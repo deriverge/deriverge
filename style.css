@@ -1,5 +1,6 @@
 body, html{
     background-color: black;
+    font-family: Montserrat, sans-serif;
 }
 
 @media screen and (max-width: 650px){
