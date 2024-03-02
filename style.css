@@ -1,12 +1,19 @@
-body{
-margin: 0;
-padding: 0;
+@media p (max-width 500px){
+    display: flex;
+    color: black;
+    font-size: 40px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vw;
 }
 
-p{
-  color: black;
-  font-size: 60px;
-  display: block;
-  margin: auto;
-  align-items: center;
+@media p (min-width 501px){
+    display: flex;
+    color: black;
+    font-size: 65px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vw;
 }
