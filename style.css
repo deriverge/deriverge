@@ -1,11 +1,12 @@
 body{
-  display: block;
-  margin: auto;
-  align-items: center;
-  justify-content: center;
+margin: 0;
+padding: 0;
 }
 
 p{
   color: black;
   font-size: 60px;
+  display: block;
+  margin: auto;
+  align-items: center;
 }
