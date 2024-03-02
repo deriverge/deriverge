@@ -5,7 +5,7 @@ body, html{
 
 @media screen and (max-width: 650px){
 
-    p,
+
     p a{
     display: flex;
     color: black;
@@ -20,7 +20,7 @@ body, html{
 
 @media screen and (min-width: 651px){
 
-    p,
+    
     p a{
     display: flex;
     color: black;
@@ -31,4 +31,8 @@ body, html{
     margin-top: 300px;
     color: white;       
     }
+}
+
+p{
+color: white;
 }
