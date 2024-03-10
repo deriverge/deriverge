@@ -1,38 +1,67 @@
 body, html{
-    background-color: black;
-    font-family: Montserrat, sans-serif;
-}
-
-@media screen and (max-width: 650px){
-
-
-    p a{
-    display: flex;
-    color: black;
-    font-size: 40px;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-top: 300px;
-    color: white;
-    }
-}
-
-@media screen and (min-width: 651px){
-
+    background-color: rgb(23, 22, 28);
+    font-family: monospace;
     
-    p a{
-    display: flex;
-    color: black;
-    font-size: 65px;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-top: 300px;
-    color: white;       
-    }
 }
 
-p{
-color: white;
+.darkGrey{
+    color: rgb(128, 128, 128);
 }
+
+.colorTag{
+    color: #4084c7;
+}
+
+.textAlign{
+    display: flex;
+    width: 100vw;
+    justify-content: center;}
+p{
+    margin-top: 20px;
+    color: white;
+    font-size: 20px;
+    margin-left: 20px;
+}
+
+#htmlDown{
+    position: absolute;
+    bottom: 20px;
+}
+
+h1{
+    margin: 0;
+    position: absolute;
+    top: 25px;
+    padding: 0;
+    color: white;
+    font-size: 3rem;
+}
+
+
+@-webkit-keyframes typing { from { width: 0; } }
+@-webkit-keyframes blink-caret { 50% { border-color: transparent; } }
+
+@keyframes typing-and-deleting {
+    0%, 100% { width: 0; } /* Na začátku a na konci animace je šířka textu 0. */
+    25% { width: 12.3ch; } /* Na 25% animace je text plně napsán (13 znaků široký). */
+    50%, 75% { width: 12.3ch; } /* Mezi 50% a 75% animace zůstane text napsán, což vytváří pauzu před mazáním. */
+  }
+  
+  @keyframes blink-caret {
+    50% { border-color: transparent; } /* Blikání kurzoru - kurzor se stává průhledným ve 50% animace. */
+  }
+  
+  h1 {
+    border-right: .1em solid rgb(255, 255, 255); /* Vytváří efekt textového kurzoru. */
+    width: 13ch; /* Maximální šířka textu, který se má zobrazit. */
+    margin: 2em 1em;
+    white-space: nowrap; /* Zabraňuje zalamování textu na nový řádek. */
+    overflow: hidden; /* Skrývá text, který přesahuje šířku elementu. */
+    animation: typing-and-deleting 6s steps(13, end) infinite, blink-caret .75s step-end infinite;
+    /* Animace: 
+       - typing-and-deleting: Napsání a smazání textu s celkovou dobou 6 sekund a nekonečným opakováním.
+       - blink-caret: Blikání kurzoru s intervalem 0.75 sekundy a nekonečným opakováním.
+    */
+  }
+  
+  
