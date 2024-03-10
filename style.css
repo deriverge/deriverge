@@ -1,15 +1,15 @@
 body, html{
-    background-color: rgb(23, 22, 28);
+    background-color: #17161c;
     font-family: monospace;
     
 }
 
 .orange{
-    color: rgb(184, 121, 70);
+    color: #b87946;
 }
 
 .darkGrey{
-    color: rgb(128, 128, 128);
+    color: #808080;
 }
 
 .colorTag{
