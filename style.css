@@ -4,6 +4,10 @@ body, html{
     
 }
 
+.orange{
+    color: rgb(184, 121, 70);
+}
+
 .darkGrey{
     color: rgb(128, 128, 128);
 }
