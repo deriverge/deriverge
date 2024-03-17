@@ -19,17 +19,22 @@ body, html{
 .textAlign{
     display: flex;
     width: 100vw;
-    justify-content: center;}
+    justify-content: center;
+}
+
 p{
-    margin-top: 20px;
+    
+    margin-top: 10px;
     color: white;
     font-size: 20px;
-    margin-left: 20px;
 }
 
 #htmlDown{
-    position: absolute;
-    bottom: 20px;
+    
+    padding: 0;
+    margin: 20px;
+    position: relative;
+    bottom: 10px;
 }
 
 h1{
@@ -66,6 +71,77 @@ h1{
        - typing-and-deleting: Napsání a smazání textu s celkovou dobou 6 sekund a nekonečným opakováním.
        - blink-caret: Blikání kurzoru s intervalem 0.75 sekundy a nekonečným opakováním.
     */
+  }
+
+  .container-section{
+    display: flex;
+    margin: 20px;
+    padding: 10px;
+    min-height: 200px;
+    border: solid 1px #4084c7;
+    border-radius: 20px;
+    background: #040019;
+    font-size: 3rem;
+    border-top: solid 30px #4084c7;
+    transition: transform 0.5s;
+  }
+
+  .container-section:hover{
+    transform: scale(1.01);
+  }
+
+  footer{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+  }
+  span, footer{
+    line-height: 50px;
+  }
+
+  .footer{
+    font-size: 30px;
+    margin: 0;
+    padding: 0;
+  }
+  a{
+    color: #4084c7;
+  }
+
+  #center{
+    font-size: 1.5rem;
+    text-align: center;
+    color: white;
+    display: flex;
+    justify-content: center;
+  }
+
+  .underline{
+    text-decoration: underline;
+  }
+
+  .bigger{
+    font-size: larger;
+  }
+
+  .positiondots{
+    z-index: 9999;
+    width: 100px;
+    display: flex;
+    height: 15px;
+    position: relative;
+    top: -32px;
+    left: -5px;
+    flex-direction: row;
+  }
+
+  .dot{
+    margin-left: 7px;
+    height: 15px;
+    width: 15px;
+    background-color: #262626;
+    border-radius: 50%;
+
   }
   
   
