@@ -142,6 +142,7 @@ h1{
 
   }
 
+  @media screen and (min-width: 490px) {
   .block{
     position: absolute;
     left: 0;
@@ -151,5 +152,34 @@ h1{
     display: block;
     text-align: center;
   }
-  
-  
+  .blockdva{
+    display: none;
+  }
+  }
+  @media screen and (max-width: 489px) {
+    .block{
+      display: none;
+    }
+    .blockdva{
+        position: absolute;
+        left: 0;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        display: block;
+        text-align: center;
+      }
+      .container-section{
+        display: flex;
+        margin: 20px;
+        padding: 10px;
+        min-height: 150px;
+        border: solid 1px #333661;
+        border-radius: 20px;
+        background: #040019;
+        font-size: 1.2rem;
+        border-top: solid 30px #333661;
+        transition: transform 0.5s;
+      }
+    }
+    
