@@ -23,10 +23,10 @@ body, html{
 }
 
 p{
-    
-    margin-top: 10px;
+    padding: 0;
+    margin: 10px;
     color: white;
-    font-size: 20px;
+    font-size: 1.4rem;
 }
 
 #htmlDown{
@@ -77,12 +77,12 @@ h1{
     display: flex;
     margin: 20px;
     padding: 10px;
-    min-height: 200px;
-    border: solid 1px #4084c7;
+    min-height: 100px;
+    border: solid 1px #333661;
     border-radius: 20px;
     background: #040019;
-    font-size: 3rem;
-    border-top: solid 30px #4084c7;
+    font-size: 1.2rem;
+    border-top: solid 30px #333661;
     transition: transform 0.5s;
   }
 
@@ -90,16 +90,13 @@ h1{
     transform: scale(1.01);
   }
 
-  footer{
-    display: flex;
-    justify-content: center;
-    text-align: center;
-  }
+
   span, footer{
     line-height: 50px;
   }
 
   .footer{
+    width: 100%;
     font-size: 30px;
     margin: 0;
     padding: 0;
@@ -108,12 +105,13 @@ h1{
     color: #4084c7;
   }
 
-  #center{
-    font-size: 1.5rem;
+  .center{
+    font-size: 1em;
     text-align: center;
     color: white;
     display: flex;
     justify-content: center;
+    align-self: center;
   }
 
   .underline{
@@ -139,9 +137,19 @@ h1{
     margin-left: 7px;
     height: 15px;
     width: 15px;
-    background-color: #262626;
+    background: #040019;
     border-radius: 50%;
 
+  }
+
+  .block{
+    position: absolute;
+    left: 0;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    display: block;
+    text-align: center;
   }
   
   
