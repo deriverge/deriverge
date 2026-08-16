@@ -1,83 +1,194 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cs">
   <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google" content="notranslate">
+
+    <title>deriverge s.r.o. — vývoj mobilních a webových aplikací</title>
+    <meta name="description" content="deriverge s.r.o. — vývojové studio. Stavíme mobilní a webové aplikace pro iOS, Android a web.">
+    <link rel="canonical" href="https://www.deriverge.com/">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <title>deriverge s.r.o.</title>
-    <link rel="canonical" href="https://www.deriverge.com/">
-    <meta name="description" content="Reality & Technologie"> 
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300..800;1,300..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="deriverge s.r.o. — vývoj aplikací">
+    <meta property="og:description" content="Vývojové studio. Mobilní a webové aplikace.">
+    <meta property="og:url" content="https://www.deriverge.com/">
     <meta property="og:image" content="https://raw.githubusercontent.com/deriverge/deriverge/main/pictures/deriverge_logo-long.jpg">
+    <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:image" content="https://raw.githubusercontent.com/deriverge/deriverge/main/pictures/deriverge_logo-long.jpg">
+
+    <script type="application/ld+json" translate="no">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "deriverge s.r.o.",
+      "url": "https://www.deriverge.com/",
+      "email": "info@deriverge.com",
+      "telephone": "+420777849095",
+      "vatID": "CZ19456361",
+      "taxID": "19456361",
+      "foundingDate": "2023-06-20",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Korytná 201",
+        "postalCode": "687 52",
+        "addressLocality": "Korytná",
+        "addressCountry": "CZ"
+      }
+    }
+    </script>
   </head>
+
   <body>
-    <header class="header">
-      <p><span class="darkGrey">&lt!</span><span class="colorTag">DOCTYPE </span>html<span class="darkGrey">&gt</span><br><span class="darkGrey">&lt</span><span class="colorTag">html</span> lang=<span class="orange">"en"</span></span><span class="darkGrey">&gt<br>.<br>.</p></span>
-      <div class="textAlign">
-        <h1><span class="darkGrey">&lt/</span>deriverge<span class="darkGrey">&gt</span></h1>
+    <nav class="topbar">
+      <span class="tab" translate="no">deriverge.js</span>
+      <div class="lang" role="group" aria-label="Jazyk / Language">
+        <button type="button" class="lang-btn is-active" data-lang="cs">CS</button>
+        <span class="lang-sep">/</span>
+        <button type="button" class="lang-btn" data-lang="en">EN</button>
       </div>
-    </header>
-    <div class="rozcestnik">
-      <div class="container-section rk">
-        <div class="mac-icons">
-          <div class="dot red"></div>
-          <div class="dot yellow"></div>
-          <div class="dot green"></div>
-        </div>
-        <a href="https://www.deriverge.cz/">Realitní kancelář</a>
-      </div>
-      <div class="container-section development">
-        <div class="mac-icons">
-          <div class="dot red"></div>
-          <div class="dot yellow"></div>
-          <div class="dot green"></div>
-        </div>
-        <a href="">Development</a>
-      </div>
-      <div class="container-section finance">
-        <div class="mac-icons">
-          <div class="dot red"></div>
-          <div class="dot yellow"></div>
-          <div class="dot green"></div>
-        </div>
-        <a href="">Finance</a>
-      </div>
-      <div class="container-section praskloto">
-        <div class="mac-icons">
-          <div class="dot red"></div>
-          <div class="dot yellow"></div>
-          <div class="dot green"></div>
-        </div>
-        <a href="">PraskloTo</a>
-      </div>
-    </div>
-    <div id="centerContainer">
-      <div class="container-section last-container">
-        <section>
-          <article>
-            <div class="center contact-line">
-              <p class="contact"><span>Kontakt:</span><br><a href="mailto:info@deriverge.com">info@deriverge.com</a> <span class="vertical-line">|</span> deriverge s.r.o.</p>
-              <p class="contactdva"><span>Kontakt:</span><br><a href="mailto:info@deriverge.com">info@deriverge.com</a><br>deriverge s.r.o.</p>
-            </div>
-            <div class="company-details">
-              <p>
-                <span class="darkGrey">Tel.:</span> <a href="tel:+420777849095">+420 777 849 095</a><br>
-                <span class="darkGrey">Sídlo:</span> Korytná 201, 687 52 Korytná<br>
-                <span class="darkGrey">IČO:</span> 19456361 <span class="vertical-line">|</span> <span class="darkGrey">DIČ:</span> CZ19456361<br>
-                <span class="darkGrey">Zapsáno v obchodním rejstříku vedeném Krajským soudem v Brně, oddíl C, vložka 134680</span>
-              </p>
-            </div>
-          </article>
+    </nav>
+
+    <main class="file">
+      <div class="gutter" aria-hidden="true"></div>
+
+      <div class="source">
+
+        <header class="hero">
+          <p class="cmt" data-en="// software studio · Czech Republic · since 2023">// vývojové studio · Česká republika · od roku 2023</p>
+          <h1 translate="no"><span class="punc">&lt;/</span>deriverge<span class="punc">&gt;</span><span class="caret" aria-hidden="true"></span></h1>
+          <p class="lede" data-en="We build mobile and web applications. From the first sketch to release on the App Store and Google Play.">Stavíme mobilní a webové aplikace. Od prvního náčrtu až po vydání v App Store a Google Play.</p>
+        </header>
+
+        <section class="block" aria-labelledby="h-about">
+          <h2 id="h-about" class="sr-only" data-en="About the company">O společnosti</h2>
+          <pre class="obj" translate="no"><span class="kw">const</span> <span class="var">deriverge</span> <span class="punc">=</span> <span class="punc">{</span>
+  <span class="key">zaměření</span><span class="punc">:</span>  <span class="str">"vývoj aplikací"</span><span class="punc">,</span>
+  <span class="key">platformy</span><span class="punc">:</span> <span class="punc">[</span><span class="str">"iOS"</span><span class="punc">,</span> <span class="str">"Android"</span><span class="punc">,</span> <span class="str">"web"</span><span class="punc">]</span><span class="punc">,</span>
+  <span class="key">stack</span><span class="punc">:</span>     <span class="punc">[</span><span class="str">"React Native"</span><span class="punc">,</span> <span class="str">"TypeScript"</span><span class="punc">,</span> <span class="str">"Node"</span><span class="punc">]</span><span class="punc">,</span>
+  <span class="key">sídlo</span><span class="punc">:</span>     <span class="str">"Korytná, CZ"</span><span class="punc">,</span>
+  <span class="key">status</span><span class="punc">:</span>    <span class="ok">"přijímáme projekty"</span>
+<span class="punc">}</span></pre>
         </section>
+
+        <section class="block" aria-labelledby="h-services">
+          <p class="cmt" data-en="// what we do">// co děláme</p>
+          <h2 id="h-services" class="h2" data-en="Services">Služby</h2>
+
+          <ul class="cards">
+            <li class="card">
+              <span class="card-idx" translate="no">01</span>
+              <h3 data-en="Mobile applications">Mobilní aplikace</h3>
+              <p data-en="One codebase for iOS and Android. Offline-first where the job demands it, native where it pays off. Including release to both stores.">Jedna kódová základna pro iOS i Android. Offline tam, kde to práce vyžaduje, nativní tam, kde se to vyplatí. Včetně vydání do obou obchodů.</p>
+            </li>
+            <li class="card">
+              <span class="card-idx" translate="no">02</span>
+              <h3 data-en="Web applications">Webové aplikace</h3>
+              <p data-en="Internal tools, client portals, dashboards. Things that have to work every day, not just look good in a demo.">Interní nástroje, klientské portály, přehledy. Věci, které musí fungovat každý den, ne jen vypadat dobře v ukázce.</p>
+            </li>
+            <li class="card">
+              <span class="card-idx" translate="no">03</span>
+              <h3 data-en="Automation and AI">Automatizace a AI</h3>
+              <p data-en="Connecting systems that don't talk to each other. Cutting out the manual work nobody wants to do twice.">Propojení systémů, které spolu nemluví. Odstranění ruční práce, kterou nikdo nechce dělat dvakrát.</p>
+            </li>
+          </ul>
+        </section>
+
+        <section class="block" aria-labelledby="h-work">
+          <p class="cmt" data-en="// currently building">// aktuálně stavíme</p>
+          <h2 id="h-work" class="h2" data-en="Work in progress">Rozpracované</h2>
+
+          <div class="project">
+            <div class="project-head">
+              <h3 translate="no">VZT Monteur</h3>
+              <span class="badge"><span class="pulse" aria-hidden="true"></span><span data-en="in development">ve vývoji</span></span>
+            </div>
+            <p data-en="A field tool for ventilation fitters. Offset and cut-out calculations, 1:1 sheet-metal templates, duct sizing. Works without signal, because the job happens in basements and plant rooms.">Terénní nástroj pro montéry vzduchotechniky. Výpočty odskoků a zaříznutí, plechové šablony 1:1, dimenzování potrubí. Funguje bez signálu, protože práce se odehrává ve sklepech a strojovnách.</p>
+            <p class="meta" translate="no">iOS &middot; Android &middot; React Native &middot; 2026</p>
+          </div>
+        </section>
+
+        <section class="block" aria-labelledby="h-contact">
+          <p class="cmt" data-en="// get in touch">// ozvěte se</p>
+          <h2 id="h-contact" class="h2" data-en="Contact">Kontakt</h2>
+
+          <div class="contact">
+            <a class="mail" href="mailto:info@deriverge.com" translate="no">info@deriverge.com</a>
+            <a class="tel" href="tel:+420777849095" translate="no">+420 777 849 095</a>
+          </div>
+
+          <div class="legal" translate="no">
+            <p><strong>deriverge s.r.o.</strong></p>
+            <p>Korytná 201, 687 52 Korytná, Česká republika</p>
+            <p>IČO: 19456361 &nbsp;<span class="punc">|</span>&nbsp; DIČ: CZ19456361</p>
+            <p>Zapsáno v obchodním rejstříku vedeném Krajským soudem v Brně, oddíl C, vložka 134680</p>
+          </div>
+        </section>
+
       </div>
-    </div>
-    <p class="htmlDown"><span class="darkGrey">&lt/</span><span class="colorTag">html</span><span class="darkGrey">&gt</span></p>
+    </main>
+
+    <footer class="foot">
+      <p class="punc" translate="no">&lt;/html&gt;</p>
+    </footer>
+
+    <script>
+      (function () {
+        var gutter = document.querySelector('.gutter');
+        if (gutter) {
+          var out = '';
+          for (var i = 1; i <= 220; i++) { out += '<span>' + i + '</span>'; }
+          gutter.innerHTML = out;
+        }
+
+        var nodes = document.querySelectorAll('[data-en]');
+        for (var j = 0; j < nodes.length; j++) {
+          nodes[j].setAttribute('data-cs', nodes[j].textContent);
+        }
+
+        var buttons = document.querySelectorAll('.lang-btn');
+
+        function setLang(lang) {
+          for (var k = 0; k < nodes.length; k++) {
+            var val = nodes[k].getAttribute('data-' + lang);
+            if (val) { nodes[k].textContent = val; }
+          }
+          document.documentElement.lang = lang;
+          for (var m = 0; m < buttons.length; m++) {
+            buttons[m].classList.toggle('is-active', buttons[m].getAttribute('data-lang') === lang);
+          }
+          try { localStorage.setItem('dv-lang', lang); } catch (e) {}
+        }
+
+        for (var n = 0; n < buttons.length; n++) {
+          buttons[n].addEventListener('click', function () {
+            setLang(this.getAttribute('data-lang'));
+          });
+        }
+
+        var saved = null;
+        try { saved = localStorage.getItem('dv-lang'); } catch (e) {}
+        if (!saved && (navigator.language || '').slice(0, 2) !== 'cs') { saved = 'en'; }
+        if (saved === 'en') { setLang('en'); }
+
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          var blocks = document.querySelectorAll('.lede, .block');
+          for (var p = 0; p < blocks.length; p++) {
+            blocks[p].style.animationDelay = (0.45 + p * 0.12) + 's';
+            blocks[p].classList.add('reveal');
+          }
+        }
+      })();
+    </script>
   </body>
 </html>
