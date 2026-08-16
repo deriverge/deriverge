@@ -1,246 +1,396 @@
-body, html {
-  background-color: #17161c;
-  font-family: monospace;
+:root {
+  --bg:        #17161c;
+  --panel:     #1c1b23;
+  --panel-2:   #040019;
+  --line:      #2a2937;
+  --edge:      #333661;
+  --ink:       #e6e6ea;
+  --dim:       #7f7f8c;
+  --blue:      #4084c7;
+  --orange:    #b87946;
+  --green:     #28c941;
+  --violet:    #8b7fd4;
+
+  --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --col: 780px;
+  --gut: 62px;
 }
-#centerContainer {
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  align-items: center;
-  max-width: 1500px; /* Nastavena maximální šířka */
-  margin-left: auto;
-  margin-right: auto;
-}
-.orange {
-  color: #b87946;
-}
-.darkGrey {
-  color: #808080;
-}
-.colorTag {
-  color: #4084c7;
-}
-.textAlign {
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  max-width: 1500px; /* Maximální šířka pro horní část kódu */
-  margin-left: auto;
-  margin-right: auto;
-}
-p {
-  padding: 0;
-  margin: 0px 10px 10px 10px;
-  color: white;
-  font-size: 1.4rem;
-}
-.htmlDown {
-  padding: 0;
-  margin: 20px;
-  position: relative;
-  bottom: 10px;
-  margin-left: 10px;
-  max-width: 1500px; /* Maximální šířka pro spodní část kódu */
-}
-h1 {
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
   margin: 0;
-  position: relative;
-  padding: 0;
-  color: white;
-  font-size: 3rem;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 15px;
+  line-height: 1.75;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
 }
-@-webkit-keyframes typing { 
-  from { width: 0; }
-}
-@-webkit-keyframes blink-caret { 
-  50% { border-color: transparent; } 
-}
-@keyframes typing-and-deleting {
-  0%, 100% { width: 0; } 
-  25% { width: 12.3ch; }
-  50%, 75% { width: 12.3ch; }
-}
-@keyframes blink-caret {
-  50% { border-color: transparent; }
-}
-h1 {
-  border-right: .1em solid rgb(255, 255, 255);
-  width: 13ch;
-  margin: 1em 1em;
-  white-space: nowrap;
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
   overflow: hidden;
-  animation: typing-and-deleting 6s steps(13, end) infinite, blink-caret .75s step-end infinite;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
 }
-.container-section {
+
+a { color: var(--blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ── horní lišta ─────────────────────────── */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 18px 0 0;
+  border-bottom: 1px solid var(--line);
+  background: var(--panel);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.tab {
+  display: inline-block;
+  padding: 11px 20px;
+  font-size: 0.8rem;
+  color: var(--dim);
+  background: var(--bg);
+  border-right: 1px solid var(--line);
+  border-top: 2px solid var(--orange);
+}
+
+.lang { display: flex; align-items: center; gap: 6px; }
+
+.lang-btn {
+  appearance: none;
+  background: none;
+  border: 0;
+  padding: 4px 2px;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  color: var(--dim);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.lang-btn:hover { color: var(--ink); }
+.lang-btn.is-active { color: var(--blue); }
+.lang-sep { color: var(--line); font-size: 0.78rem; }
+
+/* ── layout souboru ──────────────────────── */
+.file {
+  display: flex;
+  max-width: calc(var(--col) + var(--gut));
+  margin: 0 auto;
+  padding-right: 20px;
+}
+
+.gutter {
+  flex: 0 0 var(--gut);
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-  min-height: 125px;
-  width: 220px;
-  border: solid 1px #333661;
-  border-radius: 20px;
-  background: #040019;
-  font-size: 1.4rem;
-  border-top: solid 30px #333661;
-  transition: transform 0.5s;
-  text-align: center;
-  position: relative;
+  overflow: hidden;
+  padding-top: 58px;
+  border-right: 1px solid var(--line);
+  user-select: none;
 }
-.container-section a {
-  color: #4084c7;
-  text-decoration: none;
+.gutter span {
+  display: block;
+  height: 26.25px;
+  padding-right: 14px;
+  text-align: right;
+  font-size: 0.72rem;
+  line-height: 26.25px;
+  color: #3a3945;
 }
-.container-section:hover {
-  transform: scale(1.01);
+
+.source {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 58px 0 0 28px;
 }
-.mac-icons {
-  position: absolute;
-  top: -19px;
-  left: 10px;
-  display: flex;
-  gap: 5px;
+
+/* ── hero ────────────────────────────────── */
+.hero { margin-bottom: 78px; }
+
+.cmt {
+  margin: 0 0 10px;
+  font-size: 0.82rem;
+  color: var(--dim);
+  font-style: italic;
 }
-.mac-icons .dot {
-  height: 10px;
-  width: 10px;
-  border-radius: 50%;
-}
-.mac-icons .red {
-  background-color: #ff5f57;
-}
-.mac-icons .yellow {
-  background-color: #ffbd2e;
-}
-.mac-icons .green {
-  background-color: #28c941;
-}
-.rozcestnik {
-  display: flex;
-  justify-content: space-around;
-  gap: 20px;
-  margin-bottom: 20px;
-  max-width: 1500px; /* Maximální šířka pro sekci s odkazy */
-  margin-left: auto;
-  margin-right: auto;
-}
-.center {
-  font-size: 1em;
-  text-align: center;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-self: center;
-}
-.contact-line {
+
+h1 {
+  margin: 0 0 22px;
+  font-size: clamp(2.1rem, 8.5vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  color: var(--ink);
   white-space: nowrap;
 }
-.vertical-line {
-  margin: 0 10px;
-}
-.underline {
-  text-decoration: underline;
-}
-.bigger {
-  font-size: larger;
-}
-.positiondots {
-  z-index: 9999;
-  width: 100px;
-  display: flex;
-  height: 15px;
-  position: absolute;
-  top: -20px;
-  right: -20px;
-  flex-direction: row;
-}
-.dot {
-  margin-left: 7px;
-  height: 15px;
-  width: 15px;
-  background: #333661;
-  border-radius: 50%;
-}
-.container-section .positiondots {
-  position: absolute;
-  top: -20px;
-  right: -20px;
+
+.punc { color: var(--dim); font-weight: 400; }
+
+.caret {
+  display: inline-block;
+  width: 3px;
+  height: 0.85em;
+  margin-left: 4px;
+  vertical-align: -0.08em;
+  background: var(--orange);
+  animation: blink 1.1s step-end infinite;
 }
 
-/* --- Fakturační údaje --- */
-.company-details {
-  display: flex;
-  justify-content: center;
-  text-align: center;
-}
-.company-details p {
-  color: #b0b0b0;
-  font-size: 0.8rem;
-  line-height: 1.9;
-  white-space: normal;
-  margin: 0 10px 10px 10px;
-}
-.company-details .vertical-line {
-  margin: 0 6px;
-}
-.company-details a {
-  color: #4084c7;
-  text-decoration: none;
-}
-.company-details a:hover {
-  text-decoration: underline;
-}
-/* --- konec fakturačních údajů --- */
+@keyframes blink { 50% { opacity: 0; } }
 
-@media screen and (min-width: 769px) {
-  .contactdva {
-    display: none;
-  }
-  .contact {
-    position: relative;
-    margin-bottom: 20px;
-  }
+.lede {
+  margin: 0;
+  max-width: 46ch;
+  font-size: clamp(1rem, 2.6vw, 1.18rem);
+  font-weight: 300;
+  line-height: 1.7;
+  color: #b9b9c4;
 }
-@media screen and (max-width: 768px) {
-  .contact {
-    display: none;
-  }
-  .contactdva {
-    margin-bottom: 20px;
-  }
-  .container-section {
-    min-width: 270px;
-    justify-content: center;
-  }
-  .dotsdva {
-    left: -34px;
-  }
-  .company-details p {
-    font-size: 0.75rem;
-    line-height: 1.8;
-  }
+
+/* ── bloky ───────────────────────────────── */
+.block { margin-bottom: 78px; }
+
+.h2 {
+  margin: 2px 0 26px;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--ink);
 }
-@media screen and (max-width: 768px) {
-  .rozcestnik {
-    flex-direction: column;
-    align-items: center;
-  }
-  .container-section {
-    width: 100%;
-    max-width: 200px;
-  }
+
+/* ── objekt ──────────────────────────────── */
+.obj {
+  margin: 0;
+  padding: 24px 26px;
+  overflow-x: auto;
+  font-family: var(--mono);
+  font-size: 0.88rem;
+  line-height: 2;
+  background: var(--panel-2);
+  border: 1px solid var(--edge);
+  border-left: 3px solid var(--blue);
+  border-radius: 10px;
 }
-.container-section.last-container {
-  width: fit-content;
-  max-width: 92vw;
-}
-header.header {
+.obj .kw  { color: var(--violet); }
+.obj .var { color: var(--ink); }
+.obj .key { color: var(--blue); }
+.obj .str { color: var(--orange); }
+.obj .ok  { color: var(--green); }
+
+/* ── karty služeb ────────────────────────── */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
+  gap: 16px;
+  margin: 0;
   padding: 0;
-  margin: 20px;
+  list-style: none;
+}
+
+.card {
   position: relative;
-  bottom: 10px;
-  max-width: 1500px;
-  margin-left: auto;
-  margin-right: auto;
+  padding: 24px 20px 22px;
+  background: var(--panel-2);
+  border: 1px solid var(--edge);
+  border-radius: 10px;
+  transition: border-color 0.25s, transform 0.25s;
+}
+.card:hover {
+  border-color: var(--blue);
+  transform: translateY(-2px);
+}
+
+.card-idx {
+  display: block;
+  margin-bottom: 12px;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  color: var(--orange);
+}
+
+.card h3 {
+  margin: 0 0 10px;
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.card p {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 300;
+  line-height: 1.75;
+  color: #a3a3b0;
+}
+
+/* ── projekt ─────────────────────────────── */
+.project {
+  padding: 26px 26px 22px;
+  background: var(--panel-2);
+  border: 1px solid var(--edge);
+  border-left: 3px solid var(--green);
+  border-radius: 10px;
+}
+
+.project-head {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+
+.project h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 3px 11px;
+  font-size: 0.72rem;
+  color: var(--green);
+  background: rgba(40, 201, 65, 0.09);
+  border: 1px solid rgba(40, 201, 65, 0.3);
+  border-radius: 999px;
+}
+
+.pulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse { 50% { opacity: 0.25; } }
+
+.project p {
+  margin: 0;
+  font-size: 0.88rem;
+  font-weight: 300;
+  color: #a3a3b0;
+}
+
+.project .meta {
+  margin-top: 14px;
+  padding-top: 14px;
+  font-size: 0.76rem;
+  color: var(--dim);
+  border-top: 1px solid var(--line);
+}
+
+/* ── kontakt ─────────────────────────────── */
+.contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 28px;
+  margin-bottom: 34px;
+}
+
+.contact a {
+  font-size: clamp(0.95rem, 3vw, 1.15rem);
+  font-weight: 500;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+.contact a:hover {
+  text-decoration: none;
+  border-bottom-color: var(--blue);
+}
+.contact .tel { color: var(--orange); }
+.contact .tel:hover { border-bottom-color: var(--orange); }
+
+.legal {
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+}
+.legal p {
+  margin: 0 0 4px;
+  font-size: 0.78rem;
+  font-weight: 300;
+  line-height: 1.85;
+  color: var(--dim);
+}
+.legal strong {
+  font-weight: 600;
+  color: #b9b9c4;
+}
+.legal .punc { color: var(--line); }
+
+/* ── patička ─────────────────────────────── */
+.foot {
+  max-width: calc(var(--col) + var(--gut));
+  margin: 0 auto;
+  padding: 30px 20px 46px calc(var(--gut) + 28px);
+}
+.foot p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--dim);
+}
+
+/* ── animace ─────────────────────────────── */
+.reveal {
+  opacity: 0;
+  animation: rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; animation: none; }
+  .caret, .pulse { animation: none; }
+  .card:hover { transform: none; }
+  * { transition: none !important; }
+}
+
+/* ── mobil ───────────────────────────────── */
+@media (max-width: 720px) {
+  body { font-size: 14px; }
+
+  .file { padding: 0 18px; }
+  .gutter { display: none; }
+  .source { padding: 40px 0 0; }
+
+  .hero { margin-bottom: 58px; }
+  .block { margin-bottom: 58px; }
+
+  h1 { white-space: normal; }
+
+  .obj {
+    padding: 18px 16px;
+    font-size: 0.76rem;
+    line-height: 1.95;
+  }
+
+  .foot { padding: 24px 18px 40px; }
 }
