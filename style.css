@@ -1,15 +1,14 @@
 :root {
-  --bg:        #17161c;
-  --panel:     #1c1b23;
-  --panel-2:   #040019;
-  --line:      #2a2937;
-  --edge:      #333661;
-  --ink:       #e6e6ea;
-  --dim:       #7f7f8c;
-  --blue:      #4084c7;
-  --orange:    #b87946;
-  --green:     #28c941;
-  --violet:    #8b7fd4;
+  --bg:      #17161c;
+  --panel:   #1c1b23;
+  --panel-2: #040019;
+  --line:    #2a2937;
+  --edge:    #333661;
+  --ink:     #e6e6ea;
+  --dim:     #7f7f8c;
+  --blue:    #4084c7;
+  --orange:  #b87946;
+  --violet:  #8b7fd4;
 
   --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
   --col: 780px;
@@ -27,7 +26,6 @@ body {
   font-family: var(--mono);
   font-size: 15px;
   line-height: 1.75;
-  font-weight: 400;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -56,9 +54,9 @@ button:focus-visible {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 0 18px 0 0;
-  border-bottom: 1px solid var(--line);
+  padding-right: 18px;
   background: var(--panel);
+  border-bottom: 1px solid var(--line);
   position: sticky;
   top: 0;
   z-index: 10;
@@ -105,7 +103,7 @@ button:focus-visible {
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  padding-top: 58px;
+  padding-top: 56px;
   border-right: 1px solid var(--line);
   user-select: none;
 }
@@ -116,32 +114,31 @@ button:focus-visible {
   text-align: right;
   font-size: 0.72rem;
   line-height: 26.25px;
-  color: #3a3945;
+  color: #35343f;
 }
 
 .source {
   flex: 1 1 auto;
   min-width: 0;
-  padding: 58px 0 0 28px;
+  padding: 56px 0 44px 28px;
 }
 
 /* ── hero ────────────────────────────────── */
-.hero { margin-bottom: 78px; }
+.hero { margin-bottom: 72px; }
 
 .cmt {
   margin: 0 0 10px;
   font-size: 0.82rem;
-  color: var(--dim);
   font-style: italic;
+  color: var(--dim);
 }
 
 h1 {
-  margin: 0 0 22px;
+  margin: 0 0 20px;
   font-size: clamp(2.1rem, 8.5vw, 4rem);
   font-weight: 800;
   letter-spacing: -0.03em;
   line-height: 1.05;
-  color: var(--ink);
   white-space: nowrap;
 }
 
@@ -161,22 +158,21 @@ h1 {
 
 .lede {
   margin: 0;
-  max-width: 46ch;
+  max-width: 44ch;
   font-size: clamp(1rem, 2.6vw, 1.18rem);
   font-weight: 300;
-  line-height: 1.7;
   color: #b9b9c4;
 }
 
 /* ── bloky ───────────────────────────────── */
-.block { margin-bottom: 78px; }
+.block { margin-bottom: 72px; }
+.block--last { margin-bottom: 40px; }
 
 .h2 {
-  margin: 2px 0 26px;
-  font-size: 1.35rem;
+  margin: 2px 0 24px;
+  font-size: 1.3rem;
   font-weight: 700;
   letter-spacing: -0.02em;
-  color: var(--ink);
 }
 
 /* ── objekt ──────────────────────────────── */
@@ -193,10 +189,9 @@ h1 {
   border-radius: 10px;
 }
 .obj .kw  { color: var(--violet); }
-.obj .var { color: var(--ink); }
 .obj .key { color: var(--blue); }
 .obj .str { color: var(--orange); }
-.obj .ok  { color: var(--green); }
+.obj .num { color: var(--violet); }
 
 /* ── karty služeb ────────────────────────── */
 .cards {
@@ -209,7 +204,6 @@ h1 {
 }
 
 .card {
-  position: relative;
   padding: 24px 20px 22px;
   background: var(--panel-2);
   border: 1px solid var(--edge);
@@ -233,7 +227,6 @@ h1 {
   margin: 0 0 10px;
   font-size: 0.98rem;
   font-weight: 700;
-  color: var(--ink);
 }
 
 .card p {
@@ -244,65 +237,26 @@ h1 {
   color: #a3a3b0;
 }
 
-/* ── projekt ─────────────────────────────── */
-.project {
-  padding: 26px 26px 22px;
-  background: var(--panel-2);
-  border: 1px solid var(--edge);
-  border-left: 3px solid var(--green);
-  border-radius: 10px;
-}
-
-.project-head {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 14px;
-  margin-bottom: 12px;
-}
-
-.project h3 {
+/* ── principy ────────────────────────────── */
+.rules {
   margin: 0;
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--ink);
-}
-
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  padding: 3px 11px;
-  font-size: 0.72rem;
-  color: var(--green);
-  background: rgba(40, 201, 65, 0.09);
-  border: 1px solid rgba(40, 201, 65, 0.3);
-  border-radius: 999px;
-}
-
-.pulse {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--green);
-  animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse { 50% { opacity: 0.25; } }
-
-.project p {
-  margin: 0;
-  font-size: 0.88rem;
-  font-weight: 300;
-  color: #a3a3b0;
-}
-
-.project .meta {
-  margin-top: 14px;
-  padding-top: 14px;
-  font-size: 0.76rem;
-  color: var(--dim);
+  padding: 0;
+  list-style: none;
   border-top: 1px solid var(--line);
+}
+.rules li {
+  position: relative;
+  padding: 16px 0 16px 30px;
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: #b9b9c4;
+  border-bottom: 1px solid var(--line);
+}
+.rules li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--orange);
 }
 
 /* ── kontakt ─────────────────────────────── */
@@ -310,7 +264,7 @@ h1 {
   display: flex;
   flex-wrap: wrap;
   gap: 12px 28px;
-  margin-bottom: 34px;
+  margin-bottom: 30px;
 }
 
 .contact a {
@@ -327,14 +281,14 @@ h1 {
 .contact .tel:hover { border-bottom-color: var(--orange); }
 
 .legal {
-  padding-top: 22px;
+  padding-top: 20px;
   border-top: 1px solid var(--line);
 }
 .legal p {
-  margin: 0 0 4px;
+  margin: 0 0 3px;
   font-size: 0.78rem;
   font-weight: 300;
-  line-height: 1.85;
+  line-height: 1.8;
   color: var(--dim);
 }
 .legal strong {
@@ -343,13 +297,8 @@ h1 {
 }
 .legal .punc { color: var(--line); }
 
-/* ── patička ─────────────────────────────── */
+/* ── uzavírací tag ───────────────────────── */
 .foot {
-  max-width: calc(var(--col) + var(--gut));
-  margin: 0 auto;
-  padding: 30px 20px 46px calc(var(--gut) + 28px);
-}
-.foot p {
   margin: 0;
   font-size: 0.9rem;
   color: var(--dim);
@@ -368,7 +317,7 @@ h1 {
 
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; animation: none; }
-  .caret, .pulse { animation: none; }
+  .caret { animation: none; }
   .card:hover { transform: none; }
   * { transition: none !important; }
 }
@@ -379,10 +328,11 @@ h1 {
 
   .file { padding: 0 18px; }
   .gutter { display: none; }
-  .source { padding: 40px 0 0; }
+  .source { padding: 40px 0 34px; }
 
-  .hero { margin-bottom: 58px; }
-  .block { margin-bottom: 58px; }
+  .hero { margin-bottom: 54px; }
+  .block { margin-bottom: 54px; }
+  .block--last { margin-bottom: 32px; }
 
   h1 { white-space: normal; }
 
@@ -391,6 +341,4 @@ h1 {
     font-size: 0.76rem;
     line-height: 1.95;
   }
-
-  .foot { padding: 24px 18px 40px; }
 }
