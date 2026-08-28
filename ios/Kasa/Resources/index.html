@@ -512,7 +512,7 @@
 
   function fresh() {
     return {
-      v: 2, event: "Loučení s prázdninami", mode: "kasa", nextNo: 1, voice: true,
+      v: 2, event: "Loučení s prázdninami", mode: "kasa", nextNo: 1, voice: true, readOut: false, pair: "",
       items: defaultItems(), order: [], sales: [], archives: []
     };
   }
@@ -538,6 +538,8 @@
     d.savedAt = typeof d.savedAt === "number" ? d.savedAt : 0;
     d.mode = d.mode === "vydej" ? "vydej" : "kasa";
     d.voice = d.voice !== false;
+    d.readOut = d.readOut === true;
+    d.pair = typeof d.pair === "string" ? d.pair : "";
 
     // položky uložené před zavedením barev je dostanou samy, každá jinou.
     // Prázdný řetězec je vědomá volba "bez barvy" — tu necháváme být.
@@ -723,7 +725,10 @@
     sheet = null;
     pushSales();
     render();
-    if (state.mode === "kasa" && state.voice) { sayThanks(); }
+    if (state.mode === "kasa") {
+      if (state.readOut) { saySale(sale); }
+      if (state.voice) { sayThanks(); }
+    }
     showToast("Uloženo · " + czk(sale.total) + " " + (sale.method === "cash" ? "hotově" : "kartou"), sale.id);
     say("Účet uložen.");
   }
@@ -840,6 +845,7 @@
   }
 
   function broadcast(kind) {
+    relaySend(kind);
     try {
       if (!window.webkit || !window.webkit.messageHandlers || !window.webkit.messageHandlers.peer) { return; }
       window.webkit.messageHandlers.peer.postMessage(JSON.stringify({
@@ -891,6 +897,92 @@
     muted = false;
     render();
   };
+
+  // Párování přes internet: obě zařízení visí na stejném hotspotu, takže mají
+  // i data. Posílají si stav přes veřejný přeposílač ntfy.sh pod kódem, který
+  // funguje jako adresa. Používá se, jen když si ho uživatel zapne.
+  var RELAY = "https://ntfy.sh/";
+  var myId = Math.random().toString(36).slice(2, 10);
+  var es = null;
+
+  function relayTopic() { return state.pair ? "kasa-stanek-" + state.pair : ""; }
+
+  // přeposílač má limit na velikost zprávy — posíláme jen to, co fronta potřebuje
+  function relayTrim() {
+    var open = state.sales.filter(function (s) { return s.status === "open"; });
+    var done = state.sales.filter(function (s) { return s.status !== "open"; }).slice(-6);
+    return open.concat(done).map(function (s) {
+      return {
+        id: s.id, no: s.no, ts: s.ts, total: s.total, method: s.method,
+        status: s.status, updatedAt: s.updatedAt,
+        lines: s.lines.map(function (l) {
+          return { name: l.name, price: l.price, qty: l.qty, ready: l.ready || 0, color: l.color || "" };
+        })
+      };
+    });
+  }
+
+  function relaySend(kind) {
+    var topic = relayTopic();
+    if (!topic || !window.fetch) { return; }
+    try {
+      fetch(RELAY + topic, {
+        method: "POST",
+        body: JSON.stringify({ t: kind || "sync", src: myId, event: state.event, sales: relayTrim() })
+      }).catch(function () {});
+    } catch (e) {}
+  }
+
+  var pollTimer = null, seen = {}, lastTs = 0;
+
+  function relayClose() {
+    if (es) { try { es.close(); } catch (e) {} es = null; }
+    if (pollTimer) { clearInterval(pollTimer); pollTimer = null; }
+    seen = {}; lastTs = 0;
+  }
+
+  function relayTake(env) {
+    if (!env || env.event !== "message" || !env.message || seen[env.id]) { return; }
+    seen[env.id] = true;
+    if (env.time > lastTs) { lastTs = env.time; }
+    var msg = null;
+    try { msg = JSON.parse(env.message); } catch (e) { return; }
+    if (!msg || msg.src === myId) { return; }   // vlastní zprávy zpátky nebereme
+    window.__kasaPeer(msg);
+  }
+
+  // Kdyby stálé spojení síť nepustila, ptáme se po nových zprávách sami.
+  function relayPoll() {
+    var topic = relayTopic();
+    if (!topic || !window.fetch) { return; }
+    fetch(RELAY + topic + "/json?poll=1&since=" + (lastTs ? lastTs : "60s"))
+      .then(function (r) { return r.text(); })
+      .then(function (body) {
+        if (peers !== 1) { peers = 1; render(); }
+        body.split("\n").forEach(function (line) {
+          if (!line.trim()) { return; }
+          try { relayTake(JSON.parse(line)); } catch (e) {}
+        });
+      })
+      .catch(function () { if (es === null && peers !== 0) { peers = 0; render(); } });
+  }
+
+  function relayOpen() {
+    relayClose();
+    var topic = relayTopic();
+    if (!topic || !window.EventSource) { return; }
+    try {
+      es = new EventSource(RELAY + topic + "/sse?since=10m");
+      es.onopen = function () { peers = 1; render(); relaySend(); };
+      es.onerror = function () { peers = 0; render(); };
+      es.onmessage = function (ev) {
+        try { relayTake(JSON.parse(ev.data)); } catch (e) {}
+      };
+    } catch (e) {}
+
+    relayPoll();
+    pollTimer = setInterval(relayPoll, 3000);
+  }
 
   window.__kasaPeerCount = function (n) {
     peers = n | 0;
@@ -1111,6 +1203,14 @@
                 ? (peers === 1 ? "Spárováno s druhým zařízením" : "Spárováno se " + peers + " zařízeními")
                 : "Druhé zařízení zatím nenalezeno") +
             "</div>" +
+            (state.pair
+              ? '<div class="link on" style="padding-top:0"><i></i>Kód spojení: <strong>' + esc(state.pair) + "</strong></div>" +
+                '<div class="acts" style="padding-top:0"><button class="act" data-pairoff="1">Odpojit</button></div>'
+              : '<div class="field" style="padding-top:8px"><input class="inp" id="pairCode" placeholder="Kód z druhého zařízení" autocapitalize="characters"></div>' +
+                '<div class="acts" style="padding-top:0"><button class="act" data-pairjoin="1">Spojit</button>' +
+                (till ? '<button class="act" data-paircreate="1">Vytvořit kód</button>' : "") + "</div>") +
+            (till ? '<div class="acts" style="padding-top:0"><button class="act' + (state.readOut ? " on" : "") +
+                    '" data-readout="1">' + (state.readOut ? "Kasa čte objednávky nahlas ✓" : "Ať kasa čte objednávky nahlas") + "</button></div>" : "") +
             '<div class="acts" style="padding-top:6px"><button class="act' + (state.voice ? " on" : "") +
               '" data-voice="1">' + (state.voice ? (till ? "Děkuje zákazníkovi ✓" : "Čte objednávky nahlas ✓") : (till ? "Poděkovat zákazníkovi" : "Číst objednávky nahlas")) + "</button>" +
               '<button class="act" data-voicetest="1">Zkusit hlas</button></div>';
@@ -1330,7 +1430,8 @@
             "[data-dig],[data-back],[data-addcustom],[data-del],[data-copy],[data-copytext],[data-close]," +
             "[data-new],[data-rm],[data-mv],[data-reset],[data-undo],[data-hidetoast],[data-yes]," +
             "[data-backup],[data-restoreask],[data-dorestore]," +
-            "[data-ticket],[data-line],[data-serve],[data-reopen],[data-col],[data-setcol],[data-mode],[data-voice],[data-voicetest]";
+            "[data-ticket],[data-line],[data-serve],[data-reopen],[data-col],[data-setcol],[data-mode],[data-voice],[data-voicetest],"+
+            "[data-paircreate],[data-pairjoin],[data-pairoff],[data-readout]";
 
   document.addEventListener("click", function (ev) {
     if (suppressClick) { suppressClick = false; return; }
@@ -1530,6 +1631,40 @@
       save(); render(); return;
     }
 
+    if (d.paircreate) {
+      var abc = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789", code = "";
+      for (var ci = 0; ci < 5; ci++) { code += abc.charAt(Math.floor(Math.random() * abc.length)); }
+      state.pair = code;
+      save(); relayOpen(); render();
+      showToast("Kód " + code + " — zadej ho ve druhém zařízení");
+      return;
+    }
+
+    if (d.pairjoin) {
+      var fld = document.getElementById("pairCode");
+      var code2 = (fld ? fld.value : "").toUpperCase().replace(/[^A-Z0-9]/g, "");
+      if (code2.length < 3) { showToast("Zadej kód z druhého zařízení"); return; }
+      state.pair = code2;
+      save(); relayOpen(); render();
+      showToast("Spojuji přes kód " + code2 + "…");
+      return;
+    }
+
+    if (d.pairoff) {
+      state.pair = "";
+      peers = 0;
+      relayClose();
+      save(); render();
+      return;
+    }
+
+    if (d.readout) {
+      state.readOut = !state.readOut;
+      save(); render();
+      if (state.readOut) { speak("Kasa teď čte objednávky nahlas."); }
+      return;
+    }
+
     if (d.voice) {
       state.voice = !state.voice;
       save(); render();
@@ -1685,6 +1820,8 @@
   state = load();
   state.sales.forEach(function (s) { announced[s.id] = true; });
   render();
+
+  relayOpen();
 
   dbInit(function () {
     dbSettled = true;
