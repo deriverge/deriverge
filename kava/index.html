@@ -341,10 +341,14 @@
   .st.done .box svg{opacity:1}
   .st.done .nm{text-decoration:line-through}
 
-  .served{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--rule);width:100%;text-align:left;background:none;border-left:0;border-right:0;border-top:0}
-  .served .no{font-family:var(--mono);font-weight:700;color:var(--ink-3);min-width:34px}
-  .served .w{flex:1;min-width:0;font-size:13px;color:var(--ink-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .served .back{font-size:12px;font-weight:600;color:var(--accent)}
+  .served{display:flex;align-items:center;gap:10px;padding:6px 0;border-bottom:1px solid var(--rule)}
+  .served .row{flex:1;min-width:0;display:flex;align-items:center;gap:10px;background:none;border:0;padding:6px 0;text-align:left}
+  .served .row:active{opacity:.6}
+  .served .drop{background:none;border:0}
+  .served .no{font-family:var(--mono);font-weight:700;color:var(--ink-3);min-width:34px;flex:0 0 auto}
+  .served .w{flex:1;min-width:0;font-size:13px;color:var(--ink-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:block}
+  .served .back{font-size:12px;font-weight:600;color:var(--accent);flex:0 0 auto}
+  .served .drop{flex:0 0 auto;color:var(--ink-3);font-size:19px;line-height:1;padding:6px 2px 6px 10px}
 
   /* ---------- výběr barvy a přepínač režimu ---------- */
   .sw{flex:0 0 auto;width:30px;height:30px;border-radius:8px;border:1px solid rgba(0,0,0,.18)}
@@ -515,7 +519,7 @@
 
   function fresh() {
     return {
-      v: 2, event: "Loučení s prázdninami", mode: "kasa", nextNo: 1, voice: true, readOut: false, pair: "",
+      v: 2, event: "Loučení s prázdninami", mode: "kasa", nextNo: 1, voice: true,  pair: "",
       items: defaultItems(), order: [], sales: [], archives: []
     };
   }
@@ -541,7 +545,6 @@
     d.savedAt = typeof d.savedAt === "number" ? d.savedAt : 0;
     d.mode = d.mode === "vydej" ? "vydej" : "kasa";
     d.voice = d.voice !== false;
-    d.readOut = d.readOut === true;
     d.pair = typeof d.pair === "string" ? d.pair : "";
 
     // položky uložené před zavedením barev je dostanou samy, každá jinou.
@@ -728,10 +731,7 @@
     sheet = null;
     pushSales();
     render();
-    if (state.mode === "kasa") {
-      if (state.readOut) { saySale(sale); }
-      if (state.voice) { sayThanks(); }
-    }
+    if (state.mode === "kasa" && state.voice) { sayThanks(); }
     showToast("Uloženo · " + czk(sale.total) + " " + (sale.method === "cash" ? "hotově" : "kartou"), sale.id);
     say("Účet uložen.");
   }
@@ -1116,10 +1116,12 @@
       h += '<section class="sec"><h2>Vydané</h2>';
       done.forEach(function (s) {
         var what = s.lines.map(function (l) { return l.qty + "× " + l.name; }).join(", ");
-        h += '<button class="served" data-reopen="' + s.id + '">' +
-             '<span class="no">#' + s.no + "</span>" +
-             '<span class="w">' + esc(what) + "</span>" +
-             '<span class="back">Vrátit</span></button>';
+        h += '<div class="served">' +
+             '<button class="row" data-reopen="' + s.id + '" aria-label="Vrátit objednávku ' + s.no + ' do fronty">' +
+               '<span class="no">#' + s.no + "</span>" +
+               '<span class="w">' + esc(what) + "</span>" +
+               '<span class="back">Vrátit</span></button>' +
+             '<button class="drop" data-drop="' + s.id + '" aria-label="Smazat objednávku">×</button></div>';
       });
       h += "</section>";
     }
@@ -1212,8 +1214,6 @@
               : '<div class="field" style="padding-top:8px"><input class="inp" id="pairCode" placeholder="Kód z druhého zařízení" autocapitalize="characters"></div>' +
                 '<div class="acts" style="padding-top:0"><button class="act" data-pairjoin="1">Spojit</button>' +
                 (till ? '<button class="act" data-paircreate="1">Vytvořit kód</button>' : "") + "</div>") +
-            (till ? '<div class="acts" style="padding-top:0"><button class="act' + (state.readOut ? " on" : "") +
-                    '" data-readout="1">' + (state.readOut ? "Kasa čte objednávky nahlas ✓" : "Ať kasa čte objednávky nahlas") + "</button></div>" : "") +
             '<div class="acts" style="padding-top:6px"><button class="act' + (state.voice ? " on" : "") +
               '" data-voice="1">' + (state.voice ? (till ? "Děkuje zákazníkovi ✓" : "Čte objednávky nahlas ✓") : (till ? "Poděkovat zákazníkovi" : "Číst objednávky nahlas")) + "</button>" +
               '<button class="act" data-voicetest="1">Zkusit hlas</button></div>';
@@ -1343,7 +1343,8 @@
         });
         h += "</div>" +
              '<button class="btn-done' + (allReady(s) ? " go" : "") + '" data-serve="' + s.id + '">Vydáno</button>' +
-             '<button class="btn-ghost" data-cancel="1">Zavřít</button>';
+             '<button class="btn-ghost" data-cancel="1">Zavřít</button>' +
+             '<button class="btn-ghost" style="color:var(--accent);border-color:#F0C7BF" data-drop="' + s.id + '">Smazat objednávku</button>';
       }
     }
 
@@ -1433,8 +1434,8 @@
             "[data-dig],[data-back],[data-addcustom],[data-del],[data-copy],[data-copytext],[data-close]," +
             "[data-new],[data-rm],[data-mv],[data-reset],[data-undo],[data-hidetoast],[data-yes]," +
             "[data-backup],[data-restoreask],[data-dorestore]," +
-            "[data-ticket],[data-line],[data-serve],[data-reopen],[data-col],[data-setcol],[data-mode],[data-voice],[data-voicetest],"+
-            "[data-paircreate],[data-pairjoin],[data-pairoff],[data-readout]";
+            "[data-ticket],[data-line],[data-serve],[data-reopen],[data-drop],[data-col],[data-setcol],[data-mode],[data-voice],[data-voicetest],"+
+            "[data-paircreate],[data-pairjoin],[data-pairoff]";
 
   document.addEventListener("click", function (ev) {
     if (suppressClick) { suppressClick = false; return; }
@@ -1610,6 +1611,18 @@
       return;
     }
 
+    if (d.drop) {
+      var gone = findSale(d.drop);
+      if (!gone) { return; }
+      ask("Smazat objednávku #" + gone.no,
+          "Zmizí z fronty a odečte se i z tržby a statistik. Tohle použij, když se objednávka naúčtovala omylem.",
+          "Smazat", function () {
+        state.sales = state.sales.filter(function (x) { return x.id !== gone.id; });
+        pushSales("replace");
+      });
+      return;
+    }
+
     if (d.reopen) {
       var rop = findSale(d.reopen);
       if (!rop) { return; }
@@ -1658,13 +1671,6 @@
       peers = 0;
       relayClose();
       save(); render();
-      return;
-    }
-
-    if (d.readout) {
-      state.readOut = !state.readOut;
-      save(); render();
-      if (state.readOut) { speak("Kasa teď čte objednávky nahlas."); }
       return;
     }
 
