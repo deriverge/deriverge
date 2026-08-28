@@ -537,6 +537,18 @@
     d.savedAt = typeof d.savedAt === "number" ? d.savedAt : 0;
     d.mode = d.mode === "vydej" ? "vydej" : "kasa";
 
+    // položky uložené před zavedením barev je dostanou samy, každá jinou.
+    // Prázdný řetězec je vědomá volba "bez barvy" — tu necháváme být.
+    var used = {};
+    d.items.forEach(function (it) { if (it.color) { used[it.color] = true; } });
+    var next = 0;
+    d.items.forEach(function (it) {
+      if (typeof it.color !== "undefined") { return; }
+      while (next < COLORS.length && used[COLORS[next].k]) { next++; }
+      it.color = next < COLORS.length ? COLORS[next].k : "";
+      if (it.color) { used[it.color] = true; next++; }
+    });
+
     // účtenky z verze bez fronty doplníme, ať mají číslo a stav
     var maxNo = 0;
     d.sales.forEach(function (s, i) {
