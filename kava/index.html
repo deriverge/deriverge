@@ -261,6 +261,7 @@
   .act{flex:1 1 auto;padding:13px 14px;border:1px solid var(--rule);border-radius:var(--r-btn);background:var(--surface);font-size:14px;font-weight:600}
   .act:active{background:var(--sunk)}
   .act.danger{color:var(--accent);border-color:#F0C7BF}
+  .act.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
 
   /* ---------- menu editor ---------- */
   .field{padding:0 16px 14px}
@@ -511,7 +512,7 @@
 
   function fresh() {
     return {
-      v: 2, event: "Loučení s prázdninami", mode: "kasa", nextNo: 1,
+      v: 2, event: "Loučení s prázdninami", mode: "kasa", nextNo: 1, voice: true,
       items: defaultItems(), order: [], sales: [], archives: []
     };
   }
@@ -536,6 +537,7 @@
     d.event = typeof d.event === "string" ? d.event : "";
     d.savedAt = typeof d.savedAt === "number" ? d.savedAt : 0;
     d.mode = d.mode === "vydej" ? "vydej" : "kasa";
+    d.voice = d.voice !== false;
 
     // položky uložené před zavedením barev je dostanou samy, každá jinou.
     // Prázdný řetězec je vědomá volba "bez barvy" — tu necháváme být.
@@ -807,6 +809,27 @@
 
   var peers = 0;
   var muted = false;
+  var announced = {};      // id objednávek, které už zazněly
+
+  // Nová objednávka se na výdeji přečte nahlas, ať se obsluha nemusí dívat.
+  // iOS pustí hlas až po nějakém klepnutí — o to se stará tlačítko v Menu.
+  function speak(text) {
+    try {
+      if (!window.speechSynthesis) { return; }
+      var u = new SpeechSynthesisUtterance(text);
+      u.lang = "cs-CZ";
+      u.rate = 0.95;
+      window.speechSynthesis.speak(u);
+    } catch (e) {}
+  }
+
+  function saySale(s) {
+    var parts = ["Nová objednávka číslo " + s.no + "."];
+    s.lines.forEach(function (l) {
+      parts.push(l.qty > 1 ? l.qty + "krát " + l.name + "." : l.name + ".");
+    });
+    speak(parts.join(" "));
+  }
 
   function broadcast(kind) {
     try {
@@ -840,6 +863,14 @@
       });
     }
     if (!changed) { return; }
+
+    if (state.mode === "vydej" && state.voice) {
+      state.sales.forEach(function (s) {
+        if (s.status !== "open" || announced[s.id]) { return; }
+        announced[s.id] = true;
+        saySale(s);
+      });
+    }
 
     state.sales.sort(function (a, b) { return (a.no || 0) - (b.no || 0); });
     var maxNo = 0;
@@ -1071,7 +1102,10 @@
               (peers > 0
                 ? (peers === 1 ? "Spárováno s druhým zařízením" : "Spárováno se " + peers + " zařízeními")
                 : "Druhé zařízení zatím nenalezeno") +
-            "</div>";
+            "</div>" +
+            '<div class="acts" style="padding-top:6px"><button class="act' + (state.voice ? " on" : "") +
+              '" data-voice="1">' + (state.voice ? "Čte objednávky nahlas ✓" : "Číst objednávky nahlas") + "</button>" +
+              '<button class="act" data-voicetest="1">Zkusit hlas</button></div>';
 
     if (!till) {
       return h + '<p class="hint">Párování běží samo po místní síti, jakmile jsou obě zařízení' +
@@ -1288,7 +1322,7 @@
             "[data-dig],[data-back],[data-addcustom],[data-del],[data-copy],[data-copytext],[data-close]," +
             "[data-new],[data-rm],[data-mv],[data-reset],[data-undo],[data-hidetoast],[data-yes]," +
             "[data-backup],[data-restoreask],[data-dorestore]," +
-            "[data-ticket],[data-line],[data-serve],[data-reopen],[data-col],[data-setcol],[data-mode]";
+            "[data-ticket],[data-line],[data-serve],[data-reopen],[data-col],[data-setcol],[data-mode],[data-voice],[data-voicetest]";
 
   document.addEventListener("click", function (ev) {
     if (suppressClick) { suppressClick = false; return; }
@@ -1488,6 +1522,18 @@
       save(); render(); return;
     }
 
+    if (d.voice) {
+      state.voice = !state.voice;
+      save(); render();
+      if (state.voice) { speak("Čtení objednávek zapnuto."); }
+      return;
+    }
+
+    if (d.voicetest) {
+      speak("Nová objednávka číslo 7. Dvakrát espresso. Cappuccino.");
+      return;
+    }
+
     if (d.mode) {
       state.mode = d.mode === "vydej" ? "vydej" : "kasa";
       state.order = [];
@@ -1629,6 +1675,7 @@
 
   // ---------- boot ----------
   state = load();
+  state.sales.forEach(function (s) { announced[s.id] = true; });
   render();
 
   dbInit(function () {
