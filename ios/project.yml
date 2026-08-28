@@ -1,0 +1,39 @@
+# Popis projektu pro XcodeGen (https://github.com/yonaskolb/XcodeGen).
+# Kdo má XcodeGen (brew install xcodegen), vyrobí si projekt jedním příkazem:
+#     cd ios && xcodegen generate && open Kasa.xcodeproj
+# Kdo ho nemá, založí projekt v Xcode ručně podle README.md — vyjde to nastejno.
+
+name: Kasa
+options:
+  bundleIdPrefix: com.deriverge
+  deploymentTarget:
+    iOS: "15.0"
+  createIntermediateGroups: true
+
+targets:
+  Kasa:
+    type: application
+    platform: iOS
+    sources:
+      - path: Kasa
+    settings:
+      base:
+        PRODUCT_NAME: Kasa
+        PRODUCT_BUNDLE_IDENTIFIER: com.deriverge.kasa
+        MARKETING_VERSION: "1.0"
+        CURRENT_PROJECT_VERSION: "1"
+        TARGETED_DEVICE_FAMILY: "1,2"          # iPhone i iPad
+        SWIFT_VERSION: "5.0"
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_CFBundleDisplayName: Kasa
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents: YES
+        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad: >-
+          UIInterfaceOrientationPortrait
+          UIInterfaceOrientationPortraitUpsideDown
+          UIInterfaceOrientationLandscapeLeft
+          UIInterfaceOrientationLandscapeRight
+        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone: >-
+          UIInterfaceOrientationPortrait
+          UIInterfaceOrientationLandscapeLeft
+          UIInterfaceOrientationLandscapeRight

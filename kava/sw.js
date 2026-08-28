@@ -1,7 +1,7 @@
 /* Kasa na stánek — offline cache.
    The stand may have no signal; once the app has been opened online it keeps working. */
 
-var CACHE = "kasa-v1";
+var CACHE = "kasa-v2";
 var SHELL = ["./", "./index.html", "./manifest.webmanifest"];
 
 self.addEventListener("install", function (e) {
