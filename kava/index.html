@@ -733,7 +733,8 @@
     state.order = [];
     linesOpen = false;
     sheet = null;
-    pushSales();
+    save();
+    pushOrder(sale, true);
     render();
     if (state.mode === "kasa" && state.voice) { sayThanks(); }
     showToast("Uloženo · " + czk(sale.total) + " " + (sale.method === "cash" ? "hotově" : "kartou"), sale.id);
@@ -750,15 +751,10 @@
     });
     if (sale.no === state.nextNo - 1) { state.nextNo = sale.no; }
     hideToast();
-    pushSales("replace");
+    save();
+    pushDelete([sale.id]);
     render();
     say("Účet vrácen zpět na rozpracovaný.");
-  }
-
-  // uloží a rozešle změnu do spárovaného zařízení
-  function pushSales(kind) {
-    save();
-    if (!muted) { broadcast(kind); }
   }
 
   function showToast(text, undoId) {
@@ -851,27 +847,80 @@
     speak(parts.join(" "));
   }
 
-  function broadcast(kind) {
-    relaySend(kind);
+  function nativeSend(msg) {
     try {
       if (!window.webkit || !window.webkit.messageHandlers || !window.webkit.messageHandlers.peer) { return; }
-      window.webkit.messageHandlers.peer.postMessage(JSON.stringify({
-        t: kind || "sync", event: state.event, sales: state.sales
-      }));
+      msg.src = myId;
+      window.webkit.messageHandlers.peer.postMessage(JSON.stringify(msg));
     } catch (e) {}
+  }
+
+  // Posílá se vždycky jen ta jedna změněná objednávka, ne celý seznam —
+  // jinak zprávy přerostou limit přeposílače a přestanou chodit úplně.
+  var pendingOrders = {}, pendTimer = null;
+
+  // Odškrtávání jde rychle po sobě; kdyby každé ťuknutí letělo zvlášť, brzy
+  // by došel denní limit přeposílače. Proto se změny na chvíli posbírají.
+  function pushOrder(sale, now) {
+    if (muted) { return; }
+    pendingOrders[sale.id] = sale;
+    if (now) { flushOrders(); return; }
+    if (pendTimer) { return; }
+    pendTimer = setTimeout(flushOrders, 1200);
+  }
+
+  function flushOrders() {
+    if (pendTimer) { clearTimeout(pendTimer); pendTimer = null; }
+    var list = [];
+    Object.keys(pendingOrders).forEach(function (k) {
+      if (findSale(k)) { list.push(pendingOrders[k]); }
+    });
+    pendingOrders = {};
+    if (!list.length) { return; }
+    nativeSend({ t: "sync", event: state.event, sales: list.map(slim) });
+    relaySales(list);
+  }
+
+  function pushDelete(ids) {
+    if (muted) { return; }
+    flushOrders();
+    nativeSend({ t: "del", ids: ids });
+    relayDeleted(ids);
+  }
+
+  function pushClear() {
+    if (muted) { return; }
+    pendingOrders = {};
+    if (pendTimer) { clearTimeout(pendTimer); pendTimer = null; }
+    nativeSend({ t: "clear" });
+    relayCleared();
+  }
+
+  function pushEverything() {
+    if (muted) { return; }
+    pendingOrders = {};
+    if (pendTimer) { clearTimeout(pendTimer); pendTimer = null; }
+    var open = openOrders();
+    nativeSend({ t: "sync", event: state.event, sales: open.map(slim) });
+    relaySales(open);
   }
 
   window.__kasaPeer = function (raw) {
     var msg = null;
     try { msg = typeof raw === "string" ? JSON.parse(raw) : raw; } catch (e) { return; }
-    if (!msg || !Array.isArray(msg.sales)) { return; }
+    if (!msg || (!Array.isArray(msg.sales) && msg.t !== "del" && msg.t !== "clear")) { return; }
 
     var changed = false;
 
-    if (msg.t === "replace") {
-      state.sales = msg.sales;
-      changed = true;
-    } else {
+    if (msg.t === "del" && Array.isArray(msg.ids)) {
+      var before = state.sales.length;
+      state.sales = state.sales.filter(function (x) { return msg.ids.indexOf(x.id) < 0; });
+      changed = state.sales.length !== before;
+    } else if (msg.t === "clear") {
+      changed = state.sales.length > 0;
+      state.sales = [];
+      state.nextNo = 1;
+    } else if (Array.isArray(msg.sales)) {
       var mine = {};
       state.sales.forEach(function (s) { mine[s.id] = s; });
       msg.sales.forEach(function (inc) {
@@ -906,11 +955,19 @@
   };
 
   // Párování přes internet: obě zařízení visí na stejném hotspotu, takže mají
-  // i data. Posílají si stav přes veřejný přeposílač ntfy.sh pod kódem, který
-  // funguje jako adresa. Používá se, jen když si ho uživatel zapne.
+  // i data. Posílají si změny přes veřejný přeposílač pod kódem, který funguje
+  // jako adresa. Používá se, jen když si ho uživatel zapne.
+  //
+  // Přeposílač má dva tvrdé limity: jedna zpráva smí mít nejvýš 4 kB a je
+  // strop na počet zpráv za den. Proto se posílá vždycky jen to, co se právě
+  // změnilo — jedna objednávka na zprávu — a ne celý seznam. A když
+  // přeposílač zprávu odmítne, řekne se to nahlas místo tichého ignorování.
+
   var RELAY = "https://ntfy.sh/";
+  var MAX_BYTES = 3500;
   var myId = Math.random().toString(36).slice(2, 10);
-  var es = null;
+  var es = null, pollTimer = null, seen = {}, lastTs = 0, sseUp = false;
+  var relayError = "", lastIn = 0, lastOut = 0, sentOpen = false;
 
   function relayTopic() { return state.pair ? "kasa-stanek-" + state.pair : ""; }
 
@@ -920,38 +977,70 @@
     render();
   }
 
-  // přeposílač má limit na velikost zprávy — posíláme jen to, co fronta potřebuje
-  function relayTrim() {
-    var open = state.sales.filter(function (s) { return s.status === "open"; });
-    var done = state.sales.filter(function (s) { return s.status !== "open"; }).slice(-6);
-    return open.concat(done).map(function (s) {
-      return {
-        id: s.id, no: s.no, ts: s.ts, total: s.total, method: s.method,
-        status: s.status, updatedAt: s.updatedAt,
-        lines: s.lines.map(function (l) {
-          return { name: l.name, price: l.price, qty: l.qty, ready: l.ready || 0, color: l.color || "" };
-        })
-      };
-    });
+  function setRelayError(text) {
+    if (relayError === text) { return; }
+    relayError = text;
+    render();
   }
 
-  function relaySend(kind) {
+  // z objednávky posíláme jen to, co druhá strana potřebuje pro frontu
+  function slim(s) {
+    return {
+      id: s.id, no: s.no, ts: s.ts, total: s.total, method: s.method,
+      status: s.status, updatedAt: s.updatedAt,
+      lines: s.lines.map(function (l) {
+        return { name: l.name, price: l.price, qty: l.qty, ready: l.ready || 0, color: l.color || "" };
+      })
+    };
+  }
+
+  function relayPost(msg) {
     var topic = relayTopic();
     if (!topic || !window.fetch) { return; }
+    msg.src = myId;
+    var body;
+    try { body = JSON.stringify(msg); } catch (e) { return; }
+
     try {
-      fetch(RELAY + topic, {
-        method: "POST",
-        body: JSON.stringify({ t: kind || "sync", src: myId, event: state.event, sales: relayTrim() })
-      }).catch(function () {});
+      fetch(RELAY + topic, { method: "POST", body: body }).then(function (r) {
+        if (r.ok) {
+          lastOut = Date.now();
+          setRelayError("");
+          setPeers(1);
+          return;
+        }
+        setRelayError(r.status === 429
+          ? "Přeposílač zprávy odmítá — je vyčerpaný jeho denní limit zdarma. Nový kód nepomůže, limit je na připojení. Zkus to za pár hodin, nebo jeďte každý zvlášť."
+          : "Přeposílač odmítl zprávu (chyba " + r.status + ").");
+      }, function () {
+        setRelayError("Nedaří se odeslat — zkontroluj připojení.");
+      });
     } catch (e) {}
   }
 
-  var pollTimer = null, seen = {}, lastTs = 0;
+  // Objednávky posíláme po dávkách, aby se žádná zpráva nevešla přes limit.
+  function relaySales(list) {
+    var batch = [], size = 0;
+    list.forEach(function (s) {
+      var one = slim(s);
+      var len = JSON.stringify(one).length;
+      if (batch.length && size + len > MAX_BYTES) {
+        relayPost({ t: "sync", event: state.event, sales: batch });
+        batch = []; size = 0;
+      }
+      batch.push(one); size += len;
+    });
+    if (batch.length) { relayPost({ t: "sync", event: state.event, sales: batch }); }
+  }
+
+  function relayDeleted(ids) { relayPost({ t: "del", ids: ids }); }
+  function relayCleared() { relayPost({ t: "clear" }); }
 
   function relayClose() {
     if (es) { try { es.close(); } catch (e) {} es = null; }
     if (pollTimer) { clearInterval(pollTimer); pollTimer = null; }
-    seen = {}; lastTs = 0;
+    seen = {}; lastTs = 0; sseUp = false; sentOpen = false;
+    relayError = "";
   }
 
   function relayTake(env) {
@@ -961,45 +1050,68 @@
     var msg = null;
     try { msg = JSON.parse(env.message); } catch (e) { return; }
     if (!msg || msg.src === myId) { return; }   // vlastní zprávy zpátky nebereme
+    lastIn = Date.now();
     window.__kasaPeer(msg);
   }
 
-  // Kdyby stálé spojení síť nepustila, ptáme se po nových zprávách sami.
+  // Stálé spojení je hlavní cesta; dotazování je záloha, když ho síť nepustí.
+  // Když spojení drží, ptáme se zřídka, ať zbytečně nepálíme denní limit.
   function relayPoll() {
     var topic = relayTopic();
     if (!topic || !window.fetch) { return; }
-    fetch(RELAY + topic + "/json?poll=1&since=" + (lastTs ? lastTs : "60s"))
-      .then(function (r) { return r.text(); })
+    fetch(RELAY + topic + "/json?poll=1&since=" + (lastTs ? lastTs : "5m"))
+      .then(function (r) {
+        if (!r.ok) { throw new Error(String(r.status)); }
+        return r.text();
+      })
       .then(function (body) {
         setPeers(1);
+        setRelayError("");
         body.split("\n").forEach(function (line) {
           if (!line.trim()) { return; }
           try { relayTake(JSON.parse(line)); } catch (e) {}
         });
       })
-      .catch(function () { setPeers(0); });
+      .catch(function () { if (!sseUp) { setPeers(0); } });
+  }
+
+  function schedulePoll() {
+    if (pollTimer) { clearInterval(pollTimer); }
+    pollTimer = setInterval(relayPoll, sseUp ? 20000 : 4000);
   }
 
   function relayOpen() {
     relayClose();
     var topic = relayTopic();
-    if (!topic || !window.EventSource) { return; }
-    try {
-      es = new EventSource(RELAY + topic + "/sse?since=10m");
-      es.onopen = function () { setPeers(1); relaySend(); };
-      es.onerror = function () { if (!pollTimer) { setPeers(0); } };
-      es.onmessage = function (ev) {
-        try { relayTake(JSON.parse(ev.data)); } catch (e) {}
-      };
-    } catch (e) {}
+    if (!topic) { return; }
+
+    if (window.EventSource) {
+      try {
+        es = new EventSource(RELAY + topic + "/sse?since=5m");
+        es.onopen = function () {
+          sseUp = true;
+          schedulePoll();
+          setPeers(1);
+          setRelayError("");
+          if (!sentOpen) { sentOpen = true; relaySales(openOrders()); }
+        };
+        es.onerror = function () {
+          sseUp = false;
+          schedulePoll();
+        };
+        es.onmessage = function (ev) {
+          try { relayTake(JSON.parse(ev.data)); } catch (e) {}
+        };
+      } catch (e) {}
+    }
 
     relayPoll();
-    pollTimer = setInterval(relayPoll, 3000);
+    schedulePoll();
   }
 
   window.__kasaPeerCount = function (n) {
     setPeers(n | 0);
-    if (peers > 0) { broadcast(); }   // nový protějšek dostane rovnou celý stav
+    if (peers > 0) { pushEverything(); }   // nový protějšek dostane frontu
   };
 
   // ---------- stats ----------
@@ -1219,7 +1331,12 @@
             "</div>" +
             (state.pair
               ? '<div class="link on" style="padding-top:0"><i></i>Kód spojení: <strong>' + esc(state.pair) + "</strong></div>" +
-                '<div class="acts" style="padding-top:0"><button class="act" data-pairoff="1">Odpojit</button></div>'
+                (relayError ? '<p class="hint" style="color:var(--accent);text-align:left;padding-top:0;padding-bottom:2px">' + esc(relayError) + "</p>" : "") +
+                '<p class="hint" style="text-align:left;padding-top:0;padding-bottom:2px">' +
+                  (lastIn ? "Naposledy přijato v " + clock(lastIn) + "." : "Zatím nic nepřišlo.") +
+                  (lastOut ? " Odesláno v " + clock(lastOut) + "." : "") + "</p>" +
+                '<div class="acts" style="padding-top:0"><button class="act" data-resync="1">Poslat vše znovu</button>' +
+                '<button class="act" data-pairoff="1">Odpojit</button></div>'
               : '<div class="field" style="padding-top:8px"><input class="inp" id="pairCode" placeholder="Kód z druhého zařízení" autocapitalize="characters"></div>' +
                 '<div class="acts" style="padding-top:0"><button class="act" data-pairjoin="1">Spojit</button>' +
                 (till ? '<button class="act" data-paircreate="1">Vytvořit kód</button>' : "") + "</div>") +
@@ -1464,7 +1581,7 @@
             "[data-new],[data-rm],[data-mv],[data-reset],[data-undo],[data-hidetoast],[data-yes]," +
             "[data-backup],[data-restoreask],[data-dorestore]," +
             "[data-ticket],[data-line],[data-serve],[data-reopen],[data-drop],[data-col],[data-setcol],[data-mode],[data-voice],[data-voicetest],"+
-            "[data-paircreate],[data-pairjoin],[data-pairoff]";
+            "[data-paircreate],[data-pairjoin],[data-pairoff],[data-resync]";
 
   document.addEventListener("click", function (ev) {
     if (suppressClick) { suppressClick = false; return; }
@@ -1538,7 +1655,7 @@
       var id = d.del;
       ask("Smazat účtenku", "Částka se odečte z tržby i ze statistiky.", "Smazat", function () {
         state.sales = state.sales.filter(function (s) { return s.id !== id; });
-        pushSales("replace");
+        save(); pushDelete([id]);
       });
       return;
     }
@@ -1574,7 +1691,7 @@
         });
         state.sales = [];
         state.nextNo = 1;
-        pushSales("replace");
+        save(); pushClear();
         showToast("Akce uzavřena, kasa je vynulovaná.");
       });
       return;
@@ -1624,7 +1741,7 @@
       if (!ln) { return; }
       ln.ready = (ln.ready || 0) >= ln.qty ? 0 : (ln.ready || 0) + 1;
       tk.updatedAt = Date.now();
-      pushSales(); render(); return;
+      save(); pushOrder(tk); render(); return;
     }
 
     if (d.serve) {
@@ -1635,7 +1752,7 @@
       srv.updatedAt = Date.now();
       srv.lines.forEach(function (l) { l.ready = l.qty; });
       sheet = null;
-      pushSales(); render();
+      save(); pushOrder(srv, true); render();
       showToast("Objednávka #" + srv.no + " vydaná");
       return;
     }
@@ -1647,7 +1764,7 @@
           "Zmizí z fronty a odečte se i z tržby a statistik. Tohle použij, když se objednávka naúčtovala omylem.",
           "Smazat", function () {
         state.sales = state.sales.filter(function (x) { return x.id !== gone.id; });
-        pushSales("replace");
+        save(); pushDelete([gone.id]);
       });
       return;
     }
@@ -1657,7 +1774,7 @@
       if (!rop) { return; }
       rop.status = "open";
       rop.updatedAt = Date.now();
-      pushSales(); render();
+      save(); pushOrder(rop, true); render();
       showToast("Objednávka #" + rop.no + " zpátky ve frontě");
       return;
     }
@@ -1692,6 +1809,12 @@
       state.pair = code2;
       save(); relayOpen(); render();
       showToast("Spojuji přes kód " + code2 + "…");
+      return;
+    }
+
+    if (d.resync) {
+      pushEverything();
+      showToast("Fronta odeslána znovu");
       return;
     }
 
@@ -1742,7 +1865,7 @@
       }
       state = next;
       sheet = null;
-      pushSales("replace"); render();
+      save(); pushClear(); pushEverything(); render();
       showToast("Data obnovena ze zálohy");
       return;
     }
