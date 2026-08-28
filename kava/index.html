@@ -723,6 +723,7 @@
     sheet = null;
     pushSales();
     render();
+    if (state.mode === "kasa" && state.voice) { sayThanks(); }
     showToast("Uloženo · " + czk(sale.total) + " " + (sale.method === "cash" ? "hotově" : "kartou"), sale.id);
     say("Účet uložen.");
   }
@@ -821,6 +822,13 @@
       u.rate = 0.95;
       window.speechSynthesis.speak(u);
     } catch (e) {}
+  }
+
+  // Na kase zazní poděkování zákazníkovi, jakmile je účet hotový.
+  function sayThanks() {
+    var ev = (state.event || "").trim();
+    var name = ev ? ev.charAt(0).toLowerCase() + ev.slice(1) : "";
+    speak("Děkujeme za objednávku." + (name ? " Užijte si " + name + "." : ""));
   }
 
   function saySale(s) {
@@ -1104,7 +1112,7 @@
                 : "Druhé zařízení zatím nenalezeno") +
             "</div>" +
             '<div class="acts" style="padding-top:6px"><button class="act' + (state.voice ? " on" : "") +
-              '" data-voice="1">' + (state.voice ? "Čte objednávky nahlas ✓" : "Číst objednávky nahlas") + "</button>" +
+              '" data-voice="1">' + (state.voice ? (till ? "Děkuje zákazníkovi ✓" : "Čte objednávky nahlas ✓") : (till ? "Poděkovat zákazníkovi" : "Číst objednávky nahlas")) + "</button>" +
               '<button class="act" data-voicetest="1">Zkusit hlas</button></div>';
 
     if (!till) {
