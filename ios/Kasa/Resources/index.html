@@ -914,6 +914,12 @@
 
   function relayTopic() { return state.pair ? "kasa-stanek-" + state.pair : ""; }
 
+  function setPeers(n) {
+    if (peers === n) { return; }
+    peers = n;
+    render();
+  }
+
   // přeposílač má limit na velikost zprávy — posíláme jen to, co fronta potřebuje
   function relayTrim() {
     var open = state.sales.filter(function (s) { return s.status === "open"; });
@@ -965,13 +971,13 @@
     fetch(RELAY + topic + "/json?poll=1&since=" + (lastTs ? lastTs : "60s"))
       .then(function (r) { return r.text(); })
       .then(function (body) {
-        if (peers !== 1) { peers = 1; render(); }
+        setPeers(1);
         body.split("\n").forEach(function (line) {
           if (!line.trim()) { return; }
           try { relayTake(JSON.parse(line)); } catch (e) {}
         });
       })
-      .catch(function () { if (es === null && peers !== 0) { peers = 0; render(); } });
+      .catch(function () { setPeers(0); });
   }
 
   function relayOpen() {
@@ -980,8 +986,8 @@
     if (!topic || !window.EventSource) { return; }
     try {
       es = new EventSource(RELAY + topic + "/sse?since=10m");
-      es.onopen = function () { peers = 1; render(); relaySend(); };
-      es.onerror = function () { peers = 0; render(); };
+      es.onopen = function () { setPeers(1); relaySend(); };
+      es.onerror = function () { if (!pollTimer) { setPeers(0); } };
       es.onmessage = function (ev) {
         try { relayTake(JSON.parse(ev.data)); } catch (e) {}
       };
@@ -992,8 +998,7 @@
   }
 
   window.__kasaPeerCount = function (n) {
-    peers = n | 0;
-    render();
+    setPeers(n | 0);
     if (peers > 0) { broadcast(); }   // nový protějšek dostane rovnou celý stav
   };
 
@@ -1407,7 +1412,20 @@
            (t[0] === "orders" && waiting ? '<span class="dot">' + waiting + "</span>" : "") +
            t[1] + "</button>";
     });
-    document.getElementById("tabs").innerHTML = h;
+    paint("tabs", h);
+  }
+
+  // Okno platby zůstává na obrazovce i několik vteřin a mezitím může přijít
+  // zpráva z druhého zařízení. Kdyby se při každé překreslila celá stránka,
+  // okno by se přerodilo i s návratovou animací a obsluze by poskakovalo
+  // pod rukama — proto sahá na DOM jen ta část, jejíž obsah se liší.
+  var painted = {};
+
+  function paint(id, html) {
+    if (painted[id] === html) { return false; }
+    painted[id] = html;
+    document.getElementById(id).innerHTML = html;
+    return true;
   }
 
   function render(toTop) {
@@ -1422,20 +1440,20 @@
 
     var v = document.getElementById("view");
     var keep = v.scrollTop;
-    v.innerHTML = view === "sell" ? renderSell()
-                : view === "orders" ? renderOrders()
-                : view === "history" ? renderHistory()
-                : renderMenu();
-    v.scrollTop = toTop ? 0 : keep;
+    var redrawn = paint("view", view === "sell" ? renderSell()
+                              : view === "orders" ? renderOrders()
+                              : view === "history" ? renderHistory()
+                              : renderMenu());
+    if (redrawn || toTop) { v.scrollTop = toTop ? 0 : keep; }
 
-    document.getElementById("barSlot").innerHTML = view === "sell" ? renderBar() : "";
+    paint("barSlot", view === "sell" ? renderBar() : "");
     renderTabs(waiting);
-    document.getElementById("sheetSlot").innerHTML = renderSheet();
-    document.getElementById("toastSlot").innerHTML = toast
+    paint("sheetSlot", renderSheet());
+    paint("toastSlot", toast
       ? '<div class="toast' + (sheet ? " up" : "") + '"><span class="t">' + esc(toast.text) + "</span>" +
         (toast.undo ? '<button data-undo="' + toast.undo + '">Vrátit zpět</button>' : "") +
         '<button class="x" data-hidetoast="1" aria-label="Zavřít">×</button></div>'
-      : "";
+      : "");
   }
 
   // ---------- interaction ----------
