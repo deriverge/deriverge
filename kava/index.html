@@ -197,6 +197,9 @@
   .keys{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}
   .key{padding:13px 4px;border-radius:var(--r-btn);border:1px solid var(--rule);background:var(--surface);font-size:15px;font-weight:600;font-variant-numeric:tabular-nums}
   .key:active{background:var(--sunk)}
+  .keys.cash{grid-template-columns:repeat(5,1fr)}
+  .keys.cash .w3{grid-column:span 3}
+  .keys.cash .w2{grid-column:span 2}
   .key.wide{grid-column:span 2}
   .key.on{border-color:var(--ink);background:var(--ink);color:var(--paper)}
 
@@ -206,6 +209,7 @@
   .recv.give{background:#F0F7F3;border-color:#BFE0D0}
   .recv.give .val{color:var(--cash)}
   .recv.short .val{color:var(--accent)}
+  .recv.off .lbl,.recv.off .val{color:var(--ink-3)}
 
   .btn-done{width:100%;margin-top:14px;padding:17px;border:0;border-radius:var(--r-btn);background:var(--ink);color:var(--paper);font-size:17px;font-weight:700}
   .btn-done:disabled{background:var(--track);color:var(--ink-3)}
@@ -492,7 +496,7 @@
     { name: "Čaj",                   price: 30, color: "zelena" }
   ];
 
-  var NOTES = [10, 20, 50, 100, 200, 500, 1000];
+  var NOTES = [1, 2, 5, 10, 20, 50, 100, 200, 500, 1000];
 
   // ---------- state ----------
 
@@ -1269,18 +1273,25 @@
 
     if (sheet.step === "cash") {
       var back = sheet.received - sheet.total;
+      var got = sheet.received > 0;
       h += "<h2>Hotově</h2><div class=\"big num\">" + czk(sheet.total) + "</div>" +
            '<p class="sub">Naťukej, co ti dal — spočítám, kolik vrátit. Nebo rovnou Hotovo.</p>' +
-           '<div class="keys"><button class="key wide' + (sheet.received && sheet.received === sheet.total ? " on" : "") +
-             '" data-exact="1">Přesně</button><button class="key wide" data-zero="1">Vynulovat</button>';
+           '<div class="keys cash">' +
+             '<button class="key w3' + (got && sheet.received === sheet.total ? " on" : "") + '" data-exact="1">Přesně</button>' +
+             '<button class="key w2" data-zero="1">Vynulovat</button>';
       NOTES.forEach(function (v) { h += '<button class="key" data-note="' + v + '">' + v + "</button>"; });
       h += "</div>";
-      if (sheet.received > 0) {
-        h += '<div class="recv"><span class="lbl">Dostal jsem</span><span class="val num">' + czk(sheet.received) + "</span></div>";
-        h += back >= 0
-          ? '<div class="recv give"><span class="lbl">Vrátit</span><span class="val num">' + czk(back) + "</span></div>"
-          : '<div class="recv short"><span class="lbl">Chybí ještě</span><span class="val num">' + czk(-back) + "</span></div>";
-      }
+
+      // obě pole svítí pořád, jinak by okno po prvním ťuknutí povyrostlo
+      // a tlačítka by obsluze utekla pod prstem
+      h += '<div class="recv' + (got ? "" : " off") + '"><span class="lbl">Dostal jsem</span>' +
+           '<span class="val num">' + czk(sheet.received) + "</span></div>";
+      h += !got
+        ? '<div class="recv off"><span class="lbl">Vrátit</span><span class="val num">—</span></div>'
+        : (back >= 0
+            ? '<div class="recv give"><span class="lbl">Vrátit</span><span class="val num">' + czk(back) + "</span></div>"
+            : '<div class="recv short"><span class="lbl">Chybí ještě</span><span class="val num">' + czk(-back) + "</span></div>");
+
       h += '<button class="btn-done" data-commit="1">Hotovo</button>' +
            '<button class="btn-ghost" data-cancel="1">Zpět</button>';
     }
