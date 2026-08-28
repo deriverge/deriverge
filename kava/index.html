@@ -1057,6 +1057,19 @@
     if (batch.length) { relayPost({ t: "sync", event: state.event, sales: batch }); }
   }
 
+  // Ohlášení se: obě zařízení o sobě dají vědět, jakmile se připojí nebo
+  // se na to člověk podívá do Menu. Bez toho by "spárováno" nešlo poznat
+  // dřív než u první objednávky — a hlavně by nebylo vidět, že každé
+  // zařízení visí na jiném kódu.
+  var lastHello = 0, helloBack = 0;
+
+  function sayHello(force) {
+    var now = Date.now();
+    if (!force && now - lastHello < 15000) { return; }
+    lastHello = now;
+    relayPost({ t: "hi", role: state.mode });
+  }
+
   function relayDeleted(ids) { relayPost({ t: "del", ids: ids }); }
   function relayCleared() { relayPost({ t: "clear" }); }
 
@@ -1122,6 +1135,17 @@
     }
     if (msg.src === myId) { return; }   // vlastní zprávy zpátky nebereme
 
+    if (msg.t === "hi") {
+      lastIn = Date.now();
+      refreshLink();
+      if (Date.now() - helloBack > 5000) {   // ozveme se zpátky, ale ne donekonečna
+        helloBack = Date.now();
+        sayHello(true);
+      }
+      render();
+      return;
+    }
+
     lastIn = Date.now();
     refreshLink();
     window.__kasaPeer(msg);
@@ -1175,7 +1199,7 @@
             schedulePoll(link);
             refreshLink();
             setRelayError("");
-            if (!sentOpen) { sentOpen = true; relaySales(openOrders()); }
+            if (!sentOpen) { sentOpen = true; sayHello(true); relaySales(openOrders()); }
           };
           link.es.onerror = function () {
             link.sseUp = false;
@@ -1398,8 +1422,8 @@
     if (!state.pair) {
       return peers > 0 ? "Spárováno s druhým zařízením" : "Druhé zařízení zatím nenalezeno";
     }
-    if (lastIn) { return "Spárováno — data chodí oběma směry"; }
-    if (anySse()) { return "Připojeno, čekám na druhé zařízení"; }
+    if (lastIn) { return "Spárováno — druhé zařízení se ozvalo"; }
+    if (anySse()) { return "Připojeno k serveru, ale druhé zařízení mlčí"; }
     return "Nepřipojeno — zkontroluj internet na obou zařízeních";
   }
 
@@ -1420,6 +1444,10 @@
             (state.pair
               ? '<div class="link on" style="padding-top:0"><i></i>Kód spojení: <strong>' + esc(state.pair) + "</strong></div>" +
                 (relayError ? '<p class="hint" style="color:var(--accent);text-align:left;padding-top:0;padding-bottom:2px">' + esc(relayError) + "</p>" : "") +
+                (!lastIn && anySse()
+                  ? '<p class="hint" style="color:var(--accent);text-align:left;padding-top:0;padding-bottom:2px">' +
+                    "Na druhém zařízení musí být <strong>úplně stejný kód</strong>. Kód se vytváří jen na jednom — na druhém se opíše do políčka a dá se Spojit. Když si ho vytvoří obě, každé mluví jinam a objednávky se nepotkají.</p>"
+                  : "") +
                 '<p class="hint" style="text-align:left;padding-top:0;padding-bottom:2px">' +
                   (lastIn ? "Naposledy přijato v " + clock(lastIn) + "." : "Zatím nic nepřišlo.") +
                   (lastOut ? " Odesláno v " + clock(lastOut) + "." : "") + "</p>" +
@@ -1427,9 +1455,11 @@
                 '<div class="acts" style="padding-top:0"><button class="act" data-relaytest="1">Otestovat spojení</button>' +
                 '<button class="act" data-resync="1">Poslat vše znovu</button>' +
                 '<button class="act" data-pairoff="1">Odpojit</button></div>'
-              : '<div class="field" style="padding-top:8px"><input class="inp" id="pairCode" placeholder="Kód z druhého zařízení" autocapitalize="characters"></div>' +
+              : '<p class="hint" style="text-align:left;padding-top:0;padding-bottom:4px">' +
+                  "Kód vytvoř jen na <strong>jednom</strong> zařízení. Na druhém ho sem opiš — tam už nový nevytvářej.</p>" +
+                '<div class="field" style="padding-top:0"><input class="inp" id="pairCode" placeholder="Kód z druhého zařízení" autocapitalize="characters"></div>' +
                 '<div class="acts" style="padding-top:0"><button class="act" data-pairjoin="1">Spojit</button>' +
-                (till ? '<button class="act" data-paircreate="1">Vytvořit kód</button>' : "") + "</div>") +
+                '<button class="act" data-paircreate="1">Vytvořit nový kód</button></div>') +
             '<div class="acts" style="padding-top:6px"><button class="act' + (state.voice ? " on" : "") +
               '" data-voice="1">' + (state.voice ? (till ? "Děkuje zákazníkovi ✓" : "Čte objednávky nahlas ✓") : (till ? "Poděkovat zákazníkovi" : "Číst objednávky nahlas")) + "</button>" +
               '<button class="act" data-voicetest="1">Zkusit hlas</button></div>';
@@ -1684,7 +1714,13 @@
     // a tap on the sheet body (not on a control) must not close it
     if (d.scrim && t !== ev.target) { return; }
 
-    if (d.tab) { view = d.tab; linesOpen = false; render(true); return; }
+    if (d.tab) {
+      view = d.tab;
+      linesOpen = false;
+      if (view === "menu" && state.pair) { sayHello(); }
+      render(true);
+      return;
+    }
 
     if (d.add) {
       var it = findItem(d.add);
@@ -1888,6 +1924,7 @@
       for (var ci = 0; ci < 5; ci++) { code += abc.charAt(Math.floor(Math.random() * abc.length)); }
       state.pair = code;
       save(); relayOpen(); render();
+      sayHello(true);
       showToast("Kód " + code + " — zadej ho ve druhém zařízení");
       return;
     }
@@ -1898,6 +1935,7 @@
       if (code2.length < 3) { showToast("Zadej kód z druhého zařízení"); return; }
       state.pair = code2;
       save(); relayOpen(); render();
+      sayHello(true);
       showToast("Spojuji přes kód " + code2 + "…");
       return;
     }
