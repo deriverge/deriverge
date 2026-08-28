@@ -1,7 +1,7 @@
 /* Kasa na stánek — offline cache.
    The stand may have no signal; once the app has been opened online it keeps working. */
 
-var CACHE = "kasa-v2";
+var CACHE = "kasa-v3";
 var SHELL = ["./", "./index.html", "./manifest.webmanifest"];
 
 self.addEventListener("install", function (e) {
@@ -28,6 +28,16 @@ self.addEventListener("activate", function (e) {
 self.addEventListener("fetch", function (e) {
   var req = e.request;
   if (req.method !== "GET") { return; }
+
+  // Cizí adresy necháváme projít rovnou na síť. Párování si povídá se
+  // vzdáleným serverem a kdyby jeho odpovědi šly přes zdejší cache, vracela
+  // by se pořád ta první — nové objednávky by nedorazily nikdy a navenek by
+  // to vypadalo jako v pořádku. Cachujeme jen sebe a písma.
+  var url;
+  try { url = new URL(req.url); } catch (err) { return; }
+  var mine = url.origin === self.location.origin;
+  var font = url.hostname === "fonts.googleapis.com" || url.hostname === "fonts.gstatic.com";
+  if (!mine && !font) { return; }
 
   // Page loads: fresh copy when online, cached copy when not.
   if (req.mode === "navigate") {

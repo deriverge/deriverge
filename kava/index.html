@@ -963,13 +963,32 @@
   // změnilo — jedna objednávka na zprávu — a ne celý seznam. A když
   // přeposílač zprávu odmítne, řekne se to nahlas místo tichého ignorování.
 
-  var RELAY = "https://ntfy.sh/";
+  // Veřejné přeposílače mají denní limity a občas prostě odmítnou. Proto
+  // jedeme přes dva naráz: posílá se na oba a poslouchá se na obou. Stačí,
+  // aby v danou chvíli fungoval jeden. Zprávy jsou nezávislé na pořadí a
+  // slučují se podle id, takže když dorazí dvakrát, nic se nestane.
+  var RELAYS = (typeof window.__KASA_RELAY__ === "string" && window.__KASA_RELAY__)
+    ? window.__KASA_RELAY__.split(",")
+    : ["https://ntfy.sh/", "https://ntfy.envs.net/"];
+
   var MAX_BYTES = 3500;
   var myId = Math.random().toString(36).slice(2, 10);
-  var es = null, pollTimer = null, seen = {}, lastTs = 0, sseUp = false;
-  var relayError = "", lastIn = 0, lastOut = 0, sentOpen = false;
+  var links = [];
+  var seen = {}, relayError = "", lastIn = 0, lastOut = 0, sentOpen = false;
+  var pingAt = 0, testResult = "";
 
   function relayTopic() { return state.pair ? "kasa-stanek-" + state.pair : ""; }
+
+  function anySse() {
+    for (var i = 0; i < links.length; i++) { if (links[i].sseUp) { return true; } }
+    return false;
+  }
+
+  // Zelená tečka nesmí svítit jen proto, že se povedl dotaz — to by lhalo.
+  // Svítí, až když drží stálé spojení nebo když od protějšku něco přišlo.
+  function refreshLink() {
+    setPeers(anySse() || lastIn ? 1 : 0);
+  }
 
   function setPeers(n) {
     if (peers === n) { return; }
@@ -994,28 +1013,33 @@
     };
   }
 
-  function relayPost(msg) {
+  // Pošle na všechny přeposílače. Chybu hlásíme, teprve když selžou všechny.
+  function relayPost(msg, done) {
     var topic = relayTopic();
-    if (!topic || !window.fetch) { return; }
+    if (!topic || !window.fetch || !links.length) { return; }
     msg.src = myId;
     var body;
     try { body = JSON.stringify(msg); } catch (e) { return; }
 
-    try {
-      fetch(RELAY + topic, { method: "POST", body: body }).then(function (r) {
-        if (r.ok) {
+    var left = links.length, ok = false, worst = 0;
+    links.forEach(function (link) {
+      fetch(link.base + topic, { method: "POST", body: body }).then(function (r) {
+        if (r.ok) { ok = true; } else if (r.status > worst) { worst = r.status; }
+      }, function () {}).then(function () {
+        if (--left) { return; }
+        if (ok) {
           lastOut = Date.now();
           setRelayError("");
-          setPeers(1);
-          return;
+        } else {
+          setRelayError(worst === 429
+            ? "Přeposílače zprávy odmítají — vyčerpaný denní limit. Zkus to za pár hodin, nebo jeďte každý zvlášť."
+            : worst
+              ? "Přeposílač odmítl zprávu (chyba " + worst + ")."
+              : "Nedaří se odeslat — zařízení nemá spojení ven.");
         }
-        setRelayError(r.status === 429
-          ? "Přeposílač zprávy odmítá — je vyčerpaný jeho denní limit zdarma. Nový kód nepomůže, limit je na připojení. Zkus to za pár hodin, nebo jeďte každý zvlášť."
-          : "Přeposílač odmítl zprávu (chyba " + r.status + ").");
-      }, function () {
-        setRelayError("Nedaří se odeslat — zkontroluj připojení.");
+        if (done) { done(ok, worst); }
       });
-    } catch (e) {}
+    });
   }
 
   // Objednávky posíláme po dávkách, aby se žádná zpráva nevešla přes limit.
@@ -1036,77 +1060,136 @@
   function relayDeleted(ids) { relayPost({ t: "del", ids: ids }); }
   function relayCleared() { relayPost({ t: "clear" }); }
 
-  function relayClose() {
-    if (es) { try { es.close(); } catch (e) {} es = null; }
-    if (pollTimer) { clearInterval(pollTimer); pollTimer = null; }
-    seen = {}; lastTs = 0; sseUp = false; sentOpen = false;
-    relayError = "";
+  // Zkouška spojení: pošle vlastní značku a čeká, jestli se vrátí. Rozliší
+  // tím tři různé poruchy — neodešlo, odešlo ale nechodí zpátky, nebo je vše
+  // v pořádku — a nepotřebuje k tomu druhé zařízení.
+  function relayTest() {
+    if (!relayTopic()) { testResult = "Není zadaný kód spojení."; render(); return; }
+    pingAt = Date.now();
+    testResult = "Zkouším…";
+    render();
+    relayPost({ t: "ping", at: pingAt }, function (ok, worst) {
+      if (!ok) {
+        pingAt = 0;
+        testResult = worst === 429
+          ? "Odeslání odmítnuto — vyčerpaný denní limit přeposílačů."
+          : worst
+            ? "Odeslání odmítnuto (chyba " + worst + ")."
+            : "Nepodařilo se vůbec odeslat — zařízení nemá spojení ven.";
+        render();
+        return;
+      }
+      if (!pingAt) { return; }   // odpověď stihla dorazit dřív než potvrzení odeslání
+      testResult = "Odesláno, čekám na návrat…";
+      render();
+      setTimeout(function () {
+        if (!pingAt) { return; }
+        pingAt = 0;
+        testResult = "Odeslání prošlo, ale zpátky nic nedorazilo — vázne příjem.";
+        render();
+      }, 8000);
+    });
   }
 
-  function relayTake(env) {
-    if (!env || env.event !== "message" || !env.message || seen[env.id]) { return; }
-    seen[env.id] = true;
-    if (env.time > lastTs) { lastTs = env.time; }
+  function relayClose() {
+    links.forEach(function (l) {
+      if (l.es) { try { l.es.close(); } catch (e) {} }
+      if (l.timer) { clearInterval(l.timer); }
+    });
+    links = [];
+    seen = {}; sentOpen = false; relayError = ""; testResult = ""; pingAt = 0;
+  }
+
+  function relayTake(link, env) {
+    if (!env || env.event !== "message" || !env.message) { return; }
+    var key = link.base + "|" + env.id;
+    if (seen[key]) { return; }
+    seen[key] = true;
+    if (env.time > link.lastTs) { link.lastTs = env.time; }
+
     var msg = null;
     try { msg = JSON.parse(env.message); } catch (e) { return; }
-    if (!msg || msg.src === myId) { return; }   // vlastní zprávy zpátky nebereme
+    if (!msg) { return; }
+
+    if (msg.t === "ping") {
+      if (msg.src === myId && pingAt) {
+        testResult = "Spojení funguje — zpráva se vrátila za " +
+          ((Date.now() - pingAt) / 1000).toFixed(1) + " s.";
+        pingAt = 0;
+        render();
+      }
+      return;
+    }
+    if (msg.src === myId) { return; }   // vlastní zprávy zpátky nebereme
+
     lastIn = Date.now();
+    refreshLink();
     window.__kasaPeer(msg);
   }
 
   // Stálé spojení je hlavní cesta; dotazování je záloha, když ho síť nepustí.
   // Když spojení drží, ptáme se zřídka, ať zbytečně nepálíme denní limit.
-  function relayPoll() {
+  function relayPoll(link) {
     var topic = relayTopic();
     if (!topic || !window.fetch) { return; }
-    fetch(RELAY + topic + "/json?poll=1&since=" + (lastTs ? lastTs : "5m"))
+    fetch(link.base + topic + "/json?poll=1&since=" + (link.lastTs ? link.lastTs : "5m"))
       .then(function (r) {
         if (!r.ok) { throw new Error(String(r.status)); }
         return r.text();
       })
       .then(function (body) {
-        setPeers(1);
-        setRelayError("");
         body.split("\n").forEach(function (line) {
           if (!line.trim()) { return; }
-          try { relayTake(JSON.parse(line)); } catch (e) {}
+          try { relayTake(link, JSON.parse(line)); } catch (e) {}
         });
+        refreshLink();
       })
-      .catch(function () { if (!sseUp) { setPeers(0); } });
+      .catch(function () { refreshLink(); });
   }
 
-  function schedulePoll() {
-    if (pollTimer) { clearInterval(pollTimer); }
-    pollTimer = setInterval(relayPoll, sseUp ? 20000 : 4000);
+  function schedulePoll(link) {
+    if (link.timer) { clearInterval(link.timer); }
+    link.timer = setInterval(function () { relayPoll(link); }, link.sseUp ? 20000 : 4000);
   }
+
+  // pro diagnostiku: stav jednotlivých přeposílačů
+  window.__kasaLinks = function () {
+    return links.map(function (l) {
+      return { base: l.base, sseUp: l.sseUp, lastTs: l.lastTs };
+    });
+  };
 
   function relayOpen() {
     relayClose();
     var topic = relayTopic();
     if (!topic) { return; }
 
-    if (window.EventSource) {
-      try {
-        es = new EventSource(RELAY + topic + "/sse?since=5m");
-        es.onopen = function () {
-          sseUp = true;
-          schedulePoll();
-          setPeers(1);
-          setRelayError("");
-          if (!sentOpen) { sentOpen = true; relaySales(openOrders()); }
-        };
-        es.onerror = function () {
-          sseUp = false;
-          schedulePoll();
-        };
-        es.onmessage = function (ev) {
-          try { relayTake(JSON.parse(ev.data)); } catch (e) {}
-        };
-      } catch (e) {}
-    }
+    links = RELAYS.map(function (base) { return { base: base, es: null, sseUp: false, lastTs: 0, timer: null }; });
 
-    relayPoll();
-    schedulePoll();
+    links.forEach(function (link) {
+      if (window.EventSource) {
+        try {
+          link.es = new EventSource(link.base + topic + "/sse?since=5m");
+          link.es.onopen = function () {
+            link.sseUp = true;
+            schedulePoll(link);
+            refreshLink();
+            setRelayError("");
+            if (!sentOpen) { sentOpen = true; relaySales(openOrders()); }
+          };
+          link.es.onerror = function () {
+            link.sseUp = false;
+            schedulePoll(link);
+            refreshLink();
+          };
+          link.es.onmessage = function (ev) {
+            try { relayTake(link, JSON.parse(ev.data)); } catch (e) {}
+          };
+        } catch (e) {}
+      }
+      relayPoll(link);
+      schedulePoll(link);
+    });
   }
 
   window.__kasaPeerCount = function (n) {
@@ -1311,6 +1394,15 @@
            (state.sales.length ? '<button class="act danger" data-close="1">Uzavřít akci</button>' : "") + "</div>";
   }
 
+  function linkText() {
+    if (!state.pair) {
+      return peers > 0 ? "Spárováno s druhým zařízením" : "Druhé zařízení zatím nenalezeno";
+    }
+    if (lastIn) { return "Spárováno — data chodí oběma směry"; }
+    if (anySse()) { return "Připojeno, čekám na druhé zařízení"; }
+    return "Nepřipojeno — zkontroluj internet na obou zařízeních";
+  }
+
   function renderMenu() {
     var till = state.mode === "kasa";
 
@@ -1324,18 +1416,16 @@
                 ? "Tohle zařízení účtuje a posílá objednávky druhému."
                 : "Tohle zařízení jenom přijímá objednávky a odškrtává je. Neúčtuje.") +
             "</p>" +
-            '<div class="link' + (peers > 0 ? " on" : "") + '"><i></i>' +
-              (peers > 0
-                ? (peers === 1 ? "Spárováno s druhým zařízením" : "Spárováno se " + peers + " zařízeními")
-                : "Druhé zařízení zatím nenalezeno") +
-            "</div>" +
+            '<div class="link' + (peers > 0 ? " on" : "") + '"><i></i>' + linkText() + "</div>" +
             (state.pair
               ? '<div class="link on" style="padding-top:0"><i></i>Kód spojení: <strong>' + esc(state.pair) + "</strong></div>" +
                 (relayError ? '<p class="hint" style="color:var(--accent);text-align:left;padding-top:0;padding-bottom:2px">' + esc(relayError) + "</p>" : "") +
                 '<p class="hint" style="text-align:left;padding-top:0;padding-bottom:2px">' +
                   (lastIn ? "Naposledy přijato v " + clock(lastIn) + "." : "Zatím nic nepřišlo.") +
                   (lastOut ? " Odesláno v " + clock(lastOut) + "." : "") + "</p>" +
-                '<div class="acts" style="padding-top:0"><button class="act" data-resync="1">Poslat vše znovu</button>' +
+                (testResult ? '<p class="hint" style="text-align:left;padding-top:0;padding-bottom:2px;font-weight:600">' + esc(testResult) + "</p>" : "") +
+                '<div class="acts" style="padding-top:0"><button class="act" data-relaytest="1">Otestovat spojení</button>' +
+                '<button class="act" data-resync="1">Poslat vše znovu</button>' +
                 '<button class="act" data-pairoff="1">Odpojit</button></div>'
               : '<div class="field" style="padding-top:8px"><input class="inp" id="pairCode" placeholder="Kód z druhého zařízení" autocapitalize="characters"></div>' +
                 '<div class="acts" style="padding-top:0"><button class="act" data-pairjoin="1">Spojit</button>' +
@@ -1345,9 +1435,9 @@
               '<button class="act" data-voicetest="1">Zkusit hlas</button></div>';
 
     if (!till) {
-      return h + '<p class="hint">Párování běží samo po místní síti, jakmile jsou obě zařízení' +
-             ' zapnutá a blízko sebe. Funguje jen v nainstalované aplikaci z <code>ios/</code>,' +
-             ' ne v prohlížeči.</p>' + renderBackupBlock();
+      return h + '<p class="hint">Zadej stejný kód jako na kase. V nainstalované aplikaci' +
+             ' se zařízení navíc najdou sama po místní síti, i bez internetu.</p>' +
+             renderBackupBlock();
     }
 
     h += '<div class="sec"><h2>Název akce</h2></div>' +
@@ -1581,7 +1671,7 @@
             "[data-new],[data-rm],[data-mv],[data-reset],[data-undo],[data-hidetoast],[data-yes]," +
             "[data-backup],[data-restoreask],[data-dorestore]," +
             "[data-ticket],[data-line],[data-serve],[data-reopen],[data-drop],[data-col],[data-setcol],[data-mode],[data-voice],[data-voicetest],"+
-            "[data-paircreate],[data-pairjoin],[data-pairoff],[data-resync]";
+            "[data-paircreate],[data-pairjoin],[data-pairoff],[data-resync],[data-relaytest]";
 
   document.addEventListener("click", function (ev) {
     if (suppressClick) { suppressClick = false; return; }
@@ -1812,6 +1902,8 @@
       return;
     }
 
+    if (d.relaytest) { relayTest(); return; }
+
     if (d.resync) {
       pushEverything();
       showToast("Fronta odeslána znovu");
@@ -2001,9 +2093,12 @@
 </script>
 <!-- APP:END -->
 <script>
-  if ("serviceWorker" in navigator && location.protocol === "https:") {
+  var local = location.hostname === "localhost" || location.hostname === "127.0.0.1";
+  if ("serviceWorker" in navigator && (location.protocol === "https:" || local)) {
     window.addEventListener("load", function () {
-      navigator.serviceWorker.register("sw.js").catch(function () {});
+      navigator.serviceWorker.register("sw.js").then(function (reg) {
+        reg.update();          // ať se oprava rozjede hned po první návštěvě
+      }).catch(function () {});
     });
   }
 </script>
