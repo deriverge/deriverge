@@ -8,6 +8,7 @@ Po nasazení běží na `https://www.deriverge.com/kava/`.
 ## Jak se to ovládá
 
 1. **Prodej** — klepnutím na kartu přidáš položku na účet, dalším klepnutím další kus.
+   Každá položka má vlastní barvu, takže obsluha kartu pozná dřív, než přečte název.
    **Podržením karty na vteřinu** ta jedna položka z účtu zmizí — na kartě se
    při držení plní pruh, takže omylem to nejde. Zbytek účtu zůstane.
    Souhrn dole ukáže počet a částku; klepnutím na něj se účet rozbalí a jde upravovat
@@ -15,12 +16,37 @@ Po nasazení běží na `https://www.deriverge.com/kava/`.
 2. **Zaplatit** — vyskočí částka a dvě tlačítka. U *Hotově* si můžeš naťukat, co ti
    zákazník dal, a aplikace spočítá, kolik vrátit. Potvrdíš `Hotovo`.
    Špatně uložený účet jde hned vrátit tlačítkem *Vrátit zpět* v liště.
-3. **Přehled** — tržba celkem, rozpad hotově/kartou, kolik kusů které položky se
+3. **Objednávky** — zaplacený účet nezmizí, zařadí se do fronty jako objednávka
+   s číslem. Klepnutím se otevře, položky se odškrtávají (u víc kusů se počítá
+   1/2, 2/2) a `Vydáno` ji uzavře. Vydané jdou vrátit zpátky do fronty.
+   V hlavičce a na záložce je pořád vidět, kolik objednávek čeká.
+4. **Přehled** — tržba celkem, rozpad hotově/kartou, kolik kusů které položky se
    prodalo a za kolik, plus seznam účtenek (každou lze smazat).
    `Zobrazit souhrn` vyplivne text ke zkopírování. `Uzavřít akci` odloží tržbu do
    archivu a vynuluje kasu pro další prodej.
-4. **Menu** — název akce, položky a ceny. Ukládá se průběžně. Změna ceny neovlivní
-   už uložené účtenky.
+   **Tržba se úmyslně nikde jinde neukazuje** — hlavička je vidět přes pult.
+5. **Menu** — role zařízení, název akce, položky, ceny a barvy. Ukládá se průběžně.
+   Změna ceny neovlivní už uložené účtenky.
+
+## Dvě zařízení
+
+Kasa umí běžet ve dvou rolích, přepíná se to v Menu:
+
+- **Kasa** — účtuje, má všechny čtyři záložky.
+- **Výdej** — jenom přijímá objednávky a odškrtává je. Nemá prodej ani statistiky,
+  takže se do něj nedá omylem naúčtovat.
+
+Zaplacená objednávka se z kasy sama objeví na výdeji; jak se na výdeji odškrtává,
+vidí to kasa. Obě strany si posílají celý seznam objednávek a slučují ho podle
+`id`, vyhrává novější `updatedAt` — na pořadí zpráv proto nezáleží a výpadek
+spojení se dorovná, jakmile se zařízení zase vidí.
+
+**Přenos funguje jen v nainstalované aplikaci z `../ios/`**, kde ho obstarává
+Multipeer Connectivity — přímo mezi zařízeními, bez internetu i bez routeru.
+V prohlížeči je fronta k dispozici taky, ale jen na tom jednom zařízení.
+
+Vedlejší efekt párování: výdejní zařízení má kompletní kopii prodejů, takže když
+iPad umře, data jsou i v telefonu.
 
 ## Data
 
@@ -32,6 +58,7 @@ nezávislých kopiích, aby o ně restart ani vybitá baterie nepřipravily:
 | `localStorage`, klíč `kavakasa.v1` | při každé změně | běžné čtení i zápis |
 | IndexedDB `kavakasa` | při každé změně (se zpožděním 0,3 s) | záchrana, když prohlížeč localStorage zahodí |
 | `Documents/kasa.json` | při každé změně | jen v nativní aplikaci, viz `../ios/` |
+| druhé zařízení | při změně objednávky | jen když je spárované |
 
 Při startu se kasa načte z localStorage. Když je prázdný, ale v IndexedDB něco
 je, obnoví se odtamtud a napíše hlášku. V nativní aplikaci má přednost soubor.

@@ -1,6 +1,6 @@
 # Popis projektu pro XcodeGen (https://github.com/yonaskolb/XcodeGen).
 # Kdo má XcodeGen (brew install xcodegen), vyrobí si projekt jedním příkazem:
-#     cd ios && xcodegen generate && open Kasa.xcodeproj
+#     cd ios && ./copy-web.sh && xcodegen generate && open Kasa.xcodeproj
 # Kdo ho nemá, založí projekt v Xcode ručně podle README.md — vyjde to nastejno.
 
 name: Kasa
@@ -16,6 +16,28 @@ targets:
     platform: iOS
     sources:
       - path: Kasa
+    info:
+      path: Kasa/Info.plist
+      properties:
+        CFBundleDisplayName: Kasa
+        UILaunchScreen: {}
+        UIApplicationSupportsIndirectInputEvents: true
+        # Bez těchhle dvou klíčů iOS 14+ párování po místní síti zakáže.
+        NSLocalNetworkUsageDescription: >-
+          Kasa posílá objednávky mezi vašimi zařízeními přímo po místní síti.
+          Data neopouštějí vaše zařízení.
+        NSBonjourServices:
+          - _kasa-order._tcp
+          - _kasa-order._udp
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
+        UISupportedInterfaceOrientations~ipad:
+          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationPortraitUpsideDown
+          - UIInterfaceOrientationLandscapeLeft
+          - UIInterfaceOrientationLandscapeRight
     settings:
       base:
         PRODUCT_NAME: Kasa
@@ -24,16 +46,4 @@ targets:
         CURRENT_PROJECT_VERSION: "1"
         TARGETED_DEVICE_FAMILY: "1,2"          # iPhone i iPad
         SWIFT_VERSION: "5.0"
-        GENERATE_INFOPLIST_FILE: YES
-        INFOPLIST_KEY_CFBundleDisplayName: Kasa
-        INFOPLIST_KEY_UILaunchScreen_Generation: YES
-        INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents: YES
-        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad: >-
-          UIInterfaceOrientationPortrait
-          UIInterfaceOrientationPortraitUpsideDown
-          UIInterfaceOrientationLandscapeLeft
-          UIInterfaceOrientationLandscapeRight
-        INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone: >-
-          UIInterfaceOrientationPortrait
-          UIInterfaceOrientationLandscapeLeft
-          UIInterfaceOrientationLandscapeRight
+        GENERATE_INFOPLIST_FILE: NO

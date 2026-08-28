@@ -4,6 +4,11 @@ Tenhle adresář dělá z kasy skutečnou aplikaci, která se instaluje na zař�
 žádná webová stránka, žádný server, nic online. Appka nese celý svůj obsah
 uvnitř a data si ukládá do souboru ve svém úložišti.
 
+Nainstalovaná verze umí navíc jednu věc, kterou prohlížeč neumí: **spárovat dvě
+zařízení**. Objednávky z iPadu se rovnou objeví v iPhonu obsluhy. Jede to přes
+Multipeer Connectivity — přímo mezi zařízeními po místní síti nebo Bluetoothem,
+bez internetu, routeru i účtu. Stačí, aby obě appky běžely a byly blízko sebe.
+
 ## Co k tomu potřebuješ
 
 **Mac s Xcode.** Bez něj se iOS aplikace na zařízení nedostane — Apple jinou
@@ -36,7 +41,8 @@ open Kasa.xcodeproj
 3. Ve vytvořeném projektu **smaž** vygenerované `ContentView.swift`
    i `KasaApp.swift` (Move to Trash).
 4. Přetáhni do projektu soubory `ios/Kasa/KasaApp.swift`,
-   `ios/Kasa/KasaWebView.swift` a `ios/Kasa/Resources/index.html`.
+   `ios/Kasa/KasaWebView.swift`, `ios/Kasa/PeerLink.swift`
+   a `ios/Kasa/Resources/index.html`.
    V dialogu zaškrtni **Copy items if needed** a **Add to target: Kasa**.
 5. Klikni na `index.html` a v pravém panelu ověř, že má zaškrtnutou
    **Target Membership → Kasa**. Bez toho se appka spustí s prázdnou obrazovkou.
@@ -44,6 +50,11 @@ open Kasa.xcodeproj
    - Supported Destinations: iPhone i iPad
    - Device Orientation: zapni na výšku i na šířku
 7. **Signing & Capabilities** → Team: tvoje Apple ID.
+8. Target → **Info** → přidej dva klíče, bez nich iOS párování zakáže:
+   - `Privacy - Local Network Usage Description` (String):
+     *Kasa posílá objednávky mezi vašimi zařízeními přímo po místní síti.*
+   - `Bonjour services` (Array) se dvěma položkami:
+     `_kasa-order._tcp` a `_kasa-order._udp`
 
 ## Nahrání do iPadu
 
@@ -55,6 +66,18 @@ open Kasa.xcodeproj
 4. Appka je na ploše. Kabel ani Xcode už k jejímu spouštění nejsou potřeba.
 
 iPad 5. generace (iPadOS 16.7) je v pohodě — projekt cílí na iOS 15 a výš.
+
+## Párování iPadu a iPhonu
+
+Aplikaci nainstaluj stejným postupem do obou zařízení. Pak v každém otevři
+**Menu → Role zařízení**: iPad nech na *Kasa*, iPhonu dej *Výdej*. Když jsou obě
+appky spuštěné, najdou se během pár vteřin samy a v Menu se rozsvítí zelená
+tečka „Spárováno".
+
+Při prvním spuštění se iOS zeptá na povolení místní sítě — je potřeba potvrdit.
+Když se zařízení nenajdou, zkontroluj, že mají obě zapnuté Wi-Fi i Bluetooth
+(stačí zapnuté, připojení k síti není nutné) a že povolení nebylo odmítnuto
+(Nastavení → Kasa → Místní síť).
 
 ## Kde jsou data
 
@@ -85,5 +108,6 @@ offline, vykreslí se systémovým písmem — kasa funguje úplně stejně, jen
 o kousek obyčejněji. Kdyby to vadilo, dají se písma zabalit dovnitř.
 
 Swift kód jsem nemohl zkompilovat — v prostředí, kde vznikal, není macOS.
-Web uvnitř otestovaný je, obal je krátký a přímočarý, ale první build v Xcode
-je zároveň jeho první ostrý test.
+Webová část včetně protokolu párování otestovaná je (dvě okna prohlížeče, mezi
+kterými zprávy přeposílá test místo PeerLinku), ale první build v Xcode je
+zároveň první ostrý test samotného Swiftu.

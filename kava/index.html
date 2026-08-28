@@ -78,14 +78,22 @@
 
   /* ---------- tabs ---------- */
   .tabs{
-    display:grid;grid-template-columns:repeat(3,1fr);
+    display:grid;grid-auto-flow:column;grid-auto-columns:1fr;
     border-top:1px solid var(--rule);background:var(--surface);
     padding-bottom:var(--safe-b);position:relative;z-index:3;
   }
   .tab{
+    position:relative;
     display:flex;flex-direction:column;align-items:center;gap:3px;
     padding:9px 4px 10px;background:none;border:0;
     font-size:11px;font-weight:600;letter-spacing:.02em;color:var(--ink-3);
+  }
+  .tab .dot{
+    position:absolute;top:4px;left:50%;margin-left:6px;
+    min-width:18px;height:18px;padding:0 5px;border-radius:9px;
+    background:var(--accent);color:#fff;
+    font-family:var(--mono);font-size:11px;font-weight:700;
+    display:grid;place-items:center;
   }
   .tab svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
   .tab[aria-selected="true"]{color:var(--accent)}
@@ -110,7 +118,7 @@
   .prod.is-hold{background:var(--accent-tint);border-color:var(--accent)}
   .prod.is-hold .hold{transform:scaleX(1);transition:transform 1s linear}
   @media (prefers-reduced-motion:reduce){.prod.is-hold .hold{transition:none}}
-  .prod .nm{font-size:15px;font-weight:600;letter-spacing:-.01em;line-height:1.2}
+  .prod .nm{font-size:15px;font-weight:700;letter-spacing:-.01em;line-height:1.2}
   .prod .pr{font-size:14px;color:var(--ink-2)}
   .prod.is-on{border-color:var(--accent);background:var(--accent-tint)}
   .prod .badge{
@@ -119,6 +127,15 @@
     background:var(--accent);color:#fff;
     font-family:var(--mono);font-size:12px;font-weight:700;
   }
+
+  /* barevná karta — pozadí i barva textu jdou z palety inline stylem,
+     zbytek se veze na currentColor, takže sedí na jakoukoliv barvu */
+  .prod.tinted{border-color:rgba(0,0,0,.16)}
+  .prod.tinted .pr{color:inherit;opacity:.85}
+  .prod.tinted:active,.prod.tinted.is-hold{filter:brightness(.9)}
+  .prod.tinted.is-on{border-color:rgba(0,0,0,.3);box-shadow:inset 0 0 0 3px currentColor}
+  .prod.tinted .badge{background:currentColor;color:var(--bg)}
+  .prod.tinted .hold{background:currentColor}
   .prod.custom{border-style:dashed;border-bottom-width:1px;background:transparent;align-items:center;justify-content:center;text-align:center}
   .prod.custom .nm{color:var(--ink-2)}
 
@@ -192,6 +209,7 @@
   .btn-done:disabled{background:var(--track);color:var(--ink-3)}
   .btn-done:not(:disabled):active{transform:scale(.99)}
   .btn-done.warn{background:var(--accent)}
+  .btn-done.go{background:var(--cash)}
   .btn-ghost{width:100%;margin-top:8px;padding:13px;border:1px solid var(--rule);border-radius:var(--r-btn);background:transparent;color:var(--ink-2);font-size:14px;font-weight:600}
 
   .paid{display:flex;align-items:center;gap:9px;margin-top:16px;padding:13px 14px;border-radius:var(--r-tile);font-size:15px;font-weight:600;color:#fff}
@@ -265,10 +283,84 @@
     padding:12px 14px;border-radius:var(--r-tile);background:var(--ink);color:var(--paper);
     font-size:14px;font-weight:500;box-shadow:0 8px 24px rgba(21,18,14,.22);animation:rise .18s ease;
   }
+  /* nad otevřeným oknem by hláška zakryla jeho tlačítka — jde nahoru */
+  .toast.up{bottom:auto;top:calc(var(--safe-t) + 10px)}
   .toast .t{flex:1;min-width:0}
   .toast button{border:0;background:none;color:#FFB3A5;font-size:14px;font-weight:700;padding:4px 2px}
   .toast button.x{color:#9A9184;font-size:18px;line-height:1}
   .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+  /* ---------- fronta objednávek ---------- */
+  .tickets{display:flex;flex-direction:column;gap:10px;padding:14px 16px 20px}
+  .tk{
+    display:flex;align-items:center;gap:12px;width:100%;text-align:left;
+    padding:12px 14px;background:var(--surface);border:1px solid var(--rule);
+    border-bottom-width:2px;border-radius:var(--r-tile);
+  }
+  .tk:active{transform:scale(.99);background:var(--sunk)}
+  .tk.ready{border-color:var(--cash);background:#F2F8F5}
+  .tk .no{
+    flex:0 0 auto;min-width:46px;height:46px;padding:0 8px;display:grid;place-items:center;
+    border-radius:10px;background:var(--ink);color:var(--paper);
+    font-family:var(--mono);font-size:19px;font-weight:700;
+  }
+  .tk.ready .no{background:var(--cash)}
+  .tk .mid{flex:1;min-width:0}
+  .tk .chips{display:flex;flex-wrap:wrap;gap:5px}
+  .tk .time{margin-top:5px;font-size:12px;color:var(--ink-3)}
+  .tk .prog{flex:0 0 auto;font-family:var(--mono);font-size:14px;font-weight:700;color:var(--ink-2)}
+
+  .chip{
+    display:inline-flex;align-items:center;gap:4px;max-width:100%;
+    padding:3px 8px;border-radius:999px;border:1px solid rgba(0,0,0,.12);
+    background:var(--sunk);color:var(--ink);
+    font-size:12px;font-weight:700;line-height:1.3;
+  }
+  .chip .q{font-family:var(--mono);opacity:.75}
+  .chip.done{opacity:.4;text-decoration:line-through}
+
+  /* položky v otevřené objednávce */
+  .steps{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+  .st{
+    display:flex;align-items:center;gap:12px;width:100%;text-align:left;
+    padding:13px 14px;border-radius:var(--r-tile);border:1px solid rgba(0,0,0,.14);
+    font-size:16px;font-weight:700;
+  }
+  .st:active{filter:brightness(.92)}
+  .st .nm{flex:1;min-width:0}
+  .st .cnt{font-family:var(--mono);font-size:15px;opacity:.8}
+  .st .box{
+    flex:0 0 auto;width:26px;height:26px;border-radius:7px;
+    border:2px solid currentColor;display:grid;place-items:center;
+  }
+  .st .box svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;opacity:0}
+  .st.done{opacity:.55}
+  .st.done .box svg{opacity:1}
+  .st.done .nm{text-decoration:line-through}
+
+  .served{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--rule);width:100%;text-align:left;background:none;border-left:0;border-right:0;border-top:0}
+  .served .no{font-family:var(--mono);font-weight:700;color:var(--ink-3);min-width:34px}
+  .served .w{flex:1;min-width:0;font-size:13px;color:var(--ink-2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .served .back{font-size:12px;font-weight:600;color:var(--accent)}
+
+  /* ---------- výběr barvy a přepínač režimu ---------- */
+  .sw{flex:0 0 auto;width:30px;height:30px;border-radius:8px;border:1px solid rgba(0,0,0,.18)}
+  .sw:active{transform:scale(.94)}
+  .sw.none{background:var(--surface);position:relative;overflow:hidden}
+  .sw.none::after{content:"";position:absolute;left:-4px;top:13px;width:38px;height:1px;background:var(--ink-3);transform:rotate(-45deg)}
+
+  .swatches{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:14px}
+  .swatches button{height:54px;border-radius:var(--r-tile);border:1px solid rgba(0,0,0,.18);font-size:12px;font-weight:700}
+  .swatches button.on{box-shadow:inset 0 0 0 3px currentColor;border-color:rgba(0,0,0,.35)}
+
+  .seg{display:grid;grid-template-columns:1fr 1fr;gap:0;margin:0 16px;border:1px solid var(--rule);border-radius:var(--r-btn);overflow:hidden;background:var(--surface)}
+  .seg button{padding:13px 8px;border:0;background:none;font-size:15px;font-weight:600;color:var(--ink-2)}
+  .seg button.on{background:var(--ink);color:var(--paper)}
+
+  .link{display:flex;align-items:center;gap:8px;padding:12px 16px;font-size:13px;color:var(--ink-2)}
+  .link i{width:9px;height:9px;border-radius:999px;background:var(--ink-3);flex:0 0 auto}
+  .link.on i{background:var(--cash)}
+  .link.on{color:var(--ink)}
 
   /* ---------- tablet (iPad) ---------- */
   @media (min-width:700px){
@@ -327,12 +419,12 @@
 <div class="shell">
   <header class="top">
     <div>
-      <span class="eyebrow">Kasa</span>
+      <span class="eyebrow" id="topRole">Kasa</span>
       <span class="top-name" id="topName">—</span>
     </div>
     <div class="top-total">
-      <span class="eyebrow">Tržba</span>
-      <span class="v num" id="topTotal">0 Kč</span>
+      <span class="eyebrow" id="topLabel">Objednávky</span>
+      <span class="v num" id="topInfo">0</span>
     </div>
   </header>
 
@@ -340,20 +432,7 @@
 
   <div id="barSlot"></div>
 
-  <nav class="tabs" role="tablist" aria-label="Sekce">
-    <button class="tab" role="tab" data-tab="sell" aria-selected="true">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7.5" height="7.5" rx="1.5"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.5"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.5"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.5"/></svg>
-      Prodej
-    </button>
-    <button class="tab" role="tab" data-tab="history" aria-selected="false">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10"/><path d="M10 20V4"/><path d="M16 20v-7"/><path d="M22 20H2"/></svg>
-      Přehled
-    </button>
-    <button class="tab" role="tab" data-tab="menu" aria-selected="false">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/><circle cx="8.5" cy="6" r="2"/><circle cx="15.5" cy="12" r="2"/><circle cx="8.5" cy="18" r="2"/></svg>
-      Menu
-    </button>
-  </nav>
+  <nav class="tabs" id="tabs" role="tablist" aria-label="Sekce"></nav>
 </div>
 
 <div id="sheetSlot"></div>
@@ -366,17 +445,43 @@
 
   var KEY = "kavakasa.v1";
 
+  // Paleta karet. Barva položce nese informaci sama o sobě — obsluha ji pozná
+  // dřív, než stihne přečíst název — proto jsou odstíny vybrané tak, aby šly
+  // rozeznat i vedle sebe, a ke každému je natvrdo daná barva textu, která na
+  // něm má kontrast aspoň 4,75:1.
+  var COLORS = [
+    { k: "cervena",  n: "Červená",   bg: "#C0311B", ink: "#FFFFFF" },
+    { k: "oranzova", n: "Oranžová",  bg: "#F08A24", ink: "#23150A" },
+    { k: "zluta",    n: "Žlutá",     bg: "#F5CE3E", ink: "#241C00" },
+    { k: "limetka",  n: "Limetka",   bg: "#A8C93A", ink: "#1C2405" },
+    { k: "zelena",   n: "Zelená",    bg: "#127A4E", ink: "#FFFFFF" },
+    { k: "mata",     n: "Máta",      bg: "#8FD9C0", ink: "#0C2A20" },
+    { k: "tyrkys",   n: "Tyrkys",    bg: "#08627F", ink: "#FFFFFF" },
+    { k: "nebeska",  n: "Nebeská",   bg: "#8EC4EE", ink: "#0A2033" },
+    { k: "modra",    n: "Modrá",     bg: "#2158C4", ink: "#FFFFFF" },
+    { k: "fialova",  n: "Fialová",   bg: "#8A2FA8", ink: "#FFFFFF" },
+    { k: "ruzova",   n: "Růžová",    bg: "#F2A0C0", ink: "#351020" },
+    { k: "purpur",   n: "Purpurová", bg: "#B62F72", ink: "#FFFFFF" },
+    { k: "hneda",    n: "Hnědá",     bg: "#5C4632", ink: "#FFFFFF" },
+    { k: "grafit",   n: "Grafit",    bg: "#262B33", ink: "#FFFFFF" }
+  ];
+
+  function colorOf(key) {
+    for (var i = 0; i < COLORS.length; i++) { if (COLORS[i].k === key) { return COLORS[i]; } }
+    return null;
+  }
+
   var DEFAULT_ITEMS = [
-    { name: "Espresso",              price: 50 },
-    { name: "Lungo",                 price: 60 },
-    { name: "Cappuccino",            price: 70 },
-    { name: "Caffe latte",           price: 80 },
-    { name: "Ice latte",             price: 80 },
-    { name: "Ice latte karamelové",  price: 90 },
-    { name: "Ice latte kokosové",    price: 90 },
-    { name: "Espresso tonic",        price: 70 },
-    { name: "Ganucho grepresso",     price: 70 },
-    { name: "Čaj",                   price: 30 }
+    { name: "Espresso",              price: 50, color: "hneda" },
+    { name: "Lungo",                 price: 60, color: "grafit" },
+    { name: "Cappuccino",            price: 70, color: "oranzova" },
+    { name: "Caffe latte",           price: 80, color: "zluta" },
+    { name: "Ice latte",             price: 80, color: "nebeska" },
+    { name: "Ice latte karamelové",  price: 90, color: "modra" },
+    { name: "Ice latte kokosové",    price: 90, color: "mata" },
+    { name: "Espresso tonic",        price: 70, color: "limetka" },
+    { name: "Ganucho grepresso",     price: 70, color: "ruzova" },
+    { name: "Čaj",                   price: 30, color: "zelena" }
   ];
 
   var NOTES = [10, 20, 50, 100, 200, 500, 1000];
@@ -399,11 +504,16 @@
   }
 
   function defaultItems() {
-    return DEFAULT_ITEMS.map(function (i) { return { id: uid(), name: i.name, price: i.price }; });
+    return DEFAULT_ITEMS.map(function (i) {
+      return { id: uid(), name: i.name, price: i.price, color: i.color };
+    });
   }
 
   function fresh() {
-    return { v: 1, event: "Loučení s prázdninami", items: defaultItems(), order: [], sales: [], archives: [] };
+    return {
+      v: 2, event: "Loučení s prázdninami", mode: "kasa", nextNo: 1,
+      items: defaultItems(), order: [], sales: [], archives: []
+    };
   }
 
   // ---------- ukládání ----------
@@ -425,6 +535,20 @@
     d.archives = Array.isArray(d.archives) ? d.archives : [];
     d.event = typeof d.event === "string" ? d.event : "";
     d.savedAt = typeof d.savedAt === "number" ? d.savedAt : 0;
+    d.mode = d.mode === "vydej" ? "vydej" : "kasa";
+
+    // účtenky z verze bez fronty doplníme, ať mají číslo a stav
+    var maxNo = 0;
+    d.sales.forEach(function (s, i) {
+      if (typeof s.no !== "number") { s.no = i + 1; }
+      if (s.no > maxNo) { maxNo = s.no; }
+      s.status = s.status === "open" ? "open" : "served";
+      s.updatedAt = typeof s.updatedAt === "number" ? s.updatedAt : (s.ts || 0);
+      s.lines.forEach(function (l) {
+        l.ready = typeof l.ready === "number" ? l.ready : l.qty;
+      });
+    });
+    d.nextNo = typeof d.nextNo === "number" && d.nextNo > maxNo ? d.nextNo : maxNo + 1;
     return d;
   }
 
@@ -548,7 +672,7 @@
       if (state.order[i].ref === item.id && state.order[i].price === item.price) { line = state.order[i]; break; }
     }
     if (line) { line.qty += 1; }
-    else { state.order.push({ ref: item.id, name: item.name, price: item.price, qty: 1 }); }
+    else { state.order.push({ ref: item.id, name: item.name, price: item.price, qty: 1, color: item.color }); }
     save();
     render();
     say(item.name + ", celkem " + czk(orderTotal()));
@@ -569,16 +693,21 @@
   function commit() {
     var sale = {
       id: uid(),
+      no: state.nextNo++,
       ts: Date.now(),
+      updatedAt: Date.now(),
       method: sheet.method,
       total: sheet.total,
-      lines: state.order.map(function (l) { return { name: l.name, price: l.price, qty: l.qty }; })
+      status: "open",
+      lines: state.order.map(function (l) {
+        return { name: l.name, price: l.price, qty: l.qty, color: l.color || "", ready: 0 };
+      })
     };
     state.sales.push(sale);
     state.order = [];
     linesOpen = false;
     sheet = null;
-    save();
+    pushSales();
     render();
     showToast("Uloženo · " + czk(sale.total) + " " + (sale.method === "cash" ? "hotově" : "kartou"), sale.id);
     say("Účet uložen.");
@@ -590,12 +719,19 @@
     if (i < 0) { return; }
     var sale = state.sales.splice(i, 1)[0];
     state.order = sale.lines.map(function (l) {
-      return { ref: refFor(l.name, l.price), name: l.name, price: l.price, qty: l.qty };
+      return { ref: refFor(l.name, l.price), name: l.name, price: l.price, qty: l.qty, color: l.color || "" };
     });
+    if (sale.no === state.nextNo - 1) { state.nextNo = sale.no; }
     hideToast();
-    save();
+    pushSales("replace");
     render();
     say("Účet vrácen zpět na rozpracovaný.");
+  }
+
+  // uloží a rozešle změnu do spárovaného zařízení
+  function pushSales(kind) {
+    save();
+    if (!muted) { broadcast(kind); }
   }
 
   function showToast(text, undoId) {
@@ -615,6 +751,101 @@
     sheet = { step: "confirm", title: title, text: text, ok: okLabel };
     render();
   }
+
+  // ---------- fronta objednávek ----------
+  // Zaplacený účet nezmizí — zařadí se do fronty jako objednávka s číslem.
+  // Kdo připravuje, odškrtává v ní položky a nakonec dá Vydáno.
+
+  function openOrders() {
+    return state.sales.filter(function (s) { return s.status === "open"; })
+      .sort(function (a, b) { return a.no - b.no; });
+  }
+
+  function servedOrders() {
+    return state.sales.filter(function (s) { return s.status !== "open"; })
+      .sort(function (a, b) { return b.no - a.no; });
+  }
+
+  function findSale(id) {
+    for (var i = 0; i < state.sales.length; i++) {
+      if (state.sales[i].id === id) { return state.sales[i]; }
+    }
+    return null;
+  }
+
+  function pieces(s) {
+    return s.lines.reduce(function (n, l) { return n + l.qty; }, 0);
+  }
+
+  function ready(s) {
+    return s.lines.reduce(function (n, l) { return n + Math.min(l.ready || 0, l.qty); }, 0);
+  }
+
+  function allReady(s) { return ready(s) >= pieces(s); }
+
+  function tint(key, fallback) {
+    var c = colorOf(key);
+    if (!c) { return fallback || ""; }
+    return ' style="background:' + c.bg + ';color:' + c.ink + ';--bg:' + c.bg + '"';
+  }
+
+  // ---------- spárované zařízení ----------
+  // Kasa a výdej si posílají celý seznam objednávek. Slučuje se podle id,
+  // vyhrává novější updatedAt — pořadí zpráv tak nehraje roli.
+
+  var peers = 0;
+  var muted = false;
+
+  function broadcast(kind) {
+    try {
+      if (!window.webkit || !window.webkit.messageHandlers || !window.webkit.messageHandlers.peer) { return; }
+      window.webkit.messageHandlers.peer.postMessage(JSON.stringify({
+        t: kind || "sync", event: state.event, sales: state.sales
+      }));
+    } catch (e) {}
+  }
+
+  window.__kasaPeer = function (raw) {
+    var msg = null;
+    try { msg = typeof raw === "string" ? JSON.parse(raw) : raw; } catch (e) { return; }
+    if (!msg || !Array.isArray(msg.sales)) { return; }
+
+    var changed = false;
+
+    if (msg.t === "replace") {
+      state.sales = msg.sales;
+      changed = true;
+    } else {
+      var mine = {};
+      state.sales.forEach(function (s) { mine[s.id] = s; });
+      msg.sales.forEach(function (inc) {
+        var have = mine[inc.id];
+        if (!have) { state.sales.push(inc); changed = true; return; }
+        if ((inc.updatedAt || 0) > (have.updatedAt || 0)) {
+          state.sales[state.sales.indexOf(have)] = inc;
+          changed = true;
+        }
+      });
+    }
+    if (!changed) { return; }
+
+    state.sales.sort(function (a, b) { return (a.no || 0) - (b.no || 0); });
+    var maxNo = 0;
+    state.sales.forEach(function (s) { if (s.no > maxNo) { maxNo = s.no; } });
+    if (state.nextNo <= maxNo) { state.nextNo = maxNo + 1; }
+    if (msg.event && state.mode === "vydej") { state.event = msg.event; }
+
+    muted = true;              // příchozí změnu neposíláme hned zpátky
+    save();
+    muted = false;
+    render();
+  };
+
+  window.__kasaPeerCount = function (n) {
+    peers = n | 0;
+    render();
+    if (peers > 0) { broadcast(); }   // nový protějšek dostane rovnou celý stav
+  };
 
   // ---------- stats ----------
 
@@ -661,7 +892,8 @@
     state.items.forEach(function (it) {
       var qty = 0;
       state.order.forEach(function (l) { if (l.ref === it.id) { qty += l.qty; } });
-      h += '<button class="prod' + (qty ? " is-on" : "") + '" data-add="' + it.id + '">' +
+      h += '<button class="prod' + (qty ? " is-on" : "") + (it.color ? " tinted" : "") + '"' +
+             tint(it.color) + ' data-add="' + it.id + '">' +
              (qty ? '<span class="badge">' + qty + "</span><span class=\"hold\"></span>" : "") +
              '<span class="nm">' + esc(it.name) + "</span>" +
              '<span class="pr num">' + czk(it.price) + "</span>" +
@@ -706,6 +938,46 @@
            '<button class="btn-pay" disabled>Zaplatit</button>';
     }
     return h + "</div></div>";
+  }
+
+  function renderOrders() {
+    var open = openOrders();
+    var h = "";
+
+    if (!open.length) {
+      h += '<p class="hint" style="padding-top:44px">Žádná objednávka nečeká.<br>' +
+           (state.mode === "vydej"
+             ? "Jakmile kasa něco naúčtuje, objeví se to tady."
+             : "Zaplacené účty se sem zařadí samy.") + "</p>";
+    } else {
+      h += '<div class="tickets">';
+      open.forEach(function (s) {
+        h += '<button class="tk' + (allReady(s) ? " ready" : "") + '" data-ticket="' + s.id + '">' +
+               '<span class="no">' + s.no + "</span>" +
+               '<span class="mid"><span class="chips">';
+        s.lines.forEach(function (l) {
+          h += '<span class="chip' + ((l.ready || 0) >= l.qty ? " done" : "") + '"' + tint(l.color) + ">" +
+               (l.qty > 1 ? '<span class="q">' + l.qty + "×</span>" : "") + esc(l.name) + "</span>";
+        });
+        h += '</span><span class="time">' + clock(s.ts) + "</span></span>" +
+             '<span class="prog">' + ready(s) + "/" + pieces(s) + "</span></button>";
+      });
+      h += "</div>";
+    }
+
+    var done = servedOrders().slice(0, 8);
+    if (done.length) {
+      h += '<section class="sec"><h2>Vydané</h2>';
+      done.forEach(function (s) {
+        var what = s.lines.map(function (l) { return l.qty + "× " + l.name; }).join(", ");
+        h += '<button class="served" data-reopen="' + s.id + '">' +
+             '<span class="no">#' + s.no + "</span>" +
+             '<span class="w">' + esc(what) + "</span>" +
+             '<span class="back">Vrátit</span></button>';
+      });
+      h += "</section>";
+    }
+    return h;
   }
 
   function renderHistory() {
@@ -771,12 +1043,39 @@
   }
 
   function renderMenu() {
-    var h = '<div class="sec"><h2>Název akce</h2></div>' +
-            '<div class="field"><input class="inp" id="evName" value="' + esc(state.event) + '" placeholder="Např. Loučení s prázdninami"></div>' +
-            '<div class="sec"><h2>Položky a ceny</h2></div>';
+    var till = state.mode === "kasa";
+
+    var h = '<div class="sec"><h2>Role zařízení</h2></div>' +
+            '<div class="seg" role="group" aria-label="Role zařízení">' +
+              '<button class="' + (till ? "on" : "") + '" data-mode="kasa">Kasa</button>' +
+              '<button class="' + (till ? "" : "on") + '" data-mode="vydej">Výdej</button>' +
+            "</div>" +
+            '<p class="hint" style="padding-bottom:6px">' +
+              (till
+                ? "Tohle zařízení účtuje a posílá objednávky druhému."
+                : "Tohle zařízení jenom přijímá objednávky a odškrtává je. Neúčtuje.") +
+            "</p>" +
+            '<div class="link' + (peers > 0 ? " on" : "") + '"><i></i>' +
+              (peers > 0
+                ? (peers === 1 ? "Spárováno s druhým zařízením" : "Spárováno se " + peers + " zařízeními")
+                : "Druhé zařízení zatím nenalezeno") +
+            "</div>";
+
+    if (!till) {
+      return h + '<p class="hint">Párování běží samo po místní síti, jakmile jsou obě zařízení' +
+             ' zapnutá a blízko sebe. Funguje jen v nainstalované aplikaci z <code>ios/</code>,' +
+             ' ne v prohlížeči.</p>' + renderBackupBlock();
+    }
+
+    h += '<div class="sec"><h2>Název akce</h2></div>' +
+         '<div class="field"><input class="inp" id="evName" value="' + esc(state.event) + '" placeholder="Např. Loučení s prázdninami"></div>' +
+         '<div class="sec"><h2>Položky, ceny a barvy</h2></div>';
 
     state.items.forEach(function (it, i) {
+      var c = colorOf(it.color);
       h += '<div class="edit">' +
+             '<button class="sw' + (c ? "" : " none") + '"' + (c ? ' style="background:' + c.bg + '"' : "") +
+               ' data-col="' + it.id + '" aria-label="Barva karty"></button>' +
              '<input class="e-nm" data-nm="' + it.id + '" value="' + esc(it.name) + '" placeholder="Název">' +
              '<input class="e-pr" data-pr="' + it.id + '" inputmode="numeric" value="' + it.price + '" aria-label="Cena v korunách">' +
              '<button class="mv" data-mv="' + i + '" aria-label="Posunout nahoru"' + (i === 0 ? " disabled style=\"opacity:.25\"" : "") + ">↑</button>" +
@@ -785,8 +1084,12 @@
 
     return h + '<div class="acts"><button class="act" data-new="1">+ Přidat položku</button>' +
            '<button class="act danger" data-reset="1">Obnovit výchozí menu</button></div>' +
-           '<p class="hint">Ceny se ukládají průběžně. Změna ceny neovlivní už uložené účtenky.</p>' +
-           '<div class="sec"><h2>Záloha dat</h2></div>' +
+           '<p class="hint">Ceny i barvy se ukládají průběžně. Změna ceny neovlivní už uložené účtenky.</p>' +
+           renderBackupBlock();
+  }
+
+  function renderBackupBlock() {
+    return '<div class="sec"><h2>Záloha dat</h2></div>' +
            '<div class="acts"><button class="act" data-backup="1">Zobrazit zálohu</button>' +
            '<button class="act" data-restoreask="1">Načíst ze zálohy</button></div>' +
            '<p class="hint">Kasa si data drží v zařízení nadvakrát, takže restart ani vybitá baterie o ně nepřipraví.' +
@@ -861,6 +1164,45 @@
            '<button class="btn-ghost" data-cancel="1">Zavřít</button>';
     }
 
+    if (sheet.step === "ticket") {
+      var s = findSale(sheet.id);
+      if (!s) {
+        h += "<h2>Objednávka</h2><p class=\"sub\">Tahle objednávka už ve frontě není.</p>" +
+             '<button class="btn-done" data-cancel="1">Zavřít</button>';
+      } else {
+        h += "<h2>Objednávka #" + s.no + "</h2>" +
+             '<div class="big num">' + ready(s) + "/" + pieces(s) + "</div>" +
+             '<p class="sub">' + clock(s.ts) + " · " + czk(s.total) + " " +
+               (s.method === "cash" ? "hotově" : "kartou") + "</p>" +
+             '<div class="steps">';
+        s.lines.forEach(function (l, i) {
+          var isDone = (l.ready || 0) >= l.qty;
+          h += '<button class="st' + (isDone ? " done" : "") + '"' +
+                 tint(l.color, ' style="background:var(--surface)"') + ' data-line="' + i + '">' +
+                 '<span class="box"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg></span>' +
+                 '<span class="nm">' + esc(l.name) + "</span>" +
+                 (l.qty > 1 ? '<span class="cnt">' + (l.ready || 0) + "/" + l.qty + "</span>" : "") +
+               "</button>";
+        });
+        h += "</div>" +
+             '<button class="btn-done' + (allReady(s) ? " go" : "") + '" data-serve="' + s.id + '">Vydáno</button>' +
+             '<button class="btn-ghost" data-cancel="1">Zavřít</button>';
+      }
+    }
+
+    if (sheet.step === "color") {
+      h += "<h2>Barva karty</h2>" +
+           '<p class="sub">Barvu si obsluha zapamatuje dřív, než přečte název. Stejná barva se ukáže i ve frontě objednávek.</p>' +
+           '<div class="swatches">';
+      COLORS.forEach(function (c) {
+        h += '<button' + (sheet.current === c.k ? ' class="on"' : "") +
+             ' style="background:' + c.bg + ";color:" + c.ink + '" data-setcol="' + c.k + '">' + esc(c.n) + "</button>";
+      });
+      h += "</div>" +
+           '<button class="btn-ghost" data-setcol="-">Bez barvy</button>' +
+           '<button class="btn-ghost" data-cancel="1">Zpět</button>';
+    }
+
     if (sheet.step === "restore") {
       h += "<h2>Načíst ze zálohy</h2>" +
            '<p class="sub">Vlož text zálohy. Nahradí celý obsah kasy — položky, účtenky i archiv.</p>' +
@@ -875,27 +1217,56 @@
 
   // ---------- render ----------
 
+  var ICON = {
+    sell: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7.5" height="7.5" rx="1.5"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.5"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.5"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.5"/></svg>',
+    orders: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2Z"/><path d="M9.5 8.5h5"/><path d="M9.5 12.5h5"/></svg>',
+    history: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10"/><path d="M10 20V4"/><path d="M16 20v-7"/><path d="M22 20H2"/></svg>',
+    menu: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/><circle cx="8.5" cy="6" r="2"/><circle cx="15.5" cy="12" r="2"/><circle cx="8.5" cy="18" r="2"/></svg>'
+  };
+
+  function tabsFor() {
+    return state.mode === "vydej"
+      ? [["orders", "Objednávky"], ["menu", "Nastavení"]]
+      : [["sell", "Prodej"], ["orders", "Objednávky"], ["history", "Přehled"], ["menu", "Menu"]];
+  }
+
+  function renderTabs(waiting) {
+    var h = "";
+    tabsFor().forEach(function (t) {
+      h += '<button class="tab" role="tab" data-tab="' + t[0] + '" aria-selected="' +
+           (view === t[0] ? "true" : "false") + '">' + ICON[t[0]] +
+           (t[0] === "orders" && waiting ? '<span class="dot">' + waiting + "</span>" : "") +
+           t[1] + "</button>";
+    });
+    document.getElementById("tabs").innerHTML = h;
+  }
+
   function render(toTop) {
+    // role bez prodeje nesmí zůstat viset na obrazovce, kterou nemá
+    var allowed = tabsFor().map(function (t) { return t[0]; });
+    if (allowed.indexOf(view) < 0) { view = allowed[0]; }
+
+    var waiting = openOrders().length;
+    document.getElementById("topRole").textContent = state.mode === "vydej" ? "Výdej" : "Kasa";
     document.getElementById("topName").textContent = state.event || "Bez názvu";
-    document.getElementById("topTotal").textContent = czk(salesTotal());
+    document.getElementById("topInfo").textContent = String(waiting);
 
     var v = document.getElementById("view");
     var keep = v.scrollTop;
-    v.innerHTML = view === "sell" ? renderSell() : view === "history" ? renderHistory() : renderMenu();
+    v.innerHTML = view === "sell" ? renderSell()
+                : view === "orders" ? renderOrders()
+                : view === "history" ? renderHistory()
+                : renderMenu();
     v.scrollTop = toTop ? 0 : keep;
 
     document.getElementById("barSlot").innerHTML = view === "sell" ? renderBar() : "";
+    renderTabs(waiting);
     document.getElementById("sheetSlot").innerHTML = renderSheet();
     document.getElementById("toastSlot").innerHTML = toast
-      ? '<div class="toast"><span class="t">' + esc(toast.text) + "</span>" +
+      ? '<div class="toast' + (sheet ? " up" : "") + '"><span class="t">' + esc(toast.text) + "</span>" +
         (toast.undo ? '<button data-undo="' + toast.undo + '">Vrátit zpět</button>' : "") +
         '<button class="x" data-hidetoast="1" aria-label="Zavřít">×</button></div>'
       : "";
-
-    var tabs = document.querySelectorAll(".tab");
-    for (var i = 0; i < tabs.length; i++) {
-      tabs[i].setAttribute("aria-selected", tabs[i].getAttribute("data-tab") === view ? "true" : "false");
-    }
   }
 
   // ---------- interaction ----------
@@ -904,7 +1275,8 @@
             "[data-method],[data-note],[data-exact],[data-zero],[data-commit],[data-cancel],[data-scrim]," +
             "[data-dig],[data-back],[data-addcustom],[data-del],[data-copy],[data-copytext],[data-close]," +
             "[data-new],[data-rm],[data-mv],[data-reset],[data-undo],[data-hidetoast],[data-yes]," +
-            "[data-backup],[data-restoreask],[data-dorestore]";
+            "[data-backup],[data-restoreask],[data-dorestore]," +
+            "[data-ticket],[data-line],[data-serve],[data-reopen],[data-col],[data-setcol],[data-mode]";
 
   document.addEventListener("click", function (ev) {
     if (suppressClick) { suppressClick = false; return; }
@@ -978,7 +1350,7 @@
       var id = d.del;
       ask("Smazat účtenku", "Částka se odečte z tržby i ze statistiky.", "Smazat", function () {
         state.sales = state.sales.filter(function (s) { return s.id !== id; });
-        save();
+        pushSales("replace");
       });
       return;
     }
@@ -1013,7 +1385,8 @@
           total: s.total, cash: s.cash, card: s.card, count: s.count, pieces: s.pieces, items: s.items
         });
         state.sales = [];
-        save();
+        state.nextNo = 1;
+        pushSales("replace");
         showToast("Akce uzavřena, kasa je vynulovaná.");
       });
       return;
@@ -1053,6 +1426,65 @@
       return;
     }
 
+    // ---- fronta objednávek ----
+    if (d.ticket) { sheet = { step: "ticket", id: d.ticket }; render(); return; }
+
+    if (d.line) {
+      var tk = findSale(sheet.id);
+      if (!tk) { return; }
+      var ln = tk.lines[parseInt(d.line, 10)];
+      if (!ln) { return; }
+      ln.ready = (ln.ready || 0) >= ln.qty ? 0 : (ln.ready || 0) + 1;
+      tk.updatedAt = Date.now();
+      pushSales(); render(); return;
+    }
+
+    if (d.serve) {
+      var srv = findSale(d.serve);
+      if (!srv) { return; }
+      srv.status = "served";
+      srv.servedAt = Date.now();
+      srv.updatedAt = Date.now();
+      srv.lines.forEach(function (l) { l.ready = l.qty; });
+      sheet = null;
+      pushSales(); render();
+      showToast("Objednávka #" + srv.no + " vydaná");
+      return;
+    }
+
+    if (d.reopen) {
+      var rop = findSale(d.reopen);
+      if (!rop) { return; }
+      rop.status = "open";
+      rop.updatedAt = Date.now();
+      pushSales(); render();
+      showToast("Objednávka #" + rop.no + " zpátky ve frontě");
+      return;
+    }
+
+    // ---- barvy a role ----
+    if (d.col) {
+      var ci = findItem(d.col);
+      sheet = { step: "color", id: d.col, current: ci ? ci.color : "" };
+      render(); return;
+    }
+
+    if (d.setcol) {
+      var ct = findItem(sheet.id);
+      if (ct) { ct.color = d.setcol === "-" ? "" : d.setcol; }
+      sheet = null;
+      save(); render(); return;
+    }
+
+    if (d.mode) {
+      state.mode = d.mode === "vydej" ? "vydej" : "kasa";
+      state.order = [];
+      linesOpen = false;
+      save(); render();
+      showToast(state.mode === "kasa" ? "Zařízení je teď kasa" : "Zařízení je teď výdej");
+      return;
+    }
+
     if (d.backup) {
       sheet = { step: "text", title: "Záloha dat", body: JSON.stringify(state) };
       render(); return;
@@ -1071,7 +1503,7 @@
       }
       state = next;
       sheet = null;
-      save(); render();
+      pushSales("replace"); render();
       showToast("Data obnovena ze zálohy");
       return;
     }
