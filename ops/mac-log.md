@@ -509,3 +509,54 @@ App Store Connect → App Review Information a verze 1.0 (Support URL
 App support. Doplní se s nimi.
 
 ---
+
+## Fáze 10, iOS build (2026-08-31)
+
+**Apple ID v Xcode**
+
+- Uživatel přidal účet. Ověřeno nepřímo: v `com.apple.dt.Xcode` existuje
+  `DVTDeveloperAccountManagerAppleIDLists` se záznamem.
+- `security find-identity -v -p codesigning` hlásí **0 identit**.
+  Certifikát ještě nevznikl, což je normální; Xcode ho vyrobí při prvním
+  buildu s `-allowProvisioningUpdates`.
+
+**Projekt připraven k podpisu**
+
+- Do `mobile/ios/App/App.xcodeproj/project.pbxproj` doplněno
+  `DEVELOPMENT_TEAM = 6XX9G3S468;` do obou konfigurací (Debug i Release).
+- Ostatní nastavení už sedělo: `CODE_SIGN_STYLE = Automatic`,
+  `PRODUCT_BUNDLE_IDENTIFIER = com.deriverge.tapkasa`,
+  `MARKETING_VERSION = 1.0`, `CURRENT_PROJECT_VERSION = 1`.
+
+**BLOKUJE (řeší se): chybí iOS platform support**
+
+- `xcodebuild archive` končí na
+  `Found no destinations for the scheme 'App' and action archive`.
+- Příčina: destinace „Any iOS Device" je označená jako nezpůsobilá
+  s hláškou `iOS 18.5 is not installed. To use with Xcode, first
+  download and install the platform`.
+- Matoucí je, že `xcodebuild -showsdks` iOS 18.5 SDK **vypisuje**
+  a `iPhoneOS18.5.sdk` na disku je. Adresář `iPhoneOS.platform` má ale
+  jen **183 MB**, což je zjevně jen stub. Xcode 16 stahuje device
+  support zvlášť od aplikace.
+- Obejít to přes `-sdk iphoneos` nejde, destination resolution to
+  zkontroluje dřív.
+
+**Chyba v mém dřívějším doporučení**
+
+- Uživateli jsem doporučil zrušit stahování platformy s tím, že pro
+  archiv a TestFlight není potřeba. **To bylo špatně.** Bez ní Xcode 16.4
+  build pro iOS zařízení vůbec nespustí. Stálo to zbytečný čas.
+- Nyní běží `xcodebuild -downloadPlatform iOS`, řádově GB a hodiny.
+- (Predictive Code Completion Model, 2,51 GB, opravdu potřeba není,
+  ten je čistě komfortní.)
+
+**Po dokončení stažení**
+
+- `xcodebuild archive` s `-allowProvisioningUpdates`, pak export
+  a nahrání do TestFlightu.
+- K nahrání je připravený App Store Connect API klíč `MTMP9A7SKR`
+  (role App Manager); jeho `.p8` je zatím jen v `~/Downloads`, protože
+  macOS blokuje procesu přístup do té složky.
+
+---
