@@ -22,8 +22,10 @@
 (function () {
   "use strict";
 
-  var REVENUECAT_API_KEY_IOS = "[DOPLŇ: appl_... klíč z RevenueCat]";
-  var REVENUECAT_API_KEY_ANDROID = "[DOPLŇ: goog_... klíč z RevenueCat]";
+  // Veřejné (public) SDK klíče projektu Tapkasa v RevenueCat.
+  // Patří do klienta, nejsou to tajemství; secret keys se do aplikace nedávají.
+  var REVENUECAT_API_KEY_IOS = "appl_UDkkqtyFetmsKJAMwyFYbSrterz";
+  var REVENUECAT_API_KEY_ANDROID = "goog_CQNzyidxRPuTylazpgieisHqyBL";
   var ENTITLEMENT_ID = "pro";
 
   var cap = window.Capacitor;

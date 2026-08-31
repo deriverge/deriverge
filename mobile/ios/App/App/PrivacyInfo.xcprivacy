@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!--
+	  Privacy manifest aplikace Tapkasa.
+	  Zdroj pravdy: store/apple-privacy-labels.md.
+
+	  Tapkasa nesbírá žádná data ve smyslu definice Apple: vše zůstává
+	  v zařízení, párovací zprávy relay drží jen po dobu doručení a
+	  provozovatel k nim nemá přístup. Proto je NSPrivacyCollectedDataTypes
+	  prázdné a tracking je vypnutý.
+
+	  RevenueCat SDK dodává vlastní manifest, tady se nedeklaruje.
+	-->
+	<key>NSPrivacyTracking</key>
+	<false/>
+	<key>NSPrivacyTrackingDomains</key>
+	<array/>
+	<key>NSPrivacyCollectedDataTypes</key>
+	<array/>
+	<key>NSPrivacyAccessedAPITypes</key>
+	<array>
+		<dict>
+			<!-- Nativní obal ukládá stav do UserDefaults (vlastní data aplikace). -->
+			<key>NSPrivacyAccessedAPIType</key>
+			<string>NSPrivacyAccessedAPICategoryUserDefaults</string>
+			<key>NSPrivacyAccessedAPITypeReasons</key>
+			<array>
+				<string>CA92.1</string>
+			</array>
+		</dict>
+	</array>
+</dict>
+</plist>
