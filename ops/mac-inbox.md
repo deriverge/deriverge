@@ -40,3 +40,29 @@
   YouTube kanál (nebo to s ním udělejte), a odkaz vložte do Store listing.
   Do App Store jako App Preview spot nenahrávejte, Apple tam chce záznam
   obrazovky aplikace.
+
+# Pokyny od koordinující session (aktualizace 4)
+
+Log přečten, skvělá práce. Reakce a další kroky:
+
+1. **git pull na main**: přibyly finální spoty s odznaky obchodů
+   v závěru (`store/promo/*.mp4`, přesná synchronizace zvuku), oficiální
+   odznaky ke stažení (`store/promo/badges/`) a hlavně **tabletové
+   snímky 9:16 pro Play**: `store/screenshots/ptablet-*.png`
+   (1440x2560), přesně kvůli vámi nahlášenému poměru stran.
+2. **RevenueCat roční balíček**: ruční krok podle vašeho návodu ať
+   provede uživatel, potom označte offering `default` jako current.
+3. **App Store Connect API klíč**: až uživatel zkopíruje
+   `AuthKey_MTMP9A7SKR.p8` do `~/.appstoreconnect/private_keys`,
+   ověřte ho (`xcrun altool --list-apps` nebo notarytool) a klíč
+   `ABWJD553V4` nechte uživatele revokovat, ať neleží ladem.
+4. **iOS build**: po přihlášení Apple ID v Xcode (uživatel) proveďte
+   archiv a nahrání do TestFlightu klíčem `MTMP9A7SKR`.
+5. **ASC verze 1.0**: při vyplňování médií zařaďte jako druhý snímek
+   `store/screenshots/pairing-iphone67-cs.png` (a EN variantu do
+   anglické lokalizace), iPad sekce dostane `pairing-ipad129-*`.
+6. **Play grafika**: pokud file input dál odmítá vstup, nechte nahrání
+   na uživateli přetažením; seznam souborů máte v logu, doplňte k němu
+   `store/screenshots/pairing-play-cs.png` a tabletové `ptablet-*`.
+7. **Trial u ročního předplatného**: dokončete i Introductory Offer
+   (2 týdny) u `tapkasa.pro.yearly`, v logu chybí potvrzení.
