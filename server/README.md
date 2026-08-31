@@ -1,9 +1,9 @@
-# tapkasa-sync — přeposílač pro párování zařízení Tapkasa
+# tapkasa-sync, přeposílač pro párování zařízení Tapkasa
 
 Malý server, přes který si dvě spárovaná zařízení s aplikací Tapkasa posílají
 objednávky (kasa ↔ výdejní místo). Mluví stejným protokolem jako veřejná
-služba [ntfy](https://ntfy.sh) — přesněji její podmnožinou, kterou aplikace
-používá — takže aplikace funguje beze změny kódu, jen se jí řekne jiná adresa.
+služba [ntfy](https://ntfy.sh), přesněji její podmnožinou, kterou aplikace
+používá, takže aplikace funguje beze změny kódu, jen se jí řekne jiná adresa.
 
 Proč vlastní relay místo veřejného ntfy.sh: žádné cizí denní limity, žádná
 cizí infrastruktura v cestě prodejním datům a plná kontrola nad dostupností.
@@ -14,10 +14,10 @@ cizí infrastruktura v cestě prodejním datům a plná kontrola nad dostupnost�
   kdo dané téma poslouchají. Na disk se nezapisuje nic.
 - Zprávy žijí 12 hodin, na jedno téma se drží nejvýš 500 posledních zpráv.
 - Témata jsou náhodné kódy tvaru `kasa-stanek-XXXXX` (povolené znaky
-  `A-Za-z0-9_-`, délka 4–64). Kdo kód nezná, téma neuvidí.
-- Limit 8 kB na zprávu (aplikace posílá zprávy o ~300–600 B) a 120 zpráv za
+  `A-Za-z0-9_-`, délka 4-64). Kdo kód nezná, téma neuvidí.
+- Limit 8 kB na zprávu (aplikace posílá zprávy o ~300-600 B) a 120 zpráv za
   5 minut na jednu IP adresu.
-- Server data nečte, neanalyzuje, neloguje obsah — je to jen trubka.
+- Server data nečte, neanalyzuje, neloguje obsah, je to jen trubka.
 
 ### Protokol (ntfy-kompatibilní podmnožina)
 
@@ -26,10 +26,10 @@ cizí infrastruktura v cestě prodejním datům a plná kontrola nad dostupnost�
 | `POST /<téma>` | tělo = text zprávy; vrátí uloženou obálku `{id, time, event:"message", topic, message}` jako JSON |
 | `GET /<téma>/json?poll=1&since=…` | řádkovaný JSON obálek s `time >= since`; `since` je unixový čas v sekundách, nebo délka jako `60s` / `5m` (= posledních N) |
 | `GET /<téma>/sse?since=…` | `text/event-stream`: nejdřív `{event:"open"}`, pak přehrání starších zpráv podle `since`, pak živý tok; každých 30 s komentářový řádek, ať proxy spojení nezavírají |
-| `GET /healthz` | `{ok:true, topics:n}` — pro health check |
+| `GET /healthz` | `{ok:true, topics:n}`, pro health check |
 
 CORS je povolený pro všechny (`Access-Control-Allow-Origin: *`), včetně
-OPTIONS preflightů — aplikace běží i jako webová stránka z jiné domény.
+OPTIONS preflightů, aplikace běží i jako webová stránka z jiné domény.
 
 ## Spuštění lokálně
 
@@ -96,7 +96,7 @@ node --test test.mjs          # nebo: npm test
 
 5. **Drž právě jeden stroj.** Relay má stav jen v paměti, takže dvě mašiny by
    znamenaly dvě oddělené fronty zpráv. `fly deploy` někdy založí dva stroje
-   kvůli vysoké dostupnosti — srovnej to na jeden:
+   kvůli vysoké dostupnosti, srovnej to na jeden:
 
    ```bash
    fly scale count 1
@@ -110,7 +110,7 @@ node --test test.mjs          # nebo: npm test
    fly certs add sync.tapkasa.app
    ```
 
-2. U správce DNS domény přidej záznam, který příkaz vypíše — typicky CNAME:
+2. U správce DNS domény přidejte záznam, který příkaz vypíše, typicky CNAME:
 
    ```
    sync  CNAME  tapkasa-sync.fly.dev.
@@ -118,19 +118,18 @@ node --test test.mjs          # nebo: npm test
 
    (Alternativně A/AAAA záznamy na adresy z `fly ips list`.)
 
-3. Počkej na vystavení certifikátu a ověř:
+3. Počkejte na vystavení certifikátu a ověřte:
 
    ```bash
    fly certs show sync.tapkasa.app
    curl https://sync.tapkasa.app/healthz
    ```
 
-   Sdílená IPv4, kterou Fly přiděluje zdarma, pro vlastní doménu stačí —
-   všechny prohlížeče i WebView umí SNI. Vyhrazenou IPv4 ($2/měs) netřeba.
+   Sdílená IPv4, kterou Fly přiděluje zdarma, pro vlastní doménu stačí, všechny prohlížeče i WebView umí SNI. Vyhrazenou IPv4 ($2/měs) netřeba.
 
 ### Nasměrování aplikace na vlastní relay
 
-Aplikace čte seznam přeposílačů z `window.__KASA_RELAY__` — čárkami oddělené
+Aplikace čte seznam přeposílačů z `window.__KASA_RELAY__`, čárkami oddělené
 základní adresy **končící lomítkem**. Když proměnná není nastavená, používá
 veřejné `ntfy.sh` a `ntfy.envs.net`. V produkční verzi (webové i zabalené pro
 App Store / Google Play) stačí před hlavní skript vložit:
@@ -141,7 +140,7 @@ App Store / Google Play) stačí před hlavní skript vložit:
 </script>
 ```
 
-Aplikace posílá na všechny uvedené adresy naráz a poslouchá na všech — stačí,
+Aplikace posílá na všechny uvedené adresy naráz a poslouchá na všech, stačí,
 aby v danou chvíli fungovala jedna. Nechat `ntfy.sh` jako druhou adresu je
 tedy levná záloha pro případ výpadku vlastního relay; kdo ji nechce, uvede
 jen vlastní doménu.
@@ -153,16 +152,15 @@ jen vlastní doménu.
 | 1× stroj `shared-cpu-1x`, 256 MB RAM, běží nonstop | ≈ $2/měs |
 | Sdílená IPv4 + IPv6 | zdarma |
 | Odchozí data (zprávy mají stovky bajtů) | prakticky $0 |
-| **Celkem** | **≈ $2–3/měs (cca 50–70 Kč)** |
+| **Celkem** | **≈ $2-3/měs (cca 50-70 Kč)** |
 
-Pozor: stroj musí běžet pořád (`auto_stop_machines = "off"` ve `fly.toml`) —
-uspání by zahodilo paměť se zprávami a rozpojilo otevřená SSE spojení. Proto
+Pozor: stroj musí běžet pořád (`auto_stop_machines = "off"` ve `fly.toml`), uspání by zahodilo paměť se zprávami a rozpojilo otevřená SSE spojení. Proto
 se neuplatní úspora "scale to zero".
 
 ## Provozní poznámky
 
 - **Restart = prázdná paměť.** Po nasazení nové verze nebo restartu stroje
-  zprávy z posledních hodin zmizí. Aplikaci to nevadí — obě zařízení drží
+  zprávy z posledních hodin zmizí. Aplikaci to nevadí, obě zařízení drží
   vlastní úplnou kopii dat a po připojení si pošlou otevřené objednávky znovu
   (`hi` + dávka `sync` zpráv). Výpadek relay tedy nikdy neztratí prodeje.
 - **Škálování:** jeden sdílený CPU zvládne řádově tisíce spárovaných dvojic;
@@ -170,4 +168,4 @@ se neuplatní úspora "scale to zero".
   se to větším strojem (`fly scale vm`), ne více stroji.
 - **Logy:** `fly logs`. Server loguje jen start a vypnutí, obsah zpráv ne.
 - **Vypnutí:** na SIGTERM server přestane přijímat spojení, zavře SSE proudy
-  a skončí — Fly ho tak umí nasadit bez tvrdého zabití.
+  a skončí, Fly ho tak umí nasadit bez tvrdého zabití.
