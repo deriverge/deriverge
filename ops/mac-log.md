@@ -407,3 +407,57 @@ závislosti (capacitor-swift-pm 8.5.0, purchases-hybrid-common 18.32.1).
   14 dní), production access.
 
 ---
+
+## Fáze 8, App Store Connect, nastavení aplikace (2026-08-31)
+
+**Hotovo**
+
+- **App Information**:
+  - Podtitul `Kasa pro stánky a festivaly` (27/30). Zvolena tato varianta,
+    protože název už obsahuje „Pokladna do kapsy", přesně jak radí
+    `store/listing-cs.md`.
+  - Primární kategorie **Business**, sekundární **Food & Drink**.
+  - **Content Rights**: „Does not use third-party content".
+  - Poznámka: App Store Connect u ukládání vypsal obecné
+    „Sorry, something went wrong". Po znovunačtení stránky jsou ale
+    všechny hodnoty uložené, hláška patřila k jiné části stránky.
+- **Age Ratings vyplněny**, všech 6 stran dotazníku, všude odpověď
+  „None" nebo „No" (rodičovská kontrola, web, UGC, sociální sítě,
+  zprávy, reklamy, vulgarita, horor, návykové látky, zdravotní obsah,
+  sexuální obsah, násilí, hazard, loot boxy).
+  - **Výsledek: 4+ pro 172 zemí**, s regionálními variantami
+    (Brazílie ALL, Korea 00+, Vietnam). Odpovídá očekávání checklistu.
+  - Napoprvé se dotazník neuložil, protože skript klikal na Save
+    v hlavičce stránky místo Next v dialogu a nedošel k závěrečnému
+    potvrzení. Opraveno omezením hledání tlačítek na oblast dialogu.
+
+**Odchylka: dostupnost aplikace je 175 zemí, ne CZ+SK**
+
+- `store/checklist.md` požaduje **minimálně** Česko a Slovensko
+  a **doporučuje** launch jen CZ+SK. Nastaveno je 175 zemí.
+- Průvodce „Set Up Availability" nenabídl seznam zemí se zaškrtávátky
+  ani odkaz „None", takže se prošel s výchozím výběrem všech zemí.
+  Následné „Manage" ukazuje jen přehled bez možnosti editace.
+- Požadované minimum je splněno. Zúžení na CZ+SK je jednoduchá změna,
+  kterou lze udělat kdykoli před vydáním, ale je to i **obchodní
+  rozhodnutí** (UI je česky, anglický listing je hotový), proto se
+  nechává na uživateli.
+
+**Zbývá na App Store Connect**
+
+- **Cena aplikace**: v Price Schedule zvolit **Free**. Tlačítko
+  „Add Pricing" se automatizací nepodařilo otevřít. Je to jeden výběr
+  v rozbalovacím seznamu.
+- **App Privacy** podle `store/apple-privacy-labels.md`.
+- **Review screenshot paywallu** u obou předplatných, jinak IAP uvíznou
+  ve „Waiting for Review". Soubor je připravený:
+  `store/screenshots/iphone67-cs-07-paywall.png` (1290×2796).
+- **Lokalizace subscription group** „Tapkasa Pro" (display name).
+- **Verze 1.0**: promo text, popis, klíčová slova, screenshoty
+  (iPhone 6,7" a iPad 12,9"), What's New, support URL, copyright.
+- **App Review Information**: kontakt, „Sign-in not required",
+  Notes ze `store/review-notes.md`, přiložit IAP k verzi.
+- **Release option**: Manually release this version.
+- **Small Business Program**: přihlásit v Agreements.
+
+---
