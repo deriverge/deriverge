@@ -806,3 +806,49 @@ App support. Doplní se s nimi.
 - Video je v obou obchodech **nepovinné**, vydání neblokuje.
 
 ---
+
+## Fáze 14, konec noční směny (2026-09-01)
+
+**Google Play, pokus o App content**
+
+- Sekce „Obsah aplikace" se v konzoli nepodařilo otevřít.
+  `/app/{id}/app-content` přesměrovává na seznam aplikací, v levé
+  navigaci položka není a rozbalení „Nastavení aplikace → Zobrazit
+  úkoly" na dashboardu nereagovalo.
+- Nezkoušelo se dál, protože celá Play větev stejně čeká na **účet
+  obchodníka Google Payments**, bez kterého nejdou předplatná a bez
+  nich nemá smysl aplikaci dokončovat.
+- Potvrzeno ale, že **texty záznamu v obchodě jsou uložené**: Přehled
+  publikování hlásí „Byl zadán název aplikace (Tapkasa - Pokladna do
+  kapsy) a všechny další povinné informace."
+
+**Souhrn toho, co je hotové**
+
+| Oblast | Stav |
+|---|---|
+| RevenueCat projekt, aplikace, entitlement `pro`, produkty | hotovo |
+| RevenueCat offering `default` | jen balíček `$rc_monthly` |
+| Apple App ID `com.deriverge.tapkasa` | hotovo |
+| ASC aplikace `6807075649` | hotovo |
+| Obě předplatná: ceny, CZ ceny, lokalizace, trialy | hotovo |
+| App Information, kategorie, Content Rights, Age Rating 4+ | hotovo |
+| Privacy Policy URL | hotovo, `/tapkasa/privacy.html` |
+| App Privacy dotazník | rozpracováno |
+| Dostupnost 175 zemí | hotovo, potvrzeno uživatelem |
+| iOS build, archiv, podpis | hotovo přes Xcode Cloud |
+| **TestFlight, Ready to Test** | **hotovo** |
+| Interní testeři | hotovo |
+| Web přesunut na `/tapkasa/` | hotovo |
+| Repozitář: klíče, privacy manifest, export compliance | hotovo |
+| Play aplikace + texty listingu | hotovo |
+| Play grafika, předplatná, App content | blokováno |
+| YouTube, 4 videa nahraná | hotovo, jako koncepty |
+
+**Otevřené blokace pro uživatele**
+
+1. **App Store Connect je odhlášený**, znovupřihlášení vyžaduje 2FA.
+2. **Účet obchodníka Google Payments**, bez něj nejdou Play předplatná.
+3. **DAC7** formulář v ASC → Business → Agreements.
+4. **Small Business Program**, přihlásit v ASC → Agreements.
+
+---
