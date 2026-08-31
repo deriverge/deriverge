@@ -98,3 +98,16 @@ ne jen v repozitáři. Proveďte:
    nakopírujte tam a do logu zapište úplnou cestu.
 4. Do logu na závěr zapište, kde přesně soubory leží, ať to uživateli
    předáme jednou větou.
+
+# Pokyny od koordinující session (aktualizace 6)
+
+Na main přibyla složka `store/screenshots/framed/`: kompletní sada
+snímků „obrazovka aplikace uvnitř zařízení s titulkem", stejné názvy
+a rozměry jako syrové snímky (iphone67 7 ks, ipad129 5 ks, play 5 ks,
+ptablet 4 ks, vždy cs + en). **Do App Store Connect i Play nahrávejte
+přednostně tuto sadu**; pořadí: 01 prodej, pairing-* druhý, dále
+02 až 07. Syrové snímky zůstávají jako záloha. Po `git pull` je
+zahrňte i do složky „Tapkasa podklady" z aktualizace 5 (podsložka
+`framed`). Spoty jsou veřejně na
+https://deriverge.com/store/promo/ (4 varianty mp4), to je adresa,
+kterou lze rovnou použít i pro YouTube upload uživatelem.
