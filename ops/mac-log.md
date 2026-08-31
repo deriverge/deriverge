@@ -254,3 +254,41 @@ Blok automatizace byl vyřešen. Uživatel přidal do `~/.claude/settings.json`
 - Archiv a nahrání do TestFlightu.
 
 ---
+
+## Fáze 5, repozitář a iOS projekt (2026-08-31)
+
+**Commitnuto a pushnuto do `main`**, commit `795b490`:
+
+- `mobile/billing.js` a `mobile/www/billing.js`: doplněny **veřejné SDK
+  klíče** projektu Tapkasa z RevenueCat. Jsou to public client keys,
+  patří do klienta; žádný secret key se nikam nedával.
+- `mobile/ios/App/App/Info.plist`: přidáno
+  `ITSAppUsesNonExemptEncryption = NO`. Aplikace jede jen přes HTTPS,
+  spadá pod výjimku, a odpadne dotaz na export compliance u každého
+  nahrání buildu.
+- `mobile/ios/App/App/PrivacyInfo.xcprivacy`: **nově vytvořený**
+  privacy manifest podle `store/apple-privacy-labels.md`.
+  `NSPrivacyTracking = false`, prázdné `NSPrivacyTrackingDomains`
+  i `NSPrivacyCollectedDataTypes`, deklarován jen
+  `NSPrivacyAccessedAPICategoryUserDefaults` s důvodem `CA92.1`.
+- `mobile/ios/App/App.xcodeproj/project.pbxproj`: manifest přidán jako
+  file reference i do Resources build phase, jinak by se do buildu
+  vůbec nedostal.
+
+**Zjištění**: ani `ITSAppUsesNonExemptEncryption`, ani privacy manifest
+v repozitáři předtím nebyly, přestože je `store/checklist.md` fáze 2
+bod 5 obojí vyžaduje. Doplněno.
+
+Ověřeno, že projekt po zásahu do `project.pbxproj` stále načítá:
+`xcodebuild -list -project App.xcodeproj` proběhlo a vyřešilo SPM
+závislosti (capacitor-swift-pm 8.5.0, purchases-hybrid-common 18.32.1).
+
+**Nezařazeno do commitu**
+
+- `mobile/ios/App/App.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/`
+  vzniklo při ověřování projektu. Je to `Package.resolved` se zámkem
+  verzí SPM balíčků. Necháno neverzované, ať to není nevyžádaná změna;
+  pro reprodukovatelnost buildu by dávalo smysl ho commitnout, ale to je
+  rozhodnutí nad rámec zadání.
+
+---
