@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<title>Tapkasa framed shot</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&display=swap">
+<style>
+  :root{
+    --paper:#FBFAF7; --ink:#15120E; --ink2:#5F5749;
+    --sans:"Archivo","Helvetica Neue",Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:100%;height:100%}
+  body{font-family:var(--sans);color:var(--ink);overflow:hidden;background:var(--paper)}
+  .stage{position:relative;width:100%;height:100%;overflow:hidden}
+  .copy{position:absolute;text-align:center}
+  .copy h1{font-weight:800;letter-spacing:-.03em;line-height:1.02;text-wrap:balance}
+  .copy p{color:var(--ink2);line-height:1.35;text-wrap:balance;font-weight:500}
+  .dev{position:absolute;background:#0E0C09;
+    box-shadow:0 30px 80px rgba(21,18,14,.26),0 6px 20px rgba(21,18,14,.15)}
+  .dev .scr{overflow:hidden;width:100%;height:100%}
+  .dev img{width:100%;height:100%;object-fit:cover;display:block;background:var(--paper)}
+</style>
+</head>
+<body>
+<div class="stage" id="stage"></div>
+<script>
+(function () {
+  var q = new URLSearchParams(location.search);
+  var lang = q.get("lang") === "en" ? "en" : "cs";
+  var mode = q.get("mode") || "67";
+  var shot = q.get("shot") || "01-sell";
+  var img = q.get("img") || "";
+
+  // plátno v CSS px (ostrost řeší deviceScaleFactor=2 při fotografování)
+  var M = {
+    "67":   { w: 645,  h: 1398, sar: 1290 / 2796, frame: "iphone", pad: 12, r: 44, rs: 34, fs: 46, top: 64,  gap: 30, bot: 46, maxSide: 42 },
+    "ipad": { w: 1024, h: 1366, sar: 2048 / 2732, frame: "ipad",   pad: 16, r: 34, rs: 20, fs: 60, top: 66,  gap: 32, bot: 52, maxSide: 60 },
+    "play": { w: 540,  h: 960,  sar: 1080 / 1920, frame: "iphone", pad: 10, r: 36, rs: 28, fs: 38, top: 42,  gap: 22, bot: 34, maxSide: 34 },
+    "ptab": { w: 720,  h: 1280, sar: 1440 / 2560, frame: "ipad",   pad: 14, r: 30, rs: 18, fs: 48, top: 54,  gap: 26, bot: 44, maxSide: 46 }
+  }[mode];
+
+  var TX = {
+    cs: {
+      "01-sell":       ["Prodej na pár klepnutí", "Vlastní nabídka s barvami a cenami"],
+      "02-cash":       ["Vrácení spočítá za Vás", "Rychlá hotovost i platba kartou"],
+      "03-orders":     ["Objednávky přehledně", "Každý lístek s číslem a stavem"],
+      "04-ticket":     ["Výdej bez zmatků", "Odškrtávejte položky při předání"],
+      "05-history":    ["Tržby i daňové doklady", "Souhrn za období odešlete e-mailem"],
+      "06-onboarding": ["Připraveno za minutu", "Bez registrace, funguje i offline"],
+      "07-paywall":    ["Tapkasa Pro", "Neomezené platby a propojená zařízení"]
+    },
+    en: {
+      "01-sell":       ["Sell in a few taps", "Your menu with colors and prices"],
+      "02-cash":       ["Change counted for you", "Fast cash and card payments"],
+      "03-orders":     ["Orders at a glance", "Every ticket numbered and tracked"],
+      "04-ticket":     ["Pickup without mix-ups", "Tick items off as you hand them over"],
+      "05-history":    ["Sales and tax documents", "Send period summaries by e-mail"],
+      "06-onboarding": ["Ready in a minute", "No sign-up, works offline"],
+      "07-paywall":    ["Tapkasa Pro", "Unlimited payments and connected devices"]
+    }
+  }[lang][shot];
+
+  var TINT = {
+    "01-sell": "#FFEFE9", "02-cash": "#EAF4EE", "03-orders": "#FBF2D8",
+    "04-ticket": "#EAF0FB", "05-history": "#F4EEE2", "06-onboarding": "#EAF4EE",
+    "07-paywall": "#FFEFE9"
+  }[shot];
+
+  document.body.style.background =
+    "radial-gradient(120% 62% at 50% 0%, " + TINT + " 0%, rgba(255,255,255,0) 72%), var(--paper)";
+
+  var st = document.getElementById("stage");
+  st.style.width = M.w + "px";
+  st.style.height = M.h + "px";
+
+  st.innerHTML =
+    '<div class="copy" style="left:' + M.maxSide + "px;right:" + M.maxSide + "px;top:" + M.top + 'px">' +
+      '<h1 style="font-size:' + M.fs + 'px">' + TX[0] + "</h1>" +
+      '<p style="font-size:' + Math.round(M.fs * 0.44) + "px;margin-top:" + Math.round(M.fs * 0.3) + 'px">' + TX[1] + "</p>" +
+    "</div>" +
+    '<div class="dev" id="dev" style="border-radius:' + M.r + "px;padding:" + M.pad + 'px">' +
+      '<div class="scr" style="border-radius:' + M.rs + 'px"><img src="' + img + '" alt=""></div>' +
+    "</div>";
+
+  // zařízení dopočítat až podle skutečné výšky titulku
+  function place() {
+    var copy = st.querySelector(".copy");
+    var top = M.top + copy.offsetHeight + M.gap;
+    var devH = M.h - top - M.bot;
+    var devW = (devH - 2 * M.pad) * M.sar + 2 * M.pad;
+    var maxW = M.w - 2 * M.maxSide;
+    if (devW > maxW) {
+      devW = maxW;
+      devH = (devW - 2 * M.pad) / M.sar + 2 * M.pad;
+    }
+    var dev = document.getElementById("dev");
+    dev.style.width = devW + "px";
+    dev.style.height = devH + "px";
+    dev.style.left = (M.w - devW) / 2 + "px";
+    dev.style.top = top + "px";
+  }
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(function () { place(); window.__ready = true; });
+  } else { place(); window.__ready = true; }
+  place();
+})();
+</script>
+</body>
+</html>
