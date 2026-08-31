@@ -1,0 +1,14 @@
+{
+  "name": "tapkasa-sync",
+  "version": "1.0.0",
+  "description": "Sync relay pro Tapkasa — ntfy-kompatibilni preposilac zprav mezi sparovanymi zarizenimi",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "test": "node --test test.mjs"
+  }
+}

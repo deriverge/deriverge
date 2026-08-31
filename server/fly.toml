@@ -1,0 +1,45 @@
+# fly.toml — nasazení tapkasa-sync na Fly.io
+#
+# Jméno aplikace musí být na Fly.io celosvětově unikátní; "tapkasa-sync" je
+# placeholder — pokud bude obsazené, změň ho tady i v příkazech v README.
+
+app = "tapkasa-sync"
+primary_region = "fra"   # Frankfurt — nejblíž českým uživatelům
+
+kill_signal = "SIGTERM"  # relay na SIGTERM ukončí SSE proudy a čistě skončí
+kill_timeout = 5
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  PORT = "8080"
+  # RATE_LIMIT = "120"        # zpráv na IP za okno
+  # RATE_WINDOW_SEC = "300"   # délka okna v sekundách
+  # RETENTION_HOURS = "12"    # jak dlouho zprávy žijí v paměti
+  # MAX_PER_TOPIC = "500"     # strop zpráv na jedno téma
+
+[http_service]
+  internal_port = 8080       # musí sedět na PORT výše
+  force_https = true
+  # Relay drží stav jen v paměti a otevřená SSE spojení — stroj se nesmí
+  # uspávat, jinak by se páry rozpojovaly a fronta zpráv mazala.
+  auto_stop_machines = "off"
+  auto_start_machines = true
+  min_machines_running = 1
+
+  [http_service.concurrency]
+    type = "connections"
+    soft_limit = 800
+    hard_limit = 1000
+
+  [[http_service.checks]]
+    method = "GET"
+    path = "/healthz"
+    interval = "30s"
+    timeout = "5s"
+    grace_period = "10s"
+
+[[vm]]
+  size = "shared-cpu-1x"     # 1 sdílené CPU úplně stačí
+  memory = "256mb"
