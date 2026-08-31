@@ -461,3 +461,51 @@ závislosti (capacitor-swift-pm 8.5.0, purchases-hybrid-common 18.32.1).
 - **Small Business Program**: přihlásit v Agreements.
 
 ---
+
+## Fáze 9, pokyny z inboxu (2026-08-31)
+
+Přečten `ops/mac-inbox.md`, aktualizace 1 a 2. Vyhodnocení bod po bodu.
+
+**Bod 1, Xcode** — vyřešeno dřív, viz fáze 4. macOS 15.7.3 Sequoia,
+Xcode 16.4 běží, plán B (Codemagic) není potřeba.
+
+**Bod 2, pokračovat fázemi 2, 3 a 5** — uděláno, viz fáze 2, 3, 6, 7, 8.
+
+**Bod 3, po vložení klíčů znovu sync** — hotovo:
+- `git pull` na `main` stáhl commit `ed2a63e`
+  („Add a support contact row and address across the app and web"),
+- `./sync-web.sh` proběhlo, `mobile/www/index.html` má nyní 238 053 B,
+- `npx cap sync ios` proběhlo, plugin
+  `@revenuecat/purchases-capacitor@13.4.2`, `Package.swift` přepsán,
+- ověřeno, že veřejné RevenueCat klíče v `mobile/billing.js`
+  i `mobile/www/billing.js` merge přežily.
+
+**Bod 4, App Store Connect API klíč** — částečně, s komplikací:
+
+- Vytvořen nový klíč **`Tapkasa Build Upload`**, **Key ID `ABWJD553V4`**,
+  role **App Manager**, Issuer ID `1ed9b87d-51a7-41b4-ab9d-c1b5e88a87fc`.
+- **Soubor `.p8` se nepodařilo stáhnout.** Apple zobrazí potvrzovací
+  dialog „Download API Key" (klíč lze stáhnout jen jednou); klik na
+  potvrzení nevyvolal žádnou událost stahování a v historii Chromu
+  položka není. Odkaz Download u řádku ale zmizel.
+- **Náhradní řešení**: na účtu už existuje klíč **`RevenueCat API`,
+  Key ID `MTMP9A7SKR`, role App Manager**, a jeho soubor
+  `AuthKey_MTMP9A7SKR.p8` je stažený v `~/Downloads` (257 B, 28. 8. 2026).
+  Pro nahrávání buildů plně stačí.
+- **Zkopírovat ho na cílové místo se nepodařilo**: macOS blokuje procesu
+  přístup do `~/Downloads` (`Operation not permitted`, ochrana soukromí
+  TCC). Uživatel byl požádán, ať to udělá sám:
+  `mkdir -p ~/.appstoreconnect/private_keys && cp ~/Downloads/AuthKey_MTMP9A7SKR.p8 ~/.appstoreconnect/private_keys/ && chmod 600 ~/.appstoreconnect/private_keys/AuthKey_MTMP9A7SKR.p8`
+- Adresář `~/.appstoreconnect/private_keys` je založený s právy 700.
+- **Doporučení**: klíč `Tapkasa Build Upload` (`ABWJD553V4`) je bez
+  staženého souboru nepoužitelný. Buď ho stáhnout ručně, nebo revokovat,
+  ať na účtu nezůstává viset.
+- Obsah žádného klíče se nikam nezapisoval ani nevypisoval.
+
+**Bod 5, kontaktní e-mail `info@deriverge.com`** — zatím nepoužit.
+Pole, kam patří, jsou v dosud nevyplněných sekcích:
+App Store Connect → App Review Information a verze 1.0 (Support URL
+`https://www.deriverge.com/kava/`), Google Play → Store listing →
+App support. Doplní se s nimi.
+
+---
