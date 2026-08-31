@@ -292,3 +292,51 @@ závislosti (capacitor-swift-pm 8.5.0, purchases-hybrid-common 18.32.1).
   rozhodnutí nad rámec zadání.
 
 ---
+
+## Fáze 6, RevenueCat katalog (2026-08-31)
+
+**Hotovo**
+
+- **Produkty importovány** z App Store Connect do konfigurace
+  `Tapkasa iOS` (`app5d60b87dab`): `tapkasa.pro.monthly`
+  a `tapkasa.pro.yearly`. Stav u obou je „Missing Metadata", což je
+  normální, dokud aplikace neprojde review.
+- **Entitlement `pro`**: připojeny **oba produkty** (v přehledu
+  „2 products").
+- **Offering `default`** vytvořen, display name
+  „The standard set of packages", REST ID `ofrnga3369cd6e7`.
+  Obsahuje balíček **`$rc_monthly` → `tapkasa.pro.monthly`**.
+
+**BLOKUJE: balíček `$rc_annual` se nepodařilo přidat**
+
+- Offering má zatím jen 1 balíček. Roční chybí.
+- Formulář offeringu v RevenueCat se při přidání druhého balíčku chová
+  nestabilně: po kliknutí na „New Package" vymaže popis prvního balíčku,
+  novému balíčku přiřadí produkt prvního a uložení pak tiše neprojde
+  (zůstane na `/edit`, bez chybové hlášky a bez toastu).
+- Vyzkoušeno osm variant: klik na Save, `form.requestSubmit()`,
+  různá pořadí vyplňování, dopsání všech polí obou balíčků před
+  uložením. Výsledek stejný.
+- Do funkčního stavu se nezasáhlo, `$rc_monthly` zůstává správně
+  nastavený.
+
+**Doporučený ruční krok (30 sekund)**
+
+1. `https://app.revenuecat.com/projects/b0f25a13/product-catalog/offerings/ofrnga3369cd6e7`
+2. Edit → New Package
+3. Identifier **Annual** (odpovídá `$rc_annual`), Description `Annual`
+4. U aplikace Tapkasa iOS vybrat produkt **Tapkasa Pro Yearly**
+   (`tapkasa.pro.yearly`)
+5. Zkontrolovat, že prvnímu balíčku zůstalo Description `Monthly`
+   a produkt `Tapkasa Pro Monthly`, a teprve pak Save.
+
+**Ještě zbývá v RevenueCat**
+
+- Označit offering `default` jako **current**.
+- Po založení Play produktů je naimportovat do konfigurace
+  `Tapkasa Android` (`app0dee10a745`) a připojit k `pro`, plus doplnit
+  je do obou balíčků offeringu.
+- Nahrát **service account JSON** pro Google Play.
+- Zapnout **server notifications** (Apple V2, Google RTDN).
+
+---
