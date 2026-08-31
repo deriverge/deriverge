@@ -678,3 +678,69 @@ App support. Doplní se s nimi.
   `store/checklist.md` řádek 79, ne od uživatele.
 
 ---
+
+## Fáze 12, TestFlight, App Privacy a přesun webu (2026-08-31)
+
+**TestFlight, interní testeři**
+
+- Vytvořena interní skupina **Interní testeři**.
+- Přidáni `info@deriverge.com` a **`caganekdavid@gmail.com`**.
+- Zdržení mělo konkrétní příčinu: účet `caganekdavid@gmail.com` měl
+  v App Store Connect přístup **jen k aplikaci VZT Montér**, Tapkasu
+  neviděl, a proto se v nabídce testerů nezobrazoval. Doplněn přístup
+  k Tapkase přes Users and Access → Manage apps.
+- Pozvánka do týmu byla nejdřív nepřijatá, byla odeslána znovu
+  a uživatel ji potvrdil. Role Developer.
+
+**Xcode Cloud, doručení do TestFlightu**
+
+- Buildy 7 a 8 skončily zeleně, ale **do TestFlightu nedorazily**.
+  Příčina: workflow Default měl u akce Archive
+  `Distribution Preparation = None`, tedy jen archivoval.
+- Přepnuto na **TestFlight (Internal Testing Only)** a uloženo.
+- Potvrzený toolchain Xcode Cloud: **Xcode 26.6 (17F113)** na
+  **macOS Tahoe 26.6.2**. To je iOS 26 SDK, který Apple pro nahrání
+  vyžaduje a lokální Xcode 16.4 nabídnout nemohl.
+- Buildy 9 (23:07) a 10 (23:29) běží. Workflow reaguje i na push do
+  `main`, build 10 se spustil sám.
+
+**App Privacy**
+
+- Nastavena **Privacy Policy URL**.
+- Dotazník o sběru dat rozpracovaný, odpovědi podle
+  `store/apple-privacy-labels.md`: sběr Ano, typy pouze
+  Identifiers → User ID a Purchases → Purchase History, obojí
+  App Functionality, nespojené s identitou, bez trackingu.
+
+**Přesun webu z `/kava/` na `/tapkasa/`** (commit `dc41997`)
+
+- Na žádost uživatele, `/kava/` byl pozůstatek pracovního názvu.
+- Složka `kava/` přejmenována na `tapkasa/`, přepsáno **40 výskytů
+  ve 20 souborech**: manifest, service worker, `bridge.js`,
+  `billing.js`, `sync-web.sh`, `capacitor.config.ts`, `copy-web.sh`,
+  `ci_post_clone.sh`, READMEs, `store/review-notes.md`,
+  `store/promo/src/pcap.mjs`.
+- Na `/kava/` ponechána **přesměrování** (`index.html`, `privacy.html`,
+  `terms.html`), aby už rozeslané odkazy a případné nainstalované PWA
+  nespadly.
+- **Záměrně nezměněn** localStorage klíč `kavakasa.v1` ani název
+  IndexedDB databáze. Přejmenování by uživatelům osiřelo uložená data.
+- Ověřeno živě: `/tapkasa/` a `/tapkasa/privacy.html` vrací 200,
+  `/kava/` přesměrovává.
+- `sync-web.sh` a `npx cap sync ios` proběhly znovu.
+- Privacy Policy URL v App Store Connect aktualizována na
+  `https://www.deriverge.com/tapkasa/privacy.html`.
+
+**Poznámka k propagačnímu spotu**
+
+- V `store/promo/` jsou čtyři verze spotu (cs/en, na výšku i na šířku),
+  26,4 s, 1080×1920 a 1920×1080, vyrobené druhou session.
+- **Do obchodů se nehodí ani jeden.** App Store App Preview musí být
+  záznam obrazovky bez rámečků zařízení a bez odkazů na jiné obchody;
+  spot má maketu iPhonu a iPadu a končí na badgích App Store i Google
+  Play. Google Play přijímá promo video **jen jako odkaz na YouTube**
+  a badge App Store je proti jejich pravidlům.
+- Video je ale nepovinné, vydání to neblokuje. Použitelné je pro web,
+  sociální sítě a reklamu.
+
+---
