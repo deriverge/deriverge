@@ -108,3 +108,64 @@ fáze chronologicky.
   aby je buď předal, nebo akci povolil.
 
 ---
+
+## Fáze 3, App Store Connect (2026-08-31, probíhá)
+
+**Stav účtu, ověřeno**
+
+- Tým: **deriverge s.r.o.**, Team ID `6XX9G3S468`.
+- **Paid Apps Agreement: Active** (platnost 19. 8. 2026 až 19. 8. 2027).
+- Bankovní účet ČSOB (1478), CZK: **Active**.
+- Daňové formuláře W-8BEN a W-8BEN-E: **Active**.
+- Smlouvy ani bankovní údaje jsme nevyplňovali, jen odečetli stav.
+
+**Hotovo**
+
+- **App ID zaregistrováno** v Apple Developer portálu: description
+  `Tapkasa`, bundle `com.deriverge.tapkasa`, typ Explicit.
+  Předtím na účtu existoval jen `cz.vztmonter.app`.
+- **Aplikace založena** v App Store Connect:
+  - název `Tapkasa - Pokladna do kapsy`,
+  - platforma iOS, primární jazyk **čeština** (`cs`),
+  - bundle `com.deriverge.tapkasa`, SKU `tapkasa-ios`,
+  - **Apple ID aplikace `6807075649`**.
+  - Poznámka: Apple vypsal hlášku, že nešlo uložit omezení přístupu
+    uživatelů, takže aplikaci vidí všichni uživatelé účtu. Pro tento
+    účet je to v pořádku, dá se změnit v App Information.
+- **Subscription Group `Tapkasa Pro`** vytvořena, group ID `22348338`.
+- **Předplatné `tapkasa.pro.monthly`** vytvořeno:
+  - reference name `Tapkasa Pro Monthly`, Apple ID `6807076650`,
+    perioda 1 měsíc,
+  - **dostupnost: všech 175 zemí** (potvrzeno).
+  - Volba všech zemí je záměrná. `monetization.md` chce trial ve všech
+    zemích, zatímco omezení launche na CZ+SK podle `checklist.md` se
+    nastavuje na úrovni aplikace (Pricing and Availability), ne produktu.
+    Produkt tak nebude potřeba měnit při rozšíření do dalších zemí.
+
+**Rozpracované, neuložené**
+
+- Základní cena **4,99 USD** je vybraná a průvodce stojí otevřený na
+  kroku „Price by Country or Region", kde se má Česku přepsat cena na
+  **129 Kč**. Tento krok **není potvrzený**, cena tedy zatím uložená není.
+
+**BLOKUJE: bezpečnostní klasifikátor zastavuje ovládání prohlížeče**
+
+- Prostředí, ve kterém běžím, zablokovalo už dva kroky automatizace:
+  1. odkrytí a přečtení **veřejných** SDK klíčů v RevenueCat,
+  2. otevření nabídky cen u řádku Česko v App Store Connect.
+- Druhý případ je úplně běžný krok formuláře, takže blokování není
+  vázané na tajemství, ale na vzor „automatizované klikání v konzoli".
+- Obcházet to nebudu. Bez uvolnění nejde dokončit ceny, lokalizace,
+  trialy, App Privacy ani Google Play část.
+- Uživatel byl požádán o rozhodnutí.
+
+**Nedotčeno podle pravidel zadání**
+
+- **DAC7** (Directive on Administrative Cooperation, 7th Amendment) hlásí
+  v sekci Agreements „Missing Info". Je to daňový a reportovací formulář,
+  ten podle pravidel nevyplňujeme. Uživatel ho musí doplnit sám,
+  App Store Connect → Business → Agreements → Add Info.
+- **Small Business Program**: přihlášení zatím neproběhlo, je to úkon
+  v sekci Agreements. Zbývá udělat.
+
+---
