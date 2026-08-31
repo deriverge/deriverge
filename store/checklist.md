@@ -166,3 +166,18 @@ Kroky v pořadí, v jakém se reálně dělají. Značky: ☐ = udělat,
   do té doby platí anglická verze) a „Získejte/Rozjeďte to na Google Play"
   (CZ i EN PNG). Odznaky patří na web, do videí a inzerce; do snímků
   obrazovky v obchodech se nevkládají. Spot je má v závěrečné scéně.
+
+## Marketingové snímky „aplikace v zařízení" (doplněno)
+
+- `store/screenshots/framed/`: kompletní sada snímků pro oba obchody
+  ve stylu „obrazovka aplikace uvnitř zařízení" s titulkem nahoře,
+  česky i anglicky, ve stejných rozměrech a pod stejnými názvy jako
+  syrové snímky:
+  - `iphone67-*` 1290x2796 (7 obrazovek vč. onboardingu a paywallu),
+  - `ipad129-*` 2048x2732 (5 obrazovek),
+  - `play-*` 1080x1920 (5 obrazovek),
+  - `ptablet-*` 1440x2560 (4 obrazovky).
+- Do obchodů nahrávat přednostně tuto sadu; pořadí: 01 prodej,
+  pairing-* jako druhý snímek, dále 02-07. Syrové snímky v kořeni
+  `store/screenshots/` zůstávají jako záloha a zdroj.
+- Šablona a generátor: `store/promo/src/framed.html` + `fshot.mjs`.
