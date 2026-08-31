@@ -1,6 +1,6 @@
 import { chromium } from '/opt/node22/lib/node_modules/playwright/index.mjs';
 import fs from 'node:fs';
-import { execFileSync } from 'node:child_process';
+import { execFileSync, spawnSync } from 'node:child_process';
 const SP='/tmp/claude-0/-home-user-deriverge/1455238e-1fdf-569a-95ff-a73d887ca0a6/scratchpad';
 const FF=`${SP}/ff/node_modules/ffmpeg-static/ffmpeg`;
 const b=await chromium.launch();
@@ -21,16 +21,20 @@ for(const [lang,w,h,name] of JOBS){
   await p.evaluate(()=>document.fonts&&document.fonts.ready);
   await p.evaluate(()=>Promise.all([...document.images].map(i=>i.decode().catch(()=>{}))));
   await p.waitForTimeout(400);
-  const tGo=Date.now();
   await p.evaluate(()=>window.__go());
-  await p.waitForTimeout(25900);
+  await p.waitForTimeout(27200);
   await c.close();
   const webm=fs.readdirSync(dir).find(f=>f.endsWith('.webm'));
-  const off=((tGo-t0)/1000).toFixed(2);
+  // střih přesně na konec černé synchronizační značky
+  const bd=spawnSync(FF,['-hide_banner','-i',`${dir}/${webm}`,'-vf','blackdetect=d=0.05:pix_th=0.12','-an','-f','null','-'],{encoding:'utf8'});
+  const det=String(bd.stderr||'');
+  const m=[...det.matchAll(/black_end:([0-9.]+)/g)];
+  if(!m.length){throw new Error('synchronizační značka nenalezena: '+det.slice(-300));}
+  const off=(parseFloat(m[m.length-1][1])+0.02).toFixed(2);
   execFileSync(FF,['-y','-hide_banner','-loglevel','error',
     '-ss',off,'-i',`${dir}/${webm}`,'-i',`${SP}/promo/music.wav`,
     '-map','0:v','-map','1:a','-c:v','libx264','-preset','medium','-crf','20',
-    '-pix_fmt','yuv420p','-r','30','-t','25.8','-c:a','aac','-b:a','160k',
+    '-pix_fmt','yuv420p','-r','30','-t','26.4','-c:a','aac','-b:a','160k',
     '-movflags','+faststart',`${SP}/promo/${name}.mp4`]);
   console.log(name, 'offset', off, '->', Math.round(fs.statSync(`${SP}/promo/${name}.mp4`).size/1024), 'KB');
 }

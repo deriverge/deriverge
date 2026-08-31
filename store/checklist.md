@@ -161,3 +161,8 @@ Kroky v pořadí, v jakém se reálně dělají. Značky: ☐ = udělat,
   tam patří jen snímky, případně později nahrávka z aplikace.
 - Zdrojové soubory spotu a grafik: `store/promo/src/` (ad.html, promo.html,
   music.html + skripty), hudba `store/promo/music.wav`.
+- `store/promo/badges/`: oficiální odznaky „Download on the App Store"
+  (SVG, Apple zveřejňuje česky jen přes svůj generátor po přihlášení,
+  do té doby platí anglická verze) a „Získejte/Rozjeďte to na Google Play"
+  (CZ i EN PNG). Odznaky patří na web, do videí a inzerce; do snímků
+  obrazovky v obchodech se nevkládají. Spot je má v závěrečné scéně.

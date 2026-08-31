@@ -161,15 +161,19 @@
   .go .s5 .feat:nth-child(3){animation:pop2 .4s ease 21.6s forwards}
   .go .s5 .feat:nth-child(4){animation:pop2 .4s ease 21.75s forwards}
   .s5 .mark{width:17vmin;height:17vmin;margin-top:5vmin;opacity:0;transform:scale(.7)}
-  .go .s5 .mark{animation:pop2 .55s cubic-bezier(.2,.9,.3,1.25) 22.4s forwards}
+  .go .s5 .mark{animation:pop2 .55s cubic-bezier(.2,.9,.3,1.25) 22.0s forwards}
   .s5 .wn{font-size:10.4vmin;font-weight:800;letter-spacing:-.04em;margin-top:2.6vmin;opacity:0}
-  .go .s5 .wn{animation:fadeup .6s ease 22.8s forwards}
+  .go .s5 .wn{animation:fadeup .6s ease 22.35s forwards}
   .s5 .tg{font-size:3.8vmin;color:var(--ink2);margin-top:1.2vmin;opacity:0}
-  .go .s5 .tg{animation:fadeup .6s ease 23.2s forwards}
+  .go .s5 .tg{animation:fadeup .6s ease 22.7s forwards}
   .probadge{display:inline-flex;align-items:center;gap:1.4vmin;padding:1.5vmin 2.8vmin;border-radius:999px;
     background:var(--ink);color:var(--paper);font-weight:700;font-size:3vmin;margin-top:3.4vmin;opacity:0}
   .probadge .mark{width:3.4vmin;height:3.4vmin;margin:0;opacity:1;transform:none;animation:none}
-  .go .s5 .probadge{animation:fadeup .6s ease 23.7s forwards}
+  .go .s5 .probadge{animation:fadeup .6s ease 23.0s forwards}
+  .stores{display:flex;align-items:center;gap:2.2vmin;margin-top:3vmin;opacity:0}
+  .stores img.ap{height:6.6vmin;display:block}
+  .stores img.gp{height:9.9vmin;display:block}
+  .go .s5 .stores{animation:fadeup .55s ease 23.4s forwards}
 
   /* ---------- keyframes ---------- */
   @keyframes scenein{from{opacity:0;visibility:visible;transform:translateY(2.4vmin)}to{opacity:1;visibility:visible;transform:none}}
@@ -278,7 +282,9 @@
       '<div class="feats"><span class="feat">' + TX.f1 + '</span><span class="feat">' + TX.f2 +
         '</span><span class="feat">' + TX.f3 + '</span><span class="feat">' + TX.f4 + "</span></div>" +
       mark + '<div class="wn">Tapkasa</div><div class="tg">' + TX.tag + "</div>" +
-      '<div class="probadge">' + mark + " Tapkasa Pro</div></div>";
+      '<div class="probadge">' + mark + " Tapkasa Pro</div>" +
+      '<div class="stores"><img class="ap" src="badges/appstore-en.svg" alt="App Store">' +
+      '<img class="gp" src="badges/googleplay-' + (lang === "cs" ? "cs" : "en") + '.png" alt="Google Play"></div></div>';
 
   // dráha přeletu a tečkovaná linka v pixelech (offset-path počítá v px)
   var vm = Math.min(window.innerWidth, window.innerHeight) / 100;
@@ -290,7 +296,16 @@
   document.getElementById("wirePath").setAttribute("d", d);
   document.querySelector(".flychip").style.offsetPath = "path('" + d + "')";
 
-  window.__go = function () { document.body.classList.add("go"); };
+  var sync = document.createElement("div");
+  sync.style.cssText = "position:fixed;inset:0;background:#000;z-index:99;display:none";
+  document.body.appendChild(sync);
+  window.__go = function () {
+    sync.style.display = "block";
+    setTimeout(function () {
+      sync.style.display = "none";
+      document.body.classList.add("go");
+    }, 160);
+  };
 })();
 </script>
 </body>
