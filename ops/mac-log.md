@@ -169,3 +169,88 @@ fáze chronologicky.
   v sekci Agreements. Zbývá udělat.
 
 ---
+
+## Fáze 3b, App Store Connect, předplatná (2026-08-31)
+
+Blok automatizace byl vyřešen. Uživatel přidal do `~/.claude/settings.json`
+úzké pravidlo povolující jediný vstupní skript, přes který ovládám Chrome.
+
+**Měsíční předplatné `tapkasa.pro.monthly`, Apple ID `6807076650`**
+
+- Dostupnost: všech 175 zemí.
+- Cena: **4,99 USD**, Česko **129,00 Kč**.
+  Poznámka: automatický přepočet Applu vyšel přesně na 129 Kč, ruční
+  úprava tedy nebyla potřeba. `monetization.md` očekával, že přepočet
+  vyjde nehezky, aktuální kurzy to vyvrátily.
+- Lokalizace:
+  - Czech: „Tapkasa Pro, měsíční" / „Neomezené účtování a spárování
+    druhého zařízení",
+  - English (U.S.): „Tapkasa Pro Monthly" / „Unlimited sales and pairing
+    a second device".
+- **Introductory Offer**: Free, **2 weeks**, 175 zemí, od 1. 9. 2026,
+  bez konce platnosti.
+  Poznámka: Apple nedovolí začátek nabídky ke dnešnímu dni, nejbližší
+  možný začátek byl 1. 9. 2026. Na spuštění to nemá vliv, aplikace bude
+  vydaná později.
+
+**Roční předplatné `tapkasa.pro.yearly`, Apple ID `6807087169`**
+
+- Dostupnost: všech 175 zemí (varianta „1 Year Upfront").
+- Cena: **39,99 USD**, Česko **999,00 Kč**.
+  **Odchylka od zadání**: `monetization.md` chtěl 990 Kč. Apple takový
+  price point nenabízí. Dostupné sousední body jsou 799 Kč a 999 Kč.
+  Podle záložního pravidla v témže dokumentu („pokud 990 Kč není
+  v nabídce, vzít 989 nebo 999 Kč, pořád pod hranicí 1 000 Kč") je
+  nastaveno **999 Kč**. Proti 12 × 129 Kč = 1 548 Kč to je sleva 35 %.
+- Lokalizace:
+  - Czech: „Tapkasa Pro, roční",
+  - English (U.S.): „Tapkasa Pro Yearly".
+- Introductory Offer se nastavuje, výsledek doplním v dalším záznamu.
+
+**Poznámka k variantě „Monthly with a 12-Month Commitment"**
+
+- App Store Connect u ročního předplatného nově nabízí i tuto druhou
+  variantu nákupu. Vědomě jsme ji nechali nenastavenou, v zadání není
+  a vyžaduje OS 26.4+ a SDK 26.5+, což je mimo dosah současného buildu.
+
+**Zbývá na App Store Connect**
+
+- Review screenshot paywallu u obou předplatných (bez něj IAP uvíznou
+  ve „Waiting for Review").
+- Lokalizace subscription group „Tapkasa Pro" (display name).
+- App Information: kategorie, age rating, content rights.
+- App Privacy podle `store/apple-privacy-labels.md`.
+- Pricing and Availability aplikace: Free, země CZ+SK.
+- Verze 1.0: texty, screenshoty, klíčová slova, What's New, App Review
+  Information, release option Manually release.
+- Přihlášení do Small Business Programu.
+
+---
+
+## Fáze 4, Xcode (2026-08-31)
+
+**Vyřešeno bez aktualizace macOS**
+
+- Mac App Store nabízel jen verzi Xcode vyžadující novější systém, což
+  uživatel dělat nechtěl kvůli stabilitě DaVinci Resolve.
+- Řešením byla starší verze z developer.apple.com. Na disku se našel už
+  stažený **Xcode 16.4**, přesunut z `~/Downloads` do `/Applications`.
+- `sudo xcode-select -s /Applications/Xcode.app/Contents/Developer`
+  spustil uživatel, licence byla přijata při prvním startu Xcode.
+- Ověřeno: `xcodebuild -version` = **Xcode 16.4, build 16F6**,
+  `xcode-select -p` = `/Applications/Xcode.app/Contents/Developer`.
+- Balíček obsahuje `iPhoneOS.platform`, archiv na zařízení je tedy možný.
+- Volitelné stahování (iOS 18.6 Simulator 8,86 GB, Predictive Code
+  Completion Model 2,51 GB) uživatel na doporučení zrušil, pro archiv
+  a TestFlight nejsou potřeba.
+
+**Zbývá k iOS buildu**
+
+- V Xcode → Settings → Accounts přihlásit Apple ID a vybrat tým
+  deriverge s.r.o. (`6XX9G3S468`). Musí udělat uživatel.
+- Nastavit v projektu `ITSAppUsesNonExemptEncryption = NO` a přidat
+  `PrivacyInfo.xcprivacy`, doplnit veřejný RevenueCat klíč do
+  `mobile/billing.js`.
+- Archiv a nahrání do TestFlightu.
+
+---
