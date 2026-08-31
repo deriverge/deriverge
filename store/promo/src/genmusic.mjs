@@ -1,0 +1,11 @@
+import { chromium } from '/opt/node22/lib/node_modules/playwright/index.mjs';
+import fs from 'node:fs';
+const SP='/tmp/claude-0/-home-user-deriverge/1455238e-1fdf-569a-95ff-a73d887ca0a6/scratchpad';
+const b=await chromium.launch();
+const p=await b.newPage();
+p.on('pageerror',e=>console.error('pageerror:',e.message));
+await p.goto(`file://${SP}/promo/music.html`);
+const b64=await p.evaluate(()=>renderMusic());
+fs.writeFileSync(`${SP}/promo/music.wav`, Buffer.from(b64,'base64'));
+console.log('music.wav:', fs.statSync(`${SP}/promo/music.wav`).size, 'B');
+await b.close();
