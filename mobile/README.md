@@ -1,6 +1,6 @@
 # Tapkasa, nativní obal (Capacitor)
 
-„Pokladna do kapsy.“ Tenhle adresář balí webovou pokladnu `kava/index.html`
+„Pokladna do kapsy.“ Tenhle adresář balí webovou pokladnu `tapkasa/index.html`
 do nativních aplikací pro App Store a Google Play pomocí
 [Capacitoru](https://capacitorjs.com) 8.
 
@@ -8,7 +8,7 @@ do nativních aplikací pro App Store a Google Play pomocí
 mobile/
 ├── package.json           závislosti (@capacitor/* 8.5.0, purchases-capacitor 13.4.2)
 ├── capacitor.config.ts    appId com.deriverge.tapkasa, appName Tapkasa, webDir www
-├── sync-web.sh            kopíruje kava/index.html → www/ a přidá adaptéry
+├── sync-web.sh            kopíruje tapkasa/index.html → www/ a přidá adaptéry
 ├── bridge.js              JS adaptér nativního mostu (párování, ukládání)
 ├── billing.js             JS adaptér fakturace (RevenueCat)
 ├── www-bridge.md          jak hooky webu mapují na Capacitor, čti při změnách mostu
@@ -36,15 +36,15 @@ a s tímhle projektem nesouvisí; Capacitor projekt je `mobile/ios/`.
 ```sh
 cd mobile
 npm install          # jen poprvé / po změně závislostí
-./sync-web.sh        # kava/index.html + bridge.js + billing.js → www/
+./sync-web.sh        # tapkasa/index.html + bridge.js + billing.js → www/
 npx cap sync         # www/ → ios/ i android/, aktualizace nativních pluginů
 npx cap open ios     # otevře Xcode
 npx cap open android # otevře Android Studio
 ```
 
-`./sync-web.sh` spouštějte po **každé** změně `kava/index.html`, `bridge.js`
+`./sync-web.sh` spouštějte po **každé** změně `tapkasa/index.html`, `bridge.js`
 nebo `billing.js`; `npx cap sync` po každém `sync-web.sh` nebo `npm install`.
-Zdrojový `kava/index.html` se nikdy nemění, adaptéry se vkládají jen do
+Zdrojový `tapkasa/index.html` se nikdy nemění, adaptéry se vkládají jen do
 kopie v `www/`.
 
 ## iOS

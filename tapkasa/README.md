@@ -5,7 +5,7 @@ hotově či kartou, fronta objednávek, přehled tržby. Jeden soubor, žádný 
 žádná registrace. Dřívější „Kasa na stánek“, rozšířená na produkt pro App Store
 a Google Play (nativní obal je v `../mobile/`, podklady pro obchody v `../store/`).
 
-Webová verze běží na `https://www.deriverge.com/kava/`.
+Webová verze běží na `https://www.deriverge.com/tapkasa/`.
 
 ## První spuštění
 

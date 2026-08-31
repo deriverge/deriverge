@@ -18,8 +18,8 @@ Ke stažení do zařízení stačí **obyčejné Apple ID zdarma**, ale podpis p
 **7 dní** a po týdnu je potřeba appku z Xcode znovu nahrát (data zůstanou).
 S placeným Apple Developer Programem (2 400 Kč / rok) platí podpis **rok**.
 
-Pokud Mac po ruce není, použij verzi z `kava/` přidanou na plochu — chová se
-stejně, jen se jednou musí načíst z internetu. Viz `kava/README.md`.
+Pokud Mac po ruce není, použij verzi z `tapkasa/` přidanou na plochu — chová se
+stejně, jen se jednou musí načíst z internetu. Viz `tapkasa/README.md`.
 
 ## Postup s XcodeGen (rychlejší)
 
@@ -93,7 +93,7 @@ kamkoliv a kdykoliv z něj obnovit.
 
 ## Po úpravě appky
 
-`kava/index.html` je zdroj pravdy. Když se v něm něco změní:
+`tapkasa/index.html` je zdroj pravdy. Když se v něm něco změní:
 
 ```sh
 cd ios && ./copy-web.sh

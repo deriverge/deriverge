@@ -1,6 +1,6 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
-// Tapkasa — nativní obal pokladní aplikace (kava/index.html).
+// Tapkasa — nativní obal pokladní aplikace (tapkasa/index.html).
 // Web se do www/ kopíruje skriptem ./sync-web.sh, poté `npx cap sync`.
 const config: CapacitorConfig = {
   appId: 'com.deriverge.tapkasa',

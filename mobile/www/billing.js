@@ -127,7 +127,7 @@
   };
 
   // ---- napojení na hooky aplikace ----------------------------------------
-  // Aplikace (kava/index.html) volá __kasaBuy/__kasaRestore a výsledek čeká
+  // Aplikace (tapkasa/index.html) volá __kasaBuy/__kasaRestore a výsledek čeká
   // přes __kasaEntitlement('pro'|'free'); ceníky čte z __KASA_PRICES__.
   // Null (offline, neznámo) se nepředává — jinak by start bez signálu
   // smazal platné předplatné.

@@ -1,6 +1,6 @@
 # Most mezi webem a nativní vrstvou (Capacitor)
 
-Webová aplikace `kava/index.html` vznikla pro původní SwiftUI obal
+Webová aplikace `tapkasa/index.html` vznikla pro původní SwiftUI obal
 (`ios/Kasa/KasaWebView.swift` + `ios/Kasa/PeerLink.swift`) a mluví s nativní
 vrstvou přes pět hooků. Capacitor obal je obsluhuje **beze změny webu** —
 `sync-web.sh` jen do kopie v `www/` přidá `<script src="bridge.js">` a
@@ -8,7 +8,7 @@ vrstvou přes pět hooků. Capacitor obal je obsluhuje **beze změny webu** —
 
 ## Mapování hooků
 
-| Hook ve webu (`kava/index.html`) | Směr | V Capacitoru to obsluhuje |
+| Hook ve webu (`tapkasa/index.html`) | Směr | V Capacitoru to obsluhuje |
 | --- | --- | --- |
 | `window.webkit.messageHandlers.peer.postMessage(json)` | web → nativní | `bridge.js` podstrčí objekt `peer`, jehož `postMessage` volá `PeerLink.send({ json })` |
 | `window.webkit.messageHandlers.kasa.postMessage(json)` | web → nativní | `bridge.js` podstrčí objekt `kasa`, jehož `postMessage` volá `PeerLink.save({ json })` → zápis do `Documents/kasa.json` |

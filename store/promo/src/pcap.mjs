@@ -31,7 +31,7 @@ for(const lang of ['cs','en']){
   const c1=await b.newContext({viewport:{width:1024,height:1366},deviceScaleFactor:2,isMobile:true,hasTouch:true,locale:lang});
   await c1.addInitScript(`try{localStorage.setItem('kasa.setupDone','1');localStorage.setItem('kavakasa.v1',${JSON.stringify(JSON.stringify(mkState(lang,'kasa')))})}catch(e){}`);
   const p1=await c1.newPage();
-  await p1.goto('file:///home/user/deriverge/kava/index.html');
+  await p1.goto('file:///home/user/deriverge/tapkasa/index.html');
   await p1.waitForTimeout(700);
   await p1.evaluate(()=>document.fonts&&document.fonts.ready);
   await p1.waitForTimeout(300);
@@ -41,7 +41,7 @@ for(const lang of ['cs','en']){
   const c2=await b.newContext({viewport:{width:390,height:844},deviceScaleFactor:3,isMobile:true,hasTouch:true,locale:lang});
   await c2.addInitScript(`try{localStorage.setItem('kasa.setupDone','1');localStorage.setItem('kavakasa.v1',${JSON.stringify(JSON.stringify(mkState(lang,'vydej')))})}catch(e){}`);
   const p2=await c2.newPage();
-  await p2.goto('file:///home/user/deriverge/kava/index.html');
+  await p2.goto('file:///home/user/deriverge/tapkasa/index.html');
   await p2.waitForTimeout(700);
   await p2.evaluate(()=>document.fonts&&document.fonts.ready);
   await p2.waitForTimeout(300);

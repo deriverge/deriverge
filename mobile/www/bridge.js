@@ -1,7 +1,7 @@
 /*
  * Tapkasa — adaptér nativního mostu pro Capacitor.
  *
- * Webová aplikace (kava/index.html) mluví s nativní vrstvou přes hooky
+ * Webová aplikace (tapkasa/index.html) mluví s nativní vrstvou přes hooky
  * z původní SwiftUI aplikace:
  *
  *   ven z webu:  window.webkit.messageHandlers.peer.postMessage(json)  — pošli objednávku protějšku
@@ -11,7 +11,7 @@
  *                window.__KASA_BOOT__         — uložený stav, vložený PŘED spuštěním stránky
  *
  * Tento soubor je přeloží na volání Capacitor pluginu "PeerLink"
- * (mobile/ios-plugin/PeerLinkPlugin.swift), aniž by se kava/index.html
+ * (mobile/ios-plugin/PeerLinkPlugin.swift), aniž by se tapkasa/index.html
  * musel jakkoli měnit. V obyčejném prohlížeči (bez Capacitoru) neudělá nic.
  *
  * __KASA_BOOT__ tento skript neřeší — ten musí existovat dřív, než se stránka

@@ -105,7 +105,7 @@ buildu skutečně implementované. Před odesláním ověřit, že:
 - na paywallu jsou cena, délka trvání, Restore purchases a odkazy na
   Privacy Policy a Terms of Use (EULA), bez nich bývá zamítnutí 3.1.2.
   Aplikace to už splňuje (odkazy vedou na
-  `https://www.deriverge.com/kava/privacy.html` a `…/terms.html`).
+  `https://www.deriverge.com/tapkasa/privacy.html` a `…/terms.html`).
 - **Pokud v konzolích zapnete 14denní trial** (doporučeno
   v `monetization.md`), doplňte na paywall i řádek o trialu („14 dní
   zdarma, potom {cena}“), nativní platební dialog ho sice ukáže sám,

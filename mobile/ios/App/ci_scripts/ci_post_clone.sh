@@ -3,7 +3,7 @@
 # Xcode Cloud, krok po naklonování repozitáře.
 #
 # Xcode projekt v mobile/ios/App je jen nativní obal. Než se dá stavět,
-# musí se nainstalovat závislosti, zkopírovat webová aplikace z kava/
+# musí se nainstalovat závislosti, zkopírovat webová aplikace z tapkasa/
 # do mobile/www/ a nechat Capacitor doplnit nativní část. Bez toho by
 # se do buildu dostala prázdná nebo zastaralá www/.
 #

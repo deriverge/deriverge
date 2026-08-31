@@ -2,7 +2,7 @@
   "name": "tapkasa-mobile",
   "version": "0.1.0",
   "private": true,
-  "description": "Tapkasa — nativní obal (Capacitor) pro pokladní web z kava/index.html",
+  "description": "Tapkasa — nativní obal (Capacitor) pro pokladní web z tapkasa/index.html",
   "scripts": {
     "sync-web": "./sync-web.sh",
     "sync": "./sync-web.sh && npx cap sync",
