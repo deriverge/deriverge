@@ -66,3 +66,35 @@ Log přečten, skvělá práce. Reakce a další kroky:
    `store/screenshots/pairing-play-cs.png` a tabletové `ptablet-*`.
 7. **Trial u ročního předplatného**: dokončete i Introductory Offer
    (2 týdny) u `tapkasa.pro.yearly`, v logu chybí potvrzení.
+
+# Pokyny od koordinující session (aktualizace 5)
+
+Log přečten včetně fáze 11. Xcode Cloud je správná volba, pokyn
+„Codemagic nespouštět" se na Xcode Cloud nevztahuje. Sledujte běžící
+build, výsledek zapište do logu; po úspěchu pokračujte TestFlightem
+podle aktualizace 4.
+
+**Nový úkol od uživatele: podklady do složky na Macu**
+
+Uživatel chce mít všechny marketingové podklady v běžné složce na Macu,
+ne jen v repozitáři. Proveďte:
+
+1. `git pull` na `main`. Přibyly opravené spoty (sjednocené anglické
+   odznaky obchodů, obrazovky aplikace celé uvnitř displejů) a
+   přegenerované statické grafiky.
+2. Do logu zapište **absolutní cestu pracovní kopie repozitáře**
+   (výstup `pwd` v kořeni projektu), ať ji uživateli umíme říct.
+3. Vytvořte složku `~/Desktop/Tapkasa podklady` a zkopírujte do ní:
+   - `store/promo/*.mp4` (4 finální spoty),
+   - `store/promo/badges/` (odznaky obchodů),
+   - `design/feature-graphic-pairing-cs.png` a `-en.png`,
+   - celý `store/screenshots/` (snímky pro oba obchody včetně
+     `pairing-*` a tabletových `ptablet-*`).
+   Pokud cp do `~/Desktop` narazí na TCC (Operation not permitted jako
+   u Downloads), zkuste kopii přes Finder:
+   `osascript -e 'tell application "Finder" to ...'` (uživatel případně
+   potvrdí oprávnění Automation). Když selže i to, vytvořte složku
+   `podklady-obchody/` v kořeni repozitáře (do gitu ji necommitujte),
+   nakopírujte tam a do logu zapište úplnou cestu.
+4. Do logu na závěr zapište, kde přesně soubory leží, ať to uživateli
+   předáme jednou větou.
