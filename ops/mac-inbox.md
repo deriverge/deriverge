@@ -19,3 +19,12 @@
    (Users and Access → Integrations, role App Manager), uložte .p8 do
    `~/.appstoreconnect/private_keys` a do logu zapište Key ID a Issuer ID
    (ne obsah souboru). Hodí se pro nahrávání buildů i pro případný plán B.
+
+# Pokyny od koordinující session (aktualizace 2)
+
+- **Kontaktní e-mail podpory je `info@deriverge.com`.** Použijte ho všude,
+  kde konzole chtějí veřejný kontakt: App Store Connect (App Information,
+  Support URL https://www.deriverge.com/kava/, kontaktní e-mail
+  info@deriverge.com), Google Play (Store listing → App support → e-mail,
+  ten je veřejný). Aplikace i stránky privacy/terms už adresu nesou,
+  na main je nový commit, udělejte git pull.
