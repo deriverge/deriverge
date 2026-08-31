@@ -1,8 +1,9 @@
 /* Kasa na stánek — offline cache.
    The stand may have no signal; once the app has been opened online it keeps working. */
 
-var CACHE = "kasa-v3";
-var SHELL = ["./", "./index.html", "./manifest.webmanifest"];
+var CACHE = "kasa-v4";
+var SHELL = ["./", "./index.html", "./manifest.webmanifest",
+  "./icon-192.png", "./icon-512.png", "./icon-maskable-512.png", "./apple-touch-icon.png"];
 
 self.addEventListener("install", function (e) {
   e.waitUntil(
