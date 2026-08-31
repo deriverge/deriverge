@@ -560,3 +560,64 @@ App support. Doplní se s nimi.
   macOS blokuje procesu přístup do té složky.
 
 ---
+
+## Fáze 10b, iOS build hotový, nahrání odmítnuto (2026-08-31)
+
+**Build proběhl úspěšně**
+
+- Po doinstalování iOS platform support (`xcodebuild -downloadPlatform iOS`)
+  se objevila destinace „Any iOS Device".
+- Do projektu doplněno `DEVELOPMENT_TEAM = 6XX9G3S468`.
+- `xcodebuild archive -allowProvisioningUpdates` → **ARCHIVE SUCCEEDED**.
+  Xcode si sám vytvořil vývojářský certifikát a profil
+  `iOS Team Provisioning Profile: com.deriverge.tapkasa`.
+- `xcodebuild -exportArchive` (method `app-store-connect`) →
+  **EXPORT SUCCEEDED**, `App.ipa`, 6 257 651 B.
+  - certifikát **Cloud Managed Apple Distribution**, platnost do 31. 8. 2027,
+  - profil `iOS Team Store Provisioning Profile: com.deriverge.tapkasa`,
+  - entitlements `application-identifier = 6XX9G3S468.com.deriverge.tapkasa`,
+    **`beta-reports-active = true`** (připraveno pro TestFlight),
+  - architektura `arm64`,
+  - **`PrivacyInfo.xcprivacy` je v balíčku**, zařazení do Xcode projektu
+    tedy fungovalo.
+
+**Poznámka k autentizaci**
+
+- Nahrávání **nepotřebovalo** App Store Connect API klíč. `xcodebuild`
+  s `destination = upload` použil účet přihlášený v Xcode a k Applu se
+  dostal bez problémů. Nedostupnost `.p8` v `~/Downloads` je tedy pro
+  tuhle cestu bezpředmětná.
+
+## BLOKUJE: Xcode neproveditelný
+
+- Nahrání do App Store Connect Apple **odmítl při validaci**:
+
+  > SDK version issue. This app was built with the iOS 18.5 SDK.
+  > All iOS and iPadOS apps must be built with the iOS 26 SDK or later,
+  > included in Xcode 26 or later, in order to be uploaded to
+  > App Store Connect or submitted for distribution.
+  > (ID: 16ac4bcf-718b-44dd-8afa-e7488856ac26)
+
+- Řetěz omezení, který z toho plyne:
+  - Apple vyžaduje **iOS 26 SDK**, ten je jen v **Xcode 26+**,
+  - Xcode 26 vyžaduje **macOS 26 (Tahoe)**,
+  - na Macu běží **macOS 15.7.3 Sequoia** a uživatel ho aktualizovat
+    nechce kvůli stabilitě DaVinci Resolve.
+- Xcode 16.4 tedy na tomto stroji **staví i podepisuje správně**, ale
+  výsledek je pro App Store nepoužitelný. Lokální cesta je uzavřená,
+  dokud se nezmění macOS.
+
+**Doporučení pro koordinující session**
+
+- Nastal přesně případ z inboxu, bod 1. Podle pokynu **plán B
+  (Codemagic) nespouštím**, čeká se na rozhodnutí.
+- Pro plán B bude potřeba App Store Connect API klíč. Použitelný je
+  `MTMP9A7SKR` (role App Manager), soubor `AuthKey_MTMP9A7SKR.p8` leží
+  v `~/Downloads`. Pozor: prostředí, ve kterém běžím, do té složky
+  nemá přístup (TCC), takže ho tam musí vzít uživatel ručně přes Finder.
+  Klíč `ABWJD553V4` je bez staženého souboru nepoužitelný.
+- Alternativy k Codemagic, kdyby přišly v úvahu: druhý Mac s macOS 26,
+  macOS 26 na externím disku nebo v druhém APFS volume (DaVinci by
+  zůstal nedotčený na stávajícím systému), nebo Xcode Cloud.
+
+---
