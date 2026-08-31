@@ -857,7 +857,8 @@
     docMail: "Poslat e-mailem",
     docPrint: "Vytisknout",
     docEmpty: "Ve zvoleném období nejsou žádné prodeje.",
-    docFooter: "Vystaveno aplikací Tapkasa."
+    docFooter: "Vystaveno aplikací Tapkasa.",
+    supportRow: "Napsat podpoře"
   };
 
   I18N.en = {
@@ -1104,7 +1105,8 @@
     docMail: "Send by e-mail",
     docPrint: "Print",
     docEmpty: "No sales in the chosen period.",
-    docFooter: "Issued with the Tapkasa app."
+    docFooter: "Issued with the Tapkasa app.",
+    supportRow: "Contact support"
   };
 
   // ==== strojově vkládané překlady (gen-i18n.cjs) ====
@@ -1352,7 +1354,8 @@
     docMail: "Poslať e-mailom",
     docPrint: "Vytlačiť",
     docEmpty: "Vo zvolenom období nie sú žiadne predaje.",
-    docFooter: "Vystavené aplikáciou Tapkasa."
+    docFooter: "Vystavené aplikáciou Tapkasa.",
+    supportRow: "Napísať podpore"
   };
 
   I18N.de = {
@@ -1599,7 +1602,8 @@
     docMail: "Per E-Mail senden",
     docPrint: "Drucken",
     docEmpty: "Im gewählten Zeitraum gibt es keine Verkäufe.",
-    docFooter: "Erstellt mit der Tapkasa App."
+    docFooter: "Erstellt mit der Tapkasa App.",
+    supportRow: "Support kontaktieren"
   };
 
   I18N.fr = {
@@ -1846,7 +1850,8 @@
     docMail: "Envoyer par e-mail",
     docPrint: "Imprimer",
     docEmpty: "Aucune vente sur la période choisie.",
-    docFooter: "Émis avec l’application Tapkasa."
+    docFooter: "Émis avec l’application Tapkasa.",
+    supportRow: "Contacter l’assistance"
   };
 
   I18N.es = {
@@ -2093,7 +2098,8 @@
     docMail: "Enviar por correo",
     docPrint: "Imprimir",
     docEmpty: "No hay ventas en el periodo elegido.",
-    docFooter: "Emitido con la aplicación Tapkasa."
+    docFooter: "Emitido con la aplicación Tapkasa.",
+    supportRow: "Contactar con soporte"
   };
 
   I18N.it = {
@@ -2340,7 +2346,8 @@
     docMail: "Inviare per e-mail",
     docPrint: "Stampare",
     docEmpty: "Nessuna vendita nel periodo scelto.",
-    docFooter: "Emesso con l’app Tapkasa."
+    docFooter: "Emesso con l’app Tapkasa.",
+    supportRow: "Contattare l’assistenza"
   };
 
   I18N.pl = {
@@ -2587,7 +2594,8 @@
     docMail: "Wysłać e-mailem",
     docPrint: "Wydrukować",
     docEmpty: "Brak sprzedaży w wybranym okresie.",
-    docFooter: "Wystawiono w aplikacji Tapkasa."
+    docFooter: "Wystawiono w aplikacji Tapkasa.",
+    supportRow: "Kontakt z pomocą"
   };
 
   I18N.pt = {
@@ -2834,9 +2842,11 @@
     docMail: "Enviar por e-mail",
     docPrint: "Imprimir",
     docEmpty: "Sem vendas no período escolhido.",
-    docFooter: "Emitido com a aplicação Tapkasa."
+    docFooter: "Emitido com a aplicação Tapkasa.",
+    supportRow: "Contactar o suporte"
   };
   // ==== konec vkládaných překladů ====
+
 
 
   // Zbylé jazyky doplní překladová dávka; do té doby vše spadne na angličtinu.
@@ -3019,6 +3029,7 @@
 
   var FREE_LIMIT = 10;
   var APP_VERSION = "1.0.0";
+  var SUPPORT_MAIL = "info@deriverge.com";
 
   function isPro() {
     if (window.__KASA_PRO__ === true) { return true; }
@@ -4204,6 +4215,8 @@
         '<button class="act" data-cursheet="1">' + esc(T("currencyRow")) + " · " + esc(curInfo().c) + "</button>" +
       "</div>" +
       '<div class="acts" style="padding-top:0;padding-bottom:8px">' +
+        '<a class="act" style="text-align:center;text-decoration:none" href="mailto:' + SUPPORT_MAIL +
+          '?subject=' + encodeURIComponent("Tapkasa " + APP_VERSION) + '">' + esc(T("supportRow")) + "</a>" +
         '<button class="act" data-devtap="1" style="color:var(--ink-3)">' + esc(T("aboutRow", APP_VERSION)) + "</button>" +
       "</div>";
   }
