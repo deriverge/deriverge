@@ -1,4 +1,4 @@
-# Privacy Policy — Tapkasa
+# Privacy Policy, Tapkasa
 
 **Effective date:** [DOPLŇ: publication date]
 **App operator:** [DOPLŇ: operator name / entity and address]
@@ -53,13 +53,13 @@ While pairing is on, the devices exchange **order contents only**: item
 names, prices, quantities, ticket numbers, order totals, the payment
 method (cash/card), served status, timestamps and the event name. The
 messages also carry the randomly generated pairing code and a random
-per-session device identifier. **They contain no personal data** — no
+per-session device identifier. **They contain no personal data**, no
 names, no contacts, no location, nothing about your customers.
 
 Messages travel over an encrypted connection (HTTPS) through a relay
 server that delivers them to the paired device. The relay retains messages
 briefly so the other device can pick them up even after a connection
-drop — **for at most 12 hours**, after which they are deleted. The app
+drop, **for at most 12 hours**, after which they are deleted. The app
 operator does not read, store or have access to these messages. You can
 end pairing at any time with the "Disconnect" button; from that moment
 nothing is sent.
@@ -82,10 +82,10 @@ https://www.revenuecat.com/privacy
 
 The app is designed so that the operator collects no personal data about
 its users. Sales data exists only on your device, where you manage and
-delete it yourself — which places the rights of access, rectification and
+delete it yourself, which places the rights of access, rectification and
 erasure directly in your own hands. The only data processed off-device is:
 
-- transient pairing messages (section 3) — free of personal data, deleted
+- transient pairing messages (section 3), free of personal data, deleted
   within 12 hours; legal basis: performance of a contract (providing the
   feature you switched on),
 - the anonymous identifier and purchase receipt used to verify the
@@ -93,7 +93,7 @@ erasure directly in your own hands. The only data processed off-device is:
 
 For any privacy question or request, contact [DOPLŇ: support e-mail].
 You also have the right to lodge a complaint with a supervisory
-authority — in the Czech Republic, the Office for Personal Data
+authority, in the Czech Republic, the Office for Personal Data
 Protection (Úřad pro ochranu osobních údajů, www.uoou.gov.cz), or the
 authority in your own EU member state.
 

@@ -1,4 +1,4 @@
-# Zásady ochrany soukromí — Tapkasa
+# Zásady ochrany soukromí, Tapkasa
 
 **Účinnost od:** [DOPLŇ: datum zveřejnění]
 **Provozovatel aplikace:** [DOPLŇ: jméno / název provozovatele a adresa]
@@ -51,13 +51,12 @@ Při zapnutém párování si zařízení posílají **jen obsah objednávek**: 
 položek, ceny, počty kusů, čísla objednávek, celkové částky, způsob platby
 (hotově/kartou), stav vydání, časové značky a název akce. Zprávy dále nesou
 náhodně vygenerovaný párovací kód a náhodný identifikátor relace zařízení.
-**Neobsahují žádné osobní údaje** — žádná jména, kontakty, polohu ani údaje
+**Neobsahují žádné osobní údaje**, žádná jména, kontakty, polohu ani údaje
 o zákaznících.
 
 Zprávy putují šifrovaným spojením (HTTPS) přes přeposílací (relay) server,
 který je doručí druhému zařízení. Přeposílací server zprávy krátkodobě
-uchovává, aby je druhé zařízení stihlo vyzvednout i po výpadku spojení —
-**nejdéle 12 hodin**, poté jsou smazány. Provozovatel aplikace zprávy nečte,
+uchovává, aby je druhé zařízení stihlo vyzvednout i po výpadku spojení, **nejdéle 12 hodin**, poté jsou smazány. Provozovatel aplikace zprávy nečte,
 neukládá ani k nim nemá přístup. Párování kdykoli ukončíte tlačítkem
 „Odpojit“; od té chvíle se nic neodesílá.
 
@@ -79,17 +78,17 @@ zpracovatel; jeho zásady: https://www.revenuecat.com/privacy
 
 Aplikace je navržena tak, aby provozovatel žádné osobní údaje uživatelů
 neshromažďoval. Prodejní data existují jen ve vašem zařízení, kde je sami
-spravujete a mažete — tím jsou práva na přístup, opravu i výmaz naplněna
+spravujete a mažete, tím jsou práva na přístup, opravu i výmaz naplněna
 přímo ve vašich rukou. Jediné údaje zpracovávané mimo zařízení jsou:
 
-- přechodné zprávy párování (bod 3) — bez osobních údajů, smazané do 12 hodin;
+- přechodné zprávy párování (bod 3), bez osobních údajů, smazané do 12 hodin;
   právní základ: plnění smlouvy (poskytnutí funkce, kterou jste si zapnuli),
 - anonymní identifikátor a potvrzení nákupu pro ověření předplatného (bod 4);
   právní základ: plnění smlouvy.
 
 S dotazem nebo žádostí týkající se soukromí se obraťte na
 [DOPLŇ: e-mail podpory]. Máte rovněž právo podat stížnost u dozorového
-úřadu — v ČR je jím Úřad pro ochranu osobních údajů (www.uoou.gov.cz).
+úřadu, v ČR je jím Úřad pro ochranu osobních údajů (www.uoou.gov.cz).
 
 ## 6. Děti
 

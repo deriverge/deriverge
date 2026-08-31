@@ -1,4 +1,4 @@
-# Review Notes — Tapkasa (pro App Review)
+# Review Notes, Tapkasa (pro App Review)
 
 Text níže je připravený k vložení do App Store Connect → App Review
 Information → Notes (anglicky, recenzenti česky nečtou). Za ním následuje
@@ -35,7 +35,7 @@ There is no login and no server-side account. The app is fully usable
 the moment it launches; demo products are pre-filled.
 
 SUGGESTED TEST FLOW (2 minutes)
-1. On the Prodej (Sell) tab, tap a few colour cards — items appear on
+1. On the Prodej (Sell) tab, tap a few colour cards, items appear on
    the bill at the bottom. Press and hold a card for 1 second to remove
    that item again (a progress bar fills while holding).
 2. Tap Zaplatit (Pay) → Hotově (Cash) → tap banknote buttons to enter
@@ -49,7 +49,7 @@ DEVICE PAIRING (optional feature)
 Two devices can pair (roles: till and pickup) to share the order queue.
 Full pairing needs two devices, but a single device is enough to verify
 the feature: in Menu, tap "Vytvořit nový kód" (Create code), then
-"Otestovat spojení" (Test connection) — the app sends a test message
+"Otestovat spojení" (Test connection), the app sends a test message
 through the relay and reports the round trip, which exercises the whole
 transport path. Pairing exchanges order contents only (item names,
 quantities, prices, ticket numbers, timestamps); no personal data is
@@ -63,8 +63,8 @@ subscription (auto-renewable: tapkasa.pro.monthly, tapkasa.pro.yearly,
 14-day free trial) removes the daily limit and unlocks pairing.
 
 To see the paywall: either record 10 bills (any items, cash, Hotovo)
-and start an 11th payment — the paywall appears instead of the payment
-sheet — or open Menu and tap the pairing section. Purchases are
+and start an 11th payment, the paywall appears instead of the payment
+sheet, or open Menu and tap the pairing section. Purchases are
 processed by StoreKit via RevenueCat; sandbox purchases work as usual.
 
 DATA & PRIVACY
@@ -80,7 +80,7 @@ RevenueCat, (b) the optional pairing messages described above.
 ### Proč je tam odstavec o platbách
 
 Aby recenze nezařadila aplikaci mezi zpracovatele plateb (Guideline
-3.1.5(a) — fyzické zboží se smí platit mimo IAP; aplikace sama žádné
+3.1.5(a), fyzické zboží se smí platit mimo IAP; aplikace sama žádné
 platby nezpracovává, jen je eviduje). Explicitně řečeno: žádné platební
 SDK, žádné zadávání karet. To předchází žádostem o licence platební
 instituce apod.
@@ -91,26 +91,24 @@ Recenzent typicky testuje na jednom zařízení a funkci „vyžadující dvě
 zařízení" by mohl označit za nefunkční. Text říká: (1) co párování
 dělá, (2) že tlačítko **Otestovat spojení** ověří celou přenosovou
 cestu bez druhého zařízení (zpráva odejde na relay a vrátí se zpět,
-aplikace ukáže výsledek), (3) že druhé zařízení pouze zrcadlí frontu —
-nic dalšího by recenzent neviděl. Pokud by přesto chtěli dvě zařízení:
+aplikace ukáže výsledek), (3) že druhé zařízení pouze zrcadlí frontu, nic dalšího by recenzent neviděl. Pokud by přesto chtěli dvě zařízení:
 stejný build na druhém zařízení, Menu → opsat kód → Spojit.
 
-### IAP gating — co musí souhlasit s realitou buildu
+### IAP gating, co musí souhlasit s realitou buildu
 
 Popsané chování (10 zaplacených účtů/den zdarma, párování jen s Pro,
 paywall při 11. platbě a při otevření párování) musí být v odevzdaném
 buildu skutečně implementované. Před odesláním ověřit, že:
 
 - limit se počítá na kalendářní den a resetuje o půlnoci lokálního času,
-- paywall nabízí oba produkty + obnovu nákupů (Restore purchases —
-  Apple ji vyžaduje, Guideline 3.8),
+- paywall nabízí oba produkty + obnovu nákupů (Restore purchases, Apple ji vyžaduje, Guideline 3.8),
 - na paywallu jsou cena, délka trvání, Restore purchases a odkazy na
-  Privacy Policy a Terms of Use (EULA) — bez nich bývá zamítnutí 3.1.2.
+  Privacy Policy a Terms of Use (EULA), bez nich bývá zamítnutí 3.1.2.
   Aplikace to už splňuje (odkazy vedou na
   `https://www.deriverge.com/kava/privacy.html` a `…/terms.html`).
 - **Pokud v konzolích zapnete 14denní trial** (doporučeno
   v `monetization.md`), doplňte na paywall i řádek o trialu („14 dní
-  zdarma, potom {cena}“) — nativní platební dialog ho sice ukáže sám,
+  zdarma, potom {cena}“), nativní platební dialog ho sice ukáže sám,
   ale recenzenti chtějí zmínku i v aplikaci.
 
 ### Přílohy k recenzi
@@ -118,7 +116,7 @@ buildu skutečně implementované. Před odesláním ověřit, že:
 - App Review Information → kontakt: [DOPLŇ: jméno, telefon, e-mail].
 - Demo účet: nechat pole prázdné + zaškrtnout, že přihlášení není třeba.
 - Volitelně přiložit 30s screen-recording testovacího průchodu (body
-  1–4 výše) — u utilit v cizím jazyce výrazně zrychluje schválení.
+  1-4 výše), u utilit v cizím jazyce výrazně zrychluje schválení.
 
 ### Poznámka pro Play Console
 

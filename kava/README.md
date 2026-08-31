@@ -1,6 +1,6 @@
-# Tapkasa — pokladna do kapsy
+# Tapkasa, pokladna do kapsy
 
-Pokladna pro prodej na stánku, trhu nebo akci — barevné karty položek, platba
+Pokladna pro prodej na stánku, trhu nebo akci, barevné karty položek, platba
 hotově či kartou, fronta objednávek, přehled tržby. Jeden soubor, žádný backend,
 žádná registrace. Dřívější „Kasa na stánek“, rozšířená na produkt pro App Store
 a Google Play (nativní obal je v `../mobile/`, podklady pro obchody v `../store/`).
@@ -22,27 +22,29 @@ existující instalace úvod nikdy neuvidí.
   Počítadlo je v prodejní liště; o půlnoci se nuluje.
 - **Tapkasa Pro** (předplatné přes App Store / Google Play): neomezené platby
   a párování více zařízení. Kód smí *vytvořit* jen Pro; *připojit se* ke kódu
-  může kdokoliv — stánku stačí jedno předplatné.
+  může kdokoliv, stánku stačí jedno předplatné.
 - Instalace z doby před tarify (mají prodeje, archiv nebo párování) dostávají
-  Pro trvale zdarma — nikomu nic nebereme.
+  Pro trvale zdarma, nikomu nic nebereme.
 - Nákup obstarává nativní most (`__kasaBuy`/`__kasaRestore`/`__kasaEntitlement`,
-  ceníky `__KASA_PRICES__` — implementuje `../mobile/billing.js` přes
+  ceníky `__KASA_PRICES__`, implementuje `../mobile/billing.js` přes
   RevenueCat). Na webu tlačítka jen odkáží do aplikace.
 - Vývojářské odemčení: 7× klepnout na řádek verze v Menu (přepíná `pro-dev`).
 
 ## Jak se to ovládá
 
-1. **Prodej** — klepnutím na kartu přidáš položku, podržením ji odebereš
-   (karta při držení plní pruh). `+ Jiná částka` otevře klávesnici — u měn
+1. **Prodej**: klepnutím na kartu přidáte položku, podržením ji odeberete
+   (karta při držení plní pruh). `+ Jiná částka` otevře klávesnici, u měn
    s haléři/centy se ťuká v setinách (125 → 1,25 €). Souhrn dole rozbalí účet.
-2. **Zaplatit** — částka a dvě tlačítka. U *Hotově* naťukáš přijaté peníze
-   (bankovky podle zvolené měny) a appka spočítá vrácení.
-3. **Objednávky** — zaplacený účet se zařadí do fronty s číslem; položky se
+2. **Zaplatit**: částka a dvě tlačítka. U *Hotově* naťukáte přijaté peníze
+   (bankovky podle zvolené měny) a aplikace spočítá vrácení.
+3. **Objednávky**: zaplacený účet se zařadí do fronty s číslem; položky se
    odškrtávají, `Vydáno` uzavře. V hlavičce je pořád vidět počet čekajících.
-4. **Přehled** — tržba, rozpad hotově/kartou, prodané kusy, účtenky,
-   `Uzavřít akci` archivuje a vynuluje.
-5. **Menu** — role zařízení (Kasa/Výdej), název akce, položky (ceny podle
-   měny, 14 barev), párování, jazyk, měna, záloha dat.
+4. **Přehled**: tržba, rozpad hotově/kartou, prodané kusy, účtenky,
+   `Uzavřít akci` archivuje a vynuluje. `Daňový doklad` sestaví souhrnný
+   prodejní doklad za zvolené období (s údaji prodejce; jde poslat
+   e-mailem, vytisknout nebo zkopírovat).
+5. **Menu**: role zařízení (Kasa/Výdej), název akce, položky (ceny podle
+   měny, 14 barev nebo vlastní barva z kolečka), párování, jazyk, měna, záloha dat.
 
 ## Dvě zařízení
 
@@ -53,12 +55,12 @@ Objednávky se přenášejí:
   (`ntfy.sh` + `ntfy.envs.net`; posílá se na oba, poslouchá na obou, duplicity
   se zahazují podle id). SSE s adaptivním dopolováním, prezenční „hello“,
   poctivý stav spojení a vestavěný test přeposílače v Menu. Vlastní server
-  je v `../server/` — nasazený se zapne přes `window.__KASA_RELAY__`
+  je v `../server/`, nasazený se zapne přes `window.__KASA_RELAY__`
   (čárkami oddělený seznam základních adres).
 - **v nativní aplikaci** navíc Multipeer Connectivity napřímo, bez internetu
   (`../mobile/ios-plugin/`).
 
-Sloučení podle `id` a novějšího `updatedAt` — na pořadí zpráv nezáleží,
+Sloučení podle `id` a novějšího `updatedAt`, na pořadí zpráv nezáleží,
 výpadek se dorovná. Výdej má díky tomu kopii prodejů (záloha mimo iPad).
 
 ## Data
@@ -71,7 +73,7 @@ a v nativní aplikaci `Documents/kasa.json` (vkládá se před start přes
 ## Offline
 
 `sw.js` (cache `kasa-v4`) cachuje jen sebe, ikony a písma; cizí adresy pouští
-vždy na síť — párování nesmí dostávat odpovědi z cache. Navigace jde
+vždy na síť, párování nesmí dostávat odpovědi z cache. Navigace jde
 network-first, offline z cache.
 
 ## Soubory

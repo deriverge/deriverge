@@ -1,4 +1,4 @@
-# App Store Connect — „App Privacy" (Privacy Nutrition Labels)
+# App Store Connect, „App Privacy" (Privacy Nutrition Labels)
 
 Přesné odpovědi pro dotazník App Store Connect → App → App Privacy.
 Vyplňuje se před prvním odesláním k recenzi; bez něj nejde odeslat build.
@@ -6,8 +6,7 @@ Vyplňuje se před prvním odesláním k recenzi; bez něj nejde odeslat build.
 ## Výchozí fakta (z čeho odpovědi vycházejí)
 
 1. Aplikace nemá účty, analytiku, reklamy ani sledování.
-2. Prodejní data (položky, účtenky, archiv) zůstávají jen v zařízení —
-   podle definice Apple se „nesbírají" (nejsou odesílána mimo zařízení).
+2. Prodejní data (položky, účtenky, archiv) zůstávají jen v zařízení, podle definice Apple se „nesbírají" (nejsou odesílána mimo zařízení).
 3. Předplatné: RevenueCat SDK odesílá potvrzení o nákupu a **anonymní,
    aplikací vygenerovaný identifikátor uživatele** → to JE sběr dat
    (Purchases + Identifiers) a musí být deklarován.
@@ -15,18 +14,18 @@ Vyplňuje se před prvním odesláním k recenzi; bez něj nejde odeslat build.
    osobní údaje, nejsou spojeny s identitou, provozovatel k nim nemá
    přístup a relay je maže nejdéle do 12 h. Uchování slouží výhradně
    k doručení zprávy druhému zařízení (= „to service the request"),
-   proto to podle definice Apple nedeklarujeme jako sběr — viz
+   proto to podle definice Apple nedeklarujeme jako sběr, viz
    zdůvodnění na konci souboru.
 
 ---
 
-## Krok 1 — úvodní otázka
+## Krok 1, úvodní otázka
 
 > **Do you or your third-party partners collect data from this app?**
 
-**Odpověď: Yes** (kvůli RevenueCat — Purchases a Identifiers).
+**Odpověď: Yes** (kvůli RevenueCat, Purchases a Identifiers).
 
-## Krok 2 — typy dat (zaškrtnout právě tyto)
+## Krok 2, typy dat (zaškrtnout právě tyto)
 
 | Kategorie | Typ dat | Sbírá se? |
 |---|---|---|
@@ -34,40 +33,40 @@ Vyplňuje se před prvním odesláním k recenzi; bez něj nejde odeslat build.
 | Health & Fitness | vše | **Ne** |
 | Financial Info | Payment Info / Credit Info / Other | **Ne** (aplikace platby nezpracovává; nákup předplatného spadá pod Purchases níže) |
 | Location | Precise / Coarse | **Ne** |
-| Sensitive Info | — | **Ne** |
-| Contacts | — | **Ne** |
+| Sensitive Info |, | **Ne** |
+| Contacts |, | **Ne** |
 | User Content | vše (Photos, Audio, Customer Support, Other…) | **Ne** |
-| Browsing History | — | **Ne** |
-| Search History | — | **Ne** |
+| Browsing History |, | **Ne** |
+| Search History |, | **Ne** |
 | Identifiers | **User ID** | **ANO** |
-| Identifiers | Device ID | **Ne** (RevenueCat se konfiguruje bez IDFA/IDFV sběru; neověřovat slepě — viz poznámka pod tabulkou) |
+| Identifiers | Device ID | **Ne** (RevenueCat se konfiguruje bez IDFA/IDFV sběru; neověřovat slepě, viz poznámka pod tabulkou) |
 | Purchases | **Purchase History** | **ANO** |
 | Usage Data | Product Interaction / Advertising Data / Other | **Ne** |
 | Diagnostics | Crash Data / Performance Data / Other | **Ne** (žádný crash-reporting SDK) |
-| Other Data | — | **Ne** |
+| Other Data |, | **Ne** |
 
 > Poznámka k Device ID: v konfiguraci RevenueCat SDK ponechat výchozí
 > anonymní App User ID a nesbírat IDFA (žádný AppTrackingTransparency).
 > Pokud by se do buildu přidal jiný SDK, tabulku přehodnotit.
 
-## Krok 3 — detail pro **Purchases → Purchase History**
+## Krok 3, detail pro **Purchases → Purchase History**
 
 - **Usage (k čemu):** zaškrtnout pouze **App Functionality**
   (ověření nároku na Tapkasa Pro).
   - Analytics: Ne · Product Personalization: Ne · Advertising: Ne · Other: Ne
 - **Are the purchase history data linked to the user's identity?** → **No**
-  (identifikátor je náhodný, bez vazby na jméno/e-mail/účet — účty neexistují).
+  (identifikátor je náhodný, bez vazby na jméno/e-mail/účet, účty neexistují).
 - **Do you or your third-party partners use purchase history for tracking
   purposes?** → **No**.
 
-## Krok 4 — detail pro **Identifiers → User ID**
+## Krok 4, detail pro **Identifiers → User ID**
 
 - **Usage:** pouze **App Functionality** (anonymní RevenueCat App User ID
   pro obnovení a ověření předplatného).
 - **Linked to the user's identity?** → **No**.
 - **Used for tracking?** → **No**.
 
-## Krok 5 — výsledný štítek
+## Krok 5, výsledný štítek
 
 Na produktové stránce se zobrazí:
 
@@ -80,7 +79,7 @@ Nic v sekcích „Data Linked to You" ani „Data Used to Track You".
 Xcode 15+ vyžaduje `PrivacyInfo.xcprivacy`. RevenueCat SDK (od v4.26)
 dodává vlastní manifest; v manifestu aplikace deklarovat použití
 `NSPrivacyAccessedAPICategoryUserDefaults` s důvodem `CA92.1`
-(ukládání vlastních dat aplikace) — localStorage/WebView úložiště se
+(ukládání vlastních dat aplikace), localStorage/WebView úložiště se
 nedeklaruje, ale UserDefaults používá nativní obal. Tracking domains:
 žádné.
 
