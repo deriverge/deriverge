@@ -63,3 +63,19 @@ práci na aplikaci se vracejte na `main`): co je hotové, co čeká na
 uživatele, ID a cesty (nikdy obsah klíčů). Zásadní překážku uveďte
 s prefixem `BLOKUJE:` a řekněte ji uživateli. Cloudová session log čte
 a koordinuje další kroky.
+
+## Průběžné pokyny
+
+Před začátkem každé fáze spusťte `git fetch origin claude/mac-ops` a
+přečtěte `ops/mac-inbox.md` z té větve, pokud existuje
+(`git show origin/claude/mac-ops:ops/mac-inbox.md`). Jsou to doplňující
+pokyny od koordinující cloudové session; řiďte se jimi.
+
+## Ovládání Chrome
+
+Weby (App Store Connect, Play Console, RevenueCat) ovládejte v uživatelově
+přihlášeném Google Chrome. Doporučený postup: spusťte Chrome s laděním
+(`open -a "Google Chrome" --args --remote-debugging-port=9222`) a připojte
+se přes Playwright `connectOverCDP`, ať zůstane přihlášení zachované.
+Alternativně AppleScript. Když macOS zobrazí dotaz na oprávnění
+(automatizace, ovládání Chrome), požádejte uživatele o povolení.
