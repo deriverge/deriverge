@@ -28,3 +28,15 @@
   info@deriverge.com), Google Play (Store listing → App support → e-mail,
   ten je veřejný). Aplikace i stránky privacy/terms už adresu nesou,
   na main je nový commit, udělejte git pull.
+
+# Pokyny od koordinující session (aktualizace 3)
+
+- Na main přibyly marketingové podklady párování: po git pull najdete
+  `store/screenshots/pairing-*.png` (zařaďte jako druhý snímek v App Store
+  Connect i Play, CZ a EN verze do příslušných lokalizací) a
+  `design/feature-graphic-pairing-cs.png` (nahrajte jako feature graphic
+  v Play místo původní). Reklamní spot `store/promo/*.mp4` do Play listing
+  vyžaduje YouTube odkaz: požádejte uživatele, ať video nahraje na svůj
+  YouTube kanál (nebo to s ním udělejte), a odkaz vložte do Store listing.
+  Do App Store jako App Preview spot nenahrávejte, Apple tam chce záznam
+  obrazovky aplikace.
