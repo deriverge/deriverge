@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2732" height="2732" viewBox="0 0 2732 2732">
+  <!-- Tapkasa splash / launch screen (2732×2732 — covers every iPad and phone
+       when center-cropped). Motif small and centered on paper.
+       Grid: 168px tiles, 24px gap → 360px span, centered (1186…1546), 40px radius. -->
+  <rect width="2732" height="2732" fill="#FBFAF7"/>
+  <rect x="1186" y="1186" width="168" height="168" rx="40" fill="#D6402A"/>
+  <rect x="1378" y="1186" width="168" height="168" rx="40" fill="#F5CE3E"/>
+  <rect x="1186" y="1378" width="168" height="168" rx="40" fill="#2158C4"/>
+  <rect x="1378" y="1378" width="168" height="168" rx="40" fill="#127A4E"/>
+</svg>

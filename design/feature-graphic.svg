@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="500" viewBox="0 0 1024 500">
+  <!-- Tapkasa — Google Play feature graphic source (1024×500).
+       Motif grid left, wordmark + tagline right. Renders with Archivo when
+       available, otherwise the system bold sans (fine at this size). -->
+  <rect width="1024" height="500" fill="#FBFAF7"/>
+  <!-- motif: 120px tiles, 16px gap, 28px radius, vertically centered -->
+  <rect x="96"  y="122" width="120" height="120" rx="28" fill="#D6402A"/>
+  <rect x="232" y="122" width="120" height="120" rx="28" fill="#F5CE3E"/>
+  <rect x="96"  y="258" width="120" height="120" rx="28" fill="#2158C4"/>
+  <rect x="232" y="258" width="120" height="120" rx="28" fill="#127A4E"/>
+  <!-- wordmark -->
+  <text x="420" y="258" font-family="Archivo, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
+        font-size="116" font-weight="800" letter-spacing="-2" fill="#15120E">Tapkasa</text>
+  <text x="424" y="322" font-family="Archivo, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif"
+        font-size="34" font-weight="600" letter-spacing="0.5" fill="#5F5749">Pokladna do kapsy</text>
+</svg>

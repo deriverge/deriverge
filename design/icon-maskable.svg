@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <!-- Tapkasa maskable / adaptive icon (Android). Full-bleed paper background;
+       motif scaled into the central 66% safe zone so any mask shape
+       (circle, squircle, rounded square) keeps the whole grid visible.
+       Grid: 236px tiles, 28px gap → 500px span, centered (262…762), 56px radius.
+       Farthest painted point is 330px from center — inside the 338px safe circle. -->
+  <rect width="1024" height="1024" fill="#FBFAF7"/>
+  <rect x="262" y="262" width="236" height="236" rx="56" fill="#D6402A"/>
+  <rect x="526" y="262" width="236" height="236" rx="56" fill="#F5CE3E"/>
+  <rect x="262" y="526" width="236" height="236" rx="56" fill="#2158C4"/>
+  <rect x="526" y="526" width="236" height="236" rx="56" fill="#127A4E"/>
+</svg>
