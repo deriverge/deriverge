@@ -111,7 +111,7 @@
   .s4 .h{font-size:7.8vmin}
   .s4 .duo{position:relative;width:92vmin;height:96vmin;margin-top:3vmin}
   .dev{position:absolute;background:#0E0C09;box-shadow:0 2.6vmin 7vmin rgba(21,18,14,.28)}
-  .dev img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;background:var(--paper);transform:translateY(2.4vmin)}
+  .dev img{width:100%;height:100%;object-fit:contain;object-position:top center;display:block;background:var(--paper)}
   .dev .scr{overflow:hidden;width:100%;height:100%;border-radius:1.8vmin}
   .ipad{border-radius:3vmin;padding:1.5vmin;left:-8vmin;top:2vmin;width:56vmin;height:73vmin;transform:rotate(-5deg);opacity:0}
   .go .s4 .ipad{animation:inleft .7s cubic-bezier(.2,.8,.2,1) 14.1s forwards}
@@ -171,8 +171,7 @@
   .probadge .mark{width:3.4vmin;height:3.4vmin;margin:0;opacity:1;transform:none;animation:none}
   .go .s5 .probadge{animation:fadeup .6s ease 23.0s forwards}
   .stores{display:flex;align-items:center;gap:2.2vmin;margin-top:3vmin;opacity:0}
-  .stores img.ap{height:6.6vmin;display:block}
-  .stores img.gp{height:9.9vmin;display:block}
+  .stores img{height:6.8vmin;display:block}
   .go .s5 .stores{animation:fadeup .55s ease 23.4s forwards}
 
   /* ---------- keyframes ---------- */
@@ -283,8 +282,8 @@
         '</span><span class="feat">' + TX.f3 + '</span><span class="feat">' + TX.f4 + "</span></div>" +
       mark + '<div class="wn">Tapkasa</div><div class="tg">' + TX.tag + "</div>" +
       '<div class="probadge">' + mark + " Tapkasa Pro</div>" +
-      '<div class="stores"><img class="ap" src="badges/appstore-en.svg" alt="App Store">' +
-      '<img class="gp" src="badges/googleplay-' + (lang === "cs" ? "cs" : "en") + '.png" alt="Google Play"></div></div>';
+      '<div class="stores"><img src="badges/appstore-en.svg" alt="App Store">' +
+      '<img src="badges/googleplay-en-trim.png" alt="Google Play"></div></div>';
 
   // dráha přeletu a tečkovaná linka v pixelech (offset-path počítá v px)
   var vm = Math.min(window.innerWidth, window.innerHeight) / 100;

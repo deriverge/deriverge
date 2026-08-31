@@ -39,14 +39,12 @@
 
   /* ---------- devices ---------- */
   .dev{position:absolute;background:#0E0C09;box-shadow:0 30px 80px rgba(21,18,14,.28),0 6px 20px rgba(21,18,14,.16)}
-  .dev img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;background:var(--paper)}
+  .dev img{width:100%;height:100%;object-fit:contain;object-position:top center;display:block;background:var(--paper)}
   .dev .scr{overflow:hidden;width:100%;height:100%}
   .ipad{border-radius:34px;padding:16px}
   .ipad .scr{border-radius:20px}
   .iphone{border-radius:44px;padding:12px}
   .iphone .scr{border-radius:34px;position:relative}
-  .iphone .scr img{transform:translateY(30px)}
-  .ipad .scr img{transform:translateY(8px)}
   .iphone .isl{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:26%;height:22px;border-radius:12px;background:#0E0C09;z-index:3}
   .rolechip{position:absolute;z-index:5;padding:7px 14px;border-radius:999px;background:var(--ink);color:var(--paper);
     font-weight:800;font-size:14px;letter-spacing:.14em}
@@ -185,7 +183,6 @@
   var mark = '<span class="mark"><i></i><i></i><i></i><i></i></span>';
   function dev(cls, img, style) {
     return '<div class="dev ' + cls + '" style="' + style + '"><div class="scr">' +
-      (cls === "iphone" ? '<span class="isl"></span>' : "") +
       '<img src="' + img + '" alt=""></div></div>';
   }
   function wire(x, y, w, h, d) {
