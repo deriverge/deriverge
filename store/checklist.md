@@ -146,3 +146,18 @@ Kroky v pořadí, v jakém se reálně dělají. Značky: ☐ = udělat,
 | Play feature graphic | 1024×500 px | ano |
 | Play telefon screenshot | 1080×1920 px (min. 320, max. 3840) | ano (2-8 ks) |
 | Play tablet 7″/10″ screenshot | do 3840 px, doporučeno 2048×2732 | doporučené |
+
+## Prezentace párování (doplněno)
+
+- `store/screenshots/pairing-*.png`: marketingový snímek „Kasa a výdej.
+  Propojené." v rozměrech pro App Store (1290x2796, 2048x2732) i Play
+  (1080x1920), česky a anglicky. Doporučené zařazení: druhý snímek v pořadí.
+- `design/feature-graphic-pairing-cs.png` (1024x500): nová feature graphic
+  pro Play s motivem propojení.
+- `store/promo/tapkasa-spot-*.mp4`: reklamní spot s hudbou (25 s, na výšku
+  1080x1920 i na šířku 1920x1080, CZ + EN). Použití: Play listing (nahrát
+  na YouTube a vložit odkaz), web, sociální sítě. POZOR: jako App Preview
+  na App Store použít nejde (Apple vyžaduje záznam obrazovky aplikace),
+  tam patří jen snímky, případně později nahrávka z aplikace.
+- Zdrojové soubory spotu a grafik: `store/promo/src/` (ad.html, promo.html,
+  music.html + skripty), hudba `store/promo/music.wav`.

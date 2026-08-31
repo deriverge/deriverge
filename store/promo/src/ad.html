@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<title>Tapkasa ad</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=JetBrains+Mono:wght@700&display=swap">
+<style>
+  /* Reklamní spot Tapkasa. Časová osa: 104 BPM, takt 2,3077 s.
+     Scény: S1 značka (0-4,6) S2 prodej (4,6-9,2) S3 platba (9,2-13,8)
+            S4 propojení (13,8-20,8) S5 závěr (20,8-25,4). */
+  :root{
+    --paper:#FBFAF7; --surface:#FFF; --ink:#15120E; --ink2:#5F5749; --ink3:#8C8474;
+    --rule:#E4DFD5; --accent:#D6402A; --cash:#127A4E; --card:#2158C4; --zluta:#F5CE3E;
+    --sans:"Archivo","Helvetica Neue",Arial,sans-serif;
+    --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+    --u:1vmin;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:100%;height:100%;overflow:hidden}
+  body{font-family:var(--sans);color:var(--ink);
+    background:
+      radial-gradient(120% 90% at 82% 8%, #FFF3EE 0%, rgba(255,243,238,0) 55%),
+      radial-gradient(100% 80% at 12% 96%, #F1F5EF 0%, rgba(241,245,239,0) 50%),
+      var(--paper)}
+  .scene{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+    opacity:0;visibility:hidden}
+  .num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+  /* běží jen se třídou go; do té doby vše skryté (čistý začátek záznamu) */
+  body:not(.go) .scene{visibility:hidden}
+
+  /* ---------- společné ---------- */
+  .h{font-weight:800;letter-spacing:-.03em;line-height:1;text-align:center;font-size:9.2vmin;text-wrap:balance}
+  .h em{font-style:normal;color:var(--accent)}
+  .sub{color:var(--ink2);font-size:3.6vmin;text-align:center;margin-top:2.4vmin;line-height:1.35;text-wrap:balance}
+  .mark{display:grid;grid-template-columns:1fr 1fr;gap:9%}
+  .mark i{border-radius:24%;display:block}
+  .mark i:nth-child(1){background:#D6402A}.mark i:nth-child(2){background:#F5CE3E}
+  .mark i:nth-child(3){background:#2158C4}.mark i:nth-child(4){background:#127A4E}
+
+  /* ================= S1 značka 0-4.6 ================= */
+  .go .s1{visibility:visible;opacity:1;animation:sceneout .5s ease 4.25s forwards}
+  .s1 .mark{width:26vmin;height:26vmin}
+  .s1 .mark i{opacity:0;transform:scale(.2) rotate(-14deg)}
+  .go .s1 .mark i:nth-child(1){animation:cardin .55s cubic-bezier(.2,.9,.3,1.25) .30s forwards}
+  .go .s1 .mark i:nth-child(2){animation:cardin .55s cubic-bezier(.2,.9,.3,1.25) .55s forwards}
+  .go .s1 .mark i:nth-child(3){animation:cardin .55s cubic-bezier(.2,.9,.3,1.25) .80s forwards}
+  .go .s1 .mark i:nth-child(4){animation:cardin .55s cubic-bezier(.2,.9,.3,1.25) 1.05s forwards}
+  .s1 .wn{font-size:13vmin;font-weight:800;letter-spacing:-.04em;margin-top:4.6vmin;opacity:0}
+  .go .s1 .wn{animation:fadeup .7s cubic-bezier(.2,.8,.2,1) 1.7s forwards}
+  .s1 .tg{font-size:4.2vmin;color:var(--ink2);margin-top:1.6vmin;opacity:0}
+  .go .s1 .tg{animation:fadeup .7s ease 2.3s forwards}
+
+  /* ================= S2 prodej 4.6-9.2 ================= */
+  .go .s2{visibility:visible;animation:scenein .5s ease 4.6s forwards, sceneout .5s ease 8.9s forwards}
+  .s2 .h{font-size:7.4vmin}
+  .grid{display:grid;grid-template-columns:repeat(2,30vmin);gap:2.6vmin;margin-top:5vmin}
+  .prod{position:relative;height:16.5vmin;border-radius:2.6vmin;padding:2.4vmin;color:#fff;
+    display:flex;flex-direction:column;justify-content:space-between;
+    box-shadow:0 1.6vmin 4vmin rgba(21,18,14,.16);opacity:0;transform:translateY(3vmin)}
+  .go .s2 .prod:nth-child(1){animation:fadeup .45s ease 5.0s forwards}
+  .go .s2 .prod:nth-child(2){animation:fadeup .45s ease 5.15s forwards}
+  .go .s2 .prod:nth-child(3){animation:fadeup .45s ease 5.3s forwards}
+  .go .s2 .prod:nth-child(4){animation:fadeup .45s ease 5.45s forwards}
+  .prod .nm{font-weight:800;font-size:3.4vmin}
+  .prod .pr{font-size:2.9vmin;opacity:.9}
+  .badge{position:absolute;top:-1.6vmin;right:-1.6vmin;min-width:4.6vmin;height:4.6vmin;border-radius:999px;
+    display:grid;place-items:center;background:#fff;color:var(--ink);font-family:var(--mono);font-weight:700;font-size:2.7vmin;
+    border:.45vmin solid var(--ink);opacity:0;transform:scale(.4)}
+  .ring{position:absolute;left:50%;top:50%;width:9vmin;height:9vmin;border-radius:999px;border:.8vmin solid #fff;
+    transform:translate(-50%,-50%) scale(.3);opacity:0;pointer-events:none}
+  .go .s2 .p1 .ring.r1{animation:tap .5s ease 6.0s}
+  .go .s2 .p1 .b1{animation:badge .3s cubic-bezier(.2,.9,.3,1.4) 6.15s forwards}
+  .go .s2 .p1 .ring.r2{animation:tap .5s ease 6.7s}
+  .go .s2 .p1 .b2{animation:badge .3s cubic-bezier(.2,.9,.3,1.4) 6.85s forwards}
+  .go .s2 .p4 .ring.r3{animation:tap .5s ease 7.4s}
+  .go .s2 .p4 .b3{animation:badge .3s cubic-bezier(.2,.9,.3,1.4) 7.55s forwards}
+  .bill{display:flex;justify-content:space-between;align-items:center;width:62.6vmin;margin-top:3.4vmin;
+    background:var(--surface);border:1px solid var(--rule);border-radius:2.4vmin;padding:2.6vmin 3vmin;
+    box-shadow:0 1.2vmin 3.4vmin rgba(21,18,14,.12);opacity:0}
+  .go .s2 .bill{animation:fadeup .5s ease 5.7s forwards}
+  .bill .lbl{color:var(--ink3);font-weight:700;font-size:2.8vmin;letter-spacing:.06em}
+  .bill .tot{font-size:5vmin;font-weight:700}
+  .bill .pay{background:var(--accent);color:#fff;font-weight:800;font-size:3.2vmin;border-radius:1.8vmin;padding:2vmin 3.4vmin}
+
+  /* ================= S3 platba 9.2-13.8 ================= */
+  .go .s3{visibility:visible;animation:scenein .5s ease 9.25s forwards, sceneout .5s ease 13.5s forwards}
+  .s3 .h{font-size:7.4vmin}
+  .paysheet{width:64vmin;background:var(--surface);border:1px solid var(--rule);border-radius:3.4vmin;
+    padding:4vmin;margin-top:4.6vmin;box-shadow:0 2vmin 6vmin rgba(21,18,14,.16)}
+  .paysheet .k{font-size:2.7vmin;font-weight:700;letter-spacing:.1em;color:var(--ink3);text-transform:uppercase}
+  .paysheet .amt{font-size:9.6vmin;font-weight:700;margin-top:.8vmin}
+  .rowr{display:flex;justify-content:space-between;align-items:baseline;margin-top:2.6vmin;padding:2.4vmin 2.8vmin;
+    border-radius:2vmin;border:1px solid var(--rule);opacity:0}
+  .go .s3 .rowr.r1{animation:fadeup .45s ease 10.4s forwards}
+  .rowr.r2{background:#F0F7F3;border-color:#BFE0D0}
+  .go .s3 .rowr.r2{animation:fadeup .45s ease 11.1s forwards}
+  .rowr .l{font-weight:600;color:var(--ink2);font-size:3vmin}
+  .rowr .v{font-size:4.4vmin;font-weight:700}
+  .rowr.r2 .v{color:var(--cash)}
+  .btn-done{margin-top:3.2vmin;width:100%;padding:3vmin;border-radius:2vmin;background:var(--ink);color:var(--paper);
+    text-align:center;font-weight:800;font-size:3.6vmin;opacity:0}
+  .go .s3 .btn-done{animation:fadeup .4s ease 11.8s forwards, press .3s ease 12.5s}
+  .toastad{margin-top:3vmin;display:flex;align-items:center;gap:1.6vmin;background:var(--ink);color:var(--paper);
+    padding:2.2vmin 3vmin;border-radius:2.2vmin;font-size:3vmin;font-weight:600;opacity:0;transform:translateY(2vmin)}
+  .go .s3 .toastad{animation:pop2 .45s cubic-bezier(.2,.9,.3,1.3) 12.85s forwards}
+  .toastad .ok{color:#7ED9AC}
+
+  /* ================= S4 propojení 13.8-20.8 ================= */
+  .go .s4{visibility:visible;animation:scenein .5s ease 13.85s forwards, sceneout .55s ease 20.35s forwards}
+  .s4 .h{font-size:7.8vmin}
+  .s4 .duo{position:relative;width:92vmin;height:96vmin;margin-top:3vmin}
+  .dev{position:absolute;background:#0E0C09;box-shadow:0 2.6vmin 7vmin rgba(21,18,14,.28)}
+  .dev img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;background:var(--paper);transform:translateY(2.4vmin)}
+  .dev .scr{overflow:hidden;width:100%;height:100%;border-radius:1.8vmin}
+  .ipad{border-radius:3vmin;padding:1.5vmin;left:-8vmin;top:2vmin;width:56vmin;height:73vmin;transform:rotate(-5deg);opacity:0}
+  .go .s4 .ipad{animation:inleft .7s cubic-bezier(.2,.8,.2,1) 14.1s forwards}
+  .iphone{border-radius:4vmin;padding:1.1vmin;left:50vmin;top:26vmin;width:34vmin;height:70vmin;transform:rotate(4deg);opacity:0}
+  .iphone .scr{border-radius:3.2vmin}
+  .go .s4 .iphone{animation:inright .7s cubic-bezier(.2,.8,.2,1) 14.3s forwards}
+  .rolechip{position:absolute;z-index:5;padding:1vmin 2vmin;border-radius:999px;color:#fff;font-weight:800;font-size:2.2vmin;letter-spacing:.14em;opacity:0}
+  .rc-k{background:var(--accent);left:-4vmin;top:-1vmin}
+  .rc-v{background:var(--cash);left:52vmin;top:23vmin}
+  .go .s4 .rolechip{animation:fadeup .4s ease 15.1s forwards}
+  .wire{position:absolute;left:0;top:0;overflow:visible;z-index:4}
+  .wire path{fill:none;stroke:var(--ink);stroke-width:3.5px;stroke-dasharray:2 12;stroke-linecap:round;opacity:.5;vector-effect:non-scaling-stroke}
+  .flychip{position:absolute;z-index:6;display:flex;align-items:center;gap:1.4vmin;padding:1.6vmin 2.2vmin;border-radius:2.2vmin;
+    background:var(--surface);border:1px solid var(--rule);box-shadow:0 2vmin 4.6vmin rgba(21,18,14,.22);
+    font-weight:700;white-space:nowrap;font-size:2.6vmin;offset-rotate:0deg;opacity:0}
+  .go .s4 .flychip{animation:fly 2.2s cubic-bezier(.45,.05,.3,1) 15.6s forwards}
+  .flychip .no{display:grid;place-items:center;min-width:4.4vmin;height:4.4vmin;border-radius:1.2vmin;background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:2.4vmin}
+  .pill{padding:.6vmin 1.5vmin;border-radius:999px;font-size:2.2vmin;font-weight:700;color:#fff}
+  .tk13{position:absolute;z-index:6;left:51.5vmin;top:36vmin;width:27.5vmin;display:flex;align-items:center;gap:1.6vmin;
+    padding:1.7vmin 1.9vmin;background:var(--surface);border:1px solid var(--rule);border-radius:1.8vmin;
+    box-shadow:0 1.4vmin 3.6vmin rgba(21,18,14,.16);font-size:2.1vmin;opacity:0;transform:translateY(2vmin)}
+  .go .s4 .tk13{animation:pop2 .5s cubic-bezier(.2,.9,.3,1.3) 17.6s forwards}
+  .tk13 .no{display:grid;place-items:center;min-width:4.6vmin;height:4.6vmin;border-radius:1.3vmin;background:var(--ink);color:var(--paper);font-family:var(--mono);font-weight:700;font-size:2.4vmin}
+  .tk13 .chips{display:flex;flex-wrap:wrap;gap:.7vmin;flex:1}
+  .chipp{padding:.4vmin 1.3vmin;border-radius:999px;font-weight:700;color:#fff;font-size:2vmin}
+  .go .s4 .chipp.c1{animation:chipdone .01s linear 18.9s forwards}
+  .go .s4 .chipp.c2{animation:chipdone .01s linear 19.4s forwards}
+  .voice{position:absolute;z-index:7;left:6vmin;top:83vmin;display:flex;align-items:center;gap:1.4vmin;
+    padding:1.6vmin 2.4vmin;border-radius:999px;background:var(--ink);color:var(--paper);font-weight:600;font-size:2.7vmin;
+    box-shadow:0 1.4vmin 3.6vmin rgba(21,18,14,.25);opacity:0;transform:translateY(1.6vmin) scale(.92)}
+  .go .s4 .voice{animation:pop2 .5s cubic-bezier(.2,.9,.3,1.35) 18.0s forwards}
+  .voice svg{width:2.8vmin;height:2.8vmin;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .go .s4 .voice .w1{animation:wave 1s ease 18.3s 2;transform-origin:20% 50%}
+  .go .s4 .voice .w2{animation:wave 1s ease 18.45s 2;transform-origin:20% 50%}
+  .stamp{position:absolute;z-index:8;left:55vmin;top:44vmin;padding:1.3vmin 2.4vmin;border:.55vmin solid var(--cash);color:var(--cash);
+    border-radius:1.6vmin;font-weight:800;font-size:3.2vmin;letter-spacing:.06em;background:rgba(255,255,255,.88);
+    opacity:0;transform:rotate(-7deg) scale(1.6)}
+  .go .s4 .stamp{animation:stampin .4s cubic-bezier(.2,.9,.3,1.2) 19.7s forwards}
+
+  /* ================= S5 závěr 20.8-25.4 ================= */
+  .go .s5{visibility:visible;animation:scenein .55s ease 20.85s forwards}
+  .feats{display:flex;flex-wrap:wrap;justify-content:center;gap:1.8vmin;max-width:80vmin}
+  .feat{padding:1.6vmin 2.8vmin;border-radius:999px;border:1px solid var(--rule);background:var(--surface);
+    font-weight:700;font-size:2.9vmin;color:var(--ink2);opacity:0;transform:translateY(1.6vmin)}
+  .go .s5 .feat:nth-child(1){animation:pop2 .4s ease 21.3s forwards}
+  .go .s5 .feat:nth-child(2){animation:pop2 .4s ease 21.45s forwards}
+  .go .s5 .feat:nth-child(3){animation:pop2 .4s ease 21.6s forwards}
+  .go .s5 .feat:nth-child(4){animation:pop2 .4s ease 21.75s forwards}
+  .s5 .mark{width:17vmin;height:17vmin;margin-top:5vmin;opacity:0;transform:scale(.7)}
+  .go .s5 .mark{animation:pop2 .55s cubic-bezier(.2,.9,.3,1.25) 22.4s forwards}
+  .s5 .wn{font-size:10.4vmin;font-weight:800;letter-spacing:-.04em;margin-top:2.6vmin;opacity:0}
+  .go .s5 .wn{animation:fadeup .6s ease 22.8s forwards}
+  .s5 .tg{font-size:3.8vmin;color:var(--ink2);margin-top:1.2vmin;opacity:0}
+  .go .s5 .tg{animation:fadeup .6s ease 23.2s forwards}
+  .probadge{display:inline-flex;align-items:center;gap:1.4vmin;padding:1.5vmin 2.8vmin;border-radius:999px;
+    background:var(--ink);color:var(--paper);font-weight:700;font-size:3vmin;margin-top:3.4vmin;opacity:0}
+  .probadge .mark{width:3.4vmin;height:3.4vmin;margin:0;opacity:1;transform:none;animation:none}
+  .go .s5 .probadge{animation:fadeup .6s ease 23.7s forwards}
+
+  /* ---------- keyframes ---------- */
+  @keyframes scenein{from{opacity:0;visibility:visible;transform:translateY(2.4vmin)}to{opacity:1;visibility:visible;transform:none}}
+  @keyframes sceneout{from{opacity:1}to{opacity:0;visibility:hidden}}
+  @keyframes cardin{to{opacity:1;transform:scale(1) rotate(0)}}
+  @keyframes fadeup{from{opacity:0;transform:translateY(2vmin)}to{opacity:1;transform:none}}
+  @keyframes tap{0%{opacity:.9;transform:translate(-50%,-50%) scale(.3)}100%{opacity:0;transform:translate(-50%,-50%) scale(1.4)}}
+  @keyframes badge{to{opacity:1;transform:scale(1)}}
+  @keyframes press{50%{transform:scale(.96)}}
+  @keyframes pop2{to{opacity:1;transform:none}}
+  @keyframes inleft{from{opacity:0;transform:rotate(-5deg) translateX(-6vmin)}to{opacity:1;transform:rotate(-5deg)}}
+  @keyframes inright{from{opacity:0;transform:rotate(4deg) translateX(6vmin)}to{opacity:1;transform:rotate(4deg)}}
+  @keyframes fly{0%{opacity:0;offset-distance:0%}10%{opacity:1}88%{opacity:1}100%{opacity:0;offset-distance:100%}}
+  @keyframes wave{0%,100%{transform:scale(1)}50%{transform:scale(1.3);opacity:.6}}
+  @keyframes chipdone{to{opacity:.35;text-decoration:line-through}}
+  @keyframes stampin{to{opacity:1;transform:rotate(-7deg) scale(1)}}
+</style>
+</head>
+<body>
+<script>
+(function () {
+  var q = new URLSearchParams(location.search);
+  var lang = q.get("lang") === "en" ? "en" : "cs";
+  var Kc = lang === "cs";
+  var TX = {
+    cs: {
+      tag: "Pokladna do kapsy",
+      s2h: "Prodej na tři ťuknutí",
+      bill: "3 KUSY", pay: "Zaplatit",
+      s3h: "Hotově i kartou",
+      toPay: "K zaplacení", got: "Přijato", change: "Vrátit",
+      done: "Hotovo", saved: "Uloženo", savedV: "170 Kč hotově",
+      s4h: 'Kasa a výdej. <em>Propojené.</em>',
+      till: "KASA", counter: "VÝDEJ",
+      voice: "Nová objednávka číslo 13.",
+      served: "VYDÁNO ✓",
+      chip1: "2× Espresso", chip2: "Čaj",
+      f1: "9 jazyků", f2: "33 měn", f3: "Funguje offline", f4: "Daňové doklady",
+      amt: "170 Kč", got2: "200 Kč", ch2: "30 Kč",
+      p1: "Espresso", p1p: "50 Kč", p2: "Cappuccino", p2p: "70 Kč",
+      p3: "Caffe latte", p3p: "80 Kč", p4: "Čaj", p4p: "40 Kč"
+    },
+    en: {
+      tag: "The pop-up point of sale",
+      s2h: "Sell in three taps",
+      bill: "3 ITEMS", pay: "Charge",
+      s3h: "Cash or card",
+      toPay: "To pay", got: "Received", change: "Change",
+      done: "Done", saved: "Saved", savedV: "$7.00 cash",
+      s4h: 'Till and counter. <em>In sync.</em>',
+      till: "TILL", counter: "COUNTER",
+      voice: "New order number 13.",
+      served: "SERVED ✓",
+      chip1: "2× Espresso", chip2: "Tea",
+      f1: "9 languages", f2: "33 currencies", f3: "Works offline", f4: "Tax documents",
+      amt: "$7.00", got2: "$10.00", ch2: "$3.00",
+      p1: "Espresso", p1p: "$2.00", p2: "Cappuccino", p2p: "$3.00",
+      p3: "Caffe latte", p3p: "$3.00", p4: "Tea", p4p: "$1.50"
+    }
+  }[lang];
+
+  var mark = '<span class="mark"><i></i><i></i><i></i><i></i></span>';
+  var voiceSvg = '<svg viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4z"/><path class="w1" d="M15.5 8.5a5 5 0 0 1 0 7"/><path class="w2" d="M18.5 5.5a9.5 9.5 0 0 1 0 13"/></svg>';
+
+  document.body.innerHTML =
+    '<div class="scene s1">' + mark +
+      '<div class="wn">Tapkasa</div><div class="tg">' + TX.tag + "</div></div>" +
+
+    '<div class="scene s2"><div class="h">' + TX.s2h + '</div>' +
+      '<div class="grid">' +
+        '<div class="prod p1" style="background:#5C4632"><span class="nm">' + TX.p1 + '</span><span class="pr num">' + TX.p1p + '</span>' +
+          '<span class="ring r1"></span><span class="ring r2"></span>' +
+          '<span class="badge b1">1</span><span class="badge b2">2</span></div>' +
+        '<div class="prod" style="background:#F08A24;color:#23150A"><span class="nm">' + TX.p2 + '</span><span class="pr num">' + TX.p2p + "</span></div>" +
+        '<div class="prod" style="background:#F5CE3E;color:#241C00"><span class="nm">' + TX.p3 + '</span><span class="pr num">' + TX.p3p + "</span></div>" +
+        '<div class="prod p4" style="background:#127A4E"><span class="nm">' + TX.p4 + '</span><span class="pr num">' + TX.p4p + '</span>' +
+          '<span class="ring r3"></span><span class="badge b3">1</span></div>' +
+      "</div>" +
+      '<div class="bill"><span><span class="lbl">' + TX.bill + '</span><div class="tot num">' + TX.amt + '</div></span>' +
+        '<span class="pay">' + TX.pay + "</span></div></div>" +
+
+    '<div class="scene s3"><div class="h">' + TX.s3h + '</div>' +
+      '<div class="paysheet"><div class="k">' + TX.toPay + '</div><div class="amt num">' + TX.amt + "</div>" +
+        '<div class="rowr r1"><span class="l">' + TX.got + '</span><span class="v num">' + TX.got2 + "</span></div>" +
+        '<div class="rowr r2"><span class="l">' + TX.change + '</span><span class="v num">' + TX.ch2 + "</span></div>" +
+        '<div class="btn-done">' + TX.done + "</div></div>" +
+      '<div class="toastad"><span class="ok">●</span> ' + TX.saved + " · " + TX.savedV + "</div></div>" +
+
+    '<div class="scene s4"><div class="h">' + TX.s4h + '</div>' +
+      '<div class="duo">' +
+        '<div class="dev ipad"><div class="scr"><img src="dev-ipad-' + lang + '.png" alt=""></div></div>' +
+        '<div class="dev iphone"><div class="scr"><img src="dev-iphone-' + lang + '.png" alt=""></div></div>' +
+        '<div class="rolechip rc-k">' + TX.till + '</div><div class="rolechip rc-v">' + TX.counter + "</div>" +
+        '<svg class="wire" id="wireSvg"><path id="wirePath"/></svg>' +
+        '<div class="flychip"><span class="no">13</span>' +
+          '<span class="pill" style="background:#5C4632">' + TX.chip1 + '</span>' +
+          '<span class="pill" style="background:#127A4E">' + TX.chip2 + "</span></div>" +
+        '<div class="tk13"><span class="no">13</span><span class="chips">' +
+          '<span class="chipp c1" style="background:#5C4632">' + TX.chip1 + '</span>' +
+          '<span class="chipp c2" style="background:#127A4E">' + TX.chip2 + "</span></span></div>" +
+        '<div class="voice">' + voiceSvg + "<span>" + TX.voice + "</span></div>" +
+        '<div class="stamp">' + TX.served + "</div>" +
+      "</div></div>" +
+
+    '<div class="scene s5">' +
+      '<div class="feats"><span class="feat">' + TX.f1 + '</span><span class="feat">' + TX.f2 +
+        '</span><span class="feat">' + TX.f3 + '</span><span class="feat">' + TX.f4 + "</span></div>" +
+      mark + '<div class="wn">Tapkasa</div><div class="tg">' + TX.tag + "</div>" +
+      '<div class="probadge">' + mark + " Tapkasa Pro</div></div>";
+
+  // dráha přeletu a tečkovaná linka v pixelech (offset-path počítá v px)
+  var vm = Math.min(window.innerWidth, window.innerHeight) / 100;
+  function P(x, y) { return (x * vm).toFixed(1) + " " + (y * vm).toFixed(1); }
+  var d = "M" + P(44, 14) + " C " + P(64, 6) + ", " + P(74, 22) + ", " + P(66, 40);
+  var svg = document.getElementById("wireSvg");
+  svg.setAttribute("width", Math.ceil(92 * vm));
+  svg.setAttribute("height", Math.ceil(50 * vm));
+  document.getElementById("wirePath").setAttribute("d", d);
+  document.querySelector(".flychip").style.offsetPath = "path('" + d + "')";
+
+  window.__go = function () { document.body.classList.add("go"); };
+})();
+</script>
+</body>
+</html>

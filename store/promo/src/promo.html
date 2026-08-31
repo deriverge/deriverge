@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tapkasa promo</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=JetBrains+Mono:wght@700&display=swap">
+<style>
+  :root{
+    --paper:#FBFAF7; --surface:#FFFFFF; --ink:#15120E; --ink2:#5F5749; --ink3:#8C8474;
+    --rule:#E4DFD5; --accent:#D6402A; --cash:#127A4E; --card:#2158C4; --zluta:#F5CE3E;
+    --sans:"Archivo","Helvetica Neue",Arial,sans-serif;
+    --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:100%;height:100%}
+  body{
+    font-family:var(--sans); color:var(--ink); overflow:hidden;
+    background:
+      radial-gradient(120% 90% at 85% 10%, #FFF3EE 0%, rgba(255,243,238,0) 55%),
+      radial-gradient(100% 80% at 10% 95%, #F1F5EF 0%, rgba(241,245,239,0) 50%),
+      var(--paper);
+  }
+  .stage{position:relative;width:100%;height:100%;overflow:hidden}
+
+  /* ---------- text ---------- */
+  .copy h1{font-weight:800;letter-spacing:-.03em;line-height:.98;text-wrap:balance}
+  .copy h1 em{font-style:normal;color:var(--accent)}
+  .copy p{color:var(--ink2);line-height:1.4;text-wrap:balance}
+  .brandline{display:flex;align-items:center;gap:12px}
+  .mark{display:grid;grid-template-columns:1fr 1fr;gap:9%;width:44px;height:44px;flex:0 0 auto}
+  .mark i{border-radius:26%;display:block}
+  .mark i:nth-child(1){background:#D6402A}.mark i:nth-child(2){background:#F5CE3E}
+  .mark i:nth-child(3){background:#2158C4}.mark i:nth-child(4){background:#127A4E}
+  .brandline .bn{font-weight:800;letter-spacing:-.02em}
+  .probadge{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;
+    background:var(--ink);color:var(--paper);font-weight:700;letter-spacing:.02em}
+  .probadge .mark{width:20px;height:20px}
+
+  /* ---------- devices ---------- */
+  .dev{position:absolute;background:#0E0C09;box-shadow:0 30px 80px rgba(21,18,14,.28),0 6px 20px rgba(21,18,14,.16)}
+  .dev img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;background:var(--paper)}
+  .dev .scr{overflow:hidden;width:100%;height:100%}
+  .ipad{border-radius:34px;padding:16px}
+  .ipad .scr{border-radius:20px}
+  .iphone{border-radius:44px;padding:12px}
+  .iphone .scr{border-radius:34px;position:relative}
+  .iphone .scr img{transform:translateY(30px)}
+  .ipad .scr img{transform:translateY(8px)}
+  .iphone .isl{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:26%;height:22px;border-radius:12px;background:#0E0C09;z-index:3}
+  .rolechip{position:absolute;z-index:5;padding:7px 14px;border-radius:999px;background:var(--ink);color:var(--paper);
+    font-weight:800;font-size:14px;letter-spacing:.14em}
+  .rolechip.k{background:var(--accent)}
+  .rolechip.v{background:var(--cash)}
+
+  /* ---------- letící objednávka ---------- */
+  .wire{position:absolute;z-index:4;overflow:visible}
+  .wire path{fill:none;stroke:var(--ink);stroke-width:3;stroke-dasharray:2 12;stroke-linecap:round;opacity:.5}
+  .flychip{
+    position:absolute;z-index:6;display:flex;align-items:center;gap:10px;
+    padding:12px 16px;border-radius:16px;background:var(--surface);
+    border:1px solid var(--rule);box-shadow:0 14px 34px rgba(21,18,14,.22);
+    font-weight:700;white-space:nowrap;
+    offset-rotate:0deg;
+  }
+  .flychip .no{display:grid;place-items:center;min-width:34px;height:34px;border-radius:9px;background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:16px}
+  .flychip .mini{display:flex;gap:6px}
+  .flychip .pill{padding:4px 10px;border-radius:999px;font-size:13px;font-weight:700}
+
+  /* ---------- reproduktor / hlas ---------- */
+  .voice{position:absolute;z-index:7;display:flex;align-items:center;gap:10px;
+    padding:10px 16px;border-radius:999px;background:var(--ink);color:var(--paper);font-weight:600;font-size:15px;
+    box-shadow:0 10px 26px rgba(21,18,14,.25)}
+  .voice svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .voice .w1,.voice .w2{transform-origin:4px 12px}
+
+  /* ---------- animace (12s timeline) ---------- */
+  .anim .copy{opacity:0;animation:fadeup .9s ease .15s forwards}
+  .anim .dev{opacity:0}
+  .anim .ipad{animation:fromleft .9s cubic-bezier(.2,.8,.2,1) .35s forwards}
+  .anim .iphone{animation:fromright .9s cubic-bezier(.2,.8,.2,1) .55s forwards}
+  .anim .rolechip{opacity:0;animation:fadeup .5s ease 1.2s forwards}
+  .anim .wire path{stroke-dashoffset:400;animation:wire 1s ease 1.6s forwards}
+  .anim .flychip{opacity:0;offset-distance:0%;animation:fly 2.6s cubic-bezier(.45,.05,.3,1) 2.1s forwards}
+  .anim .voice{opacity:0;transform:translateY(8px) scale(.9);animation:pop .5s cubic-bezier(.2,.9,.3,1.4) 4.9s forwards}
+  .anim .voice .w1{animation:wave 1s ease 5.2s 3}
+  .anim .voice .w2{animation:wave 1s ease 5.35s 3}
+  .anim .tk13{opacity:0;transform:translateY(14px);animation:pop .55s cubic-bezier(.2,.9,.3,1.3) 4.65s forwards}
+  .anim .tk13 .chipp.c1{animation:chipdone .01s linear 7.4s forwards}
+  .anim .tk13 .chipp.c2{animation:chipdone .01s linear 8.3s forwards}
+  .anim .tk13 .prog b:nth-child(1){animation:hide .01s linear 7.4s forwards}
+  .anim .tk13 .prog b:nth-child(2){animation:show .01s linear 7.4s forwards, hide .01s linear 8.3s forwards}
+  .anim .tk13 .prog b:nth-child(3){animation:show .01s linear 8.3s forwards}
+  .anim .stamp{opacity:0;transform:rotate(-7deg) scale(1.6);animation:stamp .45s cubic-bezier(.2,.9,.3,1.2) 9.2s forwards}
+  .anim .endfade{position:absolute;inset:0;z-index:9;background:var(--paper);opacity:0;animation:show2 .8s ease 11.2s forwards}
+
+  .still .copy,.still .dev,.still .rolechip{opacity:1;animation:none}
+  .still .wire path{stroke-dashoffset:0}
+  .still .flychip{opacity:1;offset-distance:46%}
+  .still .voice{opacity:1;transform:none}
+  .still .tk13,.still .stamp,.still .endfade{display:none}
+
+  @keyframes fadeup{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+  @keyframes fromleft{from{opacity:0;transform:var(--tf) translateX(-46px)}to{opacity:1;transform:var(--tf)}}
+  @keyframes fromright{from{opacity:0;transform:var(--tf) translateX(46px)}to{opacity:1;transform:var(--tf)}}
+  @keyframes wire{to{stroke-dashoffset:0}}
+  @keyframes fly{0%{opacity:0;offset-distance:0%}8%{opacity:1}92%{opacity:1}100%{opacity:0;offset-distance:100%}}
+  @keyframes pop{to{opacity:1;transform:none}}
+  @keyframes wave{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.25);opacity:.6}}
+  @keyframes chipdone{to{opacity:.4;text-decoration:line-through}}
+  @keyframes hide{to{display:none;opacity:0;position:absolute;visibility:hidden}}
+  @keyframes show{to{visibility:visible;position:static;opacity:1}}
+  @keyframes show2{to{opacity:1}}
+  @keyframes stamp{to{opacity:1;transform:rotate(-7deg) scale(1)}}
+
+  /* lístek 13 nakreslený ve stylu aplikace, položí se přes frontu na iPhonu */
+  .tk13{position:absolute;z-index:6;display:flex;align-items:center;gap:12px;
+    padding:12px 14px;background:var(--surface);border:1px solid var(--rule);border-bottom-width:2px;border-radius:12px;
+    box-shadow:0 10px 26px rgba(21,18,14,.14)}
+  .tk13 .no{display:grid;place-items:center;min-width:44px;height:44px;border-radius:10px;background:var(--ink);color:var(--paper);font-family:var(--mono);font-size:18px;font-weight:700}
+  .tk13 .chips{display:flex;flex-wrap:wrap;gap:5px;flex:1}
+  .chipp{padding:3px 9px;border-radius:999px;border:1px solid rgba(0,0,0,.12);font-size:13px;font-weight:700}
+  .tk13 .prog{font-family:var(--mono);font-weight:700;color:var(--ink2)}
+  .tk13 .prog b{font-weight:700}
+  .tk13 .prog b:nth-child(2),.tk13 .prog b:nth-child(3){visibility:hidden;position:absolute}
+  .stamp{position:absolute;z-index:8;padding:10px 18px;border:3px solid var(--cash);color:var(--cash);
+    border-radius:12px;font-weight:800;font-size:22px;letter-spacing:.06em;background:rgba(255,255,255,.86)}
+
+  .endcard{position:absolute;inset:0;z-index:10;display:none}
+  .anim .endcard{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;
+    opacity:0;animation:show2 .7s ease 11.5s forwards}
+  .endcard .mark{width:110px;height:110px}
+  .endcard .t1{font-size:56px;font-weight:800;letter-spacing:-.03em}
+  .endcard .t2{font-size:22px;color:var(--ink2)}
+</style>
+</head>
+<body>
+<div class="stage" id="stage"></div>
+<script>
+(function () {
+  var q = new URLSearchParams(location.search);
+  var lang = q.get("lang") === "en" ? "en" : "cs";
+  var mode = q.get("mode") || "feature";
+  var still = q.get("still") === "1";
+
+  var TX = {
+    cs: {
+      h1: 'Kasa a výdej. <em>Propojené.</em>',
+      sub: 'Zaplacená objednávka se sama objeví na druhém zařízení. Výdej ji přečte nahlas.',
+      till: 'KASA', counter: 'VÝDEJ',
+      voice: 'Nová objednávka číslo 13.',
+      served: 'VYDÁNO ✓',
+      chip1: '2× Espresso', chip2: 'Čaj',
+      end2: 'Neomezené platby a propojená zařízení'
+    },
+    en: {
+      h1: 'Till and counter. <em>In sync.</em>',
+      sub: 'A paid order appears on the second device by itself. The counter reads it aloud.',
+      till: 'TILL', counter: 'COUNTER',
+      voice: 'New order number 13.',
+      served: 'SERVED ✓',
+      chip1: '2× Espresso', chip2: 'Tea',
+      end2: 'Unlimited payments and connected devices'
+    }
+  }[lang];
+
+  var ipadImg = 'dev-ipad-' + lang + '.png';
+  var phoneImg = 'dev-iphone-' + lang + '.png';
+
+  // rozměry plátna podle režimu (CSS px; ostrost řeší deviceScaleFactor při fotografování)
+  var CANVAS = {
+    feature:  { w: 1024, h: 500 },
+    shot67:   { w: 645,  h: 1398 },
+    shotipad: { w: 1024, h: 1366 },
+    shotplay: { w: 540,  h: 960 },
+    videoP:   { w: 1080, h: 1920 },
+    videoL:   { w: 1920, h: 1080 }
+  }[mode];
+
+  var st = document.getElementById("stage");
+  st.style.width = CANVAS.w + "px";
+  st.style.height = CANVAS.h + "px";
+  document.body.classList.add(still ? "still" : "anim");
+
+  var mark = '<span class="mark"><i></i><i></i><i></i><i></i></span>';
+  function dev(cls, img, style) {
+    return '<div class="dev ' + cls + '" style="' + style + '"><div class="scr">' +
+      (cls === "iphone" ? '<span class="isl"></span>' : "") +
+      '<img src="' + img + '" alt=""></div></div>';
+  }
+  function wire(x, y, w, h, d) {
+    return '<svg class="wire" style="left:' + x + 'px;top:' + y + 'px" width="' + w + '" height="' + h + '" viewBox="0 0 ' + w + " " + h + '"><path d="' + d + '"/></svg>';
+  }
+  function flychip(scale, pathCss) {
+    return '<div class="flychip" style="offset-path:' + pathCss + ';font-size:' + Math.round(15 * scale) + 'px">' +
+      '<span class="no">13</span><span class="mini">' +
+      '<span class="pill" style="background:#5C4632;color:#fff">' + TX.chip1 + '</span>' +
+      '<span class="pill" style="background:#127A4E;color:#fff">' + TX.chip2 + '</span>' +
+      "</span></div>";
+  }
+  var voiceSvg = '<svg viewBox="0 0 24 24"><path d="M11 5 6 9H3v6h3l5 4z"/><path class="w1" d="M15.5 8.5a5 5 0 0 1 0 7"/><path class="w2" d="M18.5 5.5a9.5 9.5 0 0 1 0 13"/></svg>';
+  function voice(x, y, s) {
+    return '<div class="voice" style="left:' + x + 'px;top:' + y + 'px;font-size:' + Math.round(15 * s) + 'px">' + voiceSvg + "<span>" + TX.voice + "</span></div>";
+  }
+  function tk13(x, y, w, s) {
+    return '<div class="tk13" style="left:' + x + 'px;top:' + y + 'px;width:' + w + 'px;font-size:' + Math.round(14 * s) + 'px">' +
+      '<span class="no">13</span><span class="chips">' +
+      '<span class="chipp c1" style="background:#5C4632;color:#fff">' + TX.chip1 + '</span>' +
+      '<span class="chipp c2" style="background:#127A4E;color:#fff">' + TX.chip2 + '</span>' +
+      '</span><span class="prog"><b>0/3</b><b>2/3</b><b>3/3</b></span></div>';
+  }
+  function stamp(x, y) { return '<div class="stamp" style="left:' + x + 'px;top:' + y + 'px">' + TX.served + "</div>"; }
+  function rolechip(cls, x, y, t) { return '<div class="rolechip ' + cls + '" style="left:' + x + 'px;top:' + y + 'px">' + t + "</div>"; }
+
+  var h = "";
+
+  if (mode === "feature") {
+    h += '<div class="copy" style="position:absolute;left:44px;top:74px;width:400px">' +
+           '<h1 style="font-size:52px">' + TX.h1 + "</h1>" +
+           '<p style="font-size:19px;margin-top:16px">' + TX.sub + "</p>" +
+           '<div class="probadge" style="margin-top:22px;font-size:15px">' + mark + "Tapkasa Pro</div>" +
+         "</div>";
+    h += dev("ipad", ipadImg, "--tf:rotate(-4deg);transform:rotate(-4deg);left:470px;top:36px;width:330px;height:430px");
+    h += dev("iphone", phoneImg, "--tf:rotate(5deg);transform:rotate(5deg);left:800px;top:96px;width:196px;height:414px");
+    h += rolechip("k", 486, 20, TX.till) + rolechip("v", 812, 84, TX.counter);
+    h += wire(700, 130, 220, 120, "M10 30 C 90 -10, 160 30, 205 96");
+    h += flychip(0.92, "path('M700 150 C 800 110, 860 160, 905 230')");
+  }
+
+  if (mode === "shot67" || mode === "shotplay") {
+    var W = CANVAS.w, s = W / 645;
+    h += '<div class="copy" style="position:absolute;left:' + 40 * s + "px;right:" + 40 * s + "px;top:" + 54 * s + 'px;text-align:center">' +
+           '<h1 style="font-size:' + 55 * s + 'px">' + TX.h1 + "</h1>" +
+           '<p style="font-size:' + 21 * s + "px;margin-top:" + 14 * s + 'px">' + TX.sub + "</p>" +
+         "</div>";
+    h += dev("ipad", ipadImg, "--tf:rotate(-5deg);transform:rotate(-5deg);left:" + (-70 * s) + "px;top:" + 300 * s + "px;width:" + 500 * s + "px;height:" + 650 * s + "px");
+    h += dev("iphone", phoneImg, "--tf:rotate(4deg);transform:rotate(4deg);left:" + 350 * s + "px;top:" + 640 * s + "px;width:" + 300 * s + "px;height:" + 630 * s + "px");
+    h += rolechip("k", 60 * s, 285 * s, TX.till) + rolechip("v", 370 * s, 625 * s, TX.counter);
+    h += wire(330 * s, 380 * s, 260 * s, 300 * s, "M" + 10 * s + " " + 20 * s + " C " + 220 * s + " " + 40 * s + ", " + 250 * s + " " + 160 * s + ", " + 180 * s + " " + 270 * s);
+    h += flychip(s * 1.05, "path('M" + 340 * s + " " + 400 * s + " C " + 560 * s + " " + 420 * s + ", " + 580 * s + " " + 550 * s + ", " + 500 * s + " " + 680 * s + "')");
+    h += voice(150 * s, 1280 * s, s * 1.05);
+    h += '<div class="probadge" style="position:absolute;left:50%;transform:translateX(-50%);top:' + 1330 * s + "px;font-size:" + 15 * s + 'px">' + mark + "Tapkasa Pro</div>";
+  }
+
+  if (mode === "shotipad") {
+    h += '<div class="copy" style="position:absolute;left:80px;right:80px;top:74px;text-align:center">' +
+           '<h1 style="font-size:74px">' + TX.h1 + "</h1>" +
+           '<p style="font-size:27px;margin-top:18px;max-width:760px;margin-left:auto;margin-right:auto">' + TX.sub + "</p>" +
+         "</div>";
+    h += dev("ipad", ipadImg, "--tf:rotate(-4deg);transform:rotate(-4deg);left:60px;top:360px;width:560px;height:730px");
+    h += dev("iphone", phoneImg, "--tf:rotate(4deg);transform:rotate(4deg);left:640px;top:500px;width:330px;height:695px");
+    h += rolechip("k", 90, 340, TX.till) + rolechip("v", 660, 484, TX.counter);
+    h += wire(540, 420, 260, 220, "M10 30 C 170 0, 230 90, 220 190");
+    h += flychip(1.1, "path('M560 450 C 740 420, 790 540, 780 650')");
+    h += voice(330, 1230, 1.1);
+    h += '<div class="probadge" style="position:absolute;left:50%;transform:translateX(-50%);top:1290px;font-size:17px">' + mark + "Tapkasa Pro</div>";
+  }
+
+  if (mode === "videoP") {
+    h += '<div class="copy" style="position:absolute;left:70px;right:70px;top:120px;text-align:center">' +
+           '<h1 style="font-size:96px">' + TX.h1 + "</h1>" +
+           '<p style="font-size:36px;margin-top:26px">' + TX.sub + "</p>" +
+         "</div>";
+    h += dev("ipad", ipadImg, "--tf:rotate(-5deg);transform:rotate(-5deg);left:-120px;top:560px;width:840px;height:1090px");
+    h += dev("iphone", phoneImg, "--tf:rotate(4deg);transform:rotate(4deg);left:590px;top:1130px;width:500px;height:1050px");
+    h += rolechip("k", 100, 530, TX.till) + rolechip("v", 620, 1105, TX.counter);
+    h += wire(560, 660, 420, 500, "M15 40 C 350 70, 420 280, 300 460");
+    h += flychip(1.7, "path('M575 700 C 920 740, 990 950, 870 1160')");
+    h += voice(240, 1180, 1.6);
+    h += tk13(690, 1310, 360, 1.15);
+    h += stamp(760, 1420);
+    h += '<div class="endfade"></div>' +
+         '<div class="endcard"><span class="mark"><i></i><i></i><i></i><i></i></span>' +
+         '<div class="t1">Tapkasa Pro</div><div class="t2">' + TX.end2 + "</div></div>";
+  }
+
+  if (mode === "videoL") {
+    h += '<div class="copy" style="position:absolute;left:90px;top:200px;width:640px">' +
+           '<h1 style="font-size:84px">' + TX.h1 + "</h1>" +
+           '<p style="font-size:31px;margin-top:24px">' + TX.sub + "</p>" +
+           '<div class="probadge" style="margin-top:34px;font-size:22px">' + mark + "Tapkasa Pro</div>" +
+         "</div>";
+    h += dev("ipad", ipadImg, "--tf:rotate(-4deg);transform:rotate(-4deg);left:830px;top:80px;width:620px;height:810px");
+    h += dev("iphone", phoneImg, "--tf:rotate(5deg);transform:rotate(5deg);left:1480px;top:210px;width:370px;height:780px");
+    h += rolechip("k", 860, 56, TX.till) + rolechip("v", 1500, 186, TX.counter);
+    h += wire(1330, 260, 320, 260, "M15 40 C 230 10, 290 120, 270 230");
+    h += flychip(1.25, "path('M1345 300 C 1560 270, 1620 380, 1600 490')");
+    h += voice(1440, 1010, 1.2);
+    h += tk13(1520, 400, 300, 0.95);
+    h += stamp(1590, 500);
+    h += '<div class="endfade"></div>' +
+         '<div class="endcard"><span class="mark"><i></i><i></i><i></i><i></i></span>' +
+         '<div class="t1">Tapkasa Pro</div><div class="t2">' + TX.end2 + "</div></div>";
+  }
+
+  st.innerHTML = h;
+
+  // lístek 13 a razítko jsou jen ve videích; ve stillech je schová CSS
+})();
+</script>
+</body>
+</html>
