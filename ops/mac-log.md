@@ -744,3 +744,65 @@ App support. Doplní se s nimi.
   sociální sítě a reklamu.
 
 ---
+
+## Fáze 13, noční směna (2026-09-01)
+
+**Build je v TestFlightu**
+
+- Build **10** (spuštěný 23:29) skončil zeleně a TestFlight ho přijal,
+  stav **„Ready to Test, expires in 90 days"**. Trvání buildu 11 minut.
+- Toolchain Xcode Cloud: Xcode 26.6, macOS Tahoe 26.6.2.
+- Ve skupině Interní testeři jsou `caganekdavid@gmail.com`
+  a `info@deriverge.com`.
+
+**BLOKUJE: App Store Connect se odhlásil**
+
+- Session v kopii profilu vypršela, ASC přesměrovává na přihlášení.
+- Znovupřihlášení vyžaduje Apple ID a **dvoufázové ověření uživatele**,
+  který spí. Vše na Apple straně je tím pádem do rána zastavené:
+  dokončení App Privacy, verze 1.0, review screenshoty, Small Business
+  Program, cena Free.
+- Ostatní session **žijí**: YouTube Studio (kanál deriverge s.r.o.),
+  Play Console, RevenueCat.
+
+**YouTube, nahrána všechna čtyři videa**
+
+- Kanál `UC8MKQOvIahw1esBCKGti0wA`, účet info@deriverge.com.
+- Záložka Videa: `tapkasa spot cs 1920x1080`, `tapkasa spot en 1920x1080`.
+- Záložka Shorty: `tapkasa spot cs 1080x1920`, `tapkasa spot en 1080x1920`.
+  YouTube zařadil verze na výšku automaticky jako Shorts (svislé video
+  do 60 s).
+- Všechna jsou zatím **koncepty**, tedy nikde veřejně nevisí.
+
+**Co se u videí nepodařilo**
+
+- **Název a popis nejdou vyplnit automatizací.** Pole YouTube Studia
+  jsou `contenteditable` uvnitř webové komponenty a neberou ani
+  `Input.insertText` přes CDP, ani výběr rozsahu s následným vložením.
+  Zkoušeno šestkrát ve třech variantách. Zůstávají automatické názvy
+  podle souboru.
+- **Vznikly dva duplikáty Shorts.** První pokus o nahrání verzí na výšku
+  vypadal jako neúspěšný, protože se v seznamu Videa neobjevily; ve
+  skutečnosti byly celou dobu pod Shorts. Opakováním tedy vznikly dvě
+  kopie navíc. Smazat je automatizací nešlo, kontextové menu řádku se
+  zobrazuje až při najetí myší.
+
+**Co zbývá u videí (ruční, pár minut)**
+
+1. Ve Studiu doplnit název a popis, u obou dlouhých videí i u Shorts.
+   Návrh názvu: „Tapkasa — pokladna do kapsy pro stánky, trhy a festivaly".
+2. Zvolit viditelnost. Pro odkaz v Google Play stačí Nezveřejněné.
+3. Smazat dva duplicitní Shorts.
+4. Odkaz na české video na šířku vložit do Play Console → Store listing
+   → Promo video.
+
+**Poznámka k použitelnosti v obchodech, platí i nadále**
+
+- Spot se **nehodí jako App Store App Preview** (rámečky zařízení,
+  badge Google Play). Do App Store se tedy nenahrává nic.
+- Pro Google Play je použitelný pouze jako **odkaz na YouTube**;
+  badge App Storu ve videu je proti pravidlům Play o propagaci jiných
+  platforem, je to riziko při kontrole.
+- Video je v obou obchodech **nepovinné**, vydání neblokuje.
+
+---
