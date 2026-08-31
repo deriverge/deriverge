@@ -621,3 +621,60 @@ App support. Doplní se s nimi.
   zůstal nedotčený na stávajícím systému), nebo Xcode Cloud.
 
 ---
+
+## Fáze 11, Xcode Cloud (2026-08-31)
+
+**Zásadní oprava předchozího závěru**
+
+- Dřívější závěr „Xcode neproveditelný" platil jen pro **App Store**
+  verzi Xcode. Ověřeno na xcodereleases.com:
+  - **Xcode 26.0 až 26.3 vyžaduje macOS 15.6+**, tedy běží i na
+    tomto stroji (macOS 15.7.3),
+  - teprve **Xcode 26.4+ vyžaduje macOS 26.2+**.
+  - Mac App Store nabízí jen nejnovější verzi, proto hlásil nutnost
+    aktualizace systému.
+- Lokální cesta tedy uzavřená není, stačilo by stáhnout Xcode 26.3
+  z developer.apple.com. Necháváme jako záložní plán.
+
+**Uvolnění místa** (se souhlasem uživatele)
+
+- `/Library/Developer/CoreSimulator` mělo **30 GB**, z toho 19 GB
+  runtime iOS 18.6, který stáhl `-downloadPlatform iOS`. Pro archiv
+  není potřeba. Smazáno přes `xcrun simctl runtime delete all`.
+- Smazán Xcode 16.4 (4,9 GB), DerivedData (880 MB), SPM cache.
+- Volné místo: **15 GB → 34 GB**.
+
+**Xcode Cloud rozjetý**
+
+- Workflow **Default** na větvi `main` existuje. Prvotní hláška
+  `CI.SCM.Error.RepositoryNotAccessible` byla přechodná, GitHub App
+  „Xcode Cloud" má na účtu `deriverge` přístup ke **všem repozitářům**
+  a repozitář patří témuž účtu, takže práva jsou v pořádku.
+- **První build spadl** na chybějícím `Package.resolved`:
+  > a resolved file is required when automatic dependency resolution is
+  > disabled and should be placed at .../xcshareddata/swiftpm/Package.resolved
+- **Příčina byla moje**: soubor jsem ve fázi 5 vědomě nezařadil do
+  commitu s odůvodněním, že je to nad rámec zadání. Xcode Cloud staví
+  s vypnutým automatickým resolvem a bez něj build nespustí.
+- Opraveno commitem `f9258e7`, `Package.resolved` je nyní verzovaný
+  (capacitor-swift-pm 8.5.0, purchases-hybrid-common 18.32.1,
+  RevenueCat 5.85.0). Vedlejším přínosem je reprodukovatelný build.
+- Push sám build nespustil, workflow má manuální start condition.
+  **Build spuštěn ručně 31. 8. 2026 22:35**, workflow Default,
+  větev `main`, stav Queued.
+
+**Poznámka k jinému projektu uživatele**
+
+- Aplikace VZT Montér se do TestFlightu dostala přes **EAS Build od
+  Expo**, tedy také cloudové sestavení, ne lokální Xcode. Potvrzuje to
+  správnost cloudové cesty. Pro Tapkasu je ale přirozenější Xcode Cloud,
+  protože jde o Capacitor, ne Expo projekt.
+
+**Dostupnost aplikace, upřesnění**
+
+- Uživatel výslovně potvrdil, že chce prodávat **celosvětově**.
+  Ověřeno, že App Store Connect má **175 zemí**, žádná změna nebyla
+  potřeba. Doporučení „launch jen CZ+SK" pochází ze
+  `store/checklist.md` řádek 79, ne od uživatele.
+
+---
