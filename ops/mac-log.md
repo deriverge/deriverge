@@ -340,3 +340,70 @@ závislosti (capacitor-swift-pm 8.5.0, purchases-hybrid-common 18.32.1).
 - Zapnout **server notifications** (Apple V2, Google RTDN).
 
 ---
+
+## Fáze 7, Google Play (2026-08-31)
+
+**Přihlášení**
+
+- Kopie profilu Chromu si nepřenesla Google session, Play Console
+  přesměrovávala na marketingovou stránku. Uživatel se přihlásil ručně
+  v ovládaném Chromu, pak už konzole funguje.
+- Vývojářský účet **deriverge s.r.o.**, ID `5046049502424745320`.
+
+**Hotovo**
+
+- **Aplikace vytvořena**: název `Tapkasa - Pokladna do kapsy`,
+  package **`com.deriverge.tapkasa`**, výchozí jazyk **Čeština (cs-CZ)**,
+  typ Aplikace, cena **Za 0 Kč**, všechny tři deklarace potvrzeny.
+  - **Play app ID `4976431302400174530`**, stav Koncept.
+  - Před odesláním proběhla kontrola všech polí, protože package name
+    i volba Zdarma jsou na Play nevratné.
+- **Záznam v obchodě, texty uloženy** (Uložit jako koncept, Play potvrdil
+  „Změna byla uložena"):
+  - Název: `Tapkasa - Pokladna do kapsy` (27/30),
+  - Stručný popis: 73/80 znaků,
+  - Úplný popis: 2 521/4 000 znaků, převzatý z `store/listing-cs.md`
+    s předepsanou úpravou „účtuje přes **Google Play**" místo App Store.
+
+**BLOKUJE: předplatná vyžadují účet obchodníka Google Payments**
+
+- Stránka Monetizace → Předplatné hlásí „Chybí požadavky na přístup
+  k této stránce" a nabízí jen „Založit účet obchodníka".
+- Bez toho **nejde vytvořit ani jedno předplatné**, tedy ani base plany
+  `monthly`/`yearly`, ani offer `trial14`, ani CZ ceny.
+- Je to Payments profile, který podle pravidel zadání nevyplňujeme.
+  Uživatel byl navedený. Ověření u Googlu trvá, je to kritická cesta.
+
+**BLOKUJE: nahrání grafiky do záznamu v obchodě**
+
+- Ikona, hlavní grafika ani snímky obrazovky se nepodařilo nahrát.
+- Tlačítko „Přidat podklady" neotevírá nativní dialog, ale vytvoří
+  v DOM skrytý `input[type=file]`. Soubor se do něj **prokazatelně
+  vloží** (`files.length = 1`, správný název), ale Angular v konzoli
+  na `change` ani `input` událost nereaguje a UI zůstane beze změny.
+- Vyzkoušeno: `Page.setInterceptFileChooserDialog` (funguje na testovacím
+  inputu, ale tlačítko chooser nevyvolá), `DOM.setFileInputFiles` na
+  nalezený input, ruční dispatch `input` i `change`.
+- Ruční cesta pro uživatele, soubory jsou připravené v repozitáři:
+  - Ikona: `design/png/icon-512.png` (512×512)
+  - Hlavní grafika: `design/png/feature-graphic-1024x500.png`
+  - Telefon: `store/screenshots/play-cs-0{1,2,3,5,7}-*.png` (1080×1920)
+
+**Poznámka ke snímkům pro tablety**
+
+- Play u 7" a 10" tabletu vyžaduje poměr stran 16:9 nebo 9:16.
+  Připravené iPad snímky `ipad129-*` mají 2048×2732, což je poměr 3:4
+  a do zadaného rozmezí nespadá. Před nahráním je bude potřeba
+  přeexportovat, jinak je Play odmítne.
+
+**Zbývá na Play (až po účtu obchodníka)**
+
+- Obě předplatná, base plany, offer `trial14`, ceny 129 a 990 Kč.
+- App content: privacy policy URL, App access, Ads, content rating,
+  target audience, Data safety podle `store/google-data-safety.md`,
+  Government/Financial/Health otázky.
+- Grafika záznamu, tablet snímky.
+- Play App Signing, AAB, internal testing, closed testing (12 testerů,
+  14 dní), production access.
+
+---
