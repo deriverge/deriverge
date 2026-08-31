@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <!-- Tapkasa app icon (master, 1024×1024, full-bleed — iOS masks its own corners).
+       Motif: 2×2 grid of rounded product cards on paper.
+       Grid: 376px tiles, 48px gap, 112px outer margin, 88px corner radius. -->
+  <rect width="1024" height="1024" fill="#FBFAF7"/>
+  <rect x="112" y="112" width="376" height="376" rx="88" fill="#D6402A"/>
+  <rect x="536" y="112" width="376" height="376" rx="88" fill="#F5CE3E"/>
+  <rect x="112" y="536" width="376" height="376" rx="88" fill="#2158C4"/>
+  <rect x="536" y="536" width="376" height="376" rx="88" fill="#127A4E"/>
+</svg>

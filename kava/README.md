@@ -1,105 +1,87 @@
-# Kasa na stánek
+# Tapkasa — pokladna do kapsy
 
-Jednoduchá pokladna pro prodej na akci — karty položek, platba hotově nebo kartou,
-přehled tržby. Jeden soubor, žádný backend, žádná registrace.
+Pokladna pro prodej na stánku, trhu nebo akci — barevné karty položek, platba
+hotově či kartou, fronta objednávek, přehled tržby. Jeden soubor, žádný backend,
+žádná registrace. Dřívější „Kasa na stánek“, rozšířená na produkt pro App Store
+a Google Play (nativní obal je v `../mobile/`, podklady pro obchody v `../store/`).
 
-Po nasazení běží na `https://www.deriverge.com/kava/`.
+Webová verze běží na `https://www.deriverge.com/kava/`.
+
+## První spuštění
+
+Nová instalace projde dvoukrokovým úvodem: výběr jazyka (9 jazyků: čeština,
+slovenština, angličtina, němčina, francouzština, španělština, italština,
+polština, portugalština) a měny (33 měn, každá s vlastními bankovkami pro
+vracení a počtem desetinných míst). Druhý krok vysvětlí ovládání a nabídne
+ukázkové menu, nebo prázdný start. Jazyk i měnu jde kdykoliv změnit v Menu;
+existující instalace úvod nikdy neuvidí.
+
+## Tarify
+
+- **Zdarma**: všechno na jednom zařízení, 10 zaplacených účtů denně.
+  Počítadlo je v prodejní liště; o půlnoci se nuluje.
+- **Tapkasa Pro** (předplatné přes App Store / Google Play): neomezené platby
+  a párování více zařízení. Kód smí *vytvořit* jen Pro; *připojit se* ke kódu
+  může kdokoliv — stánku stačí jedno předplatné.
+- Instalace z doby před tarify (mají prodeje, archiv nebo párování) dostávají
+  Pro trvale zdarma — nikomu nic nebereme.
+- Nákup obstarává nativní most (`__kasaBuy`/`__kasaRestore`/`__kasaEntitlement`,
+  ceníky `__KASA_PRICES__` — implementuje `../mobile/billing.js` přes
+  RevenueCat). Na webu tlačítka jen odkáží do aplikace.
+- Vývojářské odemčení: 7× klepnout na řádek verze v Menu (přepíná `pro-dev`).
 
 ## Jak se to ovládá
 
-1. **Prodej** — klepnutím na kartu přidáš položku na účet, dalším klepnutím další kus.
-   Každá položka má vlastní barvu, takže obsluha kartu pozná dřív, než přečte název.
-   **Podržením karty na vteřinu** ta jedna položka z účtu zmizí — na kartě se
-   při držení plní pruh, takže omylem to nejde. Zbytek účtu zůstane.
-   Souhrn dole ukáže počet a částku; klepnutím na něj se účet rozbalí a jde upravovat
-   po kusech. `+ Jiná částka` otevře klávesnici pro cokoliv mimo menu.
-2. **Zaplatit** — vyskočí částka a dvě tlačítka. U *Hotově* si můžeš naťukat, co ti
-   zákazník dal, a aplikace spočítá, kolik vrátit. Potvrdíš `Hotovo`.
-   Špatně uložený účet jde hned vrátit tlačítkem *Vrátit zpět* v liště.
-3. **Objednávky** — zaplacený účet nezmizí, zařadí se do fronty jako objednávka
-   s číslem. Klepnutím se otevře, položky se odškrtávají (u víc kusů se počítá
-   1/2, 2/2) a `Vydáno` ji uzavře. Vydané jdou vrátit zpátky do fronty.
-   V hlavičce a na záložce je pořád vidět, kolik objednávek čeká.
-4. **Přehled** — tržba celkem, rozpad hotově/kartou, kolik kusů které položky se
-   prodalo a za kolik, plus seznam účtenek (každou lze smazat).
-   `Zobrazit souhrn` vyplivne text ke zkopírování. `Uzavřít akci` odloží tržbu do
-   archivu a vynuluje kasu pro další prodej.
-   **Tržba se úmyslně nikde jinde neukazuje** — hlavička je vidět přes pult.
-5. **Menu** — role zařízení, název akce, položky, ceny a barvy. Ukládá se průběžně.
-   Změna ceny neovlivní už uložené účtenky.
+1. **Prodej** — klepnutím na kartu přidáš položku, podržením ji odebereš
+   (karta při držení plní pruh). `+ Jiná částka` otevře klávesnici — u měn
+   s haléři/centy se ťuká v setinách (125 → 1,25 €). Souhrn dole rozbalí účet.
+2. **Zaplatit** — částka a dvě tlačítka. U *Hotově* naťukáš přijaté peníze
+   (bankovky podle zvolené měny) a appka spočítá vrácení.
+3. **Objednávky** — zaplacený účet se zařadí do fronty s číslem; položky se
+   odškrtávají, `Vydáno` uzavře. V hlavičce je pořád vidět počet čekajících.
+4. **Přehled** — tržba, rozpad hotově/kartou, prodané kusy, účtenky,
+   `Uzavřít akci` archivuje a vynuluje.
+5. **Menu** — role zařízení (Kasa/Výdej), název akce, položky (ceny podle
+   měny, 14 barev), párování, jazyk, měna, záloha dat.
 
 ## Dvě zařízení
 
-Kasa umí běžet ve dvou rolích, přepíná se to v Menu:
+Role se přepíná v Menu: **Kasa** účtuje, **Výdej** jen odškrtává frontu.
+Objednávky se přenášejí:
 
-- **Kasa** — účtuje, má všechny čtyři záložky.
-- **Výdej** — jenom přijímá objednávky a odškrtává je. Nemá prodej ani statistiky,
-  takže se do něj nedá omylem naúčtovat.
+- **na webu** delta-protokolem přes dvojici veřejných ntfy přeposílačů
+  (`ntfy.sh` + `ntfy.envs.net`; posílá se na oba, poslouchá na obou, duplicity
+  se zahazují podle id). SSE s adaptivním dopolováním, prezenční „hello“,
+  poctivý stav spojení a vestavěný test přeposílače v Menu. Vlastní server
+  je v `../server/` — nasazený se zapne přes `window.__KASA_RELAY__`
+  (čárkami oddělený seznam základních adres).
+- **v nativní aplikaci** navíc Multipeer Connectivity napřímo, bez internetu
+  (`../mobile/ios-plugin/`).
 
-Zaplacená objednávka se z kasy sama objeví na výdeji; jak se na výdeji odškrtává,
-vidí to kasa. Obě strany si posílají celý seznam objednávek a slučují ho podle
-`id`, vyhrává novější `updatedAt` — na pořadí zpráv proto nezáleží a výpadek
-spojení se dorovná, jakmile se zařízení zase vidí.
-
-**Přenos funguje jen v nainstalované aplikaci z `../ios/`**, kde ho obstarává
-Multipeer Connectivity — přímo mezi zařízeními, bez internetu i bez routeru.
-V prohlížeči je fronta k dispozici taky, ale jen na tom jednom zařízení.
-
-Vedlejší efekt párování: výdejní zařízení má kompletní kopii prodejů, takže když
-iPad umře, data jsou i v telefonu.
+Sloučení podle `id` a novějšího `updatedAt` — na pořadí zpráv nezáleží,
+výpadek se dorovná. Výdej má díky tomu kopii prodejů (záloha mimo iPad).
 
 ## Data
 
-Všechno zůstává v zařízení, nikam se nic neodesílá. Kasa si data drží ve třech
-nezávislých kopiích, aby o ně restart ani vybitá baterie nepřipravily:
-
-| Kde | Kdy se zapisuje | K čemu |
-|---|---|---|
-| `localStorage`, klíč `kavakasa.v1` | při každé změně | běžné čtení i zápis |
-| IndexedDB `kavakasa` | při každé změně (se zpožděním 0,3 s) | záchrana, když prohlížeč localStorage zahodí |
-| `Documents/kasa.json` | při každé změně | jen v nativní aplikaci, viz `../ios/` |
-| druhé zařízení | při změně objednávky | jen když je spárované |
-
-Při startu se kasa načte z localStorage. Když je prázdný, ale v IndexedDB něco
-je, obnoví se odtamtud a napíše hlášku. V nativní aplikaci má přednost soubor.
-
-Menu → **Záloha dat** vypíše celý obsah kasy jako text ke zkopírování a umí ho
-zase načíst zpátky. To je poslední záchrana i způsob, jak data přenést jinam.
-
-Co pořád platí:
-
-- Data patří **jednomu zařízení**. Dvě obsluhy na dvou zařízeních = dvě
-  oddělené statistiky, na konci se sčítají ručně.
-- Nepoužívej anonymní okno — po zavření je pryč.
-- Odinstalace z plochy nebo smazání dat webu smaže i tržbu.
+Tři nezávislé kopie: `localStorage` (`kavakasa.v1`), IndexedDB (`kavakasa`)
+a v nativní aplikaci `Documents/kasa.json` (vkládá se před start přes
+`__KASA_BOOT__`). Migrace stavů zvládá všechny starší verze. Menu →
+**Záloha dat** vypíše/načte celý stav jako text.
 
 ## Offline
 
-`sw.js` cachuje appku, takže po prvním otevření funguje i bez signálu. Prodeje se
-ukládají lokálně, takže výpadek sítě prodej nezastaví.
+`sw.js` (cache `kasa-v4`) cachuje jen sebe, ikony a písma; cizí adresy pouští
+vždy na síť — párování nesmí dostávat odpovědi z cache. Navigace jde
+network-first, offline z cache.
 
-## Instalace do zařízení
-
-iPhone / iPad: otevřít v Safari → Sdílet → **Přidat na plochu**. Spustí se na
-celou obrazovku bez adresního řádku, s vlastní ikonou a vlastním oknem
-v přepínači aplikací. Android: Chrome → nabídka → **Přidat na plochu**.
-
-Kdo chce opravdovou nativní aplikaci bez jakéhokoliv webu, najde ji v `../ios/` —
-tentýž kód zabalený do iOS aplikace, kterou lze nahrát z Xcode přímo do iPadu.
-
-## Rozvržení
-
-Do 520 px dva sloupce karet, nad 700 px (iPad na výšku) čtyři a nad 1000 px
-(iPad na šířku) pět, s většími kartami i písmem. Platební okno je na telefonu
-lišta u spodní hrany, na tabletu vycentrovaný dialog.
-
-## Struktura
+## Soubory
 
 | Soubor | K čemu |
 |---|---|
-| `index.html` | celá aplikace (styly, markup i logika) |
+| `index.html` | celá aplikace (styly, markup, logika, všech 9 jazyků) |
 | `sw.js` | service worker pro offline režim |
-| `manifest.webmanifest` | ikona a režim celé obrazovky po přidání na plochu |
+| `manifest.webmanifest` | instalace na plochu (ikony z `../design/`) |
+| `icon-*.png`, `apple-touch-icon.png` | ikony aplikace |
+| `privacy.html`, `terms.html` | zásady soukromí a podmínky (odkazuje na ně paywall) |
 
-Blok mezi `<!-- APP:START -->` a `<!-- APP:END -->` v `index.html` je samostatně
-přenositelný — jde vložit kamkoliv jinam bez zbytku stránky.
+Blok mezi `<!-- APP:START -->` a `<!-- APP:END -->` je samostatně přenositelný.

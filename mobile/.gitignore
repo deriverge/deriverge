@@ -1,0 +1,6 @@
+# závislosti — obnoví se přes `npm install`
+node_modules/
+
+# podpisové klíče a hesla nikdy do repa
+android/keystore.properties
+*.keystore
