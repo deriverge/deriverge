@@ -175,7 +175,7 @@
     width:100%;max-width:640px;background:var(--paper);
     border-radius:18px 18px 0 0;border-top:1px solid var(--rule);
     padding:18px 16px calc(18px + var(--safe-b));
-    max-height:92dvh;overflow-y:auto;animation:rise .18s ease;
+    max-height:92dvh;overflow-y:auto;overflow-x:hidden;animation:rise .18s ease;
   }
   @media (prefers-reduced-motion:reduce){.scrim,.sheet,.toast{animation:none}}
   .sheet h2{margin:0;font-size:11px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3)}
@@ -303,14 +303,21 @@
   .toast button.x{color:#9A9184;font-size:18px;line-height:1}
 
   /* ---------- daňový doklad ---------- */
-  /* Pole Od/Do jsou input[type=date] a ta mají vlastní vnitřní minimální
-     šířku. Položky mřížky mají ve výchozím stavu min-width:auto, takže se
-     odmítnou zúžit, mřížka přeteče a panel jde pak vodorovně posouvat.
-     min-width:0 to spraví; na velmi úzkých displejích se pole zalomí. */
-  .doc-range{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+  /* Pole Od/Do jsou input[type=date]. Na iOS si takové pole s výchozím
+     vzhledem drží vlastní vnitřní šířku a width:100% ji nepřebije: pole
+     vyjede z panelu a ten pak jde tahat do stran. Pomůže až vypnutí
+     nativního vzhledu spolu s min-width:0 a vynulováním vnitřních částí,
+     které si iOS kreslí sám. Ve výchozím stavu jsou pole pod sebou, vedle
+     sebe je dáváme až tam, kde je na ně opravdu místo. */
+  .doc-range{display:grid;grid-template-columns:1fr;gap:10px;margin-top:14px}
   .doc-range label{display:block;min-width:0}
-  .doc-range .inp{min-width:0;max-width:100%}
-  @media (max-width:400px){.doc-range{grid-template-columns:1fr}}
+  .doc-range .inp{
+    -webkit-appearance:none;appearance:none;
+    display:block;width:100%;min-width:0;max-width:100%;
+  }
+  .doc-range .inp::-webkit-date-and-time-value{text-align:left;min-width:0;margin:0}
+  .doc-range .inp::-webkit-datetime-edit{padding:0}
+  @media (min-width:520px){.doc-range{grid-template-columns:1fr 1fr}}
   .doc-range label span{display:block;font-size:11px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px}
   #printDoc{display:none}
   @media print{
