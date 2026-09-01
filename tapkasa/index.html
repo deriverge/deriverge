@@ -391,6 +391,26 @@
     .oh-linkline{stroke-dashoffset:0}.oh-pick{fill:#EAF4EE}
   }
 
+  /* ---------- interaktivní průvodce ---------- */
+  /* Kroužek nesmí chytat doteky, jinak by bránil právě té akci, ke které vede. */
+  #tourLayer{position:fixed;inset:0;z-index:40;pointer-events:none}
+  .tour-ring{position:fixed;border:3px solid var(--accent);border-radius:14px;
+    box-shadow:0 0 0 4px rgba(214,64,42,.18);
+    transition:left .35s ease,top .35s ease,width .35s ease,height .35s ease;
+    animation:tourPulse 1.6s ease-in-out infinite}
+  @keyframes tourPulse{0%,100%{box-shadow:0 0 0 4px rgba(214,64,42,.18)}50%{box-shadow:0 0 0 10px rgba(214,64,42,.05)}}
+  .tour-card{position:fixed;left:14px;right:14px;max-width:560px;margin:0 auto;
+    display:flex;align-items:center;gap:10px;padding:12px 14px;
+    border-radius:var(--r-tile);background:var(--ink);color:var(--paper);
+    font-size:14px;font-weight:500;line-height:1.4;
+    box-shadow:0 8px 24px rgba(21,18,14,.25);transition:top .35s ease,bottom .35s ease}
+  .tour-n{flex:0 0 auto;padding:3px 8px;border-radius:999px;background:rgba(255,255,255,.16);
+    font-size:12px;font-weight:700;font-variant-numeric:tabular-nums}
+  .tour-t{flex:1;min-width:0}
+  .tour-skip{pointer-events:auto;flex:0 0 auto;border:0;background:none;
+    color:#9A9184;font-size:13px;font-weight:600;padding:4px 2px}
+  @media (prefers-reduced-motion:reduce){.tour-ring{animation:none;transition:none}.tour-card{transition:none}}
+
   .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
   /* ---------- počítadlo plateb zdarma ---------- */
@@ -603,6 +623,7 @@
 
 <div id="sheetSlot"></div>
 <div id="toastSlot"></div>
+<div id="tourLayer"></div>
 <div class="sr" id="live" role="status" aria-live="polite"></div>
 
 <script>
@@ -765,6 +786,18 @@
     showSummary: "Zobrazit souhrn",
     closeEvent: "Uzavřít akci",
     emptyStats: "Zatím nic neprodáno.<br>Jakmile uložíte první účet, objeví se tu statistika.",
+    tourS1: "Ťukněte na kartu produktu, položka skočí na účet.",
+    tourS2: "Ťukněte na Zaplatit.",
+    tourS3: "Zvolte Hotově.",
+    tourS4: "Ťukněte na Přesně a potom na Hotovo.",
+    tourS5: "Otevřete Objednávky, zaplacený účet čeká ve frontě.",
+    tourS6: "Otevřete lístek a ťukněte na Vydáno.",
+    tourS7: "V Přehledu vidíte tržbu; odtud se dělá i daňový doklad.",
+    tourS8: "Otevřete Menu.",
+    tourS9: "Tady vyplňte údaje obchodníka, tisknou se na doklad.",
+    tourSkip: "Přeskočit",
+    tourDoneToast: "Hotovo! Umíte všechno podstatné.",
+    tourReplay: "Spustit průvodce znovu",
     pairOfflineHint: "Zařízení se propojí přes společnou Wi-Fi síť, internet potřeba není. Bez routeru poslouží hotspot z iPhonu.",
     offHelpBtn: "Jak propojit bez internetu",
     offHelpTitle: "Propojení bez internetu",
@@ -1068,6 +1101,18 @@
     showSummary: "Show summary",
     closeEvent: "Close event",
     emptyStats: "Nothing sold yet.<br>Save your first sale and stats appear here.",
+    tourS1: "Tap a product card, the item jumps onto the bill.",
+    tourS2: "Tap Charge.",
+    tourS3: "Choose Cash.",
+    tourS4: "Tap Exact, then Done.",
+    tourS5: "Open Orders, the paid bill is waiting in the queue.",
+    tourS6: "Open the ticket and tap Served.",
+    tourS7: "Stats shows your revenue; tax documents live here too.",
+    tourS8: "Open Menu.",
+    tourS9: "Fill in your seller details here, they print on documents.",
+    tourSkip: "Skip",
+    tourDoneToast: "Done! You know everything that matters.",
+    tourReplay: "Run the tour again",
     pairOfflineHint: "The devices link over a shared Wi-Fi network; internet is not needed. With no router around, an iPhone hotspot works.",
     offHelpBtn: "How to link without internet",
     offHelpTitle: "Linking without internet",
@@ -1372,6 +1417,18 @@
     showSummary: "Zobraziť súhrn",
     closeEvent: "Uzavrieť akciu",
     emptyStats: "Zatiaľ sa nič nepredalo.<br>Len čo uložíte prvý účet, objaví sa tu štatistika.",
+    tourS1: "Ťuknite na kartu produktu, položka skočí na účet.",
+    tourS2: "Ťuknite na Zaplatiť.",
+    tourS3: "Zvoľte Hotovosť.",
+    tourS4: "Ťuknite na Presne a potom na Hotovo.",
+    tourS5: "Otvorte Objednávky, zaplatený účet čaká vo fronte.",
+    tourS6: "Otvorte lístok a ťuknite na Vydané.",
+    tourS7: "V Prehľade vidíte tržbu; odtiaľ sa robí aj daňový doklad.",
+    tourS8: "Otvorte Menu.",
+    tourS9: "Tu vyplňte údaje predajcu, tlačia sa na doklad.",
+    tourSkip: "Preskočiť",
+    tourDoneToast: "Hotovo! Ovládate všetko podstatné.",
+    tourReplay: "Spustiť sprievodcu znova",
     pairOfflineHint: "Zariadenia sa prepoja cez spoločnú Wi-Fi sieť, internet nie je potrebný. Bez routera poslúži hotspot z iPhonu.",
     offHelpBtn: "Ako prepojiť bez internetu",
     offHelpTitle: "Prepojenie bez internetu",
@@ -1675,6 +1732,18 @@
     showSummary: "Zusammenfassung zeigen",
     closeEvent: "Event abschließen",
     emptyStats: "Noch nichts verkauft.<br>Sobald Sie den ersten Verkauf speichern, taucht hier die Statistik auf.",
+    tourS1: "Tippen Sie auf eine Produktkarte, der Artikel springt auf den Bon.",
+    tourS2: "Tippen Sie auf Kassieren.",
+    tourS3: "Wählen Sie Bar.",
+    tourS4: "Tippen Sie auf Passend, dann auf Fertig.",
+    tourS5: "Öffnen Sie Bestellungen, der bezahlte Bon wartet in der Reihe.",
+    tourS6: "Öffnen Sie den Bon und tippen Sie auf Ausgegeben.",
+    tourS7: "Die Übersicht zeigt den Umsatz; hier entsteht auch der Beleg.",
+    tourS8: "Öffnen Sie das Menü.",
+    tourS9: "Tragen Sie hier die Verkäuferdaten ein, sie stehen auf dem Beleg.",
+    tourSkip: "Überspringen",
+    tourDoneToast: "Fertig! Sie können alles Wichtige.",
+    tourReplay: "Rundgang erneut starten",
     pairOfflineHint: "Die Geräte verbinden sich über ein gemeinsames WLAN, Internet ist nicht nötig. Ohne Router genügt ein iPhone-Hotspot.",
     offHelpBtn: "Verbinden ohne Internet",
     offHelpTitle: "Verbindung ohne Internet",
@@ -1978,6 +2047,18 @@
     showSummary: "Voir le résumé",
     closeEvent: "Clôturer l’événement",
     emptyStats: "Rien de vendu pour l’instant.<br>Encaissez une première vente et les statistiques apparaîtront ici.",
+    tourS1: "Touchez une carte produit, l'article saute sur l'addition.",
+    tourS2: "Touchez Encaisser.",
+    tourS3: "Choisissez Espèces.",
+    tourS4: "Touchez Exact, puis Terminé.",
+    tourS5: "Ouvrez Commandes, l'addition payée attend dans la file.",
+    tourS6: "Ouvrez le ticket et touchez Servi.",
+    tourS7: "Le Résumé montre la recette ; le document fiscal se fait ici.",
+    tourS8: "Ouvrez le Menu.",
+    tourS9: "Renseignez ici les coordonnées du vendeur, elles figurent sur le document.",
+    tourSkip: "Passer",
+    tourDoneToast: "Terminé ! Vous maîtrisez l'essentiel.",
+    tourReplay: "Relancer le guide",
     pairOfflineHint: "Les appareils se connectent via un réseau Wi-Fi commun, internet n'est pas nécessaire. Sans routeur, un partage de connexion iPhone suffit.",
     offHelpBtn: "Relier sans internet",
     offHelpTitle: "Liaison sans internet",
@@ -2281,6 +2362,18 @@
     showSummary: "Ver resumen",
     closeEvent: "Cerrar evento",
     emptyStats: "Aún no se ha vendido nada.<br>Guarde la primera venta y aquí aparecerán las estadísticas.",
+    tourS1: "Toque una tarjeta de producto, el artículo salta a la cuenta.",
+    tourS2: "Toque Cobrar.",
+    tourS3: "Elija Efectivo.",
+    tourS4: "Toque Exacto y luego Listo.",
+    tourS5: "Abra Pedidos, la cuenta pagada espera en la cola.",
+    tourS6: "Abra el ticket y toque Entregado.",
+    tourS7: "El Resumen muestra los ingresos; aquí se hace el documento fiscal.",
+    tourS8: "Abra el Menú.",
+    tourS9: "Rellene aquí los datos del vendedor, salen en el documento.",
+    tourSkip: "Omitir",
+    tourDoneToast: "¡Listo! Ya domina lo esencial.",
+    tourReplay: "Repetir la guía",
     pairOfflineHint: "Los dispositivos se enlazan por una red Wi-Fi común; no hace falta internet. Sin router, sirve el hotspot del iPhone.",
     offHelpBtn: "Cómo enlazar sin internet",
     offHelpTitle: "Enlace sin internet",
@@ -2584,6 +2677,18 @@
     showSummary: "Mostrare il riepilogo",
     closeEvent: "Chiudere l’evento",
     emptyStats: "Ancora nessuna vendita.<br>Appena viene salvato il primo conto, qui compaiono le statistiche.",
+    tourS1: "Toccate una scheda prodotto, l'articolo salta sul conto.",
+    tourS2: "Toccate Incassare.",
+    tourS3: "Scegliete Contanti.",
+    tourS4: "Toccate Esatto e poi Fatto.",
+    tourS5: "Aprite Ordini, il conto pagato aspetta in coda.",
+    tourS6: "Aprite lo scontrino e toccate Servito.",
+    tourS7: "Il Riepilogo mostra l’incasso; qui si fa anche il documento fiscale.",
+    tourS8: "Aprite il Menu.",
+    tourS9: "Compilate qui i dati del venditore, finiscono sul documento.",
+    tourSkip: "Salta",
+    tourDoneToast: "Fatto! Sapete tutto l’essenziale.",
+    tourReplay: "Riavviare la guida",
     pairOfflineHint: "I dispositivi si collegano tramite una rete Wi-Fi comune, internet non serve. Senza router basta l'hotspot dell'iPhone.",
     offHelpBtn: "Collegare senza internet",
     offHelpTitle: "Collegamento senza internet",
@@ -2887,6 +2992,18 @@
     showSummary: "Podsumowanie",
     closeEvent: "Zamknięcie imprezy",
     emptyStats: "Na razie nic nie sprzedano.<br>Po zapisaniu pierwszego rachunku pojawią się tu statystyki.",
+    tourS1: "Stuknij kartę produktu, pozycja wskoczy na rachunek.",
+    tourS2: "Stuknij Zapłać.",
+    tourS3: "Wybierz Gotówkę.",
+    tourS4: "Stuknij Równo, a potem Gotowe.",
+    tourS5: "Otwórz Zamówienia, opłacony rachunek czeka w kolejce.",
+    tourS6: "Otwórz bon i stuknij Wydane.",
+    tourS7: "Podsumowanie pokazuje utarg; tu też robi się dokument.",
+    tourS8: "Otwórz Menu.",
+    tourS9: "Tu wypełnij dane sprzedawcy, trafią na dokument.",
+    tourSkip: "Pomiń",
+    tourDoneToast: "Gotowe! Znasz wszystko, co ważne.",
+    tourReplay: "Uruchom przewodnik ponownie",
     pairOfflineHint: "Urządzenia łączą się przez wspólną sieć Wi-Fi, internet nie jest potrzebny. Bez routera wystarczy hotspot z iPhone’a.",
     offHelpBtn: "Jak połączyć bez internetu",
     offHelpTitle: "Połączenie bez internetu",
@@ -3190,6 +3307,18 @@
     showSummary: "Mostrar resumo",
     closeEvent: "Fechar evento",
     emptyStats: "Ainda não vendeu nada.<br>Assim que guardar a primeira conta, aparecem aqui as estatísticas.",
+    tourS1: "Toque num cartão de produto, o artigo salta para a conta.",
+    tourS2: "Toque em Cobrar.",
+    tourS3: "Escolha Dinheiro.",
+    tourS4: "Toque em Exato e depois em Concluído.",
+    tourS5: "Abra Pedidos, a conta paga espera na fila.",
+    tourS6: "Abra o talão e toque em Entregue.",
+    tourS7: "O Resumo mostra a receita; o documento fiscal faz-se aqui.",
+    tourS8: "Abra o Menu.",
+    tourS9: "Preencha aqui os dados do vendedor, saem no documento.",
+    tourSkip: "Saltar",
+    tourDoneToast: "Pronto! Já domina o essencial.",
+    tourReplay: "Repetir o guia",
     pairOfflineHint: "Os aparelhos ligam-se por uma rede Wi-Fi comum; não é precisa internet. Sem router, serve o hotspot do iPhone.",
     offHelpBtn: "Ligar sem internet",
     offHelpTitle: "Ligação sem internet",
@@ -3716,7 +3845,7 @@
     return {
       v: 3, event: "", mode: "kasa", nextNo: 1, voice: true, pair: "",
       lang: detectLang(), currency: detectCurrency(),
-      setup: false, license: "", payDay: "", payN: 0, biz: "", vat: false,
+      setup: false, license: "", payDay: "", payN: 0, biz: "", vat: false, tourDone: false,
       seller: {},
       items: [], order: [], sales: [], archives: []
     };
@@ -3753,6 +3882,8 @@
     d.payN = typeof d.payN === "number" ? d.payN : 0;
     d.biz = typeof d.biz === "string" ? d.biz : "";
     d.vat = d.vat === true;   // starší instalace DPH neřešily, zůstanou vypnuté
+    // průvodce je pro nové: kdo už má prodeje nebo párování, obtěžovat nebudeme
+    d.tourDone = d.tourDone === true || d.sales.length > 0 || d.archives.length > 0 || !!d.pair;
     // Dřív se údaje prodejce psaly volným textem. Aby se nikomu neztratily,
     // přesuneme je do poznámky; strukturovaná pole si doplní sám.
     if (!d.seller || typeof d.seller !== "object") { d.seller = {}; }
@@ -5489,7 +5620,12 @@
       '<div class="sec"><h2>' + esc(T("vatHead")) + "</h2></div>" +
       '<div class="acts" style="padding-bottom:6px"><button class="act' + (state.vat ? " on" : "") +
         '" data-vatmode="1">' + esc(state.vat ? T("vatOn") : T("vatOff")) + "</button></div>" +
-      '<p class="hint">' + esc(T("vatHint")) + "</p>";
+      '<p class="hint">' + esc(T("vatHint")) + "</p>" + tourReplayBlock();
+  }
+
+  function tourReplayBlock() {
+    return '<div class="acts" style="padding-top:0"><button class="act" data-tourstart="1">' +
+           esc(T("tourReplay")) + "</button></div>";
   }
 
   function settingsBlock() {
@@ -5962,6 +6098,109 @@
     return h + "</div></div>";
   }
 
+  // ---------- interaktivní průvodce ----------
+  // Vede nového uživatele skutečnými akcemi: kroužek ukáže, kam ťuknout,
+  // a krok se splní až tím, že to uživatel opravdu udělá. Žádné obrázky
+  // vedle reality, průvodce běží nad živou aplikací.
+  var tourIx = -1, tourTimer = null;
+
+  var TOUR = [
+    { key: "tourS1", sel: function () { return ".prod"; },
+      done: function () { return state.order.length > 0; } },
+    { key: "tourS2", sel: function () { return "[data-pay]"; },
+      done: function () { return !!sheet && (sheet.step === "method" || sheet.step === "cash" || sheet.step === "card"); } },
+    { key: "tourS3", sel: function () { return '[data-method="cash"]'; },
+      done: function () { return !!sheet && (sheet.step === "cash" || sheet.step === "card"); } },
+    { key: "tourS4", sel: function () { return (sheet && sheet.received > 0) ? "[data-commit]" : "[data-exact]"; },
+      done: function () { return state.sales.length > 0 && !sheet; } },
+    { key: "tourS5", sel: function () { return '[data-tab="orders"]'; },
+      done: function () { return view === "orders"; } },
+    { key: "tourS6", sel: function () { return (sheet && sheet.step === "ticket") ? "[data-serve]" : ".tk"; },
+      done: function () { return state.sales.some(function (x) { return x.status !== "open"; }); } },
+    { key: "tourS7", sel: function () { return '[data-tab="history"]'; },
+      done: function () { return view === "history"; } },
+    { key: "tourS8", sel: function () { return '[data-tab="menu"]'; },
+      done: function () { return view === "menu"; } },
+    { key: "tourS9", sel: function () { return "[data-sellersheet]"; },
+      done: function () { return !!sheet && sheet.step === "seller"; } }
+  ];
+
+  // Aktivitu řídí jen tourIx; příznak tourDone rozhoduje pouze o automatickém
+  // startu po úvodu, jinak by nešlo průvodce pustit z Menu podruhé.
+  function tourActive() { return tourIx >= 0 && tourIx < TOUR.length; }
+
+  function tourStart() {
+    tourIx = 0;
+    view = "sell";
+    sheet = null;
+    if (!tourTimer) { tourTimer = setInterval(tourPaint, 700); }
+    render(true);
+  }
+
+  function tourEnd(finished) {
+    tourIx = -1;
+    state.tourDone = true;
+    if (tourTimer) { clearInterval(tourTimer); tourTimer = null; }
+    save();
+    render();
+    if (finished) { showToast(T("tourDoneToast")); }
+  }
+
+  // posun na další krok; volá se po každém překreslení
+  function tourTick() {
+    if (!tourActive()) { return; }
+    var guard = 0;
+    while (tourActive() && TOUR[tourIx].done() && guard++ < TOUR.length) { tourIx += 1; }
+    if (tourIx >= TOUR.length) { tourEnd(true); }
+  }
+
+  function tourPaint() {
+    var layer = document.getElementById("tourLayer");
+    if (!layer) { return; }
+    if (!tourActive()) {
+      if (layer.firstChild) { layer.innerHTML = ""; }
+      return;
+    }
+
+    if (!layer.firstChild) {
+      layer.innerHTML =
+        '<div class="tour-ring" aria-hidden="true"></div>' +
+        '<div class="tour-card" role="status">' +
+          '<span class="tour-n"></span><span class="tour-t"></span>' +
+          '<button class="tour-skip" data-tourskip="1">' + esc(T("tourSkip")) + "</button>" +
+        "</div>";
+    }
+
+    var ring = layer.querySelector(".tour-ring");
+    var card = layer.querySelector(".tour-card");
+    layer.querySelector(".tour-n").textContent = (tourIx + 1) + "/" + TOUR.length;
+    layer.querySelector(".tour-t").textContent = T(TOUR[tourIx].key);
+
+    var el = null;
+    try { el = document.querySelector(TOUR[tourIx].sel()); } catch (e) {}
+    if (el) {
+      var r = el.getBoundingClientRect();
+      ring.style.display = "block";
+      ring.style.left = (r.left - 6) + "px";
+      ring.style.top = (r.top - 6) + "px";
+      ring.style.width = (r.width + 12) + "px";
+      ring.style.height = (r.height + 12) + "px";
+      // karta nad, nebo pod prvkem, podle místa
+      var below = r.bottom + 12;
+      if (below + card.offsetHeight + 16 < window.innerHeight) {
+        card.style.top = below + "px";
+        card.style.bottom = "auto";
+      } else {
+        card.style.top = "auto";
+        card.style.bottom = (window.innerHeight - r.top + 12) + "px";
+      }
+    } else {
+      ring.style.display = "none";
+      card.style.top = "auto";
+      card.style.bottom = "90px";
+    }
+  }
+
   function render(toTop) {
     // role bez prodeje nesmí zůstat viset na obrazovce, kterou nemá
     var allowed = tabsFor().map(function (t) { return t[0]; });
@@ -5990,6 +6229,9 @@
         (toast.undo ? '<button data-undo="' + toast.undo + '">' + esc(T("undoBtn")) + "</button>" : "") +
         '<button class="x" data-hidetoast="1" aria-label="' + esc(T("close")) + '">' + SVG.close + "</button></div>"
       : "");
+
+    tourTick();
+    tourPaint();
   }
 
   // ---------- interaction ----------
@@ -6001,7 +6243,7 @@
             "[data-backup],[data-restoreask],[data-dorestore],[data-docask],[data-docmake]," +
             "[data-ticket],[data-line],[data-serve],[data-reopen],[data-drop],[data-col],[data-setcol],[data-applycustom],[data-mode],[data-voice],[data-voicetest],"+
             "[data-paircreate],[data-pairjoin],[data-pairoff],[data-resync],[data-relaytest]," +
-            "[data-offlinehelp],[data-country],[data-docmail],[data-docshare],[data-sellersheet],[data-archopen],[data-archdel],[data-vatmode],[data-langsheet],[data-cursheet],[data-setlang],[data-setcur],[data-paywall],[data-buy]," +
+            "[data-tourskip],[data-tourstart],[data-offlinehelp],[data-country],[data-docmail],[data-docshare],[data-sellersheet],[data-archopen],[data-archdel],[data-vatmode],[data-langsheet],[data-cursheet],[data-setlang],[data-setcur],[data-paywall],[data-buy]," +
             "[data-restorebuy],[data-devtap],[data-oblang],[data-obcur],[data-obnext],[data-obdemo],[data-obempty]";
 
   document.addEventListener("click", function (ev) {
@@ -6362,6 +6604,9 @@
       return;
     }
 
+    if (d.tourskip) { tourEnd(false); return; }
+    if (d.tourstart) { tourStart(); return; }
+
     if (d.offlinehelp) { sheet = { step: "offhelp" }; render(); return; }
 
     if (d.sellersheet) { sheet = { step: "seller" }; render(); return; }
@@ -6432,7 +6677,9 @@
       state.setup = true;
       obStep = 1;
       try { localStorage.setItem("kasa.setupDone", "1"); } catch (e) {}
-      save(); render(true); return;
+      save();
+      if (!state.tourDone) { tourStart(); } else { render(true); }
+      return;
     }
 
     if (d.dorestore) {
