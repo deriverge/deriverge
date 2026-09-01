@@ -932,3 +932,43 @@ App support. Doplní se s nimi.
 | ASC → verze 1.0 → snímky iPad | `store/screenshots/ipad129-cs-*.png` |
 
 ---
+
+## Fáze 16, build se nedostal k testerům (2026-09-01)
+
+**Chyba, kterou nahlásil uživatel**
+
+- Aplikace se mu v TestFlightu neobjevila, ačkoli buildy 9, 10 i 11
+  hlásily „Ready to Test" a on byl ve skupině jako tester.
+
+**Příčina**
+
+- Skupina „Interní testeři" měla **2 testery, ale 0 buildů**.
+  Build v TestFlightu existuje, ale dokud není **přiřazený ke skupině**,
+  testerům se nezobrazí.
+- Xcode Cloud buildy se do skupiny musí přidat ručně, i když má skupina
+  zapnutou „Enable automatic distribution". To upozornění bylo vidět už
+  při zakládání skupiny, ale nedošlo mi, že se týká přesně naší situace.
+
+**Náprava**
+
+- Přes TestFlight → skupina → Builds → **Add Build to Group** přidán
+  build **1.0 (12)** (nejnovější, vytvořený 1. 9. v 9:20, obsahuje obě
+  opravy aplikace).
+- Ověřeno: skupina hlásí **„Internal Group ∙ 2 Testers ∙ 1 Build"**,
+  build ve stavu Testing.
+
+**Nedokončeno: automatické doručování dalších buildů**
+
+- Snaha přidat do workflow post-akci **TestFlight Internal Testing**,
+  aby se příští buildy do skupiny přidávaly samy.
+- Post-akce se v rozhraní přidat podaří, ale **uložení neprojde**,
+  tlačítko Save nezaktivní a workflow si drží původní čas poslední
+  změny. Zkoušeno třikrát různými cestami.
+- **Ruční postup pro uživatele** (jednorázově):
+  App Store Connect → Xcode Cloud → Manage Workflows → Default →
+  sekce Post-Actions → **+** → TestFlight Internal Testing →
+  vybrat skupinu „Interní testeři" → Save.
+- Bez toho je potřeba u každého nového buildu jednou kliknout
+  TestFlight → Interní testeři → Builds → Add Build to Group.
+
+---
