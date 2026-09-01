@@ -3940,10 +3940,24 @@
     speak(parts.join(" "));
   }
 
+  // Nativní hledání protějšku smí běžet jen v rámci našeho kódu spárování.
+  // Voláme při startu a po každé změně kódu; prázdný kód spojení vypne.
+  function nativeLink() {
+    try {
+      if (typeof window.__kasaPeerLink === "function") { window.__kasaPeerLink(state.pair || ""); }
+    } catch (e) {}
+  }
+
+  // Most se načítá až za touhle stránkou, takže při startu ještě nemusí být
+  // po ruce. Necháme mu proto způsob, jak si kód vyzvednout sám.
+  window.__kasaRoom = function () { return (state && state.pair) || ""; };
+
   function nativeSend(msg) {
     try {
       if (!window.webkit || !window.webkit.messageHandlers || !window.webkit.messageHandlers.peer) { return; }
+      if (!state.pair) { return; }
       msg.src = myId;
+      msg.room = state.pair;
       window.webkit.messageHandlers.peer.postMessage(JSON.stringify(msg));
     } catch (e) {}
   }
@@ -4002,6 +4016,8 @@
     var msg = null;
     try { msg = typeof raw === "string" ? JSON.parse(raw) : raw; } catch (e) { return; }
     if (!msg || (!Array.isArray(msg.sales) && msg.t !== "del" && msg.t !== "clear")) { return; }
+    // pojistka pro případ, že by se spojení navázalo mimo náš kód
+    if (!state.pair || (msg.room && msg.room !== state.pair)) { return; }
 
     var changed = false;
 
@@ -6100,7 +6116,7 @@
       var abc = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789", code = "";
       for (var ci = 0; ci < 5; ci++) { code += abc.charAt(Math.floor(Math.random() * abc.length)); }
       state.pair = code;
-      save(); relayOpen(); render();
+      save(); relayOpen(); nativeLink(); render();
       sayHello(true);
       showToast(T("toastCode", code));
       return;
@@ -6111,7 +6127,7 @@
       var code2 = (fld ? fld.value : "").toUpperCase().replace(/[^A-Z0-9]/g, "");
       if (code2.length < 3) { showToast(T("toastEnterCode")); return; }
       state.pair = code2;
-      save(); relayOpen(); render();
+      save(); relayOpen(); nativeLink(); render();
       sayHello(true);
       showToast(T("toastJoining", code2));
       return;
@@ -6129,6 +6145,7 @@
       state.pair = "";
       peers = 0;
       relayClose();
+      nativeLink();   // bez kódu se nativní hledání vypne
       save(); render();
       return;
     }
@@ -6393,6 +6410,7 @@
   render();
 
   relayOpen();
+  nativeLink();
 
   dbInit(function () {
     dbSettled = true;

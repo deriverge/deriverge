@@ -89,8 +89,18 @@
     }
   });
 
-  // Původní aplikace spouštěla hledání protějšku hned po startu — uděláme totéž.
-  callSafe("start");
+  // Hledání protějšku se spouští až s kódem spárování, ne hned po startu:
+  // bez kódu by se spojila kterákoli dvě zařízení v dosahu. Kód dodá stránka,
+  // jakmile ho zná, a při každé jeho změně znovu.
+  window.__kasaPeerLink = function (room) {
+    callSafe("start", { room: typeof room === "string" ? room : "" });
+  };
+
+  // Stránka se načetla dřív než tenhle soubor, kód spárování si tedy
+  // vyzvedneme sami; při každé další změně nám ho pošle sama.
+  if (typeof window.__kasaRoom === "function") {
+    window.__kasaPeerLink(window.__kasaRoom());
+  }
 
   // Při ukončení aplikace síť poctivě zavřeme (na iOS se stránka jen zmrazí,
   // pagehide je tam spolehlivější než beforeunload).

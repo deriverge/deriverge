@@ -66,27 +66,45 @@ final class PeerLink: NSObject {
         s.delegate = self
         return s
     }()
-    private lazy var advertiser = MCNearbyServiceAdvertiser(
-        peer: peerID, discoveryInfo: nil, serviceType: PeerLink.service)
-    private lazy var browser = MCNearbyServiceBrowser(
-        peer: peerID, serviceType: PeerLink.service)
+
+    /// Kód spárování. Zařízení se hledají a spojují jen v rámci stejného kódu:
+    /// bez něj by se na trhu propojily dvě sousední kasy různých prodejců
+    /// a objednávky by si přetekly mezi firmami.
+    private var room = ""
+    private var advertiser: MCNearbyServiceAdvertiser?
+    private var browser: MCNearbyServiceBrowser?
 
     /// Volá se na hlavním vlákně, když dorazí data od protějšku.
     var onMessage: ((String) -> Void)?
     /// Volá se na hlavním vlákně při změně počtu připojených zařízení.
     var onPeerCount: ((Int) -> Void)?
 
-    func start() {
-        advertiser.delegate = self
-        browser.delegate = self
-        advertiser.startAdvertisingPeer()
-        browser.startBrowsingForPeers()
+    /// Bez kódu se nikam nehlásíme ani nikoho nehledáme.
+    func start(room newRoom: String) {
+        let code = newRoom.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
+        if code == room && advertiser != nil { return }
+        stop()
+        room = code
+        guard !code.isEmpty else { return }
+
+        let a = MCNearbyServiceAdvertiser(
+            peer: peerID, discoveryInfo: ["r": code], serviceType: PeerLink.service)
+        let b = MCNearbyServiceBrowser(peer: peerID, serviceType: PeerLink.service)
+        a.delegate = self
+        b.delegate = self
+        a.startAdvertisingPeer()
+        b.startBrowsingForPeers()
+        advertiser = a
+        browser = b
     }
 
     func stop() {
-        advertiser.stopAdvertisingPeer()
-        browser.stopBrowsingForPeers()
+        advertiser?.stopAdvertisingPeer()
+        browser?.stopBrowsingForPeers()
+        advertiser = nil
+        browser = nil
         session.disconnect()
+        announce()
     }
 
     func send(_ json: String) {
@@ -124,12 +142,13 @@ extension PeerLink: MCSessionDelegate {
 }
 
 extension PeerLink: MCNearbyServiceAdvertiserDelegate {
-    /// Obě zařízení jsou naše, pozvání proto bereme bez ptaní.
+    /// Pozvání bereme jen od zařízení, které zná náš kód spárování.
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser,
                     didReceiveInvitationFromPeer peerID: MCPeerID,
                     withContext context: Data?,
                     invitationHandler: @escaping (Bool, MCSession?) -> Void) {
-        invitationHandler(true, session)
+        let theirs = context.flatMap { String(data: $0, encoding: .utf8) } ?? ""
+        invitationHandler(!room.isEmpty && theirs == room, session)
     }
 
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser,
@@ -143,9 +162,11 @@ extension PeerLink: MCNearbyServiceBrowserDelegate {
                  withDiscoveryInfo info: [String: String]?) {
         // Ať se dvě zařízení nezvou navzájem naráz, zve vždycky to "menší".
         // Při shodě jmen zvou obě — spojení se pak ustálí na jednom.
+        guard !room.isEmpty, info?["r"] == room else { return }
         guard !session.connectedPeers.contains(peerID) else { return }
         if self.peerID.displayName <= peerID.displayName {
-            browser.invitePeer(peerID, to: session, withContext: nil, timeout: 20)
+            browser.invitePeer(peerID, to: session,
+                               withContext: room.data(using: .utf8), timeout: 20)
         }
     }
 
@@ -184,8 +205,9 @@ public class PeerLinkPlugin: CAPPlugin, CAPBridgedPlugin {
 
     deinit { link.stop() }
 
+    /// Očekává parametr `room` s kódem spárování. Prázdný kód spojení vypne.
     @objc func start(_ call: CAPPluginCall) {
-        link.start()
+        link.start(room: call.getString("room") ?? "")
         call.resolve()
     }
 
