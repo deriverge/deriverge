@@ -3,23 +3,40 @@
 <head>
 <meta charset="UTF-8">
 <title>Tapkasa framed shot</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&display=swap">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
 <style>
+  /* Vizuál obchodních snímků. Klid, hodně místa, jedna barva jako akcent
+     a tenký rám zařízení. Ne pestré přechody: obrazovka aplikace je sama
+     barevná a pozadí jí má ustoupit, ne s ní soupeřit. */
   :root{
-    --paper:#FBFAF7; --ink:#15120E; --ink2:#5F5749;
-    --sans:"Archivo","Helvetica Neue",Arial,sans-serif;
+    --bg-a:#FFFFFF; --bg-b:#F1EFEB;
+    --ink:#12100D; --ink-2:#6E6961; --ink-3:#A39C90;
+    --accent:#D6402A;
+    --sans:"Inter","Helvetica Neue",-apple-system,Arial,sans-serif;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{width:100%;height:100%}
-  body{font-family:var(--sans);color:var(--ink);overflow:hidden;background:var(--paper)}
+  body{font-family:var(--sans);color:var(--ink);overflow:hidden;
+       background:linear-gradient(180deg,var(--bg-a) 0%,var(--bg-a) 34%,var(--bg-b) 100%);
+       -webkit-font-smoothing:antialiased}
   .stage{position:relative;width:100%;height:100%;overflow:hidden}
+
   .copy{position:absolute;text-align:center}
-  .copy h1{font-weight:800;letter-spacing:-.03em;line-height:1.02;text-wrap:balance}
-  .copy p{color:var(--ink2);line-height:1.35;text-wrap:balance;font-weight:500}
-  .dev{position:absolute;background:#0E0C09;
-    box-shadow:0 30px 80px rgba(21,18,14,.26),0 6px 20px rgba(21,18,14,.15)}
+  .eyebrow{display:inline-flex;align-items:center;gap:.6em;
+           font-weight:600;text-transform:uppercase;letter-spacing:.22em;color:var(--ink-3)}
+  /* tečka v barvě značky je jediný barevný prvek v textové části */
+  .eyebrow::before{content:"";display:block;border-radius:50%;background:var(--accent)}
+  .copy h1{font-weight:600;letter-spacing:-.035em;line-height:1.04;text-wrap:balance}
+  .copy p{color:var(--ink-2);font-weight:400;line-height:1.4;text-wrap:balance}
+
+  /* rám je záměrně tenký, aby snímek obrazovky zabral co nejvíc plochy */
+  .dev{position:absolute;background:#0B0A08;
+       box-shadow:0 2px 4px rgba(18,16,13,.10),
+                  0 18px 40px rgba(18,16,13,.10),
+                  0 48px 110px rgba(18,16,13,.13)}
   .dev .scr{overflow:hidden;width:100%;height:100%}
-  .dev img{width:100%;height:100%;object-fit:cover;display:block;background:var(--paper)}
+  .dev img{width:100%;height:100%;object-fit:contain;display:block;background:#FBFAF7}
 </style>
 </head>
 <body>
@@ -32,56 +49,63 @@
   var shot = q.get("shot") || "01-sell";
   var img = q.get("img") || "";
 
-  // plátno v CSS px (ostrost řeší deviceScaleFactor=2 při fotografování)
+  // Plátno v CSS px (ostrost řeší deviceScaleFactor=2 při fotografování).
+  // sar je poměr stran zdrojového snímku obrazovky, ne plátna. Musí sedět
+  // přesně, jinak object-fit:cover obrázek uvnitř rámu ořízne a obsah
+  // aplikace vyjede mimo displej.
   var M = {
-    "67":   { w: 645,  h: 1398, sar: 1290 / 2796, frame: "iphone", pad: 12, r: 44, rs: 34, fs: 46, top: 64,  gap: 30, bot: 46, maxSide: 42 },
-    "ipad": { w: 1024, h: 1366, sar: 2048 / 2732, frame: "ipad",   pad: 16, r: 34, rs: 20, fs: 60, top: 66,  gap: 32, bot: 52, maxSide: 60 },
-    "play": { w: 540,  h: 960,  sar: 1080 / 1920, frame: "iphone", pad: 10, r: 36, rs: 28, fs: 38, top: 42,  gap: 22, bot: 34, maxSide: 34 },
-    "ptab": { w: 720,  h: 1280, sar: 1440 / 2560, frame: "ipad",   pad: 14, r: 30, rs: 18, fs: 48, top: 54,  gap: 26, bot: 44, maxSide: 46 }
+    "67":   { w: 645,  h: 1398, sar: 1290 / 2796, pad: 7,  r: 46, rs: 39, fs: 44, top: 76,  gap: 34, bot: 56, maxSide: 46 },
+    "ipad": { w: 1024, h: 1366, sar: 2048 / 2732, pad: 9,  r: 30, rs: 21, fs: 58, top: 72,  gap: 34, bot: 60, maxSide: 76 },
+    "play": { w: 540,  h: 960,  sar: 1290 / 2796, pad: 6,  r: 38, rs: 32, fs: 37, top: 52,  gap: 26, bot: 40, maxSide: 38 },
+    "ptab": { w: 720,  h: 1280, sar: 2048 / 2732, pad: 8,  r: 28, rs: 20, fs: 46, top: 58,  gap: 30, bot: 52, maxSide: 54 }
   }[mode];
 
   var TX = {
     cs: {
-      "01-sell":       ["Prodej na pár klepnutí", "Vlastní nabídka s barvami a cenami"],
-      "02-cash":       ["Vrácení spočítá za Vás", "Rychlá hotovost i platba kartou"],
-      "03-orders":     ["Objednávky přehledně", "Každý lístek s číslem a stavem"],
-      "04-ticket":     ["Výdej bez zmatků", "Odškrtávejte položky při předání"],
-      "05-history":    ["Tržby i daňové doklady", "Souhrn za období odešlete e-mailem"],
-      "06-onboarding": ["Připraveno za minutu", "Bez registrace, funguje i offline"],
-      "07-paywall":    ["Tapkasa Pro", "Neomezené platby a propojená zařízení"]
+      "01-sell":       ["Prodej", "Prodej na pár klepnutí", "Vlastní nabídka s barvami a cenami"],
+      "02-cash":       ["Platba", "Vrácení spočítá za Vás", "Rychlá hotovost i platba kartou"],
+      "03-orders":     ["Objednávky", "Objednávky přehledně", "Každý lístek s číslem a stavem"],
+      "04-ticket":     ["Výdej", "Výdej bez zmatků", "Odškrtávejte položky při předání"],
+      "05-history":    ["Přehled", "Tržby i daňové doklady", "Souhrn za období včetně rozpisu DPH"],
+      "06-onboarding": ["Začátek", "Připraveno za minutu", "Bez registrace, funguje i offline"],
+      "07-paywall":    ["Tapkasa Pro", "Neomezené účtování", "Propojená zařízení a plná historie"],
+      "08-vat":        ["Doklad", "Doklad i s rozpisem DPH", "Sazbu zadáte u položky, zbytek dopočítá aplikace"]
     },
     en: {
-      "01-sell":       ["Sell in a few taps", "Your menu with colors and prices"],
-      "02-cash":       ["Change counted for you", "Fast cash and card payments"],
-      "03-orders":     ["Orders at a glance", "Every ticket numbered and tracked"],
-      "04-ticket":     ["Pickup without mix-ups", "Tick items off as you hand them over"],
-      "05-history":    ["Sales and tax documents", "Send period summaries by e-mail"],
-      "06-onboarding": ["Ready in a minute", "No sign-up, works offline"],
-      "07-paywall":    ["Tapkasa Pro", "Unlimited payments and connected devices"]
+      "01-sell":       ["Sell", "Sell in a few taps", "Your menu with colors and prices"],
+      "02-cash":       ["Payment", "Change counted for you", "Fast cash and card payments"],
+      "03-orders":     ["Orders", "Orders at a glance", "Every ticket numbered and tracked"],
+      "04-ticket":     ["Pickup", "Pickup without mix-ups", "Tick items off as you hand them over"],
+      "05-history":    ["Reports", "Sales and tax documents", "Period summary with a VAT breakdown"],
+      "06-onboarding": ["Setup", "Ready in a minute", "No sign-up, works offline"],
+      "07-paywall":    ["Tapkasa Pro", "Unlimited billing", "Connected devices and full history"],
+      "08-vat":        ["Documents", "Receipts with a VAT breakdown", "Set the rate per item, the app does the maths"]
     }
   }[lang][shot];
-
-  var TINT = {
-    "01-sell": "#FFEFE9", "02-cash": "#EAF4EE", "03-orders": "#FBF2D8",
-    "04-ticket": "#EAF0FB", "05-history": "#F4EEE2", "06-onboarding": "#EAF4EE",
-    "07-paywall": "#FFEFE9"
-  }[shot];
-
-  document.body.style.background =
-    "radial-gradient(120% 62% at 50% 0%, " + TINT + " 0%, rgba(255,255,255,0) 72%), var(--paper)";
 
   var st = document.getElementById("stage");
   st.style.width = M.w + "px";
   st.style.height = M.h + "px";
 
+  var eb = Math.round(M.fs * 0.255);
   st.innerHTML =
     '<div class="copy" style="left:' + M.maxSide + "px;right:" + M.maxSide + "px;top:" + M.top + 'px">' +
-      '<h1 style="font-size:' + M.fs + 'px">' + TX[0] + "</h1>" +
-      '<p style="font-size:' + Math.round(M.fs * 0.44) + "px;margin-top:" + Math.round(M.fs * 0.3) + 'px">' + TX[1] + "</p>" +
+      '<div class="eyebrow" style="font-size:' + eb + "px;margin-bottom:" + Math.round(M.fs * 0.42) + 'px">' +
+        '<i style="width:' + Math.round(eb * 0.42) + "px;height:" + Math.round(eb * 0.42) + 'px"></i>' + TX[0] +
+      "</div>" +
+      '<h1 style="font-size:' + M.fs + 'px">' + TX[1] + "</h1>" +
+      '<p style="font-size:' + Math.round(M.fs * 0.42) + "px;margin-top:" + Math.round(M.fs * 0.34) + 'px">' + TX[2] + "</p>" +
     "</div>" +
     '<div class="dev" id="dev" style="border-radius:' + M.r + "px;padding:" + M.pad + 'px">' +
       '<div class="scr" style="border-radius:' + M.rs + 'px"><img src="' + img + '" alt=""></div>' +
     "</div>";
+
+  // tečku před nadpisem kreslíme přes ::before, ale kvůli velikosti
+  // ji nastavujeme na vloženém <i>; skryjeme tedy pseudoprvek
+  var s = document.createElement("style");
+  s.textContent = ".eyebrow::before{display:none}" +
+                  ".eyebrow i{display:block;border-radius:50%;background:var(--accent);flex:0 0 auto}";
+  document.head.appendChild(s);
 
   // zařízení dopočítat až podle skutečné výšky titulku
   function place() {
@@ -100,9 +124,13 @@
     dev.style.left = (M.w - devW) / 2 + "px";
     dev.style.top = top + "px";
   }
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(function () { place(); window.__ready = true; });
-  } else { place(); window.__ready = true; }
+
+  // rozmístění vystavíme ven, ať ho jde po změně rozměrů okna zopakovat
+  window.__place = place;
+  window.addEventListener("resize", place);
+
+  function ready() { place(); window.__ready = true; }
+  if (document.fonts && document.fonts.ready) { document.fonts.ready.then(ready); } else { ready(); }
   place();
 })();
 </script>
