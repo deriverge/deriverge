@@ -78,8 +78,8 @@ TWO DEVICES: TILL AND PICKUP
 
 OVERVIEW AND CLOSE-OUT
 • Total revenue, cash/card split, and pieces sold per product.
-• Summary tax document for any period: with your business details, sent by e-mail or printed.
-• Fill in your seller details once in settings and they are pre-filled on every document.
+• Summary tax document for any period, as a PDF: with your business details, sent by e-mail or shared.
+• Enter your seller details once into separate fields and they are pre-filled on every document.
 • VAT registered? Set a rate per item. You enter prices including tax and the document works out the net amount and the tax, broken down by rate. If you are not registered, VAT never appears.
 • Copy the summary as plain text, straight into a message to your accountant.
 • "Close event" moves the takings into the archive and resets the till for the next event.

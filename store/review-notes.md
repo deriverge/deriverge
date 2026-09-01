@@ -17,10 +17,14 @@ stalls, school fairs, festival bars. The seller types in their menu
 payment, and the bill joins a numbered order queue that staff tick off
 as they prepare items. A stats tab shows the day's revenue.
 
-The interface is in Czech (our launch market is the Czech Republic).
-A short glossary for testing: Prodej = Sell, Objednávky = Orders,
-Přehled = Overview, Menu = Menu/Settings, Zaplatit = Pay, Hotově = Cash,
-Kartou = Card, Hotovo = Done, Vydáno = Served, Uzavřít akci = Close event.
+The interface ships in nine languages (Czech, Slovak, English, German,
+French, Spanish, Italian, Polish, Portuguese). The language is chosen on
+first launch and can be changed any time in Menu. Screenshots on the
+product page are Czech; if you prefer English, pick English on the first
+screen. A short Czech glossary in case you keep the default: Prodej =
+Sell, Objednávky = Orders, Přehled = Overview, Menu = Menu/Settings,
+Zaplatit = Pay, Hotově = Cash, Kartou = Card, Hotovo = Done, Vydáno =
+Served, Uzavřít akci = Close event.
 
 THE APP DOES NOT PROCESS PAYMENTS
 Tapkasa only RECORDS that a sale happened. Cash is physically handed

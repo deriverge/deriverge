@@ -76,8 +76,8 @@ DVĚ ZAŘÍZENÍ: KASA A VÝDEJ
 PŘEHLED A UZÁVĚRKA
 • Tržba celkem, rozpad hotově/kartou, prodané kusy po položkách.
 • Souhrn zkopírujete jako text, třeba do zprávy účetní.
-• Souhrnný daňový doklad za zvolené období: s vašimi údaji, poslat e-mailem nebo vytisknout.
-• Údaje prodejce vyplníte jednou v nastavení a předvyplní se na každý doklad.
+• Souhrnný daňový doklad za zvolené období jako PDF: s vašimi údaji, pošlete e-mailem nebo sdílejte.
+• Údaje obchodníka zadáte jednou do samostatných políček a předvyplní se na každý doklad.
 • Plátci DPH zadají u položky sazbu v procentech. Ceny se zadávají včetně daně, doklad dopočítá základ i daň a rozepíše je po sazbách. Kdo plátce není, DPH vůbec nevidí.
 
 VAŠE DATA JSOU VAŠE

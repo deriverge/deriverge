@@ -262,6 +262,9 @@
   .arch{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid var(--rule);font-size:14px}
   .arch .mid{flex:1;min-width:0}
   .arch .s{font-size:12px;color:var(--ink-3);margin-top:2px}
+  .arch .ab{width:32px;height:32px;flex:0 0 auto;border:0;background:none;color:var(--ink-3);font-size:17px;line-height:1;border-radius:8px}
+  .arch .ab:active{background:var(--sunk)}
+  .arch .ab.del{color:var(--accent);font-size:19px}
 
   .acts{display:flex;flex-wrap:wrap;gap:8px;padding:18px 16px 28px}
   .act{flex:1 1 auto;padding:13px 14px;border:1px solid var(--rule);border-radius:var(--r-btn);background:var(--surface);font-size:14px;font-weight:600}
@@ -318,12 +321,13 @@
   .doc-range .inp::-webkit-date-and-time-value{text-align:left;min-width:0;margin:0}
   .doc-range .inp::-webkit-datetime-edit{padding:0}
   @media (min-width:520px){.doc-range{grid-template-columns:1fr 1fr}}
+  .sf-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+  .sf-grid .sf:nth-child(1),.sf-grid .sf:nth-child(4){grid-column:1 / -1}
+  @media (max-width:400px){.sf-grid{grid-template-columns:1fr}.sf-grid .sf{grid-column:1 / -1}}
+  .sf{display:block;min-width:0}
+  .sf .inp,.sf .txt{min-width:0;max-width:100%}
+  .sf span{display:block;font-size:11px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px}
   .doc-range label span{display:block;font-size:11px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px}
-  #printDoc{display:none}
-  @media print{
-    body>*{display:none !important}
-    #printDoc{display:block !important;font:12px/1.5 ui-monospace,Menlo,monospace;color:#000;white-space:pre-wrap;margin:0}
-  }
   .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
   /* ---------- počítadlo plateb zdarma ---------- */
@@ -536,7 +540,6 @@
 
 <div id="sheetSlot"></div>
 <div id="toastSlot"></div>
-<pre id="printDoc" aria-hidden="true"></pre>
 <div class="sr" id="live" role="status" aria-live="polite"></div>
 
 <script>
@@ -671,7 +674,31 @@
     soldHead: "Co se prodalo",
     receiptsHead: "Účtenky",
     delReceiptAria: "Smazat účtenku",
+    sellerHead: "Údaje obchodníka",
+    sellerHint: "Vyplňte, co vyžaduje vaše země. Prázdná pole se na dokladu neobjeví.",
+    sellerSet: "Údaje obchodníka · vyplněno",
+    sellerEmpty: "Údaje obchodníka · doplnit",
+    sfName: "Název firmy nebo jméno",
+    sfRegNo: "IČO",
+    sfVatId: "DIČ",
+    sfStreet: "Ulice a číslo",
+    sfCity: "Město",
+    sfZip: "PSČ",
+    sfCountry: "Země",
+    sfEmail: "E-mail",
+    sfPhone: "Telefon",
+    sfNote: "Další údaje",
+    sfNotePh: "Cokoli navíc, co má být na dokladu",
     closedHead: "Uzavřené akce",
+    archReopen: "Vrátit do kasy",
+    archReopenAria: "Vrátit akci {0} zpět do kasy",
+    archDelete: "Smazat akci",
+    archDelAria: "Smazat uzavřenou akci {0}",
+    archBusy: "Nejdřív uzavřete rozdělanou akci, do neprázdné kasy vrátit nejde.",
+    confirmArchOpen: ["Vrátit akci do kasy", "Účtenky z akce „{0}“ se vrátí do kasy a půjde je dál upravovat. Z uzavřených akcí zmizí.", "Vrátit"],
+    confirmArchDel: ["Smazat uzavřenou akci", "Akce „{0}“ se smaže i s tržbou. Tohle nejde vzít zpět.", "Smazat"],
+    toastArchOpen: "Akce {0} je zpátky v kase.",
+    toastArchDel: "Uzavřená akce smazána.",
     showSummary: "Zobrazit souhrn",
     closeEvent: "Uzavřít akci",
     emptyStats: "Zatím nic neprodáno.<br>Jakmile uložíte první účet, objeví se tu statistika.",
@@ -891,6 +918,18 @@
     docTotal: "CELKEM",
     docMail: "Poslat e-mailem",
     docPrint: "Vytisknout",
+    docPeriodLabel: "Období a akce",
+    docShare: "Sdílet",
+    docColItem: "Položka",
+    docColQty: "Ks",
+    docColUnit: "Cena",
+    docColSum: "Celkem",
+    docPageOf: "Strana {0} z {1}",
+    docFile: "doklad",
+    docMailBody: "V příloze posílám souhrnný prodejní doklad.",
+    pdfFail: "Doklad se nepodařilo vytvořit.",
+    pdfSaved: "Doklad uložen jako PDF.",
+    pdfSavedMail: "Doklad uložen jako PDF, přiložte ho ke zprávě.",
     docEmpty: "Ve zvoleném období nejsou žádné prodeje.",
     docFooter: "Vystaveno aplikací Tapkasa.",
     supportRow: "Napsat podpoře"
@@ -934,7 +973,31 @@
     soldHead: "What sold",
     receiptsHead: "Receipts",
     delReceiptAria: "Delete receipt",
+    sellerHead: "Seller details",
+    sellerHint: "Fill in whatever your country requires. Empty fields never appear on the document.",
+    sellerSet: "Seller details · filled in",
+    sellerEmpty: "Seller details · add them",
+    sfName: "Business or personal name",
+    sfRegNo: "Company number",
+    sfVatId: "VAT ID",
+    sfStreet: "Street and number",
+    sfCity: "City",
+    sfZip: "Postcode",
+    sfCountry: "Country",
+    sfEmail: "E-mail",
+    sfPhone: "Phone",
+    sfNote: "Anything else",
+    sfNotePh: "Anything else that belongs on the document",
     closedHead: "Closed events",
+    archReopen: "Reopen in the till",
+    archReopenAria: "Reopen event {0} in the till",
+    archDelete: "Delete event",
+    archDelAria: "Delete closed event {0}",
+    archBusy: "Close the event you have open first, reopening needs an empty till.",
+    confirmArchOpen: ["Reopen event", "Receipts from “{0}” go back into the till and can be edited again. The event leaves the closed list.", "Reopen"],
+    confirmArchDel: ["Delete closed event", "Event “{0}” is deleted along with its revenue. This cannot be undone.", "Delete"],
+    toastArchOpen: "Event {0} is back in the till.",
+    toastArchDel: "Closed event deleted.",
     showSummary: "Show summary",
     closeEvent: "Close event",
     emptyStats: "Nothing sold yet.<br>Save your first sale and stats appear here.",
@@ -1154,6 +1217,18 @@
     docTotal: "TOTAL",
     docMail: "Send by e-mail",
     docPrint: "Print",
+    docPeriodLabel: "Period and events",
+    docShare: "Share",
+    docColItem: "Item",
+    docColQty: "Qty",
+    docColUnit: "Price",
+    docColSum: "Total",
+    docPageOf: "Page {0} of {1}",
+    docFile: "document",
+    docMailBody: "Please find the summary sales document attached.",
+    pdfFail: "The document could not be created.",
+    pdfSaved: "Document saved as PDF.",
+    pdfSavedMail: "Document saved as PDF, attach it to your message.",
     docEmpty: "No sales in the chosen period.",
     docFooter: "Issued with the Tapkasa app.",
     supportRow: "Contact support"
@@ -1198,7 +1273,31 @@
     soldHead: "Čo sa predalo",
     receiptsHead: "Bločky",
     delReceiptAria: "Zmazať bloček",
+    sellerHead: "Údaje predajcu",
+    sellerHint: "Vyplňte, čo vyžaduje vaša krajina. Prázdne polia sa na doklade neobjavia.",
+    sellerSet: "Údaje predajcu · vyplnené",
+    sellerEmpty: "Údaje predajcu · doplniť",
+    sfName: "Názov firmy alebo meno",
+    sfRegNo: "IČO",
+    sfVatId: "IČ DPH",
+    sfStreet: "Ulica a číslo",
+    sfCity: "Mesto",
+    sfZip: "PSČ",
+    sfCountry: "Krajina",
+    sfEmail: "E-mail",
+    sfPhone: "Telefón",
+    sfNote: "Ďalšie údaje",
+    sfNotePh: "Čokoľvek navyše, čo má byť na doklade",
     closedHead: "Uzavreté akcie",
+    archReopen: "Vrátiť do kasy",
+    archReopenAria: "Vrátiť akciu {0} späť do kasy",
+    archDelete: "Zmazať akciu",
+    archDelAria: "Zmazať uzavretú akciu {0}",
+    archBusy: "Najprv uzavrite rozrobenú akciu, do neprázdnej kasy vrátiť nejde.",
+    confirmArchOpen: ["Vrátiť akciu do kasy", "Účtenky z akcie „{0}“ sa vrátia do kasy a pôjde ich ďalej upravovať. Z uzavretých akcií zmiznú.", "Vrátiť"],
+    confirmArchDel: ["Zmazať uzavretú akciu", "Akcia „{0}“ sa zmaže aj s tržbou. Toto sa nedá vziať späť.", "Zmazať"],
+    toastArchOpen: "Akcia {0} je späť v kase.",
+    toastArchDel: "Uzavretá akcia zmazaná.",
     showSummary: "Zobraziť súhrn",
     closeEvent: "Uzavrieť akciu",
     emptyStats: "Zatiaľ sa nič nepredalo.<br>Len čo uložíte prvý účet, objaví sa tu štatistika.",
@@ -1418,6 +1517,18 @@
     docTotal: "SPOLU",
     docMail: "Poslať e-mailom",
     docPrint: "Vytlačiť",
+    docPeriodLabel: "Obdobie a akcie",
+    docShare: "Zdieľať",
+    docColItem: "Položka",
+    docColQty: "Ks",
+    docColUnit: "Cena",
+    docColSum: "Spolu",
+    docPageOf: "Strana {0} z {1}",
+    docFile: "doklad",
+    docMailBody: "V prílohe posielam súhrnný predajný doklad.",
+    pdfFail: "Doklad sa nepodarilo vytvoriť.",
+    pdfSaved: "Doklad uložený ako PDF.",
+    pdfSavedMail: "Doklad uložený ako PDF, priložte ho k správe.",
     docEmpty: "Vo zvolenom období nie sú žiadne predaje.",
     docFooter: "Vystavené aplikáciou Tapkasa.",
     supportRow: "Napísať podpore"
@@ -1461,7 +1572,31 @@
     soldHead: "Was verkauft wurde",
     receiptsHead: "Belege",
     delReceiptAria: "Beleg löschen",
+    sellerHead: "Angaben zum Verkäufer",
+    sellerHint: "Tragen Sie ein, was Ihr Land verlangt. Leere Felder erscheinen nicht auf dem Beleg.",
+    sellerSet: "Angaben zum Verkäufer · ausgefüllt",
+    sellerEmpty: "Angaben zum Verkäufer · ergänzen",
+    sfName: "Firmen- oder Personenname",
+    sfRegNo: "Steuernummer",
+    sfVatId: "USt-IdNr.",
+    sfStreet: "Straße und Hausnummer",
+    sfCity: "Ort",
+    sfZip: "PLZ",
+    sfCountry: "Land",
+    sfEmail: "E-Mail",
+    sfPhone: "Telefon",
+    sfNote: "Weitere Angaben",
+    sfNotePh: "Alles Weitere, was auf den Beleg gehört",
     closedHead: "Abgeschlossene Events",
+    archReopen: "Zurück in die Kasse",
+    archReopenAria: "Event {0} zurück in die Kasse holen",
+    archDelete: "Event löschen",
+    archDelAria: "Abgeschlossenes Event {0} löschen",
+    archBusy: "Schließen Sie zuerst das laufende Event ab, in eine volle Kasse geht das nicht.",
+    confirmArchOpen: ["Event zurückholen", "Die Belege aus „{0}“ kommen zurück in die Kasse und lassen sich wieder bearbeiten. Aus der Liste der abgeschlossenen Events verschwindet es.", "Zurückholen"],
+    confirmArchDel: ["Abgeschlossenes Event löschen", "Das Event „{0}“ wird samt Umsatz gelöscht. Das lässt sich nicht rückgängig machen.", "Löschen"],
+    toastArchOpen: "Event {0} ist zurück in der Kasse.",
+    toastArchDel: "Abgeschlossenes Event gelöscht.",
     showSummary: "Zusammenfassung zeigen",
     closeEvent: "Event abschließen",
     emptyStats: "Noch nichts verkauft.<br>Sobald Sie den ersten Verkauf speichern, taucht hier die Statistik auf.",
@@ -1681,6 +1816,18 @@
     docTotal: "GESAMT",
     docMail: "Per E-Mail senden",
     docPrint: "Drucken",
+    docPeriodLabel: "Zeitraum und Events",
+    docShare: "Teilen",
+    docColItem: "Artikel",
+    docColQty: "Stk",
+    docColUnit: "Preis",
+    docColSum: "Summe",
+    docPageOf: "Seite {0} von {1}",
+    docFile: "beleg",
+    docMailBody: "Anbei der zusammenfassende Verkaufsbeleg.",
+    pdfFail: "Der Beleg konnte nicht erstellt werden.",
+    pdfSaved: "Beleg als PDF gespeichert.",
+    pdfSavedMail: "Beleg als PDF gespeichert, hängen Sie ihn an die Nachricht an.",
     docEmpty: "Im gewählten Zeitraum gibt es keine Verkäufe.",
     docFooter: "Erstellt mit der Tapkasa App.",
     supportRow: "Support kontaktieren"
@@ -1724,7 +1871,31 @@
     soldHead: "Ce qui s’est vendu",
     receiptsHead: "Tickets",
     delReceiptAria: "Supprimer le ticket",
+    sellerHead: "Coordonnées du vendeur",
+    sellerHint: "Renseignez ce que votre pays exige. Les champs vides n'apparaissent pas sur le document.",
+    sellerSet: "Coordonnées du vendeur · renseignées",
+    sellerEmpty: "Coordonnées du vendeur · à compléter",
+    sfName: "Raison sociale ou nom",
+    sfRegNo: "SIRET",
+    sfVatId: "Numéro de TVA",
+    sfStreet: "Rue et numéro",
+    sfCity: "Ville",
+    sfZip: "Code postal",
+    sfCountry: "Pays",
+    sfEmail: "E-mail",
+    sfPhone: "Téléphone",
+    sfNote: "Autres mentions",
+    sfNotePh: "Tout ce qui doit encore figurer sur le document",
     closedHead: "Événements clôturés",
+    archReopen: "Remettre en caisse",
+    archReopenAria: "Remettre l'événement {0} en caisse",
+    archDelete: "Supprimer l'événement",
+    archDelAria: "Supprimer l'événement clôturé {0}",
+    archBusy: "Clôturez d'abord l'événement en cours, la caisse doit être vide.",
+    confirmArchOpen: ["Remettre en caisse", "Les tickets de « {0} » reviennent en caisse et redeviennent modifiables. L'événement quitte la liste des clôturés.", "Remettre"],
+    confirmArchDel: ["Supprimer l'événement clôturé", "L'événement « {0} » sera supprimé avec son chiffre d'affaires. C'est irréversible.", "Supprimer"],
+    toastArchOpen: "L'événement {0} est de retour en caisse.",
+    toastArchDel: "Événement clôturé supprimé.",
     showSummary: "Voir le résumé",
     closeEvent: "Clôturer l’événement",
     emptyStats: "Rien de vendu pour l’instant.<br>Encaissez une première vente et les statistiques apparaîtront ici.",
@@ -1944,6 +2115,18 @@
     docTotal: "TOTAL",
     docMail: "Envoyer par e-mail",
     docPrint: "Imprimer",
+    docPeriodLabel: "Période et événements",
+    docShare: "Partager",
+    docColItem: "Article",
+    docColQty: "Qté",
+    docColUnit: "Prix",
+    docColSum: "Total",
+    docPageOf: "Page {0} sur {1}",
+    docFile: "document",
+    docMailBody: "Veuillez trouver ci-joint le document récapitulatif des ventes.",
+    pdfFail: "Le document n'a pas pu être créé.",
+    pdfSaved: "Document enregistré en PDF.",
+    pdfSavedMail: "Document enregistré en PDF, joignez-le à votre message.",
     docEmpty: "Aucune vente sur la période choisie.",
     docFooter: "Émis avec l’application Tapkasa.",
     supportRow: "Contacter l’assistance"
@@ -1987,7 +2170,31 @@
     soldHead: "Qué se ha vendido",
     receiptsHead: "Recibos",
     delReceiptAria: "Eliminar recibo",
+    sellerHead: "Datos del vendedor",
+    sellerHint: "Rellene lo que exija su país. Los campos vacíos no salen en el documento.",
+    sellerSet: "Datos del vendedor · rellenados",
+    sellerEmpty: "Datos del vendedor · completar",
+    sfName: "Razón social o nombre",
+    sfRegNo: "NIF",
+    sfVatId: "Número de IVA",
+    sfStreet: "Calle y número",
+    sfCity: "Ciudad",
+    sfZip: "Código postal",
+    sfCountry: "País",
+    sfEmail: "Correo",
+    sfPhone: "Teléfono",
+    sfNote: "Otros datos",
+    sfNotePh: "Cualquier otra cosa que deba figurar en el documento",
     closedHead: "Eventos cerrados",
+    archReopen: "Devolver a la caja",
+    archReopenAria: "Devolver el evento {0} a la caja",
+    archDelete: "Eliminar evento",
+    archDelAria: "Eliminar el evento cerrado {0}",
+    archBusy: "Cierre primero el evento en curso, la caja tiene que estar vacía.",
+    confirmArchOpen: ["Devolver el evento a la caja", "Los tickets de «{0}» vuelven a la caja y se pueden volver a editar. El evento sale de la lista de cerrados.", "Devolver"],
+    confirmArchDel: ["Eliminar evento cerrado", "El evento «{0}» se elimina junto con sus ingresos. No se puede deshacer.", "Eliminar"],
+    toastArchOpen: "El evento {0} está de vuelta en la caja.",
+    toastArchDel: "Evento cerrado eliminado.",
     showSummary: "Ver resumen",
     closeEvent: "Cerrar evento",
     emptyStats: "Aún no se ha vendido nada.<br>Guarde la primera venta y aquí aparecerán las estadísticas.",
@@ -2207,6 +2414,18 @@
     docTotal: "TOTAL",
     docMail: "Enviar por correo",
     docPrint: "Imprimir",
+    docPeriodLabel: "Periodo y eventos",
+    docShare: "Compartir",
+    docColItem: "Artículo",
+    docColQty: "Uds",
+    docColUnit: "Precio",
+    docColSum: "Total",
+    docPageOf: "Página {0} de {1}",
+    docFile: "documento",
+    docMailBody: "Adjunto el documento resumen de ventas.",
+    pdfFail: "No se pudo crear el documento.",
+    pdfSaved: "Documento guardado en PDF.",
+    pdfSavedMail: "Documento guardado en PDF, adjúntelo al mensaje.",
     docEmpty: "No hay ventas en el periodo elegido.",
     docFooter: "Emitido con la aplicación Tapkasa.",
     supportRow: "Contactar con soporte"
@@ -2250,7 +2469,31 @@
     soldHead: "Articoli venduti",
     receiptsHead: "Scontrini",
     delReceiptAria: "Eliminare lo scontrino",
+    sellerHead: "Dati del venditore",
+    sellerHint: "Compilate quello che richiede il vostro paese. I campi vuoti non compaiono sul documento.",
+    sellerSet: "Dati del venditore · compilati",
+    sellerEmpty: "Dati del venditore · da compilare",
+    sfName: "Ragione sociale o nome",
+    sfRegNo: "Codice fiscale",
+    sfVatId: "Partita IVA",
+    sfStreet: "Via e numero",
+    sfCity: "Città",
+    sfZip: "CAP",
+    sfCountry: "Paese",
+    sfEmail: "E-mail",
+    sfPhone: "Telefono",
+    sfNote: "Altri dati",
+    sfNotePh: "Qualsiasi altra cosa debba comparire sul documento",
     closedHead: "Eventi chiusi",
+    archReopen: "Riportare in cassa",
+    archReopenAria: "Riportare l'evento {0} in cassa",
+    archDelete: "Eliminare l'evento",
+    archDelAria: "Eliminare l'evento chiuso {0}",
+    archBusy: "Chiudete prima l'evento in corso, la cassa deve essere vuota.",
+    confirmArchOpen: ["Riportare l'evento in cassa", "Gli scontrini di «{0}» tornano in cassa e si possono modificare di nuovo. L'evento esce dall'elenco dei chiusi.", "Riportare"],
+    confirmArchDel: ["Eliminare l'evento chiuso", "L'evento «{0}» viene eliminato insieme all'incasso. Non si può annullare.", "Eliminare"],
+    toastArchOpen: "L'evento {0} è di nuovo in cassa.",
+    toastArchDel: "Evento chiuso eliminato.",
     showSummary: "Mostrare il riepilogo",
     closeEvent: "Chiudere l’evento",
     emptyStats: "Ancora nessuna vendita.<br>Appena viene salvato il primo conto, qui compaiono le statistiche.",
@@ -2470,6 +2713,18 @@
     docTotal: "TOTALE",
     docMail: "Inviare per e-mail",
     docPrint: "Stampare",
+    docPeriodLabel: "Periodo ed eventi",
+    docShare: "Condividere",
+    docColItem: "Articolo",
+    docColQty: "Pz",
+    docColUnit: "Prezzo",
+    docColSum: "Totale",
+    docPageOf: "Pagina {0} di {1}",
+    docFile: "documento",
+    docMailBody: "In allegato il documento riepilogativo delle vendite.",
+    pdfFail: "Non è stato possibile creare il documento.",
+    pdfSaved: "Documento salvato in PDF.",
+    pdfSavedMail: "Documento salvato in PDF, allegatelo al messaggio.",
     docEmpty: "Nessuna vendita nel periodo scelto.",
     docFooter: "Emesso con l’app Tapkasa.",
     supportRow: "Contattare l’assistenza"
@@ -2513,7 +2768,31 @@
     soldHead: "Co się sprzedało",
     receiptsHead: "Paragony",
     delReceiptAria: "Usunąć paragon",
+    sellerHead: "Dane sprzedawcy",
+    sellerHint: "Wypełnij to, czego wymaga twój kraj. Puste pola nie pojawią się na dokumencie.",
+    sellerSet: "Dane sprzedawcy · wypełnione",
+    sellerEmpty: "Dane sprzedawcy · uzupełnij",
+    sfName: "Nazwa firmy lub imię i nazwisko",
+    sfRegNo: "REGON",
+    sfVatId: "NIP",
+    sfStreet: "Ulica i numer",
+    sfCity: "Miasto",
+    sfZip: "Kod pocztowy",
+    sfCountry: "Kraj",
+    sfEmail: "E-mail",
+    sfPhone: "Telefon",
+    sfNote: "Dodatkowe dane",
+    sfNotePh: "Cokolwiek jeszcze ma być na dokumencie",
     closedHead: "Zamknięte imprezy",
+    archReopen: "Wróć do kasy",
+    archReopenAria: "Przywróć imprezę {0} do kasy",
+    archDelete: "Usuń imprezę",
+    archDelAria: "Usuń zamkniętą imprezę {0}",
+    archBusy: "Najpierw zamknij trwającą imprezę, do niepustej kasy nie da się wrócić.",
+    confirmArchOpen: ["Przywróć imprezę do kasy", "Paragony z imprezy „{0}” wrócą do kasy i będzie je można dalej edytować. Znikną z listy zamkniętych.", "Przywróć"],
+    confirmArchDel: ["Usuń zamkniętą imprezę", "Impreza „{0}” zostanie usunięta razem z utargiem. Tego nie da się cofnąć.", "Usuń"],
+    toastArchOpen: "Impreza {0} wróciła do kasy.",
+    toastArchDel: "Zamknięta impreza usunięta.",
     showSummary: "Podsumowanie",
     closeEvent: "Zamknięcie imprezy",
     emptyStats: "Na razie nic nie sprzedano.<br>Po zapisaniu pierwszego rachunku pojawią się tu statystyki.",
@@ -2733,6 +3012,18 @@
     docTotal: "RAZEM",
     docMail: "Wysłać e-mailem",
     docPrint: "Wydrukować",
+    docPeriodLabel: "Okres i imprezy",
+    docShare: "Udostępnij",
+    docColItem: "Pozycja",
+    docColQty: "Szt",
+    docColUnit: "Cena",
+    docColSum: "Razem",
+    docPageOf: "Strona {0} z {1}",
+    docFile: "dokument",
+    docMailBody: "W załączeniu zbiorczy dokument sprzedaży.",
+    pdfFail: "Nie udało się utworzyć dokumentu.",
+    pdfSaved: "Dokument zapisany jako PDF.",
+    pdfSavedMail: "Dokument zapisany jako PDF, dołącz go do wiadomości.",
     docEmpty: "Brak sprzedaży w wybranym okresie.",
     docFooter: "Wystawiono w aplikacji Tapkasa.",
     supportRow: "Kontakt z pomocą"
@@ -2776,7 +3067,31 @@
     soldHead: "O que se vendeu",
     receiptsHead: "Recibos",
     delReceiptAria: "Apagar recibo",
+    sellerHead: "Dados do vendedor",
+    sellerHint: "Preencha o que o seu país exigir. Os campos vazios não aparecem no documento.",
+    sellerSet: "Dados do vendedor · preenchidos",
+    sellerEmpty: "Dados do vendedor · preencher",
+    sfName: "Nome da empresa ou pessoal",
+    sfRegNo: "NIPC",
+    sfVatId: "Número de IVA",
+    sfStreet: "Rua e número",
+    sfCity: "Cidade",
+    sfZip: "Código postal",
+    sfCountry: "País",
+    sfEmail: "E-mail",
+    sfPhone: "Telefone",
+    sfNote: "Outros dados",
+    sfNotePh: "Tudo o mais que deva constar do documento",
     closedHead: "Eventos fechados",
+    archReopen: "Devolver à caixa",
+    archReopenAria: "Devolver o evento {0} à caixa",
+    archDelete: "Apagar evento",
+    archDelAria: "Apagar o evento fechado {0}",
+    archBusy: "Feche primeiro o evento em curso, a caixa tem de estar vazia.",
+    confirmArchOpen: ["Devolver o evento à caixa", "Os talões de «{0}» voltam à caixa e podem voltar a ser editados. O evento sai da lista dos fechados.", "Devolver"],
+    confirmArchDel: ["Apagar evento fechado", "O evento «{0}» é apagado juntamente com a receita. Isto não se pode desfazer.", "Apagar"],
+    toastArchOpen: "O evento {0} está de volta à caixa.",
+    toastArchDel: "Evento fechado apagado.",
     showSummary: "Mostrar resumo",
     closeEvent: "Fechar evento",
     emptyStats: "Ainda não vendeu nada.<br>Assim que guardar a primeira conta, aparecem aqui as estatísticas.",
@@ -2996,6 +3311,18 @@
     docTotal: "TOTAL",
     docMail: "Enviar por e-mail",
     docPrint: "Imprimir",
+    docPeriodLabel: "Período e eventos",
+    docShare: "Partilhar",
+    docColItem: "Artigo",
+    docColQty: "Un",
+    docColUnit: "Preço",
+    docColSum: "Total",
+    docPageOf: "Página {0} de {1}",
+    docFile: "documento",
+    docMailBody: "Em anexo segue o documento resumo de vendas.",
+    pdfFail: "Não foi possível criar o documento.",
+    pdfSaved: "Documento guardado em PDF.",
+    pdfSavedMail: "Documento guardado em PDF, anexe-o à mensagem.",
     docEmpty: "Sem vendas no período escolhido.",
     docFooter: "Emitido com a aplicação Tapkasa.",
     supportRow: "Contactar o suporte"
@@ -3279,6 +3606,7 @@
       v: 3, event: "", mode: "kasa", nextNo: 1, voice: true, pair: "",
       lang: detectLang(), currency: detectCurrency(),
       setup: false, license: "", payDay: "", payN: 0, biz: "", vat: false,
+      seller: {},
       items: [], order: [], sales: [], archives: []
     };
   }
@@ -3300,6 +3628,8 @@
     d.order = Array.isArray(d.order) ? d.order : [];
     d.sales = Array.isArray(d.sales) ? d.sales : [];
     d.archives = Array.isArray(d.archives) ? d.archives : [];
+    // starší archivy vznikaly bez identifikátoru, bez něj by je nešlo smazat
+    d.archives.forEach(function (a) { if (!a.id) { a.id = uid(); } });
     d.event = typeof d.event === "string" ? d.event : "";
     d.savedAt = typeof d.savedAt === "number" ? d.savedAt : 0;
     d.mode = d.mode === "vydej" ? "vydej" : "kasa";
@@ -3312,6 +3642,13 @@
     d.payN = typeof d.payN === "number" ? d.payN : 0;
     d.biz = typeof d.biz === "string" ? d.biz : "";
     d.vat = d.vat === true;   // starší instalace DPH neřešily, zůstanou vypnuté
+    // Dřív se údaje prodejce psaly volným textem. Aby se nikomu neztratily,
+    // přesuneme je do poznámky; strukturovaná pole si doplní sám.
+    if (!d.seller || typeof d.seller !== "object") { d.seller = {}; }
+    if (!SELLER_FIELDS.some(function (k) { return d.seller[k]; }) && d.biz && !d.seller.note) {
+      d.seller.note = d.biz;
+      d.biz = "";
+    }
     if (typeof d.license !== "string") {
       // instalace z doby před tarify jedou dál bez omezení, nikomu nebereme,
       // co už používal (párování, neomezené účtování)
@@ -4174,7 +4511,15 @@
              '<div class="s">' + new Date(a.closedAt).toLocaleDateString(langInfo().loc) + " · " +
              a.count + " " + tp("billsN", a.count) + " · " + esc(T("cashLower")) + " " + czk(a.cash) +
              ", " + esc(T("cardLower")) + " " + czk(a.card) + "</div></div>" +
-             '<span class="num">' + czk(a.total) + "</span></div>";
+             '<span class="num">' + czk(a.total) + "</span>" +
+             // vrátit lze jen akci, u které jsou uložené účtenky; starší
+             // archivy je nemají a doúčtovat by se nedaly
+             (a.sales && a.sales.length
+               ? '<button class="ab" data-archopen="' + esc(a.id || "") + '" aria-label="' +
+                 esc(T("archReopenAria", a.event)) + '" title="' + esc(T("archReopen")) + '">&#8617;</button>'
+               : "") +
+             '<button class="ab del" data-archdel="' + esc(a.id || "") + '" aria-label="' +
+             esc(T("archDelAria", a.event)) + '" title="' + esc(T("archDelete")) + '">&times;</button></div>';
       });
       h += "</section>";
     }
@@ -4231,14 +4576,43 @@
     var list = Object.keys(items).map(function (k) { return items[k]; });
     list.sort(function (a, b) { return b.sum - a.sum || b.qty - a.qty; });
 
+    // Rozpis DPH počítáme jednou a používají ho text i PDF. Ceny se zadávají
+    // včetně daně, základ tedy dopočítáváme zpětně: zaklad = cena/(1+sazba/100).
+    // Položky bez sazby jdou do základu celé, aby základ a daň daly dohromady
+    // přesně celkovou tržbu.
+    var vatRows = [], vatBase = 0, vatTax = 0, anyRate = false;
+    if (state.vat) {
+      var rates = {};
+      list.forEach(function (i) {
+        var r = vatNum(i.vat);
+        var key = r === null ? "" : String(r);
+        if (r !== null) { anyRate = true; }
+        rates[key] = (rates[key] || 0) + i.sum;
+      });
+      if (anyRate) {
+        Object.keys(rates).sort(function (a, b) {
+          return (parseFloat(a) || 0) - (parseFloat(b) || 0);
+        }).forEach(function (key) {
+          var gross = rates[key];
+          var r = key === "" ? null : parseFloat(key);
+          var base = r === null ? mr(gross) : mr(gross / (1 + r / 100));
+          var tax = mr(gross - base);
+          vatBase += base;
+          vatTax += tax;
+          vatRows.push({ rate: r, gross: gross, base: base, tax: tax });
+        });
+      }
+    }
+
     var now = new Date();
     var no = "TK-" + docDate(now).replace(/-/g, "") + "-" + ("0" + now.getHours()).slice(-2) + ("0" + now.getMinutes()).slice(-2);
     var loc = langInfo().loc;
     var out = [];
     out.push(T("docTitle"));
     out.push("");
-    if (state.biz.trim()) {
-      state.biz.trim().split("\n").forEach(function (ln) { out.push(ln.trim()); });
+    var sl = sellerLines();
+    if (sl.length) {
+      sl.forEach(function (ln) { out.push(ln); });
       out.push("");
     }
     out.push(T("docNo") + " " + no);
@@ -4256,36 +4630,17 @@
     // Rozpis DPH. Ceny se zadávají včetně daně, takže základ dopočítáváme
     // zpětně: zaklad = cena / (1 + sazba/100). Položky bez sazby jdou do
     // základu celé, aby základ a daň daly dohromady přesně celkovou tržbu.
-    if (state.vat) {
-      var rates = {}, anyRate = false;
-      list.forEach(function (i) {
-        var r = vatNum(i.vat);
-        var key = r === null ? "" : String(r);
-        if (r !== null) { anyRate = true; }
-        rates[key] = (rates[key] || 0) + i.sum;
+    if (vatRows.length) {
+      out.push(T("docVatHead"));
+      vatRows.forEach(function (v) {
+        out.push(v.rate === null
+          ? T("docVatNone") + ": " + czk(v.base)
+          : T("docVatRate") + " " + v.rate + " %: " + T("docVatBase") + " " + czk(v.base) +
+            ", " + T("docVatTax") + " " + czk(v.tax));
       });
-      if (anyRate) {
-        var keys = Object.keys(rates).sort(function (a, b) {
-          return (parseFloat(a) || 0) - (parseFloat(b) || 0);
-        });
-        var baseAll = 0, taxAll = 0;
-        out.push(T("docVatHead"));
-        keys.forEach(function (key) {
-          var gross = rates[key];
-          var r = key === "" ? null : parseFloat(key);
-          var base = r === null ? mr(gross) : mr(gross / (1 + r / 100));
-          var tax = mr(gross - base);
-          baseAll += base;
-          taxAll += tax;
-          out.push(r === null
-            ? T("docVatNone") + ": " + czk(base)
-            : T("docVatRate") + " " + key + " %: " + T("docVatBase") + " " + czk(base) +
-              ", " + T("docVatTax") + " " + czk(tax));
-        });
-        out.push(T("docVatTotalBase") + " " + czk(baseAll));
-        out.push(T("docVatTotalTax") + " " + czk(taxAll));
-        out.push("");
-      }
+      out.push(T("docVatTotalBase") + " " + czk(vatBase));
+      out.push(T("docVatTotalTax") + " " + czk(vatTax));
+      out.push("");
     }
     out.push(T("docReceipts") + " " + bills);
     out.push(T("cash") + ": " + czk(cashSum));
@@ -4293,7 +4648,342 @@
     out.push(T("docTotal") + ": " + czk(total));
     out.push("");
     out.push(T("docFooter"));
-    return out.join("\n");
+
+    // Text i PDF stojí na týchž datech, ať se nikdy nerozejdou.
+    return {
+      text: out.join("\n"),
+      no: no,
+      from: from, to: to, issued: now.getTime(),
+      seller: sl,
+      events: Object.keys(events),
+      items: list,
+      vatRows: vatRows, vatBase: vatBase, vatTax: vatTax,
+      bills: bills, cash: cashSum, card: cardSum, total: total
+    };
+  }
+
+  // ---------- doklad jako PDF ----------
+  // Doklad kreslíme na plátno a to pak vkládáme do PDF jako JPEG. Důvod je
+  // prozaický: kdybychom text psali do PDF přímo, museli bychom do souboru
+  // vložit celý font, jinak by se rozsypala diakritika. Devět jazyků včetně
+  // češtiny, polštiny a portugalštiny by přes standardní kódování neprošlo.
+
+  var PDF_W = 595, PDF_H = 842;   // A4 v bodech
+  var PDF_SCALE = 3;              // px na bod, kvůli ostrosti při tisku
+
+  function pdfPages(doc) {
+    var M = 42;                       // okraj
+    var rowH = 17;
+    var pages = [];
+
+    // kolik řádků položek se vejde na první a na další stránky
+    var headH = 210 + Math.max(0, doc.seller.length - 4) * 12;
+    var footH = 150 + doc.vatRows.length * rowH;
+    var firstRows = Math.max(1, Math.floor((PDF_H - M - headH - footH - M) / rowH));
+    var nextRows = Math.max(1, Math.floor((PDF_H - M - 90 - M) / rowH));
+
+    var rest = doc.items.slice();
+    pages.push(rest.splice(0, firstRows));
+    while (rest.length) { pages.push(rest.splice(0, nextRows)); }
+    return { pages: pages, M: M, rowH: rowH };
+  }
+
+  // značka: čtyři dlaždice v barvách aplikace, stejný motiv jako ikona
+  function drawMark(g, x, y, size) {
+    var gap = size * 0.10, t = (size - gap) / 2, r = t * 0.28;
+    var cols = ["#D6402A", "#F5CE3E", "#2158C4", "#127A4E"];
+    [[0, 0], [1, 0], [0, 1], [1, 1]].forEach(function (pos, i) {
+      var tx = x + pos[0] * (t + gap), ty = y + pos[1] * (t + gap);
+      g.fillStyle = cols[i];
+      g.beginPath();
+      if (g.roundRect) { g.roundRect(tx, ty, t, t, r); }
+      else { g.rect(tx, ty, t, t); }
+      g.fill();
+    });
+  }
+
+  function drawDocPage(doc, plan, pageIx) {
+    var M = plan.M, rowH = plan.rowH, S = PDF_SCALE;
+    var total = plan.pages.length;
+    var rows = plan.pages[pageIx];
+
+    var cv = document.createElement("canvas");
+    cv.width = PDF_W * S;
+    cv.height = PDF_H * S;
+    var g = cv.getContext("2d");
+    g.scale(S, S);
+    g.fillStyle = "#FFFFFF";
+    g.fillRect(0, 0, PDF_W, PDF_H);
+    g.textBaseline = "alphabetic";
+
+    var SANS = '-apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
+    var INK = "#15120E", INK2 = "#5F5749", INK3 = "#9A9184", ACC = "#D6402A", LINE = "#E4DFD6";
+    var font = function (size, weight) { g.font = (weight || 400) + " " + size + "px " + SANS; };
+    var ink = function (c) { g.fillStyle = c; };
+    var right = function (t, x, y) { g.textAlign = "right"; g.fillText(t, x, y); g.textAlign = "left"; };
+    var rule = function (y, c, w) {
+      g.strokeStyle = c || LINE; g.lineWidth = w || 0.7;
+      g.beginPath(); g.moveTo(M, y + 0.5); g.lineTo(PDF_W - M, y + 0.5); g.stroke();
+    };
+    var label = function (t, x, y, alignRight) {
+      font(8, 700); ink(INK3);
+      g.save(); g.letterSpacing = "0.08em";
+      if (alignRight) { right(t.toUpperCase(), x, y); } else { g.fillText(t.toUpperCase(), x, y); }
+      g.restore();
+    };
+    var clip = function (t, max) {
+      if (g.measureText(t).width <= max) { return t; }
+      var v = t;
+      while (v.length > 1 && g.measureText(v + "…").width > max) { v = v.slice(0, -1); }
+      return v + "…";
+    };
+
+    var loc = langInfo().loc;
+    var xSum = PDF_W - M;
+    var xQty = PDF_W - M - 300, xUnit = PDF_W - M - 226, xVat = PDF_W - M - 116;
+    var vatOn = state.vat && doc.vatRows.length > 0;
+    var y;
+
+    // ---- hlavička se značkou ----
+    drawMark(g, M, M, 26);
+    font(17, 700); ink(INK);
+    g.fillText("Tapkasa", M + 34, M + 20);
+    font(12, 700); ink(INK);
+    right(T("docTitle"), xSum, M + 12);
+    font(9.5, 400); ink(INK2);
+    right(T("docNo") + " " + doc.no, xSum, M + 26);
+    y = M + 40;
+    rule(y, ACC, 1.6);
+    y += 26;
+
+    if (pageIx === 0) {
+      var yl = y, yr = y;
+
+      label(T("sellerHead"), M, yl); yl += 15;
+      if (doc.seller.length) {
+        doc.seller.forEach(function (ln, i) {
+          font(i === 0 ? 11.5 : 10, i === 0 ? 700 : 400);
+          ink(i === 0 ? INK : INK2);
+          g.fillText(clip(ln, 240), M, yl);
+          yl += i === 0 ? 16 : 13;
+        });
+      } else {
+        font(10, 400); ink("#C4BDB2");
+        g.fillText(T("sellerEmpty"), M, yl); yl += 13;
+      }
+
+      label(T("docPeriodLabel"), xSum, yr, true); yr += 15;
+      font(10, 400); ink(INK2);
+      right(T("docPeriod") + " " + new Date(doc.from).toLocaleDateString(loc) +
+            " – " + new Date(doc.to).toLocaleDateString(loc), xSum, yr); yr += 14;
+      right(T("docIssued") + " " + new Date(doc.issued).toLocaleDateString(loc) +
+            " " + clock(doc.issued), xSum, yr); yr += 14;
+      right(clip(T("docEvents") + " " + doc.events.join(", "), 250), xSum, yr); yr += 14;
+
+      y = Math.max(yl, yr) + 20;
+    }
+
+    // ---- tabulka položek ----
+    label(T("docItemsHead"), M, y); y += 10;
+    rule(y); y += 5;
+    label(T("docColQty"), xQty, y + 9, true);
+    label(T("docColUnit"), xUnit, y + 9, true);
+    if (vatOn) { label(T("docVatTax"), xVat, y + 9, true); }
+    label(T("docColSum"), xSum, y + 9, true);
+    y += 14;
+    rule(y); y += 15;
+
+    rows.forEach(function (i, ix) {
+      if (ix % 2 === 1) {
+        g.fillStyle = "#FAF8F4";
+        g.fillRect(M - 4, y - 11, PDF_W - 2 * M + 8, rowH);
+      }
+      font(10.5, 500); ink(INK);
+      g.fillText(clip(i.name, xQty - M - 46), M, y);
+      font(10.5, 400); ink(INK2);
+      right(String(i.qty), xQty, y);
+      right(czk(i.price), xUnit, y);
+      if (vatOn) { right(vatNum(i.vat) === null ? "–" : vatStr(i.vat) + " %", xVat, y); }
+      font(10.5, 600); ink(INK);
+      right(czk(i.sum), xSum, y);
+      y += rowH;
+    });
+
+    if (pageIx === plan.pages.length - 1) {
+      y += 2; rule(y); y += 22;
+
+      if (doc.vatRows.length) {
+        label(T("docVatHead"), M, y); y += 16;
+        doc.vatRows.forEach(function (v) {
+          font(10.5, 400); ink(INK2);
+          g.fillText(v.rate === null ? T("docVatNone") : T("docVatRate") + " " + v.rate + " %", M, y);
+          right(T("docVatBase") + " " + czk(v.base), xUnit + 40, y);
+          right(T("docVatTax") + " " + czk(v.tax), xSum, y);
+          y += rowH;
+        });
+        font(10.5, 700); ink(INK);
+        right(T("docVatTotalBase") + " " + czk(doc.vatBase), xUnit + 40, y);
+        right(T("docVatTotalTax") + " " + czk(doc.vatTax), xSum, y);
+        y += rowH + 12;
+      }
+
+      // souhrn v jemném panelu, ať je nejdůležitější číslo hned vidět
+      var boxTop = y - 6, boxH = 82;
+      g.fillStyle = "#FBFAF7";
+      g.beginPath();
+      if (g.roundRect) { g.roundRect(M - 6, boxTop, PDF_W - 2 * M + 12, boxH, 8); }
+      else { g.rect(M - 6, boxTop, PDF_W - 2 * M + 12, boxH); }
+      g.fill();
+
+      var yb = boxTop + 20;
+      font(10, 400); ink(INK2);
+      g.fillText(T("docReceipts") + " " + doc.bills, M + 4, yb);
+      right(T("cash") + ": " + czk(doc.cash), xSum - 4, yb); yb += 15;
+      right(T("card") + ": " + czk(doc.card), xSum - 4, yb); yb += 12;
+
+      g.strokeStyle = LINE; g.lineWidth = 0.7;
+      g.beginPath(); g.moveTo(M + 4, yb + 0.5); g.lineTo(xSum - 4, yb + 0.5); g.stroke();
+      yb += 22;
+      font(13, 700); ink(INK);
+      g.fillText(T("docTotal"), M + 4, yb);
+      font(16, 700); ink(ACC);
+      right(czk(doc.total), xSum - 4, yb);
+      y = boxTop + boxH;
+    }
+
+    // ---- patička ----
+    rule(PDF_H - M - 14);
+    font(8.5, 400); ink(INK3);
+    g.fillText(T("docFooter"), M, PDF_H - M);
+    if (total > 1) { right(T("docPageOf", pageIx + 1, total), xSum, PDF_H - M); }
+
+    return cv;
+  }
+
+  // Minimální PDF: každá stránka je jeden JPEG přes celou plochu A4.
+  // Odsazení objektů v tabulce xref musí sedět na bajt, proto se soubor
+  // skládá po kouscích a délky se počítají průběžně.
+  function buildPdf(jpegs) {
+    var chunks = [], len = 0;
+    var put = function (bytes) { chunks.push(bytes); len += bytes.length; };
+    var ascii = function (str) {
+      var a = new Uint8Array(str.length);
+      for (var i = 0; i < str.length; i++) { a[i] = str.charCodeAt(i) & 0xFF; }
+      return a;
+    };
+
+    var n = jpegs.length;
+    var offsets = [];
+    var objId = 0;
+    var startObj = function () { objId += 1; offsets[objId] = len; return objId; };
+
+    put(ascii("%PDF-1.4\n%\xE2\xE3\xCF\xD3\n"));
+
+    // 1 = katalog, 2 = strom stránek, pak dvojice stránka + obsah + obrázek
+    var catalog = startObj();
+    var pagesId = catalog + 1;
+    put(ascii(catalog + " 0 obj\n<< /Type /Catalog /Pages " + pagesId + " 0 R >>\nendobj\n"));
+
+    var kids = [];
+    for (var k = 0; k < n; k++) { kids.push((pagesId + 1 + k * 3) + " 0 R"); }
+    startObj();
+    put(ascii(pagesId + " 0 obj\n<< /Type /Pages /Kids [" + kids.join(" ") +
+              "] /Count " + n + " >>\nendobj\n"));
+
+    for (var i = 0; i < n; i++) {
+      var pageId = startObj();
+      var contId = pageId + 1;
+      var imgId = pageId + 2;
+      put(ascii(pageId + " 0 obj\n<< /Type /Page /Parent " + pagesId + " 0 R" +
+                " /MediaBox [0 0 " + PDF_W + " " + PDF_H + "]" +
+                " /Resources << /XObject << /Im0 " + imgId + " 0 R >> >>" +
+                " /Contents " + contId + " 0 R >>\nendobj\n"));
+
+      var stream = "q " + PDF_W + " 0 0 " + PDF_H + " 0 0 cm /Im0 Do Q\n";
+      startObj();
+      put(ascii(contId + " 0 obj\n<< /Length " + stream.length + " >>\nstream\n" +
+                stream + "endstream\nendobj\n"));
+
+      var jpg = jpegs[i];
+      startObj();
+      put(ascii(imgId + " 0 obj\n<< /Type /XObject /Subtype /Image /Width " + jpg.w +
+                " /Height " + jpg.h + " /ColorSpace /DeviceRGB /BitsPerComponent 8" +
+                " /Filter /DCTDecode /Length " + jpg.bytes.length + " >>\nstream\n"));
+      put(jpg.bytes);
+      put(ascii("\nendstream\nendobj\n"));
+    }
+
+    var xref = len;
+    var pad = function (num) { var t = String(num); while (t.length < 10) { t = "0" + t; } return t; };
+    var x = "xref\n0 " + (objId + 1) + "\n0000000000 65535 f \n";
+    for (var o = 1; o <= objId; o++) { x += pad(offsets[o]) + " 00000 n \n"; }
+    x += "trailer\n<< /Size " + (objId + 1) + " /Root " + catalog + " 0 R >>\nstartxref\n" + xref + "\n%%EOF\n";
+    put(ascii(x));
+
+    var out = new Uint8Array(len), at = 0;
+    chunks.forEach(function (c) { out.set(c, at); at += c.length; });
+    return new Blob([out], { type: "application/pdf" });
+  }
+
+  function docPdf(doc) {
+    var plan = pdfPages(doc);
+    var jpegs = [];
+    for (var i = 0; i < plan.pages.length; i++) {
+      var cv = drawDocPage(doc, plan, i);
+      var url = cv.toDataURL("image/jpeg", 0.94);
+      var bin = atob(url.slice(url.indexOf(",") + 1));
+      var bytes = new Uint8Array(bin.length);
+      for (var b = 0; b < bin.length; b++) { bytes[b] = bin.charCodeAt(b); }
+      jpegs.push({ w: cv.width, h: cv.height, bytes: bytes });
+    }
+    return buildPdf(jpegs);
+  }
+
+  function docFileName(doc) {
+    return (T("docFile") + "-" + doc.no + ".pdf").replace(/[^A-Za-z0-9._-]/g, "-");
+  }
+
+  // Sdílení souboru umí Web Share; kde není, soubor aspoň stáhneme.
+  function shareDoc(asMail) {
+    var doc = sheet && sheet.doc;
+    if (!doc) { return; }
+    var blob, name;
+    try {
+      blob = docPdf(doc);
+      name = docFileName(doc);
+    } catch (e) {
+      showToast(T("pdfFail"));
+      return;
+    }
+
+    var file = null;
+    try { file = new File([blob], name, { type: "application/pdf" }); } catch (e) { file = null; }
+
+    if (file && navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+      navigator.share({
+        files: [file],
+        title: T("docTitle"),
+        text: asMail ? T("docMailBody") : undefined
+      }).catch(function () { /* uživatel sdílení zavřel, nic neřešíme */ });
+      return;
+    }
+
+    // náhradní cesta: soubor uložit a u e-mailu rovnou otevřít rozepsanou zprávu
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = name;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function () { URL.revokeObjectURL(url); }, 20000);
+    showToast(asMail ? T("pdfSavedMail") : T("pdfSaved"));
+    if (asMail) {
+      try {
+        location.href = "mailto:?subject=" + encodeURIComponent(T("docTitle") + " " + doc.no) +
+                        "&body=" + encodeURIComponent(T("docMailBody"));
+      } catch (e) {}
+    }
   }
 
   function linkText() {
@@ -4414,6 +5104,49 @@
   }
 
   // ---------- Jazyk, měna, verze ----------
+  // Údaje prodejce. Pole jsou schválně obecná, ať sednou na kteroukoli zemi:
+  // popisky se mění podle jazyka (IČO/DIČ, Company number/VAT ID, Steuernummer
+  // /USt-IdNr. a tak dál), ale význam zůstává stejný. Poznámka na konci je
+  // pro cokoli, co konkrétní země navíc vyžaduje.
+  var SELLER_FIELDS = ["name", "regNo", "vatId", "street", "city", "zip", "country", "email", "phone", "note"];
+
+  function sellerVal(k) {
+    var v = state.seller ? state.seller[k] : "";
+    return typeof v === "string" ? v : "";
+  }
+
+  function sellerFilled() {
+    return SELLER_FIELDS.some(function (k) { return sellerVal(k).trim(); });
+  }
+
+  // Řádky tak, jak mají stát na dokladu. Prázdná pole se přeskakují,
+  // aby ve výpisu nezůstávaly osiřelé popisky ani prázdné řádky.
+  function sellerLines() {
+    var out = [];
+    var add = function (v) { if (v) { out.push(v); } };
+    var pair = function (label, v) { if (v.trim()) { out.push(label + ": " + v.trim()); } };
+
+    add(sellerVal("name").trim());
+    pair(T("sfRegNo"), sellerVal("regNo"));
+    pair(T("sfVatId"), sellerVal("vatId"));
+
+    var town = [sellerVal("zip").trim(), sellerVal("city").trim()].filter(Boolean).join(" ");
+    var addr = [sellerVal("street").trim(), town].filter(Boolean).join(", ");
+    add(addr);
+    add(sellerVal("country").trim());
+
+    var contact = [sellerVal("email").trim(), sellerVal("phone").trim()].filter(Boolean).join(" · ");
+    add(contact);
+
+    sellerVal("note").split("\n").forEach(function (ln) { add(ln.trim()); });
+
+    // starší instalace mohou mít pořád jen volný text
+    if (!out.length && state.biz.trim()) {
+      state.biz.trim().split("\n").forEach(function (ln) { add(ln.trim()); });
+    }
+    return out;
+  }
+
   // Sazba se drží jako číslo, prázdno znamená „u této položky DPH neřeším".
   function vatStr(v) {
     return (v === undefined || v === null || v === "") ? "" : String(v);
@@ -4428,8 +5161,8 @@
   // jiného (IČO, VAT ID, EIN, ABN…), pevná pole by část světa vyloučila.
   function bizBlock() {
     return '<div class="sec"><h2>' + esc(T("bizHead")) + "</h2></div>" +
-      '<div class="field"><textarea class="txt" id="bizSet" style="height:104px" placeholder="' +
-        esc(T("docOperatorPh")) + '">' + esc(state.biz) + "</textarea></div>" +
+      '<div class="acts" style="padding-bottom:6px"><button class="act" data-sellersheet="1">' +
+        esc(sellerFilled() ? T("sellerSet") : T("sellerEmpty")) + "</button></div>" +
       '<p class="hint">' + esc(T("bizHint")) + "</p>" +
       '<div class="sec"><h2>' + esc(T("vatHead")) + "</h2></div>" +
       '<div class="acts" style="padding-bottom:6px"><button class="act' + (state.vat ? " on" : "") +
@@ -4639,20 +5372,43 @@
              '<label><span>' + esc(T("docFrom")) + '</span><input class="inp" type="date" id="docFrom" value="' + esc(sheet.from) + '"></label>' +
              '<label><span>' + esc(T("docTo")) + '</span><input class="inp" type="date" id="docTo" value="' + esc(sheet.to) + '"></label>' +
            "</div>" +
-           '<p class="sub" style="margin-top:14px">' + esc(T("docOperator")) + "</p>" +
-           '<textarea class="txt" id="bizBox" style="height:92px" placeholder="' + esc(T("docOperatorPh")) + '">' + esc(state.biz) + "</textarea>" +
+           '<button class="btn-ghost" style="margin-top:14px" data-sellersheet="1">' +
+             esc(sellerFilled() ? T("sellerSet") : T("sellerEmpty")) + "</button>" +
            (sheet.error ? '<p class="sub" style="color:var(--accent);font-weight:600">' + esc(sheet.error) + "</p>" : "") +
            '<button class="btn-done" data-docmake="1">' + esc(T("docMake")) + "</button>" +
            '<button class="btn-ghost" data-cancel="1">' + esc(T("back")) + "</button>";
     }
 
+    if (sheet.step === "seller") {
+      var row = function (k, type) {
+        return '<label class="sf"><span>' + esc(T("sf" + k.charAt(0).toUpperCase() + k.slice(1))) + "</span>" +
+               '<input class="inp" type="' + (type || "text") + '" data-sf="' + k +
+               '" value="' + esc(sellerVal(k)) + '"></label>';
+      };
+      h += "<h2>" + esc(T("sellerHead")) + "</h2>" +
+           '<p class="sub">' + esc(T("sellerHint")) + "</p>" +
+           '<div class="sf-grid">' +
+             row("name") +
+             row("regNo") +
+             row("vatId") +
+             row("street") +
+             row("zip") +
+             row("city") +
+             row("country") +
+             row("email", "email") +
+             row("phone", "tel") +
+           "</div>" +
+           '<label class="sf" style="display:block;margin-top:10px"><span>' + esc(T("sfNote")) + "</span>" +
+             '<textarea class="txt" data-sf="note" style="height:74px" placeholder="' +
+             esc(T("sfNotePh")) + '">' + esc(sellerVal("note")) + "</textarea></label>" +
+           '<button class="btn-done" data-cancel="1">' + esc(T("done")) + "</button>";
+    }
+
     if (sheet.step === "docout") {
       h += "<h2>" + esc(T("docHead")) + "</h2>" +
            '<textarea class="txt" readonly id="dump" style="height:230px">' + esc(sheet.body) + "</textarea>" +
-           '<a class="btn-done" style="display:block;text-align:center;text-decoration:none" ' +
-             'href="mailto:?subject=' + encodeURIComponent(T("docTitle")) + '&body=' + encodeURIComponent(sheet.body) + '">' +
-             esc(T("docMail")) + "</a>" +
-           '<button class="btn-ghost" data-docprint="1">' + esc(T("docPrint")) + "</button>" +
+           '<button class="btn-done" data-docmail="1">' + esc(T("docMail")) + "</button>" +
+           '<button class="btn-ghost" data-docshare="1">' + esc(T("docShare")) + "</button>" +
            '<button class="btn-ghost" data-copytext="1">' + esc(T("copy")) + "</button>" +
            '<button class="btn-ghost" data-cancel="1">' + esc(T("close")) + "</button>";
     }
@@ -4903,10 +5659,10 @@
             "[data-method],[data-note],[data-exact],[data-zero],[data-commit],[data-cancel],[data-scrim]," +
             "[data-dig],[data-back],[data-addcustom],[data-del],[data-copy],[data-copytext],[data-close]," +
             "[data-new],[data-rm],[data-mv],[data-reset],[data-undo],[data-hidetoast],[data-yes]," +
-            "[data-backup],[data-restoreask],[data-dorestore],[data-docask],[data-docmake],[data-docprint]," +
+            "[data-backup],[data-restoreask],[data-dorestore],[data-docask],[data-docmake]," +
             "[data-ticket],[data-line],[data-serve],[data-reopen],[data-drop],[data-col],[data-setcol],[data-applycustom],[data-mode],[data-voice],[data-voicetest],"+
             "[data-paircreate],[data-pairjoin],[data-pairoff],[data-resync],[data-relaytest]," +
-            "[data-vatmode],[data-langsheet],[data-cursheet],[data-setlang],[data-setcur],[data-paywall],[data-buy]," +
+            "[data-docmail],[data-docshare],[data-sellersheet],[data-archopen],[data-archdel],[data-vatmode],[data-langsheet],[data-cursheet],[data-setlang],[data-setcur],[data-paywall],[data-buy]," +
             "[data-restorebuy],[data-devtap],[data-oblang],[data-obcur],[data-obnext],[data-obdemo],[data-obempty]";
 
   document.addEventListener("click", function (ev) {
@@ -5015,19 +5771,15 @@
 
     if (d.docmake) {
       var fEl = document.getElementById("docFrom"), tEl = document.getElementById("docTo");
-      var body = docBody(fEl ? fEl.value : "", tEl ? tEl.value : "");
-      if (body === null) { return; }
-      if (body === "") { sheet.error = T("docEmpty"); sheet.from = fEl.value; sheet.to = tEl.value; render(); return; }
-      sheet = { step: "docout", body: body };
+      var doc = docBody(fEl ? fEl.value : "", tEl ? tEl.value : "");
+      if (doc === null) { return; }
+      if (doc === "") { sheet.error = T("docEmpty"); sheet.from = fEl.value; sheet.to = tEl.value; render(); return; }
+      sheet = { step: "docout", body: doc.text, doc: doc };
       render(); return;
     }
 
-    if (d.docprint) {
-      var pd = document.getElementById("printDoc");
-      if (pd) { pd.textContent = sheet.body; }
-      try { window.print(); } catch (e) {}
-      return;
-    }
+    if (d.docmail) { shareDoc(true); return; }
+    if (d.docshare) { shareDoc(false); return; }
 
     if (d.copytext) {
       var body = sheet.body;
@@ -5050,14 +5802,56 @@
       var cx = T("confirmClose");
       ask(cx[0], cx[1], cx[2], function () {
         var s = stats();
+        // účtenky si archiv nese s sebou, jinak by nešlo akci vrátit zpět
+        // do kasy a doúčtovat ji
         state.archives.push({
-          closedAt: Date.now(), event: state.event || "Prodej",
-          total: s.total, cash: s.cash, card: s.card, count: s.count, pieces: s.pieces, items: s.items
+          id: uid(), closedAt: Date.now(), event: state.event || "Prodej",
+          total: s.total, cash: s.cash, card: s.card, count: s.count, pieces: s.pieces, items: s.items,
+          sales: state.sales.slice(), nextNo: state.nextNo
         });
         state.sales = [];
         state.nextNo = 1;
         save(); pushClear();
         showToast(T("toastClosed"));
+      });
+      return;
+    }
+
+    // Vrácení uzavřené akce zpět do kasy. Slučovat dvě akce dohromady by
+    // rozhodilo číslování účtenek i uzávěrku, proto to jde jen do prázdné kasy.
+    if (d.archopen) {
+      var ao = null;
+      for (var ai = 0; ai < state.archives.length; ai++) {
+        if (state.archives[ai].id === d.archopen) { ao = state.archives[ai]; break; }
+      }
+      if (!ao || !ao.sales || !ao.sales.length) { return; }
+      if (state.sales.length || state.order.length) {
+        showToast(T("archBusy"));
+        return;
+      }
+      var ax = T("confirmArchOpen");
+      ask(ax[0], ax[1].split("{0}").join(ao.event), ax[2], function () {
+        state.event = ao.event;
+        state.sales = ao.sales.slice();
+        state.nextNo = ao.nextNo || (ao.count + 1);
+        state.archives = state.archives.filter(function (x) { return x.id !== ao.id; });
+        save(); render();
+        showToast(T("toastArchOpen", ao.event));
+      });
+      return;
+    }
+
+    if (d.archdel) {
+      var ad = null;
+      for (var di = 0; di < state.archives.length; di++) {
+        if (state.archives[di].id === d.archdel) { ad = state.archives[di]; break; }
+      }
+      if (!ad) { return; }
+      var dx = T("confirmArchDel");
+      ask(dx[0], dx[1].split("{0}").join(ad.event), dx[2], function () {
+        state.archives = state.archives.filter(function (x) { return x.id !== ad.id; });
+        save(); render();
+        showToast(T("toastArchDel"));
       });
       return;
     }
@@ -5217,6 +6011,8 @@
       return;
     }
 
+    if (d.sellersheet) { sheet = { step: "seller" }; render(); return; }
+
     if (d.vatmode) {
       state.vat = !state.vat;
       save(); render();
@@ -5365,9 +6161,9 @@
     var el = ev.target;
     if (!el || !el.dataset) { return; }
 
-    // údaje prodejce jdou psát na dvou místech, v nastavení i přímo u dokladu
-    if (el.id === "bizBox" || el.id === "bizSet") {
-      state.biz = el.value;
+    if (el.dataset.sf) {
+      if (!state.seller) { state.seller = {}; }
+      state.seller[el.dataset.sf] = el.value;
       save();
       return;
     }
