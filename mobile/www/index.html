@@ -273,12 +273,18 @@
   .field{padding:0 16px 14px}
   .inp{width:100%;padding:12px 13px;border:1px solid var(--rule);border-radius:var(--r-btn);background:var(--surface);font-size:15px}
   .inp:focus{outline:2px solid var(--accent);outline-offset:-1px;border-color:transparent}
+  /* stejná textarea jako v panelu dokladu, jen zasazená do nastavení */
+  .field .txt{width:100%;padding:12px 13px;border:1px solid var(--rule);border-radius:var(--r-btn);
+              background:var(--surface);font-family:var(--mono);font-size:13px;line-height:1.5;resize:none}
+  .field .txt:focus{outline:2px solid var(--accent);outline-offset:-1px;border-color:transparent}
 
   .edit{display:flex;align-items:center;gap:6px;padding:7px 12px 7px 16px;border-bottom:1px solid var(--rule)}
   .edit .e-nm{flex:1;min-width:0;padding:10px 11px;border:1px solid transparent;border-radius:8px;background:transparent;font-size:15px;font-weight:500}
   .edit .e-nm:focus{background:var(--surface);border-color:var(--rule);outline:none}
   .edit .e-pr{width:70px;flex:0 0 auto;padding:10px 8px;border:1px solid var(--rule);border-radius:8px;background:var(--surface);text-align:right;font-family:var(--mono);font-weight:700;font-size:14px}
   .edit .e-pr:focus{outline:2px solid var(--accent);outline-offset:-1px}
+  .edit .e-vat{width:58px;flex:0 0 auto;padding:10px 6px;border:1px solid var(--rule);border-radius:8px;background:var(--surface);text-align:right;font-family:var(--mono);font-size:13px;color:var(--ink-2)}
+  .edit .e-vat:focus{outline:2px solid var(--accent);outline-offset:-1px}
   .edit .mv,.edit .rm{width:32px;height:34px;flex:0 0 auto;border:0;background:none;color:var(--ink-3);font-size:16px;line-height:1;border-radius:8px}
   .edit .mv:active,.edit .rm:active{background:var(--sunk)}
   .edit .rm{color:var(--accent);font-size:19px}
@@ -297,7 +303,14 @@
   .toast button.x{color:#9A9184;font-size:18px;line-height:1}
 
   /* ---------- daňový doklad ---------- */
+  /* Pole Od/Do jsou input[type=date] a ta mají vlastní vnitřní minimální
+     šířku. Položky mřížky mají ve výchozím stavu min-width:auto, takže se
+     odmítnou zúžit, mřížka přeteče a panel jde pak vodorovně posouvat.
+     min-width:0 to spraví; na velmi úzkých displejích se pole zalomí. */
   .doc-range{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+  .doc-range label{display:block;min-width:0}
+  .doc-range .inp{min-width:0;max-width:100%}
+  @media (max-width:400px){.doc-range{grid-template-columns:1fr}}
   .doc-range label span{display:block;font-size:11px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px}
   #printDoc{display:none}
   @media print{
@@ -844,7 +857,22 @@
     docFrom: "Od",
     docTo: "Do",
     docOperator: "Údaje prodejce na dokladu",
-    docOperatorPh: "Název / jméno\nIČO, případně DIČ\nAdresa",
+    docOperatorPh: "Název / jméno\nIČ nebo daňové číslo\nDIČ / VAT ID\nAdresa\nE-mail, telefon",
+    bizHead: "Údaje prodejce",
+    bizHint: "Vyplňte jednou a budou se předvyplňovat na každý doklad. Použijte údaje, které vyžaduje vaše země, jeden na řádek.",
+    vatHead: "DPH",
+    vatOn: "Jsem plátce DPH",
+    vatOff: "Nejsem plátce DPH",
+    vatHint: "Když je zapnuto, můžete u každé položky zadat sazbu v procentech. Ceny zadáváte včetně DPH, na dokladu se rozpad na základ a daň dopočítá sám.",
+    vatAria: "Sazba DPH v procentech",
+    vatRateShort: "DPH %",
+    docVatHead: "Rozpis DPH",
+    docVatBase: "Základ",
+    docVatTax: "DPH",
+    docVatRate: "Sazba",
+    docVatNone: "bez DPH",
+    docVatTotalBase: "Základ celkem:",
+    docVatTotalTax: "DPH celkem:",
     docMake: "Sestavit doklad",
     docTitle: "SOUHRNNÝ PRODEJNÍ DOKLAD",
     docNo: "Číslo dokladu:",
@@ -1092,7 +1120,22 @@
     docFrom: "From",
     docTo: "To",
     docOperator: "Seller details on the document",
-    docOperatorPh: "Business / name\nCompany ID, VAT ID\nAddress",
+    docOperatorPh: "Business / name\nCompany or tax number\nVAT ID\nAddress\nE-mail, phone",
+    bizHead: "Seller details",
+    bizHint: "Fill this in once and it will be pre-filled on every document. Use whatever your country requires, one item per line.",
+    vatHead: "VAT",
+    vatOn: "I am VAT registered",
+    vatOff: "Not VAT registered",
+    vatHint: "When on, you can set a rate in percent for each item. You enter prices including VAT; the document works out the net amount and the tax on its own.",
+    vatAria: "VAT rate in percent",
+    vatRateShort: "VAT %",
+    docVatHead: "VAT breakdown",
+    docVatBase: "Net",
+    docVatTax: "VAT",
+    docVatRate: "Rate",
+    docVatNone: "no VAT",
+    docVatTotalBase: "Net total:",
+    docVatTotalTax: "VAT total:",
     docMake: "Build document",
     docTitle: "SUMMARY SALES DOCUMENT",
     docNo: "Document no.:",
@@ -1341,7 +1384,22 @@
     docFrom: "Od",
     docTo: "Do",
     docOperator: "Údaje predajcu na doklade",
-    docOperatorPh: "Názov / meno\nIČO, prípadne DIČ\nAdresa",
+    docOperatorPh: "Názov / meno\nIČO alebo daňové číslo\nIČ DPH / VAT ID\nAdresa\nE-mail, telefón",
+    bizHead: "Údaje predajcu",
+    bizHint: "Vyplňte raz a budú sa predvypĺňať na každom doklade. Použite údaje, ktoré vyžaduje vaša krajina, jeden na riadok.",
+    vatHead: "DPH",
+    vatOn: "Som platca DPH",
+    vatOff: "Nie som platca DPH",
+    vatHint: "Keď je zapnuté, môžete pri každej položke zadať sadzbu v percentách. Ceny zadávate vrátane DPH, na doklade sa rozpad na základ a daň dopočíta sám.",
+    vatAria: "Sadzba DPH v percentách",
+    vatRateShort: "DPH %",
+    docVatHead: "Rozpis DPH",
+    docVatBase: "Základ",
+    docVatTax: "DPH",
+    docVatRate: "Sadzba",
+    docVatNone: "bez DPH",
+    docVatTotalBase: "Základ spolu:",
+    docVatTotalTax: "DPH spolu:",
     docMake: "Zostaviť doklad",
     docTitle: "SÚHRNNÝ PREDAJNÝ DOKLAD",
     docNo: "Číslo dokladu:",
@@ -1589,7 +1647,22 @@
     docFrom: "Von",
     docTo: "Bis",
     docOperator: "Verkäuferangaben auf dem Beleg",
-    docOperatorPh: "Firma / Name\nSteuernummer, USt-IdNr.\nAdresse",
+    docOperatorPh: "Firma / Name\nSteuernummer\nUSt-IdNr.\nAdresse\nE-Mail, Telefon",
+    bizHead: "Angaben zum Verkäufer",
+    bizHint: "Einmal ausfüllen, danach werden sie auf jedem Beleg vorausgefüllt. Verwenden Sie die in Ihrem Land verlangten Angaben, eine pro Zeile.",
+    vatHead: "Umsatzsteuer",
+    vatOn: "Ich bin umsatzsteuerpflichtig",
+    vatOff: "Nicht umsatzsteuerpflichtig",
+    vatHint: "Wenn aktiviert, können Sie je Artikel einen Satz in Prozent angeben. Preise geben Sie inklusive Steuer ein, der Beleg rechnet Netto und Steuer selbst aus.",
+    vatAria: "Umsatzsteuersatz in Prozent",
+    vatRateShort: "USt %",
+    docVatHead: "Umsatzsteuer-Aufstellung",
+    docVatBase: "Netto",
+    docVatTax: "USt",
+    docVatRate: "Satz",
+    docVatNone: "ohne USt",
+    docVatTotalBase: "Netto gesamt:",
+    docVatTotalTax: "USt gesamt:",
     docMake: "Beleg erstellen",
     docTitle: "ZUSAMMENFASSENDER VERKAUFSBELEG",
     docNo: "Belegnummer:",
@@ -1837,7 +1910,22 @@
     docFrom: "Du",
     docTo: "Au",
     docOperator: "Coordonnées du vendeur sur le document",
-    docOperatorPh: "Société / nom\nSIRET, n° TVA\nAdresse",
+    docOperatorPh: "Société / nom\nSIRET ou numéro fiscal\nNuméro de TVA\nAdresse\nE-mail, téléphone",
+    bizHead: "Coordonnées du vendeur",
+    bizHint: "Renseignez-les une fois, elles seront pré-remplies sur chaque document. Utilisez les mentions exigées par votre pays, une par ligne.",
+    vatHead: "TVA",
+    vatOn: "Je suis assujetti à la TVA",
+    vatOff: "Non assujetti à la TVA",
+    vatHint: "Une fois activé, vous pouvez saisir un taux en pourcentage pour chaque article. Vous saisissez les prix TTC, le document calcule seul le HT et la taxe.",
+    vatAria: "Taux de TVA en pourcentage",
+    vatRateShort: "TVA %",
+    docVatHead: "Détail de la TVA",
+    docVatBase: "HT",
+    docVatTax: "TVA",
+    docVatRate: "Taux",
+    docVatNone: "hors TVA",
+    docVatTotalBase: "Total HT :",
+    docVatTotalTax: "Total TVA :",
     docMake: "Établir le document",
     docTitle: "RÉCAPITULATIF DES VENTES",
     docNo: "N° du document :",
@@ -2085,7 +2173,22 @@
     docFrom: "Desde",
     docTo: "Hasta",
     docOperator: "Datos del vendedor en el documento",
-    docOperatorPh: "Empresa / nombre\nNIF\nDirección",
+    docOperatorPh: "Empresa / nombre\nNIF o número fiscal\nNúmero de IVA\nDirección\nCorreo, teléfono",
+    bizHead: "Datos del vendedor",
+    bizHint: "Rellénelos una vez y se pondrán solos en cada documento. Use los datos que exija su país, uno por línea.",
+    vatHead: "IVA",
+    vatOn: "Estoy dado de alta en el IVA",
+    vatOff: "No aplico IVA",
+    vatHint: "Al activarlo puede indicar un tipo en porcentaje para cada artículo. Los precios se introducen con IVA y el documento calcula solo la base y el impuesto.",
+    vatAria: "Tipo de IVA en porcentaje",
+    vatRateShort: "IVA %",
+    docVatHead: "Desglose del IVA",
+    docVatBase: "Base",
+    docVatTax: "IVA",
+    docVatRate: "Tipo",
+    docVatNone: "sin IVA",
+    docVatTotalBase: "Base total:",
+    docVatTotalTax: "IVA total:",
     docMake: "Generar documento",
     docTitle: "DOCUMENTO RESUMEN DE VENTAS",
     docNo: "N.º de documento:",
@@ -2333,7 +2436,22 @@
     docFrom: "Dal",
     docTo: "Al",
     docOperator: "Dati del venditore sul documento",
-    docOperatorPh: "Azienda / nome\nPartita IVA, codice fiscale\nIndirizzo",
+    docOperatorPh: "Azienda / nome\nCodice fiscale\nPartita IVA\nIndirizzo\nE-mail, telefono",
+    bizHead: "Dati del venditore",
+    bizHint: "Compilateli una volta e verranno inseriti da soli su ogni documento. Usate i dati richiesti dal vostro paese, uno per riga.",
+    vatHead: "IVA",
+    vatOn: "Sono soggetto a IVA",
+    vatOff: "Non applico IVA",
+    vatHint: "Se attivo, potete indicare un'aliquota in percentuale per ogni articolo. I prezzi si inseriscono IVA inclusa, il documento calcola da solo imponibile e imposta.",
+    vatAria: "Aliquota IVA in percentuale",
+    vatRateShort: "IVA %",
+    docVatHead: "Riepilogo IVA",
+    docVatBase: "Imponibile",
+    docVatTax: "IVA",
+    docVatRate: "Aliquota",
+    docVatNone: "senza IVA",
+    docVatTotalBase: "Imponibile totale:",
+    docVatTotalTax: "IVA totale:",
     docMake: "Generare il documento",
     docTitle: "RIEPILOGO VENDITE",
     docNo: "Numero documento:",
@@ -2581,7 +2699,22 @@
     docFrom: "Od",
     docTo: "Do",
     docOperator: "Dane sprzedawcy na dokumencie",
-    docOperatorPh: "Firma / imię i nazwisko\nNIP\nAdres",
+    docOperatorPh: "Firma / imię i nazwisko\nNIP lub numer podatkowy\nNumer VAT\nAdres\nE-mail, telefon",
+    bizHead: "Dane sprzedawcy",
+    bizHint: "Wypełnij raz, a będą się uzupełniać na każdym dokumencie. Podaj dane wymagane w twoim kraju, po jednym w wierszu.",
+    vatHead: "VAT",
+    vatOn: "Jestem podatnikiem VAT",
+    vatOff: "Nie jestem podatnikiem VAT",
+    vatHint: "Po włączeniu możesz podać stawkę w procentach przy każdej pozycji. Ceny wpisujesz z VAT, dokument sam wyliczy kwotę netto i podatek.",
+    vatAria: "Stawka VAT w procentach",
+    vatRateShort: "VAT %",
+    docVatHead: "Rozliczenie VAT",
+    docVatBase: "Netto",
+    docVatTax: "VAT",
+    docVatRate: "Stawka",
+    docVatNone: "bez VAT",
+    docVatTotalBase: "Netto razem:",
+    docVatTotalTax: "VAT razem:",
     docMake: "Utworzyć dokument",
     docTitle: "ZBIORCZY DOKUMENT SPRZEDAŻY",
     docNo: "Numer dokumentu:",
@@ -2829,7 +2962,22 @@
     docFrom: "De",
     docTo: "Até",
     docOperator: "Dados do vendedor no documento",
-    docOperatorPh: "Empresa / nome\nNIF\nMorada",
+    docOperatorPh: "Empresa / nome\nNIF ou número fiscal\nNúmero de IVA\nMorada\nE-mail, telefone",
+    bizHead: "Dados do vendedor",
+    bizHint: "Preencha uma vez e ficam preenchidos em cada documento. Use os dados exigidos no seu país, um por linha.",
+    vatHead: "IVA",
+    vatOn: "Sou sujeito passivo de IVA",
+    vatOff: "Não aplico IVA",
+    vatHint: "Quando ligado, pode indicar uma taxa em percentagem para cada artigo. Os preços são introduzidos com IVA e o documento calcula sozinho a base e o imposto.",
+    vatAria: "Taxa de IVA em percentagem",
+    vatRateShort: "IVA %",
+    docVatHead: "Resumo do IVA",
+    docVatBase: "Base",
+    docVatTax: "IVA",
+    docVatRate: "Taxa",
+    docVatNone: "sem IVA",
+    docVatTotalBase: "Base total:",
+    docVatTotalTax: "IVA total:",
     docMake: "Gerar documento",
     docTitle: "DOCUMENTO RESUMO DE VENDAS",
     docNo: "N.º do documento:",
@@ -3123,7 +3271,7 @@
     return {
       v: 3, event: "", mode: "kasa", nextNo: 1, voice: true, pair: "",
       lang: detectLang(), currency: detectCurrency(),
-      setup: false, license: "", payDay: "", payN: 0, biz: "",
+      setup: false, license: "", payDay: "", payN: 0, biz: "", vat: false,
       items: [], order: [], sales: [], archives: []
     };
   }
@@ -3156,6 +3304,7 @@
     d.payDay = typeof d.payDay === "string" ? d.payDay : "";
     d.payN = typeof d.payN === "number" ? d.payN : 0;
     d.biz = typeof d.biz === "string" ? d.biz : "";
+    d.vat = d.vat === true;   // starší instalace DPH neřešily, zůstanou vypnuté
     if (typeof d.license !== "string") {
       // instalace z doby před tarify jedou dál bez omezení, nikomu nebereme,
       // co už používal (párování, neomezené účtování)
@@ -3301,7 +3450,12 @@
       if (state.order[i].ref === item.id && state.order[i].price === item.price) { line = state.order[i]; break; }
     }
     if (line) { line.qty += 1; }
-    else { state.order.push({ ref: item.id, name: item.name, price: item.price, qty: 1, color: item.color }); }
+    else {
+      // sazbu si řádek nese s sebou, ať pozdější úprava položky nepřepíše
+      // už rozúčtovaný doklad
+      state.order.push({ ref: item.id, name: item.name, price: item.price, qty: 1,
+                         color: item.color, vat: vatStr(item.vat) });
+    }
     save();
     render();
     say(item.name + " · " + czk(orderTotal()));
@@ -3334,7 +3488,7 @@
       total: sheet.total,
       status: "open",
       lines: state.order.map(function (l) {
-        return { name: l.name, price: l.price, qty: l.qty, color: l.color || "", ready: 0 };
+        return { name: l.name, price: l.price, qty: l.qty, color: l.color || "", vat: vatStr(l.vat), ready: 0 };
       })
     };
     state.sales.push(sale);
@@ -3833,8 +3987,11 @@
       s.total += t.total;
       if (t.method === "cash") { s.cash += t.total; } else { s.card += t.total; }
       t.lines.forEach(function (l) {
-        var k = l.name + "|" + l.price;
-        if (!map[k]) { map[k] = { name: l.name, price: l.price, qty: 0, sum: 0 }; }
+        // sazba je součástí klíče, ať se do archivu nesloučí stejná položka
+        // prodávaná pod dvěma sazbami
+        var lv = vatStr(l.vat);
+        var k = l.name + "|" + l.price + "|" + lv;
+        if (!map[k]) { map[k] = { name: l.name, price: l.price, vat: lv, qty: 0, sum: 0 }; }
         map[k].qty += l.qty;
         map[k].sum += l.qty * l.price;
         s.pieces += l.qty;
@@ -4035,9 +4192,10 @@
 
     var total = 0, cashSum = 0, cardSum = 0, bills = 0;
     var items = {}, events = {};
-    var addItem = function (name, price, qty, sum) {
-      var k = name + "|" + price;
-      if (!items[k]) { items[k] = { name: name, price: price, qty: 0, sum: 0 }; }
+    var addItem = function (name, price, qty, sum, vat) {
+      var v = vatStr(vat);
+      var k = name + "|" + price + "|" + v;
+      if (!items[k]) { items[k] = { name: name, price: price, vat: v, qty: 0, sum: 0 }; }
       items[k].qty += qty;
       items[k].sum += sum;
     };
@@ -4048,7 +4206,7 @@
       total += s.total;
       if (s.method === "cash") { cashSum += s.total; } else { cardSum += s.total; }
       events[state.event || T("noName")] = true;
-      s.lines.forEach(function (l) { addItem(l.name, l.price, l.qty, l.qty * l.price); });
+      s.lines.forEach(function (l) { addItem(l.name, l.price, l.qty, l.qty * l.price, l.vat); });
     });
 
     state.archives.forEach(function (a) {
@@ -4058,7 +4216,7 @@
       cashSum += a.cash || 0;
       cardSum += a.card || 0;
       events[(a.event || T("noName")) + " (" + new Date(a.closedAt).toLocaleDateString(langInfo().loc) + ")"] = true;
-      (a.items || []).forEach(function (i) { addItem(i.name, i.price, i.qty, i.sum); });
+      (a.items || []).forEach(function (i) { addItem(i.name, i.price, i.qty, i.sum, i.vat); });
     });
 
     if (!bills) { return ""; }
@@ -4083,9 +4241,45 @@
     out.push("");
     out.push(T("docItemsHead"));
     list.forEach(function (i) {
-      out.push(i.qty + "x " + i.name + " (" + czk(i.price) + ")  " + czk(i.sum));
+      out.push(i.qty + "x " + i.name + " (" + czk(i.price) + ")  " + czk(i.sum) +
+               (state.vat && vatNum(i.vat) !== null ? "  " + vatStr(i.vat) + " %" : ""));
     });
     out.push("");
+
+    // Rozpis DPH. Ceny se zadávají včetně daně, takže základ dopočítáváme
+    // zpětně: zaklad = cena / (1 + sazba/100). Položky bez sazby jdou do
+    // základu celé, aby základ a daň daly dohromady přesně celkovou tržbu.
+    if (state.vat) {
+      var rates = {}, anyRate = false;
+      list.forEach(function (i) {
+        var r = vatNum(i.vat);
+        var key = r === null ? "" : String(r);
+        if (r !== null) { anyRate = true; }
+        rates[key] = (rates[key] || 0) + i.sum;
+      });
+      if (anyRate) {
+        var keys = Object.keys(rates).sort(function (a, b) {
+          return (parseFloat(a) || 0) - (parseFloat(b) || 0);
+        });
+        var baseAll = 0, taxAll = 0;
+        out.push(T("docVatHead"));
+        keys.forEach(function (key) {
+          var gross = rates[key];
+          var r = key === "" ? null : parseFloat(key);
+          var base = r === null ? mr(gross) : mr(gross / (1 + r / 100));
+          var tax = mr(gross - base);
+          baseAll += base;
+          taxAll += tax;
+          out.push(r === null
+            ? T("docVatNone") + ": " + czk(base)
+            : T("docVatRate") + " " + key + " %: " + T("docVatBase") + " " + czk(base) +
+              ", " + T("docVatTax") + " " + czk(tax));
+        });
+        out.push(T("docVatTotalBase") + " " + czk(baseAll));
+        out.push(T("docVatTotalTax") + " " + czk(taxAll));
+        out.push("");
+      }
+    }
     out.push(T("docReceipts") + " " + bills);
     out.push(T("cash") + ": " + czk(cashSum));
     out.push(T("card") + ": " + czk(cardSum));
@@ -4136,6 +4330,11 @@
                ' data-col="' + it.id + '" aria-label="' + esc(T("colorAria")) + '"></button>' +
              '<input class="e-nm" data-nm="' + it.id + '" value="' + esc(it.name) + '">' +
              '<input class="e-pr" data-pr="' + it.id + '" inputmode="decimal" value="' + priceStr(it.price) + '" aria-label="' + esc(T("priceAria")) + '">' +
+             // sazba se ukazuje jen plátcům DPH, ostatním by řádek jen zabírala
+             (state.vat
+               ? '<input class="e-vat" data-vat="' + it.id + '" inputmode="decimal" placeholder="%" value="' +
+                 esc(vatStr(it.vat)) + '" aria-label="' + esc(T("vatAria")) + '">'
+               : "") +
              '<button class="mv" data-mv="' + i + '" aria-label="' + esc(T("upAria")) + '"' + (i === 0 ? " disabled style=\"opacity:.25\"" : "") + ">↑</button>" +
              '<button class="rm" data-rm="' + it.id + '" aria-label="' + esc(T("rmAria")) + '">×</button></div>';
     });
@@ -4208,8 +4407,32 @@
   }
 
   // ---------- Jazyk, měna, verze ----------
+  // Sazba se drží jako číslo, prázdno znamená „u této položky DPH neřeším".
+  function vatStr(v) {
+    return (v === undefined || v === null || v === "") ? "" : String(v);
+  }
+
+  function vatNum(v) {
+    var n = parseFloat(String(v === undefined || v === null ? "" : v).replace(",", "."));
+    return isFinite(n) && n >= 0 ? n : null;
+  }
+
+  // Údaje prodejce a DPH. Záměrně volný text na řádky: každá země chce něco
+  // jiného (IČO, VAT ID, EIN, ABN…), pevná pole by část světa vyloučila.
+  function bizBlock() {
+    return '<div class="sec"><h2>' + esc(T("bizHead")) + "</h2></div>" +
+      '<div class="field"><textarea class="txt" id="bizSet" style="height:104px" placeholder="' +
+        esc(T("docOperatorPh")) + '">' + esc(state.biz) + "</textarea></div>" +
+      '<p class="hint">' + esc(T("bizHint")) + "</p>" +
+      '<div class="sec"><h2>' + esc(T("vatHead")) + "</h2></div>" +
+      '<div class="acts" style="padding-bottom:6px"><button class="act' + (state.vat ? " on" : "") +
+        '" data-vatmode="1">' + esc(state.vat ? T("vatOn") : T("vatOff")) + "</button></div>" +
+      '<p class="hint">' + esc(T("vatHint")) + "</p>";
+  }
+
   function settingsBlock() {
-    return '<div class="sec"><h2>' + esc(T("settingsHead")) + "</h2></div>" +
+    return bizBlock() +
+      '<div class="sec"><h2>' + esc(T("settingsHead")) + "</h2></div>" +
       '<div class="acts" style="padding-bottom:8px">' +
         '<button class="act" data-langsheet="1">' + esc(T("langRow")) + " · " + esc(langInfo().n) + "</button>" +
         '<button class="act" data-cursheet="1">' + esc(T("currencyRow")) + " · " + esc(curInfo().c) + "</button>" +
@@ -4676,7 +4899,7 @@
             "[data-backup],[data-restoreask],[data-dorestore],[data-docask],[data-docmake],[data-docprint]," +
             "[data-ticket],[data-line],[data-serve],[data-reopen],[data-drop],[data-col],[data-setcol],[data-applycustom],[data-mode],[data-voice],[data-voicetest],"+
             "[data-paircreate],[data-pairjoin],[data-pairoff],[data-resync],[data-relaytest]," +
-            "[data-langsheet],[data-cursheet],[data-setlang],[data-setcur],[data-paywall],[data-buy]," +
+            "[data-vatmode],[data-langsheet],[data-cursheet],[data-setlang],[data-setcur],[data-paywall],[data-buy]," +
             "[data-restorebuy],[data-devtap],[data-oblang],[data-obcur],[data-obnext],[data-obdemo],[data-obempty]";
 
   document.addEventListener("click", function (ev) {
@@ -4987,6 +5210,12 @@
       return;
     }
 
+    if (d.vatmode) {
+      state.vat = !state.vat;
+      save(); render();
+      return;
+    }
+
     if (d.mode) {
       state.mode = d.mode === "vydej" ? "vydej" : "kasa";
       state.order = [];
@@ -5129,7 +5358,8 @@
     var el = ev.target;
     if (!el || !el.dataset) { return; }
 
-    if (el.id === "bizBox") {
+    // údaje prodejce jdou psát na dvou místech, v nastavení i přímo u dokladu
+    if (el.id === "bizBox" || el.id === "bizSet") {
       state.biz = el.value;
       save();
       return;
@@ -5167,11 +5397,16 @@
 
     var nameId = el.dataset.nm;
     var priceId = el.dataset.pr;
-    var item = findItem(nameId || priceId);
+    var vatId = el.dataset.vat;
+    var item = findItem(nameId || priceId || vatId);
     if (!item) { return; }
 
     if (nameId) {
       item.name = el.value;
+    } else if (vatId) {
+      // prázdné pole necháváme prázdné, ať jde sazbu zase odebrat
+      item.vat = String(el.value).trim() === "" ? "" : vatNum(el.value);
+      if (item.vat === null) { item.vat = ""; }
     } else {
       var num = parseFloat(String(el.value).replace(",", ".").replace(/[^0-9.]/g, ""));
       item.price = isNaN(num) ? 0 : mr(num);
