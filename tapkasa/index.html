@@ -348,6 +348,49 @@
   .arch .ab svg,.edit .mv svg,.edit .rm svg{width:17px;height:17px}
   @media (min-width:600px){.step button svg{width:19px;height:19px}}
 
+  /* ---------- průvodce propojením bez internetu ---------- */
+  /* Smyčka 12 s, kroky po 3 s: 1 zapnutí hotspotu, 2 vlny + výběr sítě,
+     3 heslo, 4 spojení. Kroky v textu se zvýrazňují ve stejném rytmu. */
+  .oh-scene{margin:14px 0 4px;border:1px solid var(--rule);border-radius:var(--r-tile);background:var(--surface);padding:8px}
+  .oh-scene svg{display:block;width:100%;height:auto}
+  .oh-dev{fill:#0E0C09}
+  .oh-scr{fill:var(--paper)}
+  .oh-row{fill:var(--sunk)}
+  .oh-toggle{fill:#C9C2B6;transition:fill .3s;animation:ohToggle 12s infinite}
+  .oh-knob{fill:#FFF;animation:ohKnob 12s infinite}
+  .oh-pass{animation:ohPass 12s infinite}
+  .oh-wave{fill:none;stroke:var(--accent);stroke-width:2.4;stroke-linecap:round;opacity:0;animation:ohWave 12s infinite}
+  .oh-wave.w2{animation-delay:.35s}
+  .oh-pick{animation:ohPick 12s infinite}
+  .oh-tick{fill:none;stroke:var(--cash);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;opacity:0;animation:ohTick 12s infinite}
+  .oh-linkline{fill:none;stroke:var(--cash);stroke-width:2.6;stroke-linecap:round;stroke-dasharray:150;stroke-dashoffset:150;animation:ohLine 12s infinite}
+  .oh-done-c{fill:var(--cash)}
+  .oh-done-t{fill:none;stroke:#FFF;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+  .oh-done{opacity:0;animation:ohDone 12s infinite}
+  @keyframes ohToggle{0%,6%{fill:#C9C2B6}10%,100%{fill:var(--cash)}}
+  @keyframes ohKnob{0%,6%{transform:translateX(-5px)}10%,100%{transform:translateX(0)}}
+  @keyframes ohPass{0%,48%{opacity:.35}54%,74%{opacity:1}80%,100%{opacity:.35}}
+  @keyframes ohWave{0%,10%{opacity:0}16%,90%{opacity:1}96%,100%{opacity:0}}
+  @keyframes ohPick{0%,26%{fill:var(--sunk)}32%,100%{fill:#EAF4EE}}
+  @keyframes ohTick{0%,30%{opacity:0}36%,100%{opacity:1}}
+  @keyframes ohLine{0%,74%{stroke-dashoffset:150}86%,100%{stroke-dashoffset:0}}
+  @keyframes ohDone{0%,84%{opacity:0;transform:scale(.6);transform-origin:170px 97px}92%,100%{opacity:1;transform:scale(1)}}
+  .oh-steps{margin:12px 0 0;padding:0 0 0 22px;text-align:left;font-size:14px;line-height:1.45;color:var(--ink-2)}
+  .oh-steps li{margin:7px 0;transition:color .4s}
+  .oh-steps .oh-s1{animation:ohHi1 12s infinite}
+  .oh-steps .oh-s2{animation:ohHi2 12s infinite}
+  .oh-steps .oh-s3{animation:ohHi3 12s infinite}
+  .oh-steps .oh-s4{animation:ohHi4 12s infinite}
+  @keyframes ohHi1{0%,24%{color:var(--ink);font-weight:600}26%,100%{color:var(--ink-2);font-weight:400}}
+  @keyframes ohHi2{0%,24%{color:var(--ink-2)}26%,49%{color:var(--ink);font-weight:600}51%,100%{color:var(--ink-2);font-weight:400}}
+  @keyframes ohHi3{0%,49%{color:var(--ink-2)}51%,74%{color:var(--ink);font-weight:600}76%,100%{color:var(--ink-2);font-weight:400}}
+  @keyframes ohHi4{0%,74%{color:var(--ink-2)}76%,100%{color:var(--ink);font-weight:600}}
+  @media (prefers-reduced-motion:reduce){
+    .oh-scene *,.oh-steps li{animation:none !important}
+    .oh-toggle{fill:var(--cash)}.oh-wave,.oh-tick,.oh-done{opacity:1}
+    .oh-linkline{stroke-dashoffset:0}.oh-pick{fill:#EAF4EE}
+  }
+
   .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
   /* ---------- počítadlo plateb zdarma ---------- */
@@ -722,7 +765,15 @@
     showSummary: "Zobrazit souhrn",
     closeEvent: "Uzavřít akci",
     emptyStats: "Zatím nic neprodáno.<br>Jakmile uložíte první účet, objeví se tu statistika.",
-    pairOfflineHint: "Spojení funguje i bez internetu, zařízení se propojí napřímo. Na obou musí být zapnutá Wi-Fi (nemusí být připojená k žádné síti) a Bluetooth. Nejspolehlivější je společná síť, klidně hotspot z telefonu.",
+    pairOfflineHint: "Zařízení se propojí přes společnou Wi-Fi síť, internet potřeba není. Bez routeru poslouží hotspot z iPhonu.",
+    offHelpBtn: "Jak propojit bez internetu",
+    offHelpTitle: "Propojení bez internetu",
+    offHelpIntro: "Stačí, aby obě zařízení byla na stejné Wi-Fi síti. Síť nemusí mít internet. Když poblíž žádná není, vytvořte ji z iPhonu:",
+    offHelpS1: "Na iPhonu otevřete Nastavení → Osobní hotspot a zapněte „Povolit ostatním\".",
+    offHelpS2: "Na iPadu otevřete Nastavení → Wi-Fi a vyberte síť pojmenovanou podle iPhonu.",
+    offHelpS3: "Opište heslo, které svítí na obrazovce hotspotu v iPhonu.",
+    offHelpS4: "Otevřete Tapkasu na obou zařízeních. Spojení naváže samo do minuty.",
+    offHelpNote: "Hotspot vyžaduje SIM kartu v iPhonu; data se ale nespotřebovávají, objednávky tečou napřímo.",
     linkPairedNative: "Spárováno s druhým zařízením",
     linkSearching: "Druhé zařízení zatím nenalezeno",
     linkPaired: "Spárováno, druhé zařízení se ozvalo",
@@ -1017,7 +1068,15 @@
     showSummary: "Show summary",
     closeEvent: "Close event",
     emptyStats: "Nothing sold yet.<br>Save your first sale and stats appear here.",
-    pairOfflineHint: "Pairing works without internet, the devices link directly. Both need Wi-Fi turned on (no network connection required) and Bluetooth. A shared network is most reliable, a phone hotspot is fine.",
+    pairOfflineHint: "The devices link over a shared Wi-Fi network; internet is not needed. With no router around, an iPhone hotspot works.",
+    offHelpBtn: "How to link without internet",
+    offHelpTitle: "Linking without internet",
+    offHelpIntro: "Both devices just need to be on the same Wi-Fi network. The network needs no internet. If none is around, create one from the iPhone:",
+    offHelpS1: "On the iPhone open Settings → Personal Hotspot and turn on “Allow Others to Join”.",
+    offHelpS2: "On the iPad open Settings → Wi-Fi and pick the network named after the iPhone.",
+    offHelpS3: "Type the password shown on the iPhone’s hotspot screen.",
+    offHelpS4: "Open Tapkasa on both devices. They connect on their own within a minute.",
+    offHelpNote: "The hotspot needs a SIM in the iPhone; no data is consumed, orders flow directly.",
     linkPairedNative: "Paired with the other device",
     linkSearching: "No other device found yet",
     linkPaired: "Paired, the other device answered",
@@ -1313,7 +1372,15 @@
     showSummary: "Zobraziť súhrn",
     closeEvent: "Uzavrieť akciu",
     emptyStats: "Zatiaľ sa nič nepredalo.<br>Len čo uložíte prvý účet, objaví sa tu štatistika.",
-    pairOfflineHint: "Spojenie funguje aj bez internetu, zariadenia sa prepoja napriamo. Na oboch musí byť zapnutá Wi-Fi (nemusí byť pripojená k žiadnej sieti) a Bluetooth. Najspoľahlivejšia je spoločná sieť, pokojne hotspot z telefónu.",
+    pairOfflineHint: "Zariadenia sa prepoja cez spoločnú Wi-Fi sieť, internet nie je potrebný. Bez routera poslúži hotspot z iPhonu.",
+    offHelpBtn: "Ako prepojiť bez internetu",
+    offHelpTitle: "Prepojenie bez internetu",
+    offHelpIntro: "Stačí, aby obe zariadenia boli na rovnakej Wi-Fi sieti. Sieť nemusí mať internet. Ak žiadna nie je, vytvorte ju z iPhonu:",
+    offHelpS1: "Na iPhone otvorte Nastavenia → Osobný hotspot a zapnite „Povoliť ostatným\".",
+    offHelpS2: "Na iPade otvorte Nastavenia → Wi-Fi a vyberte sieť pomenovanú podľa iPhonu.",
+    offHelpS3: "Opíšte heslo, ktoré svieti na obrazovke hotspotu v iPhone.",
+    offHelpS4: "Otvorte Tapkasu na oboch zariadeniach. Spojenie sa nadviaže samo do minúty.",
+    offHelpNote: "Hotspot vyžaduje SIM kartu v iPhone; dáta sa nespotrebúvajú, objednávky tečú napriamo.",
     linkPairedNative: "Spárované s druhým zariadením",
     linkSearching: "Druhé zariadenie sa zatiaľ nenašlo",
     linkPaired: "Spárované, druhé zariadenie sa ozvalo",
@@ -1608,7 +1675,15 @@
     showSummary: "Zusammenfassung zeigen",
     closeEvent: "Event abschließen",
     emptyStats: "Noch nichts verkauft.<br>Sobald Sie den ersten Verkauf speichern, taucht hier die Statistik auf.",
-    pairOfflineHint: "Die Verbindung funktioniert auch ohne Internet, die Geräte verbinden sich direkt. Auf beiden muss WLAN eingeschaltet sein (keine Netzverbindung nötig) sowie Bluetooth. Am zuverlässigsten ist ein gemeinsames Netz, ein Handy-Hotspot genügt.",
+    pairOfflineHint: "Die Geräte verbinden sich über ein gemeinsames WLAN, Internet ist nicht nötig. Ohne Router genügt ein iPhone-Hotspot.",
+    offHelpBtn: "Verbinden ohne Internet",
+    offHelpTitle: "Verbindung ohne Internet",
+    offHelpIntro: "Beide Geräte müssen nur im selben WLAN sein. Das Netz braucht kein Internet. Ist keines da, erstellen Sie eines mit dem iPhone:",
+    offHelpS1: "Auf dem iPhone Einstellungen → Persönlicher Hotspot öffnen und „Zugriff für andere erlauben“ einschalten.",
+    offHelpS2: "Auf dem iPad Einstellungen → WLAN öffnen und das nach dem iPhone benannte Netz wählen.",
+    offHelpS3: "Das Passwort vom Hotspot-Bildschirm des iPhones eingeben.",
+    offHelpS4: "Tapkasa auf beiden Geräten öffnen. Die Verbindung steht von selbst binnen einer Minute.",
+    offHelpNote: "Der Hotspot braucht eine SIM im iPhone; Daten werden nicht verbraucht, Bestellungen fließen direkt.",
     linkPairedNative: "Mit dem anderen Gerät gekoppelt",
     linkSearching: "Anderes Gerät noch nicht gefunden",
     linkPaired: "Gekoppelt, das andere Gerät hat sich gemeldet",
@@ -1903,7 +1978,15 @@
     showSummary: "Voir le résumé",
     closeEvent: "Clôturer l’événement",
     emptyStats: "Rien de vendu pour l’instant.<br>Encaissez une première vente et les statistiques apparaîtront ici.",
-    pairOfflineHint: "La liaison fonctionne sans internet, les appareils se connectent directement. Le Wi-Fi doit être activé sur les deux (pas besoin d'être connecté à un réseau) ainsi que le Bluetooth. Un réseau commun est le plus fiable, un partage de connexion suffit.",
+    pairOfflineHint: "Les appareils se connectent via un réseau Wi-Fi commun, internet n'est pas nécessaire. Sans routeur, un partage de connexion iPhone suffit.",
+    offHelpBtn: "Relier sans internet",
+    offHelpTitle: "Liaison sans internet",
+    offHelpIntro: "Il suffit que les deux appareils soient sur le même réseau Wi-Fi. Le réseau n'a pas besoin d'internet. S'il n'y en a pas, créez-en un depuis l'iPhone :",
+    offHelpS1: "Sur l'iPhone, ouvrez Réglages → Partage de connexion et activez « Autoriser d'autres utilisateurs ».",
+    offHelpS2: "Sur l'iPad, ouvrez Réglages → Wi-Fi et choisissez le réseau portant le nom de l'iPhone.",
+    offHelpS3: "Saisissez le mot de passe affiché sur l'écran de partage de l'iPhone.",
+    offHelpS4: "Ouvrez Tapkasa sur les deux appareils. La liaison se fait seule en moins d’une minute.",
+    offHelpNote: "Le partage exige une SIM dans l'iPhone ; aucune donnée n'est consommée, les commandes passent en direct.",
     linkPairedNative: "Appairé à l’autre appareil",
     linkSearching: "L’autre appareil n’a pas encore été trouvé",
     linkPaired: "Appairé : l’autre appareil a répondu",
@@ -2198,7 +2281,15 @@
     showSummary: "Ver resumen",
     closeEvent: "Cerrar evento",
     emptyStats: "Aún no se ha vendido nada.<br>Guarde la primera venta y aquí aparecerán las estadísticas.",
-    pairOfflineHint: "La conexión funciona sin internet, los dispositivos se enlazan directamente. Ambos necesitan el Wi-Fi activado (sin conectarse a ninguna red) y Bluetooth. Lo más fiable es una red común, vale el hotspot del móvil.",
+    pairOfflineHint: "Los dispositivos se enlazan por una red Wi-Fi común; no hace falta internet. Sin router, sirve el hotspot del iPhone.",
+    offHelpBtn: "Cómo enlazar sin internet",
+    offHelpTitle: "Enlace sin internet",
+    offHelpIntro: "Basta con que ambos dispositivos estén en la misma red Wi-Fi. La red no necesita internet. Si no hay ninguna, créela desde el iPhone:",
+    offHelpS1: "En el iPhone abra Ajustes → Compartir internet y active «Permitir a otros conectarse».",
+    offHelpS2: "En el iPad abra Ajustes → Wi-Fi y elija la red con el nombre del iPhone.",
+    offHelpS3: "Escriba la contraseña que aparece en la pantalla del hotspot del iPhone.",
+    offHelpS4: "Abra Tapkasa en ambos dispositivos. Se conectan solos en menos de un minuto.",
+    offHelpNote: "El hotspot requiere SIM en el iPhone; no se consumen datos, los pedidos van directos.",
     linkPairedNative: "Emparejado con el otro dispositivo",
     linkSearching: "Aún no se ha encontrado el otro dispositivo",
     linkPaired: "Emparejado: el otro dispositivo ha respondido",
@@ -2493,7 +2584,15 @@
     showSummary: "Mostrare il riepilogo",
     closeEvent: "Chiudere l’evento",
     emptyStats: "Ancora nessuna vendita.<br>Appena viene salvato il primo conto, qui compaiono le statistiche.",
-    pairOfflineHint: "Il collegamento funziona anche senza internet, i dispositivi si connettono direttamente. Su entrambi devono essere attivi il Wi-Fi (senza bisogno di una rete) e il Bluetooth. La cosa più affidabile è una rete comune, va bene anche l’hotspot del telefono.",
+    pairOfflineHint: "I dispositivi si collegano tramite una rete Wi-Fi comune, internet non serve. Senza router basta l'hotspot dell'iPhone.",
+    offHelpBtn: "Collegare senza internet",
+    offHelpTitle: "Collegamento senza internet",
+    offHelpIntro: "Basta che i due dispositivi siano sulla stessa rete Wi-Fi. La rete non ha bisogno di internet. Se non ce n’è una, createla dall’iPhone:",
+    offHelpS1: "Su iPhone aprite Impostazioni → Hotspot personale e attivate «Consenti agli altri di accedere».",
+    offHelpS2: "Su iPad aprite Impostazioni → Wi-Fi e scegliete la rete con il nome dell’iPhone.",
+    offHelpS3: "Inserite la password mostrata sulla schermata hotspot dell’iPhone.",
+    offHelpS4: "Aprite Tapkasa su entrambi. Si collegano da soli entro un minuto.",
+    offHelpNote: "L’hotspot richiede una SIM nell’iPhone; i dati non si consumano, gli ordini viaggiano in diretta.",
     linkPairedNative: "Abbinato all’altro dispositivo",
     linkSearching: "Nessun altro dispositivo trovato finora",
     linkPaired: "Abbinato: l’altro dispositivo ha risposto",
@@ -2788,7 +2887,15 @@
     showSummary: "Podsumowanie",
     closeEvent: "Zamknięcie imprezy",
     emptyStats: "Na razie nic nie sprzedano.<br>Po zapisaniu pierwszego rachunku pojawią się tu statystyki.",
-    pairOfflineHint: "Połączenie działa bez internetu, urządzenia łączą się bezpośrednio. Na obu musi być włączone Wi-Fi (bez podłączenia do żadnej sieci) i Bluetooth. Najpewniejsza jest wspólna sieć, może być hotspot z telefonu.",
+    pairOfflineHint: "Urządzenia łączą się przez wspólną sieć Wi-Fi, internet nie jest potrzebny. Bez routera wystarczy hotspot z iPhone’a.",
+    offHelpBtn: "Jak połączyć bez internetu",
+    offHelpTitle: "Połączenie bez internetu",
+    offHelpIntro: "Wystarczy, że oba urządzenia będą w tej samej sieci Wi-Fi. Sieć nie potrzebuje internetu. Gdy żadnej nie ma, utwórz ją z iPhone’a:",
+    offHelpS1: "Na iPhonie otwórz Ustawienia → Hotspot osobisty i włącz „Zezwalaj innym”.",
+    offHelpS2: "Na iPadzie otwórz Ustawienia → Wi-Fi i wybierz sieć o nazwie iPhone’a.",
+    offHelpS3: "Wpisz hasło widoczne na ekranie hotspotu w iPhonie.",
+    offHelpS4: "Otwórz Tapkasę na obu urządzeniach. Połączą się same w ciągu minuty.",
+    offHelpNote: "Hotspot wymaga karty SIM w iPhonie; dane nie są zużywane, zamówienia płyną bezpośrednio.",
     linkPairedNative: "Sparowano z drugim urządzeniem",
     linkSearching: "Na razie nie znaleziono drugiego urządzenia",
     linkPaired: "Sparowano, drugie urządzenie się odezwało",
@@ -3083,7 +3190,15 @@
     showSummary: "Mostrar resumo",
     closeEvent: "Fechar evento",
     emptyStats: "Ainda não vendeu nada.<br>Assim que guardar a primeira conta, aparecem aqui as estatísticas.",
-    pairOfflineHint: "A ligação funciona sem internet, os aparelhos ligam-se diretamente. Ambos precisam do Wi-Fi ligado (sem ligação a nenhuma rede) e do Bluetooth. O mais fiável é uma rede comum, serve o hotspot do telemóvel.",
+    pairOfflineHint: "Os aparelhos ligam-se por uma rede Wi-Fi comum; não é precisa internet. Sem router, serve o hotspot do iPhone.",
+    offHelpBtn: "Ligar sem internet",
+    offHelpTitle: "Ligação sem internet",
+    offHelpIntro: "Basta que os dois aparelhos estejam na mesma rede Wi-Fi. A rede não precisa de internet. Se não houver nenhuma, crie-a a partir do iPhone:",
+    offHelpS1: "No iPhone abra Definições → Hotspot pessoal e ative «Permitir acesso a outros».",
+    offHelpS2: "No iPad abra Definições → Wi-Fi e escolha a rede com o nome do iPhone.",
+    offHelpS3: "Introduza a palavra-passe mostrada no ecrã do hotspot do iPhone.",
+    offHelpS4: "Abra a Tapkasa em ambos. Ligam-se sozinhos em menos de um minuto.",
+    offHelpNote: "O hotspot exige SIM no iPhone; não gasta dados, os pedidos fluem diretamente.",
     linkPairedNative: "Emparelhado com o outro dispositivo",
     linkSearching: "O outro dispositivo ainda não apareceu",
     linkPaired: "Emparelhado: o outro dispositivo respondeu",
@@ -5073,6 +5188,43 @@
     return lastIn > 0 && (Date.now() - lastIn) < LINK_FRESH_MS;
   }
 
+  // Instruktážní animace k propojení přes hotspot. Kreslená scéna v SVG,
+  // krokovaná čistě CSS animacemi: žádné video, žádné stahování, funguje
+  // offline a váží pár kilobajtů.
+  function offHelpScene() {
+    return '<div class="oh-scene" aria-hidden="true"><svg viewBox="0 0 340 190">' +
+      // iPhone vlevo
+      '<g class="oh-phone">' +
+        '<rect x="30" y="40" width="70" height="130" rx="12" class="oh-dev"/>' +
+        '<rect x="38" y="52" width="54" height="106" rx="6" class="oh-scr"/>' +
+        // řádek nastavení s přepínačem
+        '<rect x="43" y="62" width="44" height="12" rx="3" class="oh-row"/>' +
+        '<rect class="oh-toggle" x="72" y="64" width="13" height="8" rx="4"/>' +
+        '<circle class="oh-knob" cx="76" cy="68" r="3.2"/>' +
+        // heslo
+        '<rect x="43" y="80" width="44" height="9" rx="2" class="oh-row oh-pass"/>' +
+      "</g>" +
+      // vlny hotspotu
+      '<g class="oh-waves">' +
+        '<path d="M112 105a24 24 0 0 1 0-34" class="oh-wave w1"/>' +
+        '<path d="M124 113a40 40 0 0 0 0-50" class="oh-wave w2" transform="rotate(180 124 88)"/>' +
+      "</g>" +
+      // iPad vpravo
+      '<g class="oh-pad">' +
+        '<rect x="210" y="30" width="105" height="140" rx="12" class="oh-dev"/>' +
+        '<rect x="219" y="40" width="87" height="120" rx="6" class="oh-scr"/>' +
+        // seznam sítí, druhý řádek se vybere
+        '<rect x="226" y="52" width="73" height="11" rx="3" class="oh-row"/>' +
+        '<rect x="226" y="69" width="73" height="11" rx="3" class="oh-row oh-pick"/>' +
+        '<path d="M288 72l3.5 4 6-7" class="oh-tick"/>' +
+      "</g>" +
+      // spojnice a fajfka úspěchu
+      '<path d="M104 150 C 150 168, 180 168, 212 152" class="oh-linkline"/>' +
+      '<g class="oh-done"><circle cx="170" cy="97" r="14" class="oh-done-c"/>' +
+        '<path d="M163 97l5 5 9 -10" class="oh-done-t"/></g>' +
+      "</svg></div>";
+  }
+
   function linkText() {
     if (peers > 0) { return T("linkPairedNative"); }   // nativní spojení je živé teď
     if (!state.pair) { return T("linkSearching"); }
@@ -5138,7 +5290,9 @@
     var h = '<div class="link linkstat' + (peers > 0 || linkFresh() ? " on" : "") + '"><i></i>' + esc(linkText()) + "</div>";
     // jen v nativní aplikaci; na webu přímé spojení není a rada by mátla
     if (typeof window.__kasaPeerLink === "function") {
-      h += '<p class="hint" style="text-align:left;padding-top:0;padding-bottom:4px">' + esc(T("pairOfflineHint")) + "</p>";
+      h += '<p class="hint" style="text-align:left;padding-top:0;padding-bottom:4px">' + esc(T("pairOfflineHint")) + "</p>" +
+           '<div class="acts" style="padding-top:0;padding-bottom:6px"><button class="act" data-offlinehelp="1">' +
+           esc(T("offHelpBtn")) + "</button></div>";
     }
     if (state.pair) {
       h += '<div class="link on" style="padding-top:0"><i></i>' + esc(T("pairCode")) + " <strong>" + esc(state.pair) + "</strong></div>" +
@@ -5575,6 +5729,20 @@
            '<button class="btn-done" data-cancel="1">' + esc(T("done")) + "</button>";
     }
 
+    if (sheet.step === "offhelp") {
+      h += "<h2>" + esc(T("offHelpTitle")) + "</h2>" +
+           '<p class="sub" style="text-align:left">' + esc(T("offHelpIntro")) + "</p>" +
+           offHelpScene() +
+           '<ol class="oh-steps">' +
+             '<li class="oh-s1">' + esc(T("offHelpS1")) + "</li>" +
+             '<li class="oh-s2">' + esc(T("offHelpS2")) + "</li>" +
+             '<li class="oh-s3">' + esc(T("offHelpS3")) + "</li>" +
+             '<li class="oh-s4">' + esc(T("offHelpS4")) + "</li>" +
+           "</ol>" +
+           '<p class="hint" style="text-align:left;padding:8px 0 0">' + esc(T("offHelpNote")) + "</p>" +
+           '<button class="btn-done" data-cancel="1">' + esc(T("close")) + "</button>";
+    }
+
     if (sheet.step === "docout") {
       h += "<h2>" + esc(T("docHead")) + "</h2>" +
            '<textarea class="txt" readonly id="dump" style="height:230px">' + esc(sheet.body) + "</textarea>" +
@@ -5833,7 +6001,7 @@
             "[data-backup],[data-restoreask],[data-dorestore],[data-docask],[data-docmake]," +
             "[data-ticket],[data-line],[data-serve],[data-reopen],[data-drop],[data-col],[data-setcol],[data-applycustom],[data-mode],[data-voice],[data-voicetest],"+
             "[data-paircreate],[data-pairjoin],[data-pairoff],[data-resync],[data-relaytest]," +
-            "[data-country],[data-docmail],[data-docshare],[data-sellersheet],[data-archopen],[data-archdel],[data-vatmode],[data-langsheet],[data-cursheet],[data-setlang],[data-setcur],[data-paywall],[data-buy]," +
+            "[data-offlinehelp],[data-country],[data-docmail],[data-docshare],[data-sellersheet],[data-archopen],[data-archdel],[data-vatmode],[data-langsheet],[data-cursheet],[data-setlang],[data-setcur],[data-paywall],[data-buy]," +
             "[data-restorebuy],[data-devtap],[data-oblang],[data-obcur],[data-obnext],[data-obdemo],[data-obempty]";
 
   document.addEventListener("click", function (ev) {
@@ -6193,6 +6361,8 @@
       if (cb) { cb.innerHTML = ""; }
       return;
     }
+
+    if (d.offlinehelp) { sheet = { step: "offhelp" }; render(); return; }
 
     if (d.sellersheet) { sheet = { step: "seller" }; render(); return; }
 
