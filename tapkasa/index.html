@@ -326,8 +326,28 @@
   @media (max-width:400px){.sf-grid{grid-template-columns:1fr}.sf-grid .sf{grid-column:1 / -1}}
   .sf{display:block;min-width:0}
   .sf .inp,.sf .txt{min-width:0;max-width:100%}
+  .sf-sug{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+  .sf-sug:empty{margin-top:0}
+  .sf-sug .sug{padding:7px 11px;border:1px solid var(--rule);border-radius:999px;
+    background:var(--surface);font-size:13px;color:var(--ink-2)}
+  .sf-sug .sug:active{background:var(--sunk)}
   .sf span{display:block;font-size:11px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px}
   .doc-range label span{display:block;font-size:11px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px}
+  /* Ikony v tlačítkách jsou vlastní SVG, ne znaky ani emoji. Jednotné
+     nastavení tahu, velikost si každé místo doladí samo. */
+  .step button svg,.key svg,.tx .del svg,.arch .ab svg,.edit .mv svg,.edit .rm svg,
+  .served .drop svg,.toast button.x svg{
+    stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
+    display:block;margin:0 auto;
+  }
+  .act svg,.link svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2.6;
+    stroke-linecap:round;stroke-linejoin:round;flex:0 0 auto;margin-right:6px;vertical-align:-2px}
+  .step button svg{width:17px;height:17px}
+  .key svg{width:18px;height:18px}
+  .tx .del svg,.served .drop svg,.toast button.x svg{width:17px;height:17px}
+  .arch .ab svg,.edit .mv svg,.edit .rm svg{width:17px;height:17px}
+  @media (min-width:600px){.step button svg{width:19px;height:19px}}
+
   .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
   /* ---------- počítadlo plateb zdarma ---------- */
@@ -722,9 +742,9 @@
     pairPlaceholder: "Kód z druhého zařízení",
     join: "Spojit",
     createCode: "Vytvořit nový kód",
-    voiceOnKasa: "Děkuje zákazníkovi ✓",
+    voiceOnKasa: "Děkuje zákazníkovi",
     voiceOffKasa: "Poděkovat zákazníkovi",
-    voiceOnVydej: "Čte objednávky nahlas ✓",
+    voiceOnVydej: "Čte objednávky nahlas",
     voiceOffVydej: "Číst objednávky nahlas",
     voiceTry: "Zkusit hlas",
     vydejPairHint: "Zadejte stejný kód jako na kase. V nainstalované aplikaci se zařízení navíc najdou sama po místní síti, i bez internetu.",
@@ -858,7 +878,7 @@
     d_cake: "Koláč",
     proHead: "Tapkasa Pro",
     proFree: "Zdarma",
-    proActive: "Pro aktivní ✓",
+    proActive: "Pro aktivní",
     proLeft: ["Dnes zbývá {0} platba zdarma", "Dnes zbývají {0} platby zdarma", "Dnes zbývá {0} plateb zdarma"],
     proRow: "Odemknout Pro",
     proPitch: "Neomezené platby a propojená zařízení.",
@@ -1016,9 +1036,9 @@
     pairPlaceholder: "Code from the other device",
     join: "Join",
     createCode: "Create new code",
-    voiceOnKasa: "Thanks the customer ✓",
+    voiceOnKasa: "Thanks the customer",
     voiceOffKasa: "Thank the customer",
-    voiceOnVydej: "Reads orders aloud ✓",
+    voiceOnVydej: "Reads orders aloud",
     voiceOffVydej: "Read orders aloud",
     voiceTry: "Try the voice",
     vydejPairHint: "Enter the same code as on the till. In the installed app, devices also find each other over the local network, even without internet.",
@@ -1150,7 +1170,7 @@
     d_cake: "Cake",
     proHead: "Tapkasa Pro",
     proFree: "Free",
-    proActive: "Pro active ✓",
+    proActive: "Pro active",
     proLeft: ["{0} free payment left today", "{0} free payments left today", "{0} free payments left today"],
     proRow: "Unlock Pro",
     proPitch: "Unlimited payments and connected devices.",
@@ -1311,9 +1331,9 @@
     pairPlaceholder: "Kód z druhého zariadenia",
     join: "Spojiť",
     createCode: "Vytvoriť nový kód",
-    voiceOnKasa: "Ďakuje zákazníkovi ✓",
+    voiceOnKasa: "Ďakuje zákazníkovi",
     voiceOffKasa: "Poďakovať zákazníkovi",
-    voiceOnVydej: "Číta objednávky nahlas ✓",
+    voiceOnVydej: "Číta objednávky nahlas",
     voiceOffVydej: "Čítať objednávky nahlas",
     voiceTry: "Skúsiť hlas",
     vydejPairHint: "Zadajte rovnaký kód ako na kase. V nainštalovanej aplikácii sa zariadenia navyše nájdu samy cez miestnu sieť, aj bez internetu.",
@@ -1447,7 +1467,7 @@
     d_cake: "Koláč",
     proHead: "Tapkasa Pro",
     proFree: "Zadarmo",
-    proActive: "Pro aktívne ✓",
+    proActive: "Pro aktívne",
     proLeft: ["Dnes zostáva {0} platba zadarmo", "Dnes zostávajú {0} platby zadarmo", "Dnes zostáva {0} platieb zadarmo"],
     proRow: "Odomknúť Pro",
     proPitch: "Neobmedzené platby a prepojené zariadenia.",
@@ -1605,9 +1625,9 @@
     pairPlaceholder: "Code vom anderen Gerät",
     join: "Verbinden",
     createCode: "Neuen Code erstellen",
-    voiceOnKasa: "Sagt dem Kunden Danke ✓",
+    voiceOnKasa: "Sagt dem Kunden Danke",
     voiceOffKasa: "Dem Kunden Danke sagen",
-    voiceOnVydej: "Liest Bestellungen vor ✓",
+    voiceOnVydej: "Liest Bestellungen vor",
     voiceOffVydej: "Bestellungen vorlesen",
     voiceTry: "Stimme testen",
     vydejPairHint: "Geben Sie denselben Code ein wie an der Kasse. In der installierten App finden sich die Geräte außerdem von selbst im lokalen Netzwerk, auch ohne Internet.",
@@ -1741,7 +1761,7 @@
     d_cake: "Kuchen",
     proHead: "Tapkasa Pro",
     proFree: "Gratis",
-    proActive: "Pro aktiv ✓",
+    proActive: "Pro aktiv",
     proLeft: ["Heute noch {0} kostenlose Zahlung", "Heute noch {0} kostenlose Zahlungen", "Heute noch {0} kostenlose Zahlungen"],
     proRow: "Pro freischalten",
     proPitch: "Unbegrenzte Zahlungen und gekoppelte Geräte.",
@@ -1899,9 +1919,9 @@
     pairPlaceholder: "Code de l’autre appareil",
     join: "Rejoindre",
     createCode: "Créer un nouveau code",
-    voiceOnKasa: "Remercie le client ✓",
+    voiceOnKasa: "Remercie le client",
     voiceOffKasa: "Remercier le client",
-    voiceOnVydej: "Lit les commandes à voix haute ✓",
+    voiceOnVydej: "Lit les commandes à voix haute",
     voiceOffVydej: "Lire les commandes à voix haute",
     voiceTry: "Essayer la voix",
     vydejPairHint: "Saisissez le même code que sur la caisse. Dans l’application installée, les appareils se détectent aussi automatiquement sur le réseau local, même sans Internet.",
@@ -2035,7 +2055,7 @@
     d_cake: "Gâteau",
     proHead: "Tapkasa Pro",
     proFree: "Gratuit",
-    proActive: "Pro actif ✓",
+    proActive: "Pro actif",
     proLeft: ["Il reste {0} paiement gratuit aujourd’hui", "Il reste {0} paiements gratuits aujourd’hui", "Il reste {0} paiements gratuits aujourd’hui"],
     proRow: "Débloquer Pro",
     proPitch: "Paiements illimités et appareils connectés.",
@@ -2193,9 +2213,9 @@
     pairPlaceholder: "Código del otro dispositivo",
     join: "Conectar",
     createCode: "Crear código nuevo",
-    voiceOnKasa: "Da las gracias al cliente ✓",
+    voiceOnKasa: "Da las gracias al cliente",
     voiceOffKasa: "Dar las gracias al cliente",
-    voiceOnVydej: "Lee los pedidos en voz alta ✓",
+    voiceOnVydej: "Lee los pedidos en voz alta",
     voiceOffVydej: "Leer los pedidos en voz alta",
     voiceTry: "Probar la voz",
     vydejPairHint: "Introduzca el mismo código que en la caja. Con la app instalada, los dispositivos además se encuentran solos por la red local, incluso sin internet.",
@@ -2329,7 +2349,7 @@
     d_cake: "Tarta",
     proHead: "Tapkasa Pro",
     proFree: "Gratis",
-    proActive: "Pro activo ✓",
+    proActive: "Pro activo",
     proLeft: ["Hoy le queda {0} pago gratis", "Hoy le quedan {0} pagos gratis", "Hoy le quedan {0} pagos gratis"],
     proRow: "Desbloquear Pro",
     proPitch: "Pagos ilimitados y dispositivos conectados.",
@@ -2487,9 +2507,9 @@
     pairPlaceholder: "Codice dell’altro dispositivo",
     join: "Collegare",
     createCode: "Creare un nuovo codice",
-    voiceOnKasa: "Ringrazia il cliente ✓",
+    voiceOnKasa: "Ringrazia il cliente",
     voiceOffKasa: "Ringrazia il cliente",
-    voiceOnVydej: "Legge gli ordini ad alta voce ✓",
+    voiceOnVydej: "Legge gli ordini ad alta voce",
     voiceOffVydej: "Legge gli ordini ad alta voce",
     voiceTry: "Provare la voce",
     vydejPairHint: "Inserire lo stesso codice della cassa. Nell’app installata, in più, i dispositivi si trovano da soli sulla rete locale, anche senza internet.",
@@ -2623,7 +2643,7 @@
     d_cake: "Torta",
     proHead: "Tapkasa Pro",
     proFree: "Gratis",
-    proActive: "Pro attivo ✓",
+    proActive: "Pro attivo",
     proLeft: ["Oggi resta {0} pagamento gratis", "Oggi restano {0} pagamenti gratis", "Oggi restano {0} pagamenti gratis"],
     proRow: "Sbloccare Pro",
     proPitch: "Pagamenti illimitati e dispositivi collegati.",
@@ -2781,9 +2801,9 @@
     pairPlaceholder: "Kod z drugiego urządzenia",
     join: "Połączyć",
     createCode: "Nowy kod",
-    voiceOnKasa: "Dziękuje klientowi ✓",
+    voiceOnKasa: "Dziękuje klientowi",
     voiceOffKasa: "Dziękowanie klientowi",
-    voiceOnVydej: "Czyta zamówienia na głos ✓",
+    voiceOnVydej: "Czyta zamówienia na głos",
     voiceOffVydej: "Czytanie zamówień na głos",
     voiceTry: "Test głosu",
     vydejPairHint: "Proszę wpisać ten sam kod co na kasie. W zainstalowanej aplikacji urządzenia znajdą się też same w sieci lokalnej, nawet bez internetu.",
@@ -2917,7 +2937,7 @@
     d_cake: "Ciasto",
     proHead: "Tapkasa Pro",
     proFree: "Za darmo",
-    proActive: "Pro aktywne ✓",
+    proActive: "Pro aktywne",
     proLeft: ["Dziś została {0} darmowa płatność", "Dziś zostały {0} darmowe płatności", "Dziś zostało {0} darmowych płatności"],
     proRow: "Odblokowanie Pro",
     proPitch: "Płatności bez limitu i połączone urządzenia.",
@@ -3075,9 +3095,9 @@
     pairPlaceholder: "Código do outro dispositivo",
     join: "Ligar",
     createCode: "Criar novo código",
-    voiceOnKasa: "Agradece ao cliente ✓",
+    voiceOnKasa: "Agradece ao cliente",
     voiceOffKasa: "Agradecer ao cliente",
-    voiceOnVydej: "Lê os pedidos em voz alta ✓",
+    voiceOnVydej: "Lê os pedidos em voz alta",
     voiceOffVydej: "Ler pedidos em voz alta",
     voiceTry: "Testar a voz",
     vydejPairHint: "Escreva o mesmo código que está na caixa. Na aplicação instalada, os dispositivos também se encontram sozinhos pela rede local, mesmo sem internet.",
@@ -3211,7 +3231,7 @@
     d_cake: "Bolo",
     proHead: "Tapkasa Pro",
     proFree: "Grátis",
-    proActive: "Pro ativo ✓",
+    proActive: "Pro ativo",
     proLeft: ["Hoje ainda tem {0} pagamento grátis", "Hoje ainda tem {0} pagamentos grátis", "Hoje ainda tem {0} pagamentos grátis"],
     proRow: "Desbloquear Pro",
     proPitch: "Pagamentos sem limites e dispositivos ligados entre si.",
@@ -3445,6 +3465,18 @@
 
   var PRO_MARK = '<svg viewBox="0 0 48 48" aria-hidden="true"><rect x="4" y="4" width="19" height="19" rx="5" fill="#D6402A"/><rect x="25" y="4" width="19" height="19" rx="5" fill="#F5CE3E"/><rect x="4" y="25" width="19" height="19" rx="5" fill="#2158C4"/><rect x="25" y="25" width="19" height="19" rx="5" fill="#127A4E"/></svg>';
   var PW_CHECK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>';
+
+  // Vlastní ikony. Znaky jako ×, ↑ nebo ↩ vypadají na každé platformě jinak
+  // a část z nich telefon vykreslí jako emoji, do aplikace tedy nepatří.
+  var SVG = {
+    plus: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14"/><path d="M5 12h14"/></svg>',
+    minus: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14"/></svg>',
+    up: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>',
+    close: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>',
+    back: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5"/><path d="m11 5-7 7 7 7"/></svg>',
+    reopen: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10h11a5 5 0 0 1 0 10h-4"/><path d="m8 6-4 4 4 4"/></svg>',
+    check: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>'
+  };
 
   function detectCurrency() {
     var byLang = { cs: "CZK", sk: "EUR", de: "EUR", fr: "EUR", es: "EUR", it: "EUR", pl: "PLN", pt: "EUR", en: "USD" };
@@ -4288,7 +4320,7 @@
       t.lines.forEach(function (l) {
         // sazba je součástí klíče, ať se do archivu nesloučí stejná položka
         // prodávaná pod dvěma sazbami
-        var lv = vatStr(l.vat);
+        var lv = resolveVat(l.name, l.vat);
         var k = l.name + "|" + l.price + "|" + lv;
         if (!map[k]) { map[k] = { name: l.name, price: l.price, vat: lv, qty: 0, sum: 0 }; }
         map[k].qty += l.qty;
@@ -4348,9 +4380,9 @@
       state.order.forEach(function (l, i) {
         h += '<div class="line"><span class="nm">' + esc(l.name) + "</span>" +
                '<span class="step">' +
-                 '<button data-step="' + i + '" data-d="-1" aria-label="' + esc(T("minus")) + '">−</button>' +
+                 '<button data-step="' + i + '" data-d="-1" aria-label="' + esc(T("minus")) + '">' + SVG.minus + "</button>" +
                  '<span class="q">' + l.qty + "</span>" +
-                 '<button data-step="' + i + '" data-d="1" aria-label="' + esc(T("plusOne")) + '">+</button>' +
+                 '<button data-step="' + i + '" data-d="1" aria-label="' + esc(T("plusOne")) + '">' + SVG.plus + "</button>" +
                "</span>" +
                '<span class="amt">' + czk(l.price * l.qty) + "</span></div>";
       });
@@ -4406,7 +4438,7 @@
                '<span class="no">#' + s.no + "</span>" +
                '<span class="w">' + esc(what) + "</span>" +
                '<span class="back">' + esc(T("reopen")) + "</span></button>" +
-             '<button class="drop" data-drop="' + s.id + '" aria-label="' + esc(T("dropAria")) + '">×</button></div>';
+             '<button class="drop" data-drop="' + s.id + '" aria-label="' + esc(T("dropAria")) + '">' + SVG.close + "</button></div>";
       });
       h += "</section>";
     }
@@ -4454,7 +4486,7 @@
              '<div class="mid"><div class="w">' + esc(what) + "</div>" +
              '<div class="s">' + clock(t.ts) + " · " + esc(t.method === "cash" ? T("cashLower") : T("cardLower")) + "</div></div>" +
              '<span class="a">' + czk(t.total) + "</span>" +
-             '<button class="del" data-del="' + t.id + '" aria-label="' + esc(T("delReceiptAria")) + '">×</button></div>';
+             '<button class="del" data-del="' + t.id + '" aria-label="' + esc(T("delReceiptAria")) + '">' + SVG.close + "</button></div>";
       });
       h += "</section>";
     }
@@ -4471,10 +4503,10 @@
              // archivy je nemají a doúčtovat by se nedaly
              (a.sales && a.sales.length
                ? '<button class="ab" data-archopen="' + esc(a.id || "") + '" aria-label="' +
-                 esc(T("archReopenAria", a.event)) + '" title="' + esc(T("archReopen")) + '">&#8617;</button>'
+                 esc(T("archReopenAria", a.event)) + '" title="' + esc(T("archReopen")) + '">' + SVG.reopen + "</button>"
                : "") +
              '<button class="ab del" data-archdel="' + esc(a.id || "") + '" aria-label="' +
-             esc(T("archDelAria", a.event)) + '" title="' + esc(T("archDelete")) + '">&times;</button></div>';
+             esc(T("archDelAria", a.event)) + '" title="' + esc(T("archDelete")) + '">' + SVG.close + "</button></div>";
       });
       h += "</section>";
     }
@@ -4513,7 +4545,9 @@
       total += s.total;
       if (s.method === "cash") { cashSum += s.total; } else { cardSum += s.total; }
       events[state.event || T("noName")] = true;
-      s.lines.forEach(function (l) { addItem(l.name, l.price, l.qty, l.qty * l.price, l.vat); });
+      s.lines.forEach(function (l) {
+        addItem(l.name, l.price, l.qty, l.qty * l.price, resolveVat(l.name, l.vat));
+      });
     });
 
     state.archives.forEach(function (a) {
@@ -4523,7 +4557,9 @@
       cashSum += a.cash || 0;
       cardSum += a.card || 0;
       events[(a.event || T("noName")) + " (" + new Date(a.closedAt).toLocaleDateString(langInfo().loc) + ")"] = true;
-      (a.items || []).forEach(function (i) { addItem(i.name, i.price, i.qty, i.sum, i.vat); });
+      (a.items || []).forEach(function (i) {
+        addItem(i.name, i.price, i.qty, i.sum, resolveVat(i.name, i.vat));
+      });
     });
 
     if (!bills) { return ""; }
@@ -5026,7 +5062,10 @@
             "</p>" +
             pairBlock(till) +
             '<div class="acts" style="padding-top:6px"><button class="act' + (state.voice ? " on" : "") +
-              '" data-voice="1">' + esc(state.voice ? (till ? T("voiceOnKasa") : T("voiceOnVydej")) : (till ? T("voiceOffKasa") : T("voiceOffVydej"))) + "</button>" +
+              '" data-voice="1">' +
+                (state.voice ? SVG.check : "") +
+                esc(state.voice ? (till ? T("voiceOnKasa") : T("voiceOnVydej"))
+                                : (till ? T("voiceOffKasa") : T("voiceOffVydej"))) + "</button>" +
               '<button class="act" data-voicetest="1">' + esc(T("voiceTry")) + "</button></div>";
 
     if (!till) {
@@ -5049,8 +5088,8 @@
                ? '<input class="e-vat" data-vat="' + it.id + '" inputmode="decimal" placeholder="%" value="' +
                  esc(vatStr(it.vat)) + '" aria-label="' + esc(T("vatAria")) + '">'
                : "") +
-             '<button class="mv" data-mv="' + i + '" aria-label="' + esc(T("upAria")) + '"' + (i === 0 ? " disabled style=\"opacity:.25\"" : "") + ">↑</button>" +
-             '<button class="rm" data-rm="' + it.id + '" aria-label="' + esc(T("rmAria")) + '">×</button></div>';
+             '<button class="mv" data-mv="' + i + '" aria-label="' + esc(T("upAria")) + '"' + (i === 0 ? " disabled style=\"opacity:.25\"" : "") + ">" + SVG.up + "</button>" +
+             '<button class="rm" data-rm="' + it.id + '" aria-label="' + esc(T("rmAria")) + '">' + SVG.close + "</button></div>";
     });
 
     return h + '<div class="acts"><button class="act" data-new="1">' + esc(T("addItem")) + "</button>" +
@@ -5100,7 +5139,7 @@
   function proSection() {
     var h = '<div class="sec"><h2>' + esc(T("proHead")) + "</h2></div>";
     if (isPro()) {
-      return h + '<div class="link on"><i></i>' + esc(T("proActive")) +
+      return h + '<div class="link on"><i></i>' + SVG.check + esc(T("proActive")) +
              (state.license === "pro-dev" ? " · dev" : "") + "</div>";
     }
     return h + '<div class="link"><i></i>' + esc(T("proFree")) + " · " + esc(proLeftText(freeLeft())) + "</div>" +
@@ -5126,6 +5165,67 @@
   // /USt-IdNr. a tak dál), ale význam zůstává stejný. Poznámka na konci je
   // pro cokoli, co konkrétní země navíc vyžaduje.
   var SELLER_FIELDS = ["name", "regNo", "vatId", "street", "city", "zip", "country", "email", "phone", "note"];
+
+  // Země našeptáváme v jazyce aplikace: názvy si necháme přeložit systémem,
+  // takže Čech píše Česko, Angličan Czechia a Němec Tschechien, a nikdo si
+  // je nemusí vymýšlet. Kdyby prohlížeč Intl.DisplayNames neuměl, zůstane
+  // z pole obyčejný textový vstup.
+  var COUNTRY_CODES = ("AD AE AF AG AL AM AO AR AT AU AZ BA BB BD BE BF BG BH BI BJ BN BO BR BS " +
+    "BT BW BY BZ CA CD CF CG CH CI CL CM CN CO CR CU CV CY CZ DE DJ DK DM DO DZ EC EE EG ER ES " +
+    "ET FI FJ FM FR GA GB GD GE GH GM GN GQ GR GT GW GY HK HN HR HT HU ID IE IL IN IQ IR IS IT " +
+    "JM JO JP KE KG KH KI KM KN KP KR KW KZ LA LB LC LI LK LR LS LT LU LV LY MA MC MD ME MG MH " +
+    "MK ML MM MN MO MR MT MU MV MW MX MY MZ NA NE NG NI NL NO NP NR NZ OM PA PE PG PH PK PL PR " +
+    "PS PT PW PY QA RO RS RU RW SA SB SC SD SE SG SI SK SL SM SN SO SR SS ST SV SY SZ TD TG TH " +
+    "TJ TL TM TN TO TR TT TV TW TZ UA UG US UY UZ VA VC VE VN VU WS XK YE ZA ZM ZW").split(" ");
+
+  var countryCache = null, countryCacheLang = null;
+
+  function countryList() {
+    var lang = state && state.lang ? state.lang : "cs";
+    if (countryCache && countryCacheLang === lang) { return countryCache; }
+    var out = [];
+    try {
+      var dn = new Intl.DisplayNames([langInfo().loc], { type: "region" });
+      COUNTRY_CODES.forEach(function (c) {
+        var n = dn.of(c);
+        if (n && n !== c) { out.push(n); }
+      });
+      out.sort(function (a, b) { return a.localeCompare(b, langInfo().loc); });
+    } catch (e) { out = []; }
+    countryCache = out;
+    countryCacheLang = lang;
+    return out;
+  }
+
+  // hledáme bez ohledu na diakritiku a velikost písmen, ať „cesko" najde Česko
+  function plain(t) {
+    var v = String(t).toLowerCase();
+    try { v = v.normalize("NFD").replace(/[\u0300-\u036f]/g, ""); } catch (e) {}
+    return v;
+  }
+
+  function countryMatches(q) {
+    var v = plain(q).trim();
+    if (!v) { return []; }
+    var list = countryList();
+    var starts = [], has = [];
+    for (var i = 0; i < list.length; i++) {
+      var pn = plain(list[i]);
+      if (pn === v) { return []; }          // přesná shoda, není co nabízet
+      if (pn.indexOf(v) === 0) { starts.push(list[i]); }
+      else if (pn.indexOf(v) > 0) { has.push(list[i]); }
+      if (starts.length >= 6) { break; }
+    }
+    return starts.concat(has).slice(0, 6);
+  }
+
+  function countrySuggestHtml(q) {
+    var m = countryMatches(q);
+    if (!m.length) { return ""; }
+    return m.map(function (n) {
+      return '<button type="button" class="sug" data-country="' + esc(n) + '">' + esc(n) + "</button>";
+    }).join("");
+  }
 
   function sellerVal(k) {
     var v = state.seller ? state.seller[k] : "";
@@ -5167,6 +5267,20 @@
   // Sazba se drží jako číslo, prázdno znamená „u této položky DPH neřeším".
   function vatStr(v) {
     return (v === undefined || v === null || v === "") ? "" : String(v);
+  }
+
+  // Sazba zapsaná u účtenky je závazná: když se později u položky změní,
+  // už rozúčtované doklady se tím přepisovat nesmí. Prázdno u řádku ale
+  // neznamená „bez daně", nýbrž „tehdy se DPH ještě neřešila". V tom případě
+  // sazbu dohledáme podle názvu v aktuálním menu, jinak by se doklad po
+  // dodatečném zapnutí DPH už nedal spravit.
+  function resolveVat(name, recorded) {
+    var v = vatStr(recorded);
+    if (v !== "") { return v; }
+    for (var i = 0; i < state.items.length; i++) {
+      if (state.items[i].name === name) { return vatStr(state.items[i].vat); }
+    }
+    return "";
   }
 
   function vatNum(v) {
@@ -5363,7 +5477,7 @@
       });
       h += '<button class="key" data-dig="0">0</button>' +
            '<button class="key" data-dig="00">00</button>' +
-           '<button class="key" data-back="1" aria-label="' + esc(T("delDigit")) + '">←</button></div>' +
+           '<button class="key" data-back="1" aria-label="' + esc(T("delDigit")) + '">' + SVG.back + "</button></div>" +
            '<button class="btn-done" data-addcustom="1"' + (sheet.amount > 0 ? "" : " disabled") + ">" + esc(T("addToOrder")) + "</button>" +
            '<button class="btn-ghost" data-cancel="1">' + esc(T("back")) + "</button>";
     }
@@ -5411,10 +5525,13 @@
              row("street") +
              row("zip") +
              row("city") +
-             row("country") +
+             '<label class="sf sf-country"><span>' + esc(T("sfCountry")) + "</span>" +
+               '<input class="inp" type="text" data-sf="country" autocomplete="country-name" ' +
+               'value="' + esc(sellerVal("country")) + '"></label>' +
              row("email", "email") +
              row("phone", "tel") +
            "</div>" +
+           '<div class="sf-sug" id="cSug">' + countrySuggestHtml(sellerVal("country")) + "</div>" +
            '<label class="sf" style="display:block;margin-top:10px"><span>' + esc(T("sfNote")) + "</span>" +
              '<textarea class="txt" data-sf="note" style="height:74px" placeholder="' +
              esc(T("sfNotePh")) + '">' + esc(sellerVal("note")) + "</textarea></label>" +
@@ -5666,7 +5783,7 @@
     paint("toastSlot", toast
       ? '<div class="toast' + (sheet ? " up" : "") + '"><span class="t">' + esc(toast.text) + "</span>" +
         (toast.undo ? '<button data-undo="' + toast.undo + '">' + esc(T("undoBtn")) + "</button>" : "") +
-        '<button class="x" data-hidetoast="1" aria-label="Zavřít">×</button></div>'
+        '<button class="x" data-hidetoast="1" aria-label="' + esc(T("close")) + '">' + SVG.close + "</button></div>"
       : "");
   }
 
@@ -5679,7 +5796,7 @@
             "[data-backup],[data-restoreask],[data-dorestore],[data-docask],[data-docmake]," +
             "[data-ticket],[data-line],[data-serve],[data-reopen],[data-drop],[data-col],[data-setcol],[data-applycustom],[data-mode],[data-voice],[data-voicetest],"+
             "[data-paircreate],[data-pairjoin],[data-pairoff],[data-resync],[data-relaytest]," +
-            "[data-docmail],[data-docshare],[data-sellersheet],[data-archopen],[data-archdel],[data-vatmode],[data-langsheet],[data-cursheet],[data-setlang],[data-setcur],[data-paywall],[data-buy]," +
+            "[data-country],[data-docmail],[data-docshare],[data-sellersheet],[data-archopen],[data-archdel],[data-vatmode],[data-langsheet],[data-cursheet],[data-setlang],[data-setcur],[data-paywall],[data-buy]," +
             "[data-restorebuy],[data-devtap],[data-oblang],[data-obcur],[data-obnext],[data-obdemo],[data-obempty]";
 
   document.addEventListener("click", function (ev) {
@@ -6028,6 +6145,17 @@
       return;
     }
 
+    if (d.country) {
+      if (!state.seller) { state.seller = {}; }
+      state.seller.country = d.country;
+      save();
+      var ci = document.querySelector('[data-sf="country"]');
+      if (ci) { ci.value = d.country; }
+      var cb = document.getElementById("cSug");
+      if (cb) { cb.innerHTML = ""; }
+      return;
+    }
+
     if (d.sellersheet) { sheet = { step: "seller" }; render(); return; }
 
     if (d.vatmode) {
@@ -6182,6 +6310,12 @@
       if (!state.seller) { state.seller = {}; }
       state.seller[el.dataset.sf] = el.value;
       save();
+      // Nabídku zemí měníme přímo, překreslení celého panelu by vzalo
+      // fokus a rozepsané slovo by se rozpadlo.
+      if (el.dataset.sf === "country") {
+        var box = document.getElementById("cSug");
+        if (box) { box.innerHTML = countrySuggestHtml(el.value); }
+      }
       return;
     }
 
