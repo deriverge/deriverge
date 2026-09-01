@@ -852,3 +852,83 @@ App support. Doplní se s nimi.
 4. **Small Business Program**, přihlásit v ASC → Agreements.
 
 ---
+
+## Fáze 15, opravy aplikace a nasazení (2026-09-01)
+
+**Opravena chyba: probliknutí platebního panelu**
+
+- Hlášení uživatele: při ťuknutí na bankovku celý panel na okamžik
+  zmizel a zase se objevil, na iPhonu i iPadu.
+- Příčina nalezena v `tapkasa/index.html`: `render()` volal
+  `paint("sheetSlot", renderSheet())`. Při každé změně částky se
+  změnilo HTML, takže se nahradil celý slot a zanikl i znovu vznikl
+  obal `.scrim` a `.sheet`. Oba mají vstupní animace
+  (`@keyframes fade` z nulového krytí, `@keyframes rise`), které se tím
+  přehrály znovu. To bylo to probliknutí.
+- Řešení: `renderSheet()` rozdělen na `sheetInner()` (obsah) a obal.
+  Nová funkce `paintSheet()` přepisuje jen vnitřek už existujícího
+  panelu, dokud je otevřený stejný krok; obal se tvoří pouze při
+  otevření nebo změně kroku. Na `.scrim` přidán `data-step` pro
+  porovnání.
+- Ověřeno v prohlížeči automatizovaným testem: uzel `.scrim` přežije
+  opakovaná ťuknutí, přijatá částka roste 1 → 2 → 3 Kč, konzole čistá.
+- Commit `d579e09`.
+
+**Zkráceno poděkování zákazníkovi**
+
+- `sayThanks()` říkal „Děkujeme za objednávku." plus „Užijte si {název
+  akce}.". Název akce se opakoval u každého účtu. Nově zazní jen první
+  věta. Překlady `speakEnjoy` ponechány nevyužité pro případný návrat.
+
+**Dotaz uživatele: jde vypnout čtení objednávek**
+
+- Ano, funkce už existuje. Přepínač `state.voice` v Menu hlídá obojí:
+  čtení nových objednávek na výdeji i poděkování na kase. Nic se
+  nedoplňovalo.
+
+**Nasazeno do TestFlightu**
+
+- Push do `main` spustil Xcode Cloud sám. **Build 11**, vytvořen
+  1. 9. 2026 9:09, stav **Ready to Test**, skupina Internal.
+- V TestFlightu jsou nyní buildy 9, 10 a 11, všechny Ready to Test.
+  Build 11 je ten s opravami.
+
+**Loga deriverge pro profil vývojáře**
+
+- Vyrobena z `pictures/deriverge_logo-long.jpg`, aby seděla značka:
+  - `design/deriverge/deriverge-icon-512.png`, samotné `d` vyříznuté
+    z wordmarku (x 514-622, y 118-279 v originále), 512×512, RGB bez
+    alfa kanálu,
+  - `design/deriverge/deriverge-header-4096x2304.png`, celé
+    `</deriverge>` včetně tagline.
+  - Pozadí `#18171d` vzorkované přímo z původního loga.
+- Commit `0fec915`.
+
+## BLOKUJE: nahrávání souborů do konzolí nejde automatizovat
+
+- Ověřeno **třikrát nezávisle**:
+  1. Google Play, grafika záznamu v obchodě,
+  2. Google Play, profil vývojáře (ikona a záhlaví),
+  3. App Store Connect, snímky obrazovky verze 1.0.
+- Ve všech případech `DOM.setFileInputFiles` soubor do inputu vloží
+  (v Play šlo ověřit `files.length = 1` se správným názvem), ale
+  aplikace konzole na událost nereaguje a nahrání neproběhne.
+  Zkoušeno i `Page.setInterceptFileChooserDialog` (funguje na testovacím
+  inputu, ale tlačítka konzolí chooser nevyvolají) a ruční dispatch
+  `input` i `change`.
+- **Závěr: obrázky a snímky musí do obou konzolí přetáhnout uživatel.**
+  Texty, formuláře, přepínače a dotazníky automatizovat jde, soubory ne.
+
+**Připravené soubory k ručnímu nahrání**
+
+| Kam | Soubor |
+|---|---|
+| Play → profil vývojáře → ikona | `design/deriverge/deriverge-icon-512.png` |
+| Play → profil vývojáře → záhlaví | `design/deriverge/deriverge-header-4096x2304.png` |
+| Play → záznam v obchodě → ikona | `design/png/icon-512.png` |
+| Play → záznam v obchodě → hlavní grafika | `design/png/feature-graphic-1024x500.png` |
+| Play → snímky telefonu | `store/screenshots/play-cs-0{1,2,3,5,7}-*.png` |
+| ASC → verze 1.0 → snímky iPhone | `store/screenshots/iphone67-cs-*.png` |
+| ASC → verze 1.0 → snímky iPad | `store/screenshots/ipad129-cs-*.png` |
+
+---
