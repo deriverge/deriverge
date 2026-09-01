@@ -3441,10 +3441,10 @@
   }
 
   // Na kase zazní poděkování zákazníkovi, jakmile je účet hotový.
+  // Záměrně jen samotná věta, bez názvu akce: u stánku se jméno akce
+  // opakovalo u každého účtu a znělo to samoúčelně.
   function sayThanks() {
-    var ev = (state.event || "").trim();
-    var name = ev ? ev.charAt(0).toLowerCase() + ev.slice(1) : "";
-    speak(T("speakThanks") + (name ? " " + T("speakEnjoy", name) : ""));
+    speak(T("speakThanks"));
   }
 
   function saySale(s) {
@@ -4323,9 +4323,13 @@
     });
   }
 
-  function renderSheet() {
+  // Obsah panelu bez obalu. Obal .scrim a .sheet má vstupní animace fade
+  // a rise. Kdyby se překresloval při každém ťuknutí na bankovku, animace
+  // by se přehrály znovu a panel by pokaždé probliknul. Obal proto vzniká
+  // jen při otevření nebo změně kroku, mění se pouze tento obsah.
+  function sheetInner() {
     if (!sheet) { return ""; }
-    var h = '<div class="scrim" data-scrim="1"><div class="sheet" role="dialog" aria-modal="true">';
+    var h = "";
 
     if (sheet.step === "method") {
       var n = orderCount();
@@ -4523,7 +4527,13 @@
            ' · <a href="https://www.deriverge.com/tapkasa/terms.html" target="_blank" rel="noopener">' + esc(T("proTermsLink")) + "</a></p>";
     }
 
-    return h + "</div></div>";
+    return h;
+  }
+
+  function renderSheet() {
+    if (!sheet) { return ""; }
+    return '<div class="scrim" data-scrim="1" data-step="' + esc(sheet.step) + '">' +
+           '<div class="sheet" role="dialog" aria-modal="true">' + sheetInner() + "</div></div>";
   }
 
   // ---------- render ----------
@@ -4563,6 +4573,35 @@
     painted[id] = html;
     document.getElementById(id).innerHTML = html;
     return true;
+  }
+
+  // Panel se překresluje po každém ťuknutí (přijatá částka, vrátit, stav
+  // tlačítek). Kdyby se pokaždé nahradil celý slot, zanikl by a znovu
+  // vznikl i obal .scrim/.sheet a jeho vstupní animace by se přehrály,
+  // což se projevovalo jako probliknutí celého panelu. Dokud je otevřený
+  // stejný krok, přepisuje se proto jen vnitřek už existujícího panelu.
+  function paintSheet() {
+    var full = state.setup ? renderSheet() : renderOnboard();
+    var slot = document.getElementById("sheetSlot");
+    var shell = slot.firstElementChild;
+    var sameShell = state.setup && sheet && shell &&
+                    shell.classList.contains("scrim") &&
+                    shell.getAttribute("data-step") === sheet.step;
+
+    if (sameShell) {
+      var box = shell.querySelector(".sheet");
+      var inner = sheetInner();
+      if (box && painted.sheetInner !== inner) {
+        painted.sheetInner = inner;
+        box.innerHTML = inner;
+      }
+      painted.sheetSlot = full; // ať pozdější plné překreslení porovnává správně
+      return;
+    }
+
+    if (paint("sheetSlot", full)) {
+      painted.sheetInner = (state.setup && sheet) ? sheetInner() : null;
+    }
   }
 
   function renderOnboard() {
@@ -4619,7 +4658,7 @@
 
     paint("barSlot", view === "sell" ? renderBar() : "");
     renderTabs(waiting);
-    paint("sheetSlot", state.setup ? renderSheet() : renderOnboard());
+    paintSheet();
     if (sheet && sheet.step === "color") { wheelInit(); }
     paint("toastSlot", toast
       ? '<div class="toast' + (sheet ? " up" : "") + '"><span class="t">' + esc(toast.text) + "</span>" +
