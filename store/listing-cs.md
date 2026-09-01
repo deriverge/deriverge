@@ -77,7 +77,8 @@ PŘEHLED A UZÁVĚRKA
 • Tržba celkem, rozpad hotově/kartou, prodané kusy po položkách.
 • Souhrn zkopírujete jako text, třeba do zprávy účetní.
 • Souhrnný daňový doklad za zvolené období: s vašimi údaji, poslat e-mailem nebo vytisknout.
-• „Uzavřít akci“ odloží tržbu do archivu a vynuluje kasu pro další prodej.
+• Údaje prodejce vyplníte jednou v nastavení a předvyplní se na každý doklad.
+• Plátci DPH zadají u položky sazbu v procentech. Ceny se zadávají včetně daně, doklad dopočítá základ i daň a rozepíše je po sazbách. Kdo plátce není, DPH vůbec nevidí.
 
 VAŠE DATA JSOU VAŠE
 • Všechno zůstává ve vašem zařízení, uložené hned ve dvou nezávislých kopiích.
@@ -89,7 +90,7 @@ ZDARMA A PRO
 Zdarma: kompletní pokladna na jednom zařízení, až 10 zaplacených účtů denně, na menší akci se nedoplatíte.
 Tapkasa Pro (předplatné): neomezené účtování a spárování druhého zařízení. Předplatné se účtuje přes App Store a lze ho kdykoli zrušit v nastavení účtu.
 
-Tapkasa nevede účetnictví ani nevystavuje daňové doklady, je to rychlá kasa pro prodej, kde se dnes počítá na papírku.
+Tapkasa nevede účetnictví. Je to rychlá kasa pro prodej, kde se dnes počítá na papírku, a k tomu souhrnný doklad za období, který si vezme účetní.
 ```
 
 *(2 389 znaků, ověřeno skriptem, viz poznámka na konci souboru.)*

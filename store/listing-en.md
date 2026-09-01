@@ -3,8 +3,8 @@
 Secondary localization for App Store (en-US / en-GB) and Google Play (en-US).
 All lengths verified; limits noted per field.
 
-**Honesty note:** the app's interface is currently Czech-only. The English
-listing says so explicitly, reviewers and buyers must not be surprised.
+**Poznámka:** rozhraní bylo zpočátku jen česky, dnes má aplikace devět
+jazyků. Text listingu je uvádí, aby kupující věděl, co dostane.
 
 ---
 
@@ -79,6 +79,8 @@ TWO DEVICES: TILL AND PICKUP
 OVERVIEW AND CLOSE-OUT
 • Total revenue, cash/card split, and pieces sold per product.
 • Summary tax document for any period: with your business details, sent by e-mail or printed.
+• Fill in your seller details once in settings and they are pre-filled on every document.
+• VAT registered? Set a rate per item. You enter prices including tax and the document works out the net amount and the tax, broken down by rate. If you are not registered, VAT never appears.
 • Copy the summary as plain text, straight into a message to your accountant.
 • "Close event" moves the takings into the archive and resets the till for the next event.
 
@@ -92,7 +94,7 @@ FREE AND PRO
 Free: the complete till on one device, up to 10 paid bills per day, enough for a small event.
 Tapkasa Pro (subscription): unlimited bills and pairing of a second device. Billed through the App Store; cancel any time in your account settings.
 
-Please note: the app's interface is currently in Czech. Tapkasa does not do bookkeeping or issue tax documents, it is a fast till for sales that are counted on a scrap of paper today.
+The interface is available in Czech, Slovak, English, German, French, Spanish, Italian, Polish and Portuguese. Tapkasa does not do bookkeeping. It is a fast till for sales that are counted on a scrap of paper today, plus a summary document for any period that your accountant can work from.
 ```
 
 *(2,705 characters, verified by script, see note at the end of this file.)*
