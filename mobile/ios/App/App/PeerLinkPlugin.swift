@@ -61,6 +61,12 @@ final class PeerLink: NSObject {
     private static let service = "kasa-order"
 
     private let peerID = MCPeerID(displayName: UIDevice.current.name)
+
+    /// Otisk téhle instance. Pátrač na iOS občas „najde" inzerenta z téhož
+    /// zařízení; bez otisku si pak zařízení pošle pozvánku samo sobě, kód
+    /// spárování pochopitelně sedí a vznikne spojení sám se sebou. Otisk
+    /// putuje v discoveryInfo i v pozvánce a shoda znamená: to jsem já, ignorovat.
+    private let inst = UUID().uuidString
     private lazy var session: MCSession = {
         let s = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
         s.delegate = self
@@ -88,7 +94,7 @@ final class PeerLink: NSObject {
         guard !code.isEmpty else { return }
 
         let a = MCNearbyServiceAdvertiser(
-            peer: peerID, discoveryInfo: ["r": code], serviceType: PeerLink.service)
+            peer: peerID, discoveryInfo: ["r": code, "i": inst], serviceType: PeerLink.service)
         let b = MCNearbyServiceBrowser(peer: peerID, serviceType: PeerLink.service)
         a.delegate = self
         b.delegate = self
@@ -147,8 +153,11 @@ extension PeerLink: MCNearbyServiceAdvertiserDelegate {
                     didReceiveInvitationFromPeer peerID: MCPeerID,
                     withContext context: Data?,
                     invitationHandler: @escaping (Bool, MCSession?) -> Void) {
-        let theirs = context.flatMap { String(data: $0, encoding: .utf8) } ?? ""
-        invitationHandler(!room.isEmpty && theirs == room, session)
+        let raw = context.flatMap { String(data: $0, encoding: .utf8) } ?? ""
+        let parts = raw.split(separator: "|", maxSplits: 1).map(String.init)
+        let theirRoom = parts.first ?? ""
+        let theirInst = parts.count > 1 ? parts[1] : ""
+        invitationHandler(!room.isEmpty && theirRoom == room && theirInst != inst, session)
     }
 
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser,
@@ -163,10 +172,11 @@ extension PeerLink: MCNearbyServiceBrowserDelegate {
         // Ať se dvě zařízení nezvou navzájem naráz, zve vždycky to "menší".
         // Při shodě jmen zvou obě — spojení se pak ustálí na jednom.
         guard !room.isEmpty, info?["r"] == room else { return }
+        guard info?["i"] != inst else { return }   // našli jsme sami sebe
         guard !session.connectedPeers.contains(peerID) else { return }
         if self.peerID.displayName <= peerID.displayName {
             browser.invitePeer(peerID, to: session,
-                               withContext: room.data(using: .utf8), timeout: 20)
+                               withContext: (room + "|" + inst).data(using: .utf8), timeout: 20)
         }
     }
 

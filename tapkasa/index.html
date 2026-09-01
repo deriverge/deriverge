@@ -326,7 +326,7 @@
   @media (max-width:400px){.sf-grid{grid-template-columns:1fr}.sf-grid .sf{grid-column:1 / -1}}
   .sf{display:block;min-width:0}
   .sf .inp,.sf .txt{min-width:0;max-width:100%}
-  .sf-sug{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+  .sf-sug{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px;grid-column:1 / -1}
   .sf-sug:empty{margin-top:0}
   .sf-sug .sug{padding:7px 11px;border:1px solid var(--rule);border-radius:999px;
     background:var(--surface);font-size:13px;color:var(--ink-2)}
@@ -787,6 +787,8 @@
     closeEvent: "Uzavřít akci",
     emptyStats: "Zatím nic neprodáno.<br>Jakmile uložíte první účet, objeví se tu statistika.",
     tourS1: "Ťukněte na kartu produktu, položka skočí na účet.",
+    tourS1b: "Teď kartu podržte, dokud se nenaplní proužek, položka z účtu zmizí.",
+    tourS1c: "A ťukněte na kartu znovu, ať máme co účtovat.",
     tourS2: "Ťukněte na Zaplatit.",
     tourS3: "Zvolte Hotově.",
     tourS4: "Ťukněte na Přesně a potom na Hotovo.",
@@ -1102,6 +1104,8 @@
     closeEvent: "Close event",
     emptyStats: "Nothing sold yet.<br>Save your first sale and stats appear here.",
     tourS1: "Tap a product card, the item jumps onto the bill.",
+    tourS1b: "Now press and hold the card until the bar fills, the item leaves the bill.",
+    tourS1c: "Tap the card again so there is something to charge.",
     tourS2: "Tap Charge.",
     tourS3: "Choose Cash.",
     tourS4: "Tap Exact, then Done.",
@@ -1418,6 +1422,8 @@
     closeEvent: "Uzavrieť akciu",
     emptyStats: "Zatiaľ sa nič nepredalo.<br>Len čo uložíte prvý účet, objaví sa tu štatistika.",
     tourS1: "Ťuknite na kartu produktu, položka skočí na účet.",
+    tourS1b: "Teraz kartu podržte, kým sa nenaplní prúžok, položka z účtu zmizne.",
+    tourS1c: "A ťuknite na kartu znova, nech máme čo účtovať.",
     tourS2: "Ťuknite na Zaplatiť.",
     tourS3: "Zvoľte Hotovosť.",
     tourS4: "Ťuknite na Presne a potom na Hotovo.",
@@ -1733,6 +1739,8 @@
     closeEvent: "Event abschließen",
     emptyStats: "Noch nichts verkauft.<br>Sobald Sie den ersten Verkauf speichern, taucht hier die Statistik auf.",
     tourS1: "Tippen Sie auf eine Produktkarte, der Artikel springt auf den Bon.",
+    tourS1b: "Halten Sie die Karte nun gedrückt, bis der Balken voll ist, der Artikel verschwindet vom Bon.",
+    tourS1c: "Tippen Sie die Karte erneut an, damit es etwas zu kassieren gibt.",
     tourS2: "Tippen Sie auf Kassieren.",
     tourS3: "Wählen Sie Bar.",
     tourS4: "Tippen Sie auf Passend, dann auf Fertig.",
@@ -2048,6 +2056,8 @@
     closeEvent: "Clôturer l’événement",
     emptyStats: "Rien de vendu pour l’instant.<br>Encaissez une première vente et les statistiques apparaîtront ici.",
     tourS1: "Touchez une carte produit, l'article saute sur l'addition.",
+    tourS1b: "Maintenant, maintenez la carte jusqu'à ce que la barre se remplisse, l'article quitte l'addition.",
+    tourS1c: "Touchez à nouveau la carte pour avoir quelque chose à encaisser.",
     tourS2: "Touchez Encaisser.",
     tourS3: "Choisissez Espèces.",
     tourS4: "Touchez Exact, puis Terminé.",
@@ -2363,6 +2373,8 @@
     closeEvent: "Cerrar evento",
     emptyStats: "Aún no se ha vendido nada.<br>Guarde la primera venta y aquí aparecerán las estadísticas.",
     tourS1: "Toque una tarjeta de producto, el artículo salta a la cuenta.",
+    tourS1b: "Ahora mantenga pulsada la tarjeta hasta que se llene la barra, el artículo sale de la cuenta.",
+    tourS1c: "Toque la tarjeta otra vez para tener algo que cobrar.",
     tourS2: "Toque Cobrar.",
     tourS3: "Elija Efectivo.",
     tourS4: "Toque Exacto y luego Listo.",
@@ -2678,6 +2690,8 @@
     closeEvent: "Chiudere l’evento",
     emptyStats: "Ancora nessuna vendita.<br>Appena viene salvato il primo conto, qui compaiono le statistiche.",
     tourS1: "Toccate una scheda prodotto, l'articolo salta sul conto.",
+    tourS1b: "Ora tenete premuta la scheda finché la barra non si riempie, l’articolo sparisce dal conto.",
+    tourS1c: "Toccate di nuovo la scheda, così c’è qualcosa da incassare.",
     tourS2: "Toccate Incassare.",
     tourS3: "Scegliete Contanti.",
     tourS4: "Toccate Esatto e poi Fatto.",
@@ -2993,6 +3007,8 @@
     closeEvent: "Zamknięcie imprezy",
     emptyStats: "Na razie nic nie sprzedano.<br>Po zapisaniu pierwszego rachunku pojawią się tu statystyki.",
     tourS1: "Stuknij kartę produktu, pozycja wskoczy na rachunek.",
+    tourS1b: "Teraz przytrzymaj kartę, aż pasek się zapełni, pozycja zniknie z rachunku.",
+    tourS1c: "Stuknij kartę ponownie, żeby było co kasować.",
     tourS2: "Stuknij Zapłać.",
     tourS3: "Wybierz Gotówkę.",
     tourS4: "Stuknij Równo, a potem Gotowe.",
@@ -3308,6 +3324,8 @@
     closeEvent: "Fechar evento",
     emptyStats: "Ainda não vendeu nada.<br>Assim que guardar a primeira conta, aparecem aqui as estatísticas.",
     tourS1: "Toque num cartão de produto, o artigo salta para a conta.",
+    tourS1b: "Agora mantenha o cartão premido até a barra encher, o artigo sai da conta.",
+    tourS1c: "Toque no cartão outra vez para haver algo a cobrar.",
     tourS2: "Toque em Cobrar.",
     tourS3: "Escolha Dinheiro.",
     tourS4: "Toque em Exato e depois em Concluído.",
@@ -5419,12 +5437,11 @@
   // stánku stačí jediné předplatné na kase.
   function pairBlock(till) {
     var h = '<div class="link linkstat' + (peers > 0 || linkFresh() ? " on" : "") + '"><i></i>' + esc(linkText()) + "</div>";
-    // jen v nativní aplikaci; na webu přímé spojení není a rada by mátla
-    if (typeof window.__kasaPeerLink === "function") {
-      h += '<p class="hint" style="text-align:left;padding-top:0;padding-bottom:4px">' + esc(T("pairOfflineHint")) + "</p>" +
-           '<div class="acts" style="padding-top:0;padding-bottom:6px"><button class="act" data-offlinehelp="1">' +
-           esc(T("offHelpBtn")) + "</button></div>";
-    }
+    // Rada s návodem se ukazuje vždy. Dřívější podmínka na nativní most se
+    // na zařízení nevyhodnotila spolehlivě a tlačítko pak chybělo úplně.
+    h += '<p class="hint" style="text-align:left;padding-top:0;padding-bottom:4px">' + esc(T("pairOfflineHint")) + "</p>" +
+         '<div class="acts" style="padding-top:0;padding-bottom:6px"><button class="act" data-offlinehelp="1">' +
+         esc(T("offHelpBtn")) + "</button></div>";
     if (state.pair) {
       h += '<div class="link on" style="padding-top:0"><i></i>' + esc(T("pairCode")) + " <strong>" + esc(state.pair) + "</strong></div>" +
         (relayError ? '<p class="hint" style="color:var(--accent);text-align:left;padding-top:0;padding-bottom:2px">' + esc(relayError) + "</p>" : "") +
@@ -5855,10 +5872,10 @@
              '<label class="sf sf-country"><span>' + esc(T("sfCountry")) + "</span>" +
                '<input class="inp" type="text" data-sf="country" autocomplete="country-name" ' +
                'value="' + esc(sellerVal("country")) + '"></label>' +
+             '<div class="sf-sug" id="cSug">' + countrySuggestHtml(sellerVal("country")) + "</div>" +
              row("email", "email") +
              row("phone", "tel") +
            "</div>" +
-           '<div class="sf-sug" id="cSug">' + countrySuggestHtml(sellerVal("country")) + "</div>" +
            '<label class="sf" style="display:block;margin-top:10px"><span>' + esc(T("sfNote")) + "</span>" +
              '<textarea class="txt" data-sf="note" style="height:74px" placeholder="' +
              esc(T("sfNotePh")) + '">' + esc(sellerVal("note")) + "</textarea></label>" +
@@ -6106,6 +6123,10 @@
 
   var TOUR = [
     { key: "tourS1", sel: function () { return ".prod"; },
+      done: function () { return state.order.length > 0; } },
+    { key: "tourS1b", sel: function () { return ".prod"; },
+      done: function () { return state.order.length === 0; } },
+    { key: "tourS1c", sel: function () { return ".prod"; },
       done: function () { return state.order.length > 0; } },
     { key: "tourS2", sel: function () { return "[data-pay]"; },
       done: function () { return !!sheet && (sheet.step === "method" || sheet.step === "cash" || sheet.step === "card"); } },
