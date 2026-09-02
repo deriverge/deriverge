@@ -40,8 +40,23 @@
     };
   }
 
-  if (!isNative || typeof cap.registerPlugin !== "function") {
+  if (!isNative) {
     window.TapkasaBilling = webFallback();
+    return;
+  }
+
+  // Na nativní platformě háčky definujeme vždy. Když se most nepovede,
+  // tlačítko koupě řekne skutečnou příčinu; obecná webová hláška by
+  // problém jen maskovala (přesně to se stalo v TestFlightu).
+  function fail(reason) {
+    window.TapkasaBilling = webFallback();
+    window.__kasaBillingError = reason;
+    window.__kasaBuy = function () { alert("Nákup se nepodařilo připravit: " + reason); };
+    window.__kasaRestore = window.__kasaBuy;
+  }
+
+  if (typeof cap.registerPlugin !== "function") {
+    fail("Capacitor bez registerPlugin");
     return;
   }
 
@@ -49,7 +64,7 @@
   try {
     Purchases = cap.registerPlugin("Purchases");
   } catch (e) {
-    window.TapkasaBilling = webFallback();
+    fail("registerPlugin selhal: " + (e && e.message || e));
     return;
   }
 
@@ -149,7 +164,10 @@
     purchase(plan === "yearly" ? "yearly" : "monthly")
       .then(push)
       .catch(function (e) {
-        if (!isCancel(e)) { alert(String(e && e.message || e)); }
+        if (isCancel(e)) { return; }
+        var msg = String(e && e.message || e);
+        if (e && e.code !== undefined) { msg += " [" + e.code + "]"; }
+        alert(msg);
       });
   };
 

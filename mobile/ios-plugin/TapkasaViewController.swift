@@ -1,6 +1,7 @@
 import UIKit
 import Capacitor
 import WebKit
+import RevenuecatPurchasesCapacitor
 
 /// Registrace pluginu PeerLink a chování webview po vzoru původní
 /// ios/Kasa/KasaWebView.swift. Ve storyboardu (App/Base.lproj/Main.storyboard)
@@ -10,6 +11,10 @@ class TapkasaViewController: CAPBridgeViewController {
     override open func capacitorDidLoad() {
         // Lokální plugin není npm balíček, proto se registruje ručně.
         bridge?.registerPluginInstance(PeerLinkPlugin())
+        // RevenueCat napevno taky: vyhledávání třídy podle jména za běhu
+        // (packageClassList) je křehké, linker umí "nepoužitou" třídu
+        // vyřadit a nákupy pak na zařízení tiše nefungují.
+        bridge?.registerPluginInstance(PurchasesPlugin())
 
         guard let web = bridge?.webView else { return }
         // Pokladna je "papír", ne stránka — nemá pružit ani uhýbat klávesnici.
