@@ -3802,13 +3802,28 @@
     save(); render();
   };
 
+  // Chyba nativního mostu se musí ukázat, ne zamaskovat webovou hláškou:
+  // tichá záměna nás už jednou stála dlouhé pátrání, proč nejde koupit.
+  function nativeApp() {
+    var c = window.Capacitor;
+    return !!(c && typeof c.isNativePlatform === "function" && c.isNativePlatform());
+  }
+
   function billingBuy(plan) {
-    if (window.__kasaBuy) { try { window.__kasaBuy(plan); return; } catch (e) {} }
+    if (window.__kasaBuy) {
+      try { window.__kasaBuy(plan); return; }
+      catch (e) { alert(String(e && e.message || e)); return; }
+    }
+    if (nativeApp()) { alert(window.__kasaBillingError || "Nákupní modul se nenačetl."); return; }
     showToast(T("proWebHint"));
   }
 
   function billingRestore() {
-    if (window.__kasaRestore) { try { window.__kasaRestore(); return; } catch (e) {} }
+    if (window.__kasaRestore) {
+      try { window.__kasaRestore(); return; }
+      catch (e) { alert(String(e && e.message || e)); return; }
+    }
+    if (nativeApp()) { alert(window.__kasaBillingError || "Nákupní modul se nenačetl."); return; }
     showToast(T("proWebHint"));
   }
 
