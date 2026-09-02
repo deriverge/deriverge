@@ -55,16 +55,18 @@
     window.__kasaRestore = window.__kasaBuy;
   }
 
-  if (typeof cap.registerPlugin !== "function") {
-    fail("Capacitor bez registerPlugin");
-    return;
+  // Vestavěný most Capacitoru vystavuje nativní pluginy v Capacitor.Plugins;
+  // registerPlugin existuje jen v aplikacích, které si balí @capacitor/core.
+  // Na zařízení je k dispozici právě jen Plugins, proto jde první.
+  var Purchases = null;
+  if (cap.Plugins && cap.Plugins.Purchases) {
+    Purchases = cap.Plugins.Purchases;
+  } else if (typeof cap.registerPlugin === "function") {
+    try { Purchases = cap.registerPlugin("Purchases"); } catch (e) {}
   }
-
-  var Purchases;
-  try {
-    Purchases = cap.registerPlugin("Purchases");
-  } catch (e) {
-    fail("registerPlugin selhal: " + (e && e.message || e));
+  if (!Purchases) {
+    fail("nativní modul Purchases nenalezen; k dispozici: " +
+         (cap.Plugins ? Object.keys(cap.Plugins).join(", ") : "žádné pluginy"));
     return;
   }
 

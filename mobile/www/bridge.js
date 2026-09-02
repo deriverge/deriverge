@@ -22,15 +22,20 @@
 
   var cap = window.Capacitor;
   var isNative = !!(cap && typeof cap.isNativePlatform === "function" && cap.isNativePlatform());
-  if (!isNative || typeof cap.registerPlugin !== "function") {
+  if (!isNative) {
     return; // čistý web — aplikace si vystačí s localStorage/IndexedDB
   }
 
-  var PeerLink;
-  try {
-    PeerLink = cap.registerPlugin("PeerLink");
-  } catch (e) {
-    return;
+  // Vestavěný most vystavuje pluginy v Capacitor.Plugins; registerPlugin
+  // mají jen aplikace s vlastním balíčkem @capacitor/core. Zkoušíme obojí.
+  var PeerLink = null;
+  if (cap.Plugins && cap.Plugins.PeerLink) {
+    PeerLink = cap.Plugins.PeerLink;
+  } else if (typeof cap.registerPlugin === "function") {
+    try { PeerLink = cap.registerPlugin("PeerLink"); } catch (e) {}
+  }
+  if (!PeerLink) {
+    return; // párování zůstane na internetovém přeposílači
   }
 
   function callSafe(method, args) {
