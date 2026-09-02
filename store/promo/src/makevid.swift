@@ -81,14 +81,31 @@ func pixelBuffer(from cg: CGImage) -> CVPixelBuffer? {
     return buf
 }
 
+// Konstantních 30 fps: řídké zdrojové snímky se opakují na každém ticku.
+// Proměnlivá frekvence s dlouhými mezerami Applu vadí
+// (chyba MOV_RESAVE_FRAME_RATE_LARGER při zpracování náhledu).
 let SCALE = CMTimeScale(600)
+let FPS = 30.0
+let tick = CMTime(value: CMTimeValue(600.0 / FPS), timescale: SCALE)
+var starts: [Double] = []
+var acc = 0.0
+for fr in frames { starts.append(acc); acc += fr.dur }
+let totalTicks = Int((acc * FPS).rounded(.down))
+
+var srcIx = -1
+var buf: CVPixelBuffer? = nil
 var pts = CMTime.zero
-for (i, fr) in frames.enumerated() {
-    guard let cg = loadCG(fr.path), let buf = pixelBuffer(from: cg) else { continue }
-    while !vin.isReadyForMoreMediaData { Thread.sleep(forTimeInterval: 0.01) }
-    adaptor.append(buf, withPresentationTime: pts)
-    pts = CMTimeAdd(pts, CMTime(seconds: fr.dur, preferredTimescale: SCALE))
-    if i % 20 == 0 { print("  snímek \(i)/\(frames.count)") }
+for t in 0..<totalTicks {
+    let now = Double(t) / FPS
+    while srcIx + 1 < frames.count && starts[srcIx + 1] <= now + 0.0001 {
+        srcIx += 1
+        if let cg = loadCG(frames[srcIx].path) { buf = pixelBuffer(from: cg) }
+    }
+    guard let b = buf else { continue }
+    while !vin.isReadyForMoreMediaData { Thread.sleep(forTimeInterval: 0.005) }
+    adaptor.append(b, withPresentationTime: pts)
+    pts = CMTimeAdd(pts, tick)
+    if t % 120 == 0 { print("  tick \(t)/\(totalTicks)") }
 }
 vin.markAsFinished()
 writer.endSession(atSourceTime: pts)
