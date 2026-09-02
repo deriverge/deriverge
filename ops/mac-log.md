@@ -972,3 +972,33 @@ App support. Doplní se s nimi.
   TestFlight → Interní testeři → Builds → Add Build to Group.
 
 ---
+
+## 2026-09-02 – Verze 1.0 ODESLÁNA KE SCHVÁLENÍ
+
+Stav: `WAITING_FOR_REVIEW` (odesláno 2026-09-02 00:44 UTC, build 28).
+
+Co obsahuje finální verze:
+- interaktivní průvodce prvním spuštěním (11 kroků, plní se skutečnými
+  akcemi, včetně mazání položky podržením),
+- animovaný návod „Jak propojit bez internetu" (hotspot),
+- daňový doklad jako PDF (logo, tabulka, rozpis DPH, sdílení systémovým
+  panelem), údaje obchodníka ve strukturovaných polích s našeptávačem
+  zemí ve všech 9 jazycích,
+- párování vázané na kód spárování + otisk instance (oprava spojení
+  sama se sebou a ochrana proti cizím kasám na trhu),
+- uzavřené akce jdou vrátit do kasy nebo smazat,
+- vlastní SVG ikony místo znaků/emoji.
+
+Obchod:
+- listing v 9 jazycích (cs, en, de, fr, es, it, pl, pt-PT, sk)
+  s klíčovými slovy ušitými na každý trh,
+- snímky 9 jazyků × (8 iPhone + 6 iPad), nafocené z finální verze,
+- náhledová videa cs+en 886×1920, 22 s, skutečný průchod aplikací
+  (nástroje: store/promo/src/step-record.mjs + makevid.swift),
+- cena: zdarma (základní území USA), dostupnost 175 zemí,
+- předplatná READY_TO_SUBMIT, jdou do recenze s verzí,
+- App Privacy publikováno, App Review kontakt vyplněn.
+
+Hlídám stav recenze; při schválení se aplikace vydá automaticky
+(release AFTER_APPROVAL). Další slíbená práce po vydání: Android offline
+párování (Nearby Connections) a žádost o hodnocení v aplikaci.
