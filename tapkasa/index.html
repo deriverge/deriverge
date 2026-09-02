@@ -6119,7 +6119,7 @@
   // Vede nového uživatele skutečnými akcemi: kroužek ukáže, kam ťuknout,
   // a krok se splní až tím, že to uživatel opravdu udělá. Žádné obrázky
   // vedle reality, průvodce běží nad živou aplikací.
-  var tourIx = -1, tourTimer = null;
+  var tourIx = -1, tourTimer = null, tourScrolledFor = -1;
 
   var TOUR = [
     { key: "tourS1", sel: function () { return ".prod"; },
@@ -6152,14 +6152,18 @@
 
   function tourStart() {
     tourIx = 0;
+    tourScrolledFor = -1;
     view = "sell";
     sheet = null;
     if (!tourTimer) { tourTimer = setInterval(tourPaint, 700); }
+    // capture: posouvá se vnitřek stránky, ne okno
+    window.addEventListener("scroll", tourPaint, true);
     render(true);
   }
 
   function tourEnd(finished) {
     tourIx = -1;
+    window.removeEventListener("scroll", tourPaint, true);
     state.tourDone = true;
     if (tourTimer) { clearInterval(tourTimer); tourTimer = null; }
     save();
@@ -6200,6 +6204,15 @@
     var el = null;
     try { el = document.querySelector(TOUR[tourIx].sel()); } catch (e) {}
     if (el) {
+      // Nový krok si cíl přisune do středu obrazovky. Jen jednou na krok,
+      // aby kroužek nebojoval s ručním posouváním uživatele.
+      if (tourScrolledFor !== tourIx) {
+        tourScrolledFor = tourIx;
+        var rr = el.getBoundingClientRect();
+        if (rr.top < 70 || rr.bottom > window.innerHeight - 140) {
+          try { el.scrollIntoView({ block: "center", behavior: "smooth" }); } catch (e2) { el.scrollIntoView(); }
+        }
+      }
       var r = el.getBoundingClientRect();
       ring.style.display = "block";
       ring.style.left = (r.left - 6) + "px";
