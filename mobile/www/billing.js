@@ -77,9 +77,20 @@
     return platform === "android" ? REVENUECAT_API_KEY_ANDROID : REVENUECAT_API_KEY_IOS;
   }
 
+  // Volání pluginu nemusí vrátit příslib: vestavěný most Capacitoru u metod
+  // bez návratové hodnoty (configure) vrací undefined. Vše proto balíme do
+  // Promise.resolve, ať se na výsledek dá vždycky navázat .then.
+  function call(method, args) {
+    try {
+      return Promise.resolve(Purchases[method](args));
+    } catch (e) {
+      return Promise.reject(e);
+    }
+  }
+
   function ensureConfigured() {
     if (!configured) {
-      configured = Purchases.configure({ apiKey: apiKey() });
+      configured = call("configure", { apiKey: apiKey() });
     }
     return configured;
   }
@@ -97,7 +108,7 @@
 
   function getEntitlement() {
     return ensureConfigured()
-      .then(function () { return Purchases.getCustomerInfo(); })
+      .then(function () { return call("getCustomerInfo"); })
       .then(function (res) { return levelOf(unwrapInfo(res)); })
       .catch(function () { return null; }); // offline apod. — stav v aplikaci nechat být
   }
@@ -119,12 +130,12 @@
 
   function purchase(product) {
     return ensureConfigured()
-      .then(function () { return Purchases.getOfferings(); })
+      .then(function () { return call("getOfferings"); })
       .then(function (res) {
         var current = (res && res.current) || null;
         var pkg = findPackage(current, product);
         if (!pkg) { throw new Error("Tapkasa: balíček '" + product + "' není v nabídce"); }
-        return Purchases.purchasePackage({ aPackage: pkg });
+        return call("purchasePackage", { aPackage: pkg });
       })
       .then(function (res) { return levelOf(unwrapInfo(res)); });
       // Chybu (i zrušení nákupu uživatelem) necháváme doběhnout k volajícímu,
@@ -133,7 +144,7 @@
 
   function restore() {
     return ensureConfigured()
-      .then(function () { return Purchases.restorePurchases(); })
+      .then(function () { return call("restorePurchases"); })
       .then(function (res) { return levelOf(unwrapInfo(res)); });
   }
 
@@ -183,7 +194,7 @@
   getEntitlement().then(push);
 
   ensureConfigured()
-    .then(function () { return Purchases.getOfferings(); })
+    .then(function () { return call("getOfferings"); })
     .then(function (res) {
       var current = (res && res.current) || null;
       var monthly = findPackage(current, "monthly");
