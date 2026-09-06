@@ -1002,3 +1002,33 @@ Obchod:
 Hlídám stav recenze; při schválení se aplikace vydá automaticky
 (release AFTER_APPROVAL). Další slíbená práce po vydání: Android offline
 párování (Nearby Connections) a žádost o hodnocení v aplikaci.
+
+## 6. 9. 2026 - Vymena buildu a nove odeslani ke schvaleni
+
+Puvodni odeslani verze 1.0 bylo na pokyn uzivatele stazeno z fronty
+(vadny nakupni tok). Pricina byla dvojita a obe casti jsou opravene:
+
+1. Vestaveny most Capacitoru vystavuje nativni pluginy jen pres
+   `Capacitor.Plugins`, ne `registerPlugin` - adaptery billing.js
+   i bridge.js opraveny. (Tim se poprve rozbehlo i prime parovani
+   pres MultipeerConnectivity, ktere do te doby tise padalo na relay.)
+2. Volani metod bez navratove hodnoty (`configure`) vraci undefined,
+   ne Promise - vsechna volani obalena `Promise.resolve`.
+
+Build 48 (commit "Nakupy: volani pluginu vzdy jako Promise", overeno
+podle sourceCommit) prosel, uzivatel na nem potvrdil funkcni nakup
+predplatneho (sandbox, "Nakup probehl uspesne", platebni okno Applu
+vcetne 2tydenni zkusebni doby).
+
+Provedeno dnes pres ASC API:
+- build 48 pripojen k verzi 1.0 (usesNonExemptEncryption uz false),
+- zalozeno nove reviewSubmission 4b39c101-0f17-4139-b3ca-03aee0c5aa20,
+- odeslano: stav WAITING_FOR_REVIEW (11:55 UTC), vydani AFTER_APPROVAL.
+
+Neovereno na dvou fyzickych zarizenich: parovani zcela bez internetu
+(uzivatel zatim nemel po ruce druhe zarizeni); pres internetovy relay
+parovani funguje, takze funkce v aplikaci neni mrtva.
+
+Hlidam stav recenze; po rozhodnuti Applu se ozvu. Dalsi slibena prace
+po vydani: Android offline parovani (Nearby Connections), zadost
+o hodnoceni v aplikaci.
