@@ -10,6 +10,7 @@ class TapkasaViewController: CAPBridgeViewController {
     override open func capacitorDidLoad() {
         // Lokální plugin není npm balíček, proto se registruje ručně.
         bridge?.registerPluginInstance(PeerLinkPlugin())
+        bridge?.registerPluginInstance(RateAppPlugin())
         // Pojistka pro nákupy: kdyby automatická registrace RevenueCat
         // pluginu (packageClassList) selhala, zkusíme třídu doregistrovat
         // sami. Přímý import modulu nejde — shodil optimalizátor Swiftu

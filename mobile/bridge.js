@@ -34,6 +34,23 @@
   } else if (typeof cap.registerPlugin === "function") {
     try { PeerLink = cap.registerPlugin("PeerLink"); } catch (e) {}
   }
+  // Žádost o hodnocení v App Store: okno vyvolává systém, my jen předáme
+  // podnět. Kdy o ně požádat, rozhoduje aplikace (index.html) přes hook
+  // window.__kasaAskReview; bez nativního modulu hook nevznikne a web
+  // se chová jako dřív.
+  var RateApp = null;
+  if (cap.Plugins && cap.Plugins.RateApp) {
+    RateApp = cap.Plugins.RateApp;
+  } else if (typeof cap.registerPlugin === "function") {
+    try { RateApp = cap.registerPlugin("RateApp"); } catch (e) {}
+  }
+  if (RateApp) {
+    window.__kasaAskReview = function () {
+      // most u metod bez návratové hodnoty vrací undefined, ne příslib
+      try { Promise.resolve(RateApp.request()).catch(function () {}); } catch (e) {}
+    };
+  }
+
   if (!PeerLink) {
     return; // párování zůstane na internetovém přeposílači
   }

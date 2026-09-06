@@ -3879,6 +3879,7 @@
       v: 3, event: "", mode: "kasa", nextNo: 1, voice: true, pair: "",
       lang: detectLang(), currency: detectCurrency(),
       setup: false, license: "", payDay: "", payN: 0, biz: "", vat: false, tourDone: false,
+      rateN: 0, rateAsked: 0,
       seller: {},
       items: [], order: [], sales: [], archives: []
     };
@@ -3915,6 +3916,10 @@
     d.payN = typeof d.payN === "number" ? d.payN : 0;
     d.biz = typeof d.biz === "string" ? d.biz : "";
     d.vat = d.vat === true;   // starší instalace DPH neřešily, zůstanou vypnuté
+    // počítadlo uzavřených akcí pro žádost o hodnocení; starší instalace
+    // dostanou započtené akce, které už v archivu mají
+    d.rateN = typeof d.rateN === "number" ? d.rateN : d.archives.length;
+    d.rateAsked = typeof d.rateAsked === "number" ? d.rateAsked : 0;
     // průvodce je pro nové: kdo už má prodeje nebo párování, obtěžovat nebudeme
     d.tourDone = d.tourDone === true || d.sales.length > 0 || d.archives.length > 0 || !!d.pair;
     // Dřív se údaje prodejce psaly volným textem. Aby se nikomu neztratily,
@@ -6250,6 +6255,25 @@
     }
   }
 
+  // ---------- žádost o hodnocení ----------
+  // Ptáme se až lidí, kterým aplikace prokazatelně slouží: po desáté
+  // uzavřené akci, a znovu až po padesáté a stopadesáté. Okno vyvolává
+  // systém (v nativním obalu přes hook z bridge.js) a sám si hlídá,
+  // aby se neukazovalo příliš často; na webu hook není a nestane se nic.
+  var RATE_AT = [10, 50, 150];
+  function maybeAskReview() {
+    if (typeof window.__kasaAskReview !== "function") { return; }
+    for (var i = 0; i < RATE_AT.length; i++) {
+      if (state.rateN >= RATE_AT[i] && state.rateAsked < RATE_AT[i]) {
+        state.rateAsked = state.rateN;
+        save();
+        // chvilku po potvrzení uzávěrky, ať okno nepřekryje oznámení
+        setTimeout(function () { window.__kasaAskReview(); }, 1600);
+        return;
+      }
+    }
+  }
+
   function render(toTop) {
     // role bez prodeje nesmí zůstat viset na obrazovce, kterou nemá
     var allowed = tabsFor().map(function (t) { return t[0]; });
@@ -6441,8 +6465,10 @@
         });
         state.sales = [];
         state.nextNo = 1;
+        state.rateN += 1;
         save(); pushClear();
         showToast(T("toastClosed"));
+        maybeAskReview();
       });
       return;
     }
