@@ -1054,3 +1054,23 @@ Build 53 (obsahuje i novou zadost o hodnoceni po 10. uzavrene akci
 - plugin RateApp) pripojen k verzi. Stare odeslani zruseno, nove
 odeslani 9bdb6b09 se 4 polozkami je WAITING_FOR_REVIEW (12:02 UTC).
 Hlidam stav, po rozhodnuti se ozvu.
+
+## 7. 9. 2026 - SCHVALENO A VYDANO
+
+Apple schvalil verzi 1.0 (build 53) i obe predplatna behem pul hodiny
+posuzovani (In Review 16:33, Ready for Sale 17:03). Vydani probehlo
+automaticky (AFTER_APPROVAL). Tapkasa je ziva v App Storu:
+https://apps.apple.com/app/id6807075649
+
+Predplatna tapkasa.pro.monthly i tapkasa.pro.yearly: APPROVED.
+Zadost o hodnoceni (po 10. uzavrene akci) vysla uz ve verzi 1.0,
+zadna 1.0.1 kvuli tomu neni potreba.
+
+Zbyva po vydani: overeni offline parovani na dvou fyzickych
+zarizenich (jedina neoverena vec), Android offline parovani pres
+Nearby Connections, Google Play (ceka na overeni platebniho profilu).
+
+Behem cekani na recenzi dale: pravni a podpora stranky obou aplikaci
+sjednoceny do rodinneho vzhledu s logy a prelozeny do vsech jazyku
+aplikaci (Tapkasa 9, VZT Monter 4), VZT Monter dostal stranku podpory
+(guideline 1.5) nasazenou z predavaci fronty druheho agenta.
