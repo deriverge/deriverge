@@ -1074,3 +1074,33 @@ Behem cekani na recenzi dale: pravni a podpora stranky obou aplikaci
 sjednoceny do rodinneho vzhledu s logy a prelozeny do vsech jazyku
 aplikaci (Tapkasa 9, VZT Monter 4), VZT Monter dostal stranku podpory
 (guideline 1.5) nasazenou z predavaci fronty druheho agenta.
+
+## 7. 9. 2026 (vecer) - Google Play: kompletni priprava vydani
+
+Ucet overen a schvalen, aplikace com.deriverge.tapkasa byla jen koncept.
+Za jeden vecer provedeno:
+
+**Nastroje a build (Mac nema Homebrew ani Javu):**
+- stazen JDK 17 + 21 (Temurin) a Android SDK cmdline-tools do ~/tools,
+- podpisovy klic ~/.tapkasa-keys/upload.jks (mimo repo, jen cesta),
+- sestaven a podepsan AAB 5,7 MB (verze 1, targetSdk 36).
+
+**Play Console (vse pres CDP, uzivateluv Chrome):**
+- 10 deklaraci obsahu: soukromi, reklamy, pristup (IAP bez uctu
+  + pokyny recenzentum), IARC dotaznik (odeslan), cilove publikum 18+,
+  zabezpeceni udaju (Device ID + Purchase history, sifrovano, App
+  functionality), inzertni ID ne, statni/financni/zdravotni ne,
+- zaznam v obchodu: texty uz byly, doplnena grafika (ikona, hlavni
+  grafika, 6 snimku telefon, 5+5 tablet), kategorie Byznys, kontakt
+  info@deriverge.com + web podpory,
+- interni testovani: vydani 1 (1.0) PUBLIKOVANO (bez kontroly),
+- predplatna: tapkasa.pro.monthly 129 Kc + tapkasa.pro.yearly 999 Kc,
+  oba tarify aktivni, ceny pro 177 zemi, nabidky trial14 (14 dni
+  zdarma, novi zakaznici) aktivni u obou,
+- produkcni vydani 1 (1.0) pripraveno, 177 zemi vybrano; odeslani ke
+  kontrole zatim zamcene (panel jeste neprepocital dokoncene ukoly),
+  bezi hlidac, odeslu hned po odemceni.
+
+**Zbyva:** RevenueCat servisni ucet Googlu (validace nakupu na
+Androidu; klic goog_ v aplikaci uz je), pripadne stitky v obchode,
+odeslani ke kontrole. Marketingovy plan predan uzivateli jako artefakt.
