@@ -1104,3 +1104,30 @@ Za jeden vecer provedeno:
 **Zbyva:** RevenueCat servisni ucet Googlu (validace nakupu na
 Androidu; klic goog_ v aplikaci uz je), pripadne stitky v obchode,
 odeslani ke kontrole. Marketingovy plan predan uzivateli jako artefakt.
+
+## 7. 9. 2026 (noc) - Dosah: SEO vrstva, Search Console, testeri
+
+**Web (commit e31cb33):**
+- pristavaci stranky tapkasa/pokladna.html (cs) a pos.html (en):
+  odznaky obchodu, JSON-LD SoftwareApplication, hreflang, OG,
+- 3 navody na dlouhe fraze: pokladna-na-jarmark, pokladna-na-festival,
+  festival-pos (en), vzajemne prolinkovane, konci odznaky obchodu,
+- robots.txt + sitemap.xml (12 URL),
+- domovska stranka deriverge.com: nova sekce Produkty (Tapkasa,
+  VZT Monter),
+- aplikace /tapkasa/: meta description, canonical, OG obrazek,
+- vse nasazeno a overeno (7x HTTP 200).
+
+**Google Search Console:** vlastnictvi https://deriverge.com/
+overeno automaticky (DNS), sitemap odeslana a prectena (Uspesne,
+12 stranek), hlavni landing rucne pozadan o indexovani (prioritni
+fronta).
+
+**Google Play:** doplnen seznam interniho testovani "Interni testeri"
+(mojekafecz, caganekdavid, info@deriverge) a kanal je AKTIVNI. To byl
+chybejici pozadovany krok panelu; hlidac odemceni "Odeslat ke
+kontrole" bezi dal, odeslu hned po odemceni.
+
+**Zbyva:** RevenueCat servisni ucet pro Play (validace nakupu,
+bez nove verze aplikace), pripadne stitky v Play, Product Hunt
+a AlternativeTo (potrebuji ucty, pripravim texty).
