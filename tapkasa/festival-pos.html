@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Festival bar POS: order queue on two devices</title>
+<meta name="description" content="Split the till from the prep counter: numbered orders on a second device, direct connection with no internet, per-shift closings.">
+<link rel="canonical" href="https://deriverge.com/tapkasa/festival-pos.html">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Festival bar POS: order queue on two devices">
+<meta property="og:description" content="Split the till from the prep counter: numbered orders on a second device, direct connection with no internet, per-shift closings.">
+<meta property="og:url" content="https://deriverge.com/tapkasa/festival-pos.html">
+<meta property="og:image" content="https://deriverge.com/tapkasa/og.png">
+<style>
+  body{margin:0;background:#FBFAF7;color:#15120E;font:16px/1.68 -apple-system,"Segoe UI",Roboto,sans-serif}
+  main{max-width:680px;margin:0 auto;padding:36px 20px 60px}
+  .brand{display:flex;align-items:center;gap:14px;margin-bottom:30px}
+  .logo{width:46px;height:46px;border-radius:11px;background:#fff;border:1px solid #E4DFD5;display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:7px}
+  .logo i{border-radius:5px;display:block}
+  .brand b{font-size:17px;display:block;line-height:1.3}
+  .brand span{color:#6B6357;font-size:13px;display:block}
+  h1{font-size:30px;line-height:1.15;margin:0 0 6px;letter-spacing:-.01em;text-wrap:balance}
+  .muted{color:#6B6357;margin:0 0 22px}
+  h2{font-size:20px;margin:32px 0 8px}
+  ul,ol{padding-left:22px}
+  li{margin:7px 0}
+  p{margin:10px 0}
+  .badges{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:16px 0}
+  .badges img{height:48px;width:auto;display:block}
+  .tip{background:#fff;border:1px solid #E4DFD5;border-radius:12px;padding:14px 18px;margin:18px 0;font-size:15px}
+  a{color:#15120E}
+  footer{margin-top:52px;padding-top:18px;border-top:1px solid #E4DFD5;color:#6B6357;font-size:14px}
+  footer a{color:#6B6357}
+</style>
+</head>
+<body>
+<main>
+  <a href="pos.html" style="text-decoration:none;color:inherit"><div class="brand"><div class="logo" aria-hidden="true"><i style="background:#D6402A"></i><i style="background:#F5CE3E"></i><i style="background:#2158C4"></i><i style="background:#127A4E"></i></div><div><b>Tapkasa</b><span>Pocket point of sale</span></div></div></a>
+  <h1>Running a festival bar without the queue chaos</h1>
+  <p class="muted">Split the till from the prep counter, give orders numbers, and keep selling when the network dies.</p>
+
+  <p>Festival bottlenecks look the same everywhere: one person takes money and pours drinks. The queue grows, orders get mixed up, and by mid-evening nobody knows what has been paid. The fix is splitting the till from the prep counter.</p>
+
+  <h2>1. The till charges, the counter prepares</h2>
+  <p>Tapkasa pairs two devices: the till takes payments and every paid bill pops up on the second device as a numbered order. The prep counter ticks items off and calls the number when ready.</p>
+
+  <h2>2. Works with no signal</h2>
+  <p>Festival networks are overloaded, so the devices connect directly to each other. Keep Wi-Fi enabled on both (no network needed) or run a hotspot on one. A setup guide is built into the app.</p>
+
+  <h2>3. Close each shift</h2>
+  <p>Close a shift as an event: revenue moves to the archive and the till starts from zero. At the end, issue one summary PDF for the whole festival, with a VAT breakdown if you need it.</p>
+
+  <div class="tip"><b>Tip:</b> colour-code items by category, beer yellow, soft drinks blue, food green. New helpers find their way during the first order.</div>
+
+  <h2>Get Tapkasa</h2>
+  <div class="badges">
+    <a href="https://apps.apple.com/app/id6807075649"><img src="badge-appstore.svg" alt="Download on the App Store"></a>
+    <a href="https://play.google.com/store/apps/details?id=com.deriverge.tapkasa"><img src="badge-googleplay-en.png" alt="Get it on Google Play"></a>
+  </div>
+  <p>Or <a href="index.html">try it in your browser</a> first.</p>
+
+  <footer><a href="pos.html">About Tapkasa</a> &middot; <a href="support.html">Support</a><br>deriverge s.r.o.</footer>
+</main>
+</body>
+</html>
