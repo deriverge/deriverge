@@ -1,131 +1,129 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="cs">
 <head>
-<meta charset="utf-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>VZT Montér — podpora / Support</title>
+<title>VZT Montér, podpora / Support</title>
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <style>
-  :root { --fg:#16181d; --muted:#5b6270; --line:#e3e6ec; --bg:#ffffff; --accent:#1a5fb4; }
-  @media (prefers-color-scheme: dark) {
-    :root { --fg:#e8eaf0; --muted:#a0a7b4; --line:#2c313b; --bg:#14161a; --accent:#7aa8e8; }
-  }
-  * { box-sizing:border-box; }
-  body { margin:0; background:var(--bg); color:var(--fg);
-         font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; }
-  .wrap { max-width:720px; margin:0 auto; padding:48px 24px 80px; }
-  h1 { font-size:28px; margin:0 0 4px; letter-spacing:-.01em; }
-  .sub { color:var(--muted); margin:0 0 40px; }
-  h2 { font-size:20px; margin:40px 0 12px; padding-top:24px; border-top:1px solid var(--line); }
-  h3 { font-size:16px; margin:24px 0 6px; }
-  p { margin:0 0 12px; }
-  a { color:var(--accent); }
-  .contact { border:1px solid var(--line); border-radius:12px; padding:20px 24px; margin:24px 0; }
-  .contact p { margin:0 0 6px; }
-  .contact p:last-child { margin:0; }
-  ul { margin:0 0 12px; padding-left:22px; }
-  li { margin:0 0 6px; }
-  footer { margin-top:56px; padding-top:24px; border-top:1px solid var(--line);
-           color:var(--muted); font-size:14px; }
-  .lang { color:var(--muted); font-size:13px; text-transform:uppercase;
-          letter-spacing:.08em; margin:0 0 8px; }
+  body{margin:0;background:#FBFAF7;color:#15120E;font:16px/1.65 -apple-system,"Segoe UI",Roboto,sans-serif}
+  main{max-width:680px;margin:0 auto;padding:36px 20px 60px}
+  .brand{display:flex;align-items:center;gap:14px;margin-bottom:30px}
+  .logo{width:46px;height:46px;border-radius:11px;flex:0 0 auto;background:#fff;border:1px solid #E4DFD5}
+  .logo.tk{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:7px}
+  .logo.tk i{border-radius:5px;display:block}
+  .logo.vzt{display:flex;align-items:center;justify-content:center}
+  .logo.vzt svg{width:34px;height:34px}
+  .brand b{font-size:17px;display:block;line-height:1.3}
+  .brand span{color:#6B6357;font-size:13px;display:block}
+  h1{font-size:28px;margin:0 0 4px}
+  h2{font-size:19px;margin:32px 0 8px}
+  h3{font-size:16px;margin:22px 0 6px}
+  .muted{color:#6B6357}
+  .box{background:#fff;border:1px solid #E4DFD5;border-radius:12px;padding:18px 20px;margin:20px 0}
+  .box p{margin:0 0 6px}
+  .box p:last-child{margin:0}
+  hr{border:0;border-top:1px solid #E4DFD5;margin:48px 0}
+  ul{padding-left:22px}
+  li{margin:6px 0}
+  a{color:#15120E}
+  footer{margin-top:56px;padding-top:20px;border-top:1px solid #E4DFD5;color:#6B6357;font-size:14px}
+  footer a{color:#6B6357}
 </style>
 </head>
 <body>
-<div class="wrap">
+<main>
+  <div class="brand"><div class="logo vzt" aria-hidden="true"><svg viewBox="0 0 100 100" fill="none" stroke="#15120E"><path d="M17 32H40L64 60H83" stroke-width="13"/><path d="M17 22v20M83 50v20" stroke-width="6"/></svg></div><div><b>VZT Montér</b><span>Kalkulačka pro vzduchotechniku</span></div></div>
+  <h1>Podpora</h1>
+    <p class="muted">VZT Montér &middot; provozovatel: deriverge s.r.o. &middot; kontakt: <a href="mailto:info@deriverge.com">info@deriverge.com</a> &middot; <a href="#en">English below.</a></p>
 
-  <h1>VZT Montér — podpora</h1>
-  <p class="sub">Kalkulačka pro montéry vzduchotechniky · deriverge s.r.o.</p>
+    <div class="box">
+      <p><strong>Napište nám:</strong> <a href="mailto:info@deriverge.com">info@deriverge.com</a></p>
+      <p>Odpovídáme obvykle do dvou pracovních dnů. Píšte česky, slovensky, německy nebo anglicky.</p>
+    </div>
 
-  <div class="contact">
-    <p><strong>Napište nám:</strong> <a href="mailto:info@deriverge.com">info@deriverge.com</a></p>
-    <p>Odpovídáme obvykle do dvou pracovních dnů. Píšte česky, slovensky, německy nebo anglicky.</p>
-  </div>
+    <h2>Časté dotazy</h2>
 
-  <h2>Časté dotazy</h2>
+    <h3>Co je zdarma a co je v PRO?</h3>
+    <p>Zdarma počítáte rovinné odskoky na spiro i hranatý kanál, přepočty (kruh na čtyřhran,
+    průtok, vzduch pro místnost), historii výpočtů a deník hodin prvních 14 dní.
+    PRO odemyká zbytek: prostorové odskoky, návrh trasy, tlakové ztráty, zaříznutí
+    a rozvinutí, PDF protokoly a deník bez omezení.</p>
 
-  <h3>Co je zdarma a co je v PRO?</h3>
-  <p>Zdarma počítáte rovinné odskoky na spiro i hranatý kanál, přepočty (kruh na čtyřhran,
-  průtok, vzduch pro místnost), historii výpočtů a deník hodin prvních 14 dní.
-  PRO odemyká zbytek — prostorové odskoky, návrh trasy, tlakové ztráty, zaříznutí
-  a rozvinutí, PDF protokoly a deník bez omezení.</p>
+    <h3>Je PRO předplatné?</h3>
+    <p>Ne. PRO je <strong>jednorázový nákup</strong>. Zaplatíte jednou a platí to napořád,
+    nic se neobnovuje a nic se nestrhává.</p>
 
-  <h3>Je PRO předplatné?</h3>
-  <p>Ne. PRO je <strong>jednorázový nákup</strong>. Zaplatíte jednou a platí to napořád,
-  nic se neobnovuje a nic se nestrhává.</p>
+    <h3>Koupil jsem PRO a po přeinstalování je pryč</h3>
+    <p>Otevřete <strong>Nastavení</strong> a dole klepněte na <strong>Obnovit nákup</strong>.
+    Nákup je vázaný na vaše Apple&nbsp;ID, takže se vrátí i na novém telefonu. Musíte
+    být přihlášeni pod stejným Apple&nbsp;ID, kterým jste nakupovali.</p>
 
-  <h3>Koupil jsem PRO a po přeinstalování je pryč</h3>
-  <p>Otevřete <strong>Nastavení</strong> a dole klepněte na <strong>Obnovit nákup</strong>.
-  Nákup je vázaný na vaše Apple&nbsp;ID, takže se vrátí i na novém telefonu — musíte
-  být přihlášeni pod stejným Apple&nbsp;ID, kterým jste nakupovali.</p>
+    <h3>Funguje aplikace bez internetu?</h3>
+    <p>Ano. Všechny výpočty i data běží přímo v telefonu. Internet je potřeba jen
+    při nákupu a obnovení PRO.</p>
 
-  <h3>Funguje aplikace bez internetu?</h3>
-  <p>Ano. Všechny výpočty i data běží přímo v telefonu. Internet je potřeba jen
-  při nákupu a obnovení PRO.</p>
+    <h3>Kde jsou moje data?</h3>
+    <p>Jen ve vašem telefonu. Nikam se neodesílají. V Nastavení si můžete udělat
+    zálohu do souboru a tu si přenést jinam.</p>
 
-  <h3>Kde jsou moje data?</h3>
-  <p>Jen ve vašem telefonu. Nikam se neodesílají. V Nastavení si můžete udělat
-  zálohu do souboru a tu si přenést jinam.</p>
+    <h3>Vyšel mi jiný výsledek, než čekám</h3>
+    <p>Napište nám na <a href="mailto:info@deriverge.com">info@deriverge.com</a> a přiložte
+    zadané hodnoty (průměr, úhel, rozměry) a co vám vyšlo. Výpočet prověříme
+    a ozveme se.</p>
 
-  <h3>Vyšel mi jiný výsledek, než čekám</h3>
-  <p>Napište nám na <a href="mailto:info@deriverge.com">info@deriverge.com</a> a přiložte
-  zadané hodnoty (průměr, úhel, rozměry) a co vám vyšlo. Výpočet prověříme
-  a ozveme se.</p>
+    <h3>Chci nahlásit chybu nebo navrhnout funkci</h3>
+    <p>Pište na <a href="mailto:info@deriverge.com">info@deriverge.com</a>. Pomůže,
+    když připojíte verzi aplikace (Nastavení → O aplikaci), model telefonu
+    a screenshot.</p>
 
-  <h3>Chci nahlásit chybu nebo navrhnout funkci</h3>
-  <p>Pište na <a href="mailto:info@deriverge.com">info@deriverge.com</a>. Pomůže,
-  když připojíte verzi aplikace (Nastavení → O aplikaci), model telefonu
-  a screenshot.</p>
+    <h2>Odkazy</h2>
+    <ul>
+      <li><a href="https://www.deriverge.com/vzt-monter/soukromi.html">Zásady ochrany soukromí</a></li>
+      <li><a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/">Licenční podmínky (Apple Standard EULA)</a></li>
+    </ul>
 
-  <h2>Odkazy</h2>
-  <ul>
-    <li><a href="https://www.deriverge.com/vzt-monter/soukromi.html">Zásady ochrany soukromí</a></li>
-    <li><a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/">Licenční podmínky (Apple Standard EULA)</a></li>
-  </ul>
+    <hr id="en">
 
-  <h2>Support (English)</h2>
-  <p class="lang">English</p>
+    <h1>Support</h1>
+    <p class="muted">VZT Montér &middot; operator: deriverge s.r.o.</p>
 
-  <p><strong>Contact:</strong> <a href="mailto:info@deriverge.com">info@deriverge.com</a>
-  — we usually reply within two business days.</p>
+    <p><strong>Contact:</strong> <a href="mailto:info@deriverge.com">info@deriverge.com</a>,
+    we usually reply within two business days.</p>
 
-  <h3>What is free and what is PRO?</h3>
-  <p>Planar offsets on spiral duct and rectangular duct, unit conversions, calculation
-  history and the first 14 days of the work log are free. PRO unlocks spatial offsets,
-  route design, pressure losses, cutting and development, PDF reports and the
-  unlimited work log.</p>
+    <h3>What is free and what is PRO?</h3>
+    <p>Planar offsets on spiral duct and rectangular duct, unit conversions, calculation
+    history and the first 14 days of the work log are free. PRO unlocks spatial offsets,
+    route design, pressure losses, cutting and development, PDF reports and the
+    unlimited work log.</p>
 
-  <h3>Is PRO a subscription?</h3>
-  <p>No. PRO is a <strong>one-time purchase</strong>. It never expires and nothing
-  is billed again.</p>
+    <h3>Is PRO a subscription?</h3>
+    <p>No. PRO is a <strong>one-time purchase</strong>. It never expires and nothing
+    is billed again.</p>
 
-  <h3>I bought PRO but it is gone after reinstalling</h3>
-  <p>Open <strong>Settings</strong> and tap <strong>Restore purchase</strong> at the
-  bottom. The purchase is tied to your Apple&nbsp;ID, so make sure you are signed in
-  with the same Apple&nbsp;ID you used to buy it.</p>
+    <h3>I bought PRO but it is gone after reinstalling</h3>
+    <p>Open <strong>Settings</strong> and tap <strong>Restore purchase</strong> at the
+    bottom. The purchase is tied to your Apple&nbsp;ID, so make sure you are signed in
+    with the same Apple&nbsp;ID you used to buy it.</p>
 
-  <h3>Does the app work offline?</h3>
-  <p>Yes. All calculations and data run on the device. A connection is only needed
-  to buy or restore PRO.</p>
+    <h3>Does the app work offline?</h3>
+    <p>Yes. All calculations and data run on the device. A connection is only needed
+    to buy or restore PRO.</p>
 
-  <h3>Where is my data stored?</h3>
-  <p>On your device only. Nothing is uploaded. You can export a backup file
-  from Settings.</p>
+    <h3>Where is my data stored?</h3>
+    <p>On your device only. Nothing is uploaded. You can export a backup file
+    from Settings.</p>
 
-  <h3>Reporting a bug or requesting a feature</h3>
-  <p>Write to <a href="mailto:info@deriverge.com">info@deriverge.com</a>. Please include
-  the app version (Settings → About), your device model and a screenshot.</p>
+    <h3>Reporting a bug or requesting a feature</h3>
+    <p>Write to <a href="mailto:info@deriverge.com">info@deriverge.com</a>. Please include
+    the app version (Settings → About), your device model and a screenshot.</p>
 
-  <h2>Links</h2>
-  <ul>
-    <li><a href="https://www.deriverge.com/vzt-monter/soukromi.html">Privacy policy</a></li>
-    <li><a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/">Licensed Application End User License Agreement</a></li>
-  </ul>
-
-  <footer>
-    deriverge s.r.o. · <a href="mailto:info@deriverge.com">info@deriverge.com</a><br>
-    Aktualizováno 7. 9. 2026
-  </footer>
-
-</div>
+    <h2>Links</h2>
+    <ul>
+      <li><a href="https://www.deriverge.com/vzt-monter/soukromi.html">Privacy policy</a></li>
+      <li><a href="https://www.apple.com/legal/internet-services/itunes/dev/stdeula/">Licensed Application End User License Agreement</a></li>
+    </ul>
+  <footer><a href="podpora.html">Podpora / Support</a> &middot; <a href="soukromi.html">Soukromí / Privacy</a><br>deriverge s.r.o. &middot; <a href="mailto:info@deriverge.com">info@deriverge.com</a></footer>
+</main>
 </body>
 </html>
