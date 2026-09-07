@@ -1032,3 +1032,25 @@ parovani funguje, takze funkce v aplikaci neni mrtva.
 Hlidam stav recenze; po rozhodnuti Applu se ozvu. Dalsi slibena prace
 po vydani: Android offline parovani (Nearby Connections), zadost
 o hodnoceni v aplikaci.
+
+## 7. 9. 2026 - Zamitnuti recenze a kompletni naprava, znovu odeslano
+
+Apple 7. 9. zamitl verzi 1.0 (build 48) se 4 vyhradami. Vsechny opraveny:
+
+1. **2.3.10 Google Play v binarce**: texty predplatneho (proTerms,
+   proWebHint) ve vsech 9 jazycich prepsany neutralne ("obchod
+   s aplikacemi"), zadna zminka o Google Play.
+2. **2.1(b) predplatna nebyla soucasti recenze**: do noveho odeslani
+   pridany pres Console (API to neumi) polozky: skupina Tapkasa Pro
+   + tapkasa.pro.monthly + tapkasa.pro.yearly.
+3. **3.1.2(c) chybejici odkaz na podminky (EULA)**: do popisu vsech
+   9 lokalizaci doplneny odkazy na terms.html a privacy.html.
+   V aplikaci uz odkazy v platebnim okne byly (nazev, delka, cena take).
+4. **1.5 URL podpory**: nova stranka https://deriverge.com/tapkasa/support.html
+   (kontakt, FAQ cs+en); nastavena jako Support URL u vsech jazyku.
+
+Dale: poznamky pro recenzenta (App Review Notes) shrnuji vsechny opravy.
+Build 53 (obsahuje i novou zadost o hodnoceni po 10. uzavrene akci
+- plugin RateApp) pripojen k verzi. Stare odeslani zruseno, nove
+odeslani 9bdb6b09 se 4 polozkami je WAITING_FOR_REVIEW (12:02 UTC).
+Hlidam stav, po rozhodnuti se ozvu.
