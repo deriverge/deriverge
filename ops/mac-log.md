@@ -1131,3 +1131,23 @@ kontrole" bezi dal, odeslu hned po odemceni.
 **Zbyva:** RevenueCat servisni ucet pro Play (validace nakupu,
 bez nove verze aplikace), pripadne stitky v Play, Product Hunt
 a AlternativeTo (potrebuji ucty, pripravim texty).
+
+## 9. 9. 2026 - Google Play: produkcni vydani odeslano ke kontrole
+
+- Panel aplikace se odemkl (po aktivaci interniho testovani), krok
+  "Zobrazte si nahled a potvrdte vydani" byl dostupny.
+- Produkcni vydani 1 (1.0), versionCode 1, AAB 5,7 MB, targetSdk 36,
+  177 zemi/oblasti, poznamky k vydani cs: ulozeno. Jedine upozorneni
+  je chybejici deobfuskacni soubor (aplikace neni obfuskovana,
+  neblokuje).
+- Prehled publikovani: "Odeslat 11 zmen ke kontrole" potvrzeno
+  (produkce, zeme, zaznam v obchodu cs, obsah aplikace, kategorie).
+  Stav: "Probiha kontrola zmen", rychle kontroly max. 14 minut, pak
+  plne posouzeni Googlem (obvykle do 7 dnu). Rizene publikovani je
+  vypnute, po schvaleni se aplikace publikuje sama.
+- Predplatna (mesicni, rocni, zkusebni obdobi) jsou aktivni uz
+  z drivejska.
+
+**Zbyva:** RevenueCat servisni ucet pro Play (validace nakupu na
+Androidu), sledovat vysledek kontroly, verze 1.0.1 (versionCode 2)
+pripravit az po schvaleni prvniho vydani.
