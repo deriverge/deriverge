@@ -1151,3 +1151,22 @@ a AlternativeTo (potrebuji ucty, pripravim texty).
 **Zbyva:** RevenueCat servisni ucet pro Play (validace nakupu na
 Androidu), sledovat vysledek kontroly, verze 1.0.1 (versionCode 2)
 pripravit az po schvaleni prvniho vydani.
+
+## 10. 9. 2026 (rano) - Play kontrola bezi, Android 1.0.1 sestaven, RevenueCat
+
+- Google Play: rychle kontroly prosly, produkcni vydani 1.0 je
+  u Googlu v plnem posouzeni ("Zmeny se ted posuzuji").
+- Android 1.0.1 (versionCode 2) sestaven a podepsan upload klicem:
+  mobile/android/app/build/outputs/bundle/release/tapkasa-1.0.1-signed.aab
+  (5,8 MB). Nahraji az po schvaleni 1.0, aby se kontrola nerestartovala.
+- RevenueCat (projekt Tapkasa, app "Tapkasa Android"): chybi JSON
+  servisniho uctu Googlu. Play Console uz nema stranku "Pristup k API",
+  servisni ucet se zaklada v Google Cloud Console a do Play se zve
+  v "Uzivatele a opravneni".
+
+BLOKUJE: Google Cloud Console (console.cloud.google.com) chce znovu
+zadat heslo uctu info@deriverge.com (karta v Chrome je otevrena na
+vyzve "Overeni identity"). Hesla nezadavam. Po prihlaseni uzivatelem
+dokoncim: projekt, zapnuti Google Play Android Developer API, servisni
+ucet, pozvanku do Play Console. Stazeni JSON klice a jeho vlozeni do
+RevenueCat je prace s tajemstvim, provede uzivatel (2 kroky, popsano).
