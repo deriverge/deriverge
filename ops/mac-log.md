@@ -1170,3 +1170,17 @@ vyzve "Overeni identity"). Hesla nezadavam. Po prihlaseni uzivatelem
 dokoncim: projekt, zapnuti Google Play Android Developer API, servisni
 ucet, pozvanku do Play Console. Stazeni JSON klice a jeho vlozeni do
 RevenueCat je prace s tajemstvim, provede uzivatel (2 kroky, popsano).
+
+## 10. 9. 2026 - RevenueCat pro Android: servisni ucet pripraven
+
+- Google Cloud: novy projekt "tapkasa" (ucet info@deriverge.com),
+  zapnuto Google Play Android Developer API a Cloud Pub/Sub API.
+- Servisni ucet revenuecat@tapkasa.iam.gserviceaccount.com
+  (role Pub/Sub Admin pro notifikace z Play).
+- Play Console > Uzivatele a opravneni: servisni ucet pozvan
+  s opravnenimi "Zobrazeni informaci o aplikaci", "Zobrazeni
+  financnich udaju" a "Sprava objednavek a predplatnych".
+- Zbyva uzivatel (prace s tajnym klicem): v Google Cloud vytvorit
+  JSON klic servisniho uctu a nahrat ho v RevenueCat do aplikace
+  "Tapkasa Android" (Service Account Credentials JSON) + Save changes.
+  Klic nikdy do repozitare.
