@@ -1207,3 +1207,23 @@ Store ukazoval jen anglictinu.
 - Android: tapkasa-1.0.1-signed.aab prestaven s opravami (versionCode 2),
   nahraji po schvaleni 1.0 (stale "Zmeny se ted posuzuji").
 - RevenueCat: JSON klic servisniho uctu zatim nenahran (ceka na uzivatele).
+
+## 11. 9. 2026 (odpoledne) - Dalsi opravy z ostreho provozu, verze 1.0.1
+
+Uzivatel po testu z App Store hlasil dalsi tri veci, vse opraveno
+(commit 4b61256 na main):
+- pruvodce: cerveny ramecek poskakoval a pomalu dosedal (prekresleni
+  jen kazdych 700 ms + CSS prechody). Ted sleduje prvek kazdy snimek
+  bez prechodu, kratka animace jen pri novem kroku.
+- hlas: v roli Kasa tlacitko "Zkusit hlas" a hlaska po zapnuti cetly
+  text pro Vydej ("Nova objednavka..."). Ted Kasa rika podekovani,
+  Vydej cte objednavky (novy klic speakThanksOn v 9 jazycich).
+- hlaska "Ulozeno / Vratit zpet" prekryvala tlacitko Zaplatit; ted sedi
+  tesne nad listou s cenou, mensi pismo.
+Otestovano v prohlizeci (mereni poloh, bez chyb v konzoli).
+Hodnoceni aplikace (SKStoreReviewController) je v 1.0.1 obsazeno:
+po 10., 50. a 150. vydane objednavce.
+
+Bezi hlidac asc-wait-submit.mjs: az Xcode Cloud dokonci build 1.0.1
+z posledniho pushe, pripoji ho k verzi 1.0.1 a odesle ke kontrole.
+Android 1.0.1 (versionCode 2) prestaven se vsemi opravami.
