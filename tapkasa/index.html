@@ -304,8 +304,8 @@
   .toast{
     position:fixed;left:12px;right:12px;bottom:calc(76px + var(--safe-b));z-index:30;
     max-width:616px;margin:0 auto;display:flex;align-items:center;gap:10px;
-    padding:12px 14px;border-radius:var(--r-tile);background:var(--ink);color:var(--paper);
-    font-size:14px;font-weight:500;box-shadow:0 8px 24px rgba(21,18,14,.22);animation:rise .18s ease;
+    padding:10px 12px;border-radius:var(--r-tile);background:var(--ink);color:var(--paper);
+    font-size:13px;font-weight:500;box-shadow:0 8px 24px rgba(21,18,14,.22);animation:rise .18s ease;
   }
   /* nad otevřeným oknem by hláška zakryla jeho tlačítka, jde nahoru */
   .toast.up{bottom:auto;top:calc(var(--safe-t) + 10px)}
@@ -402,22 +402,28 @@
   /* ---------- interaktivní průvodce ---------- */
   /* Kroužek nesmí chytat doteky, jinak by bránil právě té akci, ke které vede. */
   #tourLayer{position:fixed;inset:0;z-index:40;pointer-events:none}
+  /* Polohu i velikost nastavuje skript každý snímek podle skutečného prvku,
+     bez CSS přechodů: s nimi rámeček při posunu stránky dojížděl a rostl
+     po kouskách. Animuje se jen nástup nového kroku (průhlednost a měřítko). */
   .tour-ring{position:fixed;border:3px solid var(--accent);border-radius:14px;
     box-shadow:0 0 0 4px rgba(214,64,42,.18);
-    transition:left .35s ease,top .35s ease,width .35s ease,height .35s ease;
     animation:tourPulse 1.6s ease-in-out infinite}
+  .tour-ring.is-new{animation:tourIn .3s cubic-bezier(.2,.8,.2,1),tourPulse 1.6s ease-in-out .3s infinite}
   @keyframes tourPulse{0%,100%{box-shadow:0 0 0 4px rgba(214,64,42,.18)}50%{box-shadow:0 0 0 10px rgba(214,64,42,.05)}}
+  @keyframes tourIn{from{opacity:0;transform:scale(1.1)}to{opacity:1;transform:none}}
   .tour-card{position:fixed;left:14px;right:14px;max-width:560px;margin:0 auto;
     display:flex;align-items:center;gap:10px;padding:12px 14px;
     border-radius:var(--r-tile);background:var(--ink);color:var(--paper);
     font-size:14px;font-weight:500;line-height:1.4;
-    box-shadow:0 8px 24px rgba(21,18,14,.25);transition:top .35s ease,bottom .35s ease}
+    box-shadow:0 8px 24px rgba(21,18,14,.25)}
+  .tour-card.is-new{animation:tourCardIn .3s ease-out}
+  @keyframes tourCardIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
   .tour-n{flex:0 0 auto;padding:3px 8px;border-radius:999px;background:rgba(255,255,255,.16);
     font-size:12px;font-weight:700;font-variant-numeric:tabular-nums}
   .tour-t{flex:1;min-width:0}
   .tour-skip{pointer-events:auto;flex:0 0 auto;border:0;background:none;
     color:#9A9184;font-size:13px;font-weight:600;padding:4px 2px}
-  @media (prefers-reduced-motion:reduce){.tour-ring{animation:none;transition:none}.tour-card{transition:none}}
+  @media (prefers-reduced-motion:reduce){.tour-ring,.tour-ring.is-new,.tour-card.is-new{animation:none}}
 
   .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
@@ -958,6 +964,7 @@
     speakNewOrder: "Nová objednávka číslo {0}.",
     speakTimes: "{0}krát {1}.",
     speakVoiceOn: "Čtení objednávek zapnuto.",
+    speakThanksOn: "Poděkování zákazníkovi zapnuto.",
     speakTest: "Nová objednávka číslo 7. Dvakrát espresso. Cappuccino.",
     col_cervena: "Červená",
     col_oranzova: "Oranžová",
@@ -1274,6 +1281,7 @@
     speakNewOrder: "New order number {0}.",
     speakTimes: "{0} times {1}.",
     speakVoiceOn: "Order announcements on.",
+    speakThanksOn: "Customer thank-you on.",
     speakTest: "New order number 7. Two espressos. One cappuccino.",
     col_cervena: "Red",
     col_oranzova: "Orange",
@@ -1595,6 +1603,7 @@
     speakNewOrder: "Nová objednávka číslo {0}.",
     speakTimes: "{0} krát {1}.",
     speakVoiceOn: "Čítanie objednávok zapnuté.",
+    speakThanksOn: "Poďakovanie zákazníkovi zapnuté.",
     speakTest: "Nová objednávka číslo 7. Dvakrát espresso. Cappuccino.",
     col_cervena: "červená",
     col_oranzova: "oranžová",
@@ -1913,6 +1922,7 @@
     speakNewOrder: "Neue Bestellung Nummer {0}.",
     speakTimes: "{0} Mal {1}.",
     speakVoiceOn: "Bestellungen werden jetzt vorgelesen.",
+    speakThanksOn: "Dank an den Kunden ist eingeschaltet.",
     speakTest: "Neue Bestellung Nummer sieben. Zweimal Espresso. Ein Cappuccino.",
     col_cervena: "Rot",
     col_oranzova: "Orange",
@@ -2231,6 +2241,7 @@
     speakNewOrder: "Nouvelle commande numéro {0}.",
     speakTimes: "{0} fois {1}.",
     speakVoiceOn: "Lecture des commandes activée.",
+    speakThanksOn: "Remerciement du client activé.",
     speakTest: "Nouvelle commande numéro 7. Deux fois expresso. Un cappuccino.",
     col_cervena: "rouge",
     col_oranzova: "orange",
@@ -2549,6 +2560,7 @@
     speakNewOrder: "Nuevo pedido número {0}.",
     speakTimes: "{0} de {1}.",
     speakVoiceOn: "Lectura de pedidos activada.",
+    speakThanksOn: "Agradecimiento al cliente activado.",
     speakTest: "Nuevo pedido número siete. Dos de espresso. Capuchino.",
     col_cervena: "rojo",
     col_oranzova: "naranja",
@@ -2867,6 +2879,7 @@
     speakNewOrder: "Nuovo ordine numero {0}.",
     speakTimes: "{0} volte {1}.",
     speakVoiceOn: "Lettura degli ordini attivata.",
+    speakThanksOn: "Ringraziamento al cliente attivato.",
     speakTest: "Nuovo ordine numero sette. Due caffè. Un cappuccino.",
     col_cervena: "rosso",
     col_oranzova: "arancione",
@@ -3185,6 +3198,7 @@
     speakNewOrder: "Nowe zamówienie numer {0}.",
     speakTimes: "{0} razy {1}.",
     speakVoiceOn: "Czytanie zamówień włączone.",
+    speakThanksOn: "Podziękowanie klientowi włączone.",
     speakTest: "Nowe zamówienie numer siedem. Dwa razy espresso. Cappuccino.",
     col_cervena: "czerwony",
     col_oranzova: "pomarańczowy",
@@ -3503,6 +3517,7 @@
     speakNewOrder: "Novo pedido número {0}.",
     speakTimes: "{0} vezes {1}.",
     speakVoiceOn: "Leitura de pedidos ligada.",
+    speakThanksOn: "Agradecimento ao cliente ligado.",
     speakTest: "Novo pedido número sete. Duas vezes café. Um cappuccino.",
     col_cervena: "vermelho",
     col_oranzova: "laranja",
@@ -6210,7 +6225,7 @@
   // Vede nového uživatele skutečnými akcemi: kroužek ukáže, kam ťuknout,
   // a krok se splní až tím, že to uživatel opravdu udělá. Žádné obrázky
   // vedle reality, průvodce běží nad živou aplikací.
-  var tourIx = -1, tourTimer = null, tourScrolledFor = -1;
+  var tourIx = -1, tourRaf = 0, tourScrolledFor = -1, tourLastKey = "", tourLastBox = "";
 
   var TOUR = [
     { key: "tourS1", sel: function () { return ".prod"; },
@@ -6246,17 +6261,24 @@
     tourScrolledFor = -1;
     view = "sell";
     sheet = null;
-    if (!tourTimer) { tourTimer = setInterval(tourPaint, 700); }
-    // capture: posouvá se vnitřek stránky, ne okno
-    window.addEventListener("scroll", tourPaint, true);
+    tourLastKey = "";
+    tourLastBox = "";
+    if (!tourRaf) { tourLoop(); }
     render(true);
+  }
+
+  // Rámeček sleduje cíl každý snímek: při plynulém posunu stránky sedí
+  // přesně na prvku a nedojíždí za ním.
+  function tourLoop() {
+    if (!tourActive()) { tourRaf = 0; return; }
+    tourPaint();
+    tourRaf = requestAnimationFrame(tourLoop);
   }
 
   function tourEnd(finished) {
     tourIx = -1;
-    window.removeEventListener("scroll", tourPaint, true);
     state.tourDone = true;
-    if (tourTimer) { clearInterval(tourTimer); tourTimer = null; }
+    if (tourRaf) { cancelAnimationFrame(tourRaf); tourRaf = 0; }
     save();
     render();
     if (finished) { showToast(T("tourDoneToast")); }
@@ -6305,21 +6327,35 @@
         }
       }
       var r = el.getBoundingClientRect();
-      ring.style.display = "block";
-      ring.style.left = (r.left - 6) + "px";
-      ring.style.top = (r.top - 6) + "px";
-      ring.style.width = (r.width + 12) + "px";
-      ring.style.height = (r.height + 12) + "px";
+      var key = tourIx + "|" + TOUR[tourIx].sel();
+      if (key !== tourLastKey) {
+        // nový cíl: krátký nástup, restart animace přes reflow
+        tourLastKey = key;
+        ring.classList.remove("is-new"); card.classList.remove("is-new");
+        void ring.offsetWidth;
+        ring.classList.add("is-new"); card.classList.add("is-new");
+      }
       // karta nad, nebo pod prvkem, podle místa
       var below = r.bottom + 12;
-      if (below + card.offsetHeight + 16 < window.innerHeight) {
-        card.style.top = below + "px";
-        card.style.bottom = "auto";
-      } else {
-        card.style.top = "auto";
-        card.style.bottom = (window.innerHeight - r.top + 12) + "px";
+      var cardBelow = below + card.offsetHeight + 16 < window.innerHeight;
+      var box = [Math.round(r.left), Math.round(r.top), Math.round(r.width), Math.round(r.height), cardBelow ? 1 : 0].join(",");
+      if (box !== tourLastBox) {
+        tourLastBox = box;
+        ring.style.display = "block";
+        ring.style.left = (r.left - 6) + "px";
+        ring.style.top = (r.top - 6) + "px";
+        ring.style.width = (r.width + 12) + "px";
+        ring.style.height = (r.height + 12) + "px";
+        if (cardBelow) {
+          card.style.top = below + "px";
+          card.style.bottom = "auto";
+        } else {
+          card.style.top = "auto";
+          card.style.bottom = (window.innerHeight - r.top + 12) + "px";
+        }
       }
     } else {
+      tourLastBox = "";
       ring.style.display = "none";
       card.style.top = "auto";
       card.style.bottom = "90px";
@@ -6373,9 +6409,21 @@
         (toast.undo ? '<button data-undo="' + toast.undo + '">' + esc(T("undoBtn")) + "</button>" : "") +
         '<button class="x" data-hidetoast="1" aria-label="' + esc(T("close")) + '">' + SVG.close + "</button></div>"
       : "");
+    placeToast();
 
     tourTick();
     tourPaint();
+  }
+
+  // Hláška (třeba vrácení účtu) nesmí zakrýt řádek s cenou a tlačítkem
+  // Zaplatit: na prodejní obrazovce ji posadíme těsně nad lištu účtu.
+  function placeToast() {
+    var t = document.querySelector("#toastSlot .toast");
+    if (!t || t.classList.contains("up")) { return; }
+    var bar = document.querySelector("#barSlot .bar");
+    if (!bar) { return; }
+    var top = bar.getBoundingClientRect().top;
+    if (top > 0) { t.style.bottom = Math.round(window.innerHeight - top + 8) + "px"; }
   }
 
   // ---------- interaction ----------
@@ -6727,15 +6775,17 @@
       return;
     }
 
+    // Kasa děkuje zákazníkovi, výdej čte objednávky: hláška po zapnutí
+    // i zkouška hlasu musí odpovídat roli zařízení.
     if (d.voice) {
       state.voice = !state.voice;
       save(); render();
-      if (state.voice) { speak(T("speakVoiceOn")); }
+      if (state.voice) { speak(state.mode === "kasa" ? T("speakThanksOn") : T("speakVoiceOn")); }
       return;
     }
 
     if (d.voicetest) {
-      speak(T("speakTest"));
+      speak(state.mode === "kasa" ? T("speakThanks") : T("speakTest"));
       return;
     }
 
