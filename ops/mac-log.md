@@ -1248,3 +1248,18 @@ Android 1.0.1 (versionCode 2) prestaven se vsemi opravami.
   Done > Set policy, pak v RevenueCat "Connect to Google".
   Bez notifikaci RevenueCat stavy predplatneho dotahuje dotazovanim,
   validace nakupu funguje.
+
+## 11. 9. 2026 (12:30) - Notifikace z Play do RevenueCat: temer hotovo
+
+- Uzivatel vypnul pro projekt tapkasa zasadu iam.allowedPolicyMemberDomains
+  (Override, Replace, Allow all).
+- RevenueCat: odpojeno a znovu pripojeno, stav "Connected to Google",
+  tema projects/tapkasa/topics/Play-Store-Notifications, odber
+  RevenueCat-Subscriber-app0dee10a745 existuje.
+- Play Console > Nastaveni zpenezeni: oznameni v realnem case zapnuta,
+  nazev tematu ulozen. Testovaci oznameni zatim selhava, protoze na
+  tematu chybi role Pub/Sub Publisher pro
+  google-play-developer-notifications@system.gserviceaccount.com
+  (RevenueCat ji nepridal). Panel "Grant access" v IAM projektu je
+  otevreny v Chrome, klasifikator mi vyplneni zablokoval; dokonci
+  uzivatel a pak posle test z Play Console.
