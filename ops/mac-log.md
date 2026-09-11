@@ -1227,3 +1227,24 @@ po 10., 50. a 150. vydane objednavce.
 Bezi hlidac asc-wait-submit.mjs: az Xcode Cloud dokonci build 1.0.1
 z posledniho pushe, pripoji ho k verzi 1.0.1 a odesle ke kontrole.
 Android 1.0.1 (versionCode 2) prestaven se vsemi opravami.
+
+## 11. 9. 2026 (poledne) - iOS 1.0.1 odeslano, RevenueCat Play klic hotov
+
+- App Store Connect: verze 1.0.1 s buildem 60 odeslana ke kontrole
+  (review submission bbd217d1-2e5f-47e1-a857-a7463cc2db6b).
+- Google Cloud: organizace deriverge.com (318277055591) ma zapnute
+  "Secure by Default" zasady. Uzivatel si pridelil roli Organization
+  Policy Administrator a pro projekt tapkasa vypnul
+  iam.managed.disableServiceAccountKeyCreation, vytvoril JSON klic
+  servisniho uctu a nahral ho do RevenueCat (Tapkasa Android):
+  stav "Valid credentials". Klic presunut z Downloads do
+  ~/.tapkasa-keys/revenuecat-play-service-account.json (chmod 600).
+  Nakupy na Androidu se tedy budou overovat.
+- Notifikace z Play (Pub/Sub) zatim neprosly: "One or more users named
+  in the policy do not belong to a permitted customer" = zasada
+  iam.allowedPolicyMemberDomains (Domain restricted sharing). Editace
+  zasady pripravena v Chrome (Override parent, Replace), klasifikator
+  mi dalsi krok zablokoval; dokonci uzivatel: Add a rule > Allow all >
+  Done > Set policy, pak v RevenueCat "Connect to Google".
+  Bez notifikaci RevenueCat stavy predplatneho dotahuje dotazovanim,
+  validace nakupu funguje.
