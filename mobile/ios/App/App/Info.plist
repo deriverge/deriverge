@@ -6,6 +6,18 @@
 	<string>$(CAPACITOR_DEBUG)</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
+	<key>CFBundleLocalizations</key>
+	<array>
+		<string>cs</string>
+		<string>en</string>
+		<string>sk</string>
+		<string>de</string>
+		<string>fr</string>
+		<string>es</string>
+		<string>it</string>
+		<string>pl</string>
+		<string>pt</string>
+	</array>
 	<key>CFBundleDisplayName</key>
         <string>Tapkasa</string>
 	<key>CFBundleExecutable</key>

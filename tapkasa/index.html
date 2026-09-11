@@ -449,6 +449,27 @@
   .pw-legal{padding:6px 4px 0;text-align:center;font-size:12px;color:var(--ink-3)}
   .pw-legal a{color:var(--ink-3);text-decoration:underline;text-underline-offset:2px}
 
+  /* ---------- potvrzení nákupu Pro ---------- */
+  .procele{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;background:var(--paper);animation:pc-fade .3s ease both}
+  .procele.out{animation:pc-out .35s ease both}
+  .pc-in{display:flex;flex-direction:column;align-items:center;text-align:center;padding:24px}
+  .pc-logo{position:relative;width:96px;height:96px}
+  .pc-logo i{position:absolute;width:44px;height:44px;border-radius:12px;display:block;animation:pc-tile .7s cubic-bezier(.2,.9,.3,1.2) both}
+  .pc-logo i.a{left:0;top:0;background:#D6402A;--dx:-120px;--dy:-120px;animation-delay:.05s}
+  .pc-logo i.b{right:0;top:0;background:#F5CE3E;--dx:120px;--dy:-120px;animation-delay:.15s}
+  .pc-logo i.c{left:0;bottom:0;background:#2158C4;--dx:-120px;--dy:120px;animation-delay:.25s}
+  .pc-logo i.d{right:0;bottom:0;background:#127A4E;--dx:120px;--dy:120px;animation-delay:.35s}
+  .pc-head{margin-top:22px;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);animation:pc-up .5s ease .55s both}
+  .pc-title{margin:6px 0 0;font-size:30px;font-weight:700;letter-spacing:-.02em;animation:pc-up .5s ease .65s both}
+  .pc-text{margin:12px 0 0;max-width:320px;font-size:15px;line-height:1.5;color:var(--ink-2);animation:pc-up .5s ease .8s both}
+  .pc-check{margin-top:18px;width:34px;height:34px;border-radius:50%;background:var(--cash);display:grid;place-items:center;animation:pc-tile .5s cubic-bezier(.2,.9,.3,1.2) .95s both;--dx:0;--dy:24px}
+  .pc-check svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+  @keyframes pc-fade{from{opacity:0}to{opacity:1}}
+  @keyframes pc-out{from{opacity:1}to{opacity:0}}
+  @keyframes pc-tile{from{opacity:0;transform:translate(var(--dx),var(--dy)) scale(.4) rotate(-20deg)}to{opacity:1;transform:none}}
+  @keyframes pc-up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){.procele,.procele.out,.pc-logo i,.pc-head,.pc-title,.pc-text,.pc-check{animation:none}}
+
   /* ---------- úvodní obrazovka ---------- */
   .ob{position:fixed;inset:0;z-index:40;background:var(--paper);display:flex;flex-direction:column;overflow-y:auto}
   .ob-in{width:100%;max-width:430px;margin:0 auto;padding:calc(var(--safe-t) + 34px) 24px calc(var(--safe-b) + 24px);display:flex;flex-direction:column;flex:1}
@@ -986,6 +1007,7 @@
     proPerYear: "{0} / rok",
     proRestore: "Obnovit nákup",
     proLater: "Teď ne",
+    proWelcome: "Tapkasa Pro je aktivní. Děkujeme, že podporujete další vývoj.",
     proTerms: "Předplatné se obnovuje automaticky, účtuje se přes váš účet v obchodě s aplikacemi a lze ho kdykoliv zrušit v nastavení účtu.",
     proPrivacy: "Zásady soukromí",
     proTermsLink: "Podmínky použití",
@@ -1301,6 +1323,7 @@
     proPerYear: "{0} / year",
     proRestore: "Restore purchase",
     proLater: "Not now",
+    proWelcome: "Tapkasa Pro is active. Thank you for supporting further development.",
     proTerms: "The subscription renews automatically, is billed to your app store account and can be cancelled any time in your account settings.",
     proPrivacy: "Privacy policy",
     proTermsLink: "Terms of use",
@@ -1621,6 +1644,7 @@
     proPerYear: "{0} / rok",
     proRestore: "Obnoviť nákup",
     proLater: "Teraz nie",
+    proWelcome: "Tapkasa Pro je aktívna. Ďakujeme, že podporujete ďalší vývoj.",
     proTerms: "Predplatné sa obnovuje automaticky, účtuje sa cez váš účet v obchode s aplikáciami a kedykoľvek ho môžete zrušiť v nastaveniach účtu.",
     proPrivacy: "Zásady súkromia",
     proTermsLink: "Podmienky používania",
@@ -1938,6 +1962,7 @@
     proPerYear: "{0} / Jahr",
     proRestore: "Kauf wiederherstellen",
     proLater: "Jetzt nicht",
+    proWelcome: "Tapkasa Pro ist aktiv. Danke, dass Sie die Weiterentwicklung unterstützen.",
     proTerms: "Das Abo verlängert sich automatisch, wird über Ihr Konto im App-Shop abgerechnet und lässt sich jederzeit in den Kontoeinstellungen kündigen.",
     proPrivacy: "Datenschutz",
     proTermsLink: "Nutzungsbedingungen",
@@ -2255,6 +2280,7 @@
     proPerYear: "{0} / an",
     proRestore: "Restaurer l’achat",
     proLater: "Plus tard",
+    proWelcome: "Tapkasa Pro est actif. Merci de soutenir la suite du développement.",
     proTerms: "L’abonnement se renouvelle automatiquement, est facturé via votre compte de la boutique d’applications et peut être résilié à tout moment dans les réglages du compte.",
     proPrivacy: "Confidentialité",
     proTermsLink: "Conditions d’utilisation",
@@ -2572,6 +2598,7 @@
     proPerYear: "{0} / año",
     proRestore: "Restaurar compra",
     proLater: "Ahora no",
+    proWelcome: "Tapkasa Pro está activo. Gracias por apoyar el desarrollo.",
     proTerms: "La suscripción se renueva automáticamente, se cobra a través de su cuenta de la tienda de aplicaciones y puede cancelarla cuando quiera en los ajustes de su cuenta.",
     proPrivacy: "Privacidad",
     proTermsLink: "Condiciones de uso",
@@ -2889,6 +2916,7 @@
     proPerYear: "{0} / anno",
     proRestore: "Ripristinare acquisto",
     proLater: "Non ora",
+    proWelcome: "Tapkasa Pro è attivo. Grazie per sostenere lo sviluppo.",
     proTerms: "L’abbonamento si rinnova automaticamente, viene addebitato tramite il conto dello store di applicazioni e può essere disdetto in qualsiasi momento dalle impostazioni dell’account.",
     proPrivacy: "Privacy",
     proTermsLink: "Termini di utilizzo",
@@ -3206,6 +3234,7 @@
     proPerYear: "{0} / rok",
     proRestore: "Przywrócić zakup",
     proLater: "Nie teraz",
+    proWelcome: "Tapkasa Pro jest aktywna. Dziękujemy za wsparcie dalszego rozwoju.",
     proTerms: "Subskrypcja odnawia się automatycznie, jest rozliczana przez konto w sklepie z aplikacjami i można ją w każdej chwili anulować w ustawieniach konta.",
     proPrivacy: "Prywatność",
     proTermsLink: "Warunki korzystania",
@@ -3523,6 +3552,7 @@
     proPerYear: "{0} / ano",
     proRestore: "Restaurar compra",
     proLater: "Agora não",
+    proWelcome: "Tapkasa Pro está ativo. Obrigado por apoiar o desenvolvimento.",
     proTerms: "A subscrição renova-se automaticamente, é cobrada através da sua conta da loja de aplicações e pode ser cancelada a qualquer momento nas definições da conta.",
     proPrivacy: "Privacidade",
     proTermsLink: "Termos de utilização",
@@ -3803,12 +3833,45 @@
   }
 
   // most pro nativní nákupy: mobilní obal zavolá po startu / po nákupu
-  window.__kasaEntitlement = function (v) {
+  // src: "buy" | "restore" | "start" (starší most ho neposílá). Po koupi nebo
+  // obnovení se paywall zavře a ukáže se potvrzení; při startu jen tiše
+  // srovnáme stav.
+  window.__kasaEntitlement = function (v, src) {
     var pro = v === "pro";
     if (pro && state.license !== "pro-dev") { state.license = "pro"; }
     if (!pro && state.license === "pro") { state.license = ""; }
+    var onWall = !!(sheet && sheet.step === "paywall");
+    var fresh = pro && (src === "buy" || src === "restore" || (src === undefined && onWall));
+    if (pro && onWall) { sheet = null; }
     save(); render();
+    if (fresh) { celebratePro(); }
   };
+
+  var proCeleTimer = null;
+  function closeCelebration() {
+    var el = document.querySelector(".procele");
+    if (!el) { return; }
+    if (proCeleTimer) { clearTimeout(proCeleTimer); proCeleTimer = null; }
+    el.classList.add("out");
+    setTimeout(function () { if (el.parentNode) { el.parentNode.removeChild(el); } }, 360);
+  }
+
+  function celebratePro() {
+    closeCelebration();
+    var el = document.createElement("div");
+    el.className = "procele";
+    el.setAttribute("role", "status");
+    el.innerHTML = '<div class="pc-in">' +
+      '<div class="pc-logo"><i class="a"></i><i class="b"></i><i class="c"></i><i class="d"></i></div>' +
+      '<div class="pc-head">' + esc(T("proHead")) + "</div>" +
+      '<div class="pc-title">' + esc(T("proB1")) + "</div>" +
+      '<p class="pc-text">' + esc(T("proWelcome")) + "</p>" +
+      '<div class="pc-check">' + SVG.check + "</div></div>";
+    el.addEventListener("click", closeCelebration);
+    document.body.appendChild(el);
+    try { if (navigator.vibrate) { navigator.vibrate([30, 40, 30]); } } catch (e) {}
+    proCeleTimer = setTimeout(closeCelebration, 3600);
+  }
 
   // Chyba nativního mostu se musí ukázat, ne zamaskovat webovou hláškou:
   // tichá záměna nás už jednou stála dlouhé pátrání, proč nejde koupit.

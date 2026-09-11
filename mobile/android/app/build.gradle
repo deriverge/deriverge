@@ -9,6 +9,8 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 2
         versionName "1.0.1"
+        // jazyky aplikace, ať je obchod hlásí správně (web v aplikaci je má všechny)
+        resourceConfigurations += ["cs", "en", "sk", "de", "fr", "es", "it", "pl", "pt"]
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
