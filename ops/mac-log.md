@@ -1184,3 +1184,26 @@ RevenueCat je prace s tajemstvim, provede uzivatel (2 kroky, popsano).
   JSON klic servisniho uctu a nahrat ho v RevenueCat do aplikace
   "Tapkasa Android" (Service Account Credentials JSON) + Save changes.
   Klic nikdy do repozitare.
+
+## 11. 9. 2026 - Oprava paywallu po nakupu, jazyky v obchodech, verze 1.0.1
+
+Uzivatel v ostre verzi z App Store zjistil: po koupi Pro zustal
+otevreny paywall (dalsi klepnuti hlasi "uz mate predplaceno") a App
+Store ukazoval jen anglictinu.
+
+- tapkasa/index.html: __kasaEntitlement(level, src); po "buy"/"restore"
+  se paywall zavre a ukaze se celoobrazovkove potvrzeni s animaci loga
+  Tapkasa Pro (9 jazyku, klic proWelcome), samo zmizi po 3,6 s.
+- mobile/billing.js: zdroj stavu buy/restore/start; chyba "uz vlastnite"
+  (kod 6) spusti obnoveni nakupu; kdyz se entitlement nepropise hned,
+  most se zepta znovu (az 4x po 1,5 s).
+- Info.plist CFBundleLocalizations + knownRegions: cs en sk de fr es it
+  pl pt; Android resourceConfigurations stejne.
+- Otestovano v prohlizeci (paywall zmizi, potvrzeni, menu "Pro aktivni").
+- Commit 9499767 na main, Xcode Cloud sestavi 1.0.1 automaticky.
+- App Store Connect: zalozena verze 1.0.1
+  (823e0f4c-d627-4de0-8a23-760cf4665e7c), "Co je noveho" v 9 jazycich.
+  Build pripojim a odeslu ke kontrole, az Xcode Cloud dobehne.
+- Android: tapkasa-1.0.1-signed.aab prestaven s opravami (versionCode 2),
+  nahraji po schvaleni 1.0 (stale "Zmeny se ted posuzuji").
+- RevenueCat: JSON klic servisniho uctu zatim nenahran (ceka na uzivatele).
