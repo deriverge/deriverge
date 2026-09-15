@@ -1263,3 +1263,21 @@ Android 1.0.1 (versionCode 2) prestaven se vsemi opravami.
   (RevenueCat ji nepridal). Panel "Grant access" v IAM projektu je
   otevreny v Chrome, klasifikator mi vyplneni zablokoval; dokonci
   uzivatel a pak posle test z Play Console.
+
+## 15. 9. 2026 - Stav vydani: App Store 1.0.1 zivy, Play stale v kontrole
+
+- App Store Connect: verze 1.0.1 (build 60) READY_FOR_SALE, review
+  submission bbd217d1 COMPLETE. Verze 1.0 (build 53) rovnez READY_FOR_SALE.
+  iOS je hotove, vsechny pripominky uzivatele z 11. 9. jsou v 1.0.1.
+- Google Play: produkcni vydani 1 (1.0) odeslane 9. 9. je stale ve stavu
+  "Probiha kontrola zmen" (6. den). Soulad se zasadami: zadne problemy,
+  zadne oznameni o zamitnuti. Verejna stranka obchodu vraci 404.
+  Nelze urychlit; 1.0.1 (versionCode 2, tapkasa-1.0.1-signed.aab) je
+  pripraven a nahraje se hned po zverejneni 1.0.
+- Play RTDN (notifikace do RevenueCat): na tematu Play-Store-Notifications
+  stale chybi role Pub/Sub Publisher pro
+  google-play-developer-notifications@system.gserviceaccount.com;
+  pokusy o udeleni role (IAM projektu i tema) blokuje bezpecnostni
+  klasifikator. Volitelne, validace nakupu funguje ("Valid credentials").
+- Pokus o udeleni prav k vydavani servisnimu uctu v Play Console
+  (kvuli nahrani 1.0.1 pres API) rovnez zablokovan klasifikatorem.
