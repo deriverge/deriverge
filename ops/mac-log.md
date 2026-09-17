@@ -1281,3 +1281,32 @@ Android 1.0.1 (versionCode 2) prestaven se vsemi opravami.
   klasifikator. Volitelne, validace nakupu funguje ("Valid credentials").
 - Pokus o udeleni prav k vydavani servisnimu uctu v Play Console
   (kvuli nahrani 1.0.1 pres API) rovnez zablokovan klasifikatorem.
+
+## 17. 9. 2026 - Dotaz zakaznika (JPC Events, FR): parovani bez internetu
+
+- E-mail od Charlese Denormandie (charles@jpcevents.com, JPC Events,
+  poradatel akci) na info@deriverge.com: chce Tapkasu z App Store uplne
+  offline, tablety na routeru bez internetu se neparuji. Ptal se i na
+  10 tabletu.
+- Rozbor iOS aplikace: nativni parovani (Multipeer) je v 1.0.1 zabudovane
+  a spravne zaregistrovane, ale nikdy netestovane na dvou realnych
+  zarizenich (na Macu neni Xcode). Nalezena chyba zobrazeni: bez internetu
+  vrstva preposilace prepsala stav spojeni ("Druhe zarizeni nenalezeno",
+  "Nedari se odeslat"), i kdyz nativni spojeni bezelo.
+- Oprava (commit na main, verze 1.0.2): nativePeers ma prednost, hlasky
+  preposilace se v aplikaci bez internetu neukazuji, rada k opravneni
+  Mistni sit a izolaci klientu na routeru (9 jazyku), prime hooky mostu
+  __kasaPeerSend/__kasaSave. Overeno v prohlizeci na kopii s vypnutym
+  preposilacem.
+- App Store Connect: verze 1.0.2 (a84aad7e-8952-4c42-95d5-9d5a2422302d)
+  s textem Co je noveho v 9 jazycich; hlidac ceka na build z Xcode Cloud
+  a odesle ke kontrole.
+- Odpoved Charlesovi ve francouzstine pripravena (klasifikator nedovolil
+  vepsat ani odeslat; uzivatel vlozi sam).
+- Vice nez 2 zarizeni: kod spojeni je "mistnost", pres internet se pripoji
+  libovolny pocet; nativne Multipeer max. 8 zarizeni v relaci, netestovano
+  nad 2; pri vice kasach mohou vzniknout duplicitni cisla objednavek.
+- Google Play: 1.0 stale v kontrole (obchod 404). Android AAB prestaven
+  jako 1.0.2 (versionCode 3).
+- Nove prani uzivatele: prihlaseni v aplikaci a parovani do webove verze
+  (po Android offline parovani).
