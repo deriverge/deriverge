@@ -1310,3 +1310,13 @@ Android 1.0.1 (versionCode 2) prestaven se vsemi opravami.
   jako 1.0.2 (versionCode 3).
 - Nove prani uzivatele: prihlaseni v aplikaci a parovani do webove verze
   (po Android offline parovani).
+
+## 17. 9. 2026 (13:00) - iOS 1.0.2 odeslano ke kontrole, Android 1.0.2 pripraven
+
+- Xcode Cloud build 61 (commit c03b556) pripojen k verzi 1.0.2
+  (a84aad7e-8952-4c42-95d5-9d5a2422302d), review submission
+  3981bcad-b65d-4212-970f-012f81fd7411 odeslana 10:52 UTC.
+- Android: tapkasa-1.0.2-signed.aab (versionCode 3) sestaven a podepsan,
+  nahraje se po schvaleni 1.0 na Play (stale v kontrole).
+- Zbyva od uzivatele: test parovani na dvou iOS zarizenich bez internetu
+  a odeslani odpovedi Charlesovi (JPC Events).
