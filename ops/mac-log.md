@@ -1337,3 +1337,14 @@ Android 1.0.1 (versionCode 2) prestaven se vsemi opravami.
   TestFlightu s pokyny. Uzivatel posle snimek radku z obou zarizeni.
 - 1.0.2 (build 61) zustava u Applu v kontrole; oprava parovani pujde
   jako dalsi verze, az bude znama pricina.
+
+## 17. 9. 2026 (vecer) - 1.0.2 schvalena, diagnostika jde jako 1.0.3
+
+- Apple schvalil 1.0.2 (build 61) jeste tyz den: READY_FOR_SALE.
+- Buildy 62, 63, 64 (diagnostika parovani) proto padly na ITMS-90186/90062
+  (rada 1.0.2 uzavrena); kod se prekladal bez chyby. Chyba "Unable to
+  authenticate" v logu Xcode Cloud byla zavadejici.
+- Verze zvednuta na 1.0.3 (commit 9f291fd), Xcode Cloud stavi; hlidac
+  prida build do interni skupiny TestFlightu s pokyny k diagnostice.
+- Uzivateli predan kratky potvrzovaci e-mail pro JPC Events (odpoved do
+  48 hodin).
