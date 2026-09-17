@@ -1320,3 +1320,20 @@ Android 1.0.1 (versionCode 2) prestaven se vsemi opravami.
   nahraje se po schvaleni 1.0 na Play (stale v kontrole).
 - Zbyva od uzivatele: test parovani na dvou iOS zarizenich bez internetu
   a odeslani odpovedi Charlesovi (JPC Events).
+
+## 17. 9. 2026 (odpoledne) - Parovani bez internetu na iOS NEFUNGUJE, diagnostika
+
+- Uzivatel otestoval na dvou iOS zarizenich (TestFlight 1.0.2 build 61):
+  na Wi-Fi bez internetu se nesparuji a Tapkasa vubec neni v Nastaveni >
+  Soukromi a zabezpeceni > Mistni sit. To znamena, ze nativni hledani
+  (Multipeer) se na zarizeni nikdy nespustilo. Chyba je na nasi strane.
+- Staticky vse sedi (storyboard TapkasaViewController, registerPluginInstance,
+  JSExport pluginu, NSBonjourServices, NSLocalNetworkUsageDescription,
+  bridge.js). Bez Xcode/zarizeni nelze zjistit, kde se to lame.
+- Commit ff1488d: PeerLinkPlugin hlasi stavy (started, found, invited,
+  session, browse-error, advertise-error) a metodu status; bridge.js je
+  zapisuje do __kasaPeerDiag; stranka je ukazuje v Propojenych zarizenich
+  jako radek "PeerLink:". Hlidac prida build 62 do interni skupiny
+  TestFlightu s pokyny. Uzivatel posle snimek radku z obou zarizeni.
+- 1.0.2 (build 61) zustava u Applu v kontrole; oprava parovani pujde
+  jako dalsi verze, az bude znama pricina.
