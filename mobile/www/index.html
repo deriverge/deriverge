@@ -304,8 +304,8 @@
   .toast{
     position:fixed;left:12px;right:12px;bottom:calc(76px + var(--safe-b));z-index:30;
     max-width:616px;margin:0 auto;display:flex;align-items:center;gap:10px;
-    padding:12px 14px;border-radius:var(--r-tile);background:var(--ink);color:var(--paper);
-    font-size:14px;font-weight:500;box-shadow:0 8px 24px rgba(21,18,14,.22);animation:rise .18s ease;
+    padding:10px 12px;border-radius:var(--r-tile);background:var(--ink);color:var(--paper);
+    font-size:13px;font-weight:500;box-shadow:0 8px 24px rgba(21,18,14,.22);animation:rise .18s ease;
   }
   /* nad otevřeným oknem by hláška zakryla jeho tlačítka, jde nahoru */
   .toast.up{bottom:auto;top:calc(var(--safe-t) + 10px)}
@@ -402,22 +402,28 @@
   /* ---------- interaktivní průvodce ---------- */
   /* Kroužek nesmí chytat doteky, jinak by bránil právě té akci, ke které vede. */
   #tourLayer{position:fixed;inset:0;z-index:40;pointer-events:none}
+  /* Polohu i velikost nastavuje skript každý snímek podle skutečného prvku,
+     bez CSS přechodů: s nimi rámeček při posunu stránky dojížděl a rostl
+     po kouskách. Animuje se jen nástup nového kroku (průhlednost a měřítko). */
   .tour-ring{position:fixed;border:3px solid var(--accent);border-radius:14px;
     box-shadow:0 0 0 4px rgba(214,64,42,.18);
-    transition:left .35s ease,top .35s ease,width .35s ease,height .35s ease;
     animation:tourPulse 1.6s ease-in-out infinite}
+  .tour-ring.is-new{animation:tourIn .3s cubic-bezier(.2,.8,.2,1),tourPulse 1.6s ease-in-out .3s infinite}
   @keyframes tourPulse{0%,100%{box-shadow:0 0 0 4px rgba(214,64,42,.18)}50%{box-shadow:0 0 0 10px rgba(214,64,42,.05)}}
+  @keyframes tourIn{from{opacity:0;transform:scale(1.1)}to{opacity:1;transform:none}}
   .tour-card{position:fixed;left:14px;right:14px;max-width:560px;margin:0 auto;
     display:flex;align-items:center;gap:10px;padding:12px 14px;
     border-radius:var(--r-tile);background:var(--ink);color:var(--paper);
     font-size:14px;font-weight:500;line-height:1.4;
-    box-shadow:0 8px 24px rgba(21,18,14,.25);transition:top .35s ease,bottom .35s ease}
+    box-shadow:0 8px 24px rgba(21,18,14,.25)}
+  .tour-card.is-new{animation:tourCardIn .3s ease-out}
+  @keyframes tourCardIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
   .tour-n{flex:0 0 auto;padding:3px 8px;border-radius:999px;background:rgba(255,255,255,.16);
     font-size:12px;font-weight:700;font-variant-numeric:tabular-nums}
   .tour-t{flex:1;min-width:0}
   .tour-skip{pointer-events:auto;flex:0 0 auto;border:0;background:none;
     color:#9A9184;font-size:13px;font-weight:600;padding:4px 2px}
-  @media (prefers-reduced-motion:reduce){.tour-ring{animation:none;transition:none}.tour-card{transition:none}}
+  @media (prefers-reduced-motion:reduce){.tour-ring,.tour-ring.is-new,.tour-card.is-new{animation:none}}
 
   .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
@@ -448,6 +454,27 @@
   .pw-plan:active{transform:scale(.98)}
   .pw-legal{padding:6px 4px 0;text-align:center;font-size:12px;color:var(--ink-3)}
   .pw-legal a{color:var(--ink-3);text-decoration:underline;text-underline-offset:2px}
+
+  /* ---------- potvrzení nákupu Pro ---------- */
+  .procele{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;background:var(--paper);animation:pc-fade .3s ease both}
+  .procele.out{animation:pc-out .35s ease both}
+  .pc-in{display:flex;flex-direction:column;align-items:center;text-align:center;padding:24px}
+  .pc-logo{position:relative;width:96px;height:96px}
+  .pc-logo i{position:absolute;width:44px;height:44px;border-radius:12px;display:block;animation:pc-tile .7s cubic-bezier(.2,.9,.3,1.2) both}
+  .pc-logo i.a{left:0;top:0;background:#D6402A;--dx:-120px;--dy:-120px;animation-delay:.05s}
+  .pc-logo i.b{right:0;top:0;background:#F5CE3E;--dx:120px;--dy:-120px;animation-delay:.15s}
+  .pc-logo i.c{left:0;bottom:0;background:#2158C4;--dx:-120px;--dy:120px;animation-delay:.25s}
+  .pc-logo i.d{right:0;bottom:0;background:#127A4E;--dx:120px;--dy:120px;animation-delay:.35s}
+  .pc-head{margin-top:22px;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);animation:pc-up .5s ease .55s both}
+  .pc-title{margin:6px 0 0;font-size:30px;font-weight:700;letter-spacing:-.02em;animation:pc-up .5s ease .65s both}
+  .pc-text{margin:12px 0 0;max-width:320px;font-size:15px;line-height:1.5;color:var(--ink-2);animation:pc-up .5s ease .8s both}
+  .pc-check{margin-top:18px;width:34px;height:34px;border-radius:50%;background:var(--cash);display:grid;place-items:center;animation:pc-tile .5s cubic-bezier(.2,.9,.3,1.2) .95s both;--dx:0;--dy:24px}
+  .pc-check svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+  @keyframes pc-fade{from{opacity:0}to{opacity:1}}
+  @keyframes pc-out{from{opacity:1}to{opacity:0}}
+  @keyframes pc-tile{from{opacity:0;transform:translate(var(--dx),var(--dy)) scale(.4) rotate(-20deg)}to{opacity:1;transform:none}}
+  @keyframes pc-up{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){.procele,.procele.out,.pc-logo i,.pc-head,.pc-title,.pc-text,.pc-check{animation:none}}
 
   /* ---------- úvodní obrazovka ---------- */
   .ob{position:fixed;inset:0;z-index:40;background:var(--paper);display:flex;flex-direction:column;overflow-y:auto}
@@ -809,6 +836,7 @@
     tourDoneToast: "Hotovo! Umíte všechno podstatné.",
     tourReplay: "Spustit průvodce znovu",
     pairOfflineHint: "Zařízení se propojí přes společnou Wi-Fi síť, internet potřeba není. Bez routeru poslouží hotspot z iPhonu.",
+    pairLocalNetHint: "Zařízení se nenajdou? Zkontrolujte Nastavení > Soukromí a zabezpečení > Místní síť, Tapkasa tam musí být povolená. Na routeru vypněte izolaci klientů.",
     offHelpBtn: "Jak propojit bez internetu",
     offHelpTitle: "Propojení bez internetu",
     offHelpIntro: "Stačí, aby obě zařízení byla na stejné Wi-Fi síti. Síť nemusí mít internet. Když poblíž žádná není, vytvořte ji z iPhonu:",
@@ -937,6 +965,7 @@
     speakNewOrder: "Nová objednávka číslo {0}.",
     speakTimes: "{0}krát {1}.",
     speakVoiceOn: "Čtení objednávek zapnuto.",
+    speakThanksOn: "Poděkování zákazníkovi zapnuto.",
     speakTest: "Nová objednávka číslo 7. Dvakrát espresso. Cappuccino.",
     col_cervena: "Červená",
     col_oranzova: "Oranžová",
@@ -986,6 +1015,7 @@
     proPerYear: "{0} / rok",
     proRestore: "Obnovit nákup",
     proLater: "Teď ne",
+    proWelcome: "Tapkasa Pro je aktivní. Děkujeme, že podporujete další vývoj.",
     proTerms: "Předplatné se obnovuje automaticky, účtuje se přes váš účet v obchodě s aplikacemi a lze ho kdykoliv zrušit v nastavení účtu.",
     proPrivacy: "Zásady soukromí",
     proTermsLink: "Podmínky použití",
@@ -1126,6 +1156,7 @@
     tourDoneToast: "Done! You know everything that matters.",
     tourReplay: "Run the tour again",
     pairOfflineHint: "The devices link over a shared Wi-Fi network; internet is not needed. With no router around, an iPhone hotspot works.",
+    pairLocalNetHint: "Devices don't find each other? Check Settings > Privacy & Security > Local Network, Tapkasa must be allowed there. On the router, turn off client isolation.",
     offHelpBtn: "How to link without internet",
     offHelpTitle: "Linking without internet",
     offHelpIntro: "Both devices just need to be on the same Wi-Fi network. The network needs no internet. If none is around, create one from the iPhone:",
@@ -1252,6 +1283,7 @@
     speakNewOrder: "New order number {0}.",
     speakTimes: "{0} times {1}.",
     speakVoiceOn: "Order announcements on.",
+    speakThanksOn: "Customer thank-you on.",
     speakTest: "New order number 7. Two espressos. One cappuccino.",
     col_cervena: "Red",
     col_oranzova: "Orange",
@@ -1301,6 +1333,7 @@
     proPerYear: "{0} / year",
     proRestore: "Restore purchase",
     proLater: "Not now",
+    proWelcome: "Tapkasa Pro is active. Thank you for supporting further development.",
     proTerms: "The subscription renews automatically, is billed to your app store account and can be cancelled any time in your account settings.",
     proPrivacy: "Privacy policy",
     proTermsLink: "Terms of use",
@@ -1444,6 +1477,7 @@
     tourDoneToast: "Hotovo! Ovládate všetko podstatné.",
     tourReplay: "Spustiť sprievodcu znova",
     pairOfflineHint: "Zariadenia sa prepoja cez spoločnú Wi-Fi sieť, internet nie je potrebný. Bez routera poslúži hotspot z iPhonu.",
+    pairLocalNetHint: "Zariadenia sa nenájdu? Skontrolujte Nastavenia > Súkromie a bezpečnosť > Lokálna sieť, Tapkasa tam musí byť povolená. Na routeri vypnite izoláciu klientov.",
     offHelpBtn: "Ako prepojiť bez internetu",
     offHelpTitle: "Prepojenie bez internetu",
     offHelpIntro: "Stačí, aby obe zariadenia boli na rovnakej Wi-Fi sieti. Sieť nemusí mať internet. Ak žiadna nie je, vytvorte ju z iPhonu:",
@@ -1572,6 +1606,7 @@
     speakNewOrder: "Nová objednávka číslo {0}.",
     speakTimes: "{0} krát {1}.",
     speakVoiceOn: "Čítanie objednávok zapnuté.",
+    speakThanksOn: "Poďakovanie zákazníkovi zapnuté.",
     speakTest: "Nová objednávka číslo 7. Dvakrát espresso. Cappuccino.",
     col_cervena: "červená",
     col_oranzova: "oranžová",
@@ -1621,6 +1656,7 @@
     proPerYear: "{0} / rok",
     proRestore: "Obnoviť nákup",
     proLater: "Teraz nie",
+    proWelcome: "Tapkasa Pro je aktívna. Ďakujeme, že podporujete ďalší vývoj.",
     proTerms: "Predplatné sa obnovuje automaticky, účtuje sa cez váš účet v obchode s aplikáciami a kedykoľvek ho môžete zrušiť v nastaveniach účtu.",
     proPrivacy: "Zásady súkromia",
     proTermsLink: "Podmienky používania",
@@ -1761,6 +1797,7 @@
     tourDoneToast: "Fertig! Sie können alles Wichtige.",
     tourReplay: "Rundgang erneut starten",
     pairOfflineHint: "Die Geräte verbinden sich über ein gemeinsames WLAN, Internet ist nicht nötig. Ohne Router genügt ein iPhone-Hotspot.",
+    pairLocalNetHint: "Die Geräte finden sich nicht? Prüfen Sie Einstellungen > Datenschutz & Sicherheit > Lokales Netzwerk, Tapkasa muss dort erlaubt sein. Am Router die Client-Isolierung ausschalten.",
     offHelpBtn: "Verbinden ohne Internet",
     offHelpTitle: "Verbindung ohne Internet",
     offHelpIntro: "Beide Geräte müssen nur im selben WLAN sein. Das Netz braucht kein Internet. Ist keines da, erstellen Sie eines mit dem iPhone:",
@@ -1889,6 +1926,7 @@
     speakNewOrder: "Neue Bestellung Nummer {0}.",
     speakTimes: "{0} Mal {1}.",
     speakVoiceOn: "Bestellungen werden jetzt vorgelesen.",
+    speakThanksOn: "Dank an den Kunden ist eingeschaltet.",
     speakTest: "Neue Bestellung Nummer sieben. Zweimal Espresso. Ein Cappuccino.",
     col_cervena: "Rot",
     col_oranzova: "Orange",
@@ -1938,6 +1976,7 @@
     proPerYear: "{0} / Jahr",
     proRestore: "Kauf wiederherstellen",
     proLater: "Jetzt nicht",
+    proWelcome: "Tapkasa Pro ist aktiv. Danke, dass Sie die Weiterentwicklung unterstützen.",
     proTerms: "Das Abo verlängert sich automatisch, wird über Ihr Konto im App-Shop abgerechnet und lässt sich jederzeit in den Kontoeinstellungen kündigen.",
     proPrivacy: "Datenschutz",
     proTermsLink: "Nutzungsbedingungen",
@@ -2078,6 +2117,7 @@
     tourDoneToast: "Terminé ! Vous maîtrisez l'essentiel.",
     tourReplay: "Relancer le guide",
     pairOfflineHint: "Les appareils se connectent via un réseau Wi-Fi commun, internet n'est pas nécessaire. Sans routeur, un partage de connexion iPhone suffit.",
+    pairLocalNetHint: "Les appareils ne se trouvent pas ? Vérifiez Réglages > Confidentialité et sécurité > Réseau local, Tapkasa doit y être autorisée. Sur le routeur, désactivez l'isolation des clients.",
     offHelpBtn: "Relier sans internet",
     offHelpTitle: "Liaison sans internet",
     offHelpIntro: "Il suffit que les deux appareils soient sur le même réseau Wi-Fi. Le réseau n'a pas besoin d'internet. S'il n'y en a pas, créez-en un depuis l'iPhone :",
@@ -2206,6 +2246,7 @@
     speakNewOrder: "Nouvelle commande numéro {0}.",
     speakTimes: "{0} fois {1}.",
     speakVoiceOn: "Lecture des commandes activée.",
+    speakThanksOn: "Remerciement du client activé.",
     speakTest: "Nouvelle commande numéro 7. Deux fois expresso. Un cappuccino.",
     col_cervena: "rouge",
     col_oranzova: "orange",
@@ -2255,6 +2296,7 @@
     proPerYear: "{0} / an",
     proRestore: "Restaurer l’achat",
     proLater: "Plus tard",
+    proWelcome: "Tapkasa Pro est actif. Merci de soutenir la suite du développement.",
     proTerms: "L’abonnement se renouvelle automatiquement, est facturé via votre compte de la boutique d’applications et peut être résilié à tout moment dans les réglages du compte.",
     proPrivacy: "Confidentialité",
     proTermsLink: "Conditions d’utilisation",
@@ -2395,6 +2437,7 @@
     tourDoneToast: "¡Listo! Ya domina lo esencial.",
     tourReplay: "Repetir la guía",
     pairOfflineHint: "Los dispositivos se enlazan por una red Wi-Fi común; no hace falta internet. Sin router, sirve el hotspot del iPhone.",
+    pairLocalNetHint: "¿Los dispositivos no se encuentran? Revise Ajustes > Privacidad y seguridad > Red local, Tapkasa debe estar permitida. En el router, desactive el aislamiento de clientes.",
     offHelpBtn: "Cómo enlazar sin internet",
     offHelpTitle: "Enlace sin internet",
     offHelpIntro: "Basta con que ambos dispositivos estén en la misma red Wi-Fi. La red no necesita internet. Si no hay ninguna, créela desde el iPhone:",
@@ -2523,6 +2566,7 @@
     speakNewOrder: "Nuevo pedido número {0}.",
     speakTimes: "{0} de {1}.",
     speakVoiceOn: "Lectura de pedidos activada.",
+    speakThanksOn: "Agradecimiento al cliente activado.",
     speakTest: "Nuevo pedido número siete. Dos de espresso. Capuchino.",
     col_cervena: "rojo",
     col_oranzova: "naranja",
@@ -2572,6 +2616,7 @@
     proPerYear: "{0} / año",
     proRestore: "Restaurar compra",
     proLater: "Ahora no",
+    proWelcome: "Tapkasa Pro está activo. Gracias por apoyar el desarrollo.",
     proTerms: "La suscripción se renueva automáticamente, se cobra a través de su cuenta de la tienda de aplicaciones y puede cancelarla cuando quiera en los ajustes de su cuenta.",
     proPrivacy: "Privacidad",
     proTermsLink: "Condiciones de uso",
@@ -2712,6 +2757,7 @@
     tourDoneToast: "Fatto! Sapete tutto l’essenziale.",
     tourReplay: "Riavviare la guida",
     pairOfflineHint: "I dispositivi si collegano tramite una rete Wi-Fi comune, internet non serve. Senza router basta l'hotspot dell'iPhone.",
+    pairLocalNetHint: "I dispositivi non si trovano? Controllate Impostazioni > Privacy e sicurezza > Rete locale, Tapkasa deve essere consentita. Sul router disattivate l'isolamento dei client.",
     offHelpBtn: "Collegare senza internet",
     offHelpTitle: "Collegamento senza internet",
     offHelpIntro: "Basta che i due dispositivi siano sulla stessa rete Wi-Fi. La rete non ha bisogno di internet. Se non ce n’è una, createla dall’iPhone:",
@@ -2840,6 +2886,7 @@
     speakNewOrder: "Nuovo ordine numero {0}.",
     speakTimes: "{0} volte {1}.",
     speakVoiceOn: "Lettura degli ordini attivata.",
+    speakThanksOn: "Ringraziamento al cliente attivato.",
     speakTest: "Nuovo ordine numero sette. Due caffè. Un cappuccino.",
     col_cervena: "rosso",
     col_oranzova: "arancione",
@@ -2889,6 +2936,7 @@
     proPerYear: "{0} / anno",
     proRestore: "Ripristinare acquisto",
     proLater: "Non ora",
+    proWelcome: "Tapkasa Pro è attivo. Grazie per sostenere lo sviluppo.",
     proTerms: "L’abbonamento si rinnova automaticamente, viene addebitato tramite il conto dello store di applicazioni e può essere disdetto in qualsiasi momento dalle impostazioni dell’account.",
     proPrivacy: "Privacy",
     proTermsLink: "Termini di utilizzo",
@@ -3029,6 +3077,7 @@
     tourDoneToast: "Gotowe! Znasz wszystko, co ważne.",
     tourReplay: "Uruchom przewodnik ponownie",
     pairOfflineHint: "Urządzenia łączą się przez wspólną sieć Wi-Fi, internet nie jest potrzebny. Bez routera wystarczy hotspot z iPhone’a.",
+    pairLocalNetHint: "Urządzenia się nie znajdują? Sprawdź Ustawienia > Prywatność i bezpieczeństwo > Sieć lokalna, Tapkasa musi być tam dozwolona. W routerze wyłącz izolację klientów.",
     offHelpBtn: "Jak połączyć bez internetu",
     offHelpTitle: "Połączenie bez internetu",
     offHelpIntro: "Wystarczy, że oba urządzenia będą w tej samej sieci Wi-Fi. Sieć nie potrzebuje internetu. Gdy żadnej nie ma, utwórz ją z iPhone’a:",
@@ -3157,6 +3206,7 @@
     speakNewOrder: "Nowe zamówienie numer {0}.",
     speakTimes: "{0} razy {1}.",
     speakVoiceOn: "Czytanie zamówień włączone.",
+    speakThanksOn: "Podziękowanie klientowi włączone.",
     speakTest: "Nowe zamówienie numer siedem. Dwa razy espresso. Cappuccino.",
     col_cervena: "czerwony",
     col_oranzova: "pomarańczowy",
@@ -3206,6 +3256,7 @@
     proPerYear: "{0} / rok",
     proRestore: "Przywrócić zakup",
     proLater: "Nie teraz",
+    proWelcome: "Tapkasa Pro jest aktywna. Dziękujemy za wsparcie dalszego rozwoju.",
     proTerms: "Subskrypcja odnawia się automatycznie, jest rozliczana przez konto w sklepie z aplikacjami i można ją w każdej chwili anulować w ustawieniach konta.",
     proPrivacy: "Prywatność",
     proTermsLink: "Warunki korzystania",
@@ -3346,6 +3397,7 @@
     tourDoneToast: "Pronto! Já domina o essencial.",
     tourReplay: "Repetir o guia",
     pairOfflineHint: "Os aparelhos ligam-se por uma rede Wi-Fi comum; não é precisa internet. Sem router, serve o hotspot do iPhone.",
+    pairLocalNetHint: "Os aparelhos não se encontram? Verifique Definições > Privacidade e segurança > Rede local, a Tapkasa tem de estar autorizada. No router, desligue o isolamento de clientes.",
     offHelpBtn: "Ligar sem internet",
     offHelpTitle: "Ligação sem internet",
     offHelpIntro: "Basta que os dois aparelhos estejam na mesma rede Wi-Fi. A rede não precisa de internet. Se não houver nenhuma, crie-a a partir do iPhone:",
@@ -3474,6 +3526,7 @@
     speakNewOrder: "Novo pedido número {0}.",
     speakTimes: "{0} vezes {1}.",
     speakVoiceOn: "Leitura de pedidos ligada.",
+    speakThanksOn: "Agradecimento ao cliente ligado.",
     speakTest: "Novo pedido número sete. Duas vezes café. Um cappuccino.",
     col_cervena: "vermelho",
     col_oranzova: "laranja",
@@ -3523,6 +3576,7 @@
     proPerYear: "{0} / ano",
     proRestore: "Restaurar compra",
     proLater: "Agora não",
+    proWelcome: "Tapkasa Pro está ativo. Obrigado por apoiar o desenvolvimento.",
     proTerms: "A subscrição renova-se automaticamente, é cobrada através da sua conta da loja de aplicações e pode ser cancelada a qualquer momento nas definições da conta.",
     proPrivacy: "Privacidade",
     proTermsLink: "Termos de utilização",
@@ -3776,7 +3830,7 @@
   // jen ten, kdo kód vytváří, takže stánku stačí jedno předplatné.
 
   var FREE_LIMIT = 10;
-  var APP_VERSION = "1.0.0";
+  var APP_VERSION = "1.0.2";
   var SUPPORT_MAIL = "info@deriverge.com";
 
   function isPro() {
@@ -3803,12 +3857,45 @@
   }
 
   // most pro nativní nákupy: mobilní obal zavolá po startu / po nákupu
-  window.__kasaEntitlement = function (v) {
+  // src: "buy" | "restore" | "start" (starší most ho neposílá). Po koupi nebo
+  // obnovení se paywall zavře a ukáže se potvrzení; při startu jen tiše
+  // srovnáme stav.
+  window.__kasaEntitlement = function (v, src) {
     var pro = v === "pro";
     if (pro && state.license !== "pro-dev") { state.license = "pro"; }
     if (!pro && state.license === "pro") { state.license = ""; }
+    var onWall = !!(sheet && sheet.step === "paywall");
+    var fresh = pro && (src === "buy" || src === "restore" || (src === undefined && onWall));
+    if (pro && onWall) { sheet = null; }
     save(); render();
+    if (fresh) { celebratePro(); }
   };
+
+  var proCeleTimer = null;
+  function closeCelebration() {
+    var el = document.querySelector(".procele");
+    if (!el) { return; }
+    if (proCeleTimer) { clearTimeout(proCeleTimer); proCeleTimer = null; }
+    el.classList.add("out");
+    setTimeout(function () { if (el.parentNode) { el.parentNode.removeChild(el); } }, 360);
+  }
+
+  function celebratePro() {
+    closeCelebration();
+    var el = document.createElement("div");
+    el.className = "procele";
+    el.setAttribute("role", "status");
+    el.innerHTML = '<div class="pc-in">' +
+      '<div class="pc-logo"><i class="a"></i><i class="b"></i><i class="c"></i><i class="d"></i></div>' +
+      '<div class="pc-head">' + esc(T("proHead")) + "</div>" +
+      '<div class="pc-title">' + esc(T("proB1")) + "</div>" +
+      '<p class="pc-text">' + esc(T("proWelcome")) + "</p>" +
+      '<div class="pc-check">' + SVG.check + "</div></div>";
+    el.addEventListener("click", closeCelebration);
+    document.body.appendChild(el);
+    try { if (navigator.vibrate) { navigator.vibrate([30, 40, 30]); } } catch (e) {}
+    proCeleTimer = setTimeout(closeCelebration, 3600);
+  }
 
   // Chyba nativního mostu se musí ukázat, ne zamaskovat webovou hláškou:
   // tichá záměna nás už jednou stála dlouhé pátrání, proč nejde koupit.
@@ -3993,7 +4080,9 @@
     try { localStorage.setItem(KEY, json); } catch (e) {}
 
     try {
-      if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.kasa) {
+      if (typeof window.__kasaSave === "function") {
+        window.__kasaSave(json);
+      } else if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.kasa) {
         window.webkit.messageHandlers.kasa.postMessage(json);
       }
     } catch (e) {}
@@ -4210,7 +4299,8 @@
   // Kasa a výdej si posílají celý seznam objednávek. Slučuje se podle id,
   // vyhrává novější updatedAt, pořadí zpráv tak nehraje roli.
 
-  var peers = 0;
+  var peers = 0;        // co ukazuje aplikace (nativni spojeni, nebo preposilac)
+  var nativePeers = 0;  // kolik zarizeni drzi nativni spojeni (Wi-Fi/Bluetooth, bez internetu)
   var muted = false;
   var announced = {};      // id objednávek, které už zazněly
 
@@ -4255,11 +4345,15 @@
 
   function nativeSend(msg) {
     try {
-      if (!window.webkit || !window.webkit.messageHandlers || !window.webkit.messageHandlers.peer) { return; }
       if (!state.pair) { return; }
       msg.src = myId;
       msg.room = state.pair;
-      window.webkit.messageHandlers.peer.postMessage(JSON.stringify(msg));
+      var json = JSON.stringify(msg);
+      // Most (mobile/bridge.js) dává přímý hook; objekt WebKitu je jen záloha
+      // pro původní obal, kde hook neexistuje.
+      if (typeof window.__kasaPeerSend === "function") { window.__kasaPeerSend(json); return; }
+      if (!window.webkit || !window.webkit.messageHandlers || !window.webkit.messageHandlers.peer) { return; }
+      window.webkit.messageHandlers.peer.postMessage(json);
     } catch (e) {}
   }
 
@@ -4398,7 +4492,7 @@
   // Zelená tečka nesmí svítit jen proto, že se povedl dotaz, to by lhalo.
   // Svítí, až když drží stálé spojení nebo když od protějšku něco přišlo.
   function refreshLink() {
-    setPeers(anySse() || lastIn ? 1 : 0);
+    setPeers(nativePeers > 0 || anySse() || lastIn ? 1 : 0);
   }
 
   function setPeers(n) {
@@ -4440,6 +4534,11 @@
         if (--left) { return; }
         if (ok) {
           lastOut = Date.now();
+          setRelayError("");
+        } else if (nativePeers > 0 || (nativeApp() && !worst)) {
+          // Objednávky nesou nativní spojení, přeposílač je jen záloha.
+          // V aplikaci bez internetu je jeho síťová chyba jen šum; odmítnutí
+          // serverem (limit, chyba) se ukáže dál.
           setRelayError("");
         } else {
           setRelayError(worst === 429 ? T("relayLimit")
@@ -4623,8 +4722,12 @@
   }
 
   window.__kasaPeerCount = function (n) {
-    setPeers(n | 0);
-    if (peers > 0) { pushEverything(); }   // nový protějšek dostane frontu
+    nativePeers = n | 0;
+    refreshLink();
+    if (nativePeers > 0) {
+      setRelayError("");   // bez internetu nese zprávy nativní spojení, hláška přeposílače by mátla
+      pushEverything();    // nový protějšek dostane frontu
+    }
   };
 
   // ---------- stats ----------
@@ -5403,10 +5506,13 @@
   }
 
   function linkText() {
-    if (peers > 0) { return T("linkPairedNative"); }   // nativní spojení je živé teď
+    if (nativePeers > 0) { return T("linkPairedNative"); }   // nativní spojení je živé teď
     if (!state.pair) { return T("linkSearching"); }
     if (linkFresh()) { return T("linkPaired"); }
     if (anySse()) { return T("linkSilent"); }
+    // V aplikaci internet potřeba není; výzva ke kontrole internetu by
+    // na stánku bez signálu vedla špatným směrem.
+    if (nativeApp()) { return T("linkSearching"); }
     return T("linkDown");
   }
 
@@ -5468,6 +5574,12 @@
     // Rada s návodem se ukazuje vždy. Dřívější podmínka na nativní most se
     // na zařízení nevyhodnotila spolehlivě a tlačítko pak chybělo úplně.
     h += '<p class="hint" style="text-align:left;padding-top:0;padding-bottom:4px">' + esc(T("pairOfflineHint")) + "</p>" +
+         // Nejčastější příčina, proč se iPhony a iPady nenajdou: iOS nedal
+         // oprávnění Místní síť (dotaz se často vůbec nezobrazí), nebo router
+         // izoluje klienty. Rada se ukazuje jen v aplikaci, když spojení není.
+         (nativeApp() && state.pair && nativePeers === 0
+           ? '<p class="hint" style="text-align:left;padding-top:0;padding-bottom:4px;color:var(--accent)">' + esc(T("pairLocalNetHint")) + "</p>"
+           : "") +
          '<div class="acts" style="padding-top:0;padding-bottom:6px"><button class="act" data-offlinehelp="1">' +
          esc(T("offHelpBtn")) + "</button></div>";
     if (state.pair) {
@@ -6147,7 +6259,7 @@
   // Vede nového uživatele skutečnými akcemi: kroužek ukáže, kam ťuknout,
   // a krok se splní až tím, že to uživatel opravdu udělá. Žádné obrázky
   // vedle reality, průvodce běží nad živou aplikací.
-  var tourIx = -1, tourTimer = null, tourScrolledFor = -1;
+  var tourIx = -1, tourRaf = 0, tourScrolledFor = -1, tourLastKey = "", tourLastBox = "";
 
   var TOUR = [
     { key: "tourS1", sel: function () { return ".prod"; },
@@ -6183,17 +6295,24 @@
     tourScrolledFor = -1;
     view = "sell";
     sheet = null;
-    if (!tourTimer) { tourTimer = setInterval(tourPaint, 700); }
-    // capture: posouvá se vnitřek stránky, ne okno
-    window.addEventListener("scroll", tourPaint, true);
+    tourLastKey = "";
+    tourLastBox = "";
+    if (!tourRaf) { tourLoop(); }
     render(true);
+  }
+
+  // Rámeček sleduje cíl každý snímek: při plynulém posunu stránky sedí
+  // přesně na prvku a nedojíždí za ním.
+  function tourLoop() {
+    if (!tourActive()) { tourRaf = 0; return; }
+    tourPaint();
+    tourRaf = requestAnimationFrame(tourLoop);
   }
 
   function tourEnd(finished) {
     tourIx = -1;
-    window.removeEventListener("scroll", tourPaint, true);
     state.tourDone = true;
-    if (tourTimer) { clearInterval(tourTimer); tourTimer = null; }
+    if (tourRaf) { cancelAnimationFrame(tourRaf); tourRaf = 0; }
     save();
     render();
     if (finished) { showToast(T("tourDoneToast")); }
@@ -6242,21 +6361,35 @@
         }
       }
       var r = el.getBoundingClientRect();
-      ring.style.display = "block";
-      ring.style.left = (r.left - 6) + "px";
-      ring.style.top = (r.top - 6) + "px";
-      ring.style.width = (r.width + 12) + "px";
-      ring.style.height = (r.height + 12) + "px";
+      var key = tourIx + "|" + TOUR[tourIx].sel();
+      if (key !== tourLastKey) {
+        // nový cíl: krátký nástup, restart animace přes reflow
+        tourLastKey = key;
+        ring.classList.remove("is-new"); card.classList.remove("is-new");
+        void ring.offsetWidth;
+        ring.classList.add("is-new"); card.classList.add("is-new");
+      }
       // karta nad, nebo pod prvkem, podle místa
       var below = r.bottom + 12;
-      if (below + card.offsetHeight + 16 < window.innerHeight) {
-        card.style.top = below + "px";
-        card.style.bottom = "auto";
-      } else {
-        card.style.top = "auto";
-        card.style.bottom = (window.innerHeight - r.top + 12) + "px";
+      var cardBelow = below + card.offsetHeight + 16 < window.innerHeight;
+      var box = [Math.round(r.left), Math.round(r.top), Math.round(r.width), Math.round(r.height), cardBelow ? 1 : 0].join(",");
+      if (box !== tourLastBox) {
+        tourLastBox = box;
+        ring.style.display = "block";
+        ring.style.left = (r.left - 6) + "px";
+        ring.style.top = (r.top - 6) + "px";
+        ring.style.width = (r.width + 12) + "px";
+        ring.style.height = (r.height + 12) + "px";
+        if (cardBelow) {
+          card.style.top = below + "px";
+          card.style.bottom = "auto";
+        } else {
+          card.style.top = "auto";
+          card.style.bottom = (window.innerHeight - r.top + 12) + "px";
+        }
       }
     } else {
+      tourLastBox = "";
       ring.style.display = "none";
       card.style.top = "auto";
       card.style.bottom = "90px";
@@ -6310,9 +6443,21 @@
         (toast.undo ? '<button data-undo="' + toast.undo + '">' + esc(T("undoBtn")) + "</button>" : "") +
         '<button class="x" data-hidetoast="1" aria-label="' + esc(T("close")) + '">' + SVG.close + "</button></div>"
       : "");
+    placeToast();
 
     tourTick();
     tourPaint();
+  }
+
+  // Hláška (třeba vrácení účtu) nesmí zakrýt řádek s cenou a tlačítkem
+  // Zaplatit: na prodejní obrazovce ji posadíme těsně nad lištu účtu.
+  function placeToast() {
+    var t = document.querySelector("#toastSlot .toast");
+    if (!t || t.classList.contains("up")) { return; }
+    var bar = document.querySelector("#barSlot .bar");
+    if (!bar) { return; }
+    var top = bar.getBoundingClientRect().top;
+    if (top > 0) { t.style.bottom = Math.round(window.innerHeight - top + 8) + "px"; }
   }
 
   // ---------- interaction ----------
@@ -6658,21 +6803,24 @@
     if (d.pairoff) {
       state.pair = "";
       peers = 0;
+      nativePeers = 0;
       relayClose();
       nativeLink();   // bez kódu se nativní hledání vypne
       save(); render();
       return;
     }
 
+    // Kasa děkuje zákazníkovi, výdej čte objednávky: hláška po zapnutí
+    // i zkouška hlasu musí odpovídat roli zařízení.
     if (d.voice) {
       state.voice = !state.voice;
       save(); render();
-      if (state.voice) { speak(T("speakVoiceOn")); }
+      if (state.voice) { speak(state.mode === "kasa" ? T("speakThanksOn") : T("speakVoiceOn")); }
       return;
     }
 
     if (d.voicetest) {
-      speak(T("speakTest"));
+      speak(state.mode === "kasa" ? T("speakThanks") : T("speakTest"));
       return;
     }
 

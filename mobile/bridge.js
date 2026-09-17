@@ -95,6 +95,11 @@
 
   installHandlers();
 
+  // Přímé hooky pro stránku: nespoléhají na to, že se podstrčení handlerů
+  // do objektu WebKitu povedlo. Stránka je zkouší jako první.
+  window.__kasaPeerSend = function (json) { callSafe("send", { json: String(json) }); };
+  window.__kasaSave = function (json) { callSafe("save", { json: String(json) }); };
+
   // ---- do webu: nativní události přeposíláme do funkcí stránky ------------
 
   PeerLink.addListener("message", function (ev) {

@@ -160,11 +160,34 @@
   // Null (offline, neznámo) se nepředává — jinak by start bez signálu
   // smazal platné předplatné.
 
-  function push(level) {
+  // src říká aplikaci, odkud stav přišel: "buy" a "restore" zavřou paywall
+  // a ukážou potvrzení, "start" jen tiše srovná uložený stav.
+  function push(level, src) {
     if (level !== "pro" && level !== "free") { return; }
     if (typeof window.__kasaEntitlement === "function") {
-      try { window.__kasaEntitlement(level); } catch (e) {}
+      try { window.__kasaEntitlement(level, src || "start"); } catch (e) {}
     }
+  }
+
+  // Obchod už nákup potvrdil, ale entitlement se ještě nepropsal: zeptáme se
+  // znovu, ať uživatel nezůstane na paywallu se zaplaceným předplatným.
+  function settle(level, src) {
+    if (level === "pro") { push("pro", src); return; }
+    var tries = 0;
+    (function again() {
+      tries += 1;
+      setTimeout(function () {
+        getEntitlement().then(function (l) {
+          if (l === "pro" || tries >= 4) { push(l || "free", src); } else { again(); }
+        });
+      }, 1500);
+    })();
+  }
+
+  // StoreKit: "Tuto položku už máte předplacenou" (RevenueCat kód 6).
+  function isAlreadyOwned(e) {
+    return !!(e && ((e.code !== undefined && String(e.code) === "6") ||
+      /already/i.test(String(e && e.message || ""))));
   }
 
   function isCancel(e) {
@@ -175,9 +198,13 @@
 
   window.__kasaBuy = function (plan) {
     purchase(plan === "yearly" ? "yearly" : "monthly")
-      .then(push)
+      .then(function (level) { settle(level, "buy"); })
       .catch(function (e) {
         if (isCancel(e)) { return; }
+        if (isAlreadyOwned(e)) {
+          restore().then(function (level) { settle(level, "restore"); }).catch(function () {});
+          return;
+        }
         var msg = String(e && e.message || e);
         if (e && e.code !== undefined) { msg += " [" + e.code + "]"; }
         alert(msg);
@@ -186,12 +213,12 @@
 
   window.__kasaRestore = function () {
     restore()
-      .then(push)
+      .then(function (level) { push(level, "restore"); })
       .catch(function (e) { alert(String(e && e.message || e)); });
   };
 
   // Po startu: skutečný stav předplatného + ceny v měně obchodu.
-  getEntitlement().then(push);
+  getEntitlement().then(function (level) { push(level, "start"); });
 
   ensureConfigured()
     .then(function () { return call("getOfferings"); })
@@ -206,7 +233,7 @@
       if (prices.monthly || prices.yearly) {
         window.__KASA_PRICES__ = prices;
         // překreslit otevřený paywall s cenami z obchodu
-        return getEntitlement().then(push);
+        return getEntitlement().then(function (level) { push(level, "start"); });
       }
     })
     .catch(function () {});
