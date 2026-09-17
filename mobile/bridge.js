@@ -26,6 +26,17 @@
     return; // čistý web — aplikace si vystačí s localStorage/IndexedDB
   }
 
+  // Diagnostika párování pro stránku (Menu > Propojená zařízení): stačí
+  // otevřít aplikaci a přečíst, kde se hledání zastavilo.
+  var diag = window.__kasaPeerDiag = { plugin: false, log: [] };
+  function dlog(text) {
+    diag.log.push(new Date().toTimeString().slice(0, 8) + " " + text);
+    if (diag.log.length > 12) { diag.log.shift(); }
+    if (typeof window.__kasaPeerState === "function") {
+      try { window.__kasaPeerState(diag); } catch (e) {}
+    }
+  }
+
   // Vestavěný most vystavuje pluginy v Capacitor.Plugins; registerPlugin
   // mají jen aplikace s vlastním balíčkem @capacitor/core. Zkoušíme obojí.
   var PeerLink = null;
@@ -52,8 +63,10 @@
   }
 
   if (!PeerLink) {
+    dlog("modul PeerLink nenalezen; pluginy: " + (cap.Plugins ? Object.keys(cap.Plugins).join(", ") : "žádné"));
     return; // párování zůstane na internetovém přeposílači
   }
+  diag.plugin = true;
 
   function callSafe(method, args) {
     // Na platformě bez nativní implementace (dnes Android) plugin vyhodí
@@ -109,6 +122,10 @@
     }
   });
 
+  PeerLink.addListener("state", function (ev) {
+    dlog((ev && ev.phase) + ": " + (ev && ev.detail));
+  });
+
   PeerLink.addListener("peerCount", function (ev) {
     var n = ev && typeof ev.n === "number" ? ev.n : 0;
     if (typeof window.__kasaPeerCount === "function") {
@@ -120,7 +137,14 @@
   // bez kódu by se spojila kterákoli dvě zařízení v dosahu. Kód dodá stránka,
   // jakmile ho zná, a při každé jeho změně znovu.
   window.__kasaPeerLink = function (room) {
-    callSafe("start", { room: typeof room === "string" ? room : "" });
+    var r = typeof room === "string" ? room : "";
+    dlog("start(" + (r || "bez kódu") + ")");
+    try {
+      Promise.resolve(PeerLink.start({ room: r }))
+        .then(function () { return PeerLink.status(); })
+        .then(function (st) { dlog("status: " + JSON.stringify(st)); })
+        .catch(function (e) { dlog("chyba: " + String(e && e.message || e)); });
+    } catch (e) { dlog("výjimka: " + String(e && e.message || e)); }
   };
 
   // Stránka se načetla dřív než tenhle soubor, kód spárování si tedy

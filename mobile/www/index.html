@@ -4721,6 +4721,11 @@
     });
   }
 
+  // Diagnostika nativního párování (mobile/bridge.js): text se ukazuje
+  // v Propojených zařízeních, ať jde z telefonu poznat, kde se hledání zastavilo.
+  var peerDiag = null;
+  window.__kasaPeerState = function (d) { peerDiag = d; render(); };
+
   window.__kasaPeerCount = function (n) {
     nativePeers = n | 0;
     refreshLink();
@@ -5582,6 +5587,12 @@
            : "") +
          '<div class="acts" style="padding-top:0;padding-bottom:6px"><button class="act" data-offlinehelp="1">' +
          esc(T("offHelpBtn")) + "</button></div>";
+    if (nativeApp()) {
+      var dg = peerDiag || window.__kasaPeerDiag || null;
+      var dgText = !dg ? "most nenačten" : (dg.plugin ? "modul připraven" : "modul chybí") +
+        (dg.log && dg.log.length ? "\n" + dg.log.slice(-6).join("\n") : "");
+      h += '<p class="hint" style="text-align:left;padding-top:0;padding-bottom:4px;font-family:var(--mono);font-size:11px;white-space:pre-wrap">PeerLink: ' + esc(dgText) + "</p>";
+    }
     if (state.pair) {
       h += '<div class="link on" style="padding-top:0"><i></i>' + esc(T("pairCode")) + " <strong>" + esc(state.pair) + "</strong></div>" +
         (relayError ? '<p class="hint" style="color:var(--accent);text-align:left;padding-top:0;padding-bottom:2px">' + esc(relayError) + "</p>" : "") +

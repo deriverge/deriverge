@@ -84,6 +84,25 @@ final class PeerLink: NSObject {
     var onMessage: ((String) -> Void)?
     /// Volá se na hlavním vlákně při změně počtu připojených zařízení.
     var onPeerCount: ((Int) -> Void)?
+    /// Diagnostika pro stránku: fáze (started, found, invited, session,
+    /// browse-error, advertise-error) a detail. Bez ní se z telefonu nedá
+    /// zjistit, kde se hledání zastavilo.
+    var onState: ((String, String) -> Void)?
+
+    private func state(_ phase: String, _ detail: String) {
+        DispatchQueue.main.async { self.onState?(phase, detail) }
+    }
+
+    /// Souhrn pro dotaz ze stránky.
+    func status() -> [String: Any] {
+        return [
+            "room": room,
+            "advertising": advertiser != nil,
+            "browsing": browser != nil,
+            "peers": session.connectedPeers.count,
+            "name": peerID.displayName
+        ]
+    }
 
     /// Bez kódu se nikam nehlásíme ani nikoho nehledáme.
     func start(room newRoom: String) {
@@ -102,6 +121,7 @@ final class PeerLink: NSObject {
         b.startBrowsingForPeers()
         advertiser = a
         browser = b
+        state("started", code)
     }
 
     func stop() {
@@ -131,6 +151,13 @@ final class PeerLink: NSObject {
 
 extension PeerLink: MCSessionDelegate {
     func session(_ session: MCSession, peer peerID: MCPeerID, didChange state: MCSessionState) {
+        let name: String
+        switch state {
+        case .connected: name = "connected"
+        case .connecting: name = "connecting"
+        default: name = "notConnected"
+        }
+        self.state("session", "\(peerID.displayName) \(name), n=\(session.connectedPeers.count)")
         announce()
     }
 
@@ -157,12 +184,15 @@ extension PeerLink: MCNearbyServiceAdvertiserDelegate {
         let parts = raw.split(separator: "|", maxSplits: 1).map(String.init)
         let theirRoom = parts.first ?? ""
         let theirInst = parts.count > 1 ? parts[1] : ""
-        invitationHandler(!room.isEmpty && theirRoom == room && theirInst != inst, session)
+        let ok = !room.isEmpty && theirRoom == room && theirInst != inst
+        state("invited", "\(peerID.displayName) \(ok ? "accepted" : "rejected")")
+        invitationHandler(ok, session)
     }
 
     func advertiser(_ advertiser: MCNearbyServiceAdvertiser,
                     didNotStartAdvertisingPeer error: Error) {
         NSLog("Tapkasa: zařízení se nepodařilo zveřejnit — \(error.localizedDescription)")
+        state("advertise-error", error.localizedDescription)
     }
 }
 
@@ -171,6 +201,7 @@ extension PeerLink: MCNearbyServiceBrowserDelegate {
                  withDiscoveryInfo info: [String: String]?) {
         // Ať se dvě zařízení nezvou navzájem naráz, zve vždycky to "menší".
         // Při shodě jmen zvou obě — spojení se pak ustálí na jednom.
+        state("found", "\(peerID.displayName) r=\(info?["r"] ?? "-")")
         guard !room.isEmpty, info?["r"] == room else { return }
         guard info?["i"] != inst else { return }   // našli jsme sami sebe
         guard !session.connectedPeers.contains(peerID) else { return }
@@ -181,11 +212,13 @@ extension PeerLink: MCNearbyServiceBrowserDelegate {
     }
 
     func browser(_ browser: MCNearbyServiceBrowser, lostPeer peerID: MCPeerID) {
+        state("lost", peerID.displayName)
         announce()
     }
 
     func browser(_ browser: MCNearbyServiceBrowser, didNotStartBrowsingForPeers error: Error) {
         NSLog("Tapkasa: hledání druhého zařízení selhalo — \(error.localizedDescription)")
+        state("browse-error", error.localizedDescription)
     }
 }
 
@@ -199,7 +232,8 @@ public class PeerLinkPlugin: CAPPlugin, CAPBridgedPlugin {
         CAPPluginMethod(name: "start", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "stop", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "send", returnType: CAPPluginReturnPromise),
-        CAPPluginMethod(name: "save", returnType: CAPPluginReturnPromise)
+        CAPPluginMethod(name: "save", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "status", returnType: CAPPluginReturnPromise)
     ]
 
     private let link = PeerLink()
@@ -210,6 +244,9 @@ public class PeerLinkPlugin: CAPPlugin, CAPBridgedPlugin {
         }
         link.onPeerCount = { [weak self] count in
             self?.notifyListeners("peerCount", data: ["n": count])
+        }
+        link.onState = { [weak self] phase, detail in
+            self?.notifyListeners("state", data: ["phase": phase, "detail": detail])
         }
     }
 
@@ -224,6 +261,11 @@ public class PeerLinkPlugin: CAPPlugin, CAPBridgedPlugin {
     @objc func stop(_ call: CAPPluginCall) {
         link.stop()
         call.resolve()
+    }
+
+    /// Diagnostika: co modul právě dělá.
+    @objc func status(_ call: CAPPluginCall) {
+        call.resolve(link.status())
     }
 
     /// Pošle JSON všem připojeným protějškům. Bez protějšku se zpráva
