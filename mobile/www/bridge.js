@@ -143,7 +143,10 @@
     try {
       Promise.resolve(PeerLink.start({ room: r }))
         .then(function () { return PeerLink.status(); })
-        .then(function (st) { dlog("status: " + JSON.stringify(st)); })
+        .then(function (st) {
+          st = st || {};
+          dlog("stav: kód " + (st.room || "žádný") + ", hledám " + (st.browsing ? "ano" : "ne") + ", spojeno " + (st.peers || 0));
+        })
         .catch(function (e) { dlog("chyba: " + String(e && e.message || e)); });
     } catch (e) { dlog("výjimka: " + String(e && e.message || e)); }
   };
