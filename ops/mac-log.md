@@ -1396,3 +1396,23 @@ Android 1.0.1 (versionCode 2) prestaven se vsemi opravami.
 - Overeno v prohlizeci (zadost, prijem kopie, odpoved na zadost).
 - Commit na main = build 68 (1.0.3); hlidac prida do TestFlightu.
   Android tapkasa-1.0.3-signed.aab (versionCode 3) se prestavuje.
+
+## 18. 9. 2026 (pozde vecer) - 1.0.3 odeslana do App Store i Google Play
+
+- App Store: 1.0.3 (build 69) odeslana ke kontrole, submission
+  caec0bf8-4011-4e23-bad2-136e1790fa58. Obsahuje: opravu startu
+  nativniho modulu (SceneDelegate), obnovu hledani, zvani podle otisku,
+  prevzeti menu a udaju z druheho zarizeni, zalomeni diagnostiky.
+  Uzivatel overil parovani bez internetu na iPhone + iPad (TestFlight 68).
+- Google Play: 1.0 je zverejnena (od 18. 9. 8:50). Produkcni vydani
+  1.0.3 (versionCode 5) odeslano ke kontrole. Obsahuje Android parovani
+  bez internetu pres Nearby Connections (PeerLinkPlugin.java, Android 13+,
+  bez opravneni k poloze), stejne rozhrani jako iOS. Prvni pokus
+  (versionCode 4) by vyradil 12 zarizeni bez Bluetooth; opraveno
+  uses-feature required=false. Netestovano na realnem Androidu (nemame
+  zarizeni), prelozeno a overeno staticky; JS vrstva otestovana
+  v prohlizeci pro iOS, Android 13+, starsi Android i web.
+- iOS a Android se bez internetu nepropoji (Multipeer vs Nearby);
+  pres internet ano. Multipeer max. 8 zarizeni v relaci.
+- Commity na main: b0dff61, d51f113, e7e9eff (a predchozi).
+- Charles (JPC Events): text odpovedi predan uzivateli k odeslani.
