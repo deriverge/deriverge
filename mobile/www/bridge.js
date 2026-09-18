@@ -128,6 +128,7 @@
 
   PeerLink.addListener("peerCount", function (ev) {
     var n = ev && typeof ev.n === "number" ? ev.n : 0;
+    dlog("spojená zařízení: " + n);
     if (typeof window.__kasaPeerCount === "function") {
       window.__kasaPeerCount(n);
     }

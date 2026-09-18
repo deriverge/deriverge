@@ -79,6 +79,25 @@ final class PeerLink: NSObject {
     private var room = ""
     private var advertiser: MCNearbyServiceAdvertiser?
     private var browser: MCNearbyServiceBrowser?
+    private var retryTimer: Timer?
+
+    override init() {
+        super.init()
+        // Po návratu do popředí se hledání obnoví. Sem patří i zavření
+        // systémového dotazu na Místní síť: iOS nechá hledání spuštěné před
+        // udělením oprávnění hluché, dokud se nespustí znovu.
+        NotificationCenter.default.addObserver(self, selector: #selector(appDidBecomeActive),
+                                               name: UIApplication.didBecomeActiveNotification, object: nil)
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+        retryTimer?.invalidate()
+    }
+
+    @objc private func appDidBecomeActive() {
+        retryIfLonely("foreground")
+    }
 
     /// Volá se na hlavním vlákně, když dorazí data od protějšku.
     var onMessage: ((String) -> Void)?
@@ -104,16 +123,42 @@ final class PeerLink: NSObject {
         ]
     }
 
-    /// Bez kódu se nikam nehlásíme ani nikoho nehledáme.
+    /// Bez kódu se nikam nehlásíme ani nikoho nehledáme. Volání z pluginu
+    /// přichází z jeho fronty; s hledáním i časovačem pracujeme jen na
+    /// hlavním vlákně.
     func start(room newRoom: String) {
+        DispatchQueue.main.async { self.startOnMain(room: newRoom) }
+    }
+
+    func stop() {
+        DispatchQueue.main.async { self.stopOnMain() }
+    }
+
+    private func startOnMain(room newRoom: String) {
         let code = newRoom.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
         if code == room && advertiser != nil { return }
-        stop()
+        stopOnMain()
         room = code
         guard !code.isEmpty else { return }
+        makeDiscovery()
+        state("started", code)
+        retryTimer?.invalidate()
+        retryTimer = Timer.scheduledTimer(withTimeInterval: 20, repeats: true) { [weak self] _ in
+            self?.retryIfLonely("timer")
+        }
+    }
 
+    private func stopOnMain() {
+        retryTimer?.invalidate()
+        retryTimer = nil
+        dropDiscovery()
+        session.disconnect()
+        announce()
+    }
+
+    private func makeDiscovery() {
         let a = MCNearbyServiceAdvertiser(
-            peer: peerID, discoveryInfo: ["r": code, "i": inst], serviceType: PeerLink.service)
+            peer: peerID, discoveryInfo: ["r": room, "i": inst], serviceType: PeerLink.service)
         let b = MCNearbyServiceBrowser(peer: peerID, serviceType: PeerLink.service)
         a.delegate = self
         b.delegate = self
@@ -121,16 +166,22 @@ final class PeerLink: NSObject {
         b.startBrowsingForPeers()
         advertiser = a
         browser = b
-        state("started", code)
     }
 
-    func stop() {
+    private func dropDiscovery() {
         advertiser?.stopAdvertisingPeer()
         browser?.stopBrowsingForPeers()
         advertiser = nil
         browser = nil
-        session.disconnect()
-        announce()
+    }
+
+    /// Bez protějšku se hledání každých 20 s a při návratu do popředí
+    /// spustí znovu. Spojené zařízení se nechává být.
+    private func retryIfLonely(_ why: String) {
+        guard !room.isEmpty, session.connectedPeers.isEmpty else { return }
+        dropDiscovery()
+        makeDiscovery()
+        state("retry", why)
     }
 
     func send(_ json: String) {
@@ -199,13 +250,16 @@ extension PeerLink: MCNearbyServiceAdvertiserDelegate {
 extension PeerLink: MCNearbyServiceBrowserDelegate {
     func browser(_ browser: MCNearbyServiceBrowser, foundPeer peerID: MCPeerID,
                  withDiscoveryInfo info: [String: String]?) {
-        // Ať se dvě zařízení nezvou navzájem naráz, zve vždycky to "menší".
-        // Při shodě jmen zvou obě — spojení se pak ustálí na jednom.
+        // Ať se dvě zařízení nezvou navzájem naráz, zve vždycky jen jedno:
+        // to s menším otiskem. Jména zařízení jsou na novějším iOS často
+        // stejná ("iPhone"), otisky nikdy.
         state("found", "\(peerID.displayName) r=\(info?["r"] ?? "-")")
         guard !room.isEmpty, info?["r"] == room else { return }
-        guard info?["i"] != inst else { return }   // našli jsme sami sebe
+        let theirInst = info?["i"] ?? ""
+        guard theirInst != inst else { return }   // našli jsme sami sebe
         guard !session.connectedPeers.contains(peerID) else { return }
-        if self.peerID.displayName <= peerID.displayName {
+        let iInvite = theirInst.isEmpty ? (self.peerID.displayName <= peerID.displayName) : (inst < theirInst)
+        if iInvite {
             browser.invitePeer(peerID, to: session,
                                withContext: (room + "|" + inst).data(using: .utf8), timeout: 20)
         }
