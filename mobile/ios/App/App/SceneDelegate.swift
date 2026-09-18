@@ -8,7 +8,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = scene as? UIWindowScene else { return }
 
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = CAPBridgeViewController()
+        // Okno se staví programově, storyboard se nepoužije. Musí to být
+        // náš TapkasaViewController: jen ten registruje PeerLink (párování
+        // bez internetu), RateApp a předává uložený stav kasy. S obecným
+        // CAPBridgeViewController se nic z toho nespustilo.
+        window?.rootViewController = TapkasaViewController()
         window?.makeKeyAndVisible()
 
         SceneDelegateProxy.shared.scene(scene, willConnectTo: session, options: connectionOptions)
