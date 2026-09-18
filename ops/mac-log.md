@@ -1348,3 +1348,22 @@ Android 1.0.1 (versionCode 2) prestaven se vsemi opravami.
   prida build do interni skupiny TestFlightu s pokyny k diagnostice.
 - Uzivateli predan kratky potvrzovaci e-mail pro JPC Events (odpoved do
   48 hodin).
+
+## 18. 9. 2026 - PRICINA NALEZENA: SceneDelegate obchazel TapkasaViewController
+
+- Diagnostika z TestFlightu 1.0.3 (65) na iPadu i iPhonu: "modul PeerLink
+  nenalezen; pluginy: CapacitorHttp, Console, WebView, CapacitorCookies,
+  SystemBars, Purchases".
+- Pricina: mobile/ios/App/App/SceneDelegate.swift stavel okno programove
+  jako CAPBridgeViewController(), storyboard s customClass
+  TapkasaViewController se nepouzil. capacitorDidLoad() tedy nikdy
+  nebezel: PeerLink (parovani bez internetu) ani RateApp (hodnoceni)
+  se v zadne vydane verzi (1.0, 1.0.1, 1.0.2) neregistrovaly a ani
+  __KASA_BOOT__ (stav z Documents) se nepredaval; stav drzel jen
+  localStorage webview.
+- Oprava: SceneDelegate pouziva TapkasaViewController() (commit 1464089).
+  Xcode Cloud stavi build 66 (1.0.3); hlidac ho prida do TestFlightu.
+- ASC: verze 1.0.3 zalozena (c6487826-e0d8-4a8a-8ad6-d10766308bc9),
+  Co je noveho v 9 jazycich. Odeslu po potvrzeni testu uzivatelem.
+- Dusledek pro zakaznika JPC Events: v App Store verzi parovani bez
+  internetu doposud nemohlo fungovat; oprava v 1.0.3.
