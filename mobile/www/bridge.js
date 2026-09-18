@@ -145,11 +145,23 @@
         .then(function () { return PeerLink.status(); })
         .then(function (st) {
           st = st || {};
-          dlog("stav: kód " + (st.room || "žádný") + ", hledám " + (st.browsing ? "ano" : "ne") + ", spojeno " + (st.peers || 0));
+          diag.supported = st.supported !== false;
+          dlog("stav: kód " + (st.room || "žádný") + ", hledám " + (st.browsing ? "ano" : "ne") + ", spojeno " + (st.peers || 0) +
+               (st.supported === false ? ", bez podpory (potřeba Android 13+)" : ""));
         })
         .catch(function (e) { dlog("chyba: " + String(e && e.message || e)); });
     } catch (e) { dlog("výjimka: " + String(e && e.message || e)); }
   };
+
+  // Hned po startu zjistíme, zda je přímé spojení na tomto zařízení
+  // podporované (Android 13+), ať stránka ukáže správnou radu.
+  try {
+    Promise.resolve(PeerLink.status()).then(function (st) {
+      st = st || {};
+      diag.supported = st.supported !== false;
+      dlog("modul připraven" + (st.supported === false ? ", bez podpory (potřeba Android 13+)" : ""));
+    }).catch(function () {});
+  } catch (e) {}
 
   // Stránka se načetla dřív než tenhle soubor, kód spárování si tedy
   // vyzvedneme sami; při každé další změně nám ho pošle sama.

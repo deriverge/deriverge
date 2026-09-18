@@ -7,7 +7,7 @@ android {
         applicationId "com.deriverge.tapkasa"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 3
+        versionCode 4
         versionName "1.0.3"
         // jazyky aplikace, ať je obchod hlásí správně (web v aplikaci je má všechny)
         resourceConfigurations += ["cs", "en", "sk", "de", "fr", "es", "it", "pl", "pt"]
@@ -38,6 +38,8 @@ dependencies {
     implementation "androidx.coordinatorlayout:coordinatorlayout:$androidxCoordinatorLayoutVersion"
     implementation "androidx.core:core-splashscreen:$coreSplashScreenVersion"
     implementation project(':capacitor-android')
+    // párování bez internetu (Wi-Fi/Bluetooth) přes Google Nearby Connections
+    implementation "com.google.android.gms:play-services-nearby:19.3.0"
     testImplementation "junit:junit:$junitVersion"
     androidTestImplementation "androidx.test.ext:junit:$androidxJunitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$androidxEspressoCoreVersion"
