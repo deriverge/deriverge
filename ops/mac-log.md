@@ -1367,3 +1367,19 @@ Android 1.0.1 (versionCode 2) prestaven se vsemi opravami.
   Co je noveho v 9 jazycich. Odeslu po potvrzeni testu uzivatelem.
 - Dusledek pro zakaznika JPC Events: v App Store verzi parovani bez
   internetu doposud nemohlo fungovat; oprava v 1.0.3.
+
+## 18. 9. 2026 (vecer) - Parovani bez internetu OVERENO na zarizenich
+
+- Uzivatel s TestFlight 1.0.3 (66): parovani na Wi-Fi bez internetu
+  funguje. Poprve chvili ne, po restartu iPhonu hned: typicky projev
+  iOS, ktery necha hledani spustene pred udelenim opravneni Mistni sit
+  hluche.
+- Dalsi zpevneni (commit na main, build 67): obnova hledani po navratu
+  do popredi a kazdych 20 s bez protejsku; hledani a casovac na hlavnim
+  vlakne; zvani podle otisku instance misto jmena zarizeni (na novem iOS
+  maji obe "iPhone"); diagnostika PeerLink zustava viditelna (prani
+  uzivatele) a loguje i pocet spojenych zarizeni.
+- Overeno: load() bere __KASA_BOOT__ jen kdyz neni prazdny, prvni start
+  1.0.3 tedy data z localStorage neztrati.
+- Hlidac prida build 67 do TestFlightu; po potvrzeni uzivatelem odeslu
+  1.0.3 ke kontrole (verze v ASC pripravena).
