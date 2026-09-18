@@ -1383,3 +1383,16 @@ Android 1.0.1 (versionCode 2) prestaven se vsemi opravami.
   1.0.3 tedy data z localStorage neztrati.
 - Hlidac prida build 67 do TestFlightu; po potvrzeni uzivatelem odeslu
   1.0.3 ke kontrole (verze v ASC pripravena).
+
+## 18. 9. 2026 (noc) - Prevzeti menu a udaju z druheho zarizeni
+
+- Na prani uzivatele: v Propojenych zarizenich tlacitko "Prevzit menu
+  a udaje z druheho zarizeni" (9 jazyku). Zpravy setupReq/setup jdou
+  stejnym kanalem jako objednavky (nativne cele, pres preposilac po
+  castech do 3,5 kB), kopie se pouzije jen do 90 s po vlastni zadosti,
+  casti se slucuji podle id (duplicity z druheho preposilace nevadi).
+  Kopiruje se: polozky (nazev, cena, barva, DPH), udaje prodejce, mena,
+  DPH zap/vyp, nazev akce. Objednavky, jazyk, role a kod zustavaji.
+- Overeno v prohlizeci (zadost, prijem kopie, odpoved na zadost).
+- Commit na main = build 68 (1.0.3); hlidac prida do TestFlightu.
+  Android tapkasa-1.0.3-signed.aab (versionCode 3) se prestavuje.
