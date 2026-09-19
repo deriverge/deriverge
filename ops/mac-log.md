@@ -1447,3 +1447,21 @@ bez internetu NEPROPOJI (Apple Multipeer vs Google Nearby). Krizem
 plaftorem funguje jen internetovy preposilac, tedy s internetem.
 Aby to platilo i offline, musel by vzniknout mistni server v aplikaci
 (mDNS + WebSocket na obou platformach).
+
+## 19. 9. 2026 (oprava odeslani) - k 1.0.4 byl omylem pripojen stary build
+
+- Hlidac cekal na build >= 70 a nasel build 71, ktery ale vznikl uz
+  18. 9. z commitu e7e9eff, tedy jeste s MARKETING_VERSION 1.0.3.
+  Apple binarku automaticky odmitl (verze 1.0.4 mela stav
+  INVALID_BINARY, polozka submission REJECTED). Opravy z 1.0.4 tedy
+  v prvnim odeslani vubec nebyly.
+- Naprava: stara submission 18b0062a zrusena, k verzi 1.0.4 pripojen
+  build 73 (commit 12c1bbe, MARKETING_VERSION 1.0.4, obsahuje pruvodce,
+  odstranene skryte odemceni i nativni hlas), znovu odeslano.
+  Submission c43aef11-d2b4-4c6f-bb1e-2e0e50452c4b, stav verze
+  WAITING_FOR_REVIEW.
+- Poučeni pro hlidace: cekat na build, jehož preReleaseVersion odpovida
+  vydavane verzi, ne jen na cislo builu vetsi nez X.
+- Google Play 1.0.4 (versionCode 7) overen primo v nahranem AAB:
+  obsahuje tourCanRun, zadny data-devtap ani __KASA_PRO__, __kasaSpeak,
+  celebratePro, placeToast, prevzeti nastaveni i texty pro Android.
