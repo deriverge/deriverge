@@ -62,6 +62,21 @@
     };
   }
 
+  // Čtení nahlas: v Android WebView webová speechSynthesis mlčí, nativní
+  // modul Speak používá systémové TextToSpeech. Na iOS hook nevzniká
+  // a stránka si vystačí se speechSynthesis.
+  var Speak = null;
+  if (cap.Plugins && cap.Plugins.Speak) {
+    Speak = cap.Plugins.Speak;
+  } else if (typeof cap.registerPlugin === "function") {
+    try { Speak = cap.registerPlugin("Speak"); } catch (e) {}
+  }
+  if (Speak && typeof cap.getPlatform === "function" && cap.getPlatform() === "android") {
+    window.__kasaSpeak = function (text, locale) {
+      try { Promise.resolve(Speak.speak({ text: String(text), locale: String(locale || "") })).catch(function () {}); } catch (e) {}
+    };
+  }
+
   if (!PeerLink) {
     dlog("modul PeerLink nenalezen; pluginy: " + (cap.Plugins ? Object.keys(cap.Plugins).join(", ") : "žádné"));
     return; // párování zůstane na internetovém přeposílači

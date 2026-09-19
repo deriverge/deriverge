@@ -4384,6 +4384,11 @@
   // iOS pustí hlas až po nějakém klepnutí, o to se stará tlačítko v Menu.
   function speak(text) {
     try {
+      // nativní hlas (Android), jinak webová syntéza
+      if (typeof window.__kasaSpeak === "function") {
+        window.__kasaSpeak(text, langInfo().loc);
+        return;
+      }
       if (!window.speechSynthesis) { return; }
       var u = new SpeechSynthesisUtterance(text);
       u.lang = langInfo().loc;

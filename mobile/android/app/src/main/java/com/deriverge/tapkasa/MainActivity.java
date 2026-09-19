@@ -10,6 +10,7 @@ public class MainActivity extends BridgeActivity {
         // Lokální plugin (párování bez internetu) není npm balíček,
         // registruje se ručně, a to před startem mostu.
         registerPlugin(PeerLinkPlugin.class);
+        registerPlugin(SpeakPlugin.class);
         super.onCreate(savedInstanceState);
     }
 }
