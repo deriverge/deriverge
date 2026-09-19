@@ -1416,3 +1416,34 @@ Android 1.0.1 (versionCode 2) prestaven se vsemi opravami.
   pres internet ano. Multipeer max. 8 zarizeni v relaci.
 - Commity na main: b0dff61, d51f113, e7e9eff (a predchozi).
 - Charles (JPC Events): text odpovedi predan uzivateli k odeslani.
+
+## 19. 9. 2026 - 1.0.4: pruvodce, skryte odemceni Pro, hlas na Androidu
+
+Stav pred tim: iOS 1.0.3 schvalena a ziva, Play 1.0.3 (versionCode 5,
+tedy vcetne parovani pres Nearby) ziva od 19. 9. 0:21.
+
+- Pruvodce se s prazdnym menu nespousti (kroky vedly na dlazdice, ktere
+  na obrazovce nejsou). Nabidne se sam, az uzivatel prida prvni polozku
+  a prejde na prodej; rucni spusteni hlasi, ze chybi polozky.
+- BEZPECNOST: 7 klepnuti na radek s verzi odemykalo Pro zdarma
+  (license "pro-dev") i v obchodnich verzich. Gesto, jeho texty
+  i globalni prepinac __KASA_PRO__ odstraneny; radek s verzi uz neni
+  tlacitko. Instalacim z doby pred tarify zustava neomezene pouzivani
+  (nove pod nazvem "pro-legacy", stara hodnota se dal uznava).
+  Zavrena i druha cesta: obnova zalohy uz neprepisuje licenci ani denni
+  pocitadlo plateb, ty patri zarizeni. V poznamkach k vydani o tom
+  zamerne nic neni.
+- Android: podekovani zakaznikovi a cteni objednavek mlcely, protoze
+  webova speechSynthesis v Android WebView nefunguje. Novy nativni modul
+  SpeakPlugin.java (TextToSpeech, fronta pred inicializaci, nahradni
+  jazyk); stranka ho pouziva jen na Androidu.
+- Odeslano: App Store 1.0.4 build 71 (submission
+  18b0062a-7262-4828-8859-fb18651d9699), Google Play 1.0.4 versionCode 7
+  (Probiha kontrola zmen).
+- Commity na main: f2ef2aa, 12c1bbe.
+
+POZOR na marketingove tvrzeni: iOS a Android se pres spolecnou Wi-Fi
+bez internetu NEPROPOJI (Apple Multipeer vs Google Nearby). Krizem
+plaftorem funguje jen internetovy preposilac, tedy s internetem.
+Aby to platilo i offline, musel by vzniknout mistni server v aplikaci
+(mDNS + WebSocket na obou platformach).
