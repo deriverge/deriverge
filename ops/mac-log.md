@@ -1537,3 +1537,22 @@ Aby to platilo i offline, musel by vzniknout mistni server v aplikaci
   (GIF ma vyhrazeny index 0), takze zaobleni panelu je videt na bilem
   i tmavem pozadi. Commit 2029acf, overeno i na zive adrese (80 kB).
   Podpis v Gmailu se na soubor odkazuje, zmena se tedy projevi sama.
+
+## 20. 9. 2026 - Predplatne na Androidu nefungovalo, opraveno v RevenueCat
+
+- Stav vydani: App Store 1.0.4 (build 73) ziva od 19. 9., Google Play
+  1.0.4 (versionCode 7) ziva, verejny zaznam hlasi 1.0.4. Obe tedy maji
+  vsechny opravy (pruvodce, odstranene skryte odemceni Pro, hlas na
+  Androidu, parovani bez internetu).
+- NALEZ: v RevenueCat mela aplikace "Tapkasa Android" nula produktu.
+  getOfferings() proto na Androidu nevratil zadny balicek $rc_monthly
+  ani $rc_annual a nakup predplatneho skoncil hlaskou, ze balicek neni
+  v nabidce. Na Androidu tedy nikdo koupit nemohl.
+- Oprava (vse v RevenueCat, bez nove verze aplikace):
+  1) import obou produktu z Play: tapkasa.pro.monthly:monthly
+     a tapkasa.pro.yearly:yearly (stav Published),
+  2) obe navazany na entitlement "pro",
+  3) pridany do nabidky "default" k balickum $rc_annual a $rc_monthly
+     vedle produktu iOS. Ulozeno, overeno na detailu nabidky.
+- Zbyva overit skutecnym nakupem na Android zarizeni (nemame ho).
+  Doporuceni: pridat testera licenci v Play Console a zkusit nakup.
