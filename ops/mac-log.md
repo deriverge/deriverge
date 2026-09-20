@@ -1510,3 +1510,17 @@ Aby to platilo i offline, musel by vzniknout mistni server v aplikaci
   prestanou chodit.
 - Web: /podpis/ stranka smazana na prani uzivatele, zustava jen
   znacka.gif, na kterou se odkazuje podpis v Gmailu (commit 7713db1).
+
+## 20. 9. 2026 - Automaticka odpoved na info@deriverge.com
+
+- Zapnuta Gmail "Odpoved v nepritomnosti" (vacation responder) na uctu
+  info@deriverge.com: predmet "Dekujeme za Vasi zpravu / Thank you for
+  your message", telo cesky, anglicky a kratce francouzsky, slib
+  odpovedi do jednoho pracovniho dne a prosba o model zarizeni a verzi
+  systemu u dotazu na Tapkasu. Zacatek 20. 9. 2026, konec nevyplnen,
+  bezi tedy trvale.
+- Zamerne bez omezeni na kontakty nebo domenu, jinak by novym zakaznikum
+  neodpovedela. Gmail sam odpovi jednomu odesilateli nejvys jednou za
+  ctyri dny a nereaguje na hromadne rozesilky, takze nehrozi smycka.
+- Overeno po znovunacteni nastaveni (prepinac zapnuto, text 740 znaku,
+  vsechny tri jazyky).
