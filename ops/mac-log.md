@@ -1581,3 +1581,33 @@ Aby to platilo i offline, musel by vzniknout mistni server v aplikaci
 - Zaver: retez Play -> RevenueCat -> entitlement na tomhle uctu funguje,
   dokazal to nakup ve VZT Monterovi. U Tapkasy zbyva stejny test provest
   (Play Console -> licencni testeri, pak nakup v aplikaci).
+
+## 21. 9. 2026 - VZT Monter 1.2.2 odeslan do obou obchodu (opravy kolecka a klavesnice)
+
+- Dnesni 1.2.1 (iOS build 12, Android vc 8) vznikla v 18:53, vecerni
+  opravy (kolecko uhlu bez klavesnice, pole viditelne nad klavesnici)
+  jsem dopsal az po 20:18. 1.2.1 je tedy bez nich; na Play byla ziva,
+  na App Store IN_REVIEW.
+- Vydani 1.2.2: verze v app.json, EAS build obou platforem (iOS build
+  13, Android versionCode 9, autoIncrement), commity adb5d78, 11e0073,
+  1c762b1 v repu vzduchotechnika_app (bez remote, jen lokalne).
+- App Store: eas submit nahral build 13; ASC API: zrusena kontrola
+  1.2.1 (68722f9d, byla IN_REVIEW -> DEVELOPER_REJECTED), verze
+  prejmenovana na 1.2.2, pripojen build 13, poznamky v 6 jazycich,
+  nova kontrola 77f80cad WAITING_FOR_REVIEW.
+- Google Play: balicek ma 87 MB, prohlizecovy upload zvladne 10 MB.
+  Se souhlasem Davida dostal servisni ucet
+  revenuecat@tapkasa.iam.gserviceaccount.com v Play Console pravo
+  "Vydavani v produkcni verzi" jen pro VZT Monter (nic jineho).
+  eas.json ma submit profil android (produkce, koncept), klic zustava
+  v ~/.tapkasa-keys. eas submit vytvoril koncept 1.2.2 (vc 9), v Play
+  Console dopsany poznamky (cs-CZ, sk, de-DE, en-GB, en-US, pl-PL),
+  vydani ulozeno a odeslano ke kontrole (Prehled publikovani,
+  "Probiha kontrola zmen"). Rizene publikovani je vypnute, po
+  schvaleni jde ven samo.
+- Jedine upozorneni v kontrole Play: chybi deobfuskacni soubor (R8),
+  stejne jako u predchozich vydani, neblokuje.
+- OTEVRENO: dialog "Nahrajte dokumenty k overeni sve organizace" se
+  ukazal jednou na domovske strance Play Console a pak uz ne; David
+  dodal vypis z OR (Downloads/vypis-1207476 (2).pdf), zatim nebylo kam
+  ho nahrat. Hledam stranku overeni.
