@@ -1524,3 +1524,16 @@ Aby to platilo i offline, musel by vzniknout mistni server v aplikaci
   ctyri dny a nereaguje na hromadne rozesilky, takze nehrozi smycka.
 - Overeno po znovunacteni nastaveni (prepinac zapnuto, text 740 znaku,
   vsechny tri jazyky).
+
+## 20. 9. 2026 (pozde vecer) - Uprava automaticke odpovedi a znacky
+
+- Automaticka odpoved na info@deriverge.com prepsana podle prani:
+  pouze anglicky, bez zminky o Tapkase, s lhutou dvou pracovnich dnu.
+  Predmet "Thank you for your message", telo: Hello / thank you for
+  your email. We have received your message and will look into it. /
+  We will get back to you within two business days. / Kind regards.
+  Overeno po ulozeni a znovunacteni nastaveni.
+- znacka.gif ma zaoblene rohy: rohy obrazku jsou nove pruhledne
+  (GIF ma vyhrazeny index 0), takze zaobleni panelu je videt na bilem
+  i tmavem pozadi. Commit 2029acf, overeno i na zive adrese (80 kB).
+  Podpis v Gmailu se na soubor odkazuje, zmena se tedy projevi sama.
