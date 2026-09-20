@@ -1556,3 +1556,28 @@ Aby to platilo i offline, musel by vzniknout mistni server v aplikaci
      vedle produktu iOS. Ulozeno, overeno na detailu nabidky.
 - Zbyva overit skutecnym nakupem na Android zarizeni (nemame ho).
   Doporuceni: pridat testera licenci v Play Console a zkusit nakup.
+
+## 20. 9. 2026 - Overeni androidi platby: testovaci karta patrila VZT Monterovi
+
+- David hlasil, ze mu na Androidu nabidlo "testovaci kartu" a odemklo
+  PRO, aniz by si byl jisty, jestli neco koupil. Dohledano v RevenueCat
+  pres prepinac "Sandbox data" (bez nej se testovaci nakupy vubec
+  nezobrazuji).
+- ZJISTENI: ten nakup nebyl Tapkasa, ale VZT Monter. Projekt VZT Monter
+  (d7f2931b), radek "Recent sandbox transactions": Play Store, produkt
+  "VZT Monter PRO (Android)", jednorazovy, ceska zeme, cas nakupu
+  odpovida Davidovu hlaseni. Tapkasa (b0f25a13) nema z Play Store ani
+  jednu transakci, ani v sandboxu.
+- Penize neodesly: Play Console -> Sprava objednavek je za cele obdobi
+  prazdna (zadna objednavka). Testera licenci Google neuctuje. V
+  RevenueCat je u Tapkasy Revenue 0 USD a Paid subscribers 0; ctyri
+  zkusebni verze bezi vsechny pres App Store (mj. Francouz z 16. 9.,
+  tedy nejspis JPC Events).
+- Tapkasa Android je pritom v RevenueCat kompletne nastavena:
+  "Valid credentials" u service accountu, Google developer notifications
+  "Connected to Google" (zatim bez udalosti, protoze nakup zadny nebyl),
+  verejny klic goog_CQNzyidxRPuTylazpgieisHqyBL sedi na klic aplikace
+  "Tapkasa Android", SDK purchases-capacitor 13.4.2 hlasi i Android.
+- Zaver: retez Play -> RevenueCat -> entitlement na tomhle uctu funguje,
+  dokazal to nakup ve VZT Monterovi. U Tapkasy zbyva stejny test provest
+  (Play Console -> licencni testeri, pak nakup v aplikaci).
