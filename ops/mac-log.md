@@ -1496,3 +1496,17 @@ Aby to platilo i offline, musel by vzniknout mistni server v aplikaci
 - Gmail info@deriverge.com: vytvoren podpis "deriverge", nastaven jako
   vychozi pro nove zpravy i odpovedi, puvodni podpis "David Cagánek"
   ponechan. Overeno po znovunacteni nastaveni.
+
+## 20. 9. 2026 (vecer) - ITMS-90186 u buildu 74 je jen sum
+
+- Apple poslal "Action needed" pro build 74 (verze 1.0.4): ITMS-90186
+  a ITMS-90062, tedy rada 1.0.4 je po schvaleni uzavrena pro nove
+  buildy. Nic se nerozbilo: verejne je v App Store 1.0.4 (build 73)
+  a ta bezi dal. Build 74 vznikl automaticky z pushe, ktery menil jen
+  web (slozka podpis/), do aplikace nesahal.
+- Oprava do budoucna: workflow Xcode Cloud "Default" ma nove podminku
+  filesAndFoldersRule START_IF_ANY_FILE_MATCHES pro slozky mobile
+  a tapkasa. Zmeny webu uz build nespousti, takze tyhle e-maily
+  prestanou chodit.
+- Web: /podpis/ stranka smazana na prani uzivatele, zustava jen
+  znacka.gif, na kterou se odkazuje podpis v Gmailu (commit 7713db1).
