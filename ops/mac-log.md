@@ -1465,3 +1465,19 @@ Aby to platilo i offline, musel by vzniknout mistni server v aplikaci
 - Google Play 1.0.4 (versionCode 7) overen primo v nahranem AAB:
   obsahuje tourCanRun, zadny data-devtap ani __KASA_PRO__, __kasaSpeak,
   celebratePro, placeToast, prevzeti nastaveni i texty pro Android.
+
+## 20. 9. 2026 - Odpoved Charlesovi odeslana, iOS 1.0.4 schvalena
+
+- App Store: 1.0.4 (build 73) schvalena a ziva uz 19. 9., verejny zaznam
+  hlasi verzi 1.0.4. Google Play: ziva 1.0.3 (versionCode 5, uz obsahuje
+  parovani bez internetu pres Nearby), 1.0.4 (versionCode 7) v kontrole.
+- Potvrzeni prijeti poslal Charlesovi sam uzivatel 17. 9. 22:27 se slibem
+  konkretni odpovedi do 48 hodin. Dnes odeslana konkretni odpoved
+  z info@deriverge.com (francouzsky, v tomtez vlaknu): pricina (nativni
+  modul se nespoustel), opravene verze s odkazy na oba obchody, postup
+  pro stanek (stejny kod, vlastni Wi-Fi router bez izolace klientu,
+  opravneni Mistni sit na iOS a Zarizeni v okoli na Androidu 13+),
+  upozorneni ze iOS a Android se bez internetu nepropoji (ruzne
+  protokoly) a pracujeme na spolecnem mistnim propojeni, voditko
+  k poctu zarizeni (Apple limit 8, overeno na dvou) a zminka o tlacitku
+  pro prevzeti menu. Gmail potvrdil odeslani.
