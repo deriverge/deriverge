@@ -1481,3 +1481,18 @@ Aby to platilo i offline, musel by vzniknout mistni server v aplikaci
   protokoly) a pracujeme na spolecnem mistnim propojeni, voditko
   k poctu zarizeni (Apple limit 8, overeno na dvou) a zminka o tlacitku
   pro prevzeti menu. Gmail potvrdil odeslani.
+
+## 20. 9. 2026 - E-mailovy podpis ve stylu webu
+
+- Nova stranka https://deriverge.com/podpis/ (noindex): nahled podpisu,
+  tlacitko Zkopirovat podpis (do schranky jde text/html, aby se do Gmailu
+  vlozil hotovy podpis) a navod pro Gmail i Apple Mail. Commit e825f20.
+- Animovana znacka podpis/znacka.gif: </deriverge> se vypisuje a kurzor
+  blika, JetBrains Mono, barvy webu (panel #1c1b23, modra #4084c7,
+  oranzova #b87946), 268x58 px, 40 kB. CSS animace postovni klienti
+  zahazuji, proto GIF.
+- Podpis sam: tabulka s vlozenymi styly, monospace stack, leva modra
+  linka jako gutter editoru, kontakty a odkazy na produkty.
+- Gmail info@deriverge.com: vytvoren podpis "deriverge", nastaven jako
+  vychozi pro nove zpravy i odpovedi, puvodni podpis "David Cagánek"
+  ponechan. Overeno po znovunacteni nastaveni.
