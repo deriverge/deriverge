@@ -1,0 +1,2 @@
+/* Dotaz iOS na oprávnění Místní síť (párování bez internetu). */
+"NSLocalNetworkUsageDescription" = "Tapkasa verbindet die Kasse über das lokale Netzwerk mit dem Ausgabegerät, damit Bestellungen auch ohne Internet ankommen.";

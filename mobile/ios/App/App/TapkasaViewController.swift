@@ -1,6 +1,7 @@
 import UIKit
 import Capacitor
 import WebKit
+import AVFoundation
 
 /// Registrace pluginu PeerLink a chování webview po vzoru původní
 /// ios/Kasa/KasaWebView.swift. Ve storyboardu (App/Base.lproj/Main.storyboard)
@@ -11,6 +12,11 @@ class TapkasaViewController: CAPBridgeViewController {
         // Lokální plugin není npm balíček, proto se registruje ručně.
         bridge?.registerPluginInstance(PeerLinkPlugin())
         bridge?.registerPluginInstance(RateAppPlugin())
+        bridge?.registerPluginInstance(DocSharePlugin())
+        // Poděkování a čtení objednávek musí zaznít i s přepínačem ticha
+        // (výdejní iPhone ho mívá zapnutý). Kategorie playback to umožní;
+        // mixWithOthers nechá hrát hudbu stánku dál.
+        try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .spokenAudio, options: [.mixWithOthers])
         // Pojistka pro nákupy: kdyby automatická registrace RevenueCat
         // pluginu (packageClassList) selhala, zkusíme třídu doregistrovat
         // sami. Přímý import modulu nejde — shodil optimalizátor Swiftu

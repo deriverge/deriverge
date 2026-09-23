@@ -7,8 +7,8 @@ android {
         applicationId "com.deriverge.tapkasa"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 7
-        versionName "1.0.4"
+        versionCode 8
+        versionName "1.0.5"
         // jazyky aplikace, ať je obchod hlásí správně (web v aplikaci je má všechny)
         resourceConfigurations += ["cs", "en", "sk", "de", "fr", "es", "it", "pl", "pt"]
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"

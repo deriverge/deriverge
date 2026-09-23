@@ -80,8 +80,10 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
 	<key>NSLocalNetworkUsageDescription</key>
-	<string>Tapkasa propojuje kasu s výdejním zařízením po místní síti, aby objednávky chodily i bez internetu.</string>
+	<string>Tapkasa connects the till with the counter device over the local network, so orders arrive even without internet.</string>
 	<key>NSBonjourServices</key>
 	<array>
 		<string>_kasa-order._tcp</string>

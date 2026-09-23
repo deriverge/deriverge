@@ -77,6 +77,27 @@
     };
   }
 
+  // Daňový doklad (PDF): e-mail s přílohou, sdílení a uložení do souborů.
+  // Web Share ani stažení přes blob: v Android WebView nefungují a mailto:
+  // přílohu nenese, proto nativní modul DocShare na obou platformách.
+  // Hook vrací příslib s {result: "mail"|"share"|"saved"|"cancel"}.
+  var DocShare = null;
+  if (cap.Plugins && cap.Plugins.DocShare) {
+    DocShare = cap.Plugins.DocShare;
+  } else if (typeof cap.registerPlugin === "function") {
+    try { DocShare = cap.registerPlugin("DocShare"); } catch (e) {}
+  }
+  if (DocShare) {
+    window.__kasaShareFile = function (opts) {
+      try {
+        return Promise.resolve(DocShare.share(opts || {}));
+      } catch (e) {
+        return Promise.reject(e);
+      }
+    };
+    window.__kasaSaveFile = true;
+  }
+
   if (!PeerLink) {
     dlog("modul PeerLink nenalezen; pluginy: " + (cap.Plugins ? Object.keys(cap.Plugins).join(", ") : "žádné"));
     return; // párování zůstane na internetovém přeposílači
@@ -163,6 +184,11 @@
           diag.supported = st.supported !== false;
           dlog("stav: kód " + (st.room || "žádný") + ", hledám " + (st.browsing ? "ano" : "ne") + ", spojeno " + (st.peers || 0) +
                (st.supported === false ? ", bez podpory (potřeba Android 13+)" : ""));
+          // skutečný počet spojení i po znovunačtení stránky, jinak by
+          // stránka myslela, že nikdo není, a zprávy by jen odkládala
+          if (typeof st.peers === "number" && typeof window.__kasaPeerCount === "function") {
+            window.__kasaPeerCount(st.peers);
+          }
         })
         .catch(function (e) { dlog("chyba: " + String(e && e.message || e)); });
     } catch (e) { dlog("výjimka: " + String(e && e.message || e)); }

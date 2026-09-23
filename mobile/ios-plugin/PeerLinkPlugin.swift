@@ -60,7 +60,16 @@ final class PeerLink: NSObject {
     /// V Info.plist mu odpovídají NSBonjourServices _kasa-order._tcp/_udp.
     private static let service = "kasa-order"
 
-    private let peerID = MCPeerID(displayName: UIDevice.current.name)
+    /// MCPeerID spadne, když má jméno víc než 63 bajtů UTF-8. Na iOS 15 je
+    /// to uživatelské jméno zařízení („Davidův iPhone…“ s diakritikou a emoji
+    /// se tam snadno dostane), proto ho zkracujeme.
+    private let peerID = MCPeerID(displayName: PeerLink.shortName())
+
+    private static func shortName() -> String {
+        var n = UIDevice.current.name.trimmingCharacters(in: .whitespacesAndNewlines)
+        while n.utf8.count > 60 { n.removeLast() }
+        return n.isEmpty ? "Tapkasa" : n
+    }
 
     /// Otisk téhle instance. Pátrač na iOS občas „najde" inzerenta z téhož
     /// zařízení; bez otisku si pak zařízení pošle pozvánku samo sobě, kód
@@ -253,7 +262,9 @@ extension PeerLink: MCNearbyServiceBrowserDelegate {
         // Ať se dvě zařízení nezvou navzájem naráz, zve vždycky jen jedno:
         // to s menším otiskem. Jména zařízení jsou na novějším iOS často
         // stejná ("iPhone"), otisky nikdy.
-        state("found", "\(peerID.displayName) r=\(info?["r"] ?? "-")")
+        // Cizí kód se do diagnostiky nevypisuje: v Menu by ho viděl každý,
+        // kdo má Tapkasu poblíž, a mohl by se ke kase připojit.
+        state("found", "\(peerID.displayName) \(info?["r"] == room ? "stejný kód" : "jiný kód")")
         guard !room.isEmpty, info?["r"] == room else { return }
         let theirInst = info?["i"] ?? ""
         guard theirInst != inst else { return }   // našli jsme sami sebe

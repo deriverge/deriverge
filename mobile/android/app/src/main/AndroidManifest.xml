@@ -35,9 +35,20 @@
         </provider>
     </application>
 
+    <!-- Android 11 skrývá cizí balíčky: bez této deklarace TextToSpeech
+         nenajde hlasový modul a poděkování ani čtení objednávek nezazní.
+         (Od Androidu 12 jde spojení přes systém, tam to fungovalo i bez ní.) -->
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.TTS_SERVICE" />
+        </intent>
+    </queries>
+
     <!-- Permissions -->
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <!-- krátká vibrace po aktivaci Pro (běžné oprávnění, bez dotazu) -->
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <!-- Párování bez internetu (Nearby Connections), jen Android 13+:
          bez oprávnění k poloze, Bluetooth i Wi-Fi s příznakem neverForLocation. -->

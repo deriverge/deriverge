@@ -26,7 +26,11 @@
 <!-- APP:START -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<!-- Písma se načítají bez blokování: stylopis Google Fonts v <body> před
+     skriptem aplikace držel start, dokud nevypršel požadavek. Na festivalu
+     s přetíženou sítí nebo na routeru bez internetu tak kasa desítky sekund
+     ukazovala prázdnou obrazovku. Bez sítě se použijí systémová písma. -->
+<link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
 <style>
   :root{
     color-scheme: light;
@@ -47,6 +51,8 @@
     --r-btn:10px;
     --safe-b:env(safe-area-inset-bottom,0px);
     --safe-t:env(safe-area-inset-top,0px);
+    --safe-l:env(safe-area-inset-left,0px);
+    --safe-r:env(safe-area-inset-right,0px);
     --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
     --sans:"Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;
   }
@@ -70,7 +76,10 @@
   .eyebrow{font-size:11px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3)}
 
   /* ---------- shell ---------- */
-  .shell{display:flex;flex-direction:column;height:100dvh;max-width:640px;margin:0 auto;background:var(--paper)}
+  /* Na iPhonu na šířku leží výřez nebo Dynamic Island přes okraj; bez
+     odsazení zakrýval začátky názvů položek a řádků účtu. */
+  .shell{display:flex;flex-direction:column;height:100dvh;max-width:640px;margin:0 auto;background:var(--paper);
+    padding-left:var(--safe-l);padding-right:var(--safe-r)}
 
   .top{
     display:flex;align-items:center;justify-content:space-between;gap:12px;
@@ -78,11 +87,17 @@
     border-bottom:1px solid var(--rule);background:var(--paper);
     position:relative;z-index:3;
   }
-  .top-name{display:block;font-size:14px;font-weight:600;letter-spacing:-.01em;margin-top:1px}
+  .top > div:first-child{min-width:0;flex:1}
+  .top-name{display:block;font-size:14px;font-weight:600;letter-spacing:-.01em;margin-top:1px;
+    max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  button.top-name{border:0;background:none;padding:0;text-align:left;color:inherit;font-family:inherit}
+  button.top-name:disabled{opacity:1}
+  .top-name .chev{display:inline-block;width:9px;height:9px;margin-left:6px;border-right:2px solid var(--ink-3);
+    border-bottom:2px solid var(--ink-3);transform:translateY(-3px) rotate(45deg)}
   .top-total{text-align:right;flex:0 0 auto}
   .top-total .v{display:block;font-size:15px;margin-top:1px}
 
-  .view{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+  .view{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
 
   /* ---------- tabs ---------- */
   .tabs{
@@ -126,7 +141,7 @@
   .prod.is-hold{background:var(--accent-tint);border-color:var(--accent)}
   .prod.is-hold .hold{transform:scaleX(1);transition:transform 1s linear}
   @media (prefers-reduced-motion:reduce){.prod.is-hold .hold{transition:none}}
-  .prod .nm{font-size:15px;font-weight:700;letter-spacing:-.01em;line-height:1.2}
+  .prod .nm{font-size:15px;font-weight:700;letter-spacing:-.01em;line-height:1.2;overflow-wrap:anywhere;hyphens:auto}
   .prod .pr{font-size:14px;color:var(--ink-2)}
   .prod.is-on{border-color:var(--accent);background:var(--accent-tint)}
   /* odznak musí zůstat uvnitř karty, ta má oříznuté okraje kvůli pruhu držení */
@@ -154,6 +169,15 @@
   /* ---------- order bar ---------- */
   .bar{border-top:1px solid var(--rule);background:var(--surface);position:relative;z-index:2}
   .bar-lines{max-height:34dvh;overflow-y:auto;border-bottom:1px solid var(--rule)}
+  /* telefon na šířku: rozbalené řádky účtu nesmí schovat celé menu */
+  @media (max-height:450px){.bar-lines{max-height:22dvh}}
+  /* Plátce DPH na úzkém telefonu: jméno položky dostalo dva znaky, řádek
+     editoru se proto zalomí a ceny s ovládáním jdou pod jméno. */
+  @media (max-width:420px){
+    .edit.vat{flex-wrap:wrap}
+    .edit.vat .e-nm{flex:1 1 calc(100% - 44px)}
+    .edit.vat .e-pr{margin-left:36px}
+  }
   .line{display:flex;align-items:center;gap:10px;padding:8px 12px;border-bottom:1px solid var(--rule)}
   .line:last-child{border-bottom:0}
   .line .nm{flex:1;min-width:0;font-size:14px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -166,7 +190,9 @@
   .bar-main{display:flex;align-items:center;gap:8px;padding:10px 12px}
   .bar-sum{flex:1;min-width:0;background:none;border:0;text-align:left;padding:2px 0}
   .bar-sum .c{display:block;font-size:12px;color:var(--ink-3);font-weight:600}
-  .bar-sum .t{display:block;font-size:24px;margin-top:1px}
+  /* Delší popisky tlačítek (Verwerfen/Kassieren…) na úzkém telefonu
+     nechaly součtu tak málo místa, že vjel pod Zrušit. Zmenší se. */
+  .bar-sum .t{display:block;font-size:24px;margin-top:1px;white-space:nowrap;overflow:hidden}
   .btn-pay{
     flex:0 0 auto;padding:14px 20px;border:0;border-radius:var(--r-btn);
     background:var(--accent);color:#fff;font-size:16px;font-weight:700;letter-spacing:-.01em;
@@ -187,7 +213,7 @@
   }
   @media (prefers-reduced-motion:reduce){.scrim,.sheet,.toast{animation:none}}
   .sheet h2{margin:0;font-size:11px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3)}
-  .sheet .big{font-size:46px;line-height:1;margin:8px 0 2px}
+  .sheet .big{font-size:46px;line-height:1.05;margin:8px 0 2px;white-space:nowrap;overflow:hidden}
   .sheet .sub{margin:6px 0 0;font-size:13px;color:var(--ink-2);line-height:1.45}
   .sheet .txt{width:100%;height:190px;margin-top:14px;padding:12px;border:1px solid var(--rule);border-radius:var(--r-btn);background:var(--surface);font-family:var(--mono);font-size:12px;line-height:1.5;resize:none}
 
@@ -205,7 +231,8 @@
   .keys{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}
   .key{padding:13px 4px;border-radius:var(--r-btn);border:1px solid var(--rule);background:var(--surface);font-size:15px;font-weight:600;font-variant-numeric:tabular-nums}
   .key:active{background:var(--sunk)}
-  .keys.cash{grid-template-columns:repeat(5,1fr)}
+  .keys.cash{grid-template-columns:repeat(5,minmax(0,1fr))}
+  .keys.cash .key{min-width:0;padding:13px 2px;font-size:clamp(12px,3.6vw,15px);overflow-wrap:anywhere}
   .keys.cash .w3{grid-column:span 3}
   .keys.cash .w2{grid-column:span 2}
   .key.wide{grid-column:span 2}
@@ -234,7 +261,7 @@
   .sec h2{margin:0 0 10px;font-size:11px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3)}
 
   .hero{padding:18px 16px 16px;border-bottom:1px solid var(--rule)}
-  .hero .sum{font-size:44px;line-height:1;margin-top:6px}
+  .hero .sum{font-size:44px;line-height:1.05;margin-top:6px;white-space:nowrap;overflow:hidden}
   .hero .meta{margin:8px 0 0;font-size:13px;color:var(--ink-2)}
 
   .split{display:flex;gap:2px;margin-top:14px;height:10px}
@@ -302,7 +329,7 @@
 
   /* ---------- toast ---------- */
   .toast{
-    position:fixed;left:12px;right:12px;bottom:calc(76px + var(--safe-b));z-index:30;
+    position:fixed;left:calc(12px + var(--safe-l));right:calc(12px + var(--safe-r));bottom:calc(76px + var(--safe-b));z-index:30;
     max-width:616px;margin:0 auto;display:flex;align-items:center;gap:10px;
     padding:10px 12px;border-radius:var(--r-tile);background:var(--ink);color:var(--paper);
     font-size:13px;font-weight:500;box-shadow:0 8px 24px rgba(21,18,14,.22);animation:rise .18s ease;
@@ -341,6 +368,28 @@
   .sf-sug .sug:active{background:var(--sunk)}
   .sf span{display:block;font-size:11px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px}
   .doc-range label span{display:block;font-size:11px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px}
+  .vchips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .vchip{padding:9px 13px;border:1px solid var(--rule);border-radius:999px;background:var(--surface);font-size:14px;font-weight:600;color:var(--ink-2)}
+  .vchip.on{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+  .doc-ev{display:block;min-width:0;margin-top:10px}
+  .doc-ev span{display:block;font-size:11px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);margin-bottom:6px}
+  .doc-ev .inp{display:block;width:100%;min-width:0;max-width:100%}
+
+  /* ---------- akce ---------- */
+  .evl{margin-top:14px;border-top:1px solid var(--rule)}
+  .evr{display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--rule)}
+  .evr .pick{flex:1;min-width:0;display:flex;align-items:center;gap:10px;padding:13px 2px;border:0;background:none;text-align:left}
+  .evr .pick .mid{flex:1;min-width:0}
+  .evr .pick .n{display:block;font-size:15px;font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .evr .pick .s{display:block;font-size:12px;color:var(--ink-3);margin-top:2px}
+  .evr .pick .go{flex:0 0 auto;font-size:13px;font-weight:600;color:var(--accent)}
+  .evr.on .pick .go{color:var(--cash)}
+  .evr .ab{width:36px;height:36px;flex:0 0 auto;border:0;background:none;color:var(--accent);border-radius:8px}
+  .evr .ab:active{background:var(--sunk)}
+  .evr .ab svg{width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .evchk{display:flex;align-items:center;gap:10px;margin-top:14px;font-size:14px;color:var(--ink-2)}
+  .evchk input{width:20px;height:20px;accent-color:var(--ink);flex:0 0 auto}
+  .tk .evn{margin-left:6px;padding:1px 6px;border-radius:6px;background:var(--sunk);color:var(--ink-2);font-size:11px;font-weight:600}
   /* Ikony v tlačítkách jsou vlastní SVG, ne znaky ani emoji. Jednotné
      nastavení tahu, velikost si každé místo doladí samo. */
   .step button svg,.key svg,.tx .del svg,.arch .ab svg,.edit .mv svg,.edit .rm svg,
@@ -445,10 +494,10 @@
   .pw-list{display:flex;flex-direction:column;gap:9px;margin-top:16px}
   .pw-b{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600}
   .pw-b svg{width:18px;height:18px;stroke:var(--cash);fill:none;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;flex:0 0 auto}
-  .pw-plans{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+  .pw-plans{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:16px}
   .pw-plan{position:relative;display:flex;flex-direction:column;gap:2px;align-items:center;padding:14px 8px;border:1.5px solid var(--rule);border-radius:var(--r-tile);background:var(--surface)}
   .pw-plan .k{font-size:12px;font-weight:700;color:var(--ink-2);text-transform:uppercase;letter-spacing:.05em}
-  .pw-plan .p{font-size:22px}
+  .pw-plan .p{font-size:clamp(15px,5.6vw,22px);max-width:100%;text-align:center;overflow-wrap:anywhere;line-height:1.1}
   .pw-plan .s{font-size:11px;color:var(--ink-3)}
   .pw-plan.best{border-color:var(--accent);background:var(--accent-tint)}
   .pw-plan:active{transform:scale(.98)}
@@ -569,8 +618,11 @@
   .wheelside{display:flex;flex-direction:column;gap:14px;flex:1;min-width:120px}
   .wprev{width:64px;height:52px;border-radius:12px;border:1px solid rgba(0,0,0,.18);display:grid;place-items:center;font-weight:700;font-size:16px}
   #wlight{width:100%;accent-color:var(--ink);height:32px}
-  .swatches{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:14px}
-  .swatches button{height:54px;border-radius:var(--r-tile);border:1px solid rgba(0,0,0,.18);font-size:12px;font-weight:700}
+  /* Sloupce se musí umět zúžit: s repeat(5,1fr) nejdelší název barvy
+     (polské „pomarańczowy“) roztáhl mřížku a krajní barvy ujely za okraj. */
+  .swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(62px,1fr));gap:10px;margin-top:14px}
+  .swatches button{min-width:0;height:54px;padding:4px 3px;border-radius:var(--r-tile);border:1px solid rgba(0,0,0,.18);
+    font-size:12px;font-weight:700;line-height:1.15;overflow:hidden;overflow-wrap:anywhere;hyphens:auto}
   .swatches button.on{box-shadow:inset 0 0 0 3px currentColor;border-color:rgba(0,0,0,.35)}
 
   .seg{display:grid;grid-template-columns:1fr 1fr;gap:0;margin:0 16px;border:1px solid var(--rule);border-radius:var(--r-btn);overflow:hidden;background:var(--surface)}
@@ -641,7 +693,7 @@
   <header class="top">
     <div>
       <span class="eyebrow" id="topRole">Kasa</span>
-      <span class="top-name" id="topName">·</span>
+      <button type="button" class="top-name" id="topName" data-evsheet="1">·</button>
     </div>
     <div class="top-total">
       <span class="eyebrow" id="topLabel">Objednávky</span>
@@ -763,6 +815,7 @@
     tabSell: "Prodej",
     tabOrders: "Objednávky",
     tabHistory: "Přehled",
+    navAria: "Sekce",
     tabMenu: "Menu",
     tabSettings: "Nastavení",
     customTile: "+ Jiná částka",
@@ -877,6 +930,26 @@
     vydejPairHint: "Zadejte stejný kód jako na kase. V nainstalované aplikaci se zařízení navíc najdou sama po místní síti, i bez internetu.",
     eventHead: "Název akce",
     eventPlaceholder: "Např. Sobotní trh",
+    evHead: "Akce",
+    evHint: "Každá akce má vlastní menu, účtenky a číslování. Přepnutím se nic neuzavírá ani nemaže.",
+    evActive: "Prodáváte",
+    evSwitch: "Přepnout",
+    evNew: "Nová akce",
+    evNewHint: "Třeba stánek na trhu vedle každodenní kavárny. Účtenky a čísla začínají od jedničky.",
+    evCopyMenu: "Převzít menu z akce „{0}“",
+    evCreate: "Založit a přepnout",
+    evDelAria: "Odebrat akci {0}",
+    evDelBusy: "Akce má účtenky. Přepněte se do ní a uzavřete ji.",
+    confirmEvDel: ["Odebrat akci", "Akce „{0}“ i její menu zmizí. Účtenky nemá, žádná tržba se neztratí.", "Odebrat"],
+    toastEvSwitched: "Prodáváte v akci {0}.",
+    basketBusy: "Nejdřív dokončete nebo zrušte rozpracovaný účet.",
+    openHead: "Další otevřené akce",
+    evManage: "Přepnout nebo založit akci",
+    evManageN: "Přepnout akci (otevřeno: {0})",
+    evMenuHint: "Menu níže patří jen této akci. Každá akce má vlastní.",
+    evSwitchAria: "Akce {0}, přepnout akci",
+    docEvLabel: "Akce",
+    docEvAll: "Všechny akce",
     itemsHead: "Položky, ceny a barvy",
     colorAria: "Barva karty",
     priceAria: "Cena",
@@ -886,6 +959,12 @@
     resetMenu: "Obnovit výchozí menu",
     pricesHint: "Ceny i barvy se ukládají průběžně. Změna ceny neovlivní už uložené účtenky.",
     backupHead: "Záloha dat",
+    backupSave: "Uložit zálohu do souboru",
+    backupSaved: "Záloha uložena.",
+    backupFail: "Zálohu se nepodařilo uložit.",
+    backupTooBig: "Záloha je na schránku příliš velká. Uložte ji do souboru.",
+    restoreFile: "Načíst zálohu ze souboru",
+    copiedAny: "Zkopírováno",
     backupShow: "Zobrazit zálohu",
     backupLoad: "Načíst ze zálohy",
     backupHint: "Data si aplikace drží v zařízení nadvakrát, takže restart ani vybitá baterie o ně nepřipraví.<br>Zálohu si můžete zkopírovat kamkoliv, třeba do poznámek nebo do mailu, a kdykoliv z ní vše obnovit.",
@@ -1013,6 +1092,12 @@
     proActive: "Pro aktivní",
     proLeft: ["Dnes zbývá {0} platba zdarma", "Dnes zbývají {0} platby zdarma", "Dnes zbývá {0} plateb zdarma"],
     proRow: "Odemknout Pro",
+    proRestoreNone: "K tomuto účtu obchodu nepatří žádné aktivní předplatné.",
+    proBuyPending: "Platba přijata, aktivace se ještě zpracovává. Za chvíli zkuste Obnovit nákup.",
+    billNet: "Obchod není dostupný. Zkontrolujte připojení k internetu a zkuste to znovu.",
+    billPending: "Platba čeká na schválení. Pro se zapne, jakmile ji obchod potvrdí.",
+    billStore: "Nákup teď v obchodě nejde dokončit. Zkuste to prosím později.",
+    billFail: "Nákup se nepodařil (kód {0}). Zkuste to prosím znovu.",
     proPitch: "Neomezené platby a propojená zařízení.",
     proB1: "Neomezený počet plateb každý den",
     proB2: "Propojení pokladny s dalšími zařízeními",
@@ -1037,7 +1122,7 @@
     currencyHint: "Ovlivní jen zobrazování a rychlé bankovky. Uložené ceny se nepřepočítávají.",
     docBtn: "Daňový doklad",
     docHead: "Souhrnný doklad",
-    docHint: "Sestaví souhrnný prodejní doklad za zvolené období. Uzavřené akce se počítají podle data uzavření.",
+    docHint: "Sestaví souhrnný prodejní doklad za zvolené období. Účtenky se počítají podle data prodeje.",
     docFrom: "Od",
     docTo: "Do",
     bizHead: "Údaje prodejce",
@@ -1064,6 +1149,7 @@
     docReceipts: "Počet účtů:",
     docTotal: "CELKEM",
     docMail: "Poslat e-mailem",
+    docSave: "Uložit PDF do zařízení",
     docPeriodLabel: "Období a akce",
     docShare: "Sdílet",
     docColItem: "Položka",
@@ -1089,6 +1175,7 @@
     tabSell: "Sell",
     tabOrders: "Orders",
     tabHistory: "Stats",
+    navAria: "Sections",
     tabMenu: "Menu",
     tabSettings: "Settings",
     customTile: "+ Other amount",
@@ -1203,6 +1290,26 @@
     vydejPairHint: "Enter the same code as on the till. In the installed app, devices also find each other over the local network, even without internet.",
     eventHead: "Event name",
     eventPlaceholder: "e.g. Saturday market",
+    evHead: "Events",
+    evHint: "Each event has its own menu, receipts and numbering. Switching closes or deletes nothing.",
+    evActive: "Selling now",
+    evSwitch: "Switch",
+    evNew: "New event",
+    evNewHint: "For example a market stall next to your everyday café. Receipts and numbers start from one.",
+    evCopyMenu: "Copy the menu from “{0}”",
+    evCreate: "Create and switch",
+    evDelAria: "Remove event {0}",
+    evDelBusy: "This event has receipts. Switch to it and close it.",
+    confirmEvDel: ["Remove event", "Event “{0}” and its menu will be removed. It has no receipts, so no revenue is lost.", "Remove"],
+    toastEvSwitched: "Now selling in {0}.",
+    basketBusy: "Finish or clear the current order first.",
+    openHead: "Other open events",
+    evManage: "Switch or create an event",
+    evManageN: "Switch event ({0} open)",
+    evMenuHint: "The menu below belongs to this event only. Each event has its own.",
+    evSwitchAria: "Event {0}, switch event",
+    docEvLabel: "Event",
+    docEvAll: "All events",
     itemsHead: "Items, prices and colours",
     colorAria: "Card colour",
     priceAria: "Price",
@@ -1212,6 +1319,12 @@
     resetMenu: "Restore default menu",
     pricesHint: "Prices and colours save as you type. Changing a price never touches saved receipts.",
     backupHead: "Data backup",
+    backupSave: "Save backup to a file",
+    backupSaved: "Backup saved.",
+    backupFail: "The backup could not be saved.",
+    backupTooBig: "The backup is too large for the clipboard. Save it to a file.",
+    restoreFile: "Load backup from a file",
+    copiedAny: "Copied",
     backupShow: "Show backup",
     backupLoad: "Load from backup",
     backupHint: "Your data is stored twice on this device, so a restart or a dead battery cannot lose it.<br>Copy the backup anywhere, such as notes or e-mail, and restore from it any time.",
@@ -1337,6 +1450,12 @@
     proActive: "Pro active",
     proLeft: ["{0} free payment left today", "{0} free payments left today", "{0} free payments left today"],
     proRow: "Unlock Pro",
+    proRestoreNone: "No active subscription belongs to this store account.",
+    proBuyPending: "Payment received, activation is still processing. Try Restore purchase in a moment.",
+    billNet: "The store cannot be reached. Check your internet connection and try again.",
+    billPending: "The payment is waiting for approval. Pro turns on as soon as the store confirms it.",
+    billStore: "The purchase cannot be completed in the store right now. Please try again later.",
+    billFail: "The purchase failed (code {0}). Please try again.",
     proPitch: "Unlimited payments and connected devices.",
     proB1: "Unlimited payments every day",
     proB2: "Pair the till with more devices",
@@ -1363,7 +1482,7 @@
     colApply: "Use colour",
     docBtn: "Tax document",
     docHead: "Summary document",
-    docHint: "Builds a summary sales document for the chosen period. Closed events count by their closing date.",
+    docHint: "Builds a summary sales document for the chosen period. Receipts count by their sale date.",
     docFrom: "From",
     docTo: "To",
     bizHead: "Seller details",
@@ -1390,6 +1509,7 @@
     docReceipts: "Receipts:",
     docTotal: "TOTAL",
     docMail: "Send by e-mail",
+    docSave: "Save PDF to device",
     docPeriodLabel: "Period and events",
     docShare: "Share",
     docColItem: "Item",
@@ -1416,6 +1536,7 @@
     tabSell: "Predaj",
     tabOrders: "Objednávky",
     tabHistory: "Prehľad",
+    navAria: "Sekcie",
     tabMenu: "Menu",
     tabSettings: "Nastavenia",
     customTile: "+ Iná suma",
@@ -1530,6 +1651,26 @@
     vydejPairHint: "Zadajte rovnaký kód ako na kase. V nainštalovanej aplikácii sa zariadenia navyše nájdu samy cez miestnu sieť, aj bez internetu.",
     eventHead: "Názov akcie",
     eventPlaceholder: "Napr. Sobotný trh",
+    evHead: "Akcie",
+    evHint: "Každá akcia má vlastné menu, účtenky a číslovanie. Prepnutím sa nič neuzatvára ani nemaže.",
+    evActive: "Predávate",
+    evSwitch: "Prepnúť",
+    evNew: "Nová akcia",
+    evNewHint: "Napríklad stánok na trhu popri každodennej kaviarni. Účtenky a čísla začínajú od jednotky.",
+    evCopyMenu: "Prevziať menu z akcie „{0}“",
+    evCreate: "Založiť a prepnúť",
+    evDelAria: "Odobrať akciu {0}",
+    evDelBusy: "Akcia má účtenky. Prepnite sa do nej a uzavrite ju.",
+    confirmEvDel: ["Odobrať akciu", "Akcia „{0}“ aj jej menu zmiznú. Účtenky nemá, žiadna tržba sa nestratí.", "Odobrať"],
+    toastEvSwitched: "Predávate v akcii {0}.",
+    basketBusy: "Najprv dokončite alebo zrušte rozpracovaný účet.",
+    openHead: "Ďalšie otvorené akcie",
+    evManage: "Prepnúť alebo založiť akciu",
+    evManageN: "Prepnúť akciu (otvorené: {0})",
+    evMenuHint: "Menu nižšie patrí len tejto akcii. Každá akcia má vlastné.",
+    evSwitchAria: "Akcia {0}, prepnúť akciu",
+    docEvLabel: "Akcia",
+    docEvAll: "Všetky akcie",
     itemsHead: "Položky, ceny a farby",
     colorAria: "Farba karty",
     priceAria: "Cena",
@@ -1539,6 +1680,12 @@
     resetMenu: "Obnoviť predvolené menu",
     pricesHint: "Ceny aj farby sa ukladajú priebežne. Zmena ceny neovplyvní už uložené bločky.",
     backupHead: "Záloha dát",
+    backupSave: "Uložiť zálohu do súboru",
+    backupSaved: "Záloha uložená.",
+    backupFail: "Zálohu sa nepodarilo uložiť.",
+    backupTooBig: "Záloha je na schránku príliš veľká. Uložte ju do súboru.",
+    restoreFile: "Načítať zálohu zo súboru",
+    copiedAny: "Skopírované",
     backupShow: "Zobraziť zálohu",
     backupLoad: "Načítať zo zálohy",
     backupHint: "Dáta si apka drží v zariadení dvojmo, takže reštart ani vybitá batéria vás o ne nepripravia.<br>Zálohu si môžete skopírovať kamkoľvek (do poznámok, do mailu) a kedykoľvek z nej všetko obnoviť.",
@@ -1666,6 +1813,12 @@
     proActive: "Pro aktívne",
     proLeft: ["Dnes zostáva {0} platba zadarmo", "Dnes zostávajú {0} platby zadarmo", "Dnes zostáva {0} platieb zadarmo"],
     proRow: "Odomknúť Pro",
+    proRestoreNone: "K tomuto účtu obchodu nepatrí žiadne aktívne predplatné.",
+    proBuyPending: "Platba prijatá, aktivácia sa ešte spracúva. O chvíľu skúste Obnoviť nákup.",
+    billNet: "Obchod nie je dostupný. Skontrolujte pripojenie na internet a skúste to znova.",
+    billPending: "Platba čaká na schválenie. Pro sa zapne, len čo ju obchod potvrdí.",
+    billStore: "Nákup sa teraz v obchode nedá dokončiť. Skúste to prosím neskôr.",
+    billFail: "Nákup sa nepodaril (kód {0}). Skúste to prosím znova.",
     proPitch: "Neobmedzené platby a prepojené zariadenia.",
     proB1: "Neobmedzený počet platieb každý deň",
     proB2: "Prepojenie pokladne s ďalšími zariadeniami",
@@ -1690,7 +1843,7 @@
     currencyHint: "Ovplyvní len zobrazovanie a rýchle bankovky. Uložené ceny sa neprepočítavajú.",
     docBtn: "Daňový doklad",
     docHead: "Súhrnný doklad",
-    docHint: "Zostaví súhrnný predajný doklad za zvolené obdobie. Uzavreté akcie sa počítajú podľa dátumu uzavretia.",
+    docHint: "Zostaví súhrnný predajný doklad za zvolené obdobie. Účtenky sa počítajú podľa dátumu predaja.",
     docFrom: "Od",
     docTo: "Do",
     bizHead: "Údaje predajcu",
@@ -1717,6 +1870,7 @@
     docReceipts: "Počet bločkov:",
     docTotal: "SPOLU",
     docMail: "Poslať e-mailom",
+    docSave: "Uložiť PDF do zariadenia",
     docPeriodLabel: "Obdobie a akcie",
     docShare: "Zdieľať",
     docColItem: "Položka",
@@ -1742,6 +1896,7 @@
     tabSell: "Verkauf",
     tabOrders: "Bestellungen",
     tabHistory: "Übersicht",
+    navAria: "Bereiche",
     tabMenu: "Menü",
     tabSettings: "Einstellungen",
     customTile: "+ Anderer Betrag",
@@ -1856,6 +2011,26 @@
     vydejPairHint: "Geben Sie denselben Code ein wie an der Kasse. In der installierten App finden sich die Geräte außerdem von selbst im lokalen Netzwerk, auch ohne Internet.",
     eventHead: "Eventname",
     eventPlaceholder: "z. B. Samstagsmarkt",
+    evHead: "Events",
+    evHint: "Jedes Event hat ein eigenes Menü, eigene Belege und eine eigene Nummerierung. Beim Wechseln wird nichts abgeschlossen oder gelöscht.",
+    evActive: "Aktiv",
+    evSwitch: "Wechseln",
+    evNew: "Neues Event",
+    evNewHint: "Zum Beispiel ein Marktstand neben dem täglichen Café. Belege und Nummern beginnen bei eins.",
+    evCopyMenu: "Menü von „{0}“ übernehmen",
+    evCreate: "Anlegen und wechseln",
+    evDelAria: "Event {0} entfernen",
+    evDelBusy: "Dieses Event hat Belege. Wechseln Sie hinein und schließen Sie es ab.",
+    confirmEvDel: ["Event entfernen", "Das Event „{0}“ und sein Menü werden entfernt. Es hat keine Belege, es geht kein Umsatz verloren.", "Entfernen"],
+    toastEvSwitched: "Sie verkaufen jetzt in {0}.",
+    basketBusy: "Schließen Sie zuerst die offene Bestellung ab oder verwerfen Sie sie.",
+    openHead: "Weitere offene Events",
+    evManage: "Event wechseln oder anlegen",
+    evManageN: "Event wechseln ({0} offen)",
+    evMenuHint: "Das Menü unten gehört nur zu diesem Event. Jedes Event hat ein eigenes.",
+    evSwitchAria: "Event {0}, Event wechseln",
+    docEvLabel: "Event",
+    docEvAll: "Alle Events",
     itemsHead: "Artikel, Preise und Farben",
     colorAria: "Kachelfarbe",
     priceAria: "Preis",
@@ -1865,6 +2040,12 @@
     resetMenu: "Menü zurücksetzen",
     pricesHint: "Preise und Farben werden laufend gespeichert. Eine Preisänderung ändert nichts an schon gespeicherten Belegen.",
     backupHead: "Daten-Backup",
+    backupSave: "Sicherung als Datei speichern",
+    backupSaved: "Sicherung gespeichert.",
+    backupFail: "Die Sicherung konnte nicht gespeichert werden.",
+    backupTooBig: "Die Sicherung ist für die Zwischenablage zu groß. Speichern Sie sie als Datei.",
+    restoreFile: "Sicherung aus Datei laden",
+    copiedAny: "Kopiert",
     backupShow: "Backup anzeigen",
     backupLoad: "Aus Backup laden",
     backupHint: "Die App speichert Ihre Daten doppelt im Gerät. Ein Neustart oder ein leerer Akku kann ihnen nichts anhaben.<br>Das Backup können Sie überallhin kopieren (in die Notizen, in eine E-Mail) und jederzeit alles daraus wiederherstellen.",
@@ -1992,6 +2173,12 @@
     proActive: "Pro aktiv",
     proLeft: ["Heute noch {0} kostenlose Zahlung", "Heute noch {0} kostenlose Zahlungen", "Heute noch {0} kostenlose Zahlungen"],
     proRow: "Pro freischalten",
+    proRestoreNone: "Zu diesem Store-Konto gehört kein aktives Abo.",
+    proBuyPending: "Zahlung erhalten, die Aktivierung läuft noch. Tippen Sie gleich auf Kauf wiederherstellen.",
+    billNet: "Der Store ist nicht erreichbar. Prüfen Sie die Internetverbindung und versuchen Sie es erneut.",
+    billPending: "Die Zahlung wartet auf Freigabe. Pro wird aktiv, sobald der Store sie bestätigt.",
+    billStore: "Der Kauf lässt sich im Store gerade nicht abschließen. Bitte später erneut versuchen.",
+    billFail: "Der Kauf ist fehlgeschlagen (Code {0}). Bitte erneut versuchen.",
     proPitch: "Unbegrenzte Zahlungen und gekoppelte Geräte.",
     proB1: "Jeden Tag unbegrenzt viele Zahlungen",
     proB2: "Kasse mit weiteren Geräten koppeln",
@@ -2016,7 +2203,7 @@
     currencyHint: "Betrifft nur die Anzeige und die Schnelltasten für Scheine. Gespeicherte Preise werden nicht umgerechnet.",
     docBtn: "Steuerbeleg",
     docHead: "Sammelbeleg",
-    docHint: "Erstellt einen zusammenfassenden Verkaufsbeleg für den gewählten Zeitraum. Abgeschlossene Events zählen nach ihrem Abschlussdatum.",
+    docHint: "Erstellt einen zusammenfassenden Verkaufsbeleg für den gewählten Zeitraum. Belege zählen nach ihrem Verkaufsdatum.",
     docFrom: "Von",
     docTo: "Bis",
     bizHead: "Angaben zum Verkäufer",
@@ -2043,6 +2230,7 @@
     docReceipts: "Belege:",
     docTotal: "GESAMT",
     docMail: "Per E-Mail senden",
+    docSave: "PDF auf dem Gerät speichern",
     docPeriodLabel: "Zeitraum und Events",
     docShare: "Teilen",
     docColItem: "Artikel",
@@ -2068,6 +2256,7 @@
     tabSell: "Vente",
     tabOrders: "Commandes",
     tabHistory: "Bilan",
+    navAria: "Sections",
     tabMenu: "Menu",
     tabSettings: "Réglages",
     customTile: "+ Autre montant",
@@ -2131,10 +2320,10 @@
     tourS1c: "Touchez à nouveau la carte pour avoir quelque chose à encaisser.",
     tourS2: "Touchez Encaisser.",
     tourS3: "Choisissez Espèces.",
-    tourS4: "Touchez Exact, puis Terminé.",
+    tourS4: "Touchez Appoint, puis Terminé.",
     tourS5: "Ouvrez Commandes, l'addition payée attend dans la file.",
-    tourS6: "Ouvrez le ticket et touchez Servi.",
-    tourS7: "Le Résumé montre la recette ; le document fiscal se fait ici.",
+    tourS6: "Ouvrez le ticket et touchez Servie.",
+    tourS7: "Le Bilan montre la recette ; le document fiscal se fait ici.",
     tourS8: "Ouvrez le Menu.",
     tourS9: "Renseignez ici les coordonnées du vendeur, elles figurent sur le document.",
     tourSkip: "Passer",
@@ -2182,6 +2371,26 @@
     vydejPairHint: "Saisissez le même code que sur la caisse. Dans l’application installée, les appareils se détectent aussi automatiquement sur le réseau local, même sans Internet.",
     eventHead: "Nom de l’événement",
     eventPlaceholder: "Ex. Marché du samedi",
+    evHead: "Événements",
+    evHint: "Chaque événement a son propre menu, ses tickets et sa numérotation. Changer d’événement ne clôture et ne supprime rien.",
+    evActive: "En cours",
+    evSwitch: "Passer",
+    evNew: "Nouvel événement",
+    evNewHint: "Par exemple un stand au marché en plus du café de tous les jours. Tickets et numéros repartent de un.",
+    evCopyMenu: "Reprendre le menu de « {0} »",
+    evCreate: "Créer et passer",
+    evDelAria: "Supprimer l’événement {0}",
+    evDelBusy: "Cet événement a des tickets. Passez-y et clôturez-le.",
+    confirmEvDel: ["Supprimer l’événement", "L’événement « {0} » et son menu seront supprimés. Il n’a aucun ticket, aucune recette n’est perdue.", "Supprimer"],
+    toastEvSwitched: "Vous vendez maintenant dans {0}.",
+    basketBusy: "Terminez ou annulez d’abord la commande en cours.",
+    openHead: "Autres événements ouverts",
+    evManage: "Changer ou créer un événement",
+    evManageN: "Changer d’événement ({0} ouverts)",
+    evMenuHint: "Le menu ci-dessous appartient uniquement à cet événement. Chaque événement a le sien.",
+    evSwitchAria: "Événement {0}, changer d’événement",
+    docEvLabel: "Événement",
+    docEvAll: "Tous les événements",
     itemsHead: "Articles, prix et couleurs",
     colorAria: "Couleur de la carte",
     priceAria: "Prix",
@@ -2191,6 +2400,12 @@
     resetMenu: "Rétablir le menu par défaut",
     pricesHint: "Les prix et les couleurs se sauvegardent au fil de la saisie. Changer un prix ne modifie pas les tickets déjà enregistrés.",
     backupHead: "Sauvegarde des données",
+    backupSave: "Enregistrer la sauvegarde dans un fichier",
+    backupSaved: "Sauvegarde enregistrée.",
+    backupFail: "La sauvegarde n’a pas pu être enregistrée.",
+    backupTooBig: "La sauvegarde est trop volumineuse pour le presse-papiers. Enregistrez-la dans un fichier.",
+    restoreFile: "Charger une sauvegarde depuis un fichier",
+    copiedAny: "Copié",
     backupShow: "Voir la sauvegarde",
     backupLoad: "Charger une sauvegarde",
     backupHint: "L’application conserve vos données en double sur l’appareil : un redémarrage ou une batterie vide ne les effacera pas.<br>Copiez la sauvegarde où vous le souhaitez (dans vos notes, dans un e-mail) et restaurez l’ensemble à tout moment.",
@@ -2318,6 +2533,12 @@
     proActive: "Pro actif",
     proLeft: ["Il reste {0} paiement gratuit aujourd’hui", "Il reste {0} paiements gratuits aujourd’hui", "Il reste {0} paiements gratuits aujourd’hui"],
     proRow: "Débloquer Pro",
+    proRestoreNone: "Aucun abonnement actif n’est lié à ce compte de la boutique.",
+    proBuyPending: "Paiement reçu, l’activation est encore en cours. Essayez Restaurer l’achat dans un instant.",
+    billNet: "La boutique est injoignable. Vérifiez la connexion internet et réessayez.",
+    billPending: "Le paiement attend une validation. Pro s’active dès que la boutique le confirme.",
+    billStore: "L’achat ne peut pas aboutir dans la boutique pour le moment. Réessayez plus tard.",
+    billFail: "L’achat a échoué (code {0}). Veuillez réessayer.",
     proPitch: "Paiements illimités et appareils connectés.",
     proB1: "Paiements illimités chaque jour",
     proB2: "Connexion de la caisse à d’autres appareils",
@@ -2342,7 +2563,7 @@
     currencyHint: "Ne change que l’affichage et les boutons de billets. Les prix enregistrés ne sont pas convertis.",
     docBtn: "Justificatif fiscal",
     docHead: "Document récapitulatif",
-    docHint: "Établit un récapitulatif des ventes pour la période choisie. Les événements clôturés comptent à leur date de clôture.",
+    docHint: "Établit un récapitulatif des ventes pour la période choisie. Les tickets comptent à leur date de vente.",
     docFrom: "Du",
     docTo: "Au",
     bizHead: "Coordonnées du vendeur",
@@ -2369,6 +2590,7 @@
     docReceipts: "Tickets :",
     docTotal: "TOTAL",
     docMail: "Envoyer par e-mail",
+    docSave: "Enregistrer le PDF sur l’appareil",
     docPeriodLabel: "Période et événements",
     docShare: "Partager",
     docColItem: "Article",
@@ -2394,6 +2616,7 @@
     tabSell: "Vender",
     tabOrders: "Pedidos",
     tabHistory: "Resumen",
+    navAria: "Secciones",
     tabMenu: "Menú",
     tabSettings: "Ajustes",
     customTile: "+ Otro importe",
@@ -2508,6 +2731,26 @@
     vydejPairHint: "Introduzca el mismo código que en la caja. Con la app instalada, los dispositivos además se encuentran solos por la red local, incluso sin internet.",
     eventHead: "Nombre del evento",
     eventPlaceholder: "P. ej. Mercadillo del sábado",
+    evHead: "Eventos",
+    evHint: "Cada evento tiene su propio menú, sus tickets y su numeración. Al cambiar no se cierra ni se borra nada.",
+    evActive: "Vendiendo",
+    evSwitch: "Cambiar",
+    evNew: "Nuevo evento",
+    evNewHint: "Por ejemplo, un puesto en un mercado además de la cafetería de cada día. Los tickets y los números empiezan desde uno.",
+    evCopyMenu: "Copiar el menú de «{0}»",
+    evCreate: "Crear y cambiar",
+    evDelAria: "Quitar el evento {0}",
+    evDelBusy: "Este evento tiene tickets. Cambie a él y ciérrelo.",
+    confirmEvDel: ["Quitar evento", "El evento «{0}» y su menú se quitarán. No tiene tickets, no se pierde ninguna venta.", "Quitar"],
+    toastEvSwitched: "Ahora vende en {0}.",
+    basketBusy: "Primero termine o cancele el pedido en curso.",
+    openHead: "Otros eventos abiertos",
+    evManage: "Cambiar o crear un evento",
+    evManageN: "Cambiar de evento ({0} abiertos)",
+    evMenuHint: "El menú de abajo es solo de este evento. Cada evento tiene el suyo.",
+    evSwitchAria: "Evento {0}, cambiar de evento",
+    docEvLabel: "Evento",
+    docEvAll: "Todos los eventos",
     itemsHead: "Artículos, precios y colores",
     colorAria: "Color de la tarjeta",
     priceAria: "Precio",
@@ -2517,6 +2760,12 @@
     resetMenu: "Restaurar menú predeterminado",
     pricesHint: "Los precios y los colores se guardan solos sobre la marcha. Cambiar un precio no toca los recibos ya guardados.",
     backupHead: "Copia de seguridad",
+    backupSave: "Guardar la copia en un archivo",
+    backupSaved: "Copia guardada.",
+    backupFail: "No se pudo guardar la copia.",
+    backupTooBig: "La copia es demasiado grande para el portapapeles. Guárdela en un archivo.",
+    restoreFile: "Cargar copia desde un archivo",
+    copiedAny: "Copiado",
     backupShow: "Ver la copia",
     backupLoad: "Cargar copia",
     backupHint: "La app guarda los datos por duplicado en el dispositivo, así que no se pierden ni con un reinicio ni con la batería agotada.<br>La copia de seguridad se la puede llevar a donde quiera (a las notas, a un correo) y restaurarlo todo en cualquier momento.",
@@ -2644,6 +2893,12 @@
     proActive: "Pro activo",
     proLeft: ["Hoy le queda {0} pago gratis", "Hoy le quedan {0} pagos gratis", "Hoy le quedan {0} pagos gratis"],
     proRow: "Desbloquear Pro",
+    proRestoreNone: "No hay ninguna suscripción activa en esta cuenta de la tienda.",
+    proBuyPending: "Pago recibido, la activación aún se está procesando. Pruebe Restaurar compra en un momento.",
+    billNet: "No se puede acceder a la tienda. Compruebe la conexión a internet y vuelva a intentarlo.",
+    billPending: "El pago está pendiente de aprobación. Pro se activará en cuanto la tienda lo confirme.",
+    billStore: "La compra no se puede completar en la tienda ahora mismo. Inténtelo más tarde.",
+    billFail: "La compra ha fallado (código {0}). Vuelva a intentarlo.",
     proPitch: "Pagos ilimitados y dispositivos conectados.",
     proB1: "Pagos ilimitados cada día",
     proB2: "Conecte la caja con más dispositivos",
@@ -2668,7 +2923,7 @@
     currencyHint: "Solo afecta a lo que se muestra y a los billetes rápidos. Los precios guardados no se recalculan.",
     docBtn: "Documento fiscal",
     docHead: "Documento resumen",
-    docHint: "Genera un documento resumen de ventas del periodo elegido. Los eventos cerrados cuentan por su fecha de cierre.",
+    docHint: "Genera un documento resumen de ventas del periodo elegido. Los tickets cuentan por su fecha de venta.",
     docFrom: "Desde",
     docTo: "Hasta",
     bizHead: "Datos del vendedor",
@@ -2695,6 +2950,7 @@
     docReceipts: "Recibos:",
     docTotal: "TOTAL",
     docMail: "Enviar por correo",
+    docSave: "Guardar PDF en el dispositivo",
     docPeriodLabel: "Periodo y eventos",
     docShare: "Compartir",
     docColItem: "Artículo",
@@ -2720,6 +2976,7 @@
     tabSell: "Vendita",
     tabOrders: "Ordini",
     tabHistory: "Incassi",
+    navAria: "Sezioni",
     tabMenu: "Menu",
     tabSettings: "Impostazioni",
     customTile: "+ Altro importo",
@@ -2786,7 +3043,7 @@
     tourS4: "Toccate Esatto e poi Fatto.",
     tourS5: "Aprite Ordini, il conto pagato aspetta in coda.",
     tourS6: "Aprite lo scontrino e toccate Servito.",
-    tourS7: "Il Riepilogo mostra l’incasso; qui si fa anche il documento fiscale.",
+    tourS7: "Incassi mostra l’incasso; qui si fa anche il documento fiscale.",
     tourS8: "Aprite il Menu.",
     tourS9: "Compilate qui i dati del venditore, finiscono sul documento.",
     tourSkip: "Salta",
@@ -2827,13 +3084,33 @@
     join: "Collegare",
     createCode: "Creare un nuovo codice",
     voiceOnKasa: "Ringrazia il cliente",
-    voiceOffKasa: "Ringrazia il cliente",
+    voiceOffKasa: "Ringraziare il cliente",
     voiceOnVydej: "Legge gli ordini ad alta voce",
-    voiceOffVydej: "Legge gli ordini ad alta voce",
+    voiceOffVydej: "Leggere gli ordini ad alta voce",
     voiceTry: "Provare la voce",
     vydejPairHint: "Inserire lo stesso codice della cassa. Nell’app installata, in più, i dispositivi si trovano da soli sulla rete locale, anche senza internet.",
     eventHead: "Nome dell’evento",
     eventPlaceholder: "Es. Mercato del sabato",
+    evHead: "Eventi",
+    evHint: "Ogni evento ha il proprio menu, i propri scontrini e la propria numerazione. Cambiando evento non si chiude e non si cancella nulla.",
+    evActive: "In vendita",
+    evSwitch: "Passare",
+    evNew: "Nuovo evento",
+    evNewHint: "Ad esempio una bancarella al mercato oltre al bar di tutti i giorni. Scontrini e numeri ripartono da uno.",
+    evCopyMenu: "Riprendere il menu da «{0}»",
+    evCreate: "Creare e passare",
+    evDelAria: "Rimuovere l’evento {0}",
+    evDelBusy: "Questo evento ha degli scontrini. Passate all’evento e chiudetelo.",
+    confirmEvDel: ["Rimuovere l’evento", "L’evento «{0}» e il suo menu verranno rimossi. Non ha scontrini, nessun incasso va perso.", "Rimuovere"],
+    toastEvSwitched: "Ora vendete in {0}.",
+    basketBusy: "Prima completate o svuotate l’ordine in corso.",
+    openHead: "Altri eventi aperti",
+    evManage: "Cambiare o creare un evento",
+    evManageN: "Cambiare evento ({0} aperti)",
+    evMenuHint: "Il menu qui sotto appartiene solo a questo evento. Ogni evento ha il suo.",
+    evSwitchAria: "Evento {0}, cambiare evento",
+    docEvLabel: "Evento",
+    docEvAll: "Tutti gli eventi",
     itemsHead: "Articoli, prezzi e colori",
     colorAria: "Colore del riquadro",
     priceAria: "Prezzo",
@@ -2843,6 +3120,12 @@
     resetMenu: "Ripristinare il menu predefinito",
     pricesHint: "Prezzi e colori si salvano man mano che si scrive. Cambiare un prezzo non tocca gli scontrini già salvati.",
     backupHead: "Backup dei dati",
+    backupSave: "Salvare il backup in un file",
+    backupSaved: "Backup salvato.",
+    backupFail: "Non è stato possibile salvare il backup.",
+    backupTooBig: "Il backup è troppo grande per gli appunti. Salvatelo in un file.",
+    restoreFile: "Caricare il backup da un file",
+    copiedAny: "Copiato",
     backupShow: "Mostrare il backup",
     backupLoad: "Caricare da backup",
     backupHint: "L’app tiene i dati sul dispositivo in doppia copia, così non si perdono con un riavvio o con la batteria scarica.<br>È possibile copiare il backup dove si preferisce (nelle note, in una mail) e ripristinare tutto in qualsiasi momento.",
@@ -2970,6 +3253,12 @@
     proActive: "Pro attivo",
     proLeft: ["Oggi resta {0} pagamento gratis", "Oggi restano {0} pagamenti gratis", "Oggi restano {0} pagamenti gratis"],
     proRow: "Sbloccare Pro",
+    proRestoreNone: "A questo account dello store non è associato alcun abbonamento attivo.",
+    proBuyPending: "Pagamento ricevuto, l’attivazione è ancora in corso. Tra poco provate Ripristinare acquisto.",
+    billNet: "Lo store non è raggiungibile. Controllate la connessione a internet e riprovate.",
+    billPending: "Il pagamento è in attesa di approvazione. Pro si attiva appena lo store lo conferma.",
+    billStore: "Al momento l’acquisto non si può completare nello store. Riprovate più tardi.",
+    billFail: "L’acquisto non è riuscito (codice {0}). Riprovate.",
     proPitch: "Pagamenti illimitati e dispositivi collegati.",
     proB1: "Pagamenti illimitati ogni giorno",
     proB2: "Collegamento della cassa ad altri dispositivi",
@@ -2994,7 +3283,7 @@
     currencyHint: "Cambia solo la visualizzazione e i tagli rapidi delle banconote. I prezzi salvati non si riconvertono.",
     docBtn: "Documento fiscale",
     docHead: "Documento riepilogativo",
-    docHint: "Genera un riepilogo delle vendite per il periodo scelto. Gli eventi chiusi contano per la data di chiusura.",
+    docHint: "Genera un riepilogo delle vendite per il periodo scelto. Gli scontrini contano per la data di vendita.",
     docFrom: "Dal",
     docTo: "Al",
     bizHead: "Dati del venditore",
@@ -3021,6 +3310,7 @@
     docReceipts: "Scontrini:",
     docTotal: "TOTALE",
     docMail: "Inviare per e-mail",
+    docSave: "Salvare il PDF sul dispositivo",
     docPeriodLabel: "Periodo ed eventi",
     docShare: "Condividere",
     docColItem: "Articolo",
@@ -3046,6 +3336,7 @@
     tabSell: "Sprzedaż",
     tabOrders: "Zamówienia",
     tabHistory: "Utarg",
+    navAria: "Sekcje",
     tabMenu: "Menu",
     tabSettings: "Ustawienia",
     customTile: "+ Inna kwota",
@@ -3107,12 +3398,12 @@
     tourS1: "Stuknij kartę produktu, pozycja wskoczy na rachunek.",
     tourS1b: "Teraz przytrzymaj kartę, aż pasek się zapełni, pozycja zniknie z rachunku.",
     tourS1c: "Stuknij kartę ponownie, żeby było co kasować.",
-    tourS2: "Stuknij Zapłać.",
+    tourS2: "Stuknij Zapłata.",
     tourS3: "Wybierz Gotówkę.",
     tourS4: "Stuknij Równo, a potem Gotowe.",
     tourS5: "Otwórz Zamówienia, opłacony rachunek czeka w kolejce.",
-    tourS6: "Otwórz bon i stuknij Wydane.",
-    tourS7: "Podsumowanie pokazuje utarg; tu też robi się dokument.",
+    tourS6: "Otwórz bon i stuknij Wydano.",
+    tourS7: "Utarg pokazuje sprzedaż; tu też robi się dokument.",
     tourS8: "Otwórz Menu.",
     tourS9: "Tu wypełnij dane sprzedawcy, trafią na dokument.",
     tourSkip: "Pomiń",
@@ -3160,6 +3451,26 @@
     vydejPairHint: "Proszę wpisać ten sam kod co na kasie. W zainstalowanej aplikacji urządzenia znajdą się też same w sieci lokalnej, nawet bez internetu.",
     eventHead: "Nazwa imprezy",
     eventPlaceholder: "Np. Sobotni targ",
+    evHead: "Imprezy",
+    evHint: "Każda impreza ma własne menu, paragony i numerację. Przełączenie niczego nie zamyka ani nie usuwa.",
+    evActive: "Sprzedajesz",
+    evSwitch: "Przełącz",
+    evNew: "Nowa impreza",
+    evNewHint: "Na przykład stoisko na targu obok codziennej kawiarni. Paragony i numery zaczynają się od jedynki.",
+    evCopyMenu: "Przejmij menu z imprezy „{0}”",
+    evCreate: "Utwórz i przełącz",
+    evDelAria: "Usuń imprezę {0}",
+    evDelBusy: "Ta impreza ma paragony. Przełącz się na nią i ją zamknij.",
+    confirmEvDel: ["Usuń imprezę", "Impreza „{0}” i jej menu zostaną usunięte. Nie ma paragonów, żaden utarg nie przepadnie.", "Usuń"],
+    toastEvSwitched: "Sprzedajesz teraz w imprezie {0}.",
+    basketBusy: "Najpierw dokończ lub anuluj bieżące zamówienie.",
+    openHead: "Inne otwarte imprezy",
+    evManage: "Przełącz lub utwórz imprezę",
+    evManageN: "Przełącz imprezę (otwarte: {0})",
+    evMenuHint: "Menu poniżej należy tylko do tej imprezy. Każda impreza ma własne.",
+    evSwitchAria: "Impreza {0}, przełącz imprezę",
+    docEvLabel: "Impreza",
+    docEvAll: "Wszystkie imprezy",
     itemsHead: "Pozycje, ceny i kolory",
     colorAria: "Kolor kafelka",
     priceAria: "Cena",
@@ -3169,6 +3480,12 @@
     resetMenu: "Przywrócić domyślne menu",
     pricesHint: "Ceny i kolory zapisują się na bieżąco. Zmiana ceny nie wpłynie na już zapisane paragony.",
     backupHead: "Kopia zapasowa",
+    backupSave: "Zapisz kopię do pliku",
+    backupSaved: "Kopia zapisana.",
+    backupFail: "Nie udało się zapisać kopii.",
+    backupTooBig: "Kopia jest za duża dla schowka. Zapisz ją do pliku.",
+    restoreFile: "Wczytaj kopię z pliku",
+    copiedAny: "Skopiowano",
     backupShow: "Podgląd kopii",
     backupLoad: "Wczytanie z kopii",
     backupHint: "Apka trzyma dane w urządzeniu w dwóch kopiach, więc nie przepadną przez restart ani rozładowaną baterię.<br>Kopię można skopiować gdziekolwiek (do notatek, do maila) i w każdej chwili wszystko z niej przywrócić.",
@@ -3296,6 +3613,12 @@
     proActive: "Pro aktywne",
     proLeft: ["Dziś została {0} darmowa płatność", "Dziś zostały {0} darmowe płatności", "Dziś zostało {0} darmowych płatności"],
     proRow: "Odblokowanie Pro",
+    proRestoreNone: "Do tego konta w sklepie nie należy żadna aktywna subskrypcja.",
+    proBuyPending: "Płatność przyjęta, aktywacja jeszcze trwa. Za chwilę spróbuj Przywrócić zakup.",
+    billNet: "Sklep jest niedostępny. Sprawdź połączenie z internetem i spróbuj ponownie.",
+    billPending: "Płatność czeka na zatwierdzenie. Pro włączy się, gdy sklep ją potwierdzi.",
+    billStore: "Zakupu nie da się teraz dokończyć w sklepie. Spróbuj później.",
+    billFail: "Zakup się nie powiódł (kod {0}). Spróbuj ponownie.",
     proPitch: "Płatności bez limitu i połączone urządzenia.",
     proB1: "Płatności bez limitu każdego dnia",
     proB2: "Połączenie kasy z kolejnymi urządzeniami",
@@ -3320,7 +3643,7 @@
     currencyHint: "Wpływa tylko na wyświetlanie i szybkie banknoty. Zapisane ceny się nie przeliczają.",
     docBtn: "Dokument podatkowy",
     docHead: "Dokument zbiorczy",
-    docHint: "Tworzy zbiorczy dokument sprzedaży za wybrany okres. Zamknięte imprezy liczą się według daty zamknięcia.",
+    docHint: "Tworzy zbiorczy dokument sprzedaży za wybrany okres. Paragony liczą się według daty sprzedaży.",
     docFrom: "Od",
     docTo: "Do",
     bizHead: "Dane sprzedawcy",
@@ -3347,6 +3670,7 @@
     docReceipts: "Paragony:",
     docTotal: "RAZEM",
     docMail: "Wysłać e-mailem",
+    docSave: "Zapisz PDF na urządzeniu",
     docPeriodLabel: "Okres i imprezy",
     docShare: "Udostępnij",
     docColItem: "Pozycja",
@@ -3372,6 +3696,7 @@
     tabSell: "Venda",
     tabOrders: "Pedidos",
     tabHistory: "Resumo",
+    navAria: "Secções",
     tabMenu: "Menu",
     tabSettings: "Definições",
     customTile: "+ Outro valor",
@@ -3435,7 +3760,7 @@
     tourS1c: "Toque no cartão outra vez para haver algo a cobrar.",
     tourS2: "Toque em Cobrar.",
     tourS3: "Escolha Dinheiro.",
-    tourS4: "Toque em Exato e depois em Concluído.",
+    tourS4: "Toque em Certo e depois em Feito.",
     tourS5: "Abra Pedidos, a conta paga espera na fila.",
     tourS6: "Abra o talão e toque em Entregue.",
     tourS7: "O Resumo mostra a receita; o documento fiscal faz-se aqui.",
@@ -3486,6 +3811,26 @@
     vydejPairHint: "Escreva o mesmo código que está na caixa. Na aplicação instalada, os dispositivos também se encontram sozinhos pela rede local, mesmo sem internet.",
     eventHead: "Nome do evento",
     eventPlaceholder: "Ex.: Mercado de sábado",
+    evHead: "Eventos",
+    evHint: "Cada evento tem o seu próprio menu, talões e numeração. Mudar de evento não fecha nem apaga nada.",
+    evActive: "A vender",
+    evSwitch: "Mudar",
+    evNew: "Novo evento",
+    evNewHint: "Por exemplo, uma banca no mercado além do café do dia a dia. Talões e números começam do um.",
+    evCopyMenu: "Copiar o menu de «{0}»",
+    evCreate: "Criar e mudar",
+    evDelAria: "Remover o evento {0}",
+    evDelBusy: "Este evento tem talões. Mude para ele e feche-o.",
+    confirmEvDel: ["Remover evento", "O evento «{0}» e o seu menu serão removidos. Não tem talões, não se perde nenhuma venda.", "Remover"],
+    toastEvSwitched: "Agora está a vender em {0}.",
+    basketBusy: "Primeiro conclua ou anule o pedido em curso.",
+    openHead: "Outros eventos abertos",
+    evManage: "Mudar ou criar um evento",
+    evManageN: "Mudar de evento ({0} abertos)",
+    evMenuHint: "O menu abaixo pertence só a este evento. Cada evento tem o seu.",
+    evSwitchAria: "Evento {0}, mudar de evento",
+    docEvLabel: "Evento",
+    docEvAll: "Todos os eventos",
     itemsHead: "Artigos, preços e cores",
     colorAria: "Cor do cartão",
     priceAria: "Preço",
@@ -3495,6 +3840,12 @@
     resetMenu: "Repor menu original",
     pricesHint: "Os preços e as cores vão sendo guardados automaticamente. Mudar um preço não mexe nos recibos já guardados.",
     backupHead: "Cópia de segurança",
+    backupSave: "Guardar a cópia num ficheiro",
+    backupSaved: "Cópia guardada.",
+    backupFail: "Não foi possível guardar a cópia.",
+    backupTooBig: "A cópia é demasiado grande para a área de transferência. Guarde-a num ficheiro.",
+    restoreFile: "Carregar cópia de um ficheiro",
+    copiedAny: "Copiado",
     backupShow: "Mostrar cópia",
     backupLoad: "Repor da cópia",
     backupHint: "A app guarda os dados duas vezes no dispositivo, por isso um reinício ou a bateria a zeros não os apagam.<br>Pode guardar a cópia de segurança onde quiser (nas notas, num email) e repor tudo a qualquer momento.",
@@ -3622,6 +3973,12 @@
     proActive: "Pro ativo",
     proLeft: ["Hoje ainda tem {0} pagamento grátis", "Hoje ainda tem {0} pagamentos grátis", "Hoje ainda tem {0} pagamentos grátis"],
     proRow: "Desbloquear Pro",
+    proRestoreNone: "Nenhuma subscrição ativa pertence a esta conta da loja.",
+    proBuyPending: "Pagamento recebido, a ativação ainda está a ser processada. Tente Restaurar compra daqui a pouco.",
+    billNet: "Não é possível contactar a loja. Verifique a ligação à internet e tente novamente.",
+    billPending: "O pagamento aguarda aprovação. O Pro liga-se assim que a loja o confirmar.",
+    billStore: "Neste momento não é possível concluir a compra na loja. Tente mais tarde.",
+    billFail: "A compra falhou (código {0}). Tente novamente.",
     proPitch: "Pagamentos sem limites e dispositivos ligados entre si.",
     proB1: "Pagamentos sem limite todos os dias",
     proB2: "Emparelhar a caixa com mais dispositivos",
@@ -3646,7 +4003,7 @@
     currencyHint: "Só afeta o que aparece no ecrã e os botões das notas. Os preços guardados não são convertidos.",
     docBtn: "Documento fiscal",
     docHead: "Documento resumo",
-    docHint: "Gera um documento resumo das vendas do período escolhido. Os eventos fechados contam pela data de fecho.",
+    docHint: "Gera um documento resumo das vendas do período escolhido. Os talões contam pela data de venda.",
     docFrom: "De",
     docTo: "Até",
     bizHead: "Dados do vendedor",
@@ -3673,6 +4030,7 @@
     docReceipts: "Recibos:",
     docTotal: "TOTAL",
     docMail: "Enviar por e-mail",
+    docSave: "Guardar PDF no dispositivo",
     docPeriodLabel: "Período e eventos",
     docShare: "Partilhar",
     docColItem: "Artigo",
@@ -3695,9 +4053,25 @@
 
   // Zbylé jazyky doplní překladová dávka; do té doby vše spadne na angličtinu.
 
+  // Jazyk z aplikace, ale formát data a čísel podle země zařízení, když
+  // mluví stejným jazykem: angličtina v Británii dává 23/09/2026, ne 9/23.
+  var locCache = {};
   function langInfo() {
-    for (var i = 0; i < LANGS.length; i++) { if (LANGS[i].k === state.lang) { return LANGS[i]; } }
-    return LANGS[2];
+    var base = LANGS[2];
+    for (var i = 0; i < LANGS.length; i++) { if (LANGS[i].k === state.lang) { base = LANGS[i]; break; } }
+    if (locCache[base.k] === undefined) {
+      var loc = base.loc;
+      try {
+        var dev = (navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language]);
+        for (var j = 0; j < dev.length; j++) {
+          var tag = String(dev[j] || "");
+          if (tag.split("-")[0].toLowerCase() === base.k && /-[A-Za-z]{2}$/.test(tag) &&
+              Intl.DateTimeFormat.supportedLocalesOf([tag]).length) { loc = tag; break; }
+        }
+      } catch (e) {}
+      locCache[base.k] = loc;
+    }
+    return { k: base.k, n: base.n, loc: locCache[base.k] };
   }
 
   function detectLang() {
@@ -3737,6 +4111,7 @@
       var m = n % 10, h = n % 100;
       return (m >= 2 && m <= 4 && (h < 12 || h > 14)) ? 1 : 2;
     }
+    if (lang === "fr") { return n <= 1 ? 0 : 2; }   // „0 vente“
     return n === 1 ? 0 : 2;
   }
 
@@ -3822,6 +4197,32 @@
 
   function notesFor() { return curInfo().notes; }
 
+  // DPH se počítá a píše na setiny i u měn, které v hotovosti drobné nemají
+  // (Kč, Ft…); celé koruny na řádek sazby dávaly odchylku až 50 haléřů.
+  // Jen jen a won drobné nemají vůbec.
+  function vatDec() {
+    var c = curInfo();
+    return c.c === "JPY" || c.c === "KRW" ? 0 : Math.max(2, c.dec);
+  }
+  function vr(n) {
+    var f = Math.pow(10, vatDec());
+    return Math.round(n * f) / f;
+  }
+  var vatFmt = null, vatFmtKey = "";
+  function vatMoney(n) {
+    var c = curInfo(), d = vatDec(), key = c.c + "|" + d + "|" + langInfo().loc;
+    if (vatFmtKey !== key) {
+      vatFmtKey = key;
+      try {
+        vatFmt = new Intl.NumberFormat(langInfo().loc, { style: "currency", currency: c.c,
+          minimumFractionDigits: d, maximumFractionDigits: d });
+      } catch (e) { vatFmt = null; }
+    }
+    var v = vr(n);
+    if (vatFmt) { try { return vatFmt.format(v); } catch (e) {} }
+    return v.toFixed(d) + " " + c.c;
+  }
+
   var nfPlain = null;
   function noteLbl(v) {
     if (!nfPlain) {
@@ -3844,10 +4245,22 @@
 
   // Ceny předplatného: nativní most je dodá v místní měně obchodu;
   // bez něj ukazujeme výchozí dolarové.
+  // V aplikaci se ukazuje jen cena z obchodu (tu zákazník opravdu
+  // zaplatí); dokud nedorazí, je tam výpustka a o ceny se požádá znovu.
+  // Náhradní dolarové ceny zůstávají jen pro web.
+  var pricesAskedAt = 0;
   function priceOf(plan) {
     var p = window.__KASA_PRICES__ || {};
-    if (plan === "yearly") { return p.yearly || "$39.99"; }
-    return p.monthly || "$4.99";
+    var have = plan === "yearly" ? p.yearly : p.monthly;
+    if (have) { return have; }
+    if (nativeApp()) {
+      if (typeof window.__kasaLoadPrices === "function" && Date.now() - pricesAskedAt > 15000) {
+        pricesAskedAt = Date.now();
+        setTimeout(function () { try { window.__kasaLoadPrices(); } catch (e) {} }, 0);
+      }
+      return "…";
+    }
+    return plan === "yearly" ? "$39.99" : "$4.99";
   }
 
   var PRO_MARK = '<svg viewBox="0 0 48 48" aria-hidden="true"><rect x="4" y="4" width="19" height="19" rx="5" fill="#D6402A"/><rect x="25" y="4" width="19" height="19" rx="5" fill="#F5CE3E"/><rect x="4" y="25" width="19" height="19" rx="5" fill="#2158C4"/><rect x="25" y="25" width="19" height="19" rx="5" fill="#127A4E"/></svg>';
@@ -3867,24 +4280,34 @@
 
   function detectCurrency() {
     var byLang = { cs: "CZK", sk: "EUR", de: "EUR", fr: "EUR", es: "EUR", it: "EUR", pl: "PLN", pt: "EUR", en: "USD" };
-    var region = "";
-    try { region = String(navigator.language || "").split("-")[1] || ""; } catch (e) {}
     var byRegion = { CZ: "CZK", SK: "EUR", GB: "GBP", US: "USD", PL: "PLN", HU: "HUF", CH: "CHF", DK: "DKK",
-      SE: "SEK", NO: "NOK", RO: "RON", BG: "BGN", UA: "UAH", TR: "TRY", CA: "CAD", AU: "AUD", NZ: "NZD",
+      SE: "SEK", NO: "NOK", RO: "RON", BG: "EUR", UA: "UAH", TR: "TRY", CA: "CAD", AU: "AUD", NZ: "NZD",
+      AT: "EUR", BE: "EUR", CY: "EUR", DE: "EUR", EE: "EUR", ES: "EUR", FI: "EUR", FR: "EUR", GR: "EUR",
+      HR: "EUR", IE: "EUR", IT: "EUR", LT: "EUR", LU: "EUR", LV: "EUR", MT: "EUR", NL: "EUR", PT: "EUR",
+      SI: "EUR", AD: "EUR", MC: "EUR", SM: "EUR", VA: "EUR", ME: "EUR", XK: "EUR", LI: "CHF",
       JP: "JPY", KR: "KRW", CN: "CNY", IN: "INR", BR: "BRL", MX: "MXN", ZA: "ZAR", IL: "ILS", AE: "AED",
       SG: "SGD", TH: "THB", PH: "PHP", ID: "IDR", VN: "VND", KE: "KES", NG: "NGN" };
-    if (region && byRegion[region.toUpperCase()]) { return byRegion[region.toUpperCase()]; }
+    // Země z jazyků zařízení i z nastavení formátů. Dřív se brala jen
+    // z prvního jazyka, takže anglický telefon v Irsku nebo Nizozemsku
+    // začínal v dolarech a Čech v Rakousku v korunách.
+    var langs = [];
+    try { langs = (navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language]).slice(); } catch (e) {}
+    try { langs.push(Intl.DateTimeFormat().resolvedOptions().locale); } catch (e) {}
+    for (var i = 0; i < langs.length; i++) {
+      var m = /-([A-Za-z]{2})\b/.exec(String(langs[i] || ""));
+      if (m && byRegion[m[1].toUpperCase()]) { return byRegion[m[1].toUpperCase()]; }
+    }
     return byLang[detectLang()] || "USD";
   }
 
   // ==================== tarify ====================
   // Free: 10 plateb denně, jedno zařízení. Pro: bez limitu + párování.
-  // Nákup jde přes nativní most (RevenueCat v aplikaci); na webu je jen
-  // vývojářské odemčení. Připojit se k cizímu kódu smí i Free, platí
+  // Nákup jde přes nativní most (RevenueCat v aplikaci). Připojit se
+  // k cizímu kódu smí i Free, platí
   // jen ten, kdo kód vytváří, takže stánku stačí jedno předplatné.
 
   var FREE_LIMIT = 10;
-  var APP_VERSION = "1.0.4";
+  var APP_VERSION = "1.0.5";
   var SUPPORT_MAIL = "info@deriverge.com";
 
   // Pro se získá jedině nákupem v obchodě. Výjimkou jsou instalace z doby
@@ -3926,7 +4349,22 @@
     if (pro && onWall) { sheet = null; }
     save(); render();
     if (fresh) { celebratePro(); }
+    // Dřív se po obnově bez předplatného nestalo vůbec nic a zaplacený
+    // nákup bez aktivace skončil taky potichu.
+    if (!pro && src === "restore") { showToast(T("proRestoreNone")); }
+    else if (!pro && src === "buy") { showToast(T("proBuyPending")); }
   };
+
+  // Chyby nákupu z mobile/billing.js, přeložené podle kódu RevenueCat.
+  window.__kasaBillingFail = function (kind, code, raw) {
+    if (code === "15") { return; }                       // nákup už probíhá
+    var msg = code === "10" || code === "35" ? T("billNet")
+            : code === "20" ? T("billPending")
+            : kind === "offering" || code === "2" || code === "3" || code === "5" || code === "23" ? T("billStore")
+            : T("billFail", code || "?");
+    showToast(msg);
+  };
+  window.__kasaPricesChanged = function () { render(); };
 
   var proCeleTimer = null;
   function closeCelebration() {
@@ -4044,13 +4482,50 @@
 
   function fresh() {
     return {
-      v: 3, event: "", mode: "kasa", nextNo: 1, voice: true, pair: "",
+      v: 3, event: "", evId: uid(), gone: [], mode: "kasa", nextNo: 1, voice: true, pair: "",
       lang: detectLang(), currency: detectCurrency(),
       setup: false, license: "", payDay: "", payN: 0, biz: "", vat: false, tourDone: false,
       rateN: 0, rateAsked: 0,
       seller: {},
-      items: [], order: [], sales: [], archives: []
+      items: [], order: [], sales: [], archives: [],
+      // Další otevřené akce vedle té, ve které se právě prodává. Aktivní akce
+      // zůstává v kořeni stavu (event, evId, items, sales, nextNo), takže
+      // zbytek aplikace s ní pracuje jako dřív a starší zálohy platí dál.
+      parked: []
     };
+  }
+
+  function isObj(x) { return !!x && typeof x === "object" && !Array.isArray(x); }
+
+  // Doplní účtenkám číslo, stav, čas změny a akci; vrátí nejvyšší číslo.
+  function normSales(list, evId) {
+    var maxNo = 0;
+    list.forEach(function (s, i) {
+      if (typeof s.no !== "number") { s.no = i + 1; }
+      if (s.no > maxNo) { maxNo = s.no; }
+      s.status = s.status === "open" ? "open" : "served";
+      s.updatedAt = typeof s.updatedAt === "number" ? s.updatedAt : (s.ts || 0);
+      if (!Array.isArray(s.lines)) { s.lines = []; }
+      s.lines.forEach(function (l) {
+        l.ready = typeof l.ready === "number" ? l.ready : l.qty;
+      });
+      if (evId && (typeof s.ev !== "string" || !s.ev)) { s.ev = evId; }
+    });
+    return maxNo;
+  }
+
+  // Položky uložené před zavedením barev je dostanou samy, každá jinou.
+  // Prázdný řetězec je vědomá volba "bez barvy", tu necháváme být.
+  function normItems(items) {
+    var used = {};
+    items.forEach(function (it) { if (it.color) { used[it.color] = true; } });
+    var next = 0;
+    items.forEach(function (it) {
+      if (typeof it.color !== "undefined") { return; }
+      while (next < COLORS.length && used[COLORS[next].k]) { next++; }
+      it.color = next < COLORS.length ? COLORS[next].k : "";
+      if (it.color) { used[it.color] = true; next++; }
+    });
   }
 
   // ---------- ukládání ----------
@@ -4070,9 +4545,27 @@
     var d;
     try { d = typeof raw === "string" ? JSON.parse(raw) : raw; } catch (e) { return null; }
     if (!d || !Array.isArray(d.items)) { return null; }
-    d.order = Array.isArray(d.order) ? d.order : [];
-    d.sales = Array.isArray(d.sales) ? d.sales : [];
-    d.archives = Array.isArray(d.archives) ? d.archives : [];
+    d.items = d.items.filter(isObj);
+    d.order = Array.isArray(d.order) ? d.order.filter(isObj) : [];
+    d.sales = Array.isArray(d.sales) ? d.sales.filter(isObj) : [];
+    d.archives = Array.isArray(d.archives) ? d.archives.filter(isObj) : [];
+    d.evId = typeof d.evId === "string" && d.evId ? d.evId : uid();
+    // id smazaných a vrácených účtenek, ať je protějšek, který smazání
+    // nezachytil, nevrátí zpátky do tržby
+    d.gone = Array.isArray(d.gone) ? d.gone.filter(function (x) { return typeof x === "string"; }).slice(-500) : [];
+    var evSeen = {};
+    evSeen[d.evId] = true;
+    d.parked = Array.isArray(d.parked) ? d.parked.filter(isObj) : [];
+    d.parked.forEach(function (pk) {
+      if (typeof pk.id !== "string" || !pk.id || evSeen[pk.id]) { pk.id = uid(); }
+      evSeen[pk.id] = true;
+      pk.event = typeof pk.event === "string" ? pk.event : "";
+      pk.items = Array.isArray(pk.items) ? pk.items.filter(isObj) : [];
+      pk.sales = Array.isArray(pk.sales) ? pk.sales.filter(isObj) : [];
+      normItems(pk.items);
+      var pkMax = normSales(pk.sales, pk.id);
+      pk.nextNo = typeof pk.nextNo === "number" && pk.nextNo > pkMax ? pk.nextNo : pkMax + 1;
+    });
     // starší archivy vznikaly bez identifikátoru, bez něj by je nešlo smazat
     d.archives.forEach(function (a) { if (!a.id) { a.id = uid(); } });
     d.event = typeof d.event === "string" ? d.event : "";
@@ -4082,17 +4575,22 @@
     d.pair = typeof d.pair === "string" ? d.pair : "";
     d.lang = isLang(d.lang) ? d.lang : "cs";
     d.currency = typeof d.currency === "string" && d.currency ? d.currency : "CZK";
-    d.setup = true;   // kdo už má uložená data, tomu se úvod nezobrazuje
+    // Kdo už má data, tomu se úvod nezobrazuje. Výslovné setup:false (úvod
+    // zavřený před dokončením) ale platí dál, jinak se volba jazyka a měny
+    // už nikdy neukázala a zůstalo prázdné menu bez názvu akce.
+    d.setup = d.setup !== false || d.items.length > 0 || d.sales.length > 0 || d.archives.length > 0 || !!d.pair;
     d.payDay = typeof d.payDay === "string" ? d.payDay : "";
     d.payN = typeof d.payN === "number" ? d.payN : 0;
     d.biz = typeof d.biz === "string" ? d.biz : "";
     d.vat = d.vat === true;   // starší instalace DPH neřešily, zůstanou vypnuté
+    d.customVat = typeof d.customVat === "string" ? d.customVat : "";
     // počítadlo uzavřených akcí pro žádost o hodnocení; starší instalace
     // dostanou započtené akce, které už v archivu mají
     d.rateN = typeof d.rateN === "number" ? d.rateN : d.archives.length;
     d.rateAsked = typeof d.rateAsked === "number" ? d.rateAsked : 0;
     // průvodce je pro nové: kdo už má prodeje nebo párování, obtěžovat nebudeme
-    d.tourDone = d.tourDone === true || d.sales.length > 0 || d.archives.length > 0 || !!d.pair;
+    d.tourDone = d.tourDone === true || d.sales.length > 0 || d.archives.length > 0 || !!d.pair ||
+                 d.parked.some(function (pk) { return pk.sales.length > 0; });
     // Dřív se údaje prodejce psaly volným textem. Aby se nikomu neztratily,
     // přesuneme je do poznámky; strukturovaná pole si doplní sám.
     if (!d.seller || typeof d.seller !== "object") { d.seller = {}; }
@@ -4106,46 +4604,48 @@
       d.license = (own && (d.sales.length || d.archives.length || d.pair)) ? "pro-legacy" : "";
     }
 
-    // položky uložené před zavedením barev je dostanou samy, každá jinou.
-    // Prázdný řetězec je vědomá volba "bez barvy", tu necháváme být.
-    var used = {};
-    d.items.forEach(function (it) { if (it.color) { used[it.color] = true; } });
-    var next = 0;
-    d.items.forEach(function (it) {
-      if (typeof it.color !== "undefined") { return; }
-      while (next < COLORS.length && used[COLORS[next].k]) { next++; }
-      it.color = next < COLORS.length ? COLORS[next].k : "";
-      if (it.color) { used[it.color] = true; next++; }
-    });
+    normItems(d.items);
 
-    // účtenky z verze bez fronty doplníme, ať mají číslo a stav
-    var maxNo = 0;
-    d.sales.forEach(function (s, i) {
-      if (typeof s.no !== "number") { s.no = i + 1; }
-      if (s.no > maxNo) { maxNo = s.no; }
-      s.status = s.status === "open" ? "open" : "served";
-      s.updatedAt = typeof s.updatedAt === "number" ? s.updatedAt : (s.ts || 0);
-      s.lines.forEach(function (l) {
-        l.ready = typeof l.ready === "number" ? l.ready : l.qty;
-      });
-    });
+    // účtenky z verze bez fronty doplníme, ať mají číslo, stav a akci
+    // Výdej drží frontu cizí kasy: účtenkám bez akce nepřidělujeme id jeho
+    // vlastní akce, jinak by je uzávěrka kasy už nikdy nesmazala.
+    var maxNo = normSales(d.sales, d.mode === "vydej" ? "" : d.evId);
     d.nextNo = typeof d.nextNo === "number" && d.nextNo > maxNo ? d.nextNo : maxNo + 1;
     return d;
   }
 
   function isEmpty(d) {
-    return !d || (!d.sales.length && !d.archives.length && !d.order.length);
+    return !d || (!d.sales.length && !d.archives.length && !d.order.length &&
+                  !d.parked.some(function (pk) { return pk.sales.length > 0; }));
   }
 
+  // Vyhrává nejnovější kopie (savedAt). Na iOS nese __KASA_BOOT__ stav
+  // z chvíle spuštění aplikace: když systém na pozadí ukončí obsah WebView
+  // a stránka se znovu načte, byl by to stav ráno a první uložení by jím
+  // přepsalo celý den prodeje. localStorage i nativní soubor se ukládají
+  // při každé změně, takže novější z nich je vždy ten správný.
   function load() {
-    // v nativní aplikaci je zdrojem pravdy soubor v úložišti zařízení
+    var best = null;
+    function consider(d) { if (d && (!best || (d.savedAt || 0) > (best.savedAt || 0))) { best = d; } }
     if (typeof window.__KASA_BOOT__ === "string" && window.__KASA_BOOT__) {
-      var boot = parseState(window.__KASA_BOOT__, true);
-      if (boot) { return boot; }
+      consider(parseState(window.__KASA_BOOT__, true));
     }
     var raw = null;
     try { raw = localStorage.getItem(KEY); } catch (e) { raw = null; }
-    return parseState(raw, true) || fresh();
+    consider(parseState(raw, true));
+    return best || fresh();
+  }
+
+  // Po výměně celého stavu (záloha, obnova z IndexedDB, jiná karta):
+  // formát částek, jazyk stránky, ohlášené objednávky a párování na nový kód.
+  function afterReplace(prevPair) {
+    moneyFmt = null; nfPlain = null;
+    rebuildMoneyFmt();
+    state.sales.forEach(function (s) { announced[s.id] = true; });
+    if (prevPair === undefined || prevPair !== state.pair) {
+      relayOpen();
+      nativeLink();
+    }
   }
 
   function save() {
@@ -4284,6 +4784,7 @@
       method: sheet.method,
       total: sheet.total,
       status: "open",
+      ev: state.evId,
       lines: state.order.map(function (l) {
         return { name: l.name, price: l.price, qty: l.qty, color: l.color || "", vat: vatStr(l.vat), ready: 0 };
       })
@@ -4301,13 +4802,19 @@
   }
 
   function undoSale(id) {
+    // Rozpracovaný účet dalšího zákazníka ani otevřené placení se nesmí
+    // tiše přepsat vráceným účtem.
+    if (state.order.length || sheet) { showToast(T("basketBusy")); return; }
     var i = state.sales.length - 1;
     while (i >= 0 && state.sales[i].id !== id) { i--; }
     if (i < 0) { return; }
     var sale = state.sales.splice(i, 1)[0];
     state.order = sale.lines.map(function (l) {
-      return { ref: refFor(l.name, l.price), name: l.name, price: l.price, qty: l.qty, color: l.color || "" };
+      return { ref: refFor(l.name, l.price), name: l.name, price: l.price, qty: l.qty,
+               color: l.color || "", vat: vatStr(l.vat) };
     });
+    // opravený prodej nesmí spotřebovat druhou z bezplatných plateb dne
+    if (state.payDay === todayKey() && state.payN > 0 && sale.ts >= new Date().setHours(0, 0, 0, 0)) { state.payN -= 1; }
     if (sale.no === state.nextNo - 1) { state.nextNo = sale.no; }
     hideToast();
     save();
@@ -4338,9 +4845,23 @@
   // Zaplacený účet nezmizí, zařadí se do fronty jako objednávka s číslem.
   // Kdo připravuje, odškrtává v ní položky a nakonec dá Vydáno.
 
+  // Kasa ukazuje nevydané objednávky ze všech otevřených akcí: po přepnutí
+  // na jinou akci by jinak z fronty zmizely a nikdo by je nevydal.
   function openOrders() {
-    return state.sales.filter(function (s) { return s.status === "open"; })
-      .sort(function (a, b) { return a.no - b.no; });
+    var all = [];
+    if (state.mode === "kasa" && state.parked && state.parked.length) {
+      eachOpenEvent(function (ev) { all = all.concat(ev.sales); });
+    } else {
+      all = state.sales;
+    }
+    return all.filter(function (s) { return s.status === "open"; })
+      .sort(function (a, b) { return (a.ts || 0) - (b.ts || 0) || a.no - b.no; });
+  }
+
+  function evNameOf(id) {
+    if (!id || id === state.evId) { return state.event || T("noName"); }
+    var pk = parkedById(id);
+    return pk ? (pk.event || T("noName")) : "";
   }
 
   function servedOrders() {
@@ -4349,10 +4870,8 @@
   }
 
   function findSale(id) {
-    for (var i = 0; i < state.sales.length; i++) {
-      if (state.sales[i].id === id) { return state.sales[i]; }
-    }
-    return null;
+    var at = locateSale(id);
+    return at ? at.sale : null;
   }
 
   function pieces(s) {
@@ -4424,18 +4943,40 @@
   // po ruce. Necháme mu proto způsob, jak si kód vyzvednout sám.
   window.__kasaRoom = function () { return (state && state.pair) || ""; };
 
+  // Zprávy odeslané, když není žádný nativní protějšek (zamčený iPad,
+  // vypnutý Bluetooth), se dřív ztratily: smazání, uzávěrka i „Vydáno“.
+  // Počkají tady a odejdou v pořadí, jakmile se zařízení znovu spojí.
+  var nativeOutbox = [];
+  var nativeKnown = false;   // přišel už počet spojení z nativní vrstvy?
+
+  function nativeRaw(json) {
+    // Most (mobile/bridge.js) dává přímý hook; objekt WebKitu je jen záloha
+    // pro původní obal, kde hook neexistuje.
+    if (typeof window.__kasaPeerSend === "function") { window.__kasaPeerSend(json); return; }
+    if (!window.webkit || !window.webkit.messageHandlers || !window.webkit.messageHandlers.peer) { return; }
+    window.webkit.messageHandlers.peer.postMessage(json);
+  }
+
   function nativeSend(msg) {
     try {
       if (!state.pair) { return; }
       msg.src = myId;
       msg.room = state.pair;
       var json = JSON.stringify(msg);
-      // Most (mobile/bridge.js) dává přímý hook; objekt WebKitu je jen záloha
-      // pro původní obal, kde hook neexistuje.
-      if (typeof window.__kasaPeerSend === "function") { window.__kasaPeerSend(json); return; }
-      if (!window.webkit || !window.webkit.messageHandlers || !window.webkit.messageHandlers.peer) { return; }
-      window.webkit.messageHandlers.peer.postMessage(json);
+      if (nativeKnown && nativePeers === 0 && peerLinkApp() && msg.t !== "setupReq" && msg.t !== "setup") {
+        nativeOutbox.push({ room: state.pair, json: json });
+        if (nativeOutbox.length > 80) { nativeOutbox.shift(); }
+        return;
+      }
+      nativeRaw(json);
     } catch (e) {}
+  }
+
+  function flushNativeOutbox() {
+    var list = nativeOutbox; nativeOutbox = [];
+    list.forEach(function (m) {
+      if (m.room === state.pair) { try { nativeRaw(m.json); } catch (e) {} }
+    });
   }
 
   // Posílá se vždycky jen ta jedna změněná objednávka, ne celý seznam -
@@ -4460,23 +5001,55 @@
     });
     pendingOrders = {};
     if (!list.length) { return; }
-    nativeSend({ t: "sync", event: state.event, sales: list.map(slim) });
-    relaySales(list);
+    sendSales(list, state.evId, state.event);
+  }
+
+  function markGone(ids) {
+    var have = state.gone || [];
+    state.gone = have.concat(ids.filter(function (x) {
+      return typeof x === "string" && have.indexOf(x) < 0;
+    })).slice(-500);
   }
 
   function pushDelete(ids) {
+    markGone(ids);
     if (muted) { return; }
+    save();   // záznam o smazání musí přežít restart, volající ukládal dřív
     flushOrders();
     nativeSend({ t: "del", ids: ids });
     relayDeleted(ids);
   }
 
-  function pushClear() {
+  // Uzávěrka smaže na protějšku jen účtenky této akce. Starší verze
+  // aplikace id akce neznají a smažou vše jako dřív.
+  function pushClear(evId) {
     if (muted) { return; }
     pendingOrders = {};
     if (pendTimer) { clearTimeout(pendTimer); pendTimer = null; }
-    nativeSend({ t: "clear" });
-    relayCleared();
+    var at = Date.now();
+    var m = { t: "clear", role: state.mode, at: at };
+    if (evId) { m.ev = evId; }
+    nativeSend(m);
+    relayCleared(evId, at);
+  }
+
+  // Účtenky jedné akce ven: nativně i přes přeposílač, obojí po dávkách.
+  // Nearby na Androidu větší zprávu odmítne a zůstane po ní jen řádek
+  // v diagnostice, proto i nativní cesta dělí seznam.
+  var NATIVE_MAX = 24000;
+  function sendSales(list, evId, name) {
+    var batch = [], size = 0;
+    list.forEach(function (sl) {
+      var one = slim(sl);
+      var len = JSON.stringify(one).length;
+      if (batch.length && size + len > NATIVE_MAX) {
+        nativeSend({ t: "sync", event: name, ev: evId, sales: batch });
+        batch = []; size = 0;
+      }
+      batch.push(one); size += len;
+    });
+    if (batch.length) { nativeSend({ t: "sync", event: name, ev: evId, sales: batch }); }
+    relaySales(list, evId, name);
   }
 
   // ---------- převzetí menu a údajů z druhého zařízení ----------
@@ -4509,7 +5082,7 @@
 
   function sendSetup() {
     var p = setupPayload();
-    nativeSend({ t: "setup", seq: 0, last: true, seller: p.seller, currency: p.currency, vat: p.vat, event: p.event, items: p.items });
+    nativeSend({ t: "setup", seq: 0, last: true, full: true, seller: p.seller, currency: p.currency, vat: p.vat, event: p.event, items: p.items });
     var chunks = [], cur = [], size = 0;
     p.items.forEach(function (it) {
       var len = JSON.stringify(it).length;
@@ -4518,7 +5091,7 @@
     });
     chunks.push(cur);
     chunks.forEach(function (c, i) {
-      var m = { t: "setup", seq: i, last: i === chunks.length - 1, items: c };
+      var m = { t: "setup", seq: i, n: chunks.length, last: i === chunks.length - 1, items: c };
       if (i === 0) { m.seller = p.seller; m.currency = p.currency; m.vat = p.vat; m.event = p.event; }
       relayPost(m);
     });
@@ -4526,7 +5099,14 @@
 
   function takeSetup(msg) {
     if (!setupWanted || Date.now() - setupWanted > SETUP_WAIT_MS) { return; }
-    if (!setupParts) { setupParts = { items: [], ids: {}, seller: null, currency: "", vat: false, event: "" }; }
+    if (!setupParts) { setupParts = { items: [], ids: {}, seqs: {}, n: 0, head: false, seller: null, currency: "", vat: false, event: "" }; }
+    // úplná kopie z nativního spojení platí sama o sobě, bez ohledu na části
+    if (msg.full) { setupParts = { items: [], ids: {}, seqs: {}, n: 1, head: true, seller: null, currency: "", vat: false, event: "" }; }
+    var seq = typeof msg.seq === "number" ? msg.seq : 0;
+    if (!msg.full && setupParts.seqs[seq]) { return; }          // stejná část z druhého přeposílače
+    setupParts.seqs[seq] = true;
+    if (typeof msg.n === "number" && msg.n > 0) { setupParts.n = msg.n; }
+    if (seq === 0) { setupParts.head = true; }
     if (msg.seller && typeof msg.seller === "object") { setupParts.seller = msg.seller; }
     if (typeof msg.currency === "string") { setupParts.currency = msg.currency; }
     if (typeof msg.vat === "boolean") { setupParts.vat = msg.vat; }
@@ -4540,7 +5120,13 @@
       if (it.vat !== undefined) { o.vat = it.vat; }
       setupParts.items.push(o);
     });
-    if (!msg.last) { return; }
+    // Použít až úplné menu: části přes přeposílač chodí v libovolném
+    // pořadí a některá se může ztratit. Starší verze počet neposílají,
+    // tam platí dřívější „poslední část“.
+    if (setupParts.n) {
+      if (Object.keys(setupParts.seqs).length < setupParts.n) { return; }
+    } else if (!msg.last) { return; }
+    if (!setupParts.head) { return; }
     var got = setupParts; setupParts = null; setupWanted = 0;
     if (!got.items.length && !got.seller) { return; }
     if (got.items.length) { state.items = got.items; }
@@ -4553,6 +5139,7 @@
     state.vat = got.vat === true;
     if (got.event) { state.event = got.event; }
     muted = true; save(); muted = false;
+    afterReplace(state.pair);
     render();
     showToast(T("setupImportDone"));
   }
@@ -4561,9 +5148,10 @@
     if (muted) { return; }
     pendingOrders = {};
     if (pendTimer) { clearTimeout(pendTimer); pendTimer = null; }
-    var open = openOrders();
-    nativeSend({ t: "sync", event: state.event, sales: open.map(slim) });
-    relaySales(open);
+    eachOpenEvent(function (ev) {
+      var open = ev.sales.filter(function (x) { return x.status === "open"; });
+      if (open.length || ev.id === state.evId) { sendSales(open, ev.id, ev.event); }
+    });
   }
 
   window.__kasaPeer = function (raw) {
@@ -4575,32 +5163,123 @@
       if (msg.t === "setupReq") { sendSetup(); } else { takeSetup(msg); }
       return;
     }
+    if (msg && msg.t === "drop" && Array.isArray(msg.ids)) {
+      // jen výdej: zastaralé objednávky z fronty pryč, kasa nic nemaže
+      if (state.mode !== "vydej" || !state.pair || (msg.room && msg.room !== state.pair)) { return; }
+      var dropIds = msg.ids.filter(function (x) { return typeof x === "string"; });
+      var kept0 = state.sales.filter(function (x) { return dropIds.indexOf(x.id) < 0; });
+      if (kept0.length !== state.sales.length) {
+        state.sales = kept0;
+        muted = true; save(); muted = false; render();
+      }
+      return;
+    }
     if (!msg || (!Array.isArray(msg.sales) && msg.t !== "del" && msg.t !== "clear")) { return; }
     // pojistka pro případ, že by se spojení navázalo mimo náš kód
     if (!state.pair || (msg.room && msg.room !== state.pair)) { return; }
     lastIn = Date.now();   // i nativní zpráva je „druhé zařízení se ozvalo"
 
     var changed = false;
+    // Akce (aktivní a odložené), do kterých něco přibylo: srovnáme jim
+    // pořadí a počítadlo čísel.
+    var touched = {};
+    var rejected = [];
+    var msgEv = typeof msg.ev === "string" ? msg.ev : "";
 
     if (msg.t === "del" && Array.isArray(msg.ids)) {
-      var before = state.sales.length;
-      state.sales = state.sales.filter(function (x) { return msg.ids.indexOf(x.id) < 0; });
-      changed = state.sales.length !== before;
-    } else if (msg.t === "clear") {
-      changed = state.sales.length > 0;
-      state.sales = [];
-      state.nextNo = 1;
-    } else if (Array.isArray(msg.sales)) {
-      var mine = {};
-      state.sales.forEach(function (s) { mine[s.id] = s; });
-      msg.sales.forEach(function (inc) {
-        var have = mine[inc.id];
-        if (!have) { state.sales.push(inc); changed = true; return; }
-        if ((inc.updatedAt || 0) > (have.updatedAt || 0)) {
-          state.sales[state.sales.indexOf(have)] = inc;
-          changed = true;
-        }
+      var delIds = msg.ids.filter(function (x) { return typeof x === "string"; });
+      markGone(delIds);
+      eachOpenEvent(function (ev) {
+        var before = ev.sales.length;
+        var kept = ev.sales.filter(function (x) { return delIds.indexOf(x.id) < 0; });
+        if (kept.length !== before) { setEventSales(ev.id, kept); changed = true; }
       });
+    } else if (msg.t === "clear") {
+      // Kasa bere uzávěrku jen od jiné kasy. Dřív ji smazala i zpráva
+      // z výdeje, třeba po obnovení zálohy, a kasa přišla o tržbu.
+      if (state.mode === "kasa" && msg.role !== "kasa") { return; }
+      // Uzávěrka se týká jen účtenek vzniklých před ní: akce po uzávěrce
+      // pokračuje pod stejným id a pozdě doručená zpráva by jinak smazala
+      // i dnešní objednávky. Starší verze čas neposílají, tam platí vše.
+      var clearAt = typeof msg.at === "number" ? msg.at : Infinity;
+      var older = function (x) { return (x.ts || 0) <= clearAt; };
+      if (state.mode === "vydej") {
+        // Výdej drží frontu ze všech akcí. Účtenky bez akce jsou z doby
+        // před aktualizací a patřily k jediné akci kasy.
+        var left = state.sales.filter(function (x) {
+          return !(older(x) && (!msgEv || !x.ev || x.ev === msgEv));
+        });
+        changed = left.length !== state.sales.length;
+        state.sales = left;
+      } else {
+        // druhá kasa: stejná akce, jinak (jiné id akce na každém zařízení)
+        // ta, ve které se právě prodává, jako dřív
+        var target = msgEv && parkedById(msgEv) ? msgEv : state.evId;
+        eachOpenEvent(function (ev) {
+          if (ev.id !== target) { return; }
+          var keep = ev.sales.filter(function (x) { return !older(x); });
+          if (keep.length !== ev.sales.length) {
+            setEventSales(ev.id, keep);
+            if (!keep.length) {
+              if (ev.id === state.evId) { state.nextNo = 1; } else { var pk0 = parkedById(ev.id); if (pk0) { pk0.nextNo = 1; } }
+            }
+            changed = true;
+          }
+        });
+      }
+    } else if (Array.isArray(msg.sales)) {
+      var goneSet = {};
+      (state.gone || []).forEach(function (x) { goneSet[x] = true; });
+      var archSet = null;
+      msg.sales.forEach(function (raw) {
+        var inc = cleanSale(raw);
+        if (!inc) { return; }
+        var at = locateSale(inc.id);
+        if (at) {
+          if ((inc.updatedAt || 0) > (at.sale.updatedAt || 0)) {
+            mergeSale(at.sale, inc);
+            touched[at.evId] = true;
+            changed = true;
+          }
+          return;
+        }
+        // Smazanou nebo už uzavřenou účtenku zpátky nebereme a protějšku
+        // řekneme, ať ji smaže taky (zmeškal smazání nebo uzávěrku).
+        if (!archSet) {
+          archSet = {};
+          state.archives.forEach(function (a) {
+            (Array.isArray(a.sales) ? a.sales : []).forEach(function (x) { if (x && x.id) { archSet[x.id] = true; } });
+          });
+        }
+        if (goneSet[inc.id] || archSet[inc.id]) { rejected.push(inc.id); return; }
+        // Nová účtenka. Výdej bere všechno do jedné fronty a pamatuje si
+        // název akce, kasa ji zařadí do akce, ze které pochází.
+        var target = typeof inc.ev === "string" && inc.ev ? inc.ev : msgEv;
+        if (!inc.ev && target) { inc.ev = target; }
+        if (state.mode === "vydej") {
+          if (msg.event && (!msgEv || inc.ev === msgEv)) { inc.en = msg.event; }
+          state.sales.push(inc);
+          touched[state.evId] = true;
+        } else {
+          var pk = target && target !== state.evId ? parkedById(target) : null;
+          if (pk) {
+            pk.sales.push(inc);
+            touched[pk.id] = true;
+          } else {
+            if (!inc.ev || inc.ev !== state.evId) { inc.ev = state.evId; }
+            state.sales.push(inc);
+            touched[state.evId] = true;
+          }
+        }
+        changed = true;
+      });
+    }
+    if (rejected.length) {
+      // Protějšku řekneme, ať si je vyřadí z fronty, ale bez záznamu
+      // o smazání: „del“ by po vrácení uzavřené akce zpět do kasy
+      // odmazal její účtenky natrvalo.
+      var rej = rejected.slice(0, 60);
+      setTimeout(function () { nativeSend({ t: "drop", ids: rej }); relayPost({ t: "drop", ids: rej }); }, 0);
     }
     if (!changed) { return; }
 
@@ -4612,10 +5291,13 @@
       });
     }
 
-    state.sales.sort(function (a, b) { return (a.no || 0) - (b.no || 0); });
-    var maxNo = 0;
-    state.sales.forEach(function (s) { if (s.no > maxNo) { maxNo = s.no; } });
-    if (state.nextNo <= maxNo) { state.nextNo = maxNo + 1; }
+    eachOpenEvent(function (ev) {
+      if (!touched[ev.id]) { return; }
+      var list = ev.sales.slice().sort(function (a, b) { return (a.no || 0) - (b.no || 0); });
+      var maxNo = 0;
+      list.forEach(function (s) { if (s.no > maxNo) { maxNo = s.no; } });
+      setEventSales(ev.id, list, maxNo);
+    });
     if (msg.event && state.mode === "vydej") { state.event = msg.event; }
 
     muted = true;              // příchozí změnu neposíláme hned zpátky
@@ -4642,7 +5324,28 @@
     : ["https://ntfy.sh/", "https://ntfy.envs.net/"];
 
   var MAX_BYTES = 3500;
-  var myId = Math.random().toString(36).slice(2, 10);
+  // Id zařízení musí přežít restart: přeposílač po startu přehraje zprávy
+  // za posledních 5 minut a vlastní starý „clear“ by jinak smazal účtenky.
+  var runId = Math.random().toString(36).slice(2, 10);
+  var bootAt = Date.now();
+  // posledních pár spuštění tohoto zařízení: jejich zprávy jsou naše
+  var myRuns = (function () {
+    var list = [];
+    try { list = JSON.parse(localStorage.getItem("kavakasa.runs") || "[]"); } catch (e) { list = []; }
+    if (!Array.isArray(list)) { list = []; }
+    list = list.filter(function (x) { return typeof x === "string"; }).concat([runId]).slice(-30);
+    try { localStorage.setItem("kavakasa.runs", JSON.stringify(list)); } catch (e) {}
+    return list;
+  })();
+  var myId = (function () {
+    var id = "";
+    try { id = localStorage.getItem("kavakasa.src") || ""; } catch (e) {}
+    if (!/^[a-z0-9]{6,16}$/.test(id)) {
+      id = Math.random().toString(36).slice(2, 10);
+      try { localStorage.setItem("kavakasa.src", id); } catch (e) {}
+    }
+    return id;
+  })();
   var links = [];
   var seen = {}, relayError = "", lastIn = 0, lastOut = 0, sentOpen = false;
   var pingAt = 0, testResult = "";
@@ -4673,14 +5376,22 @@
   }
 
   // z objednávky posíláme jen to, co druhá strana potřebuje pro frontu
+  // Sazba DPH řádku a akce musí cestovat s účtenkou: kasa jinak po
+  // odškrtnutí na výdeji dostala zpátky účtenku bez sazeb a doklad pak
+  // sazbu hádal podle aktuálního menu.
   function slim(s) {
-    return {
+    var o = {
       id: s.id, no: s.no, ts: s.ts, total: s.total, method: s.method,
       status: s.status, updatedAt: s.updatedAt,
       lines: s.lines.map(function (l) {
-        return { name: l.name, price: l.price, qty: l.qty, ready: l.ready || 0, color: l.color || "" };
+        var ln = { name: l.name, price: l.price, qty: l.qty, ready: l.ready || 0, color: l.color || "" };
+        if (l.vat) { ln.vat = l.vat; }
+        return ln;
       })
     };
+    if (s.ev) { o.ev = s.ev; }
+    if (s.servedAt) { o.servedAt = s.servedAt; }
+    return o;
   }
 
   // Pošle na všechny přeposílače. Chybu hlásíme, teprve když selžou všechny.
@@ -4688,6 +5399,7 @@
     var topic = relayTopic();
     if (!topic || !window.fetch || !links.length) { return; }
     msg.src = myId;
+    msg.run = runId;
     var body;
     try { body = JSON.stringify(msg); } catch (e) { return; }
 
@@ -4700,13 +5412,17 @@
         if (ok) {
           lastOut = Date.now();
           setRelayError("");
-        } else if (nativePeers > 0 || (peerLinkApp() && !worst)) {
-          // Objednávky nesou nativní spojení, přeposílač je jen záloha.
-          // V aplikaci bez internetu je jeho síťová chyba jen šum; odmítnutí
-          // serverem (limit, chyba) se ukáže dál.
-          setRelayError("");
+          flushOutbox();
         } else {
-          setRelayError(worst === 429 ? T("relayLimit")
+          // Nedoručenou zprávu si necháme a pošleme ji znovu po nejbližším
+          // úspěchu nebo obnovení spojení; jinak objednávka z výpadku sítě
+          // na výdej nikdy nedorazila.
+          if (msg.t !== "hi" && msg.t !== "ping") { queueOutbox(msg); }
+          // Chybu skryjeme, jen když zprávy nese živé nativní spojení. Samotná
+          // možnost nativního párování nestačí: iPhone s Androidem se bez
+          // přeposílače nespojí a obsluha by o výpadku nevěděla.
+          setRelayError(nativePeers > 0 ? ""
+            : worst === 429 ? T("relayLimit")
             : worst ? T("relayRefused", worst)
             : T("relayOffline"));
         }
@@ -4715,26 +5431,47 @@
     });
   }
 
+  var outbox = [], outboxBusy = false;
+  function queueOutbox(msg) {
+    var copy = {};
+    Object.keys(msg).forEach(function (k) { if (k !== "src") { copy[k] = msg[k]; } });
+    // uzávěrku ani smazání neopakujeme: dorazily by po novějších objednávkách
+    // a smazaly by je (akce po uzávěrce jede dál pod stejným id)
+    if (copy.t === "clear") { return; }
+    outbox.push({ topic: relayTopic(), msg: copy });
+    if (outbox.length > 60) { outbox.shift(); }
+  }
+  function flushOutbox() {
+    if (outboxBusy || !outbox.length) { return; }
+    outboxBusy = true;
+    var list = outbox; outbox = [];
+    var topic = relayTopic();
+    list.forEach(function (m) { if (m.topic === topic) { relayPost(m.msg); } });
+    setTimeout(function () { outboxBusy = false; }, 2000);
+  }
+
   // Objednávky posíláme po dávkách, aby se žádná zpráva nevešla přes limit.
-  function relaySales(list) {
+  function relaySales(list, evId, name) {
+    evId = evId || state.evId;
+    name = typeof name === "string" ? name : state.event;
     var batch = [], size = 0;
     list.forEach(function (s) {
       var one = slim(s);
       var len = JSON.stringify(one).length;
       if (batch.length && size + len > MAX_BYTES) {
-        relayPost({ t: "sync", event: state.event, sales: batch });
+        relayPost({ t: "sync", event: name, ev: evId, sales: batch });
         batch = []; size = 0;
       }
       batch.push(one); size += len;
     });
-    if (batch.length) { relayPost({ t: "sync", event: state.event, sales: batch }); }
+    if (batch.length) { relayPost({ t: "sync", event: name, ev: evId, sales: batch }); }
   }
 
   // Ohlášení se: obě zařízení o sobě dají vědět, jakmile se připojí nebo
   // se na to člověk podívá do Menu. Bez toho by "spárováno" nešlo poznat
   // dřív než u první objednávky, a hlavně by nebylo vidět, že každé
   // zařízení visí na jiném kódu.
-  var lastHello = 0, helloBack = 0;
+  var lastHello = 0, helloBack = 0, lastQueueSent = 0;
 
   function sayHello(force) {
     var now = Date.now();
@@ -4744,7 +5481,20 @@
   }
 
   function relayDeleted(ids) { relayPost({ t: "del", ids: ids }); }
-  function relayCleared() { relayPost({ t: "clear" }); }
+  // Otevřené objednávky všech akcí jen přes přeposílač (po připojení nebo
+  // na pozdrav výdeje, který se připojil později než před 5 minutami).
+  function relayAllOpen() {
+    eachOpenEvent(function (ev) {
+      var open = ev.sales.filter(function (x) { return x.status === "open"; });
+      if (open.length) { relaySales(open, ev.id, ev.event); }
+    });
+  }
+
+  function relayCleared(evId, at) {
+    var m = { t: "clear", role: state.mode, at: at || Date.now() };
+    if (evId) { m.ev = evId; }
+    relayPost(m);
+  }
 
   // Zkouška spojení: pošle vlastní značku a čeká, jestli se vrátí. Rozliší
   // tím tři různé poruchy, neodešlo, odešlo ale nechodí zpátky, nebo je vše
@@ -4797,17 +5547,25 @@
 
     if (msg.t === "ping") {
       if (msg.src === myId && pingAt) {
-        testResult = T("testOk", ((Date.now() - pingAt) / 1000).toFixed(1));
+        testResult = T("testOk", (function (x) { try { return new Intl.NumberFormat(langInfo().loc, { minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(x); } catch (e) { return x.toFixed(1); } })((Date.now() - pingAt) / 1000));
         pingAt = 0;
         render();
       }
       return;
     }
-    if (msg.src === myId) { return; }   // vlastní zprávy zpátky nebereme
+    // Vlastní zprávy zpátky nebereme: z tohoto spuštění podle run, ze
+    // starších spuštění (přeposílač je po restartu přehraje) podle času.
+    // Zařízení obnovené z téže zálohy má stejné id, ale jiné spuštění
+    // a novější zprávy, takže se navzájem neignorují.
+    if (msg.src === myId && (msg.run ? myRuns.indexOf(msg.run) >= 0 : (env.time || 0) * 1000 < bootAt)) { return; }
 
     if (msg.t === "hi") {
       lastIn = Date.now();
       refreshLink();
+      if (state.mode === "kasa" && msg.role === "vydej" && Date.now() - lastQueueSent > 20000) {
+        lastQueueSent = Date.now();
+        relayAllOpen();
+      }
       if (Date.now() - helloBack > 5000) {   // ozveme se zpátky, ale ne donekonečna
         helloBack = Date.now();
         sayHello(true);
@@ -4869,7 +5627,11 @@
             schedulePoll(link);
             refreshLink();
             setRelayError("");
-            if (!sentOpen) { sentOpen = true; sayHello(true); relaySales(openOrders()); }
+            flushOutbox();
+            if (!sentOpen || Date.now() - sentOpen > 60000) {
+              sentOpen = Date.now(); sayHello(true);
+              relayAllOpen();
+            }
           };
           link.es.onerror = function () {
             link.sseUp = false;
@@ -4893,12 +5655,201 @@
 
   window.__kasaPeerCount = function (n) {
     nativePeers = n | 0;
+    nativeKnown = true;
     refreshLink();
     if (nativePeers > 0) {
       setRelayError("");   // bez internetu nese zprávy nativní spojení, hláška přeposílače by mátla
+      flushNativeOutbox(); // co se nestihlo poslat během výpadku, v původním pořadí
       pushEverything();    // nový protějšek dostane frontu
     }
   };
+
+  // Změna účtenky dostane čas vždy vyšší než ten poslední. Zařízení bez
+  // internetu mívají hodiny posunuté a „Vydáno“ z pozadu jdoucího výdeje by
+  // jinak kasa zahodila jako starší.
+  function touchSale(s) {
+    s.updatedAt = Math.max(Date.now(), (s.updatedAt || 0) + 1);
+  }
+
+  // Příchozí účtenka z druhého zařízení nebo z veřejného přeposílače:
+  // jen čisté, úplné údaje. Rozbitá zpráva dřív shodila aplikaci při
+  // každém dalším spuštění.
+  function cleanSale(inc) {
+    if (!isObj(inc) || typeof inc.id !== "string" || !inc.id || inc.id.length > 64) { return null; }
+    if (!Array.isArray(inc.lines) || !inc.lines.length) { return null; }
+    var no = Number(inc.no);
+    if (!isFinite(no) || no < 1) { return null; }
+    var lines = [];
+    for (var i = 0; i < inc.lines.length; i++) {
+      var l = inc.lines[i];
+      if (!isObj(l) || typeof l.name !== "string") { return null; }
+      var price = Number(l.price), qty = Number(l.qty), rd = Number(l.ready);
+      if (!isFinite(price) || !isFinite(qty) || qty <= 0) { return null; }
+      lines.push({
+        name: l.name.slice(0, 120), price: price, qty: qty,
+        ready: isFinite(rd) ? Math.max(0, Math.min(qty, rd)) : 0,
+        color: typeof l.color === "string" ? l.color.slice(0, 40) : "",
+        vat: typeof l.vat === "string" || typeof l.vat === "number" ? vatStr(l.vat) : ""
+      });
+    }
+    var total = Number(inc.total);
+    var o = {
+      id: inc.id, no: Math.floor(no),
+      ts: isFinite(Number(inc.ts)) ? Number(inc.ts) : Date.now(),
+      total: isFinite(total) ? total : lines.reduce(function (a, x) { return a + x.price * x.qty; }, 0),
+      method: inc.method === "card" ? "card" : "cash",
+      status: inc.status === "open" ? "open" : "served",
+      updatedAt: isFinite(Number(inc.updatedAt)) ? Number(inc.updatedAt) : 0,
+      lines: lines
+    };
+    if (typeof inc.ev === "string" && inc.ev) { o.ev = inc.ev.slice(0, 40); }
+    if (isFinite(Number(inc.servedAt)) && inc.servedAt) { o.servedAt = Number(inc.servedAt); }
+    return o;
+  }
+
+  // ---------- akce ----------
+  // Aktivní akce žije v kořeni stavu (event, evId, items, sales, nextNo),
+  // ostatní otevřené akce v state.parked. Přepnutí je jen výměna obsahu,
+  // nic se neuzavírá ani nemaže. Rozpracovaný účet musí být prázdný: jeho
+  // řádky odkazují na položky menu aktivní akce.
+
+  function activeEvent() {
+    return { id: state.evId, event: state.event, items: state.items, sales: state.sales,
+             nextNo: state.nextNo, active: true };
+  }
+
+  // Aktivní akce vždy první, pak ostatní v pořadí založení.
+  function eachOpenEvent(fn) {
+    fn(activeEvent());
+    state.parked.slice().forEach(function (pk) { fn(pk); });
+  }
+
+  function openEventList() {
+    var out = [];
+    eachOpenEvent(function (ev) { out.push(ev); });
+    return out;
+  }
+
+  function parkedById(id) {
+    for (var i = 0; i < state.parked.length; i++) {
+      if (state.parked[i].id === id) { return state.parked[i]; }
+    }
+    return null;
+  }
+
+  function setEventSales(id, list, maxNo) {
+    var target = id === state.evId ? null : parkedById(id);
+    if (id === state.evId) {
+      state.sales = list;
+      if (typeof maxNo === "number" && state.nextNo <= maxNo) { state.nextNo = maxNo + 1; }
+    } else if (target) {
+      target.sales = list;
+      if (typeof maxNo === "number" && target.nextNo <= maxNo) { target.nextNo = maxNo + 1; }
+    }
+  }
+
+  function locateSale(id) {
+    for (var i = 0; i < state.sales.length; i++) {
+      if (state.sales[i].id === id) { return { sale: state.sales[i], evId: state.evId }; }
+    }
+    for (var p = 0; p < state.parked.length; p++) {
+      var pk = state.parked[p];
+      for (var j = 0; j < pk.sales.length; j++) {
+        if (pk.sales[j].id === id) { return { sale: pk.sales[j], evId: pk.id }; }
+      }
+    }
+    return null;
+  }
+
+  function archivedSale(id) {
+    return state.archives.some(function (a) {
+      return Array.isArray(a.sales) && a.sales.some(function (x) { return x && x.id === id; });
+    });
+  }
+
+  // Změna z druhého zařízení (odškrtnutí, vydání, vrácení do fronty).
+  // Sazby DPH a akci si účtenka nechává svoje: starší verze je neposílají.
+  function mergeSale(have, inc) {
+    have.status = inc.status === "open" ? "open" : "served";
+    have.updatedAt = inc.updatedAt || have.updatedAt;
+    if (inc.servedAt) { have.servedAt = inc.servedAt; }
+    else if (have.status === "open") { delete have.servedAt; }
+    var incLines = Array.isArray(inc.lines) ? inc.lines : [];
+    if (incLines.length === have.lines.length) {
+      have.lines.forEach(function (l, i) {
+        var il = incLines[i] || {};
+        if (typeof il.ready === "number") { l.ready = il.ready; }
+        if (il.vat && !l.vat) { l.vat = il.vat; }
+      });
+      return;
+    }
+    var old = have.lines;
+    have.lines = incLines.map(function (il) {
+      var o = { name: il.name, price: il.price, qty: il.qty, ready: il.ready || 0,
+                color: il.color || "", vat: il.vat || "" };
+      if (!o.vat) {
+        old.forEach(function (ol) {
+          if (!o.vat && ol.name === o.name && ol.price === o.price && ol.vat) { o.vat = ol.vat; }
+        });
+      }
+      return o;
+    });
+    if (typeof inc.total === "number") { have.total = inc.total; }
+  }
+
+  function evTotal(ev) {
+    return ev.sales.reduce(function (a, x) { return a + (x.total || 0); }, 0);
+  }
+
+  function evLabel(ev) { return ev.event || T("noName"); }
+
+  // Uloží aktivní akci mezi odložené a na její místo dá jinou.
+  function swapInEvent(next) {
+    flushOrders();
+    state.parked.push({
+      id: state.evId, event: state.event, items: state.items, sales: state.sales,
+      nextNo: state.nextNo, createdAt: state.evCreated || 0
+    });
+    state.evId = next.id;
+    state.event = next.event || "";
+    state.items = Array.isArray(next.items) ? next.items : [];
+    state.sales = Array.isArray(next.sales) ? next.sales : [];
+    state.nextNo = typeof next.nextNo === "number" && next.nextNo > 0 ? next.nextNo : 1;
+    state.evCreated = next.createdAt || Date.now();
+    state.order = [];
+    linesOpen = false;
+    toast = null;
+    if (toastTimer) { clearTimeout(toastTimer); toastTimer = null; }
+  }
+
+  function switchEvent(id) {
+    if (id === state.evId) { sheet = null; render(); return; }
+    var target = parkedById(id);
+    if (!target) { return; }
+    if (state.order.length) { showToast(T("basketBusy")); return; }
+    state.parked = state.parked.filter(function (pk) { return pk.id !== id; });
+    swapInEvent(target);
+    sheet = null;
+    view = "sell";
+    save(); render(true);
+    showToast(T("toastEvSwitched", evLabel(activeEvent())));
+  }
+
+  // Nová akce: menu se volitelně zkopíruje (s novými id), účtenky a čísla
+  // začínají od nuly.
+  function createEvent(name, copyMenu) {
+    if (state.order.length) { showToast(T("basketBusy")); return; }
+    var items = copyMenu ? state.items.map(function (it) {
+      var o = { id: uid(), name: it.name, price: it.price, color: it.color || "" };
+      if (it.vat !== undefined) { o.vat = it.vat; }
+      return o;
+    }) : [];
+    swapInEvent({ id: uid(), event: name, items: items, sales: [], nextNo: 1, createdAt: Date.now() });
+    sheet = null;
+    view = items.length ? "sell" : "menu";
+    save(); render(true);
+    showToast(T("toastEvSwitched", evLabel(activeEvent())));
+  }
 
   // ---------- stats ----------
 
@@ -4936,7 +5887,7 @@
     out.push(T("sumBills") + " " + s.count + " · " + T("sumPieces") + " " + s.pieces);
     out.push("");
     s.items.forEach(function (i) {
-      out.push(i.qty + "x " + i.name + " a " + czk(i.price) + " = " + czk(i.sum));
+      out.push(i.qty + "× " + i.name + " (" + czk(i.price) + ") = " + czk(i.sum));
     });
     return out.join("\n");
   }
@@ -4999,6 +5950,11 @@
   function renderOrders() {
     var open = openOrders();
     var h = "";
+    // Výdej drží frontu ze všech akcí kasy; když se v ní potkají dvě,
+    // čísla se mohou opakovat, proto u lístku ukážeme i název akce.
+    var evs = {};
+    open.forEach(function (s) { evs[s.ev || ""] = true; });
+    var mixed = Object.keys(evs).length > 1;
 
     if (!open.length) {
       h += '<p class="hint" style="padding-top:44px">' + esc(T("noOrders")) + "<br>" +
@@ -5013,7 +5969,8 @@
           h += '<span class="chip' + ((l.ready || 0) >= l.qty ? " done" : "") + '"' + tint(l.color) + ">" +
                (l.qty > 1 ? '<span class="q">' + l.qty + "×</span>" : "") + esc(l.name) + "</span>";
         });
-        h += '</span><span class="time">' + clock(s.ts) + "</span></span>" +
+        h += '</span><span class="time">' + clock(s.ts) +
+               (mixed && (s.en || evNameOf(s.ev)) ? '<span class="evn">' + esc(s.en || evNameOf(s.ev)) + "</span>" : "") + "</span></span>" +
              '<span class="prog">' + ready(s) + "/" + pieces(s) + "</span></button>";
       });
       h += "</div>";
@@ -5082,6 +6039,19 @@
       h += "</section>";
     }
 
+    if (state.parked.length) {
+      h += '<section class="sec"><h2>' + esc(T("openHead")) + "</h2>";
+      state.parked.forEach(function (pk) {
+        var pn = pk.sales.length;
+        h += '<div class="arch"><div class="mid"><div>' + esc(evLabel(pk)) + "</div>" +
+             '<div class="s">' + pn + " " + tp("billsN", pn) + "</div></div>" +
+             '<span class="num">' + czk(evTotal(pk)) + "</span>" +
+             '<button class="act" style="flex:0 0 auto;padding:8px 12px;margin:0" data-evswitch="' + esc(pk.id) + '">' +
+               esc(T("evSwitch")) + "</button></div>";
+      });
+      h += "</section>";
+    }
+
     if (state.archives.length) {
       h += '<section class="sec"><h2>' + esc(T("closedHead")) + "</h2>";
       state.archives.slice().reverse().forEach(function (a) {
@@ -5115,7 +6085,20 @@
     return d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2);
   }
 
-  function docBody(fromS, toS) {
+  // Názvy akcí pro výběr v dokladu: otevřené i uzavřené, bez opakování.
+  function docEventNames() {
+    var seen = {}, out = [];
+    function add(n) { n = n || T("noName"); if (!seen[n]) { seen[n] = true; out.push(n); } }
+    eachOpenEvent(function (ev) { add(ev.event); });
+    state.archives.slice().reverse().forEach(function (a) { add(a.event); });
+    return out;
+  }
+
+  function docBody(fromS, toS, onlyName) {
+    // prázdné pole „Od“ znamená od začátku, prázdné „Do“ dnešek; dřív
+    // tlačítko v takovém případě tiše nic neudělalo
+    if (!fromS) { fromS = "2000-01-01"; }
+    if (!toS) { toS = docDate(new Date()); }
     var from = new Date(fromS + "T00:00:00").getTime();
     var to = new Date(toS + "T23:59:59.999").getTime();
     if (isNaN(from) || isNaN(to)) { return null; }
@@ -5130,24 +6113,51 @@
       items[k].sum += sum;
     };
 
-    state.sales.forEach(function (s) {
-      if (s.ts < from || s.ts > to) { return; }
-      bills += 1;
-      total += s.total;
-      if (s.method === "cash") { cashSum += s.total; } else { cardSum += s.total; }
-      events[state.event || T("noName")] = true;
-      s.lines.forEach(function (l) {
-        addItem(l.name, l.price, l.qty, l.qty * l.price, resolveVat(l.name, l.vat));
+    // otevřené akce: účtenky podle data prodeje
+    eachOpenEvent(function (ev) {
+      var evName = ev.event || T("noName");
+      if (onlyName && evName !== onlyName) { return; }
+      ev.sales.forEach(function (s) {
+        if (s.ts < from || s.ts > to) { return; }
+        bills += 1;
+        total += s.total;
+        if (s.method === "cash") { cashSum += s.total; } else { cardSum += s.total; }
+        events[evName] = true;
+        s.lines.forEach(function (l) {
+          addItem(l.name, l.price, l.qty, l.qty * l.price, resolveVat(l.name, l.vat, ev.items));
+        });
       });
     });
 
+    // Uzavřené akce: když mají uložené účtenky, počítá se každá podle data
+    // prodeje (jako u otevřených). Dřív se celá akce přesunula na datum
+    // uzavření a akce přes přelom měsíce se mohla započítat dvakrát.
+    // Staré archivy bez účtenek zůstávají podle data uzavření.
     state.archives.forEach(function (a) {
+      if (onlyName && (a.event || T("noName")) !== onlyName) { return; }
+      var aName = (a.event || T("noName")) + " (" + new Date(a.closedAt).toLocaleDateString(langInfo().loc) + ")";
+      if (Array.isArray(a.sales) && a.sales.length) {
+        a.sales.forEach(function (s) {
+          if (!s || !Array.isArray(s.lines) || s.ts < from || s.ts > to) { return; }
+          bills += 1;
+          total += s.total || 0;
+          if (s.method === "cash") { cashSum += s.total || 0; } else { cardSum += s.total || 0; }
+          events[aName] = true;
+          // bez sazby na řádku platí sazba uložená v archivu při uzávěrce,
+          // ne dnešní menu
+          var aItems = Array.isArray(a.items) && a.items.length ? a.items : undefined;
+          s.lines.forEach(function (l) {
+            addItem(l.name, l.price, l.qty, l.qty * l.price, resolveVat(l.name, l.vat, aItems));
+          });
+        });
+        return;
+      }
       if (a.closedAt < from || a.closedAt > to) { return; }
       bills += a.count || 0;
       total += a.total || 0;
       cashSum += a.cash || 0;
       cardSum += a.card || 0;
-      events[(a.event || T("noName")) + " (" + new Date(a.closedAt).toLocaleDateString(langInfo().loc) + ")"] = true;
+      events[aName] = true;
       (a.items || []).forEach(function (i) {
         addItem(i.name, i.price, i.qty, i.sum, resolveVat(i.name, i.vat));
       });
@@ -5177,17 +6187,18 @@
         }).forEach(function (key) {
           var gross = rates[key];
           var r = key === "" ? null : parseFloat(key);
-          var base = r === null ? mr(gross) : mr(gross / (1 + r / 100));
-          var tax = mr(gross - base);
-          vatBase += base;
-          vatTax += tax;
+          var base = r === null ? vr(gross) : vr(gross / (1 + r / 100));
+          var tax = vr(gross - base);
+          vatBase = vr(vatBase + base);
+          vatTax = vr(vatTax + tax);
           vatRows.push({ rate: r, gross: gross, base: base, tax: tax });
         });
       }
     }
 
     var now = new Date();
-    var no = "TK-" + docDate(now).replace(/-/g, "") + "-" + ("0" + now.getHours()).slice(-2) + ("0" + now.getMinutes()).slice(-2);
+    var no = "TK-" + docDate(now).replace(/-/g, "") + "-" + ("0" + now.getHours()).slice(-2) + ("0" + now.getMinutes()).slice(-2) +
+             ("0" + now.getSeconds()).slice(-2);
     var loc = langInfo().loc;
     var out = [];
     out.push(T("docTitle"));
@@ -5205,7 +6216,7 @@
     out.push(T("docItemsHead"));
     list.forEach(function (i) {
       out.push(i.qty + "x " + i.name + " (" + czk(i.price) + ")  " + czk(i.sum) +
-               (state.vat && vatNum(i.vat) !== null ? "  " + vatStr(i.vat) + " %" : ""));
+               (state.vat && vatNum(i.vat) !== null ? "  " + rateTxt(i.vat) + " %" : ""));
     });
     out.push("");
 
@@ -5216,12 +6227,12 @@
       out.push(T("docVatHead"));
       vatRows.forEach(function (v) {
         out.push(v.rate === null
-          ? T("docVatNone") + ": " + czk(v.base)
-          : T("docVatRate") + " " + v.rate + " %: " + T("docVatBase") + " " + czk(v.base) +
-            ", " + T("docVatTax") + " " + czk(v.tax));
+          ? T("docVatNone") + ": " + vatMoney(v.base)
+          : T("docVatRate") + " " + rateTxt(v.rate) + " %: " + T("docVatBase") + " " + vatMoney(v.base) +
+            ", " + T("docVatTax") + " " + vatMoney(v.tax));
       });
-      out.push(T("docVatTotalBase") + " " + czk(vatBase));
-      out.push(T("docVatTotalTax") + " " + czk(vatTax));
+      out.push(T("docVatTotalBase") + " " + vatMoney(vatBase));
+      out.push(T("docVatTotalTax") + " " + vatMoney(vatTax));
       out.push("");
     }
     out.push(T("docReceipts") + " " + bills);
@@ -5253,20 +6264,77 @@
   var PDF_W = 595, PDF_H = 842;   // A4 v bodech
   var PDF_SCALE = 3;              // px na bod, kvůli ostrosti při tisku
 
+  var PDF_SANS = '-apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
+
+  // ořízne text na šířku, s výpustkou
+  function pdfClip(g, t, max) {
+    if (g.measureText(t).width <= max) { return t; }
+    var v = t;
+    while (v.length > 1 && g.measureText(v + "…").width > max) { v = v.slice(0, -1); }
+    return v + "…";
+  }
+
+  // rozdělí text na řádky po slovech; když se nevejde ani tak, poslední ořízne
+  function pdfWrap(g, t, max, maxLines) {
+    var words = String(t).split(" ");
+    var out = [], cur = "", i = 0;
+    for (; i < words.length; i++) {
+      var next = cur ? cur + " " + words[i] : words[i];
+      if (g.measureText(next).width <= max || !cur) { cur = next; continue; }
+      out.push(cur);
+      cur = words[i];
+      if (out.length === maxLines - 1) { break; }
+    }
+    var rest = words.slice(i + 1).join(" ");
+    if (cur) { out.push(rest ? cur + " " + rest : cur); }
+    out[out.length - 1] = pdfClip(g, out[out.length - 1], max);
+    return out;
+  }
+
+  function pdfEventsText(doc) { return T("docEvents") + " " + doc.events.join(", "); }
+
+  // Stránkování podle skutečné geometrie drawDocPage: kde začíná první
+  // řádek (hlavička první stránky se měří stejnými písmy a zalomením),
+  // kam až smí řádky sahat nad patičku a kolik místa potřebuje souhrn.
+  // Dřív se odhadovalo a na delších dokladech součet a DPH vyjely ze stránky.
   function pdfPages(doc) {
-    var M = 42;                       // okraj
-    var rowH = 17;
-    var pages = [];
+    var M = 42, rowH = 17;
+    var halfW = (PDF_W - 2 * M) / 2 - 8;
+    var g = document.createElement("canvas").getContext("2d");
+    var font = function (size, weight) { g.font = (weight || 400) + " " + size + "px " + PDF_SANS; };
 
-    // kolik řádků položek se vejde na první a na další stránky
-    var headH = 210 + Math.max(0, doc.seller.length - 4) * 12;
-    var footH = 150 + doc.vatRows.length * rowH;
-    var firstRows = Math.max(1, Math.floor((PDF_H - M - headH - footH - M) / rowH));
-    var nextRows = Math.max(1, Math.floor((PDF_H - M - 90 - M) / rowH));
+    var top = M + 40 + 26;                       // pod linkou hlavičky
+    var yl = top + 15, yr = top + 15;
+    if (doc.seller.length) {
+      doc.seller.forEach(function (ln, i) {
+        font(i === 0 ? 11.5 : 10, i === 0 ? 700 : 400);
+        pdfWrap(g, ln, halfW, 3).forEach(function (part, j) { yl += (i === 0 && j === 0) ? 16 : 13; });
+      });
+    } else { yl += 13; }
+    font(10, 400);
+    yr += 14 + 14 + pdfWrap(g, pdfEventsText(doc), halfW, 4).length * 14;
 
-    var rest = doc.items.slice();
-    pages.push(rest.splice(0, firstRows));
-    while (rest.length) { pages.push(rest.splice(0, nextRows)); }
+    var firstBase = [Math.max(yl, yr) + 20 + 44, top + 44];
+    var LAST = PDF_H - M - 14 - 10;               // poslední řádek nad patičkou
+    var SUM_LIMIT = PDF_H - M - 14 - 8;           // spodek souhrnu nad patičkou
+    var V = doc.vatRows.length;
+    var sumH = 24 + (V ? 45 + V * rowH : 0) + 76;
+    var cap = function (base) { return Math.max(1, Math.floor((LAST - base) / rowH) + 1); };
+
+    var pages = [], rest = doc.items.slice();
+    pages.push(rest.splice(0, cap(firstBase[0])));
+    while (rest.length) { pages.push(rest.splice(0, cap(firstBase[1]))); }
+
+    // souhrn se musí vejít za poslední řádek, jinak řádky přesuneme na novou stránku
+    var li = pages.length - 1;
+    var baseOf = function (ix) { return firstBase[ix === 0 ? 0 : 1]; };
+    if (baseOf(li) + pages[li].length * rowH + sumH > SUM_LIMIT) {
+      // Na novou stránku jde jen poslední řádek (když se k souhrnu vejde),
+      // ať předchozí stránka zůstane plná a tabulka nezačíná prázdná.
+      var fitNew = Math.floor((SUM_LIMIT - sumH - firstBase[1]) / rowH);
+      var move = fitNew >= 1 && pages[li].length > 1 ? 1 : 0;
+      pages.push(pages[li].splice(pages[li].length - move, move));
+    }
     return { pages: pages, M: M, rowH: rowH };
   }
 
@@ -5298,7 +6366,7 @@
     g.fillRect(0, 0, PDF_W, PDF_H);
     g.textBaseline = "alphabetic";
 
-    var SANS = '-apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
+    var SANS = PDF_SANS;
     var INK = "#15120E", INK2 = "#5F5749", INK3 = "#9A9184", ACC = "#D6402A", LINE = "#E4DFD6";
     var font = function (size, weight) { g.font = (weight || 400) + " " + size + "px " + SANS; };
     var ink = function (c) { g.fillStyle = c; };
@@ -5313,29 +6381,8 @@
       if (alignRight) { right(t.toUpperCase(), x, y); } else { g.fillText(t.toUpperCase(), x, y); }
       g.restore();
     };
-    // rozdělí text na řádky po slovech; když se nevejde ani tak, poslední ořízne
-    var wrap = function (t, max, maxLines) {
-      var words = String(t).split(" ");
-      var out = [], cur = "", i = 0;
-      for (; i < words.length; i++) {
-        var next = cur ? cur + " " + words[i] : words[i];
-        if (g.measureText(next).width <= max || !cur) { cur = next; continue; }
-        out.push(cur);
-        cur = words[i];
-        if (out.length === maxLines - 1) { break; }
-      }
-      var rest = words.slice(i + 1).join(" ");
-      if (cur) { out.push(rest ? cur + " " + rest : cur); }
-      out[out.length - 1] = clip(out[out.length - 1], max);
-      return out;
-    };
-
-    var clip = function (t, max) {
-      if (g.measureText(t).width <= max) { return t; }
-      var v = t;
-      while (v.length > 1 && g.measureText(v + "…").width > max) { v = v.slice(0, -1); }
-      return v + "…";
-    };
+    var wrap = function (t, max, maxLines) { return pdfWrap(g, t, max, maxLines); };
+    var clip = function (t, max) { return pdfClip(g, t, max); };
 
     var loc = langInfo().loc;
     var vatOn = state.vat && doc.vatRows.length > 0;
@@ -5355,7 +6402,7 @@
     var wUnit = colW(T("docColUnit"), doc.items.map(function (i) { return czk(i.price); }));
     var wSum = colW(T("docColSum"), doc.items.map(function (i) { return czk(i.sum); }));
     var wVat = vatOn ? colW(T("docVatTax"), doc.items.map(function (i) {
-      return vatNum(i.vat) === null ? "–" : vatStr(i.vat) + " %";
+      return vatNum(i.vat) === null ? "–" : rateTxt(i.vat) + " %";
     })) : 0;
 
     var GAP = 16;
@@ -5405,7 +6452,8 @@
             " – " + new Date(doc.to).toLocaleDateString(loc), halfW), xSum, yr); yr += 14;
       right(clip(T("docIssued") + " " + new Date(doc.issued).toLocaleDateString(loc) +
             " " + clock(doc.issued), halfW), xSum, yr); yr += 14;
-      right(clip(T("docEvents") + " " + doc.events.join(", "), halfW), xSum, yr); yr += 14;
+      // víc akcí se zalomí na další řádky, dřív zbytek zmizel za výpustkou
+      wrap(pdfEventsText(doc), halfW, 4).forEach(function (part) { right(part, xSum, yr); yr += 14; });
 
       y = Math.max(yl, yr) + 20;
     }
@@ -5431,7 +6479,7 @@
       font(10.5, 400); ink(INK2);
       right(String(i.qty), xQty, y);
       right(czk(i.price), xUnit, y);
-      if (vatOn) { right(vatNum(i.vat) === null ? "–" : vatStr(i.vat) + " %", xVat, y); }
+      if (vatOn) { right(vatNum(i.vat) === null ? "–" : rateTxt(i.vat) + " %", xVat, y); }
       font(10.5, 600); ink(INK);
       right(czk(i.sum), xSum, y);
       y += rowH;
@@ -5444,10 +6492,10 @@
         label(T("docVatHead"), M, y); y += 16;
 
         // i tady si sloupce změříme, popisky daně jsou v každém jazyce jinak dlouhé
-        var baseTxt = doc.vatRows.map(function (v) { return T("docVatBase") + " " + czk(v.base); });
-        var taxTxt = doc.vatRows.map(function (v) { return T("docVatTax") + " " + czk(v.tax); });
-        baseTxt.push(T("docVatTotalBase") + " " + czk(doc.vatBase));
-        taxTxt.push(T("docVatTotalTax") + " " + czk(doc.vatTax));
+        var baseTxt = doc.vatRows.map(function (v) { return T("docVatBase") + " " + vatMoney(v.base); });
+        var taxTxt = doc.vatRows.map(function (v) { return T("docVatTax") + " " + vatMoney(v.tax); });
+        baseTxt.push(T("docVatTotalBase") + " " + vatMoney(doc.vatBase));
+        taxTxt.push(T("docVatTotalTax") + " " + vatMoney(doc.vatTax));
         font(10.5, 700);
         var wide = function (arr) {
           var w = 0;
@@ -5460,7 +6508,7 @@
 
         doc.vatRows.forEach(function (v, ix) {
           font(10.5, 400); ink(INK2);
-          g.fillText(clip(v.rate === null ? T("docVatNone") : T("docVatRate") + " " + v.rate + " %", wRate), M, y);
+          g.fillText(clip(v.rate === null ? T("docVatNone") : T("docVatRate") + " " + rateTxt(v.rate) + " %", wRate), M, y);
           right(baseTxt[ix], xBase, y);
           right(taxTxt[ix], xTax, y);
           y += rowH;
@@ -5587,8 +6635,23 @@
     return (T("docFile") + "-" + doc.no + ".pdf").replace(/[^A-Za-z0-9._-]/g, "-");
   }
 
-  // Sdílení souboru umí Web Share; kde není, soubor aspoň stáhneme.
-  function shareDoc(asMail) {
+  function blobToBase64(blob, done) {
+    try {
+      var r = new FileReader();
+      r.onload = function () {
+        var u = String(r.result || "");
+        done(u.indexOf(",") >= 0 ? u.slice(u.indexOf(",") + 1) : null);
+      };
+      r.onerror = function () { done(null); };
+      r.readAsDataURL(blob);
+    } catch (e) { done(null); }
+  }
+
+  // Doklad ven: mode "mail" (e-mail s přílohou), "share" (nabídka sdílení),
+  // "save" (uložit do souborů, jen v aplikaci). V aplikaci jde vše přes
+  // nativní modul DocShare: Android WebView nemá Web Share, stažení přes
+  // blob: zahodí a mailto: přílohu nenese, takže dřív odešla prázdná zpráva.
+  function shareDoc(mode) {
     var doc = sheet && sheet.doc;
     if (!doc) { return; }
     var blob, name;
@@ -5600,6 +6663,29 @@
       return;
     }
 
+    if (typeof window.__kasaShareFile === "function") {
+      blobToBase64(blob, function (b64) {
+        if (!b64) { showToast(T("pdfFail")); return; }
+        window.__kasaShareFile({
+          data: b64, name: name, mime: "application/pdf", mode: mode,
+          subject: T("docTitle") + " " + doc.no, text: T("docMailBody"), title: T("docTitle")
+        }).then(function (r) {
+          if (r && r.result === "saved") { showToast(T("pdfSaved")); }
+        }, function () {
+          // Nativní modul selhal. Webová cesta má smysl jen tam, kde WebView
+          // umí Web Share (iOS); v Android WebView by stažení i mailto tiše
+          // selhaly a hláška „uloženo“ by lhala.
+          if (navigator.share) { webShareDoc(doc, blob, name, mode); } else { showToast(T("pdfFail")); }
+        });
+      });
+      return;
+    }
+    webShareDoc(doc, blob, name, mode);
+  }
+
+  // Prohlížeč: Web Share se souborem, kde není, soubor stáhneme.
+  function webShareDoc(doc, blob, name, mode) {
+    var asMail = mode === "mail";
     var file = null;
     try { file = new File([blob], name, { type: "application/pdf" }); } catch (e) { file = null; }
 
@@ -5711,12 +6797,15 @@
     }
 
     h += '<div class="sec"><h2>' + esc(T("eventHead")) + "</h2></div>" +
-         '<div class="field"><input class="inp" id="evName" value="' + esc(state.event) + '" placeholder="' + esc(T("eventPlaceholder")) + '"></div>' +
+         '<div class="field"><input class="inp" id="evName" maxlength="60" value="' + esc(state.event) + '" placeholder="' + esc(T("eventPlaceholder")) + '"></div>' +
+         '<div class="acts" style="padding-top:0"><button class="act" data-evsheet="1">' +
+           esc(state.parked.length ? T("evManageN", state.parked.length + 1) : T("evManage")) + "</button></div>" +
+         '<p class="hint" style="text-align:left;padding-top:0">' + esc(T("evMenuHint")) + "</p>" +
          '<div class="sec"><h2>' + esc(T("itemsHead")) + "</h2></div>";
 
     state.items.forEach(function (it, i) {
       var c = colorOf(it.color);
-      h += '<div class="edit">' +
+      h += '<div class="edit' + (state.vat ? " vat" : "") + '">' +
              '<button class="sw' + (c ? "" : " none") + '"' + (c ? ' style="background:' + c.bg + '"' : "") +
                ' data-col="' + it.id + '" aria-label="' + esc(T("colorAria")) + '"></button>' +
              '<input class="e-nm" data-nm="' + it.id + '" value="' + esc(it.name) + '">' +
@@ -5814,6 +6903,69 @@
   }
 
   // cena do editačního pole: bez zbytečných nul, s tečkou
+  // Cena z pole: poslední čárka či tečka je desetinná, jen když za ní nejsou
+  // přesně tři číslice (tam jde o tisíce: „1,200“, „25.000“). Obě znaménka
+  // najednou: poslední je desetinné („1.234,50“). Dřív z „1,200“ bylo 1.
+  // Sazby z menu (od nejčastější) pro jinou částku, plus „bez DPH“.
+  function menuRates() {
+    var cnt = {};
+    state.items.forEach(function (it) {
+      var r = vatNum(it.vat);
+      if (r !== null) { cnt[String(r)] = (cnt[String(r)] || 0) + 1; }
+    });
+    return Object.keys(cnt).sort(function (a, b) { return cnt[b] - cnt[a] || parseFloat(a) - parseFloat(b); });
+  }
+
+  function defaultCustomVat() {
+    if (state.customVat === "-") { return ""; }
+    if (state.customVat && vatNum(state.customVat) !== null) { return vatStr(state.customVat); }
+    var r = menuRates();
+    return r.length ? vatStr(r[0]) : "";
+  }
+
+  function customVatChips() {
+    var rates = menuRates();
+    var cur = sheet.vat === undefined ? "" : vatStr(sheet.vat);
+    if (cur !== "" && rates.indexOf(String(vatNum(cur))) < 0) { rates.push(String(vatNum(cur))); }
+    var h = '<div class="vchips" role="group" aria-label="' + esc(T("vatAria")) + '">';
+    rates.forEach(function (r) {
+      var v = vatStr(r);
+      h += '<button class="vchip' + (cur === v ? " on" : "") + '" data-cvat="' + esc(v) + '">' + esc(v) + " %</button>";
+    });
+    return h + '<button class="vchip' + (cur === "" ? " on" : "") + '" data-cvat="-">' + esc(T("docVatNone")) + "</button></div>";
+  }
+
+  // Změna měny: uložené ceny se nepřevádějí (kurz neznáme), ale při méně
+  // desetinných místech se zaokrouhlí. Jinak dlaždice ukazovala 3 Kč, ale
+  // součet počítal s 2,5 a nesouhlasil.
+  function setCurrency(code) {
+    var oldDec = curInfo().dec;
+    state.currency = code;
+    moneyFmt = null; nfPlain = null;
+    if (curInfo().dec < oldDec) {
+      var round = function (list) { list.forEach(function (it) { it.price = mr(it.price); }); };
+      round(state.items);
+      round(state.order);
+      state.parked.forEach(function (pk) { round(pk.items); });
+    }
+  }
+
+  function parsePrice(raw) {
+    var t = String(raw === undefined || raw === null ? "" : raw)
+      .replace(/[\s\u00a0\u202f']/g, "").replace(/[^0-9.,]/g, "");
+    if (!t) { return NaN; }
+    var last = Math.max(t.lastIndexOf(","), t.lastIndexOf("."));
+    if (last < 0) { return parseFloat(t); }
+    var tail = t.slice(last + 1);
+    var mixed = t.indexOf(",") >= 0 && t.indexOf(".") >= 0;
+    var seps = (t.match(/[.,]/g) || []).length;
+    if (mixed || (seps === 1 && tail.length !== 3)) {
+      var ip = t.slice(0, last).replace(/[.,]/g, "");
+      return parseFloat((ip || "0") + "." + (tail || "0"));
+    }
+    return parseFloat(t.replace(/[.,]/g, ""));
+  }
+
   function priceStr(v) {
     var dec = curInfo().dec;
     if (!dec || v === Math.round(v)) { return String(Math.round(v)); }
@@ -5935,13 +7087,23 @@
   // neznamená „bez daně", nýbrž „tehdy se DPH ještě neřešila". V tom případě
   // sazbu dohledáme podle názvu v aktuálním menu, jinak by se doklad po
   // dodatečném zapnutí DPH už nedal spravit.
-  function resolveVat(name, recorded) {
+  // Sazba řádku; když ji řádek nemá (starší účtenky), vezme se z menu
+  // akce, do které účtenka patří.
+  function resolveVat(name, recorded, items) {
     var v = vatStr(recorded);
     if (v !== "") { return v; }
-    for (var i = 0; i < state.items.length; i++) {
-      if (state.items[i].name === name) { return vatStr(state.items[i].vat); }
+    var list = items || state.items;
+    for (var i = 0; i < list.length; i++) {
+      if (list[i].name === name) { return vatStr(list[i].vat); }
     }
     return "";
+  }
+
+  // sazba DPH k zobrazení: 12,5 % v češtině, 12.5 % v angličtině
+  function rateTxt(v) {
+    var n = vatNum(v);
+    if (n === null) { return ""; }
+    try { return new Intl.NumberFormat(langInfo().loc, { maximumFractionDigits: 2 }).format(n); } catch (e) { return String(n); }
   }
 
   function vatNum(v) {
@@ -5963,6 +7125,7 @@
   }
 
   function tourReplayBlock() {
+    if (state.mode !== "kasa") { return ""; }   // výdej nemá prodej, průvodce by nepostoupil
     return '<div class="acts" style="padding-top:0"><button class="act" data-tourstart="1">' +
            esc(T("tourReplay")) + "</button></div>";
   }
@@ -6144,6 +7307,9 @@
       h += '<button class="key" data-dig="0">0</button>' +
            '<button class="key" data-dig="00">00</button>' +
            '<button class="key" data-back="1" aria-label="' + esc(T("delDigit")) + '">' + SVG.back + "</button></div>" +
+           // plátce DPH: jiná částka potřebuje sazbu, jinak by v dokladu
+           // skončila celá jako bez daně
+           (state.vat ? customVatChips() : "") +
            '<button class="btn-done" data-addcustom="1"' + (sheet.amount > 0 ? "" : " disabled") + ">" + esc(T("addToOrder")) + "</button>" +
            '<button class="btn-ghost" data-cancel="1">' + esc(T("back")) + "</button>";
     }
@@ -6158,7 +7324,12 @@
     if (sheet.step === "text") {
       h += "<h2>" + esc(sheet.title) + "</h2>" +
            '<textarea class="txt" readonly id="dump">' + esc(sheet.body) + "</textarea>" +
-           '<button class="btn-done" data-copytext="1">' + esc(T("copy")) + "</button>" +
+           // záloha jako soubor: velká záloha se do schránky v Androidu nevejde
+           (sheet.backup && typeof window.__kasaShareFile === "function"
+             ? '<button class="btn-done" data-backupfile="save">' + esc(T("backupSave")) + "</button>" +
+               '<button class="btn-ghost" data-backupfile="share">' + esc(T("docShare")) + "</button>" +
+               '<button class="btn-ghost" data-copytext="1">' + esc(T("copy")) + "</button>"
+             : '<button class="btn-done" data-copytext="1">' + esc(T("copy")) + "</button>") +
            '<button class="btn-ghost" data-cancel="1">' + esc(T("close")) + "</button>";
     }
 
@@ -6169,6 +7340,16 @@
              '<label><span>' + esc(T("docFrom")) + '</span><input class="inp" type="date" id="docFrom" value="' + esc(sheet.from) + '"></label>' +
              '<label><span>' + esc(T("docTo")) + '</span><input class="inp" type="date" id="docTo" value="' + esc(sheet.to) + '"></label>' +
            "</div>" +
+           (function () {
+             var names = docEventNames();
+             if (names.length < 2) { return ""; }
+             var o = '<label class="doc-ev"><span>' + esc(T("docEvLabel")) + '</span><select class="inp" id="docEv">' +
+                     '<option value="">' + esc(T("docEvAll")) + "</option>";
+             names.forEach(function (n) {
+               o += '<option value="' + esc(n) + '"' + (sheet.ev === n ? " selected" : "") + ">" + esc(n) + "</option>";
+             });
+             return o + "</select></label>";
+           })() +
            '<button class="btn-ghost" style="margin-top:14px" data-sellersheet="1">' +
              esc(sellerFilled() ? T("sellerSet") : T("sellerEmpty")) + "</button>" +
            (sheet.error ? '<p class="sub" style="color:var(--accent);font-weight:600">' + esc(sheet.error) + "</p>" : "") +
@@ -6218,11 +7399,48 @@
            '<button class="btn-done" data-cancel="1">' + esc(T("close")) + "</button>";
     }
 
+    if (sheet.step === "events") {
+      h += "<h2>" + esc(T("evHead")) + "</h2>" +
+           '<p class="sub">' + esc(T("evHint")) + "</p>" +
+           '<div class="evl">';
+      openEventList().forEach(function (ev) {
+        var n = ev.sales.length;
+        var meta = n + " " + tp("billsN", n) + " · " + czk(evTotal(ev));
+        h += '<div class="evr' + (ev.active ? " on" : "") + '">' +
+               '<button class="pick" data-evswitch="' + esc(ev.id) + '"' + (ev.active ? ' aria-current="true"' : "") + ">" +
+                 '<span class="mid"><span class="n">' + esc(evLabel(ev)) + '</span><span class="s">' + esc(meta) + "</span></span>" +
+                 '<span class="go">' + esc(ev.active ? T("evActive") : T("evSwitch")) + "</span></button>" +
+               // odebrat jde jen prázdná odložená akce, s účtenkami se uzavírá
+               (!ev.active && !n
+                 ? '<button class="ab" data-evdel="' + esc(ev.id) + '" aria-label="' + esc(T("evDelAria", evLabel(ev))) + '">' + SVG.close + "</button>"
+                 : "") +
+             "</div>";
+      });
+      h += "</div>" +
+           '<button class="btn-done" data-evnew="1">' + esc(T("evNew")) + "</button>" +
+           '<button class="btn-ghost" data-cancel="1">' + esc(T("close")) + "</button>";
+    }
+
+    if (sheet.step === "newevent") {
+      h += "<h2>" + esc(T("evNew")) + "</h2>" +
+           '<p class="sub">' + esc(T("evNewHint")) + "</p>" +
+           '<input class="inp" style="margin-top:14px" id="evNewName" maxlength="60" value="' + esc(sheet.draft || "") +
+             '" placeholder="' + esc(T("eventPlaceholder")) + '" aria-label="' + esc(T("eventHead")) + '">' +
+           (state.items.length
+             ? '<label class="evchk"><input type="checkbox" id="evCopy"' + (sheet.copy === false ? "" : " checked") + ">" +
+               "<span>" + esc(T("evCopyMenu", evLabel(activeEvent()))) + "</span></label>"
+             : "") +
+           '<button class="btn-done" data-evcreate="1">' + esc(T("evCreate")) + "</button>" +
+           '<button class="btn-ghost" data-evsheet="1">' + esc(T("back")) + "</button>";
+    }
+
     if (sheet.step === "docout") {
       h += "<h2>" + esc(T("docHead")) + "</h2>" +
            '<textarea class="txt" readonly id="dump" style="height:230px">' + esc(sheet.body) + "</textarea>" +
            '<button class="btn-done" data-docmail="1">' + esc(T("docMail")) + "</button>" +
            '<button class="btn-ghost" data-docshare="1">' + esc(T("docShare")) + "</button>" +
+           // uložení do souborů nabízí jen aplikace; v prohlížeči PDF stáhne sdílení
+           (window.__kasaSaveFile ? '<button class="btn-ghost" data-docsave="1">' + esc(T("docSave")) + "</button>" : "") +
            '<button class="btn-ghost" data-copytext="1">' + esc(T("copy")) + "</button>" +
            '<button class="btn-ghost" data-cancel="1">' + esc(T("close")) + "</button>";
     }
@@ -6282,6 +7500,8 @@
            '<p class="sub">' + esc(T("restoreHint")) + "</p>" +
            (sheet.error ? '<p class="sub" style="color:var(--accent);font-weight:600">' + esc(sheet.error) + "</p>" : "") +
            '<textarea class="txt" id="paste" placeholder="' + esc(T("restorePlaceholder")) + '">' + esc(sheet.draft || "") + "</textarea>" +
+           '<label class="btn-ghost" style="display:block;text-align:center;cursor:pointer">' + esc(T("restoreFile")) +
+             '<input type="file" id="restoreFile" accept=".json,application/json,text/plain" style="display:none"></label>' +
            '<button class="btn-done warn" data-dorestore="1">' + esc(T("restoreDo")) + "</button>" +
            '<button class="btn-ghost" data-cancel="1">' + esc(T("back")) + "</button>";
     }
@@ -6352,6 +7572,8 @@
   }
 
   function renderTabs(waiting) {
+    var navEl = document.getElementById("tabs");
+    if (navEl) { navEl.setAttribute("aria-label", T("navAria")); }
     var h = "";
     tabsFor().forEach(function (t) {
       h += '<button class="tab" role="tab" data-tab="' + t[0] + '" aria-selected="' +
@@ -6368,10 +7590,40 @@
   // pod rukama, proto sahá na DOM jen ta část, jejíž obsah se liší.
   var painted = {};
 
+  // Překreslení nesmí vzít kurzor z pole, do kterého se právě píše (název
+  // či cena položky, údaje prodejce). Dřív ho shodila třeba zmizelá hláška
+  // nebo půlminutové obnovení stavu spojení a psaní se přerušilo.
+  function focusKeyOf(a) {
+    if (a.id) { return "#" + a.id; }
+    var keys = ["nm", "pr", "vat", "sf"];
+    for (var i = 0; i < keys.length; i++) {
+      var v = a.getAttribute("data-" + keys[i]);
+      if (v !== null) { return "[data-" + keys[i] + '="' + String(v).replace(/["\\]/g, "") + '"]'; }
+    }
+    return null;
+  }
+
+  function swapHtml(el, html) {
+    var a = document.activeElement, key = null, val = "", s0 = null, s1 = null;
+    if (a && el.contains(a) && (a.tagName === "INPUT" || a.tagName === "TEXTAREA") && a.type !== "checkbox") {
+      key = focusKeyOf(a);
+      val = a.value;
+      try { s0 = a.selectionStart; s1 = a.selectionEnd; } catch (e) {}
+    }
+    el.innerHTML = html;
+    if (!key) { return; }
+    var n = null;
+    try { n = el.querySelector(key); } catch (e) { n = null; }
+    if (!n) { return; }
+    if (n.value !== val) { n.value = val; }
+    try { n.focus({ preventScroll: true }); } catch (e) { n.focus(); }
+    if (s0 !== null) { try { n.setSelectionRange(s0, s1); } catch (e) {} }
+  }
+
   function paint(id, html) {
     if (painted[id] === html) { return false; }
     painted[id] = html;
-    document.getElementById(id).innerHTML = html;
+    swapHtml(document.getElementById(id), html);
     return true;
   }
 
@@ -6380,6 +7632,10 @@
   // vznikl i obal .scrim/.sheet a jeho vstupní animace by se přehrály,
   // což se projevovalo jako probliknutí celého panelu. Dokud je otevřený
   // stejný krok, přepisuje se proto jen vnitřek už existujícího panelu.
+  // Kdy se naposledy objevil nový krok panelu. Rychlé dvojí ťuknutí na
+  // Zaplatit/Kartou jinak druhým ťuknutím rovnou potvrdilo platbu.
+  var stepShownAt = 0;
+
   function paintSheet() {
     var full = state.setup ? renderSheet() : renderOnboard();
     var slot = document.getElementById("sheetSlot");
@@ -6393,7 +7649,7 @@
       var inner = sheetInner();
       if (box && painted.sheetInner !== inner) {
         painted.sheetInner = inner;
-        box.innerHTML = inner;
+        swapHtml(box, inner);
       }
       painted.sheetSlot = full; // ať pozdější plné překreslení porovnává správně
       return;
@@ -6401,6 +7657,7 @@
 
     if (paint("sheetSlot", full)) {
       painted.sheetInner = (state.setup && sheet) ? sheetInner() : null;
+      stepShownAt = Date.now();
     }
   }
 
@@ -6454,7 +7711,8 @@
       done: function () { return !!sheet && (sheet.step === "method" || sheet.step === "cash" || sheet.step === "card"); } },
     { key: "tourS3", sel: function () { return '[data-method="cash"]'; },
       done: function () { return !!sheet && (sheet.step === "cash" || sheet.step === "card"); } },
-    { key: "tourS4", sel: function () { return (sheet && sheet.received > 0) ? "[data-commit]" : "[data-exact]"; },
+    { key: "tourS4", sel: function () {
+        return (sheet && (sheet.step === "card" || sheet.received > 0)) ? "[data-commit]" : "[data-exact]"; },
       done: function () { return state.sales.length > 0 && !sheet; } },
     { key: "tourS5", sel: function () { return '[data-tab="orders"]'; },
       done: function () { return view === "orders"; } },
@@ -6543,8 +7801,9 @@
     if (el) {
       // Nový krok si cíl přisune do středu obrazovky. Jen jednou na krok,
       // aby kroužek nebojoval s ručním posouváním uživatele.
-      if (tourScrolledFor !== tourIx) {
-        tourScrolledFor = tourIx;
+      var scrollKey = tourIx + "|" + TOUR[tourIx].sel();
+      if (tourScrolledFor !== scrollKey) {
+        tourScrolledFor = scrollKey;
         var rr = el.getBoundingClientRect();
         if (rr.top < 70 || rr.bottom > window.innerHeight - 140) {
           try { el.scrollIntoView({ block: "center", behavior: "smooth" }); } catch (e2) { el.scrollIntoView(); }
@@ -6581,8 +7840,10 @@
     } else {
       tourLastBox = "";
       ring.style.display = "none";
-      card.style.top = "auto";
-      card.style.bottom = "90px";
+      // Bez cíle karta patří nahoru: dole zakrývala Zaplatit i Hotovo
+      // (průhledná pro ťuknutí, ale tlačítka nebyla vidět).
+      card.style.bottom = "auto";
+      card.style.top = "calc(var(--safe-t) + 70px)";
     }
   }
 
@@ -6605,6 +7866,52 @@
     }
   }
 
+  // Android: tlačítko Zpět (mobile/.../MainActivity). Vrací true, když
+  // na stránce bylo co zavřít; jinak aplikaci opustí systém.
+  window.__kasaBack = function () {
+    if (tourActive()) { tourEnd(false); render(); return true; }
+    if (sheet) {
+      pending = null;
+      sheet = sheet.back ? sheet.back : sheet.step === "newevent" ? { step: "events" } : null;
+      render(); return true;
+    }
+    if (!state.setup && obStep > 1) { obStep = 1; render(); return true; }
+    if (linesOpen) { linesOpen = false; render(); return true; }
+    var first = tabsFor()[0][0];
+    if (view !== first) { view = first; render(true); return true; }
+    return false;
+  };
+
+  // Velká čísla (součet účtu, částka k zaplacení, tržba) se musí vejít celá:
+  // s delšími popisky tlačítek a velkými částkami (Ft, Rp, ₫) přetékala
+  // za okraj. Písmo se zmenší jen tolik, kolik je potřeba.
+  function fitNumbers() {
+    var list = document.querySelectorAll(".bar-sum .t, .sheet .big, .hero .sum");
+    for (var i = 0; i < list.length; i++) {
+      var el = list[i];
+      el.style.fontSize = "";
+      el.style.whiteSpace = "nowrap";
+      var size = parseFloat(getComputedStyle(el).fontSize) || 24;
+      var guard = 0;
+      while (el.scrollWidth > el.clientWidth + 1 && size > 12 && guard++ < 30) {
+        size = Math.max(12, size - 1.5);
+        el.style.fontSize = size + "px";
+      }
+    }
+  }
+
+  // Název akce v hlavičce je na kase zároveň přepínač akcí.
+  function paintTopName() {
+    var el = document.getElementById("topName");
+    if (!el) { return; }
+    var till = state.mode === "kasa";
+    var name = state.event || T("noName");
+    var html = esc(name) + (till ? '<i class="chev" aria-hidden="true"></i>' : "");
+    if (el.innerHTML !== html) { el.innerHTML = html; }
+    el.disabled = !till;
+    el.setAttribute("aria-label", till ? T("evSwitchAria", name) : name);
+  }
+
   function render(toTop) {
     // role bez prodeje nesmí zůstat viset na obrazovce, kterou nemá
     var allowed = tabsFor().map(function (t) { return t[0]; });
@@ -6613,7 +7920,7 @@
     var waiting = openOrders().length;
     document.getElementById("topRole").textContent = state.mode === "vydej" ? T("roleVydej") : T("roleKasa");
     document.getElementById("topLabel").textContent = T("ordersLabel");
-    document.getElementById("topName").textContent = state.event || T("noName");
+    paintTopName();
     document.getElementById("topInfo").textContent = String(waiting);
 
     var v = document.getElementById("view");
@@ -6634,6 +7941,7 @@
         '<button class="x" data-hidetoast="1" aria-label="' + esc(T("close")) + '">' + SVG.close + "</button></div>"
       : "");
     placeToast();
+    fitNumbers();
 
     tourTick();
     tourPaint();
@@ -6659,8 +7967,9 @@
             "[data-backup],[data-restoreask],[data-dorestore],[data-docask],[data-docmake]," +
             "[data-ticket],[data-line],[data-serve],[data-reopen],[data-drop],[data-col],[data-setcol],[data-applycustom],[data-mode],[data-voice],[data-voicetest],"+
             "[data-paircreate],[data-pairjoin],[data-pairoff],[data-resync],[data-relaytest],[data-setupimport]," +
-            "[data-tourskip],[data-tourstart],[data-offlinehelp],[data-country],[data-docmail],[data-docshare],[data-sellersheet],[data-archopen],[data-archdel],[data-vatmode],[data-langsheet],[data-cursheet],[data-setlang],[data-setcur],[data-paywall],[data-buy]," +
-            "[data-restorebuy],[data-oblang],[data-obcur],[data-obnext],[data-obdemo],[data-obempty]";
+            "[data-tourskip],[data-tourstart],[data-offlinehelp],[data-country],[data-docmail],[data-docshare],[data-docsave],[data-sellersheet],[data-archopen],[data-archdel],[data-vatmode],[data-langsheet],[data-cursheet],[data-setlang],[data-setcur],[data-paywall],[data-buy]," +
+            "[data-restorebuy],[data-oblang],[data-obcur],[data-obnext],[data-obdemo],[data-obempty]," +
+            "[data-evsheet],[data-evswitch],[data-evnew],[data-evcreate],[data-evdel],[data-cvat],[data-backupfile]";
 
   document.addEventListener("click", function (ev) {
     if (suppressClick) { suppressClick = false; return; }
@@ -6692,18 +8001,31 @@
       return;
     }
 
-    if (d.custom) { sheet = { step: "custom", amount: 0 }; render(); return; }
+    if (d.custom) { sheet = { step: "custom", amount: 0, vat: state.vat ? defaultCustomVat() : "" }; render(); return; }
     if (d.dig) {
-      sheet.amount = Math.min(999999, parseInt(String(sheet.amount) + d.dig, 10) || 0);
+      // číslice navíc se ignoruje, dřív se částka potichu změnila na 999 999
+      var nv = parseInt(String(sheet.amount) + d.dig, 10) || 0;
+      if (nv <= 99999999) { sheet.amount = nv; }
       render(); return;
     }
     if (d.back) { sheet.amount = Math.floor(sheet.amount / 10); render(); return; }
+    if (d.cvat) {
+      if (sheet) { sheet.vat = d.cvat === "-" ? "" : d.cvat; render(); }
+      return;
+    }
+
     if (d.addcustom) {
-      state.order.push({ ref: uid(), name: T("customItem"), price: mr(minorToMajor(sheet.amount)), qty: 1 });
+      var cl = { ref: uid(), name: T("customItem"), price: mr(minorToMajor(sheet.amount)), qty: 1 };
+      if (state.vat) {
+        cl.vat = vatStr(sheet.vat);
+        state.customVat = cl.vat === "" ? "-" : cl.vat;
+      }
+      state.order.push(cl);
       sheet = null; save(); render(); return;
     }
 
-    if (d.step) { bump(parseInt(d.step, 10), parseInt(d.d, 10)); return; }
+    // zatemněné pozadí panelu nese data-step taky; to není krokovač řádku
+    if (d.step && !d.scrim) { bump(parseInt(d.step, 10), parseInt(d.d, 10)); return; }
     if (d.toggle) { linesOpen = !linesOpen; render(); return; }
 
     if (d.clearask) {
@@ -6722,6 +8044,7 @@
       sheet = { step: "method", total: mr(orderTotal()), method: null, received: 0 };
       render(); return;
     }
+    if ((d.method || d.commit) && Date.now() - stepShownAt < 450) { return; }
     if (d.method) { sheet.method = d.method; sheet.step = d.method; render(); return; }
     if (d.note) { sheet.received = mr(sheet.received + parseFloat(d.note)); render(); return; }
     if (d.exact) { sheet.received = sheet.total; render(); return; }
@@ -6740,6 +8063,8 @@
     if (d.cancel || d.scrim) {
       if (sheet && (sheet.step === "cash" || sheet.step === "card")) {
         sheet.step = "method"; sheet.received = 0;
+      } else if (sheet && sheet.back) {
+        sheet = sheet.back;   // údaje prodejce otevřené z dokladu: zpět do dokladu
       } else {
         sheet = null; pending = null;
       }
@@ -6773,22 +8098,48 @@
 
     if (d.docmake) {
       var fEl = document.getElementById("docFrom"), tEl = document.getElementById("docTo");
-      var doc = docBody(fEl ? fEl.value : "", tEl ? tEl.value : "");
+      var eEl = document.getElementById("docEv");
+      var doc = docBody(fEl ? fEl.value : "", tEl ? tEl.value : "", eEl ? eEl.value : "");
       if (doc === null) { return; }
-      if (doc === "") { sheet.error = T("docEmpty"); sheet.from = fEl.value; sheet.to = tEl.value; render(); return; }
+      if (doc === "") {
+        sheet.error = T("docEmpty"); sheet.from = fEl.value; sheet.to = tEl.value; sheet.ev = eEl ? eEl.value : "";
+        render(); return;
+      }
       sheet = { step: "docout", body: doc.text, doc: doc };
       render(); return;
     }
 
-    if (d.docmail) { shareDoc(true); return; }
-    if (d.docshare) { shareDoc(false); return; }
+    if (d.docmail) { shareDoc("mail"); return; }
+    if (d.docshare) { shareDoc("share"); return; }
+    if (d.docsave) { shareDoc("save"); return; }
+
+    if (d.backupfile) {
+      var bj = sheet && sheet.body;
+      if (!bj || typeof window.__kasaShareFile !== "function") { return; }
+      blobToBase64(new Blob([bj], { type: "application/json" }), function (b64) {
+        if (!b64) { showToast(T("backupFail")); return; }
+        window.__kasaShareFile({
+          data: b64, name: "tapkasa-backup-" + docDate(new Date()) + ".json", mime: "application/json",
+          mode: d.backupfile === "share" ? "share" : "save", subject: T("backupHead"), text: "", title: T("backupHead")
+        }).then(function (r) {
+          if (r && r.result === "saved") { showToast(T("backupSaved")); }
+        }, function () { showToast(T("backupFail")); });
+      });
+      return;
+    }
 
     if (d.copytext) {
       var body = sheet.body;
       var area = document.getElementById("dump");
+      var copiedMsg = sheet.backup || sheet.step === "docout" ? T("copiedAny") : T("toastCopied");
+      // Android: schránka tiše zahodí text nad zhruba půl megabajtu, ale
+      // hlásí úspěch. Velkou zálohu proto nekopírujeme a nabídneme soubor.
+      if (sheet.backup && nativeApp() && !iosApp() && body.length > 200000) {
+        showToast(T("backupTooBig")); render(); return;
+      }
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(body).then(function () {
-          sheet = null; render(); showToast(T("toastCopied")); render();
+          sheet = null; render(); showToast(copiedMsg); render();
         }, function () {
           if (area) { area.focus(); area.select(); }
           showToast(T("toastCopyFail")); render();
@@ -6800,6 +8151,41 @@
       return;
     }
 
+    // ---- akce: přehled, přepnutí, založení, odebrání ----
+    if (d.evsheet) {
+      if (state.mode !== "kasa") { return; }
+      sheet = { step: "events" };
+      render(); return;
+    }
+    if (d.evswitch) { switchEvent(d.evswitch); return; }
+    if (d.evnew) {
+      if (state.order.length) { showToast(T("basketBusy")); return; }
+      sheet = { step: "newevent", draft: "", copy: true };
+      render();
+      var nn = document.getElementById("evNewName");
+      if (nn) { nn.focus(); }
+      return;
+    }
+    if (d.evcreate) {
+      var nEl = document.getElementById("evNewName"), cEl = document.getElementById("evCopy");
+      createEvent(nEl ? nEl.value.trim().slice(0, 60) : "", cEl ? cEl.checked : false);
+      return;
+    }
+    if (d.evdel) {
+      var dv = parkedById(d.evdel);
+      if (!dv) { return; }
+      if (dv.sales.length) { showToast(T("evDelBusy")); return; }
+      var ex = T("confirmEvDel");
+      var back = sheet;
+      ask(ex[0], ex[1].split("{0}").join(evLabel(dv)), ex[2], function () {
+        state.parked = state.parked.filter(function (pk) { return pk.id !== dv.id; });
+        save();
+        sheet = back && back.step === "events" ? { step: "events" } : null;
+        render();
+      });
+      return;
+    }
+
     if (d.close) {
       var cx = T("confirmClose");
       ask(cx[0], cx[1], cx[2], function () {
@@ -6807,14 +8193,19 @@
         // účtenky si archiv nese s sebou, jinak by nešlo akci vrátit zpět
         // do kasy a doúčtovat ji
         state.archives.push({
-          id: uid(), closedAt: Date.now(), event: state.event || "Prodej",
+          id: uid(), closedAt: Date.now(), event: state.event || T("noName"), evId: state.evId,
           total: s.total, cash: s.cash, card: s.card, count: s.count, pieces: s.pieces, items: s.items,
           sales: state.sales.slice(), nextNo: state.nextNo
         });
+        // Akce zůstává otevřená (název, menu), jen začíná znovu od nuly:
+        // denní uzávěrka kavárny tak nevyžaduje zakládat akci každý den.
         state.sales = [];
         state.nextNo = 1;
         state.rateN += 1;
-        save(); pushClear();
+        save(); pushClear(state.evId);
+        // starší verze výdeje po uzávěrce smaže frontu celou, i objednávky
+        // jiných otevřených akcí; ty mu hned pošleme znovu
+        if (state.parked.length) { pushEverything(); }
         showToast(T("toastClosed"));
         maybeAskReview();
       });
@@ -6822,24 +8213,59 @@
     }
 
     // Vrácení uzavřené akce zpět do kasy. Slučovat dvě akce dohromady by
-    // rozhodilo číslování účtenek i uzávěrku, proto to jde jen do prázdné kasy.
+    // rozhodilo číslování účtenek i uzávěrku, proto se vrací jako samostatná
+    // otevřená akce (s kopií současného menu) a kasa se do ní přepne.
     if (d.archopen) {
       var ao = null;
       for (var ai = 0; ai < state.archives.length; ai++) {
         if (state.archives[ai].id === d.archopen) { ao = state.archives[ai]; break; }
       }
       if (!ao || !ao.sales || !ao.sales.length) { return; }
-      if (state.sales.length || state.order.length) {
-        showToast(T("archBusy"));
+      if (state.order.length) {
+        showToast(T("basketBusy"));
         return;
       }
       var ax = T("confirmArchOpen");
       ask(ax[0], ax[1].split("{0}").join(ao.event), ax[2], function () {
-        state.event = ao.event;
-        state.sales = ao.sales.slice();
-        state.nextNo = ao.nextNo || (ao.count + 1);
+        // Kam účtenky vrátit: do prázdné akce, která je ta samá (stejné id
+        // nebo název), jinak do nové otevřené akce. Denní uzávěrka nechává
+        // akci otevřenou, takže typicky se vrací zpátky do ní.
+        var same = function (ev) { return (ao.evId && ev.id === ao.evId) || ev.event === ao.event; };
+        var into = null;
+        if (!state.sales.length && (same(activeEvent()) || !state.parked.length)) {
+          into = activeEvent();
+        } else {
+          state.parked.forEach(function (pk) { if (!into && !pk.sales.length && same(pk)) { into = pk; } });
+        }
+        var rid = into ? into.id
+          : (ao.evId && ao.evId !== state.evId && !parkedById(ao.evId) ? ao.evId : uid());
+        var rsales = ao.sales.filter(isObj).map(function (x) { var c = JSON.parse(JSON.stringify(x)); c.ev = rid; return c; });
+        var back = {};
+        rsales.forEach(function (x) { back[x.id] = true; });
+        state.gone = (state.gone || []).filter(function (x) { return !back[x]; });
+        var rmax = normSales(rsales, rid);
+        var rnext = Math.max(ao.nextNo || 0, rmax + 1);
         state.archives = state.archives.filter(function (x) { return x.id !== ao.id; });
-        save(); render();
+        if (into && into.active) {
+          state.event = ao.event;
+          state.sales = rsales;
+          state.nextNo = rnext;
+        } else if (into) {
+          state.parked = state.parked.filter(function (pk) { return pk.id !== into.id; });
+          swapInEvent({ id: into.id, event: ao.event, items: into.items, sales: rsales, nextNo: rnext,
+                        createdAt: into.createdAt || Date.now() });
+        } else {
+          // menu vezmeme z otevřené akce stejného jména, jinak z aktivní
+          var src = state.items;
+          state.parked.forEach(function (pk) { if (same(pk) && pk.items.length) { src = pk.items; } });
+          var ritems = src.map(function (it) {
+            var o = { id: uid(), name: it.name, price: it.price, color: it.color || "" };
+            if (it.vat !== undefined) { o.vat = it.vat; }
+            return o;
+          });
+          swapInEvent({ id: rid, event: ao.event, items: ritems, sales: rsales, nextNo: rnext, createdAt: Date.now() });
+        }
+        save(); pushEverything(); render();
         showToast(T("toastArchOpen", ao.event));
       });
       return;
@@ -6905,7 +8331,7 @@
       var ln = tk.lines[parseInt(d.line, 10)];
       if (!ln) { return; }
       ln.ready = (ln.ready || 0) >= ln.qty ? 0 : (ln.ready || 0) + 1;
-      tk.updatedAt = Date.now();
+      touchSale(tk);
       save(); pushOrder(tk); render(); return;
     }
 
@@ -6914,7 +8340,7 @@
       if (!srv) { return; }
       srv.status = "served";
       srv.servedAt = Date.now();
-      srv.updatedAt = Date.now();
+      touchSale(srv);
       srv.lines.forEach(function (l) { l.ready = l.qty; });
       sheet = null;
       save(); pushOrder(srv, true); render();
@@ -6927,7 +8353,11 @@
       if (!gone) { return; }
       var co = T("confirmDropOrder");
       ask(co[0].split("{0}").join(String(gone.no)), co[1], co[2], function () {
-        state.sales = state.sales.filter(function (x) { return x.id !== gone.id; });
+        var gAt = locateSale(gone.id);
+        if (gAt) {
+          var src = gAt.evId === state.evId ? state.sales : (parkedById(gAt.evId) || { sales: [] }).sales;
+          setEventSales(gAt.evId, src.filter(function (x) { return x.id !== gone.id; }));
+        }
         save(); pushDelete([gone.id]);
       });
       return;
@@ -6937,7 +8367,7 @@
       var rop = findSale(d.reopen);
       if (!rop) { return; }
       rop.status = "open";
-      rop.updatedAt = Date.now();
+      touchSale(rop);
       save(); pushOrder(rop, true); render();
       showToast(T("toastReopened", rop.no));
       return;
@@ -7041,7 +8471,16 @@
 
     if (d.offlinehelp) { sheet = { step: "offhelp" }; render(); return; }
 
-    if (d.sellersheet) { sheet = { step: "seller" }; render(); return; }
+    if (d.sellersheet) {
+      var fromDoc = sheet && sheet.step === "doc";
+      if (fromDoc) {
+        var f0 = document.getElementById("docFrom"), t0 = document.getElementById("docTo"), e0 = document.getElementById("docEv");
+        sheet = { step: "seller", back: { step: "doc", from: f0 ? f0.value : sheet.from, to: t0 ? t0.value : sheet.to, ev: e0 ? e0.value : "" } };
+      } else {
+        sheet = { step: "seller" };
+      }
+      render(); return;
+    }
 
     if (d.vatmode) {
       state.vat = !state.vat;
@@ -7050,7 +8489,9 @@
     }
 
     if (d.mode) {
-      state.mode = d.mode === "vydej" ? "vydej" : "kasa";
+      var nextMode = d.mode === "vydej" ? "vydej" : "kasa";
+      if (nextMode === state.mode) { return; }   // ťuknutí na už zvolenou roli nesmí smazat účet
+      state.mode = nextMode;
       state.order = [];
       linesOpen = false;
       save(); render();
@@ -7059,7 +8500,7 @@
     }
 
     if (d.backup) {
-      sheet = { step: "text", title: T("backupHead"), body: JSON.stringify(state) };
+      sheet = { step: "text", title: T("backupHead"), body: JSON.stringify(state), backup: true };
       render(); return;
     }
 
@@ -7077,8 +8518,7 @@
     }
 
     if (d.setcur) {
-      state.currency = d.setcur;
-      moneyFmt = null; nfPlain = null;
+      setCurrency(d.setcur);
       sheet = null;
       save(); render(); return;
     }
@@ -7089,7 +8529,7 @@
 
     // ---- onboarding ----
     if (d.oblang) { state.lang = d.oblang; moneyFmt = null; nfPlain = null; save(); render(); return; }
-    if (d.obcur) { state.currency = d.obcur; moneyFmt = null; nfPlain = null; save(); render(); return; }
+    if (d.obcur) { setCurrency(d.obcur); save(); render(); return; }
     if (d.obnext) { obStep = 2; render(); return; }
     if (d.obdemo || d.obempty) {
       state.items = d.obdemo ? defaultItems() : [];
@@ -7119,7 +8559,9 @@
       next.payN = state.payN;
       state = next;
       sheet = null;
-      save(); pushClear(); pushEverything(); render();
+      // Dřív šlo na protějšek i „clear“, a když zálohu obnovil výdej,
+      // kasa přišla o všechny neuzavřené účtenky. Posíláme jen otevřené.
+      save(); afterReplace(); pushEverything(); render();
       showToast(T("toastRestored"));
       return;
     }
@@ -7217,7 +8659,7 @@
 
     if (el.id === "evName") {
       state.event = el.value;
-      document.getElementById("topName").textContent = state.event || T("noName");
+      paintTopName();
       save();
       return;
     }
@@ -7243,7 +8685,7 @@
       item.vat = String(el.value).trim() === "" ? "" : vatNum(el.value);
       if (item.vat === null) { item.vat = ""; }
     } else {
-      var num = parseFloat(String(el.value).replace(",", ".").replace(/[^0-9.]/g, ""));
+      var num = parsePrice(el.value);
       item.price = isNaN(num) ? 0 : mr(num);
     }
     save();
@@ -7283,13 +8725,44 @@
     if (view === "menu" && !sheet) { render(); }
   }, 30000);
 
+  document.addEventListener("change", function (ev) {
+    var el = ev.target;
+    if (!el || el.id !== "restoreFile" || !el.files || !el.files[0]) { return; }
+    var rd = new FileReader();
+    rd.onload = function () {
+      if (sheet && sheet.step === "restore") { sheet.draft = String(rd.result || ""); sheet.error = ""; render(); }
+    };
+    rd.readAsText(el.files[0]);
+  });
+
+  // Webová verze otevřená ve dvou kartách: novější uložení z druhé karty
+  // převezmeme, jinak by si karty navzájem přepisovaly tržby a čísla.
+  // otočení telefonu nebo změna velikosti okna: velká čísla znovu přizpůsobit
+  window.addEventListener("resize", function () { try { fitNumbers(); } catch (e) {} });
+
+  window.addEventListener("storage", function (ev) {
+    if (ev.key !== KEY || !ev.newValue) { return; }
+    var other = parseState(ev.newValue, true);
+    if (!other || (other.savedAt || 0) <= (state.savedAt || 0)) { return; }
+    var keepOrder = state.order, keepEv = state.evId, prevPair = state.pair;
+    state = other;
+    // Rozpracovaný účet patří této kartě; cizí by rozhodil otevřené placení.
+    if (state.evId === keepEv) { state.order = keepOrder; }
+    else if (sheet) { sheet = null; }
+    afterReplace(prevPair);
+    render();
+  });
+
   dbInit(function () {
     dbSettled = true;
     dbRead(function (rec) {
       var backup = parseState(rec, true);   // záloha z tohoto zařízení
-      // v zařízení nic není, ale záložní kopie ano → obnovit
-      if (backup && isEmpty(state) && !isEmpty(backup)) {
+      // V zařízení nic není, ale záložní kopie ano, nebo je záložní kopie
+      // novější (localStorage se přestal ukládat, když došlo místo) → obnovit.
+      if (backup && !isEmpty(backup) &&
+          (isEmpty(state) || (backup.savedAt || 0) > (state.savedAt || 0))) {
         state = backup;
+        afterReplace();
         render();
         showToast(T("toastDbRestore"));
       }

@@ -74,6 +74,8 @@ public class PeerLinkPlugin extends Plugin {
     private boolean advertising = false;
     private boolean discovering = false;
     private String pendingRoom = null;
+    /** Kód, na který se čeká, až uživatel povolí Zařízení v okolí v Nastavení. */
+    private String wantedRoom = null;
 
     private final Runnable retry = new Runnable() {
         @Override public void run() {
@@ -121,6 +123,7 @@ public class PeerLinkPlugin extends Plugin {
         }
         if (code.isEmpty()) {
             final String empty = code;
+            wantedRoom = null;
             main.post(() -> { stopOnMain(); room = empty; });
             call.resolve();
             return;
@@ -143,6 +146,9 @@ public class PeerLinkPlugin extends Plugin {
         if (getPermissionState("nearby") == PermissionState.GRANTED) {
             main.post(() -> startOnMain(code));
         } else {
+            // kód si pamatujeme: po povolení v Nastavení se hledání spustí
+            // samo při návratu do aplikace, bez restartu
+            wantedRoom = code;
             state("permission-denied", "bez oprávnění Zařízení v okolí a Bluetooth to nejde");
         }
         call.resolve();
@@ -150,6 +156,7 @@ public class PeerLinkPlugin extends Plugin {
 
     @PluginMethod
     public void stop(PluginCall call) {
+        wantedRoom = null;
         main.post(() -> { stopOnMain(); room = ""; });
         call.resolve();
     }
@@ -202,7 +209,35 @@ public class PeerLinkPlugin extends Plugin {
     @Override
     protected void handleOnResume() {
         super.handleOnResume();
-        main.post(() -> retryIfLonely("foreground"));
+        main.post(() -> {
+            if (room.isEmpty() && wantedRoom != null && !wantedRoom.isEmpty()
+                    && getPermissionState("nearby") == PermissionState.GRANTED) {
+                String c = wantedRoom;
+                wantedRoom = null;
+                startOnMain(c);
+                return;
+            }
+            if (room.isEmpty()) { return; }
+            if (!advertising && !discovering) {
+                // na pozadí bylo hledání zastavené; spojení zůstala
+                beginDiscovery();
+                state("retry", "foreground");
+            } else {
+                retryIfLonely("foreground");
+            }
+            main.removeCallbacks(retry);
+            main.postDelayed(retry, RETRY_MS);
+        });
+    }
+
+    /**
+     * Na pozadí se hledání zastaví: bez toho se každých 20 s obnovovalo celou
+     * noc a vybíjelo telefon na další trh. Navázaná spojení zůstávají.
+     */
+    @Override
+    protected void handleOnStop() {
+        super.handleOnStop();
+        main.post(() -> { main.removeCallbacks(retry); endDiscovery(); });
     }
 
     // ---- hledání a spojení (hlavní vlákno) ---------------------------------
@@ -270,7 +305,8 @@ public class PeerLinkPlugin extends Plugin {
     private final EndpointDiscoveryCallback discovery = new EndpointDiscoveryCallback() {
         @Override public void onEndpointFound(String endpointId, DiscoveredEndpointInfo info) {
             String name = info.getEndpointName();
-            state("found", roomOf(name));
+            // cizí kód do diagnostiky nepíšeme, v Menu by ho viděl kdokoli poblíž
+            state("found", room.equals(roomOf(name)) ? "stejný kód" : "jiný kód");
             if (room.isEmpty() || !room.equals(roomOf(name))) { return; }
             String theirInst = instOf(name);
             if (theirInst.equals(inst)) { return; }            // našli jsme sami sebe

@@ -1,0 +1,2 @@
+/* Dotaz iOS na oprávnění Místní síť (párování bez internetu). */
+"NSLocalNetworkUsageDescription" = "Tapkasa propojuje kasu s výdejním zařízením po místní síti, aby objednávky chodily i bez internetu.";

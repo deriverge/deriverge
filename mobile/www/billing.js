@@ -185,56 +185,87 @@
   }
 
   // StoreKit: "Tuto položku už máte předplacenou" (RevenueCat kód 6).
+  // Jen podle kódu: dřív stačilo slovo "already" v jakékoli hlášce (třeba
+  // "operace už probíhá" při dvojím ťuknutí) a spouštěla se obnova.
   function isAlreadyOwned(e) {
-    return !!(e && ((e.code !== undefined && String(e.code) === "6") ||
-      /already/i.test(String(e && e.message || ""))));
+    return !!(e && e.code !== undefined && String(e.code) === "6");
   }
 
   function isCancel(e) {
-    return !!(e && (e.userCancelled === true ||
-      (e.code !== undefined && String(e.code) === "1") ||
-      /cancel/i.test(String(e && e.message || ""))));
+    return !!(e && (e.userCancelled === true || (e.code !== undefined && String(e.code) === "1")));
   }
 
+  // Chyba nákupu či obnovy se ukáže přeloženě v aplikaci (index.html);
+  // alert s holou hláškou SDK zůstává jen pro případ, že hook chybí.
+  function reportFail(kind, e) {
+    var code = e && e.code !== undefined ? String(e.code) : "";
+    var raw = String(e && e.message || e || "");
+    if (typeof window.__kasaBillingFail === "function") {
+      try { window.__kasaBillingFail(kind, code, raw); return; } catch (x) {}
+    }
+    alert(raw + (code ? " [" + code + "]" : ""));
+  }
+
+  // Dvojí ťuknutí na tarif dřív spustilo druhý nákup, který obchod odmítl
+  // a kód ho vyložil jako "už zaplaceno".
+  var busy = false;
+
   window.__kasaBuy = function (plan) {
+    if (busy) { return; }
+    busy = true;
     purchase(plan === "yearly" ? "yearly" : "monthly")
-      .then(function (level) { settle(level, "buy"); })
+      .then(function (level) { busy = false; settle(level, "buy"); })
       .catch(function (e) {
-        if (isCancel(e)) { return; }
+        if (isCancel(e)) { busy = false; return; }
         if (isAlreadyOwned(e)) {
-          restore().then(function (level) { settle(level, "restore"); }).catch(function () {});
+          restore()
+            .then(function (level) { busy = false; settle(level, "restore"); })
+            .catch(function (e2) { busy = false; reportFail("restore", e2); });
           return;
         }
-        var msg = String(e && e.message || e);
-        if (e && e.code !== undefined) { msg += " [" + e.code + "]"; }
-        alert(msg);
+        busy = false;
+        reportFail(/není v nabídce/.test(String(e && e.message || "")) ? "offering" : "buy", e);
       });
   };
 
   window.__kasaRestore = function () {
+    if (busy) { return; }
+    busy = true;
     restore()
-      .then(function (level) { push(level, "restore"); })
-      .catch(function (e) { alert(String(e && e.message || e)); });
+      .then(function (level) { busy = false; push(level, "restore"); })
+      .catch(function (e) { busy = false; reportFail("restore", e); });
   };
 
   // Po startu: skutečný stav předplatného + ceny v měně obchodu.
   getEntitlement().then(function (level) { push(level, "start"); });
 
-  ensureConfigured()
-    .then(function () { return call("getOfferings"); })
-    .then(function (res) {
-      var current = (res && res.current) || null;
-      var monthly = findPackage(current, "monthly");
-      var yearly = findPackage(current, "yearly");
-      var ps = function (p) {
-        return p && p.product && (p.product.priceString || p.product.price_string) || "";
-      };
-      var prices = { monthly: ps(monthly), yearly: ps(yearly) };
-      if (prices.monthly || prices.yearly) {
-        window.__KASA_PRICES__ = prices;
-        // překreslit otevřený paywall s cenami z obchodu
-        return getEntitlement().then(function (level) { push(level, "start"); });
-      }
-    })
-    .catch(function () {});
+  // Ceny z obchodu. Po startu bez signálu se dřív už nenačetly a paywall
+  // celé sezení ukazoval náhradní dolarové ceny; aplikace si je teď při
+  // otevření paywallu vyžádá znovu (window.__kasaLoadPrices).
+  var pricesLoading = false;
+  function loadPrices() {
+    if (pricesLoading) { return; }
+    pricesLoading = true;
+    ensureConfigured()
+      .then(function () { return call("getOfferings"); })
+      .then(function (res) {
+        pricesLoading = false;
+        var current = (res && res.current) || null;
+        var monthly = findPackage(current, "monthly");
+        var yearly = findPackage(current, "yearly");
+        var ps = function (p) {
+          return p && p.product && (p.product.priceString || p.product.price_string) || "";
+        };
+        var prices = { monthly: ps(monthly), yearly: ps(yearly) };
+        if (prices.monthly || prices.yearly) {
+          window.__KASA_PRICES__ = prices;
+          if (typeof window.__kasaPricesChanged === "function") {
+            try { window.__kasaPricesChanged(); } catch (e) {}
+          }
+        }
+      })
+      .catch(function () { pricesLoading = false; });
+  }
+  window.__kasaLoadPrices = loadPrices;
+  loadPrices();
 })();

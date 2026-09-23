@@ -16,6 +16,13 @@ const config: CapacitorConfig = {
   android: {
     backgroundColor: '#FBFAF7',
   },
+  plugins: {
+    // Aplikace má jen světlý vzhled. Bez toho měl Android 15+ v tmavém
+    // režimu bílé ikony stavového řádku na světlém papíru, nečitelné.
+    SystemBars: {
+      style: 'LIGHT',
+    },
+  },
 };
 
 export default config;

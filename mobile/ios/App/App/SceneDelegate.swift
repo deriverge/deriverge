@@ -18,6 +18,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         SceneDelegateProxy.shared.scene(scene, willConnectTo: session, options: connectionOptions)
     }
 
+    // Kasa a výdej musí svítit celou akci: zhasnutý iPad přeruší spojení
+    // bez internetu a objednávky nedorazí. Webové zámky obrazovky na
+    // starších iOS nefungují, proto nativně.
+    func sceneDidBecomeActive(_ scene: UIScene) {
+        UIApplication.shared.isIdleTimerDisabled = true
+    }
+
+    func sceneWillResignActive(_ scene: UIScene) {
+        UIApplication.shared.isIdleTimerDisabled = false
+    }
+
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         SceneDelegateProxy.shared.scene(scene, openURLContexts: URLContexts)
     }
