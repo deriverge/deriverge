@@ -1611,3 +1611,36 @@ Aby to platilo i offline, musel by vzniknout mistni server v aplikaci
   ukazal jednou na domovske strance Play Console a pak uz ne; David
   dodal vypis z OR (Downloads/vypis-1207476 (2).pdf), zatim nebylo kam
   ho nahrat. Hledam stranku overeni.
+
+## 23. 9. 2026 - Tapkasa 1.0.5: vice akci, doklad na Androidu, kontrola cele aplikace
+
+- David hlasil: na Androidu "Poslat e-mailem" otevrelo prazdnou zpravu bez
+  prilohy a "Sdilet" nenabidlo ulozeni; barvy polozek ujizdely za okraj;
+  chtel vic akci najednou (kavarna kazdy den + stanek) s vlastnim menu.
+- Pricina e-mailu/sdileni: Android WebView nema Web Share, blob download
+  zahodi, mailto prilohu nenese. Novy nativni modul DocShare (Java i Swift):
+  e-mail s prilohou (Android: SEND se selektorem mailto BEZ typu, jinak se
+  e-mailova aplikace nenajde), nabidka sdileni, ulozit do souboru (SAF).
+  Overeno v emulatoru Android 15 (Pixel, AVD "vzt", ~/tools/android-sdk):
+  Gmail otevren pres ComposeActivityGmailExternal, Tisk otevrel PDF,
+  Stazene soubory 174 kB PDF. Nalezen a opraven pad TransactionTooLarge
+  (Capacitor ukladal PDF v datech volani do stavu aktivity).
+- Vice akci: aktivni akce v koreni stavu, dalsi v state.parked, uctenky
+  nesou ev. Parovani radi podle id/ev, uzaverka nese ev+role+at (maze jen
+  uctenky pred uzaverkou), odmitnute zastarale objednavky -> "drop"
+  (jen vydej, bez nahrobku). Fronta kasy ukazuje objednavky vsech akci.
+- Kontrola cele aplikace (workflow 271 agentu): 128 nalezu, 127 potvrzeno,
+  opravena drtiva vetsina (ukladani/nacteni nejnovejsi kopie, validace,
+  fronty zprav, DPH na halere, strankovani PDF, predplatne, Zpet na Androidu,
+  TTS queries, tichy rezim iOS, displej nezhasina, lokalizace dotazu na
+  mistni sit, rozvrzeni 320 px, preklady). Druha kontrola vlastni zmeny
+  (56 agentu) nasla 25 veci, vse opraveno, vc. dvou funkci fail v billing.js.
+- Vedome neopraveno: dve Free zarizeni se sparuji vymyslenym kodem (chce
+  server), zpravy preposilace nejsou podepsane, peti znakovy kod v Bluetooth
+  inzerci (diagnostika uz cizi kody neukazuje), PeerLink log cesky (Davidovo
+  prani ho nechat), SEK/NOK/UAH bez desetin.
+- Vydani: commit 901ba92 na main. Xcode Cloud run 77 USPESNY (Swift prelozen),
+  build 77 vlak 1.0.5, verze 1.0.5 WAITING_FOR_REVIEW (submission 974094fa),
+  poznamky v 9 jazycich. Google Play: tapkasa-1.0.5-vc8-signed.aab (jarsigner,
+  upload klic), produkce, poznamky cs-CZ (listing ma jen cestinu), odeslano
+  ke kontrole, rizene publikovani vypnute.
