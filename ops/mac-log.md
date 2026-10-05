@@ -1644,3 +1644,45 @@ Aby to platilo i offline, musel by vzniknout mistni server v aplikaci
   poznamky v 9 jazycich. Google Play: tapkasa-1.0.5-vc8-signed.aab (jarsigner,
   upload klic), produkce, poznamky cs-CZ (listing ma jen cestinu), odeslano
   ke kontrole, rizene publikovani vypnute.
+
+## 2026-10-05 noc: SealSlim 1.0.0 (cz.mojekafe.bitslim), dokonceni a vydani
+
+- Kod: /Users/davidcaganek/FotoKompreseMobile (lokalni git, bez remote). Prepsano
+  skoro cele lib/: nativni komprese (flutter_image_compress), cile Nejlepsi
+  kvalita / do 1 MB / 500 kB / 200 kB / vlastni, zmenseni delsi strany,
+  HEIC/PNG/WebP -> JPEG, bezeztratove odstraneni EXIF u JPEG, ktery uz limit
+  splnuje, poloha a metadata pryc ve vychozim stavu, kopie nikdy vetsi nez
+  original, porovnani pred/po s predelem a zoomem, tabletove rozvrzeni,
+  10 jazyku, tulen jako maskot a ikona (CustomPainter -> PNG).
+- iOS vyber fotek: vlastni PHPicker v AppDelegate.swift (image_picker na iOS
+  presklada HEIC na 9MB JPEG a ukazoval by falesnou puvodni velikost).
+  Android: vlastni systemovy vyber v MainActivity.kt (nazvy podle EXIF data).
+- iOS build bez Xcode: EAS custom build (.eas/build/ios-flutter.yml), projekt
+  @deriverge-sro/sealslim, lokalni credentials.json (mimo git) s novym
+  certifikatem Apple Distribution 4SL6JHF9DS a profilem 39RATQNL5W
+  (~/.sealslim-keys). Nahrani .ipa pres ASC API buildUploads (bez Xcode).
+  Build 3 a 4 VALID bez varovani. Build 4 pripojen k verzi 1.0.0.
+- App Store Connect: 13 jazyku textu, screenshoty 6.9/6.5/iPad 13, cena zdarma,
+  IAP bitslim_lifetime 1,99 USD ve 175 zemich (READY_TO_SUBMIT), poznamky
+  pro kontrolu, kontakt z puvodnich udaju.
+- BLOKUJE: iOS odeslani ke kontrole. API vraci APP_DATA_USAGES_REQUIRED
+  (dotaznik Ochrana soukromi v aplikaci jde vyplnit jen ve webovem ASC
+  s prihlasenim Apple ID) a prvni IAP se musi vybrat na strance verze.
+  ASC v Chrome neni prihlasene. Ceka na Davida (cca 3 minuty).
+- Google Play: AAB versionCode 3, jen arm64-v8a (web nahrani max 10 MB;
+  9,9 MB po odstraneni mapping souboru a presignovani upload klicem).
+  Produkt bitslim_lifetime 1,99 USD (174 zemi), listing 13 jazyku, ikona,
+  banner, 6 snimku telefon + 3 tablet, vsechny deklarace obsahu, 178 zemi.
+  Interni test nahrazen vc3 (vc1 zadal READ_MEDIA_IMAGES). ODESLANO KE KONTROLE
+  (23 zmen), rizene publikovani vypnute.
+- RevenueCat (projekt BitSlim f3259bc2): pridana Play aplikace app854e5cc602,
+  produkt bitslim_lifetime v naroku premium a balicku $rc_lifetime.
+- BLOKUJE: Android nakupy v RevenueCat. Chybi JSON servisniho uctu u Play
+  aplikace v RevenueCat (nahrani klice za Davida nesmim) a servisni ucet
+  revenuecat@tapkasa nema v Play Console prava k SealSlim (prideleni prav
+  odmitla automaticka kontrola). Bez toho nakup na Androidu neprojde
+  overenim.
+- Web: deriverge.com/sealslim/ (index, privacy, support v 10 jazycich),
+  commit 6cd9b1a na main.
+- Na pozdeji: verze s armeabi-v7a pro starsi 32bit telefony (29 % modelu
+  v katalogu), az servisni ucet dostane prava a pujde nahravat pres API.
