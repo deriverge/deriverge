@@ -1686,3 +1686,5 @@ Aby to platilo i offline, musel by vzniknout mistni server v aplikaci
   commit 6cd9b1a na main.
 - Na pozdeji: verze s armeabi-v7a pro starsi 32bit telefony (29 % modelu
   v katalogu), az servisni ucet dostane prava a pujde nahravat pres API.
+
+- 2026-10-05: TestFlight pro SealSlim: interni skupina "Interni testeri" (vsechny buildy), David (Account Holder) pozvan, build 4 IN_BETA_TESTING, poznamky Co testovat cs+en. Druhy ucet Davida (role Developer) pridat nejde, nema pristup k aplikaci.
