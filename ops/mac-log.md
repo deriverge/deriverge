@@ -1711,3 +1711,20 @@ Aby to platilo i offline, musel by vzniknout mistni server v aplikaci
   - Stav: SealSlim na Google Play porad v kontrole. iOS: verze
     PREPARE_FOR_SUBMISSION, build 4 VALID, IAP READY_TO_SUBMIT, prazdne
     odeslani 5919c212 READY_FOR_REVIEW. BLOKUJE: ASC v Chrome porad neprihlasene.
+
+- 2026-10-05: SealSlim odblokovan na obou platformach.
+  - Android: David nahral JSON servisniho uctu do RevenueCat (BitSlim >
+    SealSlim Android). Vysledek: Valid credentials, vsechny 3 kontroly
+    (overeni nakupu, katalog jednorazovych produktu, katalog predplatnych),
+    produkt bitslim_lifetime Published, balicek $rc_lifetime v nabidce default
+    obsahuje iOS i Android produkt, verejny klic goog_ v kodu sedi.
+  - iOS: David se prihlasil do ASC v Chrome. App Privacy vyplneno podle
+    privacy manifestu v buildu 4 (jediny sber dat je RevenueCat:
+    PurchaseHistory, nepropojeno, bez sledovani, App Functionality):
+    Nakupy, pouziti Funkcnost aplikace, nepropojeno s identitou, bez
+    sledovani. Publikovano.
+  - Prvni IAP se v novem ASC nepridava na strance verze (sekce tam neni),
+    ale tlacitkem Add for Review na strance IAP do konceptu odeslani; pak
+    Add for Review na verzi do stejneho konceptu a Submit for Review.
+  - ODESLANO KE KONTROLE 09:08 UTC: verze 1.0.0 (build 4) i bitslim_lifetime
+    WAITING_FOR_REVIEW, odeslani 5919c212, automaticke vydani po schvaleni.
