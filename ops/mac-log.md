@@ -1688,3 +1688,26 @@ Aby to platilo i offline, musel by vzniknout mistni server v aplikaci
   v katalogu), az servisni ucet dostane prava a pujde nahravat pres API.
 
 - 2026-10-05: TestFlight pro SealSlim: interni skupina "Interni testeri" (vsechny buildy), David (Account Holder) pozvan, build 4 IN_BETA_TESTING, poznamky Co testovat cs+en. Druhy ucet Davida (role Developer) pridat nejde, nema pristup k aplikaci.
+
+- 2026-10-05: Kontrola nakupu na Androidu (Tapkasa, VZT Monter, SealSlim).
+  - Servisni ucet revenuecat@tapkasa ma v Play Console prava na urovni celeho
+    uctu (zobrazeni informaci o aplikaci, financnich udaju, sprava objednavek
+    a predplatnych), takze plati i pro SealSlim. Prideleni prav k SealSlim
+    uz neni potreba. Prava k vydavani ma jen u VZT Montera.
+  - Tapkasa: RevenueCat Android credentials platne (3 kontroly), produkty
+    Published, nabidka obsahuje Android balicky, klice v kodu sedi. Zatim ani
+    jedna transakce z Google Play, nakup na Androidu tedy neni overeny v praxi.
+  - VZT Monter: credentials platne, produkt Published, klice sedi, testovaci
+    nakup 20. 9. prosel. RTDN (Google developer notifications) neni pripojene.
+  - SealSlim: produkt bitslim_lifetime aktivni, interni test ma seznam
+    "Interni testeri" (opt-in https://play.google.com/apps/internaltest/4700779394310108117).
+    Licencni testeri: seznamy "Interni testeri" (3) a "VZT Monter testeri" (1),
+    RESPOND_NORMALLY, Davidovy ucty v nich jsou.
+  - BLOKUJE: nakupy SealSlim na Androidu. Zbyva jen nahrat
+    ~/.tapkasa-keys/revenuecat-play-service-account.json v RevenueCat
+    (BitSlim > SealSlim Android > Service account credentials). Nahravat klice
+    za Davida nesmim, stranka je otevrena v Chrome.
+  - Emulator zastaven: nema ucet Google, testovaci nakup na nem nejde.
+  - Stav: SealSlim na Google Play porad v kontrole. iOS: verze
+    PREPARE_FOR_SUBMISSION, build 4 VALID, IAP READY_TO_SUBMIT, prazdne
+    odeslani 5919c212 READY_FOR_REVIEW. BLOKUJE: ASC v Chrome porad neprihlasene.
