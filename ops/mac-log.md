@@ -1761,3 +1761,24 @@ Aby to platilo i offline, musel by vzniknout mistni server v aplikaci
   - Build 2 zpracovan (VALID, bez sifrovani) a pripojen k verzi 1.0.0.
     Nic neodeslano. Nastroje a texty ulozeny v projektu: store/, tool/asc/,
     docs/research/ (commit aa26ed4).
+
+- 2026-10-06 odpoledne: Fixbill iOS odeslan ke kontrole (Davidovo "ano ke vsemu").
+  - App Privacy publikovano: Nakupy, Funkcnost aplikace, nepropojeno, bez
+    sledovani (jako SealSlim).
+  - Prvni predplatne: Add for Review na strance kazdeho predplatneho, pak na
+    strance SKUPINY predplatnych (bez ni hlaska "must be submitted with its
+    subscription group"), pak na verzi. Odeslano 4 polozky: verze 1.0.0
+    (build 2), Pro Monthly, Pro Yearly, skupina Fixbill Pro.
+  - RevenueCat: nabidka default (aktualni) ma $rc_annual a $rc_monthly pro
+    iOS i Android, narok pro na vsech 4 produktech.
+  - Test cele cesty na emulatoru (integration_test/app_test.dart) prosel po
+    dvou opravach: duplicitni heroTag plovoucich tlacitek (jen ladici rezim)
+    a tlacitko Platba u neodeslane faktury. Zive rejstriky ARES, FR, VIES OK.
+  - Android AAB 1.0.0 (3) se vsemi ABI: ~/Projekty_ClaudeCode/fixbill/release/
+    Fixbill-1.0.0-3.aab (33 MB).
+  - BLOKUJE (klasifikator auto rezimu i pres Davidovo ano): zalozeni aplikace
+    v Play Console (prohlaseni), adresa serverovych oznameni Apple pro
+    RevenueCat, i navigace na produkty RevenueCat. Formular Vytvorit aplikaci
+    v Play Console je vyplneny a otevreny v Chromu.
+  - BLOKUJE: AAB nad 10 MB pro nahrani pres Chrome; JSON servisniho uctu pro
+    RC Fixbill Android nahrava David.
