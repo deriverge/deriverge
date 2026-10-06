@@ -1728,3 +1728,33 @@ Aby to platilo i offline, musel by vzniknout mistni server v aplikaci
     Add for Review na verzi do stejneho konceptu a Submit for Review.
   - ODESLANO KE KONTROLE 09:08 UTC: verze 1.0.0 (build 4) i bitslim_lifetime
     WAITING_FOR_REVIEW, odeslani 5919c212, automaticke vydani po schvaleni.
+
+- 2026-10-06: Nova aplikace Fixbill (nabidky a faktury pro remeslniky).
+  - Vyzkum: 11 aplikaci na faktury a nabidky v US top 100 grossing Business,
+    13 az 19 v GB/DE/FR/ES/CA/AU/MX. Medianova cena Business v RevenueCat
+    SOSA 2026: 8,99 USD mesicne, 39,99 USD rocne. Konkurence: stiznosti na
+    zdrazovani, tydenni plany a limity faktur. Podklady ve scratchpadu
+    research/ (trends.md, invoice_competitors.md, einvoicing.md).
+  - Kod: ~/Projekty_ClaudeCode/fixbill (Flutter, lokalni git, posledni commit
+    eecd180). 10 jazyku aplikace i dokladu, 20 testu prochazi.
+  - Web: deriverge.com/fixbill/ (stranka, privacy, terms, support; CZ, EN,
+    DE, FR), karta 04 na uvodni strance, sitemap. Commit 3e8bca2, nasazeno.
+  - iOS: zalozen zaznam aplikace v ASC (app 6819481858, "Fixbill: Estimate &
+    Invoice", SKU fixbill-ios, jen iPhone). Pres API: verze 1.0.0, kategorie
+    Business + Productivity, vek 4+, zdarma ve 175 zemich, kontakt pro
+    kontrolu z SealSlimu, texty a 5 snimku ve 14 jazycich.
+  - Predplatne: skupina Fixbill Pro (22443850), fixbill_pro_monthly
+    (6819482763, 9,99 USD) a fixbill_pro_yearly (6819483390, 69,99 USD,
+    7 dni zdarma), ceny prepoctene pro 175 zemi, obe READY_TO_SUBMIT.
+    RevenueCat Fixbill iOS ma platny IAP klic i ASC API klic.
+  - Build 2 (EAS 9445c65d, jen iPhone) nahran pres buildUploads, zpracovava se.
+  - BLOKUJE: App Privacy. Vybrane Nakupy, rozpracovane (Funkcnost aplikace,
+    nepropojeno, bez sledovani), dokonceni a publikovani zablokoval
+    klasifikator jako krok bez vyslovneho souhlasu. Potreba Davidovo ano.
+  - BLOKUJE: odeslani ke kontrole (verze 1.0.0 + obe predplatna) az po
+    Davidove souhlasu. Postup: Add for Review na strance predplatneho, pak na
+    verzi, Submit for Review.
+  - Android: AAB 1.0.0 (2) podepsany upload klicem, 33 MB, scratchpad
+    fixbill/Fixbill-1.0.0-2.aab. BLOKUJE: aplikace v Play Console neexistuje
+    (zalozeni a prohlaseni = Davidovo ano) a AAB je nad 10 MB pro nahrani
+    pres Chrome.
