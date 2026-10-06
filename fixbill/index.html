@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fixbill, quotes and invoices in two minutes for iPhone and Android</title>
+<meta name="description" content="Quotes and invoices on your phone for tradespeople and small businesses: PDF, payment QR codes, client signatures and reminders. Your data stays on your device.">
+<link rel="canonical" href="https://deriverge.com/fixbill/">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="theme-color" content="#F5F7FB">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Fixbill">
+<meta property="og:title" content="Fixbill, quotes and invoices in two minutes">
+<meta property="og:description" content="Write the quote on site, let your client sign on screen, add a payment QR code and track who has paid. No account, no tracking, your data stays on your phone.">
+<meta property="og:url" content="https://deriverge.com/fixbill/">
+<meta property="og:image" content="https://deriverge.com/fixbill/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Fixbill app icon and the headline Quotes &amp; invoices in two minutes">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="cs_CZ">
+<meta property="og:locale:alternate" content="de_DE">
+<meta property="og:locale:alternate" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Fixbill",
+  "operatingSystem": "iOS, Android",
+  "applicationCategory": "BusinessApplication",
+  "description": "Quotes and invoices on your phone for tradespeople and small businesses: PDF documents, payment QR codes and links, client signatures, job photos, clients and price list, payment tracking and reminders. Data stays on the device.",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+  "url": "https://deriverge.com/fixbill/",
+  "image": "https://deriverge.com/fixbill/icon-512.png",
+  "publisher": { "@type": "Organization", "name": "deriverge s.r.o.", "url": "https://deriverge.com/" }
+}
+</script>
+<style>
+  :root{
+    --bg:#F5F7FB;--card:#FFFFFF;--line:#E2E7F0;--soft:#E9EFFF;
+    --ink:#0E1726;--ink-2:#566176;--body:#334155;
+    --blue:#1F5EFF;--amber:#FFA41B;--amber-soft:#FFF2DC;--amber-dk:#8F5300;
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+  a{color:var(--blue)}
+  .sprite{position:absolute;width:0;height:0;overflow:hidden}
+
+  /* Four language versions on one URL: English by default, the others at #cs, #de and #fr. English must stay last. */
+  .page{max-width:1040px;margin:0 auto;padding:28px 20px 56px;overflow-x:clip}
+  #cs,#de,#fr{display:none}
+  #cs:target,#de:target,#fr:target{display:block}
+  #cs:target~#en,#de:target~#en,#fr:target~#en{display:none}
+
+  .top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px 20px;margin-bottom:44px}
+  .brand{display:flex;align-items:center;gap:12px}
+  .logo{width:46px;height:46px;border-radius:11px;flex:0 0 auto;display:block}
+  .brand b{display:block;font-size:17px;line-height:1.3}
+  .brand small{display:block;font-size:13px;color:var(--ink-2)}
+  .langs{font-size:14px;color:var(--ink-2)}
+  .langs a{color:var(--ink-2)}
+  .langs strong{color:var(--ink);font-weight:600}
+
+  .hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:48px;align-items:center}
+  .eyebrow{margin:0 0 12px;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--blue)}
+  h1{margin:0 0 16px;font-size:50px;line-height:1.06;letter-spacing:-.025em;text-wrap:balance}
+  h1 em{font-style:normal;color:var(--blue)}
+  .lede{margin:0 0 26px;max-width:33em;font-size:18px;color:var(--body)}
+  .badges{display:flex;flex-wrap:wrap;gap:12px;margin:0 0 14px}
+  .store{display:inline-flex;flex-direction:column;justify-content:center;min-width:168px;height:54px;padding:0 18px;border-radius:12px;background:var(--ink);color:#fff;line-height:1.2}
+  .store small{font-size:11.5px;color:#C9D2E3}
+  .store small::before{content:"";display:inline-block;width:7px;height:7px;margin-right:6px;border-radius:50%;background:var(--amber);vertical-align:1px}
+  .store b{font-size:18px;font-weight:600;letter-spacing:-.01em}
+  .note{margin:0;font-size:14.5px;color:var(--ink-2)}
+
+  .hero-art{position:relative;isolation:isolate;width:100%;max-width:400px;justify-self:center;padding-bottom:34px}
+  .hero-art::before{content:"";position:absolute;z-index:-1;top:-34px;right:-40px;width:74%;aspect-ratio:1;border-radius:50%;background:var(--soft)}
+  .mock{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:20px 20px 18px;box-shadow:0 28px 56px -28px rgba(14,23,38,.35)}
+  .m-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin:0 0 16px}
+  .m-biz{display:flex;align-items:center;gap:10px;min-width:0}
+  .m-logo{flex:0 0 auto;width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,#3B74FF,var(--blue) 60%,#1640C8)}
+  .m-biz b{display:block;font-size:15px;line-height:1.25}
+  .m-biz small{display:block;font-size:12px;color:var(--ink-2)}
+  .chip{flex:0 0 auto;font-size:11.5px;font-weight:700;line-height:1;padding:6px 9px;border-radius:999px;background:var(--amber-soft);color:var(--amber-dk)}
+  .m-job{margin:0 0 4px;font-size:11.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-2)}
+  .m-lines{list-style:none;margin:0;padding:0}
+  .m-lines li{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px;line-height:1.35}
+  .m-lines small{display:block;font-size:12px;color:var(--ink-2)}
+  .m-lines b,.m-total b{white-space:nowrap;font-variant-numeric:tabular-nums}
+  .m-total{display:flex;justify-content:space-between;align-items:baseline;margin:12px 0 14px;font-size:14px;font-weight:600}
+  .m-total b{font-size:21px;letter-spacing:-.01em}
+  .m-pay{display:flex;align-items:center;gap:12px;padding:10px;border-radius:14px;background:var(--bg)}
+  .qr{flex:0 0 auto;display:block;width:66px;height:66px;padding:5px;border-radius:7px;background:#fff;color:var(--ink)}
+  .m-pay b{display:block;font-size:14px;line-height:1.3}
+  .m-pay small{display:block;font-size:12px;line-height:1.35;color:var(--ink-2)}
+  .m-sign{position:absolute;right:-16px;bottom:0;display:flex;align-items:center;gap:10px;padding:9px 14px;border-radius:14px;background:var(--ink);color:#fff;font-size:13px;font-weight:600;box-shadow:0 16px 32px -16px rgba(14,23,38,.7)}
+  .m-sign svg{display:block;width:58px;height:20px;color:var(--amber)}
+
+  h2{margin:76px 0 20px;font-size:30px;line-height:1.2;letter-spacing:-.015em;text-wrap:balance}
+  .sub{margin:-8px 0 22px;max-width:40em;color:var(--ink-2)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px}
+  .ic{display:grid;place-items:center;width:40px;height:40px;margin:0 0 12px;border-radius:11px;background:var(--soft);color:var(--blue)}
+  .ic.a{background:var(--amber-soft);color:var(--amber-dk)}
+  .ic svg{display:block;width:22px;height:22px}
+  .card h3{margin:0 0 6px;font-size:17px;line-height:1.35}
+  .card p{margin:0;font-size:15px;color:var(--body)}
+  .pro{display:inline-block;margin-left:6px;padding:3px 7px;border-radius:999px;background:var(--amber);color:var(--ink);font-size:10.5px;font-weight:700;letter-spacing:.06em;line-height:1;vertical-align:2px}
+
+  .plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+  .plan{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px}
+  .plan.hi{border:2px solid var(--blue)}
+  .plan .k{margin:0 0 6px;font-size:12.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--blue)}
+  .plan h3{margin:0 0 8px;font-size:21px;line-height:1.3}
+  .plan p{margin:0;font-size:15px;color:var(--body)}
+
+  .private{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px 44px;margin-top:76px;padding:38px;border-radius:24px;background:var(--ink);color:#fff}
+  .private h2{margin:0 0 12px;color:#fff}
+  .private p{margin:0 0 16px;color:#C9D2E3}
+  .private a{color:#fff;font-weight:600}
+  .checks{list-style:none;margin:0;padding:0;display:grid;gap:14px;align-content:center}
+  .checks li{position:relative;padding-left:34px;color:#E6EBF4}
+  .checks li::before{content:"";position:absolute;left:0;top:2px;width:22px;height:22px;border-radius:50%;background:var(--amber) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.6 6.3l2.2 2.2 4.6-4.9' fill='none' stroke='%230E1726' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/13px no-repeat}
+
+  .cta{margin-top:76px;padding:40px 24px;border-radius:24px;background:var(--soft);text-align:center}
+  .appicon{display:block;width:96px;height:96px;margin:0 auto 16px;border-radius:22px;box-shadow:0 14px 30px -14px rgba(31,94,255,.65)}
+  .cta h2{margin:0 0 8px}
+  .cta .sub{margin:0 auto 22px}
+  .cta .badges{justify-content:center;margin:0}
+  footer{margin-top:48px;padding-top:20px;border-top:1px solid var(--line);font-size:14px;color:var(--ink-2)}
+  footer a{color:var(--ink-2)}
+
+  @media (max-width:860px){
+    .hero{grid-template-columns:minmax(0,1fr);gap:44px}
+    h1{font-size:40px}
+    h2{margin-top:60px;font-size:26px}
+    .plans{grid-template-columns:minmax(0,1fr)}
+    .private{grid-template-columns:minmax(0,1fr);margin-top:60px;padding:30px 24px}
+    .cta{margin-top:60px}
+  }
+  @media (max-width:480px){
+    .page{padding:20px 16px 44px}
+    .top{margin-bottom:32px}
+    h1{font-size:33px}
+    .lede{font-size:17px}
+    .store{flex:1 1 150px;min-width:0}
+    .hero-art::before{top:-24px;right:-12px}
+    .mock{padding:16px 14px 14px}
+    .m-sign{right:6px}
+    .private{padding:26px 18px}
+  }
+</style>
+</head>
+<body>
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <symbol id="i-doc" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></g></symbol>
+  <symbol id="i-qr" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><path d="M14 14h2v2h-2zM18 18h2v2h-2zM14 19.5v.5M19.5 14h.5"/></g></symbol>
+  <symbol id="i-pen" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 4l4.5 4.5L9 19H4.5v-4.5z"/><path d="M12.5 6.5L17 11M13 21h7"/></g></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20v-.5A5.5 5.5 0 0 1 8 14h2a5.5 5.5 0 0 1 5.5 5.5v.5M16 4.6a3.5 3.5 0 0 1 0 6.8M18.5 14.2a5.5 5.5 0 0 1 3 4.9v.9"/></g></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16.5V11a6 6 0 0 1 12 0v5.5l1.5 1.5h-15z"/><path d="M10 21a2 2 0 0 0 4 0"/></g></symbol>
+  <symbol id="i-sync" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4v15M4.5 15.5L8 19l3.5-3.5M16 20V5M12.5 8.5L16 5l3.5 3.5"/></g></symbol>
+  <symbol id="qr" viewBox="0 0 25 25"><path fill="currentColor" shape-rendering="crispEdges" d="M0 0h7v1H0zM8 0h1v1H8zM13 0h1v1H13zM18 0h7v1H18zM0 1h1v1H0zM6 1h1v1H6zM9 1h4v1H9zM14 1h3v1H14zM18 1h1v1H18zM24 1h1v1H24zM0 2h1v1H0zM2 2h3v1H2zM6 2h1v1H6zM8 2h3v1H8zM12 2h5v1H12zM18 2h1v1H18zM20 2h3v1H20zM24 2h1v1H24zM0 3h1v1H0zM2 3h3v1H2zM6 3h1v1H6zM8 3h3v1H8zM12 3h1v1H12zM14 3h1v1H14zM16 3h1v1H16zM18 3h1v1H18zM20 3h3v1H20zM24 3h1v1H24zM0 4h1v1H0zM2 4h3v1H2zM6 4h1v1H6zM8 4h2v1H8zM12 4h1v1H12zM15 4h1v1H15zM18 4h1v1H18zM20 4h3v1H20zM24 4h1v1H24zM0 5h1v1H0zM6 5h1v1H6zM9 5h2v1H9zM12 5h5v1H12zM18 5h1v1H18zM24 5h1v1H24zM0 6h7v1H0zM8 6h1v1H8zM10 6h1v1H10zM12 6h1v1H12zM14 6h1v1H14zM16 6h1v1H16zM18 6h7v1H18zM8 7h1v1H8zM10 7h4v1H10zM15 7h2v1H15zM1 8h1v1H1zM6 8h1v1H6zM8 8h1v1H8zM12 8h1v1H12zM15 8h1v1H15zM17 8h6v1H17zM24 8h1v1H24zM1 9h1v1H1zM3 9h1v1H3zM8 9h1v1H8zM10 9h4v1H10zM16 9h1v1H16zM19 9h1v1H19zM21 9h4v1H21zM0 10h2v1H0zM3 10h1v1H3zM5 10h2v1H5zM8 10h5v1H8zM16 10h1v1H16zM20 10h1v1H20zM24 10h1v1H24zM1 11h4v1H1zM13 11h1v1H13zM16 11h1v1H16zM19 11h3v1H19zM24 11h1v1H24zM0 12h3v1H0zM4 12h1v1H4zM6 12h2v1H6zM13 12h2v1H13zM16 12h7v1H16zM24 12h1v1H24zM1 13h5v1H1zM9 13h1v1H9zM11 13h2v1H11zM14 13h3v1H14zM18 13h1v1H18zM21 13h1v1H21zM24 13h1v1H24zM1 14h1v1H1zM6 14h1v1H6zM10 14h1v1H10zM12 14h3v1H12zM18 14h1v1H18zM21 14h1v1H21zM23 14h1v1H23zM1 15h5v1H1zM8 15h1v1H8zM11 15h5v1H11zM18 15h5v1H18zM24 15h1v1H24zM2 16h1v1H2zM6 16h2v1H6zM9 16h1v1H9zM11 16h1v1H11zM13 16h1v1H13zM15 16h6v1H15zM22 16h3v1H22zM10 17h1v1H10zM13 17h4v1H13zM20 17h2v1H20zM23 17h1v1H23zM0 18h7v1H0zM8 18h1v1H8zM10 18h2v1H10zM14 18h3v1H14zM18 18h1v1H18zM20 18h1v1H20zM23 18h1v1H23zM0 19h1v1H0zM6 19h1v1H6zM14 19h1v1H14zM16 19h1v1H16zM20 19h2v1H20zM23 19h2v1H23zM0 20h1v1H0zM2 20h3v1H2zM6 20h1v1H6zM10 20h5v1H10zM16 20h6v1H16zM24 20h1v1H24zM0 21h1v1H0zM2 21h3v1H2zM6 21h1v1H6zM9 21h1v1H9zM11 21h5v1H11zM20 21h2v1H20zM23 21h2v1H23zM0 22h1v1H0zM2 22h3v1H2zM6 22h1v1H6zM10 22h2v1H10zM13 22h2v1H13zM16 22h2v1H16zM21 22h1v1H21zM23 22h2v1H23zM0 23h1v1H0zM6 23h1v1H6zM11 23h4v1H11zM19 23h6v1H19zM0 24h7v1H0zM8 24h3v1H8zM14 24h1v1H14zM17 24h1v1H17zM19 24h6v1H19z"/></symbol>
+  <symbol id="sig" viewBox="0 0 120 40"><path fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" d="M4 30c8-10 14-20 19-19 6 1-6 21 0 21s12-22 19-21c6 1-5 17 1 17 5 0 8-9 13-9 4 0 2 7 7 7 6 0 10-6 17-7 8-1 14 1 36-3"/></symbol>
+</svg>
+<main>
+
+<div class="page" id="cs" lang="cs">
+  <header class="top">
+    <div class="brand"><img class="logo" src="icon-192.png" alt="" width="46" height="46"><span><b>Fixbill</b><small>Nabídky a faktury</small></span></div>
+    <nav class="langs" aria-label="Jazyk"><a href="#en" lang="en" hreflang="en">English</a> &middot; <strong aria-current="page">Čeština</strong> &middot; <a href="#de" lang="de" hreflang="de">Deutsch</a> &middot; <a href="#fr" lang="fr" hreflang="fr">Français</a></nav>
+  </header>
+
+  <section class="hero">
+    <div>
+      <p class="eyebrow">Pro iPhone a Android</p>
+      <h1>Nabídka i faktura za <em>dvě minuty</em></h1>
+      <p class="lede">Pro řemeslníky, živnostníky a malé firmy. Nabídku napíšete přímo na místě, pošlete ji ještě před odchodem a peníze máte dřív. Vše z telefonu.</p>
+      <div class="badges">
+        <span class="store"><small>Již brzy v</small> <b>App Store</b></span>
+        <span class="store"><small>Již brzy na</small> <b>Google Play</b></span>
+      </div>
+      <p class="note">Zdarma 5 dokladů měsíčně. Bez registrace.</p>
+    </div>
+    <div class="hero-art" role="img" aria-label="Ukázka faktury ve Fixbill: rekonstrukce koupelny, tři položky, celkem 17 400 Kč, neuhrazeno, s QR kódem pro platbu. Nabídku zákazník podepsal na displeji.">
+      <div class="mock">
+        <div class="m-top"><div class="m-biz"><i class="m-logo"></i><span><b>Vaše firma</b><small>Faktura 20260042</small></span></div><span class="chip">Neuhrazeno</span></div>
+        <p class="m-job">Rekonstrukce koupelny</p>
+        <ul class="m-lines">
+          <li><span>Obklad stěn<small>12 m² × 950&nbsp;Kč</small></span><b>11&nbsp;400&nbsp;Kč</b></li>
+          <li><span>Lepidlo a spárovací hmota<small>1 × 2&nbsp;100&nbsp;Kč</small></span><b>2&nbsp;100&nbsp;Kč</b></li>
+          <li><span>Práce<small>6 h × 650&nbsp;Kč</small></span><b>3&nbsp;900&nbsp;Kč</b></li>
+        </ul>
+        <div class="m-total"><span>Celkem</span><b>17&nbsp;400&nbsp;Kč</b></div>
+        <div class="m-pay"><svg class="qr"><use href="#qr"/></svg><span><b>Naskenujte a zaplaťte</b><small>QR Platba, převod na účet</small></span></div>
+      </div>
+      <div class="m-sign"><svg><use href="#sig"/></svg><span>Nabídka podepsaná zákazníkem</span></div>
+    </div>
+  </section>
+
+  <h2>Vše pro zakázku přímo v telefonu</h2>
+  <div class="grid">
+    <div class="card"><span class="ic"><svg aria-hidden="true"><use href="#i-doc"/></svg></span><h3>Nabídky a faktury v PDF</h3><p>Vyberte zákazníka, přidejte práci a materiál a pošlete úhledné PDF rovnou ze zakázky: e-mailem, přes messenger nebo jinou aplikací, kterou si zvolíte.</p></div>
+    <div class="card"><span class="ic a"><svg aria-hidden="true"><use href="#i-qr"/></svg></span><h3>QR platba a odkaz na platbu</h3><p>Na fakturách je QR kód pro platbu: QR Platba pro české účty a EPC pro převody v eurech. Zákazník ho naskenuje v bankovní aplikaci. Přidat můžete i odkaz na online platbu.</p></div>
+    <div class="card"><span class="ic"><svg aria-hidden="true"><use href="#i-pen"/></svg></span><h3>Podpis přímo na místě<span class="pro">PRO</span></h3><p>Zákazník podepíše nabídku přímo na vašem displeji. K nabídkám a fakturám můžete přidat fotky ze zakázky.</p></div>
+    <div class="card"><span class="ic a"><svg aria-hidden="true"><use href="#i-users"/></svg></span><h3>Klienti a ceník</h3><p>Klienti a položky se ukládají průběžně, takže další nabídka je hotová rychleji. Firmy dohledáte ve veřejných rejstřících: v ARES, ve francouzském registru firem a v evropském systému VIES pro DIČ.</p></div>
+    <div class="card"><span class="ic"><svg aria-hidden="true"><use href="#i-bell"/></svg></span><h3>Přehled o platbách</h3><p>Hned vidíte, co je neuhrazené a co po splatnosti. Platby si zaznamenáte, a když zákazník nezaplatí včas, pošlete mu upomínku.</p></div>
+    <div class="card"><span class="ic a"><svg aria-hidden="true"><use href="#i-sync"/></svg></span><h3>Záloha a 10 jazyků</h3><p>Všechna data uložíte do jednoho souboru se zálohou a v novém telefonu je zase načtete. Aplikace umí 10 jazyků.</p></div>
+  </div>
+
+  <h2>Férové ceny</h2>
+  <p class="sub">Žádné týdenní plány a žádné zdražování, dokud předplatné trvá.</p>
+  <div class="plans">
+    <div class="plan"><p class="k">Zdarma</p><h3>5 dokladů měsíčně</h3><p>Nabídky a faktury zdarma každý měsíc. Na každém dokladu je malá patička „Vytvořeno ve Fixbill“.</p></div>
+    <div class="plan hi"><p class="k">Fixbill Pro</p><h3>Měsíčně nebo ročně</h3><p>Neomezeně dokladů bez patičky, elektronický podpis zákazníka a fotky ze zakázky. Pokud je nabízeno zkušební období zdarma, uvidíte ho ještě před nákupem.</p></div>
+    <div class="plan"><p class="k">Cenový slib</p><h3>Cena se vám nezmění</h3><p>Cenu vašeho předplatného nezvýšíme, dokud zůstane aktivní. Zrušit ho můžete kdykoli v účtu App Store nebo Google Play.</p></div>
+  </div>
+
+  <section class="private">
+    <div>
+      <h2>Data zůstávají ve vašem telefonu</h2>
+      <p>Fixbill nepotřebuje účet. Údaje o firmě, klienti, položky, doklady, fotky i podpisy jsou uložené jen ve vašem zařízení a my je nikdy nevidíme.</p>
+      <p><a href="privacy.html#cs">Přečtěte si zásady ochrany soukromí</a></p>
+    </div>
+    <ul class="checks">
+      <li>Žádný účet, analytika, reklamy ani sledování.</li>
+      <li>Doklady opustí telefon, jen když je sami sdílíte, a to do aplikace nebo služby, kterou vyberete.</li>
+      <li>Zálohy jsou soubory, které uložíte, kam chcete.</li>
+      <li>Vyhledání firmy pošle do veřejného rejstříku jen hledané číslo.</li>
+    </ul>
+  </section>
+
+  <div class="cta">
+    <img class="appicon" src="icon-512.png" alt="" width="96" height="96">
+    <h2>Fixbill už brzy</h2>
+    <p class="sub">Máte dotaz? Napište na <a href="mailto:info@deriverge.com">info@deriverge.com</a>.</p>
+    <div class="badges">
+      <span class="store"><small>Již brzy v</small> <b>App Store</b></span>
+      <span class="store"><small>Již brzy na</small> <b>Google Play</b></span>
+    </div>
+  </div>
+
+  <footer><a href="support.html#cs">Podpora</a> &middot; <a href="privacy.html#cs">Soukromí</a> &middot; <a href="terms.html#cs">Podmínky použití</a> &middot; <a href="#en" lang="en" hreflang="en">English</a> &middot; <a href="#de" lang="de" hreflang="de">Deutsch</a> &middot; <a href="#fr" lang="fr" hreflang="fr">Français</a><br>Provozovatel: <a href="/">deriverge s.r.o.</a> &middot; <a href="mailto:info@deriverge.com">info@deriverge.com</a></footer>
+</div>
+
+<div class="page" id="de" lang="de">
+  <header class="top">
+    <div class="brand"><img class="logo" src="icon-192.png" alt="" width="46" height="46"><span><b>Fixbill</b><small>Angebote und Rechnungen</small></span></div>
+    <nav class="langs" aria-label="Sprache"><a href="#en" lang="en" hreflang="en">English</a> &middot; <a href="#cs" lang="cs" hreflang="cs">Čeština</a> &middot; <strong aria-current="page">Deutsch</strong> &middot; <a href="#fr" lang="fr" hreflang="fr">Français</a></nav>
+  </header>
+
+  <section class="hero">
+    <div>
+      <p class="eyebrow">Für iPhone und Android</p>
+      <h1>Angebote und Rechnungen in <em>zwei Minuten</em></h1>
+      <p class="lede">Für Handwerker und kleine Betriebe. Erstellen Sie das Angebot vor Ort, senden Sie es noch vor der Abfahrt und kommen Sie schneller an Ihr Geld. Alles vom Handy aus.</p>
+      <div class="badges">
+        <span class="store"><small>Demnächst im</small> <b>App Store</b></span>
+        <span class="store"><small>Demnächst bei</small> <b>Google Play</b></span>
+      </div>
+      <p class="note">Kostenlos für 5 Dokumente pro Monat. Kein Konto nötig.</p>
+    </div>
+    <div class="hero-art" role="img" aria-label="Beispielrechnung in Fixbill: Badsanierung, drei Positionen, gesamt 810,50 €, offen, mit Zahlungs-QR-Code. Das Angebot hat der Kunde auf dem Display unterschrieben.">
+      <div class="mock">
+        <div class="m-top"><div class="m-biz"><i class="m-logo"></i><span><b>Ihre Firma</b><small>Rechnung RE-2026-0042</small></span></div><span class="chip">Offen</span></div>
+        <p class="m-job">Badsanierung</p>
+        <ul class="m-lines">
+          <li><span>Wandfliesen verlegen<small>12 m² × 38,00&nbsp;€</small></span><b>456,00&nbsp;€</b></li>
+          <li><span>Fliesenkleber und Fugenmörtel<small>1 × 84,50&nbsp;€</small></span><b>84,50&nbsp;€</b></li>
+          <li><span>Arbeitszeit<small>6 Std. × 45,00&nbsp;€</small></span><b>270,00&nbsp;€</b></li>
+        </ul>
+        <div class="m-total"><span>Gesamt</span><b>810,50&nbsp;€</b></div>
+        <div class="m-pay"><svg class="qr"><use href="#qr"/></svg><span><b>Scannen und bezahlen</b><small>EPC-QR-Code (GiroCode), Überweisung in Euro</small></span></div>
+      </div>
+      <div class="m-sign"><svg><use href="#sig"/></svg><span>Angebot vom Kunden unterschrieben</span></div>
+    </div>
+  </section>
+
+  <h2>Alles für den Auftrag, direkt auf dem Handy</h2>
+  <div class="grid">
+    <div class="card"><span class="ic"><svg aria-hidden="true"><use href="#i-doc"/></svg></span><h3>Angebote und Rechnungen als PDF</h3><p>Kunden wählen, Arbeiten und Material eintragen und ein sauberes PDF direkt vom Einsatzort senden: per E-Mail, Messenger oder mit jeder App Ihrer Wahl.</p></div>
+    <div class="card"><span class="ic a"><svg aria-hidden="true"><use href="#i-qr"/></svg></span><h3>Zahlungs-QR-Code und Link</h3><p>Rechnungen tragen einen Zahlungs-QR-Code: EPC (GiroCode) für Überweisungen in Euro und QR Platba in Tschechien. Ihr Kunde scannt ihn in seiner Banking-App. Auch ein Link zur Online-Zahlung ist möglich.</p></div>
+    <div class="card"><span class="ic"><svg aria-hidden="true"><use href="#i-pen"/></svg></span><h3>Vor Ort unterschrieben<span class="pro">PRO</span></h3><p>Ihr Kunde unterschreibt das Angebot direkt auf Ihrem Display. Fotos vom Auftrag fügen Sie Angeboten und Rechnungen einfach hinzu.</p></div>
+    <div class="card"><span class="ic a"><svg aria-hidden="true"><use href="#i-users"/></svg></span><h3>Kunden und Preisliste</h3><p>Kunden und Positionen werden automatisch gespeichert, so geht das nächste Angebot schneller. Firmen finden Sie in öffentlichen Registern: ARES in Tschechien, dem französischen Unternehmensverzeichnis und der EU-Prüfung VIES für USt-IdNr.</p></div>
+    <div class="card"><span class="ic"><svg aria-hidden="true"><use href="#i-bell"/></svg></span><h3>Zahlungen im Blick</h3><p>Offene und überfällige Rechnungen auf einen Blick. Erfassen Sie Zahlungen und senden Sie eine Erinnerung, wenn eine Zahlung ausbleibt.</p></div>
+    <div class="card"><span class="ic a"><svg aria-hidden="true"><use href="#i-sync"/></svg></span><h3>Datensicherung und 10 Sprachen</h3><p>Sichern Sie alle Daten in einer Datei und laden Sie sie auf einem neuen Handy wieder. Die App gibt es in 10 Sprachen.</p></div>
+  </div>
+
+  <h2>Faire Preise</h2>
+  <p class="sub">Keine Wochen-Abos und keine Preiserhöhung, solange Ihr Abo läuft.</p>
+  <div class="plans">
+    <div class="plan"><p class="k">Kostenlos</p><h3>5 Dokumente pro Monat</h3><p>Angebote und Rechnungen jeden Monat kostenlos. Jedes Dokument trägt eine kleine Fußzeile „Erstellt mit Fixbill“.</p></div>
+    <div class="plan hi"><p class="k">Fixbill Pro</p><h3>Monatlich oder jährlich</h3><p>Unbegrenzt Dokumente ohne Fußzeile, Kundenunterschriften und Fotos vom Auftrag. Wird ein kostenloser Testzeitraum angeboten, sehen Sie das vor dem Abschluss.</p></div>
+    <div class="plan"><p class="k">Preisversprechen</p><h3>Ihr Preis bleibt gleich</h3><p>Solange Ihr Abo aktiv ist, erhöhen wir seinen Preis nicht. Kündigen können Sie jederzeit in Ihrem App-Store- oder Google-Play-Konto.</p></div>
+  </div>
+
+  <section class="private">
+    <div>
+      <h2>Ihre Daten bleiben auf Ihrem Handy</h2>
+      <p>Fixbill braucht kein Konto. Firmendaten, Kunden, Positionen, Dokumente, Fotos und Unterschriften werden nur auf Ihrem Gerät gespeichert. Wir sehen sie nie.</p>
+      <p><a href="privacy.html#de">Zur Datenschutzerklärung</a></p>
+    </div>
+    <ul class="checks">
+      <li>Kein Konto, keine Analyse, keine Werbung, kein Tracking.</li>
+      <li>Dokumente verlassen Ihr Handy nur, wenn Sie sie teilen, und zwar an die App oder den Dienst Ihrer Wahl.</li>
+      <li>Sicherungen sind Dateien, die Sie speichern, wo Sie möchten.</li>
+      <li>Die Firmensuche sendet nur die gesuchte Nummer an ein öffentliches Register.</li>
+    </ul>
+  </section>
+
+  <div class="cta">
+    <img class="appicon" src="icon-512.png" alt="" width="96" height="96">
+    <h2>Fixbill kommt bald</h2>
+    <p class="sub">Fragen? Schreiben Sie an <a href="mailto:info@deriverge.com">info@deriverge.com</a>.</p>
+    <div class="badges">
+      <span class="store"><small>Demnächst im</small> <b>App Store</b></span>
+      <span class="store"><small>Demnächst bei</small> <b>Google Play</b></span>
+    </div>
+  </div>
+
+  <footer><a href="support.html#de">Hilfe</a> &middot; <a href="privacy.html#de">Datenschutz</a> &middot; <a href="terms.html#de">Nutzungsbedingungen</a> &middot; <a href="#en" lang="en" hreflang="en">English</a> &middot; <a href="#cs" lang="cs" hreflang="cs">Čeština</a> &middot; <a href="#fr" lang="fr" hreflang="fr">Français</a><br>Betreiber: <a href="/">deriverge s.r.o.</a> &middot; <a href="mailto:info@deriverge.com">info@deriverge.com</a></footer>
+</div>
+
+<div class="page" id="fr" lang="fr">
+  <header class="top">
+    <div class="brand"><img class="logo" src="icon-192.png" alt="" width="46" height="46"><span><b>Fixbill</b><small>Devis et factures</small></span></div>
+    <nav class="langs" aria-label="Langue"><a href="#en" lang="en" hreflang="en">English</a> &middot; <a href="#cs" lang="cs" hreflang="cs">Čeština</a> &middot; <a href="#de" lang="de" hreflang="de">Deutsch</a> &middot; <strong aria-current="page">Français</strong></nav>
+  </header>
+
+  <section class="hero">
+    <div>
+      <p class="eyebrow">Pour iPhone et Android</p>
+      <h1>Devis et factures en <em>deux minutes</em></h1>
+      <p class="lede">Pour les artisans et les petites entreprises. Rédigez le devis sur le chantier, envoyez-le avant de partir et soyez payé plus vite, directement depuis votre téléphone.</p>
+      <div class="badges">
+        <span class="store"><small>Bientôt disponible</small> <b>App Store</b></span>
+        <span class="store"><small>Bientôt disponible</small> <b>Google Play</b></span>
+      </div>
+      <p class="note">Gratuit pour 5 documents par mois. Sans compte.</p>
+    </div>
+    <div class="hero-art" role="img" aria-label="Exemple de facture dans Fixbill&nbsp;: rénovation de salle de bains, trois lignes, total 810,50 €, à payer, avec un QR code de paiement. Le client a signé le devis sur l'écran.">
+      <div class="mock">
+        <div class="m-top"><div class="m-biz"><i class="m-logo"></i><span><b>Votre entreprise</b><small>Facture F2026-0042</small></span></div><span class="chip">À payer</span></div>
+        <p class="m-job">Rénovation de salle de bains</p>
+        <ul class="m-lines">
+          <li><span>Pose de faïence murale<small>12 m² × 38,00&nbsp;€</small></span><b>456,00&nbsp;€</b></li>
+          <li><span>Colle et joints<small>1 × 84,50&nbsp;€</small></span><b>84,50&nbsp;€</b></li>
+          <li><span>Main-d'œuvre<small>6 h × 45,00&nbsp;€</small></span><b>270,00&nbsp;€</b></li>
+        </ul>
+        <div class="m-total"><span>Total</span><b>810,50&nbsp;€</b></div>
+        <div class="m-pay"><svg class="qr"><use href="#qr"/></svg><span><b>Scannez pour payer</b><small>QR code EPC, virement en euros</small></span></div>
+      </div>
+      <div class="m-sign"><svg><use href="#sig"/></svg><span>Devis signé par le client</span></div>
+    </div>
+  </section>
+
+  <h2>Tout pour le chantier, dans votre téléphone</h2>
+  <div class="grid">
+    <div class="card"><span class="ic"><svg aria-hidden="true"><use href="#i-doc"/></svg></span><h3>Devis et factures en PDF</h3><p>Choisissez un client, ajoutez travaux et fournitures, puis envoyez un PDF soigné depuis le chantier&nbsp;: par e-mail, par messagerie ou avec l'application de votre choix.</p></div>
+    <div class="card"><span class="ic a"><svg aria-hidden="true"><use href="#i-qr"/></svg></span><h3>QR code et lien de paiement</h3><p>Vos factures portent un QR code de paiement&nbsp;: EPC pour les virements en euros, QR Platba en Tchéquie. Votre client le scanne dans son application bancaire. Vous pouvez aussi ajouter un lien de paiement en ligne.</p></div>
+    <div class="card"><span class="ic"><svg aria-hidden="true"><use href="#i-pen"/></svg></span><h3>Signé sur place<span class="pro">PRO</span></h3><p>Votre client signe le devis directement sur votre écran. Ajoutez des photos du chantier à vos devis et factures.</p></div>
+    <div class="card"><span class="ic a"><svg aria-hidden="true"><use href="#i-users"/></svg></span><h3>Clients et tarifs</h3><p>Clients et articles s'enregistrent au fur et à mesure&nbsp;: le devis suivant va plus vite. Retrouvez une entreprise dans les registres publics&nbsp;: l'annuaire des entreprises en France, ARES en Tchéquie et VIES pour la TVA européenne.</p></div>
+    <div class="card"><span class="ic"><svg aria-hidden="true"><use href="#i-bell"/></svg></span><h3>Suivi des paiements</h3><p>Voyez d'un coup d'œil les factures impayées et en retard, enregistrez les paiements et envoyez une relance quand un paiement se fait attendre.</p></div>
+    <div class="card"><span class="ic a"><svg aria-hidden="true"><use href="#i-sync"/></svg></span><h3>Sauvegarde et 10 langues</h3><p>Exportez toutes vos données dans un fichier de sauvegarde et importez-le sur un nouveau téléphone. L'application existe en 10 langues.</p></div>
+  </div>
+
+  <h2>Des prix justes</h2>
+  <p class="sub">Pas de formule à la semaine, pas de hausse de prix tant que vous êtes abonné.</p>
+  <div class="plans">
+    <div class="plan"><p class="k">Gratuit</p><h3>5 documents par mois</h3><p>Devis et factures gratuits chaque mois. Chaque document porte une petite mention «&nbsp;Créé avec Fixbill&nbsp;» en pied de page.</p></div>
+    <div class="plan hi"><p class="k">Fixbill Pro</p><h3>Mensuel ou annuel</h3><p>Documents illimités sans pied de page, signature électronique du client et photos du chantier. Si un essai gratuit est proposé, vous le verrez avant de vous abonner.</p></div>
+    <div class="plan"><p class="k">Prix garanti</p><h3>Votre prix ne bouge pas</h3><p>Nous n'augmenterons pas le prix de votre abonnement tant qu'il reste actif. Résiliez quand vous voulez depuis votre compte App Store ou Google Play.</p></div>
+  </div>
+
+  <section class="private">
+    <div>
+      <h2>Vos données restent sur votre téléphone</h2>
+      <p>Fixbill ne demande aucun compte. Profil de l'entreprise, clients, articles, documents, photos et signatures sont stockés uniquement sur votre appareil. Nous ne les voyons jamais.</p>
+      <p><a href="privacy.html#fr">Lire la politique de confidentialité</a></p>
+    </div>
+    <ul class="checks">
+      <li>Pas de compte, pas d'analytique, pas de publicité, pas de suivi.</li>
+      <li>Un document ne quitte votre téléphone que si vous le partagez, vers l'application ou le service de votre choix.</li>
+      <li>Les sauvegardes sont des fichiers que vous enregistrez où vous voulez.</li>
+      <li>La recherche d'entreprise n'envoie que le numéro recherché à un registre public.</li>
+    </ul>
+  </section>
+
+  <div class="cta">
+    <img class="appicon" src="icon-512.png" alt="" width="96" height="96">
+    <h2>Fixbill arrive bientôt</h2>
+    <p class="sub">Une question&nbsp;? Écrivez à <a href="mailto:info@deriverge.com">info@deriverge.com</a>.</p>
+    <div class="badges">
+      <span class="store"><small>Bientôt disponible</small> <b>App Store</b></span>
+      <span class="store"><small>Bientôt disponible</small> <b>Google Play</b></span>
+    </div>
+  </div>
+
+  <footer><a href="support.html#fr">Assistance</a> &middot; <a href="privacy.html#fr">Confidentialité</a> &middot; <a href="terms.html#fr">Conditions d'utilisation</a> &middot; <a href="#en" lang="en" hreflang="en">English</a> &middot; <a href="#cs" lang="cs" hreflang="cs">Čeština</a> &middot; <a href="#de" lang="de" hreflang="de">Deutsch</a><br>Éditeur&nbsp;: <a href="/">deriverge s.r.o.</a> &middot; <a href="mailto:info@deriverge.com">info@deriverge.com</a></footer>
+</div>
+
+<div class="page" id="en" lang="en">
+  <header class="top">
+    <div class="brand"><img class="logo" src="icon-192.png" alt="" width="46" height="46"><span><b>Fixbill</b><small>Quotes and invoices</small></span></div>
+    <nav class="langs" aria-label="Language"><strong aria-current="page">English</strong> &middot; <a href="#cs" lang="cs" hreflang="cs">Čeština</a> &middot; <a href="#de" lang="de" hreflang="de">Deutsch</a> &middot; <a href="#fr" lang="fr" hreflang="fr">Français</a></nav>
+  </header>
+
+  <section class="hero">
+    <div>
+      <p class="eyebrow">For iPhone and Android</p>
+      <h1>Quotes and invoices in <em>two minutes</em></h1>
+      <p class="lede">Made for tradespeople and small businesses. Write the quote on site, send it before you leave and get paid faster, right from your phone.</p>
+      <div class="badges">
+        <span class="store"><small>Coming soon to the</small> <b>App Store</b></span>
+        <span class="store"><small>Coming soon to</small> <b>Google Play</b></span>
+      </div>
+      <p class="note">Free for 5 documents a month. No account needed.</p>
+    </div>
+    <div class="hero-art" role="img" aria-label="Example invoice in Fixbill: bathroom renovation, three items, total €810.50, unpaid, with a payment QR code. The quote was signed by the client on screen.">
+      <div class="mock">
+        <div class="m-top"><div class="m-biz"><i class="m-logo"></i><span><b>Your business</b><small>Invoice INV-2026-0042</small></span></div><span class="chip">Unpaid</span></div>
+        <p class="m-job">Bathroom renovation</p>
+        <ul class="m-lines">
+          <li><span>Wall tiling<small>12 m² × €38.00</small></span><b>€456.00</b></li>
+          <li><span>Tile adhesive and grout<small>1 × €84.50</small></span><b>€84.50</b></li>
+          <li><span>Labour<small>6 h × €45.00</small></span><b>€270.00</b></li>
+        </ul>
+        <div class="m-total"><span>Total</span><b>€810.50</b></div>
+        <div class="m-pay"><svg class="qr"><use href="#qr"/></svg><span><b>Scan to pay</b><small>EPC QR code, bank transfer in euro</small></span></div>
+      </div>
+      <div class="m-sign"><svg><use href="#sig"/></svg><span>Quote signed by the client</span></div>
+    </div>
+  </section>
+
+  <h2>Everything for the job, right on your phone</h2>
+  <div class="grid">
+    <div class="card"><span class="ic"><svg aria-hidden="true"><use href="#i-doc"/></svg></span><h3>Quotes and invoices as PDF</h3><p>Pick a client, add work and materials and send a clean PDF straight from the job: by e-mail, in a messenger or with any app you choose.</p></div>
+    <div class="card"><span class="ic a"><svg aria-hidden="true"><use href="#i-qr"/></svg></span><h3>Payment QR code and link</h3><p>Invoices carry a payment QR code: EPC for euro bank transfers and QR Platba in the Czech Republic. Your client scans it in their banking app. You can add an online payment link too.</p></div>
+    <div class="card"><span class="ic"><svg aria-hidden="true"><use href="#i-pen"/></svg></span><h3>Signed on the spot<span class="pro">PRO</span></h3><p>Your client signs the quote right on your screen. Add photos from the job to your quotes and invoices.</p></div>
+    <div class="card"><span class="ic a"><svg aria-hidden="true"><use href="#i-users"/></svg></span><h3>Clients and price list</h3><p>Clients and items are saved as you go, so the next quote is quicker. Look up companies in public registries: ARES in the Czech Republic, the French company directory and the EU VIES VAT check.</p></div>
+    <div class="card"><span class="ic"><svg aria-hidden="true"><use href="#i-bell"/></svg></span><h3>Know who has paid</h3><p>See unpaid and overdue invoices at a glance. Record payments and send a reminder when a payment is late.</p></div>
+    <div class="card"><span class="ic a"><svg aria-hidden="true"><use href="#i-sync"/></svg></span><h3>Backup and 10 languages</h3><p>Export all your data to one backup file and import it on a new phone. The app speaks 10 languages.</p></div>
+  </div>
+
+  <h2>Fair pricing</h2>
+  <p class="sub">No weekly plans and no price rises while you subscribe.</p>
+  <div class="plans">
+    <div class="plan"><p class="k">Free</p><h3>5 documents a month</h3><p>Quotes and invoices for free, every month. Each one carries a small “Created with Fixbill” footer.</p></div>
+    <div class="plan hi"><p class="k">Fixbill Pro</p><h3>Monthly or yearly</h3><p>Unlimited documents without the footer, client e-signatures and job photos. If a free trial is offered, you will see it before you subscribe.</p></div>
+    <div class="plan"><p class="k">Price promise</p><h3>Your price stays the same</h3><p>We will not raise the price of your subscription while it stays active. Cancel any time in your App Store or Google Play account.</p></div>
+  </div>
+
+  <section class="private">
+    <div>
+      <h2>Your data stays on your phone</h2>
+      <p>Fixbill needs no account. Your business profile, clients, items, documents, photos and signatures are stored only on your device. We never see them.</p>
+      <p><a href="privacy.html">Read the privacy policy</a></p>
+    </div>
+    <ul class="checks">
+      <li>No account, no analytics, no ads, no tracking.</li>
+      <li>Documents leave your phone only when you share them, to the app or service you pick.</li>
+      <li>Backups are files you save wherever you choose.</li>
+      <li>Company lookup sends only the number you look up to a public registry.</li>
+    </ul>
+  </section>
+
+  <div class="cta">
+    <img class="appicon" src="icon-512.png" alt="" width="96" height="96">
+    <h2>Fixbill is coming soon</h2>
+    <p class="sub">Questions? Write to <a href="mailto:info@deriverge.com">info@deriverge.com</a>.</p>
+    <div class="badges">
+      <span class="store"><small>Coming soon to the</small> <b>App Store</b></span>
+      <span class="store"><small>Coming soon to</small> <b>Google Play</b></span>
+    </div>
+  </div>
+
+  <footer><a href="support.html">Support</a> &middot; <a href="privacy.html">Privacy</a> &middot; <a href="terms.html">Terms of use</a> &middot; <a href="#cs" lang="cs" hreflang="cs">Čeština</a> &middot; <a href="#de" lang="de" hreflang="de">Deutsch</a> &middot; <a href="#fr" lang="fr" hreflang="fr">Français</a><br>Operator: <a href="/">deriverge s.r.o.</a> &middot; <a href="mailto:info@deriverge.com">info@deriverge.com</a></footer>
+</div>
+
+</main>
+</body>
+</html>
