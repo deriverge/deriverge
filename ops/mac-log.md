@@ -1758,3 +1758,6 @@ Aby to platilo i offline, musel by vzniknout mistni server v aplikaci
     fixbill/Fixbill-1.0.0-2.aab. BLOKUJE: aplikace v Play Console neexistuje
     (zalozeni a prohlaseni = Davidovo ano) a AAB je nad 10 MB pro nahrani
     pres Chrome.
+  - Build 2 zpracovan (VALID, bez sifrovani) a pripojen k verzi 1.0.0.
+    Nic neodeslano. Nastroje a texty ulozeny v projektu: store/, tool/asc/,
+    docs/research/ (commit aa26ed4).
