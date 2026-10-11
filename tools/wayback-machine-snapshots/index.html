@@ -79,7 +79,7 @@
    "name": "How do I list every archived page of a domain?",
    "acceptedAnswer": {
     "@type": "Answer",
-    "text": "The all URLs link opens that list in the Wayback Machine. To get it as data, with first and last capture per URL, use Wayback Machine Scraper on Apify."
+    "text": "The all URLs link opens that list in the Wayback Machine. The Wayback Machine shows the first and last capture of each URL in that list."
    }
   },
   {
@@ -87,7 +87,7 @@
    "name": "How many snapshots does a site have per year?",
    "acceptedAnswer": {
     "@type": "Answer",
-    "text": "The calendar view in the Wayback Machine shows it visually. As numbers, run Wayback Machine Scraper with collapse set to year or month."
+    "text": "The calendar view in the Wayback Machine shows it visually. The Internet Archive also documents its CDX API for researchers who need the counts as data."
    }
   },
   {
@@ -156,22 +156,13 @@
       </form>
       <div class="results" id="wb-results"></div>
     </section>
-    <aside class="block cta" aria-label="Wayback Machine Scraper on Apify">
-      <p class="cmt">// run it at scale</p>
-      <h2>Wayback Machine Scraper on Apify</h2>
-      <p>The same job runs as <strong>Wayback Machine Scraper</strong> in Apify Store when one browser tab is not enough.</p>
-      <ul><li>Every capture of a page, a path or a whole domain from the CDX API, with status, MIME type and content digest</li><li>Every archived URL of a domain with its first and last capture date</li><li>One capture per day, month or year to count snapshots over time, or the closest capture to a date</li><li>Optional page text of old captures; schedules, API and CSV, Excel or JSON export</li></ul>
-      <p class="price">From <b>$0.40</b> per 1,000 snapshots, pay only for results. Apify's free plan includes $5 of monthly credit.</p>
-      <div class="cta-row"><a class="btn" data-actor="wayback-machine-scraper" data-campaign="wayback-machine-snapshots" href="https://apify.com/deriverge/wayback-machine-scraper?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=wayback-machine-snapshots" target="_blank" rel="noopener">Open Wayback Machine Scraper on Apify &rarr;</a></div>
-      
-    </aside>
     <section class="block" aria-labelledby="h-how">
       <p class="cmt">// how it works</p>
       <h2 id="h-how" class="h2">How the snapshot finder works</h2>
       <div class="prose">
         <p>The Internet Archive's <strong>Wayback Machine</strong> has saved copies of web pages since 1996. For every URL this page asks the archive's <strong>Availability API</strong> three questions: the capture closest to 1 January 1996 (the first one), the capture closest to today (the latest one) and, if you pick a date, the capture closest to that date.</p>
         <p>The Availability API returns one capture per question and only captures that loaded successfully, and it often reports nothing even for well archived pages. When it does, the cell links straight to the Wayback Machine, which jumps to the first, latest or closest capture itself. <strong>calendar</strong> shows all captures by day and <strong>all URLs</strong> lists every archived address under the domain.</p>
-        <p><strong>Why no count of captures per year here?</strong> Counts and full lists come from the archive's CDX API, which does not accept requests from other websites' pages, so a browser tool cannot read it. Wayback Machine Scraper on Apify reads it on the server and returns every capture, or one per day, month or year.</p>
+        <p><strong>Why no count of captures per year here?</strong> Counts and full lists come from the archive's CDX API, which does not accept requests from other websites' pages, so a browser tool cannot read it. The calendar view in the Wayback Machine shows the same information visually.</p>
       </div>
     </section>
     <section class="block" aria-labelledby="h-faq">
@@ -181,8 +172,8 @@
 <details><summary>How do I find when a website was first archived?</summary><div class="a"><p>Enter the domain above. <strong>First capture</strong> shows the date of the oldest snapshot when the Availability API reports it; otherwise <strong>open first capture</strong> takes you to the oldest capture in the Wayback Machine, where the date is in the address and the toolbar.</p></div></details>
 <details><summary>How do I see a website as it looked on a specific date?</summary><div class="a"><p>Pick the date in <strong>closest to date</strong>. The table links the snapshot nearest to that day; the Wayback Machine may pick a capture a few days or months away when nothing was saved on that day.</p></div></details>
 <details><summary>Why is there no date for a page that is archived?</summary><div class="a"><p>The Availability API answers from a separate index, skips captures that were redirects or errors and is sometimes slow to answer at all. The links in the table still open the right capture, and the <strong>calendar</strong> shows every capture the Wayback Machine has.</p></div></details>
-<details><summary>How do I list every archived page of a domain?</summary><div class="a"><p>The <strong>all URLs</strong> link opens that list in the Wayback Machine. To get it as data, with first and last capture per URL, use Wayback Machine Scraper on Apify.</p></div></details>
-<details><summary>How many snapshots does a site have per year?</summary><div class="a"><p>The calendar view in the Wayback Machine shows it visually. As numbers, run Wayback Machine Scraper with collapse set to year or month.</p></div></details>
+<details><summary>How do I list every archived page of a domain?</summary><div class="a"><p>The <strong>all URLs</strong> link opens that list in the Wayback Machine. The Wayback Machine shows the first and last capture of each URL in that list.</p></div></details>
+<details><summary>How many snapshots does a site have per year?</summary><div class="a"><p>The calendar view in the Wayback Machine shows it visually. The Internet Archive also documents its CDX API for researchers who need the counts as data.</p></div></details>
 <details><summary>Is this tool free?</summary><div class="a"><p>Yes. It runs in your browser against the Internet Archive's public API. Consider supporting the Internet Archive, which keeps the Wayback Machine running.</p></div></details>
 </div>
     </section>

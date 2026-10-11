@@ -499,7 +499,7 @@ def page_wayback():
     explain = section('// how it works', 'How the snapshot finder works', '''      <div class="prose">
         <p>The Internet Archive's <strong>Wayback Machine</strong> has saved copies of web pages since 1996. For every URL this page asks the archive's <strong>Availability API</strong> three questions: the capture closest to 1 January 1996 (the first one), the capture closest to today (the latest one) and, if you pick a date, the capture closest to that date.</p>
         <p>The Availability API returns one capture per question and only captures that loaded successfully, and it often reports nothing even for well archived pages. When it does, the cell links straight to the Wayback Machine, which jumps to the first, latest or closest capture itself. <strong>calendar</strong> shows all captures by day and <strong>all URLs</strong> lists every archived address under the domain.</p>
-        <p><strong>Why no count of captures per year here?</strong> Counts and full lists come from the archive's CDX API, which does not accept requests from other websites' pages, so a browser tool cannot read it. Wayback Machine Scraper on Apify reads it on the server and returns every capture, or one per day, month or year.</p>
+        <p><strong>Why no count of captures per year here?</strong> Counts and full lists come from the archive's CDX API, which does not accept requests from other websites' pages, so a browser tool cannot read it. The calendar view in the Wayback Machine shows the same information visually.</p>
       </div>''', hid='how')
     faq = [
         ('How do I find when a website was first archived?',
@@ -509,20 +509,15 @@ def page_wayback():
         ('Why is there no date for a page that is archived?',
          '<p>The Availability API answers from a separate index, skips captures that were redirects or errors and is sometimes slow to answer at all. The links in the table still open the right capture, and the <strong>calendar</strong> shows every capture the Wayback Machine has.</p>'),
         ('How do I list every archived page of a domain?',
-         '<p>The <strong>all URLs</strong> link opens that list in the Wayback Machine. To get it as data, with first and last capture per URL, use Wayback Machine Scraper on Apify.</p>'),
+         '<p>The <strong>all URLs</strong> link opens that list in the Wayback Machine. The Wayback Machine shows the first and last capture of each URL in that list.</p>'),
         ('How many snapshots does a site have per year?',
-         '<p>The calendar view in the Wayback Machine shows it visually. As numbers, run Wayback Machine Scraper with collapse set to year or month.</p>'),
+         '<p>The calendar view in the Wayback Machine shows it visually. The Internet Archive also documents its CDX API for researchers who need the counts as data.</p>'),
         ('Is this tool free?',
          '<p>Yes. It runs in your browser against the Internet Archive\'s public API. Consider supporting the Internet Archive, which keeps the Wayback Machine running.</p>'),
     ]
     body = '\n'.join([
         tool,
-        cta(campaign=camp, slug='wayback-machine-scraper', name='Wayback Machine Scraper', unit='snapshots', points=[
-            'Every capture of a page, a path or a whole domain from the CDX API, with status, MIME type and content digest',
-            'Every archived URL of a domain with its first and last capture date',
-            'One capture per day, month or year to count snapshots over time, or the closest capture to a date',
-            'Optional page text of old captures; schedules, API and CSV, Excel or JSON export',
-        ]),
+        # Bez odkazu na placený actor: podmínky archive.org dovolují přístup jen zdarma a pro vědu a výzkum (11. 10. 2026).
         explain,
         section('// questions', 'Frequently asked questions', faq_block(faq), hid='faq'),
         more_tools(path),
@@ -1170,13 +1165,13 @@ def page_index(stats, total_c, total_j, date):
         ('/tools/bulk-dns-lookup/', 'Bulk DNS lookup', 'A, AAAA, MX, TXT, NS, CNAME, CAA, SOA and DMARC for up to 20 domains, over DNS over HTTPS.', 'dns-records-lookup'),
         ('/tools/rdap-whois-lookup/', 'RDAP WHOIS lookup', 'Registrar, creation and expiry dates, status codes and nameservers, straight from the registry.', 'whois-domain-lookup'),
         ('/tools/domain-availability-checker/', 'Domain availability checker', 'Up to 20 names across .com, .io, .ai, .dev and 20 more extensions, checked with the registries.', 'domain-availability-checker'),
-        ('/tools/wayback-machine-snapshots/', 'Wayback Machine snapshot finder', 'First, latest and closest-to-date captures of up to 20 URLs, with links to every archived copy.', 'wayback-machine-scraper'),
+        ('/tools/wayback-machine-snapshots/', 'Wayback Machine snapshot finder', 'First, latest and closest-to-date captures of up to 20 URLs, with links to every archived copy.', None),  # bez placeného actoru, viz page_wayback
         ('/tools/phone-number-validator/', 'Phone number validator', 'Up to 50 numbers: valid or not, E.164, national format, line type and country, offline.', 'phone-number-validator'),
         ('/tools/companies-using-ats/', 'Which ATS do companies use?', f'{total_c:,} companies on 14 applicant tracking systems, a company lookup and an ATS detector.', 'career-site-jobs-search'),
     ]
     cards = ''
     for i, (p, n, d, s) in enumerate(tools):
-        price = per1000(s)
+        price = per1000(s) if s else None
         meta = f'Bulk version on Apify from {price} per 1,000' if price else ''
         cards += f'<li><a class="card" href="{p}"><span class="card-idx">{i + 1:02d}</span><h3>{esc(n)}</h3><p>{esc(d)}</p><span class="card-meta">{esc(meta)}</span></a></li>'
     ats_list = ''.join(f'<li><a href="/tools/companies-using-{a}/">Companies using {esc(ATS[a]["name"])}</a><span>{stats[a]["companies"]:,}</span></li>' for a in ORDER)
