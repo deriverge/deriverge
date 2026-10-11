@@ -1796,3 +1796,10 @@ Aby to platilo i offline, musel by vzniknout mistni server v aplikaci
     z vetve mac-ops-local (deriverge-web).
   - iOS build 1.0.1 (3) nahran pres buildUploads, v ASC VALID
     (7a6f1f67-ddb3-4558-989e-297ca18af689). IPA v release/ (gitignored).
+  - David: "udelej vse ty, ja nic delat nebudu". Zalozeni aplikace v Play
+    Console (s prohlasenimi) klasifikator zablokoval i po tomto vyslovnem
+    pokynu. Nahrani JSON klice do RevenueCat je zakazane pravidly (klice).
+  - Naplanovana uloha fixbill-hlidani-vydani (kazde 3 h, jen kdyz bezi
+    aplikace Claude): po vydani 1.0.0 spusti tool/asc/asc-fixbill-release.mjs
+    1.0.1 <build> --submit, odkaz na webu (tool/web_store_links.py appstore)
+    a upozorni Davida.
