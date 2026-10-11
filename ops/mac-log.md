@@ -1794,3 +1794,5 @@ Aby to platilo i offline, musel by vzniknout mistni server v aplikaci
     tool/asc/asc-fixbill-header.mjs --version <id>, odeslat.
   - Pracovni strom mac-ops ve scratchpadu system vycistil, obnoven
     z vetve mac-ops-local (deriverge-web).
+  - iOS build 1.0.1 (3) nahran pres buildUploads, v ASC VALID
+    (7a6f1f67-ddb3-4558-989e-297ca18af689). IPA v release/ (gitignored).
