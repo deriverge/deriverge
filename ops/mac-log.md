@@ -1782,3 +1782,15 @@ Aby to platilo i offline, musel by vzniknout mistni server v aplikaci
     v Play Console je vyplneny a otevreny v Chromu.
   - BLOKUJE: AAB nad 10 MB pro nahrani pres Chrome; JSON servisniho uctu pro
     RC Fixbill Android nahrava David.
+
+- 2026-10-11: Fixbill a SealSlim porad WAITING_FOR_REVIEW (od 6. 10. a 5. 10.).
+  Smlouvy (Paid, Free), banka, danove formulare, DSA a DAC7 aktivni, v ASC
+  zadne upozorneni, v poste nic od App Review. Fronta Apple je pomala
+  (pravdepodobne uvedeni iPhone Duo).
+  - Play Console: Fixbill porad nezalozeny (3 aplikace). Ceka na Davida.
+  - Pripravena verze 1.0.1 (3) s opravami z testu: iOS EAS build
+    9b42dd08 (bezi), Android release/Fixbill-1.0.1-3.aab. Po schvaleni 1.0.0:
+    zalozit verzi 1.0.1, pripojit build 3, zahlavi pres
+    tool/asc/asc-fixbill-header.mjs --version <id>, odeslat.
+  - Pracovni strom mac-ops ve scratchpadu system vycistil, obnoven
+    z vetve mac-ops-local (deriverge-web).
