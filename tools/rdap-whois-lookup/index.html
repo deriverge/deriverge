@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RDAP WHOIS Lookup: Registrar, Expiry Date and Nameservers</title>
+<meta name="description" content="Free RDAP WHOIS lookup for up to 20 domains: registrar, creation and expiry dates, status codes, nameservers and DNSSEC, live from the registry.">
+<link rel="canonical" href="https://deriverge.com/tools/rdap-whois-lookup/">
+<meta name="robots" content="index, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300..800;1,300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/tools/tools.css">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="deriverge">
+<meta property="og:title" content="RDAP WHOIS Lookup: Registrar, Expiry Date and Nameservers">
+<meta property="og:description" content="Free RDAP WHOIS lookup for up to 20 domains: registrar, creation and expiry dates, status codes, nameservers and DNSSEC, live from the registry.">
+<meta property="og:url" content="https://deriverge.com/tools/rdap-whois-lookup/">
+<meta property="og:image" content="https://raw.githubusercontent.com/deriverge/deriverge/main/pictures/deriverge_logo-long.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "WebApplication",
+ "name": "RDAP WHOIS lookup",
+ "url": "https://deriverge.com/tools/rdap-whois-lookup/",
+ "description": "Free RDAP WHOIS lookup for up to 20 domains: registrar, creation and expiry dates, status codes, nameservers and DNSSEC, live from the registry.",
+ "applicationCategory": "DeveloperApplication",
+ "operatingSystem": "Any (runs in a web browser)",
+ "browserRequirements": "Requires JavaScript",
+ "isAccessibleForFree": true,
+ "offers": {
+  "@type": "Offer",
+  "price": "0",
+  "priceCurrency": "USD"
+ },
+ "publisher": {
+  "@type": "Organization",
+  "name": "deriverge s.r.o.",
+  "url": "https://deriverge.com/"
+ }
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "What is the difference between RDAP and WHOIS?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Both return the registration record of a domain. WHOIS is plain text in a different layout for every registry, over its own network port. RDAP uses HTTPS and JSON with fixed field names, so dates, status codes and nameservers mean the same thing everywhere."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How do I find when a domain expires?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Enter it above and read Expires. The date comes from the registry, so it reflects the last renewal the registrar reported. A domain past its date can still be in the auto-renew grace period."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Why is the owner of the domain not shown?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Since GDPR most registries hide the registrant, and this page never shows contact data even where it is published. To reach an owner, use the registrar's contact form or the abuse address of the registrar."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Why does my .de, .eu or .co domain not work here?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "These registries either have no public RDAP server or block requests made from web pages. The WHOIS Domain Lookup actor on Apify falls back to WHOIS for them."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How old is a domain?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "The Created line shows the registration date and the age. If a domain was deleted and registered again, the date is the new registration, not the first one ever."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Can I monitor expiry dates of many domains?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes, with the Apify actor: schedule it on your list and keep only the domains whose registrar, status, nameservers or expiry changed, or filter domains expiring within a number of days."
+   }
+  }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "deriverge",
+   "item": "https://deriverge.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Tools",
+   "item": "https://deriverge.com/tools/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 3,
+   "name": "RDAP WHOIS lookup",
+   "item": "https://deriverge.com/tools/rdap-whois-lookup/"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<nav class="topbar">
+  <a class="tab" href="/tools/" translate="no">tools/rdap-whois-lookup.js</a>
+  <div class="crumbs"><a href="/">deriverge</a><span class="punc">/</span><a href="/tools/">tools</a></div>
+</nav>
+<main class="file wide">
+  <div class="gutter" aria-hidden="true"></div>
+  <div class="source">
+    <header class="hero hero--tool">
+      <p class="cmt">// free tool · runs in your browser</p>
+      <h1 class="h1-tool">RDAP WHOIS lookup</h1>
+      <p class="lede">Find the registrar of a domain, when it was registered and when it expires, its status codes and nameservers. Your browser asks the registry's own RDAP server, the modern replacement for WHOIS, for up to 20 domains at once.</p>
+    </header>
+    <section class="block block--tight" aria-label="RDAP WHOIS lookup tool">
+      <form class="panel" id="whois-form" novalidate>
+        <div class="field">
+          <label class="label" for="whois-domains"><span class="key">domains</span>: one per line, up to 20</label>
+          <textarea id="whois-domains" name="domains" spellcheck="false" autocapitalize="off" placeholder="example.com&#10;wikipedia.org&#10;bbc.co.uk"></textarea>
+        </div>
+        <div class="actions"><button type="submit" class="btn">Look up</button><button type="button" class="btn btn--ghost" id="whois-csv" hidden>Download CSV</button><span class="hint">Subdomains are checked as their registered domain: www.shop.example.co.uk becomes example.co.uk.</span></div>
+        <p class="status" id="whois-status" role="status" aria-live="polite"></p>
+      </form>
+      <div class="results" id="whois-results"></div>
+    </section>
+    <aside class="block cta" aria-label="WHOIS Domain Lookup on Apify">
+      <p class="cmt">// run it at scale</p>
+      <h2>WHOIS Domain Lookup on Apify</h2>
+      <p>The same job runs as <strong>WHOIS Domain Lookup</strong> in Apify Store when one browser tab is not enough.</p>
+      <ul><li>Thousands of domains, URLs or e-mail addresses per run, one row each</li><li>RDAP with a WHOIS fallback for .de, .eu, .it, .jp and other registries without RDAP</li><li>Registrar, creation and expiry dates, domain age, status codes, nameservers and DNSSEC</li><li>Scheduled runs that return only changed domains; API and CSV, Excel or JSON export</li></ul>
+      <p class="price">From <b>$1.00</b> per 1,000 domains, pay only for results. Apify's free plan includes $5 of monthly credit.</p>
+      <div class="cta-row"><a class="btn" data-actor="whois-domain-lookup" data-campaign="rdap-whois-lookup" href="https://apify.com/deriverge/whois-domain-lookup?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=rdap-whois-lookup" target="_blank" rel="noopener">Open WHOIS Domain Lookup on Apify &rarr;</a></div>
+      <p class="more">Also: <a class="" data-actor="domain-whois-dns-lookup" data-campaign="rdap-whois-lookup" href="https://apify.com/deriverge/domain-whois-dns-lookup?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=rdap-whois-lookup" target="_blank" rel="noopener">Domain WHOIS and DNS Lookup</a> (from $1.00 per 1,000 domains)</p>
+    </aside>
+    <section class="block" aria-labelledby="h-rdap">
+      <p class="cmt">// how it works</p>
+      <h2 id="h-rdap" class="h2">RDAP, the successor of WHOIS</h2>
+      <div class="prose">
+        <p><strong>RDAP</strong> (Registration Data Access Protocol) is the structured, JSON based replacement for the old text WHOIS service. ICANN requires it from every generic top-level domain, and many country registries offer it too. This page loads the official IANA list of RDAP servers, then your browser asks the registry of each domain directly.</p>
+        <p>It works for <code>.com</code>, <code>.net</code>, <code>.org</code>, <code>.io</code>, <code>.ai</code>, <code>.app</code>, <code>.dev</code>, <code>.xyz</code>, <code>.uk</code>, <code>.fr</code>, <code>.nl</code>, <code>.cz</code>, <code>.ch</code>, <code>.us</code>, <code>.ca</code>, <code>.au</code>, <code>.br</code> and more than a thousand other extensions. Registries without public RDAP, such as <code>.eu</code>, <code>.it</code>, <code>.es</code>, <code>.se</code>, <code>.at</code>, <code>.jp</code>, <code>.co</code> and <code>.me</code>, and <code>.de</code>, whose RDAP server refuses requests from web pages, need the classic WHOIS service, which the Apify actor uses.</p>
+        <p><strong>No personal data.</strong> The page reads only the registrar, dates, status codes, nameservers and DNSSEC. Registrant, administrative and technical contacts are never read or displayed, even where a registry publishes them.</p>
+      </div>
+      <h3 class="h3">Domain status codes explained</h3>
+      <div class="tbl-wrap"><table class="tbl tbl--fit"><thead><tr><th>Status</th><th>Meaning</th></tr></thead><tbody><tr><td class="k">clientTransferProhibited</td><td>The registrar locked transfers to another registrar. Normal for most domains; it protects against hijacking.</td></tr><tr><td class="k">serverTransferProhibited</td><td>The registry locked transfers, often for high-value domains or during a dispute.</td></tr><tr><td class="k">clientDeleteProhibited, clientUpdateProhibited</td><td>The registrar blocked deletion or changes. Also a normal protection.</td></tr><tr><td class="k">clientHold, serverHold</td><td>The domain is not published in DNS, so websites and e-mail on it stop working. Often unpaid renewal or a legal issue.</td></tr><tr><td class="k">autoRenewPeriod</td><td>The registry renewed the domain automatically and the registrar can still cancel the renewal.</td></tr><tr><td class="k">redemptionPeriod</td><td>The domain expired and was deleted by the registrar. The holder can still restore it, usually for a fee.</td></tr><tr><td class="k">pendingDelete</td><td>The domain will be released within days. After that, anyone can register it.</td></tr></tbody></table></div>
+    </section>
+    <section class="block" aria-labelledby="h-faq">
+      <p class="cmt">// questions</p>
+      <h2 id="h-faq" class="h2">Frequently asked questions</h2>
+<div class="faq">
+<details><summary>What is the difference between RDAP and WHOIS?</summary><div class="a"><p>Both return the registration record of a domain. WHOIS is plain text in a different layout for every registry, over its own network port. RDAP uses HTTPS and JSON with fixed field names, so dates, status codes and nameservers mean the same thing everywhere.</p></div></details>
+<details><summary>How do I find when a domain expires?</summary><div class="a"><p>Enter it above and read <strong>Expires</strong>. The date comes from the registry, so it reflects the last renewal the registrar reported. A domain past its date can still be in the auto-renew grace period.</p></div></details>
+<details><summary>Why is the owner of the domain not shown?</summary><div class="a"><p>Since GDPR most registries hide the registrant, and this page never shows contact data even where it is published. To reach an owner, use the registrar's contact form or the abuse address of the registrar.</p></div></details>
+<details><summary>Why does my .de, .eu or .co domain not work here?</summary><div class="a"><p>These registries either have no public RDAP server or block requests made from web pages. The WHOIS Domain Lookup actor on Apify falls back to WHOIS for them.</p></div></details>
+<details><summary>How old is a domain?</summary><div class="a"><p>The <strong>Created</strong> line shows the registration date and the age. If a domain was deleted and registered again, the date is the new registration, not the first one ever.</p></div></details>
+<details><summary>Can I monitor expiry dates of many domains?</summary><div class="a"><p>Yes, with the Apify actor: schedule it on your list and keep only the domains whose registrar, status, nameservers or expiry changed, or filter domains expiring within a number of days.</p></div></details>
+</div>
+    </section>
+    <section class="block" aria-labelledby="h-more-tools">
+      <p class="cmt">// more free tools</p>
+      <h2 id="h-more-tools" class="h2">More free tools</h2>
+      <ul class="linklist"><li><a href="/tools/bulk-dns-lookup/">Bulk DNS lookup</a><span>A, MX, TXT, NS, CAA for 20 domains</span></li><li><a href="/tools/domain-availability-checker/">Domain availability checker</a><span>20 names across TLDs</span></li><li><a href="/tools/wayback-machine-snapshots/">Wayback Machine snapshot finder</a><span>first, latest and closest capture</span></li><li><a href="/tools/phone-number-validator/">Phone number validator</a><span>50 numbers, E.164 and type</span></li><li><a href="/tools/companies-using-ats/">Which ATS do companies use?</a><span>14 systems compared</span></li></ul>
+    </section>
+    <section class="block block--last">
+<footer class="site-foot">
+  <p>Free tools by <a href="/">deriverge s.r.o.</a>, a software studio in the Czech Republic. Our data actors are in <a data-actor="" data-campaign="rdap-whois-lookup" href="https://apify.com/deriverge?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=rdap-whois-lookup" target="_blank" rel="noopener">Apify Store</a>.</p>
+  <p>Questions or a company listed by mistake: <a href="mailto:info@deriverge.com">info@deriverge.com</a>. The tools are provided as is, without warranty.</p>
+</footer>
+    </section>
+    <p class="foot punc" translate="no">&lt;/html&gt;</p>
+  </div>
+</main>
+<script src="/tools/config.js"></script>
+<script src="/tools/common.js"></script>
+<script src="/tools/js/rdap-core.js" defer></script>
+<script src="/tools/js/whois.js" defer></script>
+</body>
+</html>

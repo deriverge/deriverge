@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wayback Machine Snapshot Finder: First and Latest Capture</title>
+<meta name="description" content="Find the first, latest and closest-to-date Wayback Machine snapshots of up to 20 URLs, with direct links to every archived copy. Free, in your browser.">
+<link rel="canonical" href="https://deriverge.com/tools/wayback-machine-snapshots/">
+<meta name="robots" content="index, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300..800;1,300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/tools/tools.css">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="deriverge">
+<meta property="og:title" content="Wayback Machine Snapshot Finder: First and Latest Capture">
+<meta property="og:description" content="Find the first, latest and closest-to-date Wayback Machine snapshots of up to 20 URLs, with direct links to every archived copy. Free, in your browser.">
+<meta property="og:url" content="https://deriverge.com/tools/wayback-machine-snapshots/">
+<meta property="og:image" content="https://raw.githubusercontent.com/deriverge/deriverge/main/pictures/deriverge_logo-long.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "WebApplication",
+ "name": "Wayback Machine snapshot finder",
+ "url": "https://deriverge.com/tools/wayback-machine-snapshots/",
+ "description": "Find the first, latest and closest-to-date Wayback Machine snapshots of up to 20 URLs, with direct links to every archived copy. Free, in your browser.",
+ "applicationCategory": "UtilitiesApplication",
+ "operatingSystem": "Any (runs in a web browser)",
+ "browserRequirements": "Requires JavaScript",
+ "isAccessibleForFree": true,
+ "offers": {
+  "@type": "Offer",
+  "price": "0",
+  "priceCurrency": "USD"
+ },
+ "publisher": {
+  "@type": "Organization",
+  "name": "deriverge s.r.o.",
+  "url": "https://deriverge.com/"
+ }
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "How do I find when a website was first archived?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Enter the domain above. First capture shows the date of the oldest snapshot when the Availability API reports it; otherwise open first capture takes you to the oldest capture in the Wayback Machine, where the date is in the address and the toolbar."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How do I see a website as it looked on a specific date?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Pick the date in closest to date. The table links the snapshot nearest to that day; the Wayback Machine may pick a capture a few days or months away when nothing was saved on that day."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Why is there no date for a page that is archived?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "The Availability API answers from a separate index, skips captures that were redirects or errors and is sometimes slow to answer at all. The links in the table still open the right capture, and the calendar shows every capture the Wayback Machine has."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How do I list every archived page of a domain?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "The all URLs link opens that list in the Wayback Machine. To get it as data, with first and last capture per URL, use Wayback Machine Scraper on Apify."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How many snapshots does a site have per year?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "The calendar view in the Wayback Machine shows it visually. As numbers, run Wayback Machine Scraper with collapse set to year or month."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Is this tool free?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes. It runs in your browser against the Internet Archive's public API. Consider supporting the Internet Archive, which keeps the Wayback Machine running."
+   }
+  }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "deriverge",
+   "item": "https://deriverge.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Tools",
+   "item": "https://deriverge.com/tools/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 3,
+   "name": "Wayback Machine snapshot finder",
+   "item": "https://deriverge.com/tools/wayback-machine-snapshots/"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<nav class="topbar">
+  <a class="tab" href="/tools/" translate="no">tools/wayback-machine-snapshots.js</a>
+  <div class="crumbs"><a href="/">deriverge</a><span class="punc">/</span><a href="/tools/">tools</a></div>
+</nav>
+<main class="file wide">
+  <div class="gutter" aria-hidden="true"></div>
+  <div class="source">
+    <header class="hero hero--tool">
+      <p class="cmt">// free tool · runs in your browser</p>
+      <h1 class="h1-tool">Wayback Machine snapshot finder</h1>
+      <p class="lede">See when a page or domain was first saved by the Internet Archive, its most recent capture and the capture closest to a date you choose, for up to 20 URLs at once, with direct links to every archived copy.</p>
+    </header>
+    <section class="block block--tight" aria-label="Wayback Machine snapshot finder">
+      <form class="panel" id="wb-form" novalidate>
+        <div class="field">
+          <label class="label" for="wb-urls"><span class="key">urls</span>: pages or domains, one per line, up to 20</label>
+          <textarea id="wb-urls" name="urls" spellcheck="false" autocapitalize="off" placeholder="example.com&#10;nytimes.com&#10;https://www.apple.com/iphone/"></textarea>
+        </div>
+        <div class="field" style="max-width:260px">
+          <label class="label" for="wb-date"><span class="key">closest to date</span> (optional)</label>
+          <input type="date" id="wb-date" name="date" min="1996-01-01">
+        </div>
+        <div class="actions"><button type="submit" class="btn">Find snapshots</button><button type="button" class="btn btn--ghost" id="wb-csv" hidden>Download CSV</button></div>
+        <p class="status" id="wb-status" role="status" aria-live="polite"></p>
+      </form>
+      <div class="results" id="wb-results"></div>
+    </section>
+    <aside class="block cta" aria-label="Wayback Machine Scraper on Apify">
+      <p class="cmt">// run it at scale</p>
+      <h2>Wayback Machine Scraper on Apify</h2>
+      <p>The same job runs as <strong>Wayback Machine Scraper</strong> in Apify Store when one browser tab is not enough.</p>
+      <ul><li>Every capture of a page, a path or a whole domain from the CDX API, with status, MIME type and content digest</li><li>Every archived URL of a domain with its first and last capture date</li><li>One capture per day, month or year to count snapshots over time, or the closest capture to a date</li><li>Optional page text of old captures; schedules, API and CSV, Excel or JSON export</li></ul>
+      <p class="price">From <b>$0.40</b> per 1,000 snapshots, pay only for results. Apify's free plan includes $5 of monthly credit.</p>
+      <div class="cta-row"><a class="btn" data-actor="wayback-machine-scraper" data-campaign="wayback-machine-snapshots" href="https://apify.com/deriverge/wayback-machine-scraper?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=wayback-machine-snapshots" target="_blank" rel="noopener">Open Wayback Machine Scraper on Apify &rarr;</a></div>
+      
+    </aside>
+    <section class="block" aria-labelledby="h-how">
+      <p class="cmt">// how it works</p>
+      <h2 id="h-how" class="h2">How the snapshot finder works</h2>
+      <div class="prose">
+        <p>The Internet Archive's <strong>Wayback Machine</strong> has saved copies of web pages since 1996. For every URL this page asks the archive's <strong>Availability API</strong> three questions: the capture closest to 1 January 1996 (the first one), the capture closest to today (the latest one) and, if you pick a date, the capture closest to that date.</p>
+        <p>The Availability API returns one capture per question and only captures that loaded successfully, and it often reports nothing even for well archived pages. When it does, the cell links straight to the Wayback Machine, which jumps to the first, latest or closest capture itself. <strong>calendar</strong> shows all captures by day and <strong>all URLs</strong> lists every archived address under the domain.</p>
+        <p><strong>Why no count of captures per year here?</strong> Counts and full lists come from the archive's CDX API, which does not accept requests from other websites' pages, so a browser tool cannot read it. Wayback Machine Scraper on Apify reads it on the server and returns every capture, or one per day, month or year.</p>
+      </div>
+    </section>
+    <section class="block" aria-labelledby="h-faq">
+      <p class="cmt">// questions</p>
+      <h2 id="h-faq" class="h2">Frequently asked questions</h2>
+<div class="faq">
+<details><summary>How do I find when a website was first archived?</summary><div class="a"><p>Enter the domain above. <strong>First capture</strong> shows the date of the oldest snapshot when the Availability API reports it; otherwise <strong>open first capture</strong> takes you to the oldest capture in the Wayback Machine, where the date is in the address and the toolbar.</p></div></details>
+<details><summary>How do I see a website as it looked on a specific date?</summary><div class="a"><p>Pick the date in <strong>closest to date</strong>. The table links the snapshot nearest to that day; the Wayback Machine may pick a capture a few days or months away when nothing was saved on that day.</p></div></details>
+<details><summary>Why is there no date for a page that is archived?</summary><div class="a"><p>The Availability API answers from a separate index, skips captures that were redirects or errors and is sometimes slow to answer at all. The links in the table still open the right capture, and the <strong>calendar</strong> shows every capture the Wayback Machine has.</p></div></details>
+<details><summary>How do I list every archived page of a domain?</summary><div class="a"><p>The <strong>all URLs</strong> link opens that list in the Wayback Machine. To get it as data, with first and last capture per URL, use Wayback Machine Scraper on Apify.</p></div></details>
+<details><summary>How many snapshots does a site have per year?</summary><div class="a"><p>The calendar view in the Wayback Machine shows it visually. As numbers, run Wayback Machine Scraper with collapse set to year or month.</p></div></details>
+<details><summary>Is this tool free?</summary><div class="a"><p>Yes. It runs in your browser against the Internet Archive's public API. Consider supporting the Internet Archive, which keeps the Wayback Machine running.</p></div></details>
+</div>
+    </section>
+    <section class="block" aria-labelledby="h-more-tools">
+      <p class="cmt">// more free tools</p>
+      <h2 id="h-more-tools" class="h2">More free tools</h2>
+      <ul class="linklist"><li><a href="/tools/bulk-dns-lookup/">Bulk DNS lookup</a><span>A, MX, TXT, NS, CAA for 20 domains</span></li><li><a href="/tools/rdap-whois-lookup/">RDAP WHOIS lookup</a><span>registrar, expiry, nameservers</span></li><li><a href="/tools/domain-availability-checker/">Domain availability checker</a><span>20 names across TLDs</span></li><li><a href="/tools/phone-number-validator/">Phone number validator</a><span>50 numbers, E.164 and type</span></li><li><a href="/tools/companies-using-ats/">Which ATS do companies use?</a><span>14 systems compared</span></li></ul>
+    </section>
+    <section class="block block--last">
+<footer class="site-foot">
+  <p>Free tools by <a href="/">deriverge s.r.o.</a>, a software studio in the Czech Republic. Our data actors are in <a data-actor="" data-campaign="wayback-machine-snapshots" href="https://apify.com/deriverge?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=wayback-machine-snapshots" target="_blank" rel="noopener">Apify Store</a>.</p>
+  <p>Questions or a company listed by mistake: <a href="mailto:info@deriverge.com">info@deriverge.com</a>. The tools are provided as is, without warranty.</p>
+</footer>
+    </section>
+    <p class="foot punc" translate="no">&lt;/html&gt;</p>
+  </div>
+</main>
+<script src="/tools/config.js"></script>
+<script src="/tools/common.js"></script>
+<script src="/tools/js/wayback.js" defer></script>
+</body>
+</html>

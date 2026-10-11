@@ -1,0 +1,89 @@
+{
+ "date": "2026-10-11",
+ "pages": [
+  [
+   "/tools/bulk-dns-lookup/",
+   "Bulk DNS Lookup: A, MX, TXT, NS and CAA for 20 Domains"
+  ],
+  [
+   "/tools/rdap-whois-lookup/",
+   "RDAP WHOIS Lookup: Registrar, Expiry Date and Nameservers"
+  ],
+  [
+   "/tools/domain-availability-checker/",
+   "Bulk Domain Availability Checker: 20 Names Across TLDs"
+  ],
+  [
+   "/tools/wayback-machine-snapshots/",
+   "Wayback Machine Snapshot Finder: First and Latest Capture"
+  ],
+  [
+   "/tools/phone-number-validator/",
+   "Bulk Phone Number Validator: E.164 Format, Type and Country"
+  ],
+  [
+   "/tools/companies-using-bamboohr/",
+   "Companies Using BambooHR: List of 6,198 Employers"
+  ],
+  [
+   "/tools/companies-using-greenhouse/",
+   "Companies Using Greenhouse: List of 5,536 Employers"
+  ],
+  [
+   "/tools/companies-using-workable/",
+   "Companies Using Workable: List of 5,221 Employers"
+  ],
+  [
+   "/tools/companies-using-ashby/",
+   "Companies Using Ashby: List of 3,431 Employers"
+  ],
+  [
+   "/tools/companies-using-smartrecruiters/",
+   "Companies Using SmartRecruiters: List of 3,158 Employers"
+  ],
+  [
+   "/tools/companies-using-workday/",
+   "Companies Using Workday: List of 2,303 Employers"
+  ],
+  [
+   "/tools/companies-using-personio/",
+   "Companies Using Personio: List of 2,060 Employers"
+  ],
+  [
+   "/tools/companies-using-breezy/",
+   "Companies Using Breezy HR: List of 2,007 Employers"
+  ],
+  [
+   "/tools/companies-using-icims/",
+   "Companies Using iCIMS: List of 1,974 Employers"
+  ],
+  [
+   "/tools/companies-using-lever/",
+   "Companies Using Lever: List of 1,710 Employers"
+  ],
+  [
+   "/tools/companies-using-rippling/",
+   "Companies Using Rippling: List of 1,394 Employers"
+  ],
+  [
+   "/tools/companies-using-teamtailor/",
+   "Companies Using Teamtailor: List of 1,354 Employers"
+  ],
+  [
+   "/tools/companies-using-oracle/",
+   "Companies Using Oracle Recruiting Cloud: List of 903 Employers"
+  ],
+  [
+   "/tools/companies-using-recruitee/",
+   "Companies Using Recruitee: List of 874 Employers"
+  ],
+  [
+   "/tools/companies-using-ats/",
+   "Which Companies Use Which ATS: 38,123 Employers, 14 Systems"
+  ],
+  [
+   "/tools/",
+   "Free Data Tools: DNS, WHOIS, Domains, Wayback, Phone, ATS"
+  ]
+ ]
+}

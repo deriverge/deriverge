@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bulk DNS Lookup: A, MX, TXT, NS and CAA for 20 Domains</title>
+<meta name="description" content="Free bulk DNS lookup: A, AAAA, MX, TXT, NS, CNAME, CAA, SOA and DMARC records for up to 20 domains at once, in your browser over DNS over HTTPS.">
+<link rel="canonical" href="https://deriverge.com/tools/bulk-dns-lookup/">
+<meta name="robots" content="index, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300..800;1,300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/tools/tools.css">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="deriverge">
+<meta property="og:title" content="Bulk DNS Lookup: A, MX, TXT, NS and CAA for 20 Domains">
+<meta property="og:description" content="Free bulk DNS lookup: A, AAAA, MX, TXT, NS, CNAME, CAA, SOA and DMARC records for up to 20 domains at once, in your browser over DNS over HTTPS.">
+<meta property="og:url" content="https://deriverge.com/tools/bulk-dns-lookup/">
+<meta property="og:image" content="https://raw.githubusercontent.com/deriverge/deriverge/main/pictures/deriverge_logo-long.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "WebApplication",
+ "name": "Bulk DNS lookup",
+ "url": "https://deriverge.com/tools/bulk-dns-lookup/",
+ "description": "Free bulk DNS lookup: A, AAAA, MX, TXT, NS, CNAME, CAA, SOA and DMARC records for up to 20 domains at once, in your browser over DNS over HTTPS.",
+ "applicationCategory": "DeveloperApplication",
+ "operatingSystem": "Any (runs in a web browser)",
+ "browserRequirements": "Requires JavaScript",
+ "isAccessibleForFree": true,
+ "offers": {
+  "@type": "Offer",
+  "price": "0",
+  "priceCurrency": "USD"
+ },
+ "publisher": {
+  "@type": "Organization",
+  "name": "deriverge s.r.o.",
+  "url": "https://deriverge.com/"
+ }
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "How do I check the DNS records of many domains at once?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Paste up to 20 domains above, one per line, choose the record types and press Look up records. Every domain gets its own table and Download CSV saves all of them in one file. For hundreds or thousands of domains, use DNS Records Lookup on Apify, which returns one row per hostname."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What does NXDOMAIN mean?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "The resolver says the name does not exist in DNS. Either the domain is not registered, its registration has lapsed, or the subdomain was never created."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Why do I still see an old record after changing it?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Resolvers keep each answer for its TTL. Until that time runs out they may return the old value. Try the other resolver: Cloudflare and Google cache independently, so one of them may already have the new record."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Is the list of domains sent to deriverge?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "No. This page has no server behind it. Your browser sends each question directly to Cloudflare (cloudflare-dns.com) or Google (dns.google) over HTTPS."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How do I find the mail provider of a domain?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Look at the MX records: aspmx.l.google.com means Google Workspace, *.mail.protection.outlook.com means Microsoft 365. DNS Records Lookup on Apify names the provider for you in a mailProvider field, next to the SPF record and the DMARC policy."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Can I check DNS records on a schedule?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes, with the Apify actor. Run it daily or hourly on the same list and keep only the domains whose records changed, then send them to a spreadsheet, a webhook or Slack."
+   }
+  }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "deriverge",
+   "item": "https://deriverge.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Tools",
+   "item": "https://deriverge.com/tools/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 3,
+   "name": "Bulk DNS lookup",
+   "item": "https://deriverge.com/tools/bulk-dns-lookup/"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<nav class="topbar">
+  <a class="tab" href="/tools/" translate="no">tools/bulk-dns-lookup.js</a>
+  <div class="crumbs"><a href="/">deriverge</a><span class="punc">/</span><a href="/tools/">tools</a></div>
+</nav>
+<main class="file wide">
+  <div class="gutter" aria-hidden="true"></div>
+  <div class="source">
+    <header class="hero hero--tool">
+      <p class="cmt">// free tool · runs in your browser</p>
+      <h1 class="h1-tool">Bulk DNS lookup</h1>
+      <p class="lede">Check the DNS records of up to 20 domains at once: A, AAAA, MX, TXT, NS, CNAME, CAA and SOA, plus the DMARC policy. Queries go from your browser straight to Cloudflare or Google over DNS over HTTPS.</p>
+    </header>
+    <section class="block block--tight" aria-label="DNS lookup tool">
+      <form class="panel" id="dns-form" novalidate>
+        <div class="field">
+          <label class="label" for="dns-domains"><span class="key">domains</span>: one per line, up to 20 (URLs and e-mail addresses work too)</label>
+          <textarea id="dns-domains" name="domains" spellcheck="false" autocapitalize="off" placeholder="example.com&#10;github.com&#10;https://www.wikipedia.org/wiki/DNS"></textarea>
+        </div>
+        <div class="field"><span class="label"><span class="key">records</span></span><div class="checks"><label class="check"><input type="checkbox" name="type" value="A" checked> A</label><label class="check"><input type="checkbox" name="type" value="AAAA" checked> AAAA</label><label class="check"><input type="checkbox" name="type" value="CNAME" checked> CNAME</label><label class="check"><input type="checkbox" name="type" value="MX" checked> MX</label><label class="check"><input type="checkbox" name="type" value="NS" checked> NS</label><label class="check"><input type="checkbox" name="type" value="TXT" checked> TXT</label><label class="check"><input type="checkbox" name="type" value="CAA" checked> CAA</label><label class="check"><input type="checkbox" name="type" value="SOA" checked> SOA</label><label class="check"><input type="checkbox" name="type" value="DMARC" checked> DMARC</label></div></div>
+        <div class="field" style="max-width:320px">
+          <label class="label" for="dns-resolver"><span class="key">resolver</span></label>
+          <select id="dns-resolver" name="resolver"><option value="cloudflare">Cloudflare (1.1.1.1)</option><option value="google">Google Public DNS (8.8.8.8)</option></select>
+        </div>
+        <div class="actions"><button type="submit" class="btn">Look up records</button><button type="button" class="btn btn--ghost" id="dns-csv" hidden>Download CSV</button><span class="hint">Your list goes straight from this page to the resolver. We do not see it.</span></div>
+        <p class="status" id="dns-status" role="status" aria-live="polite"></p>
+      </form>
+      <div class="results" id="dns-results"></div>
+    </section>
+    <aside class="block cta" aria-label="DNS Records Lookup on Apify">
+      <p class="cmt">// run it at scale</p>
+      <h2>DNS Records Lookup on Apify</h2>
+      <p>The same job runs as <strong>DNS Records Lookup</strong> in Apify Store when one browser tab is not enough.</p>
+      <ul><li>Thousands of hostnames per run, one clean row each: A, AAAA, CNAME, MX, NS, TXT, SOA and CAA</li><li>SPF record, DMARC policy and the mail provider read from MX (Google Workspace, Microsoft 365, Zoho and others)</li><li>Scheduled runs that return only the domains whose records changed</li><li>API, webhooks and integrations; export to CSV, Excel or JSON</li></ul>
+      <p class="price">From <b>$0.80</b> per 1,000 hostnames, pay only for results. Apify's free plan includes $5 of monthly credit.</p>
+      <div class="cta-row"><a class="btn" data-actor="dns-records-lookup" data-campaign="bulk-dns-lookup" href="https://apify.com/deriverge/dns-records-lookup?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=bulk-dns-lookup" target="_blank" rel="noopener">Open DNS Records Lookup on Apify &rarr;</a></div>
+      <p class="more">Also: <a class="" data-actor="domain-whois-dns-lookup" data-campaign="bulk-dns-lookup" href="https://apify.com/deriverge/domain-whois-dns-lookup?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=bulk-dns-lookup" target="_blank" rel="noopener">Domain WHOIS and DNS Lookup</a> (from $1.00 per 1,000 domains)</p>
+    </aside>
+    <section class="block" aria-labelledby="h-records">
+      <p class="cmt">// what the records mean</p>
+      <h2 id="h-records" class="h2">What each record type tells you</h2>
+      <div class="tbl-wrap"><table class="tbl tbl--fit"><thead><tr><th>Record</th><th>What it holds</th></tr></thead><tbody>
+        <tr><td class="k">A, AAAA</td><td>The IPv4 and IPv6 addresses the name points to, so a browser knows which server to contact.</td></tr>
+        <tr><td class="k">CNAME</td><td>An alias: the name is another name in disguise, for example <code>www</code> pointing to a CDN host. A CNAME cannot sit on the bare domain, so <code>example.com</code> usually has none.</td></tr>
+        <tr><td class="k">MX</td><td>The mail servers for the domain, lowest priority number first. No MX usually means the domain does not receive e-mail.</td></tr>
+        <tr><td class="k">NS</td><td>The nameservers that hold the domain's records. They show which DNS provider the domain uses.</td></tr>
+        <tr><td class="k">TXT</td><td>Free text: the SPF record (<code>v=spf1</code>) listing who may send mail for the domain, and verification codes for Google, Microsoft, Atlassian and others.</td></tr>
+        <tr><td class="k">CAA</td><td>Which certificate authorities may issue TLS certificates for the domain. No CAA record means any authority may.</td></tr>
+        <tr><td class="k">SOA</td><td>The zone's primary nameserver, the administrator mailbox, the serial number and the refresh timers.</td></tr>
+        <tr><td class="k">DMARC</td><td>A TXT record at <code>_dmarc.example.com</code> that tells receivers what to do with mail failing SPF and DKIM: <code>p=none</code>, <code>quarantine</code> or <code>reject</code>.</td></tr>
+      </tbody></table></div>
+      <div class="prose" style="margin-top:22px">
+        <p>The lookup asks a public resolver over <strong>DNS over HTTPS</strong>, the same answers <code>dig</code> or <code>nslookup</code> would give from that resolver. Answers are cached for the TTL shown, in seconds, so a record you changed a minute ago may still show its old value until the TTL runs out.</p>
+        <p><code>www.example.com</code> and <code>example.com</code> are separate names with separate records. Enter both if you need both.</p>
+      </div>
+    </section>
+    <section class="block" aria-labelledby="h-faq">
+      <p class="cmt">// questions</p>
+      <h2 id="h-faq" class="h2">Frequently asked questions</h2>
+<div class="faq">
+<details><summary>How do I check the DNS records of many domains at once?</summary><div class="a"><p>Paste up to 20 domains above, one per line, choose the record types and press <strong>Look up records</strong>. Every domain gets its own table and <strong>Download CSV</strong> saves all of them in one file. For hundreds or thousands of domains, use DNS Records Lookup on Apify, which returns one row per hostname.</p></div></details>
+<details><summary>What does NXDOMAIN mean?</summary><div class="a"><p>The resolver says the name does not exist in DNS. Either the domain is not registered, its registration has lapsed, or the subdomain was never created.</p></div></details>
+<details><summary>Why do I still see an old record after changing it?</summary><div class="a"><p>Resolvers keep each answer for its TTL. Until that time runs out they may return the old value. Try the other resolver: Cloudflare and Google cache independently, so one of them may already have the new record.</p></div></details>
+<details><summary>Is the list of domains sent to deriverge?</summary><div class="a"><p>No. This page has no server behind it. Your browser sends each question directly to Cloudflare (<code>cloudflare-dns.com</code>) or Google (<code>dns.google</code>) over HTTPS.</p></div></details>
+<details><summary>How do I find the mail provider of a domain?</summary><div class="a"><p>Look at the MX records: <code>aspmx.l.google.com</code> means Google Workspace, <code>*.mail.protection.outlook.com</code> means Microsoft 365. DNS Records Lookup on Apify names the provider for you in a <code>mailProvider</code> field, next to the SPF record and the DMARC policy.</p></div></details>
+<details><summary>Can I check DNS records on a schedule?</summary><div class="a"><p>Yes, with the Apify actor. Run it daily or hourly on the same list and keep only the domains whose records changed, then send them to a spreadsheet, a webhook or Slack.</p></div></details>
+</div>
+    </section>
+    <section class="block" aria-labelledby="h-more-tools">
+      <p class="cmt">// more free tools</p>
+      <h2 id="h-more-tools" class="h2">More free tools</h2>
+      <ul class="linklist"><li><a href="/tools/rdap-whois-lookup/">RDAP WHOIS lookup</a><span>registrar, expiry, nameservers</span></li><li><a href="/tools/domain-availability-checker/">Domain availability checker</a><span>20 names across TLDs</span></li><li><a href="/tools/wayback-machine-snapshots/">Wayback Machine snapshot finder</a><span>first, latest and closest capture</span></li><li><a href="/tools/phone-number-validator/">Phone number validator</a><span>50 numbers, E.164 and type</span></li><li><a href="/tools/companies-using-ats/">Which ATS do companies use?</a><span>14 systems compared</span></li></ul>
+    </section>
+    <section class="block block--last">
+<footer class="site-foot">
+  <p>Free tools by <a href="/">deriverge s.r.o.</a>, a software studio in the Czech Republic. Our data actors are in <a data-actor="" data-campaign="bulk-dns-lookup" href="https://apify.com/deriverge?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=bulk-dns-lookup" target="_blank" rel="noopener">Apify Store</a>.</p>
+  <p>Questions or a company listed by mistake: <a href="mailto:info@deriverge.com">info@deriverge.com</a>. The tools are provided as is, without warranty.</p>
+</footer>
+    </section>
+    <p class="foot punc" translate="no">&lt;/html&gt;</p>
+  </div>
+</main>
+<script src="/tools/config.js"></script>
+<script src="/tools/common.js"></script>
+<script src="/tools/js/dns.js" defer></script>
+</body>
+</html>

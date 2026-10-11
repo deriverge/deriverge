@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bulk Domain Availability Checker: 20 Names Across TLDs</title>
+<meta name="description" content="Check up to 20 domain names across .com, .io, .ai, .dev and 20 more extensions at once, straight from the registries over RDAP. Free, no signup.">
+<link rel="canonical" href="https://deriverge.com/tools/domain-availability-checker/">
+<meta name="robots" content="index, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300..800;1,300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/tools/tools.css">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="deriverge">
+<meta property="og:title" content="Bulk Domain Availability Checker: 20 Names Across TLDs">
+<meta property="og:description" content="Check up to 20 domain names across .com, .io, .ai, .dev and 20 more extensions at once, straight from the registries over RDAP. Free, no signup.">
+<meta property="og:url" content="https://deriverge.com/tools/domain-availability-checker/">
+<meta property="og:image" content="https://raw.githubusercontent.com/deriverge/deriverge/main/pictures/deriverge_logo-long.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "WebApplication",
+ "name": "Bulk domain availability checker",
+ "url": "https://deriverge.com/tools/domain-availability-checker/",
+ "description": "Check up to 20 domain names across .com, .io, .ai, .dev and 20 more extensions at once, straight from the registries over RDAP. Free, no signup.",
+ "applicationCategory": "DeveloperApplication",
+ "operatingSystem": "Any (runs in a web browser)",
+ "browserRequirements": "Requires JavaScript",
+ "isAccessibleForFree": true,
+ "offers": {
+  "@type": "Offer",
+  "price": "0",
+  "priceCurrency": "USD"
+ },
+ "publisher": {
+  "@type": "Organization",
+  "name": "deriverge s.r.o.",
+  "url": "https://deriverge.com/"
+ }
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "How does the checker know if a domain is available?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "It asks the registry that runs the extension, for example Verisign for .com, over RDAP. A 404 answer means there is no registration record for the name."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Can I check one name across many extensions?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes. Type the bare name, such as brightpath, and tick the extensions you want. Each name is paired with every ticked extension, up to 200 checks in one go."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Is it safe to search for my idea here?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "The page has no server of its own. Each question goes from your browser directly to the registry, so no reseller sees your list. We cannot see it either."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Does it show prices or premium domains?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "No. Registries do not publish prices over RDAP, and premium names look like any other unregistered name. Check the price at a registrar."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Why are .co, .me and .eu missing?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Their registries have no public RDAP server, so a web page cannot ask them. Enter a full domain such as name.eu to get a DNS based hint, or use the Apify actor, which asks WHOIS servers too."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How can I check thousands of names?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Use Domain Availability Checker on Apify: a list of names times a list of extensions, one row per combination, with the method that decided each answer."
+   }
+  }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "deriverge",
+   "item": "https://deriverge.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Tools",
+   "item": "https://deriverge.com/tools/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 3,
+   "name": "Bulk domain availability checker",
+   "item": "https://deriverge.com/tools/domain-availability-checker/"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<nav class="topbar">
+  <a class="tab" href="/tools/" translate="no">tools/domain-availability-checker.js</a>
+  <div class="crumbs"><a href="/">deriverge</a><span class="punc">/</span><a href="/tools/">tools</a></div>
+</nav>
+<main class="file wide">
+  <div class="gutter" aria-hidden="true"></div>
+  <div class="source">
+    <header class="hero hero--tool">
+      <p class="cmt">// free tool · runs in your browser</p>
+      <h1 class="h1-tool">Bulk domain availability checker</h1>
+      <p class="lede">Type up to 20 names, pick the extensions and see which domains are still unregistered. Every answer comes straight from the registry over RDAP, and your searches never pass through a reseller.</p>
+    </header>
+    <section class="block block--tight" aria-label="Domain availability checker">
+      <form class="panel" id="avail-form" novalidate>
+        <div class="field">
+          <label class="label" for="avail-names"><span class="key">names</span>: up to 20, one per line. A bare name is paired with every extension below; a full domain is checked as it is.</label>
+          <textarea id="avail-names" name="names" spellcheck="false" autocapitalize="off" placeholder="brightpath&#10;northwind labs&#10;mybrand.io"></textarea>
+        </div>
+        <div class="field"><span class="label"><span class="key">extensions</span></span><div class="checks"><label class="check"><input type="checkbox" name="tld" value="com" checked> .com</label><label class="check"><input type="checkbox" name="tld" value="net" checked> .net</label><label class="check"><input type="checkbox" name="tld" value="org" checked> .org</label><label class="check"><input type="checkbox" name="tld" value="io" checked> .io</label><label class="check"><input type="checkbox" name="tld" value="ai" checked> .ai</label><label class="check"><input type="checkbox" name="tld" value="app" checked> .app</label><label class="check"><input type="checkbox" name="tld" value="dev" checked> .dev</label><label class="check"><input type="checkbox" name="tld" value="xyz"> .xyz</label><label class="check"><input type="checkbox" name="tld" value="tech"> .tech</label><label class="check"><input type="checkbox" name="tld" value="online"> .online</label><label class="check"><input type="checkbox" name="tld" value="store"> .store</label><label class="check"><input type="checkbox" name="tld" value="site"> .site</label><label class="check"><input type="checkbox" name="tld" value="info"> .info</label><label class="check"><input type="checkbox" name="tld" value="biz"> .biz</label><label class="check"><input type="checkbox" name="tld" value="cloud"> .cloud</label><label class="check"><input type="checkbox" name="tld" value="us"> .us</label><label class="check"><input type="checkbox" name="tld" value="ca"> .ca</label><label class="check"><input type="checkbox" name="tld" value="uk"> .uk</label><label class="check"><input type="checkbox" name="tld" value="co.uk"> .co.uk</label><label class="check"><input type="checkbox" name="tld" value="com.au"> .com.au</label><label class="check"><input type="checkbox" name="tld" value="fr"> .fr</label><label class="check"><input type="checkbox" name="tld" value="nl"> .nl</label><label class="check"><input type="checkbox" name="tld" value="ch"> .ch</label><label class="check"><input type="checkbox" name="tld" value="cz"> .cz</label><label class="check"><input type="checkbox" name="tld" value="de"> .de</label></div></div>
+        <div class="actions"><button type="submit" class="btn">Check availability</button><button type="button" class="btn btn--ghost" id="avail-csv" hidden>Download CSV</button><label class="check"><input type="checkbox" id="avail-only-free"> show only available</label></div>
+        <p class="status" id="avail-status" role="status" aria-live="polite"></p>
+      </form>
+      <div class="results" id="avail-results"></div>
+    </section>
+    <aside class="block cta" aria-label="Domain Availability Checker on Apify">
+      <p class="cmt">// run it at scale</p>
+      <h2>Domain Availability Checker on Apify</h2>
+      <p>The same job runs as <strong>Domain Availability Checker</strong> in Apify Store when one browser tab is not enough.</p>
+      <ul><li>Thousands of name and extension combinations per run, one row each</li><li>RDAP plus WHOIS for registries without RDAP, such as .de, .eu and .it, with DNS as the last resort</li><li>Registrar, registration and expiry dates for names that are taken</li><li>Schedules to watch names you want, API and CSV, Excel or JSON export</li></ul>
+      <p class="price">From <b>$0.50</b> per 1,000 name checks, pay only for results. Apify's free plan includes $5 of monthly credit.</p>
+      <div class="cta-row"><a class="btn" data-actor="domain-availability-checker" data-campaign="domain-availability-checker" href="https://apify.com/deriverge/domain-availability-checker?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=domain-availability-checker" target="_blank" rel="noopener">Open Domain Availability Checker on Apify &rarr;</a></div>
+      <p class="more">Also: <a class="" data-actor="whois-domain-lookup" data-campaign="domain-availability-checker" href="https://apify.com/deriverge/whois-domain-lookup?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=domain-availability-checker" target="_blank" rel="noopener">WHOIS Domain Lookup</a> (from $1.00 per 1,000 domains)</p>
+    </aside>
+    <section class="block" aria-labelledby="h-caveat">
+      <p class="cmt">// read this before you buy</p>
+      <h2 id="h-caveat" class="h2">What &quot;likely available&quot; means</h2>
+      <div class="prose">
+        <p>Each check asks the registry of the extension over <strong>RDAP</strong>. When the registry answers <strong>404 Not Found</strong>, it has no registration record for the name, which almost always means you can register it. It is still not a guarantee:</p>
+        <ul>
+          <li>Registries reserve or block some names (brands, geographic names, short or offensive words). They may answer 404 and still refuse the registration.</li>
+          <li>Premium names are unregistered but sold at a higher price. RDAP does not show prices.</li>
+          <li>A name can be registered by someone else seconds after the check.</li>
+        </ul>
+        <p>A name shown as <strong>registered</strong> has a record at the registry; the table adds the expiry date and registrar where the registry shares them. For <code>.de</code> and other registries that do not answer web pages, the page falls back to DNS: <strong>no DNS, unconfirmed</strong> means the name has no nameservers, which is a good sign but not proof. Always confirm at a registrar before you rely on a name.</p>
+        <p>Your searches go from your browser to the registries and Cloudflare DNS. We do not see or store them.</p>
+      </div>
+    </section>
+    <section class="block" aria-labelledby="h-faq">
+      <p class="cmt">// questions</p>
+      <h2 id="h-faq" class="h2">Frequently asked questions</h2>
+<div class="faq">
+<details><summary>How does the checker know if a domain is available?</summary><div class="a"><p>It asks the registry that runs the extension, for example Verisign for <code>.com</code>, over RDAP. A 404 answer means there is no registration record for the name.</p></div></details>
+<details><summary>Can I check one name across many extensions?</summary><div class="a"><p>Yes. Type the bare name, such as <code>brightpath</code>, and tick the extensions you want. Each name is paired with every ticked extension, up to 200 checks in one go.</p></div></details>
+<details><summary>Is it safe to search for my idea here?</summary><div class="a"><p>The page has no server of its own. Each question goes from your browser directly to the registry, so no reseller sees your list. We cannot see it either.</p></div></details>
+<details><summary>Does it show prices or premium domains?</summary><div class="a"><p>No. Registries do not publish prices over RDAP, and premium names look like any other unregistered name. Check the price at a registrar.</p></div></details>
+<details><summary>Why are .co, .me and .eu missing?</summary><div class="a"><p>Their registries have no public RDAP server, so a web page cannot ask them. Enter a full domain such as <code>name.eu</code> to get a DNS based hint, or use the Apify actor, which asks WHOIS servers too.</p></div></details>
+<details><summary>How can I check thousands of names?</summary><div class="a"><p>Use Domain Availability Checker on Apify: a list of names times a list of extensions, one row per combination, with the method that decided each answer.</p></div></details>
+</div>
+    </section>
+    <section class="block" aria-labelledby="h-more-tools">
+      <p class="cmt">// more free tools</p>
+      <h2 id="h-more-tools" class="h2">More free tools</h2>
+      <ul class="linklist"><li><a href="/tools/bulk-dns-lookup/">Bulk DNS lookup</a><span>A, MX, TXT, NS, CAA for 20 domains</span></li><li><a href="/tools/rdap-whois-lookup/">RDAP WHOIS lookup</a><span>registrar, expiry, nameservers</span></li><li><a href="/tools/wayback-machine-snapshots/">Wayback Machine snapshot finder</a><span>first, latest and closest capture</span></li><li><a href="/tools/phone-number-validator/">Phone number validator</a><span>50 numbers, E.164 and type</span></li><li><a href="/tools/companies-using-ats/">Which ATS do companies use?</a><span>14 systems compared</span></li></ul>
+    </section>
+    <section class="block block--last">
+<footer class="site-foot">
+  <p>Free tools by <a href="/">deriverge s.r.o.</a>, a software studio in the Czech Republic. Our data actors are in <a data-actor="" data-campaign="domain-availability-checker" href="https://apify.com/deriverge?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=domain-availability-checker" target="_blank" rel="noopener">Apify Store</a>.</p>
+  <p>Questions or a company listed by mistake: <a href="mailto:info@deriverge.com">info@deriverge.com</a>. The tools are provided as is, without warranty.</p>
+</footer>
+    </section>
+    <p class="foot punc" translate="no">&lt;/html&gt;</p>
+  </div>
+</main>
+<script src="/tools/config.js"></script>
+<script src="/tools/common.js"></script>
+<script src="/tools/js/rdap-core.js" defer></script>
+<script src="/tools/js/availability.js" defer></script>
+</body>
+</html>

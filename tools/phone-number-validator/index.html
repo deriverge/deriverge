@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bulk Phone Number Validator: E.164 Format, Type and Country</title>
+<meta name="description" content="Validate up to 50 phone numbers at once: valid or not, E.164 and national format, country and line type (mobile, landline, toll free). Offline and free.">
+<link rel="canonical" href="https://deriverge.com/tools/phone-number-validator/">
+<meta name="robots" content="index, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300..800;1,300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/tools/tools.css">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="deriverge">
+<meta property="og:title" content="Bulk Phone Number Validator: E.164 Format, Type and Country">
+<meta property="og:description" content="Validate up to 50 phone numbers at once: valid or not, E.164 and national format, country and line type (mobile, landline, toll free). Offline and free.">
+<meta property="og:url" content="https://deriverge.com/tools/phone-number-validator/">
+<meta property="og:image" content="https://raw.githubusercontent.com/deriverge/deriverge/main/pictures/deriverge_logo-long.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "WebApplication",
+ "name": "Bulk phone number validator",
+ "url": "https://deriverge.com/tools/phone-number-validator/",
+ "description": "Validate up to 50 phone numbers at once: valid or not, E.164 and national format, country and line type (mobile, landline, toll free). Offline and free.",
+ "applicationCategory": "BusinessApplication",
+ "operatingSystem": "Any (runs in a web browser)",
+ "browserRequirements": "Requires JavaScript",
+ "isAccessibleForFree": true,
+ "offers": {
+  "@type": "Offer",
+  "price": "0",
+  "priceCurrency": "USD"
+ },
+ "publisher": {
+  "@type": "Organization",
+  "name": "deriverge s.r.o.",
+  "url": "https://deriverge.com/"
+ }
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "How do I validate a list of phone numbers?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Paste up to 50 numbers above, one per line, set the default country for numbers without a + code and press Validate numbers. Download CSV saves the results."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What is E.164 format?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "The international standard for writing phone numbers: +, country code, then the national number without the leading zero, up to 15 digits in total. 020 7946 0958 in the UK becomes +442079460958."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Does valid mean the number is in use?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "No. It means the number could exist: right length, assigned range. Checking whether a line is active needs a live network lookup (HLR), which no offline validator does."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Why is a US number shown as \"fixed line or mobile\"?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "In the North American Numbering Plan mobile and landline numbers share the same area codes, so the type cannot be read from the number itself."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Are my numbers uploaded anywhere?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "No. The validation library is loaded into the page and every check happens on your device. You can disconnect from the internet after the page has loaded and it still works."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How can I validate thousands of numbers?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Use Phone Number Validator on Apify. It takes lists or another run's dataset, adds the original carrier and time zones, and gives a reason for every invalid number."
+   }
+  }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "deriverge",
+   "item": "https://deriverge.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Tools",
+   "item": "https://deriverge.com/tools/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 3,
+   "name": "Bulk phone number validator",
+   "item": "https://deriverge.com/tools/phone-number-validator/"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<nav class="topbar">
+  <a class="tab" href="/tools/" translate="no">tools/phone-number-validator.js</a>
+  <div class="crumbs"><a href="/">deriverge</a><span class="punc">/</span><a href="/tools/">tools</a></div>
+</nav>
+<main class="file wide">
+  <div class="gutter" aria-hidden="true"></div>
+  <div class="source">
+    <header class="hero hero--tool">
+      <p class="cmt">// free tool · runs offline in your browser</p>
+      <h1 class="h1-tool">Bulk phone number validator</h1>
+      <p class="lede">Paste up to 50 phone numbers in any format. Each is checked against Google's libphonenumber rules and returned in E.164, international and national format, with its line type and country. Nothing leaves your browser.</p>
+    </header>
+    <section class="block block--tight" aria-label="Phone number validator">
+      <form class="panel" id="phone-form" novalidate>
+        <div class="field">
+          <label class="label" for="phone-numbers"><span class="key">numbers</span>: one per line, up to 50, any format</label>
+          <textarea id="phone-numbers" name="numbers" spellcheck="false" placeholder="+44 20 7946 0958&#10;(201) 555-0123&#10;0049 1512 3456789&#10;+420 601 123 456"></textarea>
+        </div>
+        <div class="field" style="max-width:420px">
+          <label class="label" for="phone-country"><span class="key">default country</span>: for numbers written without + or 00</label>
+          <select id="phone-country" name="country"><option value="US">United States (+1)</option></select>
+        </div>
+        <div class="actions"><button type="submit" class="btn">Validate numbers</button><button type="button" class="btn btn--ghost" id="phone-csv" hidden>Download CSV</button><span class="hint">Checked in your browser with Google's libphonenumber rules. Nothing is uploaded.</span></div>
+        <p class="status" id="phone-status" role="status" aria-live="polite"></p>
+      </form>
+      <div class="results" id="phone-results"></div>
+    </section>
+    <aside class="block cta" aria-label="Phone Number Validator on Apify">
+      <p class="cmt">// run it at scale</p>
+      <h2>Phone Number Validator on Apify</h2>
+      <p>The same job runs as <strong>Phone Number Validator</strong> in Apify Store when one browser tab is not enough.</p>
+      <ul><li>Thousands of numbers per run, from a list or straight from another run's dataset</li><li>E.164, international and national format, country, line type and a reason for every invalid number</li><li>The carrier the range was assigned to and the number's time zones</li><li>Skip duplicates, API and CSV, Excel or JSON export</li></ul>
+      <p class="price">From <b>$0.55</b> per 1,000 phone numbers, pay only for results. Apify's free plan includes $5 of monthly credit.</p>
+      <div class="cta-row"><a class="btn" data-actor="phone-number-validator" data-campaign="phone-number-validator" href="https://apify.com/deriverge/phone-number-validator?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=phone-number-validator" target="_blank" rel="noopener">Open Phone Number Validator on Apify &rarr;</a></div>
+      
+    </aside>
+    <section class="block" aria-labelledby="h-meaning">
+      <p class="cmt">// what the result means</p>
+      <h2 id="h-meaning" class="h2">Valid, E.164 and line types</h2>
+      <div class="prose">
+        <p><strong>Valid</strong> means the number has the right length and falls into a range the country's regulator has assigned, according to Google's <strong>libphonenumber</strong> data. It does not mean the line is switched on or that someone answers: no offline check can know that.</p>
+        <p><strong>E.164</strong> is the international format used by databases, CRMs and SMS gateways: a plus sign, the country code and the number without spaces or a leading zero, for example <code>+442079460958</code>. Store numbers this way and they compare and deduplicate cleanly.</p>
+        <p>A number that starts with <code>+</code> or <code>00</code> carries its own country. Numbers without it are read as numbers of the <strong>default country</strong>.</p>
+      </div>
+      <h3 class="h3">Line types</h3>
+      <div class="tbl-wrap"><table class="tbl tbl--fit"><thead><tr><th>Type</th><th>Meaning</th></tr></thead><tbody><tr><td class="k">Mobile</td><td>A mobile range, such as UK 07 or German 015x.</td></tr><tr><td class="k">Fixed line</td><td>A geographic landline range.</td></tr><tr><td class="k">Fixed line or mobile</td><td>The United States, Canada and a few other countries share ranges, so the type cannot be told from the number.</td></tr><tr><td class="k">Toll free</td><td>Free to call, such as 800 in the US or 0800 in the UK.</td></tr><tr><td class="k">Premium rate, shared cost</td><td>Numbers that cost the caller more, or split the cost with the receiver.</td></tr><tr><td class="k">VoIP, personal number, UAN</td><td>Internet telephony ranges, follow-me numbers and company-wide access numbers.</td></tr></tbody></table></div>
+    </section>
+    <section class="block" aria-labelledby="h-faq">
+      <p class="cmt">// questions</p>
+      <h2 id="h-faq" class="h2">Frequently asked questions</h2>
+<div class="faq">
+<details><summary>How do I validate a list of phone numbers?</summary><div class="a"><p>Paste up to 50 numbers above, one per line, set the default country for numbers without a + code and press <strong>Validate numbers</strong>. <strong>Download CSV</strong> saves the results.</p></div></details>
+<details><summary>What is E.164 format?</summary><div class="a"><p>The international standard for writing phone numbers: <code>+</code>, country code, then the national number without the leading zero, up to 15 digits in total. <code>020 7946 0958</code> in the UK becomes <code>+442079460958</code>.</p></div></details>
+<details><summary>Does valid mean the number is in use?</summary><div class="a"><p>No. It means the number could exist: right length, assigned range. Checking whether a line is active needs a live network lookup (HLR), which no offline validator does.</p></div></details>
+<details><summary>Why is a US number shown as &quot;fixed line or mobile&quot;?</summary><div class="a"><p>In the North American Numbering Plan mobile and landline numbers share the same area codes, so the type cannot be read from the number itself.</p></div></details>
+<details><summary>Are my numbers uploaded anywhere?</summary><div class="a"><p>No. The validation library is loaded into the page and every check happens on your device. You can disconnect from the internet after the page has loaded and it still works.</p></div></details>
+<details><summary>How can I validate thousands of numbers?</summary><div class="a"><p>Use Phone Number Validator on Apify. It takes lists or another run's dataset, adds the original carrier and time zones, and gives a reason for every invalid number.</p></div></details>
+</div>
+    </section>
+    <section class="block" aria-labelledby="h-more-tools">
+      <p class="cmt">// more free tools</p>
+      <h2 id="h-more-tools" class="h2">More free tools</h2>
+      <ul class="linklist"><li><a href="/tools/bulk-dns-lookup/">Bulk DNS lookup</a><span>A, MX, TXT, NS, CAA for 20 domains</span></li><li><a href="/tools/rdap-whois-lookup/">RDAP WHOIS lookup</a><span>registrar, expiry, nameservers</span></li><li><a href="/tools/domain-availability-checker/">Domain availability checker</a><span>20 names across TLDs</span></li><li><a href="/tools/wayback-machine-snapshots/">Wayback Machine snapshot finder</a><span>first, latest and closest capture</span></li><li><a href="/tools/companies-using-ats/">Which ATS do companies use?</a><span>14 systems compared</span></li></ul>
+    </section>
+    <section class="block block--last">
+<footer class="site-foot">
+  <p>Free tools by <a href="/">deriverge s.r.o.</a>, a software studio in the Czech Republic. Our data actors are in <a data-actor="" data-campaign="phone-number-validator" href="https://apify.com/deriverge?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=phone-number-validator" target="_blank" rel="noopener">Apify Store</a>.</p>
+  <p>Questions or a company listed by mistake: <a href="mailto:info@deriverge.com">info@deriverge.com</a>. The tools are provided as is, without warranty.</p>
+</footer>
+    </section>
+    <p class="foot punc" translate="no">&lt;/html&gt;</p>
+  </div>
+</main>
+<script src="/tools/config.js"></script>
+<script src="/tools/common.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/libphonenumber-js@1.13.14/bundle/libphonenumber-max.js" integrity="sha384-TL6PuziRMu9wcvBemTwYbdAy214PjKbUVuk16nYuoNHRBVrFQfPJP4H+qMUqRvyl" crossorigin="anonymous" defer></script>
+<script src="/tools/js/phone.js" defer></script>
+</body>
+</html>
