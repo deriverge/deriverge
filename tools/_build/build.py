@@ -30,6 +30,10 @@ TOOLS = os.path.dirname(HERE)
 SITE = 'https://deriverge.com'
 APIFY_USER = 'deriverge'
 UTM = [('utm_source', 'deriverge.com'), ('utm_medium', 'tool')]
+# The Apify affiliate parameter lives in tools/config.js (one place for the browser and this build).
+_cfg = open(os.path.join(TOOLS, 'config.js'), encoding='utf-8').read()
+AFFILIATE = re.search(r"AFFILIATE_PARAM:\s*'([^']*)'", _cfg).group(1).lstrip('?&')
+REL = 'noopener sponsored' if AFFILIATE else 'noopener'
 OG_IMAGE = 'https://raw.githubusercontent.com/deriverge/deriverge/main/pictures/deriverge_logo-long.jpg'
 LIBPHONE = ('https://cdn.jsdelivr.net/npm/libphonenumber-js@1.13.14/bundle/libphonenumber-max.js',
             'sha384-TL6PuziRMu9wcvBemTwYbdAy214PjKbUVuk16nYuoNHRBVrFQfPJP4H+qMUqRvyl')
@@ -99,12 +103,13 @@ def per1000(slug):
 
 def actor_href(slug, campaign):
     q = UTM + [('utm_campaign', campaign)]
-    return f'https://apify.com/{APIFY_USER}' + (f'/{slug}' if slug else '') + '?' + urllib.parse.urlencode(q)
+    return (f'https://apify.com/{APIFY_USER}' + (f'/{slug}' if slug else '') + '?' + urllib.parse.urlencode(q)
+            + (f'&{AFFILIATE}' if AFFILIATE else ''))
 
 
 def actor_link(slug, campaign, text, cls='btn'):
     return (f'<a class="{cls}" data-actor="{esc(slug)}" data-campaign="{esc(campaign)}" href="{esc(actor_href(slug, campaign))}" '
-            f'target="_blank" rel="noopener">{text}</a>')
+            f'target="_blank" rel="{REL}">{text}</a>')
 
 
 # ── page chrome ────────────────────────────────────────────────────────────────────────────────────────────────────
@@ -138,8 +143,11 @@ def webapp_ld(name, path, desc, category='DeveloperApplication'):
             'publisher': {'@type': 'Organization', 'name': 'deriverge s.r.o.', 'url': SITE + '/'}}
 
 
+DISCLOSURE = (' Links to Apify carry our affiliate code: if you become a paying Apify customer, Apify pays us a commission'
+              ' at no extra cost to you.') if AFFILIATE else ''
+
 FOOTER = '''<footer class="site-foot">
-  <p>Free tools by <a href="/">deriverge s.r.o.</a>, a software studio in the Czech Republic. Our data actors are in <a data-actor="" data-campaign="{campaign}" href="{store}" target="_blank" rel="noopener">Apify Store</a>.</p>
+  <p>Free tools by <a href="/">deriverge s.r.o.</a>, a software studio in the Czech Republic. Our data actors are in <a data-actor="" data-campaign="{campaign}" href="{store}" target="_blank" rel="{rel}">Apify Store</a>.{disclosure}</p>
   <p>Questions or a company listed by mistake: <a href="mailto:info@deriverge.com">info@deriverge.com</a>. The tools are provided as is, without warranty.</p>
 </footer>'''
 
@@ -194,7 +202,7 @@ def layout(*, path, title, desc, tab, kicker, h1, lede, body, ld, campaign, scri
     </header>
 {body}
     <section class="block block--last">
-{FOOTER.format(campaign=esc(campaign), store=esc(actor_href('', campaign)))}
+{FOOTER.format(campaign=esc(campaign), store=esc(actor_href('', campaign)), rel=REL, disclosure=DISCLOSURE)}
     </section>
     <p class="foot punc" translate="no">&lt;/html&gt;</p>
   </div>
@@ -1181,7 +1189,7 @@ def page_index(stats, total_c, total_j, date):
       <ul class="linklist">{ats_list}</ul>''', hid='data'),
         section('// why free', 'How these tools work', '''      <div class="prose">
         <p>Every tool runs in your browser and talks directly to the public source: DNS resolvers, domain registries, the Internet Archive. There is no server of ours in between, no signup and no tracking of what you look up.</p>
-        <p>Each tool does one small job well. When you need thousands of rows, a schedule, an API or an export into your own systems, the same job runs as an actor in <a data-actor="" data-campaign="tools-index" href="''' + esc(actor_href('', 'tools-index')) + '''" target="_blank" rel="noopener">our Apify Store profile</a>, where you pay only for the results you get.</p>
+        <p>Each tool does one small job well. When you need thousands of rows, a schedule, an API or an export into your own systems, the same job runs as an actor in <a data-actor="" data-campaign="tools-index" href="''' + esc(actor_href('', 'tools-index')) + '''" target="_blank" rel="''' + REL + '''">our Apify Store profile</a>, where you pay only for the results you get.</p>
       </div>''', hid='how'),
     ])
     ld = [{'@context': 'https://schema.org', '@type': 'CollectionPage', 'name': 'Free data tools', 'url': SITE + path, 'description': desc,

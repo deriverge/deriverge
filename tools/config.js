@@ -6,7 +6,7 @@
  * Apify affiliate dashboard gives it, for example 'fpr=abc123'. Nothing else needs to change.
  */
 window.DV_TOOLS = {
-  AFFILIATE_PARAM: '',
+  AFFILIATE_PARAM: 'fpr=b6jtb8',
   APIFY_USER: 'deriverge',
   UTM: { utm_source: 'deriverge.com', utm_medium: 'tool' },
 };
