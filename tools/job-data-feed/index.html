@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Job Data Feed: Daily Open Jobs from Company Career Sites</title>
+<meta name="description" content="A daily feed of more than 1,700,000 open jobs from the career sites of more than 47,000 companies on 14 applicant tracking systems, as a file or an API. Free sample, monthly plans.">
+<link rel="canonical" href="https://deriverge.com/tools/job-data-feed/">
+<meta name="robots" content="index, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300..800;1,300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/tools/tools.css">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="deriverge">
+<meta property="og:title" content="Job Data Feed: Daily Open Jobs from Company Career Sites">
+<meta property="og:description" content="A daily feed of more than 1,700,000 open jobs from the career sites of more than 47,000 companies on 14 applicant tracking systems, as a file or an API. Free sample, monthly plans.">
+<meta property="og:url" content="https://deriverge.com/tools/job-data-feed/">
+<meta property="og:image" content="https://raw.githubusercontent.com/deriverge/deriverge/main/pictures/deriverge_logo-long.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Dataset",
+ "name": "Job data feed from company career sites",
+ "url": "https://deriverge.com/tools/job-data-feed/",
+ "description": "A daily feed of more than 1,700,000 open jobs from the career sites of more than 47,000 companies on 14 applicant tracking systems, as a file or an API. Free sample, monthly plans.",
+ "isAccessibleForFree": false,
+ "creator": {
+  "@type": "Organization",
+  "name": "deriverge s.r.o.",
+  "url": "https://deriverge.com/"
+ },
+ "distribution": [
+  {
+   "@type": "DataDownload",
+   "encodingFormat": "application/x-ndjson",
+   "contentUrl": "https://deriverge.com/tools/data/job-feed-sample.jsonl.gz",
+   "name": "Free sample"
+  }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "Where do the jobs come from?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "From the public job boards that employers run on their applicant tracking systems, such as Workday, Greenhouse or Lever. Most career sites on our list were found through their addresses in the public Common Crawl web archive."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How fresh is the feed?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "The index is rebuilt every night. Boards on ten systems are read daily and the other four in rotation within one to three days, so a new posting reaches the feed within three days."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Does the feed contain personal data?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "No candidate data and no lists of recruiters. Descriptions are the employer's own text and can name a hiring manager or a contact; leave descriptions out if you do not need them."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Can I show the jobs on my own site?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "You decide how you use the data and are responsible for using it lawfully and in line with the employers' terms. Every record links to the job and apply page on the employer's own site. We remove any company from your feed on request."
+   }
+  }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "deriverge",
+   "item": "https://deriverge.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Tools",
+   "item": "https://deriverge.com/tools/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 3,
+   "name": "Job data feed",
+   "item": "https://deriverge.com/tools/job-data-feed/"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<nav class="topbar">
+  <a class="tab" href="/tools/" translate="no">tools/job-data-feed</a>
+  <div class="crumbs"><a href="/">deriverge</a><span class="punc">/</span><a href="/tools/">tools</a></div>
+</nav>
+<main class="file wide">
+  <div class="gutter" aria-hidden="true"></div>
+  <div class="source">
+    <header class="hero hero--tool">
+      <p class="cmt">// data feed · for job boards and HR tech</p>
+      <h1 class="h1-tool">Job data feed</h1>
+      <p class="lede">Every open job from the career sites of more than 47,000 companies on 14 applicant tracking systems, delivered daily as one file. For job boards, HR tech products and labour market research.</p>
+    </header>
+    <section class="block" aria-labelledby="h-fields">
+      <p class="cmt">// what you get</p>
+      <h2 id="h-fields" class="h2">What is in the feed</h2>
+      <div class="prose">
+        <p>Every open job our index finds on the public career sites of more than 47,000 companies, on 14 applicant tracking systems from Workday to Recruitee. The build of 19 October 2026 held 1,740,189 open jobs. Each job is one record with the fields below; there is no candidate data and no recruiter contact list.</p>
+      </div>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Fields</th><th>What they hold</th></tr></thead><tbody><tr><td class="k"><code>title, company, companyWebsite</code></td><td>The job title as the employer wrote it, the employer and its website when the system shows it.</td></tr><tr><td class="k"><code>ats, careerSiteUrl, url, applyUrl</code></td><td>The applicant tracking system, the career site, the job page and the apply link on the employer's own site.</td></tr><tr><td class="k"><code>locations, countries, workArrangement</code></td><td>Locations as listed, ISO country codes, and <code>remote</code>, <code>hybrid</code> or <code>onsite</code>.</td></tr><tr><td class="k"><code>employmentType, seniority, jobCategory, department</code></td><td>Full time, part time, contract, temporary, internship and more; level from intern to executive; one of 21 job categories; the department when listed.</td></tr><tr><td class="k"><code>postedAt, firstSeenAt</code></td><td>The posting date when the system has one, and the day our index first saw the job.</td></tr><tr><td class="k"><code>salaryMin, salaryMax, salaryCurrency, salaryPeriod</code></td><td>Pay as numbers when the ad states it, with yearly equivalents in <code>salaryYearlyMin</code> and <code>salaryYearlyMax</code>.</td></tr><tr><td class="k"><code>skills, experienceYearsMin, educationLevel, visaSponsorship, language</code></td><td>Read from the description: skills, years of experience, education, visa sponsorship and the language of the ad.</td></tr><tr><td class="k"><code>description</code></td><td>The full text of the ad, on request. It is the employer's text and can name a hiring manager.</td></tr></tbody></table></div>
+    </section>
+    <section class="block" aria-labelledby="h-coverage">
+      <p class="cmt">// coverage</p>
+      <h2 id="h-coverage" class="h2">Open jobs per system</h2>
+      <div class="tbl-wrap"><table class="tbl tbl--fit"><thead><tr><th>System</th><th>Open jobs, 19 October 2026</th></tr></thead><tbody><tr><td class="k">Workday</td><td>more than 540,000</td></tr><tr><td class="k">SmartRecruiters</td><td>more than 280,000</td></tr><tr><td class="k">Oracle Recruiting Cloud</td><td>more than 220,000</td></tr><tr><td class="k">Greenhouse</td><td>more than 190,000</td></tr><tr><td class="k">iCIMS</td><td>more than 160,000</td></tr><tr><td class="k">Workable</td><td>more than 72,000</td></tr><tr><td class="k">Ashby</td><td>more than 61,000</td></tr><tr><td class="k">Lever</td><td>more than 59,000</td></tr><tr><td class="k">BambooHR</td><td>more than 42,000</td></tr><tr><td class="k">Breezy HR</td><td>more than 34,000</td></tr><tr><td class="k">Personio</td><td>more than 20,000</td></tr><tr><td class="k">Teamtailor</td><td>more than 17,000</td></tr><tr><td class="k">Rippling</td><td>more than 14,000</td></tr><tr><td class="k">Recruitee</td><td>more than 14,000</td></tr></tbody></table></div>
+      <div class="prose"><p>Boards on ten of the systems are read every day. Workday, Workable, Personio and iCIMS boards are read in rotation, each within one to three days. We read only the job boards that employers publish, without logins, and leave out career sites whose <code>robots.txt</code> disallows the job feed.</p></div>
+    </section>
+    <section class="block" aria-labelledby="h-delivery">
+      <p class="cmt">// delivery</p>
+      <h2 id="h-delivery" class="h2">How the feed is delivered</h2>
+      <div class="prose">
+        <ul>
+          <li>Every morning a gzipped JSON Lines file (CSV on request) with all open jobs of your feed, at a private download link.</li>
+          <li>Next to it, the jobs added and the jobs closed since the day before, so you can update your database without comparing files.</li>
+          <li>A filtered feed keeps only the countries, systems, job categories or title keywords you choose.</li>
+        </ul>
+      </div>
+    </section>
+    <section class="block" aria-labelledby="h-plans">
+      <p class="cmt">// pricing</p>
+      <h2 id="h-plans" class="h2">Plans</h2>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Plan</th><th>What it includes</th><th>Price</th></tr></thead><tbody>
+        <tr><td class="k">Filtered feed</td><td>Daily file of up to 200,000 open jobs chosen by country, system, job category or title keywords, with added and closed files.</td><td>from $299 per month</td></tr>
+        <tr><td class="k">Full feed</td><td>Daily file of every open job in the index, with added and closed files and descriptions on request.</td><td>$799 per month</td></tr>
+        <tr><td class="k">Custom</td><td>Other fields, a feed for named companies, or files in your own storage.</td><td>on request</td></tr>
+      </tbody></table></div>
+      <div class="prose"><p>Billed monthly by invoice from deriverge s.r.o., a Czech company with an EU VAT number. You can cancel at the end of any month.</p></div>
+    </section>
+    <aside class="block cta" aria-label="Start a job data feed">
+      <p class="cmt">// start</p>
+      <h2>Get a sample of your feed</h2>
+      <p>Download the free sample: 1,050 real jobs added to the index in the three days before 19 October 2026, 75 from each system, without descriptions. Then write to us with what you need, and we reply with a sample of your exact feed and an offer, usually within one or two working days.</p>
+      <div class="cta-row"><a class="btn" href="/tools/data/job-feed-sample.jsonl.gz" download>Download the sample (JSON Lines, gzip)</a> <a class="btn btn--ghost" href="mailto:info@deriverge.com?subject=Job%20data%20feed&amp;body=Company%3A%0AWhat%20the%20data%20is%20for%3A%0ACountries%2C%20systems%20or%20job%20categories%20you%20need%3A%0ADelivery%20%28daily%20file%20or%20API%29%20and%20format%20%28JSON%20Lines%20or%20CSV%29%3A%0A">Ask for a feed</a></div>
+      <p class="more">Prefer to pay per request? The same index is behind <a class="" data-actor="career-site-jobs-search" data-campaign="job-data-feed" href="https://apify.com/deriverge/career-site-jobs-search?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=job-data-feed&amp;fpr=b6jtb8" target="_blank" rel="noopener sponsored">Career Site and ATS Jobs API on Apify</a> and our <a href="https://rapidapi.com/David%C4%8Cag%C3%A1nek/api/job-search-career-sites-and-ats" target="_blank" rel="noopener">Job Search API on RapidAPI</a>.</p>
+    </aside>
+    <section class="block" aria-labelledby="h-faq">
+      <p class="cmt">// faq</p>
+      <h2 id="h-faq" class="h2">Questions</h2>
+<div class="faq">
+<details><summary>Where do the jobs come from?</summary><div class="a"><p>From the public job boards that employers run on their applicant tracking systems, such as Workday, Greenhouse or Lever. Most career sites on our list were found through their addresses in the public Common Crawl web archive.</p></div></details>
+<details><summary>How fresh is the feed?</summary><div class="a"><p>The index is rebuilt every night. Boards on ten systems are read daily and the other four in rotation within one to three days, so a new posting reaches the feed within three days.</p></div></details>
+<details><summary>Does the feed contain personal data?</summary><div class="a"><p>No candidate data and no lists of recruiters. Descriptions are the employer's own text and can name a hiring manager or a contact; leave descriptions out if you do not need them.</p></div></details>
+<details><summary>Can I show the jobs on my own site?</summary><div class="a"><p>You decide how you use the data and are responsible for using it lawfully and in line with the employers' terms. Every record links to the job and apply page on the employer's own site. We remove any company from your feed on request.</p></div></details>
+</div>
+    </section>
+    <section class="block block--last">
+<footer class="site-foot">
+  <p>Free tools by <a href="/">deriverge s.r.o.</a>, a software studio in the Czech Republic. Our data actors are in <a data-actor="" data-campaign="job-data-feed" href="https://apify.com/deriverge?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=job-data-feed&amp;fpr=b6jtb8" target="_blank" rel="noopener sponsored">Apify Store</a>. Links to Apify carry our affiliate code: if you become a paying Apify customer, Apify pays us a commission at no extra cost to you.</p>
+  <p>Questions or a company listed by mistake: <a href="mailto:info@deriverge.com">info@deriverge.com</a>. The tools are provided as is, without warranty.</p>
+</footer>
+    </section>
+    <p class="foot punc" translate="no">&lt;/html&gt;</p>
+  </div>
+</main>
+<script src="/tools/config.js"></script>
+<script src="/tools/common.js"></script>
+
+</body>
+</html>

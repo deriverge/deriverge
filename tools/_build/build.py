@@ -1118,7 +1118,7 @@ def page_compare(by, stats, date, cn):
         ('How do I find out which ATS a company uses?',
          '<p>Search the company above, or paste one of its job links into the detector. By hand: open a job and check where the Apply button leads, such as boards.greenhouse.io, jobs.lever.co or myworkdayjobs.com.</p>'),
         ('Can I get the jobs from all these companies?',
-         '<p>Yes. Career Site Jobs Search on Apify searches the daily index behind these pages, more than a million open jobs from all 14 systems, and re-reads each match live with its full description.</p>'),
+         '<p>Yes. Career Site and ATS Jobs API on Apify searches the daily index behind these pages, more than a million open jobs from all 14 systems, and re-reads each match live with its full description.</p>'),
     ]
     stats_html = f'''      <ul class="stats">
         <li class="stat"><b>{total_c:,}</b><span>companies</span></li>
@@ -1138,7 +1138,7 @@ def page_compare(by, stats, date, cn):
     </section>''',
         section('// by country', 'Most used ATS by country', cc_table, hid='countries'),
         cta(campaign=camp, slug='career-site-jobs-search', name=actor('career-site-jobs-search')['title'] or 'Career Site Jobs Search', unit='jobs', kicker='// get the jobs',
-            lead='Every company on these pages feeds one daily job index. <strong>Career Site Jobs Search</strong> lets you query it.',
+            lead='Every company on these pages feeds one daily job index. <strong>Career Site and ATS Jobs API</strong> lets you query it, and the <a href="/tools/job-data-feed/">job data feed</a> delivers all of it daily.',
             points=['More than a million open jobs from 40,000+ career sites on all 14 systems',
                     'Filter by title, country, seniority, remote, salary, skills and visa sponsorship',
                     'Each match re-read on its board with the full description and apply link',
@@ -1186,7 +1186,8 @@ def page_index(stats, total_c, total_j, date):
     body = '\n'.join([
         section('// tools', 'Tools', f'      <ul class="cards">{cards}</ul>', hid='tools'),
         section('// data', 'Companies by applicant tracking system', f'''      <div class="prose"><p>Lists of employers per ATS, built from {total_j:,} open jobs on public career sites. Search, sort and download each list.</p></div>
-      <ul class="linklist">{ats_list}</ul>''', hid='data'),
+      <ul class="linklist">{ats_list}</ul>
+      <div class="prose"><p>Need every job, every day? The <a href="/tools/job-data-feed/">job data feed</a> delivers the whole index as a daily file.</p></div>''', hid='data'),
         section('// why free', 'How these tools work', '''      <div class="prose">
         <p>Every tool runs in your browser and talks directly to the public source: DNS resolvers, domain registries, the Internet Archive. There is no server of ours in between, no signup and no tracking of what you look up.</p>
         <p>Each tool does one small job well. When you need thousands of rows, a schedule, an API or an export into your own systems, the same job runs as an actor in <a data-actor="" data-campaign="tools-index" href="''' + esc(actor_href('', 'tools-index')) + '''" target="_blank" rel="''' + REL + '''">our Apify Store profile</a>, where you pay only for the results you get.</p>
@@ -1198,6 +1199,89 @@ def page_index(stats, total_c, total_j, date):
     layout(path=path, title=title, desc=desc, tab='index.js', kicker='// free tools · no signup', h1='Free data tools', campaign=camp,
            lede='Small, fast tools for domains, DNS, web archives, phone numbers and hiring data. They run in your browser, and each one has a bulk version on Apify for when you need thousands of rows.',
            body=body, ld=ld, trail=[('deriverge', '/'), ('Tools', '/tools/')])
+
+
+def floor_round(n):
+    """Rounds a count down for 'more than' claims: 1,740,189 -> 1,700,000, 47,967 -> 47,000, 540,470 -> 540,000."""
+    step = 100_000 if n >= 1_000_000 else 10_000 if n >= 100_000 else 1_000
+    return n // step * step
+
+
+def page_job_feed():
+    path, camp = '/tools/job-data-feed/', 'job-data-feed'
+    try:
+        with urllib.request.urlopen('https://api.apify.com/v2/key-value-stores/jletghbJMlxiI0vnm/records/meta.json', timeout=60) as r:
+            meta = json.load(r)
+    except Exception as e:  # noqa: BLE001
+        raise SystemExit(f'job index meta.json not readable: {e}')
+    jobs, comps, totals = meta['jobs'], meta['companies'], meta['totals']
+    built = fmt_date(meta['generatedAt'][:10])
+    j, c = f'{floor_round(jobs):,}', f'{floor_round(comps):,}'
+    title = 'Job Data Feed: Daily Open Jobs from Company Career Sites'
+    desc = (f'A daily feed of more than {j} open jobs from the career sites of more than {c} companies on 14 applicant '
+            'tracking systems, as a file or an API. Free sample, monthly plans.')
+    rows = ''.join(f'<tr><td class="k">{esc(ATS[a]["name"])}</td><td>more than {floor_round(n):,}</td></tr>'
+                   for a, n in sorted(totals.items(), key=lambda x: -x[1]))
+    fields = [
+        ('title, company, companyWebsite', 'The job title as the employer wrote it, the employer and its website when the system shows it.'),
+        ('ats, careerSiteUrl, url, applyUrl', 'The applicant tracking system, the career site, the job page and the apply link on the employer\'s own site.'),
+        ('locations, countries, workArrangement', 'Locations as listed, ISO country codes, and <code>remote</code>, <code>hybrid</code> or <code>onsite</code>.'),
+        ('employmentType, seniority, jobCategory, department', 'Full time, part time, contract, temporary, internship and more; level from intern to executive; one of 21 job categories; the department when listed.'),
+        ('postedAt, firstSeenAt', 'The posting date when the system has one, and the day our index first saw the job.'),
+        ('salaryMin, salaryMax, salaryCurrency, salaryPeriod', 'Pay as numbers when the ad states it, with yearly equivalents in <code>salaryYearlyMin</code> and <code>salaryYearlyMax</code>.'),
+        ('skills, experienceYearsMin, educationLevel, visaSponsorship, language', 'Read from the description: skills, years of experience, education, visa sponsorship and the language of the ad.'),
+        ('description', 'The full text of the ad, on request. It is the employer\'s text and can name a hiring manager.'),
+    ]
+    field_rows = ''.join(f'<tr><td class="k"><code>{esc(k)}</code></td><td>{v}</td></tr>' for k, v in fields)
+    mail = ('mailto:info@deriverge.com?subject=' + urllib.parse.quote('Job data feed') + '&body=' + urllib.parse.quote(
+        'Company:\nWhat the data is for:\nCountries, systems or job categories you need:\nDelivery (daily file or API) and format (JSON Lines or CSV):\n'))
+    body = '\n'.join([
+        section('// what you get', 'What is in the feed', f'''      <div class="prose">
+        <p>Every open job our index finds on the public career sites of more than {c} companies, on 14 applicant tracking systems from Workday to Recruitee. The build of {built} held {jobs:,} open jobs. Each job is one record with the fields below; there is no candidate data and no recruiter contact list.</p>
+      </div>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Fields</th><th>What they hold</th></tr></thead><tbody>{field_rows}</tbody></table></div>''', hid='fields'),
+        section('// coverage', 'Open jobs per system', f'''      <div class="tbl-wrap"><table class="tbl tbl--fit"><thead><tr><th>System</th><th>Open jobs, {esc(built)}</th></tr></thead><tbody>{rows}</tbody></table></div>
+      <div class="prose"><p>Boards on ten of the systems are read every day. Workday, Workable, Personio and iCIMS boards are read in rotation, each within one to three days. We read only the job boards that employers publish, without logins, and leave out career sites whose <code>robots.txt</code> disallows the job feed.</p></div>''', hid='coverage'),
+        section('// delivery', 'How the feed is delivered', '''      <div class="prose">
+        <ul>
+          <li>Every morning a gzipped JSON Lines file (CSV on request) with all open jobs of your feed, at a private download link.</li>
+          <li>Next to it, the jobs added and the jobs closed since the day before, so you can update your database without comparing files.</li>
+          <li>A filtered feed keeps only the countries, systems, job categories or title keywords you choose.</li>
+        </ul>
+      </div>''', hid='delivery'),
+        section('// pricing', 'Plans', '''      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Plan</th><th>What it includes</th><th>Price</th></tr></thead><tbody>
+        <tr><td class="k">Filtered feed</td><td>Daily file of up to 200,000 open jobs chosen by country, system, job category or title keywords, with added and closed files.</td><td>from $299 per month</td></tr>
+        <tr><td class="k">Full feed</td><td>Daily file of every open job in the index, with added and closed files and descriptions on request.</td><td>$799 per month</td></tr>
+        <tr><td class="k">Custom</td><td>Other fields, a feed for named companies, or files in your own storage.</td><td>on request</td></tr>
+      </tbody></table></div>
+      <div class="prose"><p>Billed monthly by invoice from deriverge s.r.o., a Czech company with an EU VAT number. You can cancel at the end of any month.</p></div>''', hid='plans'),
+        f'''    <aside class="block cta" aria-label="Start a job data feed">
+      <p class="cmt">// start</p>
+      <h2>Get a sample of your feed</h2>
+      <p>Download the free sample: 1,050 real jobs added to the index in the three days before {esc(built)}, 75 from each system, without descriptions. Then write to us with what you need, and we reply with a sample of your exact feed and an offer, usually within one or two working days.</p>
+      <div class="cta-row"><a class="btn" href="/tools/data/job-feed-sample.jsonl.gz" download>Download the sample (JSON Lines, gzip)</a> <a class="btn btn--ghost" href="{esc(mail)}">Ask for a feed</a></div>
+      <p class="more">Prefer to pay per request? The same index is behind {actor_link('career-site-jobs-search', camp, 'Career Site and ATS Jobs API on Apify', cls='')} and our <a href="https://rapidapi.com/David%C4%8Cag%C3%A1nek/api/job-search-career-sites-and-ats" target="_blank" rel="noopener">Job Search API on RapidAPI</a>.</p>
+    </aside>''',
+    ])
+    faq = [
+        ('Where do the jobs come from?',
+         '<p>From the public job boards that employers run on their applicant tracking systems, such as Workday, Greenhouse or Lever. Most career sites on our list were found through their addresses in the public Common Crawl web archive.</p>'),
+        ('How fresh is the feed?',
+         '<p>The index is rebuilt every night. Boards on ten systems are read daily and the other four in rotation within one to three days, so a new posting reaches the feed within three days.</p>'),
+        ('Does the feed contain personal data?',
+         '<p>No candidate data and no lists of recruiters. Descriptions are the employer\'s own text and can name a hiring manager or a contact; leave descriptions out if you do not need them.</p>'),
+        ('Can I show the jobs on my own site?',
+         '<p>You decide how you use the data and are responsible for using it lawfully and in line with the employers\' terms. Every record links to the job and apply page on the employer\'s own site. We remove any company from your feed on request.</p>'),
+    ]
+    body += '\n' + section('// faq', 'Questions', faq_block(faq), hid='faq')
+    ld = [{'@context': 'https://schema.org', '@type': 'Dataset', 'name': 'Job data feed from company career sites', 'url': SITE + path,
+           'description': desc, 'isAccessibleForFree': False,
+           'creator': {'@type': 'Organization', 'name': 'deriverge s.r.o.', 'url': SITE + '/'},
+           'distribution': [{'@type': 'DataDownload', 'encodingFormat': 'application/x-ndjson', 'contentUrl': SITE + '/tools/data/job-feed-sample.jsonl.gz', 'name': 'Free sample'}]},
+          faq_ld(faq)]
+    layout(path=path, title=title, desc=desc, tab='job-data-feed', kicker='// data feed · for job boards and HR tech', h1='Job data feed',
+           lede=f'Every open job from the career sites of more than {c} companies on 14 applicant tracking systems, delivered daily as one file. For job boards, HR tech products and labour market research.',
+           body=body, ld=ld, campaign=camp)
 
 
 def update_sitemap(date):
@@ -1227,6 +1311,7 @@ def main():
     for a in ORDER:
         page_ats(a, by[a], stats[a], date, cn)
     total_c, total_j = page_compare(by, stats, date, cn)
+    page_job_feed()
     page_index(stats, total_c, total_j, date)
     print('JSON sizes (KB):', {a: round(s / 1024) for a, s in sizes.items()}, 'total', round(sum(sizes.values()) / 1024), 'KB')
     update_sitemap(dt.date.today().isoformat())
