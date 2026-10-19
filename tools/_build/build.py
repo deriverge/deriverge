@@ -199,7 +199,7 @@ def layout(*, path, title, desc, tab, kicker, h1, lede, body, ld, campaign, scri
   <div class="wrap">
     <a class="brand" href="/" aria-label="deriverge home"><span class="br">&lt;/</span>deriverge<span class="br">&gt;</span></a>
     <div class="crumb">{crumbs}</div>
-    <nav class="nav" aria-label="Main"><a class="nav-link" href="/tools/"{cur('/tools/')}>Tools</a><a class="nav-link" href="/tools/job-data-feed/"{cur('/tools/job-data-feed/')}>Job data feed</a><a class="nav-link" href="/#kontakt">Contact</a></nav>
+    <nav class="nav" aria-label="Main"><a class="nav-link" href="/tools/"{cur('/tools/')}>Tools</a><a class="nav-link" href="/tools/job-data-feed/"{cur('/tools/job-data-feed/')}>Job data feed</a><a class="nav-link" href="/#contact">Contact</a></nav>
   </div>
 </header>
 <main id="main" class="page">
