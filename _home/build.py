@@ -11,6 +11,7 @@ import html
 import json
 import os
 import re
+import sys
 import time
 import urllib.request
 
@@ -127,6 +128,8 @@ def page(lang, data, tr, en, langs_present):
         'extra_fonts': ('<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">\n' if code == 'ar' else ''),
     }
     out = open(os.path.join(HERE, 'template.html'), encoding='utf-8').read()
+    out = out.replace('{{postarna_preview}}', open(os.path.join(HERE, 'postarna-preview.html'), encoding='utf-8').read())
+    out = out.replace('{{postarna_logo}}', open(os.path.join(HERE, 'postarna-logo.svg'), encoding='utf-8').read().replace('aria-label="Poštárna"', 'aria-hidden="true"'))
     out = re.sub(r'\{\{t:([a-z_.0-9]+)\}\}', lambda m: t(m.group(1)), out)
     out = re.sub(r'\{\{num:([a-z]+)\}\}', lambda m: fmt(data[m.group(1)], sep), out)
     out = re.sub(r'\{\{([a-z_]+)\}\}', lambda m: values[m.group(1)], out)
@@ -174,8 +177,10 @@ def main():
             continue
         tr = json.load(open(os.path.join(HERE, 'i18n', lang[0] + '.json'), encoding='utf-8'))
         missing = [k for k in en if k not in tr]
-        if missing:
+        if missing and '--allow-missing' not in sys.argv:
             raise SystemExit(f'{lang[0]}: missing keys {missing[:5]}')
+        if missing:
+            print(f'  {lang[0]}: {len(missing)} keys fall back to English (test build only)')
         print(' ', page(lang, data, tr, en, present))
     update_sitemap(present, dt.date.today().isoformat())
 

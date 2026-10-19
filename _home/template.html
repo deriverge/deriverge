@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://api.apify.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 {{extra_fonts}}<link rel="stylesheet" href="/style.css">
 <link rel="stylesheet" href="/home.css">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -89,33 +89,22 @@
         <p class="eyebrow">{{t:products.eyebrow}}</p>
         <h2 class="display sec-title" id="h-products">{{t:products.title}}</h2>
       </header>
-      <article class="feature" data-reveal>
+      <article class="feature feature--postarna" data-reveal>
         <div class="feature-copy">
-          <p class="tile-kicker mono">{{t:postarna.kicker}}</p>
-          <h3 class="feature-title">Poštárna</h3>
-          <p class="feature-text">{{t:postarna.text}}</p>
-          <ul class="chips"><li>{{t:postarna.f1}}</li><li>{{t:postarna.f2}}</li><li>{{t:postarna.f3}}</li><li>{{t:postarna.f4}}</li><li>{{t:postarna.f5}}</li></ul>
-          <div class="feature-links">
-            <a class="btn btn--ghost" href="https://www.postarna.cz/" target="_blank" rel="noopener">{{t:postarna.link}} <span class="arr" aria-hidden="true">&nearr;</span></a>
-            <a class="feature-alt mono" href="https://www.postarna.sk/" target="_blank" rel="noopener" hreflang="sk">postarna.sk</a>
+          <div class="feature-head">
+            <p class="tile-kicker mono">{{t:postarna.kicker}}</p>
+            <h3 class="feature-title"><span class="sr-only">Poštárna</span>{{postarna_logo}}</h3>
+            <p class="feature-text">{{t:postarna.text}}</p>
+          </div>
+          <div class="feature-side">
+            <ul class="chips"><li>{{t:postarna.f1}}</li><li>{{t:postarna.f2}}</li><li>{{t:postarna.f3}}</li><li>{{t:postarna.f4}}</li><li>{{t:postarna.f5}}</li></ul>
+            <div class="feature-links">
+              <a class="btn btn--postarna" href="https://www.postarna.cz/" target="_blank" rel="noopener">postarna.cz <span class="arr" aria-hidden="true">&nearr;</span></a>
+              <a class="feature-alt mono" href="https://www.postarna.sk/" target="_blank" rel="noopener" hreflang="sk">postarna.sk</a>
+            </div>
           </div>
         </div>
-        <figure class="mail" aria-label="Poštárna">
-          <div class="mail-bar" aria-hidden="true"><span></span><span></span><span></span><b class="mono">postarna.cz</b></div>
-          <div class="mail-body" lang="cs">
-            <p class="mail-subj"><span class="mono">Předmět</span> Petře, máte svátek. Tady je dárek.</p>
-            <p class="mail-hi">Dobrý den, Petře, k svátku od nás máte slevu 15&nbsp;% na celý nákup.</p>
-            <p class="mail-code"><span class="mono">Váš kód</span> <b class="mono">JARO-7Q2K</b></p>
-            <ul class="mail-prod"><li><i></i>Keramický hrnek <b>289&nbsp;Kč</b></li><li><i></i>Sypaný zelený čaj <b>159&nbsp;Kč</b></li><li><i></i>Dárková sada <b>590&nbsp;Kč</b></li></ul>
-            <span class="mail-btn">Uplatnit slevu</span>
-          </div>
-          <div class="mail-tags" aria-hidden="true">
-            <span class="mtag mtag--a mono">{{t:postarna.mock_code}}</span>
-            <span class="mtag mtag--b mono">{{t:postarna.mock_feed}}</span>
-            <span class="mtag mtag--c mono"><i></i>{{t:postarna.mock_sent}}</span>
-          </div>
-          <figcaption class="mail-note">{{t:postarna.mock_note}}</figcaption>
-        </figure>
+        {{postarna_preview}}
       </article>
     </div>
   </section>
