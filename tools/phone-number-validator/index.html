@@ -9,7 +9,7 @@
 <meta name="robots" content="index, follow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300..800;1,300..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/style.css">
 <link rel="stylesheet" href="/tools/tools.css">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -129,15 +129,18 @@
 </script>
 </head>
 <body>
-<nav class="topbar">
-  <a class="tab" href="/tools/" translate="no">tools/phone-number-validator.js</a>
-  <div class="crumbs"><a href="/">deriverge</a><span class="punc">/</span><a href="/tools/">tools</a></div>
-</nav>
-<main class="file wide">
-  <div class="gutter" aria-hidden="true"></div>
-  <div class="source">
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head site-head--page">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="deriverge home"><span class="br">&lt;/</span>deriverge<span class="br">&gt;</span></a>
+    <div class="crumb"><a href="/tools/">tools</a></div>
+    <nav class="nav" aria-label="Main"><a class="nav-link" href="/tools/">Tools</a><a class="nav-link" href="/tools/job-data-feed/">Job data feed</a><a class="nav-link" href="/#kontakt">Contact</a></nav>
+  </div>
+</header>
+<main id="main" class="page">
+  <div class="wrap">
     <header class="hero hero--tool">
-      <p class="cmt">// free tool · runs offline in your browser</p>
+      <p class="cmt">free tool · runs offline in your browser</p>
       <h1 class="h1-tool">Bulk phone number validator</h1>
       <p class="lede">Paste up to 50 phone numbers in any format. Each is checked against Google's libphonenumber rules and returned in E.164, international and national format, with its line type and country. Nothing leaves your browser.</p>
     </header>
@@ -157,7 +160,7 @@
       <div class="results" id="phone-results"></div>
     </section>
     <aside class="block cta" aria-label="Phone Number Validator on Apify">
-      <p class="cmt">// run it at scale</p>
+      <p class="cmt">run it at scale</p>
       <h2>Phone Number Validator on Apify</h2>
       <p>The same job runs as <strong>Phone Number Validator</strong> in Apify Store when one browser tab is not enough.</p>
       <ul><li>Thousands of numbers per run, from a list or straight from another run's dataset</li><li>E.164, international and national format, country, line type and a reason for every invalid number</li><li>The carrier the range was assigned to and the number's time zones</li><li>Skip duplicates, API and CSV, Excel or JSON export</li></ul>
@@ -166,7 +169,7 @@
       
     </aside>
     <section class="block" aria-labelledby="h-meaning">
-      <p class="cmt">// what the result means</p>
+      <p class="cmt">what the result means</p>
       <h2 id="h-meaning" class="h2">Valid, E.164 and line types</h2>
       <div class="prose">
         <p><strong>Valid</strong> means the number has the right length and falls into a range the country's regulator has assigned, according to Google's <strong>libphonenumber</strong> data. It does not mean the line is switched on or that someone answers: no offline check can know that.</p>
@@ -177,7 +180,7 @@
       <div class="tbl-wrap"><table class="tbl tbl--fit"><thead><tr><th>Type</th><th>Meaning</th></tr></thead><tbody><tr><td class="k">Mobile</td><td>A mobile range, such as UK 07 or German 015x.</td></tr><tr><td class="k">Fixed line</td><td>A geographic landline range.</td></tr><tr><td class="k">Fixed line or mobile</td><td>The United States, Canada and a few other countries share ranges, so the type cannot be told from the number.</td></tr><tr><td class="k">Toll free</td><td>Free to call, such as 800 in the US or 0800 in the UK.</td></tr><tr><td class="k">Premium rate, shared cost</td><td>Numbers that cost the caller more, or split the cost with the receiver.</td></tr><tr><td class="k">VoIP, personal number, UAN</td><td>Internet telephony ranges, follow-me numbers and company-wide access numbers.</td></tr></tbody></table></div>
     </section>
     <section class="block" aria-labelledby="h-faq">
-      <p class="cmt">// questions</p>
+      <p class="cmt">questions</p>
       <h2 id="h-faq" class="h2">Frequently asked questions</h2>
 <div class="faq">
 <details><summary>How do I validate a list of phone numbers?</summary><div class="a"><p>Paste up to 50 numbers above, one per line, set the default country for numbers without a + code and press <strong>Validate numbers</strong>. <strong>Download CSV</strong> saves the results.</p></div></details>
@@ -189,19 +192,20 @@
 </div>
     </section>
     <section class="block" aria-labelledby="h-more-tools">
-      <p class="cmt">// more free tools</p>
+      <p class="cmt">more free tools</p>
       <h2 id="h-more-tools" class="h2">More free tools</h2>
       <ul class="linklist"><li><a href="/tools/bulk-dns-lookup/">Bulk DNS lookup</a><span>A, MX, TXT, NS, CAA for 20 domains</span></li><li><a href="/tools/rdap-whois-lookup/">RDAP WHOIS lookup</a><span>registrar, expiry, nameservers</span></li><li><a href="/tools/domain-availability-checker/">Domain availability checker</a><span>20 names across TLDs</span></li><li><a href="/tools/wayback-machine-snapshots/">Wayback Machine snapshot finder</a><span>first, latest and closest capture</span></li><li><a href="/tools/companies-using-ats/">Which ATS do companies use?</a><span>14 systems compared</span></li></ul>
     </section>
-    <section class="block block--last">
-<footer class="site-foot">
-  <p>Free tools by <a href="/">deriverge s.r.o.</a>, a software studio in the Czech Republic. Our data actors are in <a data-actor="" data-campaign="phone-number-validator" href="https://apify.com/deriverge?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=phone-number-validator&amp;fpr=b6jtb8" target="_blank" rel="noopener sponsored">Apify Store</a>. Links to Apify carry our affiliate code: if you become a paying Apify customer, Apify pays us a commission at no extra cost to you.</p>
-  <p>Questions or a company listed by mistake: <a href="mailto:info@deriverge.com">info@deriverge.com</a>. The tools are provided as is, without warranty.</p>
-</footer>
-    </section>
-    <p class="foot punc" translate="no">&lt;/html&gt;</p>
   </div>
 </main>
+<footer class="site-foot site-foot--tools">
+  <div class="wrap">
+<div class="foot-brand"><a class="brand" href="/"><span class="br">&lt;/</span>deriverge<span class="br">&gt;</span></a></div>
+<div class="foot-text">  <p>Free tools by <a href="/">deriverge s.r.o.</a>, a software studio in the Czech Republic. Our data actors are in <a data-actor="" data-campaign="phone-number-validator" href="https://apify.com/deriverge?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=phone-number-validator&amp;fpr=b6jtb8" target="_blank" rel="noopener sponsored">Apify Store</a>. Links to Apify carry our affiliate code: if you become a paying Apify customer, Apify pays us a commission at no extra cost to you.</p>
+  <p>Questions or a company listed by mistake: <a href="mailto:info@deriverge.com">info@deriverge.com</a>. The tools are provided as is, without warranty.</p>
+</div>
+  </div>
+</footer>
 <script src="/tools/config.js"></script>
 <script src="/tools/common.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/libphonenumber-js@1.13.14/bundle/libphonenumber-max.js" integrity="sha384-TL6PuziRMu9wcvBemTwYbdAy214PjKbUVuk16nYuoNHRBVrFQfPJP4H+qMUqRvyl" crossorigin="anonymous" defer></script>

@@ -9,7 +9,7 @@
 <meta name="robots" content="index, follow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300..800;1,300..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/style.css">
 <link rel="stylesheet" href="/tools/tools.css">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -129,15 +129,18 @@
 </script>
 </head>
 <body>
-<nav class="topbar">
-  <a class="tab" href="/tools/" translate="no">tools/bulk-dns-lookup.js</a>
-  <div class="crumbs"><a href="/">deriverge</a><span class="punc">/</span><a href="/tools/">tools</a></div>
-</nav>
-<main class="file wide">
-  <div class="gutter" aria-hidden="true"></div>
-  <div class="source">
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head site-head--page">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="deriverge home"><span class="br">&lt;/</span>deriverge<span class="br">&gt;</span></a>
+    <div class="crumb"><a href="/tools/">tools</a></div>
+    <nav class="nav" aria-label="Main"><a class="nav-link" href="/tools/">Tools</a><a class="nav-link" href="/tools/job-data-feed/">Job data feed</a><a class="nav-link" href="/#kontakt">Contact</a></nav>
+  </div>
+</header>
+<main id="main" class="page">
+  <div class="wrap">
     <header class="hero hero--tool">
-      <p class="cmt">// free tool · runs in your browser</p>
+      <p class="cmt">free tool · runs in your browser</p>
       <h1 class="h1-tool">Bulk DNS lookup</h1>
       <p class="lede">Check the DNS records of up to 20 domains at once: A, AAAA, MX, TXT, NS, CNAME, CAA and SOA, plus the DMARC policy. Queries go from your browser straight to Cloudflare or Google over DNS over HTTPS.</p>
     </header>
@@ -158,7 +161,7 @@
       <div class="results" id="dns-results"></div>
     </section>
     <aside class="block cta" aria-label="DNS Records Lookup on Apify">
-      <p class="cmt">// run it at scale</p>
+      <p class="cmt">run it at scale</p>
       <h2>DNS Records Lookup on Apify</h2>
       <p>The same job runs as <strong>DNS Records Lookup</strong> in Apify Store when one browser tab is not enough.</p>
       <ul><li>Thousands of hostnames per run, one clean row each: A, AAAA, CNAME, MX, NS, TXT, SOA and CAA</li><li>SPF record, DMARC policy and the mail provider read from MX (Google Workspace, Microsoft 365, Zoho and others)</li><li>Scheduled runs that return only the domains whose records changed</li><li>API, webhooks and integrations; export to CSV, Excel or JSON</li></ul>
@@ -167,7 +170,7 @@
       <p class="more">Also: <a class="" data-actor="domain-whois-dns-lookup" data-campaign="bulk-dns-lookup" href="https://apify.com/deriverge/domain-whois-dns-lookup?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=bulk-dns-lookup&amp;fpr=b6jtb8" target="_blank" rel="noopener sponsored">Domain WHOIS and DNS Lookup</a> (from $1.00 per 1,000 domains)</p>
     </aside>
     <section class="block" aria-labelledby="h-records">
-      <p class="cmt">// what the records mean</p>
+      <p class="cmt">what the records mean</p>
       <h2 id="h-records" class="h2">What each record type tells you</h2>
       <div class="tbl-wrap"><table class="tbl tbl--fit"><thead><tr><th>Record</th><th>What it holds</th></tr></thead><tbody>
         <tr><td class="k">A, AAAA</td><td>The IPv4 and IPv6 addresses the name points to, so a browser knows which server to contact.</td></tr>
@@ -185,7 +188,7 @@
       </div>
     </section>
     <section class="block" aria-labelledby="h-faq">
-      <p class="cmt">// questions</p>
+      <p class="cmt">questions</p>
       <h2 id="h-faq" class="h2">Frequently asked questions</h2>
 <div class="faq">
 <details><summary>How do I check the DNS records of many domains at once?</summary><div class="a"><p>Paste up to 20 domains above, one per line, choose the record types and press <strong>Look up records</strong>. Every domain gets its own table and <strong>Download CSV</strong> saves all of them in one file. For hundreds or thousands of domains, use DNS Records Lookup on Apify, which returns one row per hostname.</p></div></details>
@@ -197,19 +200,20 @@
 </div>
     </section>
     <section class="block" aria-labelledby="h-more-tools">
-      <p class="cmt">// more free tools</p>
+      <p class="cmt">more free tools</p>
       <h2 id="h-more-tools" class="h2">More free tools</h2>
       <ul class="linklist"><li><a href="/tools/rdap-whois-lookup/">RDAP WHOIS lookup</a><span>registrar, expiry, nameservers</span></li><li><a href="/tools/domain-availability-checker/">Domain availability checker</a><span>20 names across TLDs</span></li><li><a href="/tools/wayback-machine-snapshots/">Wayback Machine snapshot finder</a><span>first, latest and closest capture</span></li><li><a href="/tools/phone-number-validator/">Phone number validator</a><span>50 numbers, E.164 and type</span></li><li><a href="/tools/companies-using-ats/">Which ATS do companies use?</a><span>14 systems compared</span></li></ul>
     </section>
-    <section class="block block--last">
-<footer class="site-foot">
-  <p>Free tools by <a href="/">deriverge s.r.o.</a>, a software studio in the Czech Republic. Our data actors are in <a data-actor="" data-campaign="bulk-dns-lookup" href="https://apify.com/deriverge?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=bulk-dns-lookup&amp;fpr=b6jtb8" target="_blank" rel="noopener sponsored">Apify Store</a>. Links to Apify carry our affiliate code: if you become a paying Apify customer, Apify pays us a commission at no extra cost to you.</p>
-  <p>Questions or a company listed by mistake: <a href="mailto:info@deriverge.com">info@deriverge.com</a>. The tools are provided as is, without warranty.</p>
-</footer>
-    </section>
-    <p class="foot punc" translate="no">&lt;/html&gt;</p>
   </div>
 </main>
+<footer class="site-foot site-foot--tools">
+  <div class="wrap">
+<div class="foot-brand"><a class="brand" href="/"><span class="br">&lt;/</span>deriverge<span class="br">&gt;</span></a></div>
+<div class="foot-text">  <p>Free tools by <a href="/">deriverge s.r.o.</a>, a software studio in the Czech Republic. Our data actors are in <a data-actor="" data-campaign="bulk-dns-lookup" href="https://apify.com/deriverge?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=bulk-dns-lookup&amp;fpr=b6jtb8" target="_blank" rel="noopener sponsored">Apify Store</a>. Links to Apify carry our affiliate code: if you become a paying Apify customer, Apify pays us a commission at no extra cost to you.</p>
+  <p>Questions or a company listed by mistake: <a href="mailto:info@deriverge.com">info@deriverge.com</a>. The tools are provided as is, without warranty.</p>
+</div>
+  </div>
+</footer>
 <script src="/tools/config.js"></script>
 <script src="/tools/common.js"></script>
 <script src="/tools/js/dns.js" defer></script>

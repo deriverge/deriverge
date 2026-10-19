@@ -146,10 +146,15 @@ def webapp_ld(name, path, desc, category='DeveloperApplication'):
 DISCLOSURE = (' Links to Apify carry our affiliate code: if you become a paying Apify customer, Apify pays us a commission'
               ' at no extra cost to you.') if AFFILIATE else ''
 
-FOOTER = '''<footer class="site-foot">
-  <p>Free tools by <a href="/">deriverge s.r.o.</a>, a software studio in the Czech Republic. Our data actors are in <a data-actor="" data-campaign="{campaign}" href="{store}" target="_blank" rel="{rel}">Apify Store</a>.{disclosure}</p>
+FOOTER = '''<div class="foot-brand"><a class="brand" href="/"><span class="br">&lt;/</span>deriverge<span class="br">&gt;</span></a></div>
+<div class="foot-text">  <p>Free tools by <a href="/">deriverge s.r.o.</a>, a software studio in the Czech Republic. Our data actors are in <a data-actor="" data-campaign="{campaign}" href="{store}" target="_blank" rel="{rel}">Apify Store</a>.{disclosure}</p>
   <p>Questions or a company listed by mistake: <a href="mailto:info@deriverge.com">info@deriverge.com</a>. The tools are provided as is, without warranty.</p>
-</footer>'''
+</div>'''
+
+
+def kick(k):
+    """Section labels are written like code comments ('// data'); the page shows them without the slashes."""
+    return re.sub(r'^//\s*', '', k)
 
 
 def layout(*, path, title, desc, tab, kicker, h1, lede, body, ld, campaign, scripts=(), trail=None, head_extra=''):
@@ -157,9 +162,10 @@ def layout(*, path, title, desc, tab, kicker, h1, lede, body, ld, campaign, scri
     trail = trail or [('deriverge', '/'), ('Tools', '/tools/')] + ([(h1, path)] if path != '/tools/' else [])
     lds = list(ld) + [crumbs_ld(trail)]
     ld_html = '\n'.join(f'<script type="application/ld+json">\n{json.dumps(x, ensure_ascii=False, indent=1)}\n</script>' for x in lds)
-    crumbs = '<a href="/">deriverge</a><span class="punc">/</span><a href="/tools/">tools</a>'
+    crumbs = '<a href="/tools/">tools</a>'
     if len(trail) > 3:
-        crumbs += f'<span class="punc">/</span><a href="{trail[2][1]}">{esc(trail[2][0].lower())}</a>'
+        crumbs += f'<span class="sep">/</span><a href="{trail[2][1]}">{esc(trail[2][0].lower())}</a>'
+    cur = (lambda p: ' aria-current="page"' if path == p else '')
     script_tags = '\n'.join(scripts)
     doc = f'''<!DOCTYPE html>
 <html lang="en">
@@ -172,7 +178,7 @@ def layout(*, path, title, desc, tab, kicker, h1, lede, body, ld, campaign, scri
 <meta name="robots" content="index, follow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300..800;1,300..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/style.css">
 <link rel="stylesheet" href="/tools/tools.css">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -188,25 +194,29 @@ def layout(*, path, title, desc, tab, kicker, h1, lede, body, ld, campaign, scri
 {head_extra}{ld_html}
 </head>
 <body>
-<nav class="topbar">
-  <a class="tab" href="/tools/" translate="no">tools/{esc(tab)}</a>
-  <div class="crumbs">{crumbs}</div>
-</nav>
-<main class="file wide">
-  <div class="gutter" aria-hidden="true"></div>
-  <div class="source">
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head site-head--page">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="deriverge home"><span class="br">&lt;/</span>deriverge<span class="br">&gt;</span></a>
+    <div class="crumb">{crumbs}</div>
+    <nav class="nav" aria-label="Main"><a class="nav-link" href="/tools/"{cur('/tools/')}>Tools</a><a class="nav-link" href="/tools/job-data-feed/"{cur('/tools/job-data-feed/')}>Job data feed</a><a class="nav-link" href="/#kontakt">Contact</a></nav>
+  </div>
+</header>
+<main id="main" class="page">
+  <div class="wrap">
     <header class="hero hero--tool">
-      <p class="cmt">{esc(kicker)}</p>
+      <p class="cmt">{esc(kick(kicker))}</p>
       <h1 class="h1-tool">{esc(h1)}</h1>
       <p class="lede">{lede}</p>
     </header>
 {body}
-    <section class="block block--last">
-{FOOTER.format(campaign=esc(campaign), store=esc(actor_href('', campaign)), rel=REL, disclosure=DISCLOSURE)}
-    </section>
-    <p class="foot punc" translate="no">&lt;/html&gt;</p>
   </div>
 </main>
+<footer class="site-foot site-foot--tools">
+  <div class="wrap">
+{FOOTER.format(campaign=esc(campaign), store=esc(actor_href('', campaign)), rel=REL, disclosure=DISCLOSURE)}
+  </div>
+</footer>
 <script src="/tools/config.js"></script>
 <script src="/tools/common.js"></script>
 {script_tags}
@@ -231,7 +241,7 @@ PAGES = []
 def section(kicker, title, inner, cls='block', hid=None):
     hid = hid or re.sub(r'[^a-z0-9]+', '-', title.lower()).strip('-')
     return f'''    <section class="{cls}" aria-labelledby="h-{hid}">
-      <p class="cmt">{esc(kicker)}</p>
+      <p class="cmt">{esc(kick(kicker))}</p>
       <h2 id="h-{hid}" class="h2">{esc(title)}</h2>
 {inner}
     </section>'''
@@ -250,7 +260,7 @@ def cta(*, campaign, slug, name, points, unit, also=(), kicker='// run it at sca
         also_html = '<p class="more">Also: ' + ' · '.join(bits) + '</p>'
     lead = lead or f'The same job runs as <strong>{esc(name)}</strong> in Apify Store when one browser tab is not enough.'
     return f'''    <aside class="block cta" aria-label="{esc(name)} on Apify">
-      <p class="cmt">{esc(kicker)}</p>
+      <p class="cmt">{esc(kick(kicker))}</p>
       <h2>{esc(name)} on Apify</h2>
       <p>{lead}</p>
       <ul>{pts}</ul>

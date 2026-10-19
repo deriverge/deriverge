@@ -9,7 +9,7 @@
 <meta name="robots" content="index, follow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300..800;1,300..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/style.css">
 <link rel="stylesheet" href="/tools/tools.css">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -222,20 +222,23 @@
 </script>
 </head>
 <body>
-<nav class="topbar">
-  <a class="tab" href="/tools/" translate="no">tools/companies-using-ats.json</a>
-  <div class="crumbs"><a href="/">deriverge</a><span class="punc">/</span><a href="/tools/">tools</a></div>
-</nav>
-<main class="file wide">
-  <div class="gutter" aria-hidden="true"></div>
-  <div class="source">
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head site-head--page">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="deriverge home"><span class="br">&lt;/</span>deriverge<span class="br">&gt;</span></a>
+    <div class="crumb"><a href="/tools/">tools</a></div>
+    <nav class="nav" aria-label="Main"><a class="nav-link" href="/tools/">Tools</a><a class="nav-link" href="/tools/job-data-feed/">Job data feed</a><a class="nav-link" href="/#kontakt">Contact</a></nav>
+  </div>
+</header>
+<main id="main" class="page">
+  <div class="wrap">
     <header class="hero hero--tool">
-      <p class="cmt">// free data · updated 19 October 2026</p>
+      <p class="cmt">free data · updated 19 October 2026</p>
       <h1 class="h1-tool">Which ATS do companies use?</h1>
       <p class="lede">38,256 companies and the applicant tracking system behind their career site: Greenhouse, Workday, Lever, Ashby, BambooHR and 9 more. Compare the systems, see who leads in each country and look up any company.</p>
     </header>
     <section class="block" aria-labelledby="h-numbers">
-      <p class="cmt">// at a glance</p>
+      <p class="cmt">at a glance</p>
       <h2 id="h-numbers" class="h2">The data in numbers</h2>
       <ul class="stats">
         <li class="stat"><b>38,256</b><span>companies</span></li>
@@ -245,7 +248,7 @@
       </ul>
     </section>
     <section class="block" aria-labelledby="h-find">
-      <p class="cmt">// lookup</p>
+      <p class="cmt">lookup</p>
       <h2 id="h-find" class="h2">Find which ATS a company uses</h2>
       <div id="find" data-ats="bamboohr,greenhouse,workable,ashby,smartrecruiters,workday,personio,breezy,icims,lever,rippling,teamtailor,oracle,recruitee">
         <form class="panel" id="find-form" novalidate>
@@ -257,7 +260,7 @@
       </div>
     </section>
     <section class="block" aria-labelledby="h-compare">
-      <p class="cmt">// compare</p>
+      <p class="cmt">compare</p>
       <h2 id="h-compare" class="h2">All 14 systems compared</h2>
       <div class="tbl-wrap"><table class="tbl"><thead><tr><th>System</th><th class="num">Companies</th><th class="num">With open jobs</th><th class="num">Open jobs</th><th class="num">Median jobs</th><th>Main country</th></tr></thead><tbody><tr><td><a href="/tools/companies-using-bamboohr/">BambooHR</a></td><td class="num">6,272</td><td class="num">5,873</td><td class="num">42,462</td><td class="num">4</td><td>United States</td></tr><tr><td><a href="/tools/companies-using-greenhouse/">Greenhouse</a></td><td class="num">5,532</td><td class="num">5,368</td><td class="num">190,562</td><td class="num">10</td><td>United States</td></tr><tr><td><a href="/tools/companies-using-workable/">Workable</a></td><td class="num">5,217</td><td class="num">2,724</td><td class="num">72,527</td><td class="num">8</td><td>United States</td></tr><tr><td><a href="/tools/companies-using-ashby/">Ashby</a></td><td class="num">3,437</td><td class="num">3,370</td><td class="num">61,715</td><td class="num">8</td><td>United States</td></tr><tr><td><a href="/tools/companies-using-smartrecruiters/">SmartRecruiters</a></td><td class="num">3,162</td><td class="num">3,132</td><td class="num">286,450</td><td class="num">7</td><td>United States</td></tr><tr><td><a href="/tools/companies-using-workday/">Workday</a></td><td class="num">2,303</td><td class="num">2,287</td><td class="num">540,470</td><td class="num">96</td><td>United States</td></tr><tr><td><a href="/tools/companies-using-personio/">Personio</a></td><td class="num">2,073</td><td class="num">2,028</td><td class="num">20,250</td><td class="num">5</td><td>Germany</td></tr><tr><td><a href="/tools/companies-using-breezy/">Breezy HR</a></td><td class="num">2,032</td><td class="num">1,925</td><td class="num">34,914</td><td class="num">4</td><td>United States</td></tr><tr><td><a href="/tools/companies-using-icims/">iCIMS</a></td><td class="num">1,969</td><td class="num">1,936</td><td class="num">164,713</td><td class="num">23</td><td>United States</td></tr><tr><td><a href="/tools/companies-using-lever/">Lever</a></td><td class="num">1,715</td><td class="num">1,671</td><td class="num">59,145</td><td class="num">9</td><td>United States</td></tr><tr><td><a href="/tools/companies-using-rippling/">Rippling</a></td><td class="num">1,410</td><td class="num">1,335</td><td class="num">14,675</td><td class="num">5</td><td>United States</td></tr><tr><td><a href="/tools/companies-using-teamtailor/">Teamtailor</a></td><td class="num">1,352</td><td class="num">1,103</td><td class="num">17,124</td><td class="num">6</td><td>Sweden</td></tr><tr><td><a href="/tools/companies-using-oracle/">Oracle Recruiting Cloud</a></td><td class="num">904</td><td class="num">895</td><td class="num">220,832</td><td class="num">67</td><td>United States</td></tr><tr><td><a href="/tools/companies-using-recruitee/">Recruitee</a></td><td class="num">878</td><td class="num">845</td><td class="num">14,131</td><td class="num">6</td><td>Netherlands</td></tr></tbody></table></div>
       <p class="note">Median jobs = median open jobs per company with at least one opening. Main country = the country most of the system's employers hire in. Data of 19 October 2026.</p>
@@ -269,13 +272,13 @@
       </div>
     </section>
     <section class="block" aria-labelledby="h-countries">
-      <p class="cmt">// by country</p>
+      <p class="cmt">by country</p>
       <h2 id="h-countries" class="h2">Most used ATS by country</h2>
       <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Country</th><th class="num">Companies</th><th>Most used</th><th>Second</th><th>Third</th></tr></thead><tbody><tr><td>United States</td><td class="num">17,757</td><td>Greenhouse <span class="hint">21%</span></td><td>BambooHR <span class="hint">19%</span></td><td>Ashby <span class="hint">12%</span></td></tr><tr><td>Germany</td><td class="num">2,421</td><td>Personio <span class="hint">65%</span></td><td>Recruitee <span class="hint">8%</span></td><td>SmartRecruiters <span class="hint">7%</span></td></tr><tr><td>Canada</td><td class="num">1,777</td><td>BambooHR <span class="hint">47%</span></td><td>Greenhouse <span class="hint">10%</span></td><td>Workable <span class="hint">7%</span></td></tr><tr><td>United Kingdom</td><td class="num">1,738</td><td>Workable <span class="hint">20%</span></td><td>BambooHR <span class="hint">17%</span></td><td>Ashby <span class="hint">15%</span></td></tr><tr><td>India</td><td class="num">737</td><td>SmartRecruiters <span class="hint">23%</span></td><td>Greenhouse <span class="hint">19%</span></td><td>Workday <span class="hint">12%</span></td></tr><tr><td>France</td><td class="num">591</td><td>SmartRecruiters <span class="hint">26%</span></td><td>Teamtailor <span class="hint">23%</span></td><td>Ashby <span class="hint">10%</span></td></tr><tr><td>Netherlands</td><td class="num">500</td><td>Recruitee <span class="hint">49%</span></td><td>SmartRecruiters <span class="hint">12%</span></td><td>Ashby <span class="hint">7%</span></td></tr><tr><td>Australia</td><td class="num">466</td><td>SmartRecruiters <span class="hint">19%</span></td><td>Workable <span class="hint">17%</span></td><td>BambooHR <span class="hint">13%</span></td></tr><tr><td>Sweden</td><td class="num">343</td><td>Teamtailor <span class="hint">83%</span></td><td>SmartRecruiters <span class="hint">4%</span></td><td>Ashby <span class="hint">3%</span></td></tr><tr><td>Spain</td><td class="num">232</td><td>Teamtailor <span class="hint">17%</span></td><td>Greenhouse <span class="hint">17%</span></td><td>Workable <span class="hint">12%</span></td></tr><tr><td>Philippines</td><td class="num">212</td><td>Workable <span class="hint">23%</span></td><td>BambooHR <span class="hint">16%</span></td><td>SmartRecruiters <span class="hint">14%</span></td></tr><tr><td>Poland</td><td class="num">201</td><td>SmartRecruiters <span class="hint">16%</span></td><td>Workable <span class="hint">15%</span></td><td>Ashby <span class="hint">12%</span></td></tr><tr><td>South Africa</td><td class="num">188</td><td>BambooHR <span class="hint">27%</span></td><td>Breezy HR <span class="hint">27%</span></td><td>SmartRecruiters <span class="hint">13%</span></td></tr><tr><td>Greece</td><td class="num">176</td><td>Workable <span class="hint">77%</span></td><td>BambooHR <span class="hint">8%</span></td><td>SmartRecruiters <span class="hint">5%</span></td></tr></tbody></table></div>
       <p class="note">Companies with open jobs, counted in the country where most of their jobs are. Shares are within each country.</p>
     </section>
     <aside class="block cta" aria-label="Career Site and ATS Jobs API on Apify">
-      <p class="cmt">// get the jobs</p>
+      <p class="cmt">get the jobs</p>
       <h2>Career Site and ATS Jobs API on Apify</h2>
       <p>Every company on these pages feeds one daily job index. <strong>Career Site and ATS Jobs API</strong> lets you query it, and the <a href="/tools/job-data-feed/">job data feed</a> delivers all of it daily.</p>
       <ul><li>More than a million open jobs from 40,000+ career sites on all 14 systems</li><li>Filter by title, country, seniority, remote, salary, skills and visa sponsorship</li><li>Each match re-read on its board with the full description and apply link</li><li>Schedules with new jobs only, API and CSV, Excel or JSON export</li></ul>
@@ -284,7 +287,7 @@
       <p class="more">Also: <a class="" data-actor="greenhouse-lever-workday-jobs-scraper" data-campaign="companies-using-ats" href="https://apify.com/deriverge/greenhouse-lever-workday-jobs-scraper?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=companies-using-ats&amp;fpr=b6jtb8" target="_blank" rel="noopener sponsored">Career Site Jobs Scraper</a> (from $1.00 per 1,000 jobs) · <a class="" data-actor="greenhouse-jobs-scraper" data-campaign="companies-using-ats" href="https://apify.com/deriverge/greenhouse-jobs-scraper?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=companies-using-ats&amp;fpr=b6jtb8" target="_blank" rel="noopener sponsored">Greenhouse Jobs Scraper</a> (from $1.00 per 1,000 jobs) · <a class="" data-actor="workday-jobs-scraper" data-campaign="companies-using-ats" href="https://apify.com/deriverge/workday-jobs-scraper?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=companies-using-ats&amp;fpr=b6jtb8" target="_blank" rel="noopener sponsored">Workday Jobs Scraper by Company Name</a> (from $1.00 per 1,000 jobs) · <a class="" data-actor="lever-jobs-scraper" data-campaign="companies-using-ats" href="https://apify.com/deriverge/lever-jobs-scraper?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=companies-using-ats&amp;fpr=b6jtb8" target="_blank" rel="noopener sponsored">Lever Jobs Scraper</a> (from $1.00 per 1,000 jobs) · <a class="" data-actor="ashby-jobs-scraper" data-campaign="companies-using-ats" href="https://apify.com/deriverge/ashby-jobs-scraper?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=companies-using-ats&amp;fpr=b6jtb8" target="_blank" rel="noopener sponsored">Ashby Jobs Scraper</a> (from $1.00 per 1,000 jobs)</p>
     </aside>
     <section class="block" aria-labelledby="h-detect">
-      <p class="cmt">// detector</p>
+      <p class="cmt">detector</p>
       <h2 id="h-detect" class="h2">Detect the ATS from a job link</h2>
       <form class="panel" id="detect-form" novalidate>
         <label class="label" for="detect-url"><span class="key">link</span>: a job posting, an Apply button target or a careers page</label>
@@ -293,7 +296,7 @@
       </form>
     </section>
     <section class="block" aria-labelledby="h-howto">
-      <p class="cmt">// by hand</p>
+      <p class="cmt">by hand</p>
       <h2 id="h-howto" class="h2">How to check which ATS a company uses</h2>
       <div class="prose">
         <ol>
@@ -305,7 +308,7 @@
       <div class="tbl-wrap"><table class="tbl tbl--fit"><thead><tr><th>System</th><th>Tell-tale sign</th></tr></thead><tbody><tr><td><a href="/tools/companies-using-bamboohr/">BambooHR</a></td><td>The career page is <code>&lt;company&gt;.bamboohr.com/careers</code>.</td></tr><tr><td><a href="/tools/companies-using-greenhouse/">Greenhouse</a></td><td>Apply links go to <code>boards.greenhouse.io/&lt;token&gt;</code> or <code>job-boards.greenhouse.io/&lt;token&gt;</code>.</td></tr><tr><td><a href="/tools/companies-using-workable/">Workable</a></td><td>The career page is <code>apply.workable.com/&lt;account&gt;/</code>.</td></tr><tr><td><a href="/tools/companies-using-ashby/">Ashby</a></td><td>Apply links go to <code>jobs.ashbyhq.com/&lt;company&gt;</code>.</td></tr><tr><td><a href="/tools/companies-using-smartrecruiters/">SmartRecruiters</a></td><td>The career page is <code>careers.smartrecruiters.com/&lt;Company&gt;</code>.</td></tr><tr><td><a href="/tools/companies-using-workday/">Workday</a></td><td>Apply links go to <code>&lt;tenant&gt;.wd1.myworkdayjobs.com/&lt;site&gt;</code> (wd1, wd3, wd5, wd103 and others).</td></tr><tr><td><a href="/tools/companies-using-personio/">Personio</a></td><td>Job pages are at <code>&lt;company&gt;.jobs.personio.de</code> or <code>&lt;company&gt;.jobs.personio.com</code>.</td></tr><tr><td><a href="/tools/companies-using-breezy/">Breezy HR</a></td><td>The career site is <code>&lt;company&gt;.breezy.hr</code>.</td></tr><tr><td><a href="/tools/companies-using-icims/">iCIMS</a></td><td>The portal is <code>&lt;portal&gt;.icims.com</code>, often <code>careers-&lt;company&gt;.icims.com</code>.</td></tr><tr><td><a href="/tools/companies-using-lever/">Lever</a></td><td>Apply links go to <code>jobs.lever.co/&lt;company&gt;</code> or <code>jobs.eu.lever.co/&lt;company&gt;</code>.</td></tr><tr><td><a href="/tools/companies-using-rippling/">Rippling</a></td><td>The job board is <code>ats.rippling.com/&lt;company&gt;/jobs</code>.</td></tr><tr><td><a href="/tools/companies-using-teamtailor/">Teamtailor</a></td><td>The career site is <code>&lt;company&gt;.teamtailor.com/jobs</code>, or a custom domain with jobs under <code>/jobs/&lt;id&gt;-&lt;title&gt;</code>.</td></tr><tr><td><a href="/tools/companies-using-oracle/">Oracle Recruiting Cloud</a></td><td>The career site is <code>&lt;pod&gt;.fa.&lt;region&gt;.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1</code>.</td></tr><tr><td><a href="/tools/companies-using-recruitee/">Recruitee</a></td><td>The career site is <code>&lt;company&gt;.recruitee.com</code>.</td></tr></tbody></table></div>
     </section>
     <section class="block" aria-labelledby="h-method">
-      <p class="cmt">// method</p>
+      <p class="cmt">method</p>
       <h2 id="h-method" class="h2">How the data is collected</h2>
       <div class="prose">
         <p>The companies come from public career sites only. We find job boards of 14 applicant tracking systems in the Common Crawl web archive and read each board's public job list every day for a job index of over a million openings. A company is counted when its board answered with a company name. Counts reflect what we could discover, which favours systems with public, crawlable boards: this is <strong>not a market share estimate</strong>, and enterprise systems such as Workday, Oracle and iCIMS are undercounted by companies but strong by jobs.</p>
@@ -313,7 +316,7 @@
       </div>
     </section>
     <section class="block" aria-labelledby="h-faq">
-      <p class="cmt">// questions</p>
+      <p class="cmt">questions</p>
       <h2 id="h-faq" class="h2">Frequently asked questions</h2>
 <div class="faq">
 <details><summary>What is the most popular applicant tracking system?</summary><div class="a"><p>In our data the most common system by number of companies is BambooHR (6,272 companies), followed by Greenhouse and Workable. By open jobs, Workday leads with 540,470, because its customers are large employers. Our counts reflect public, discoverable boards, so treat them as a sample rather than market share.</p></div></details>
@@ -325,19 +328,20 @@
 </div>
     </section>
     <section class="block" aria-labelledby="h-lists">
-      <p class="cmt">// per system</p>
+      <p class="cmt">per system</p>
       <h2 id="h-lists" class="h2">Company lists per system</h2>
       <ul class="linklist"><li><a href="/tools/companies-using-bamboohr/">BambooHR</a></li><li><a href="/tools/companies-using-greenhouse/">Greenhouse</a></li><li><a href="/tools/companies-using-workable/">Workable</a></li><li><a href="/tools/companies-using-ashby/">Ashby</a></li><li><a href="/tools/companies-using-smartrecruiters/">SmartRecruiters</a></li><li><a href="/tools/companies-using-workday/">Workday</a></li><li><a href="/tools/companies-using-personio/">Personio</a></li><li><a href="/tools/companies-using-breezy/">Breezy HR</a></li><li><a href="/tools/companies-using-icims/">iCIMS</a></li><li><a href="/tools/companies-using-lever/">Lever</a></li><li><a href="/tools/companies-using-rippling/">Rippling</a></li><li><a href="/tools/companies-using-teamtailor/">Teamtailor</a></li><li><a href="/tools/companies-using-oracle/">Oracle Recruiting Cloud</a></li><li><a href="/tools/companies-using-recruitee/">Recruitee</a></li></ul>
     </section>
-    <section class="block block--last">
-<footer class="site-foot">
-  <p>Free tools by <a href="/">deriverge s.r.o.</a>, a software studio in the Czech Republic. Our data actors are in <a data-actor="" data-campaign="companies-using-ats" href="https://apify.com/deriverge?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=companies-using-ats&amp;fpr=b6jtb8" target="_blank" rel="noopener sponsored">Apify Store</a>. Links to Apify carry our affiliate code: if you become a paying Apify customer, Apify pays us a commission at no extra cost to you.</p>
-  <p>Questions or a company listed by mistake: <a href="mailto:info@deriverge.com">info@deriverge.com</a>. The tools are provided as is, without warranty.</p>
-</footer>
-    </section>
-    <p class="foot punc" translate="no">&lt;/html&gt;</p>
   </div>
 </main>
+<footer class="site-foot site-foot--tools">
+  <div class="wrap">
+<div class="foot-brand"><a class="brand" href="/"><span class="br">&lt;/</span>deriverge<span class="br">&gt;</span></a></div>
+<div class="foot-text">  <p>Free tools by <a href="/">deriverge s.r.o.</a>, a software studio in the Czech Republic. Our data actors are in <a data-actor="" data-campaign="companies-using-ats" href="https://apify.com/deriverge?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=companies-using-ats&amp;fpr=b6jtb8" target="_blank" rel="noopener sponsored">Apify Store</a>. Links to Apify carry our affiliate code: if you become a paying Apify customer, Apify pays us a commission at no extra cost to you.</p>
+  <p>Questions or a company listed by mistake: <a href="mailto:info@deriverge.com">info@deriverge.com</a>. The tools are provided as is, without warranty.</p>
+</div>
+  </div>
+</footer>
 <script src="/tools/config.js"></script>
 <script src="/tools/common.js"></script>
 <script src="/tools/js/ats-common.js" defer></script>

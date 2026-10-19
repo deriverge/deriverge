@@ -1,227 +1,268 @@
 <!DOCTYPE html>
 <html lang="cs">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="google" content="notranslate">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="google" content="notranslate">
+<title>deriverge s.r.o.</title>
+<meta name="description" content="deriverge s.r.o. je softwarové studio v České republice. Vyvíjíme mobilní a webové aplikace pro firmy a provozujeme vlastní aplikace a datovou platformu.">
+<link rel="canonical" href="https://www.deriverge.com/">
+<meta name="theme-color" content="#0c0c0f" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f6f6f3" media="(prefers-color-scheme: light)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://api.apify.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/home.css">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="deriverge">
+<meta property="og:title" content="deriverge s.r.o.">
+<meta property="og:description" content="Softwarové studio. Mobilní a webové aplikace pro firmy, vlastní aplikace a datová platforma.">
+<meta property="og:url" content="https://www.deriverge.com/">
+<meta property="og:image" content="https://raw.githubusercontent.com/deriverge/deriverge/main/pictures/deriverge_logo-long.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/deriverge/deriverge/main/pictures/deriverge_logo-long.jpg">
+<script type="application/ld+json" translate="no">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "deriverge s.r.o.",
+  "url": "https://www.deriverge.com/",
+  "logo": "https://www.deriverge.com/android-chrome-512x512.png",
+  "email": "info@deriverge.com",
+  "telephone": "+420777849095",
+  "vatID": "CZ19456361",
+  "taxID": "19456361",
+  "foundingDate": "2023-06-20",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Korytná 201",
+    "postalCode": "687 52",
+    "addressLocality": "Korytná",
+    "addressCountry": "CZ"
+  },
+  "sameAs": ["https://apify.com/deriverge"]
+}
+</script>
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+<a class="skip" href="#main" data-en="Skip to content">Přeskočit na obsah</a>
 
-    <title>deriverge s.r.o.</title>
-    <meta name="description" content="deriverge s.r.o., vývojové studio. Mobilní a webové aplikace na míru.">
-    <link rel="canonical" href="https://www.deriverge.com/">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300..800;1,300..700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
-
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="deriverge s.r.o.">
-    <meta property="og:description" content="Vývojové studio. Mobilní a webové aplikace na míru.">
-    <meta property="og:url" content="https://www.deriverge.com/">
-    <meta property="og:image" content="https://raw.githubusercontent.com/deriverge/deriverge/main/pictures/deriverge_logo-long.jpg">
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:image" content="https://raw.githubusercontent.com/deriverge/deriverge/main/pictures/deriverge_logo-long.jpg">
-
-    <script type="application/ld+json" translate="no">
-    {
-      "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "deriverge s.r.o.",
-      "url": "https://www.deriverge.com/",
-      "email": "info@deriverge.com",
-      "telephone": "+420777849095",
-      "vatID": "CZ19456361",
-      "taxID": "19456361",
-      "foundingDate": "2023-06-20",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Korytná 201",
-        "postalCode": "687 52",
-        "addressLocality": "Korytná",
-        "addressCountry": "CZ"
-      }
-    }
-    </script>
-  </head>
-
-  <body>
-    <nav class="topbar">
-      <span class="tab" translate="no">deriverge.js</span>
+<header class="site-head" id="top">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="deriverge, domů"><span class="br">&lt;/</span>deriverge<span class="br">&gt;</span></a>
+    <nav class="nav" aria-label="Hlavní navigace">
+      <a class="nav-link" href="#sluzby" data-en="Services">Služby</a>
+      <a class="nav-link" href="#produkty" data-en="Products">Produkty</a>
+      <a class="nav-link" href="#data" data-en="Data">Data</a>
+      <a class="nav-link" href="#kontakt" data-en="Contact">Kontakt</a>
       <div class="lang" role="group" aria-label="Jazyk / Language">
-        <button type="button" class="lang-btn is-active" data-lang="cs">CS</button>
-        <span class="lang-sep">/</span>
-        <button type="button" class="lang-btn" data-lang="en">EN</button>
+        <button type="button" class="lang-btn is-active" data-lang="cs" aria-pressed="true">CS</button>
+        <button type="button" class="lang-btn" data-lang="en" aria-pressed="false">EN</button>
       </div>
     </nav>
+  </div>
+</header>
 
-    <main class="file">
-      <div class="gutter" aria-hidden="true"></div>
-
-      <div class="source">
-
-        <header class="hero">
-          <p class="cmt" data-en="// software studio · Czech Republic">// vývojové studio · Česká republika</p>
-          <h1 translate="no"><span class="punc">&lt;/</span>deriverge<span class="punc">&gt;</span><span class="caret" aria-hidden="true"></span></h1>
-          <p class="lede" data-en="Software built to order. Mobile, web, internal.">Software na míru. Mobilní, webový, interní.</p>
-        </header>
-
-        <section class="block" aria-labelledby="h-about">
-          <h2 id="h-about" class="sr-only" data-en="About the company">O společnosti</h2>
-          <pre class="obj" translate="no"><span class="kw">const</span> <span class="var">deriverge</span> <span class="punc">=</span> <span class="punc">{</span>
-  <span class="key">obor</span><span class="punc">:</span>      <span class="str">"vývoj software"</span><span class="punc">,</span>
-  <span class="key">platformy</span><span class="punc">:</span> <span class="punc">[</span><span class="str">"iOS"</span><span class="punc">,</span> <span class="str">"Android"</span><span class="punc">,</span> <span class="str">"web"</span><span class="punc">]</span><span class="punc">,</span>
-  <span class="key">stack</span><span class="punc">:</span>     <span class="punc">[</span><span class="str">"React Native"</span><span class="punc">,</span> <span class="str">"TypeScript"</span><span class="punc">,</span> <span class="str">"Node"</span><span class="punc">]</span><span class="punc">,</span>
-  <span class="key">sídlo</span><span class="punc">:</span>     <span class="str">"Korytná, CZ"</span>
-<span class="punc">}</span></pre>
-        </section>
-
-        <section class="block" aria-labelledby="h-services">
-          <p class="cmt" data-en="// what we do">// co děláme</p>
-          <h2 id="h-services" class="h2" data-en="Services">Služby</h2>
-
-          <ul class="cards">
-            <li class="card">
-              <span class="card-idx" translate="no">01</span>
-              <h3 data-en="Mobile applications">Mobilní aplikace</h3>
-              <p data-en="iOS and Android from one codebase. Including release to both stores.">iOS a Android z jedné kódové základny. Včetně vydání do obou obchodů.</p>
-            </li>
-            <li class="card">
-              <span class="card-idx" translate="no">02</span>
-              <h3 data-en="Web applications">Webové aplikace</h3>
-              <p data-en="Internal tools, portals, dashboards. Built for daily use, not for a demo.">Interní nástroje, portály, přehledy. Pro denní provoz, ne pro ukázku.</p>
-            </li>
-            <li class="card">
-              <span class="card-idx" translate="no">03</span>
-              <h3 data-en="Automation">Automatizace</h3>
-              <p data-en="Connecting systems that don't talk to each other. Removing the manual work.">Propojení systémů, které spolu nemluví. Odstranění ruční práce.</p>
-            </li>
-          </ul>
-        </section>
-
-        <section class="block" aria-labelledby="h-rules">
-          <p class="cmt" data-en="// how we work">// jak pracujeme</p>
-          <h2 id="h-rules" class="h2" data-en="Principles">Principy</h2>
-
-          <ul class="rules">
-            <li data-en="Scope agreed up front. The price does not move along the way.">Rozsah dohodneme předem. Cena se cestou nemění.</li>
-            <li data-en="You get the whole codebase. Including every credential.">Kód předáváme celý. Včetně všech přístupů.</li>
-            <li data-en="What we deploy, we can also maintain.">Co nasadíme, umíme i udržovat.</li>
-            <li data-en="We do not name our clients. Yours would not be named either.">O klientech mlčíme. O vás bychom mlčeli také.</li>
-          </ul>
-        </section>
-
-        <section class="block" aria-labelledby="h-products">
-          <p class="cmt" data-en="// our own products">// vlastní produkty</p>
-          <h2 id="h-products" class="h2" data-en="Products">Produkty</h2>
-
-          <ul class="cards">
-            <li class="card">
-              <span class="card-idx" translate="no">01</span>
-              <h3 translate="no"><a href="/tapkasa/pokladna.html" style="color:inherit">Tapkasa</a></h3>
-              <p data-en="A pocket POS for stalls, markets and festivals. Works offline, free for small events.">Pokladna do kapsy pro stánky, trhy a festivaly. Funguje i bez internetu, pro malé akce zdarma.</p>
-            </li>
-            <li class="card">
-              <span class="card-idx" translate="no">02</span>
-              <h3 translate="no">VZT Montér</h3>
-              <p data-en="A calculator for HVAC fitters. Offsets, pressure losses and PDF reports, right on site.">Kalkulačka pro montéry vzduchotechniky. Odskoky, tlakové ztráty a PDF protokoly přímo na stavbě.</p>
-            </li>
-            <li class="card">
-              <span class="card-idx" translate="no">03</span>
-              <h3 translate="no"><a href="/sealslim/" style="color:inherit">SealSlim</a></h3>
-              <p data-en="Photo compression right on your phone. Smaller photos for forms, e-mail and the web, nothing is uploaded.">Komprese fotek přímo v telefonu. Menší fotky pro formuláře, e-mail i web, nic se nikam nenahrává.</p>
-            </li>
-            <li class="card">
-              <span class="card-idx" translate="no">04</span>
-              <h3 translate="no"><a href="/fixbill/" style="color:inherit">Fixbill</a></h3>
-              <p data-en="Quotes and invoices from your phone for tradespeople and small businesses. The client signs on screen, the invoice carries a payment QR code.">Cenové nabídky a faktury z telefonu pro řemeslníky a živnostníky. Zákazník podepíše na displeji, faktura má QR platbu.</p>
-            </li>
-            <li class="card">
-              <span class="card-idx" translate="no">05</span>
-              <h3><a href="https://apify.com/deriverge" target="_blank" rel="noopener" style="color:inherit" data-en="Data on Apify">Data na Apify</a></h3>
-              <p data-en="Over 50 tools for collecting public data in Apify Store: jobs, company registers, sports and public tenders. You pay only for the records you get.">Přes 50 nástrojů na sběr veřejných dat v Apify Store: nabídky práce, obchodní rejstříky, sport a veřejné zakázky. Platí se jen za získané záznamy.</p>
-            </li>
-            <li class="card">
-              <span class="card-idx" translate="no">06</span>
-              <h3><a href="/tools/" style="color:inherit" data-en="Free tools">Nástroje zdarma</a></h3>
-              <p data-en="DNS, WHOIS, domain availability, the Wayback Machine, phone numbers and company lists by ATS. They run right in your browser.">DNS, WHOIS, dostupnost domén, Wayback Machine, telefonní čísla a seznamy firem podle ATS. Běží přímo v prohlížeči.</p>
-            </li>
-          </ul>
-        </section>
-
-        <section class="block block--last" aria-labelledby="h-contact">
-          <p class="cmt" data-en="// get in touch">// ozvěte se</p>
-          <h2 id="h-contact" class="h2" data-en="Contact">Kontakt</h2>
-
-          <div class="contact">
-            <a class="mail" href="mailto:info@deriverge.com" translate="no">info@deriverge.com</a>
-            <a class="tel" href="tel:+420777849095" translate="no">+420 777 849 095</a>
-          </div>
-
-          <div class="legal" translate="no">
-            <p><strong>deriverge s.r.o.</strong></p>
-            <p>Korytná 201, 687 52 Korytná, Česká republika</p>
-            <p>IČO: 19456361 &nbsp;<span class="punc">|</span>&nbsp; DIČ: CZ19456361</p>
-            <p>Zapsáno v obchodním rejstříku vedeném Krajským soudem v Brně, oddíl C, vložka 134680</p>
-          </div>
-        </section>
-
-        <p class="foot punc" translate="no">&lt;/html&gt;</p>
-
+<main id="main">
+  <section class="hero" aria-labelledby="hero-title">
+    <canvas class="hero-canvas" id="flow" aria-hidden="true"></canvas>
+    <div class="hero-shade" aria-hidden="true"></div>
+    <div class="wrap hero-inner">
+      <p class="eyebrow" data-en="Software studio · Czech Republic · since 2023">Softwarové studio · Česká republika · od 2023</p>
+      <h1 class="display hero-title" id="hero-title" data-en="We design, build and run software.">Navrhujeme, stavíme a provozujeme software.</h1>
+      <p class="lede hero-lede" data-en="Mobile and web applications for companies, and products of our own: four mobile apps and a data platform that reads the career sites of tens of thousands of companies every night.">Mobilní a webové aplikace pro firmy a vlastní produkty: čtyři mobilní aplikace a datová platforma, která každou noc přečte kariérní weby desítek tisíc firem.</p>
+      <div class="hero-cta">
+        <a class="btn" href="mailto:info@deriverge.com"><span data-en="Write to us">Napište nám</span> <span class="arr" aria-hidden="true">&rarr;</span></a>
+        <a class="btn btn--ghost" href="#produkty" data-en="What we run">Co provozujeme</a>
       </div>
-    </main>
+    </div>
 
-    <script>
-      (function () {
-        var gutter = document.querySelector('.gutter');
-        if (gutter) {
-          var out = '';
-          for (var i = 1; i <= 200; i++) { out += '<span>' + i + '</span>'; }
-          gutter.innerHTML = out;
-        }
+    <div class="wrap">
+      <div class="live" aria-live="polite">
+        <p class="live-label"><span class="dot" aria-hidden="true"></span><span data-en="Live from our data platform">Živě z naší datové platformy</span></p>
+        <dl class="live-grid">
+          <div class="live-item">
+            <dt data-en="open jobs in tonight's index">otevřených nabídek práce v dnešním indexu</dt>
+            <dd class="mono" data-live="jobs">1 740 189</dd>
+          </div>
+          <div class="live-item">
+            <dt data-en="companies in the index">firem v indexu</dt>
+            <dd class="mono" data-live="companies">47 967</dd>
+          </div>
+          <div class="live-item">
+            <dt data-en="index built">index sestaven</dt>
+            <dd class="mono" data-live="built">19. 10. 2026, 03:23 UTC</dd>
+          </div>
+          <div class="live-item">
+            <dt data-en="public data tools on Apify">veřejných datových nástrojů na Apify</dt>
+            <dd class="mono" data-live="actors">85</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </section>
 
-        var nodes = document.querySelectorAll('[data-en]');
-        for (var j = 0; j < nodes.length; j++) {
-          nodes[j].setAttribute('data-cs', nodes[j].textContent);
-        }
+  <section class="sec" id="sluzby" aria-labelledby="h-sluzby">
+    <div class="wrap">
+      <header class="sec-head" data-reveal>
+        <p class="eyebrow" data-en="For clients">Pro klienty</p>
+        <h2 class="display sec-title" id="h-sluzby" data-en="What we build">Co stavíme</h2>
+      </header>
+      <div class="svc">
+        <article class="svc-item" data-reveal style="--i:0">
+          <svg class="svc-ico" viewBox="0 0 40 40" aria-hidden="true"><rect x="11" y="4" width="18" height="32" rx="4"/><path d="M17 31h6"/></svg>
+          <h3 data-en="Mobile applications">Mobilní aplikace</h3>
+          <p data-en="iOS and Android from one codebase, including release to the App Store and Google Play and subscriptions through both stores.">iOS a Android z jedné kódové základny, včetně vydání do App Store a Google Play a předplatného přes oba obchody.</p>
+        </article>
+        <article class="svc-item" data-reveal style="--i:1">
+          <svg class="svc-ico" viewBox="0 0 40 40" aria-hidden="true"><rect x="4" y="7" width="32" height="22" rx="3"/><path d="M4 13h32M15 34h10M20 29v5"/></svg>
+          <h3 data-en="Web applications">Webové aplikace</h3>
+          <p data-en="Internal tools, customer portals and dashboards, designed for daily work rather than for a demo.">Interní nástroje, zákaznické portály a přehledy, navržené pro denní práci, ne pro ukázku.</p>
+        </article>
+        <article class="svc-item" data-reveal style="--i:2">
+          <svg class="svc-ico" viewBox="0 0 40 40" aria-hidden="true"><path d="M4 9c10 0 12 11 16 11S26 9 36 9M4 31c10 0 12-11 16-11s6 11 16 11"/><circle cx="20" cy="20" r="2.4"/></svg>
+          <h3 data-en="Data and automation">Data a automatizace</h3>
+          <p data-en="Collecting public data, connecting systems that do not talk to each other, and APIs with paid plans. We run the same methods on our own data platform.">Sběr veřejných dat, propojení systémů, které spolu nemluví, a API s placenými plány. Stejné postupy používáme na vlastní datové platformě.</p>
+        </article>
+      </div>
+    </div>
+  </section>
 
-        var buttons = document.querySelectorAll('.lang-btn');
+  <section class="sec" id="produkty" aria-labelledby="h-produkty">
+    <div class="wrap">
+      <header class="sec-head" data-reveal>
+        <p class="eyebrow" data-en="Our own products">Vlastní produkty</p>
+        <h2 class="display sec-title" id="h-produkty" data-en="Our own apps">Vlastní aplikace</h2>
+      </header>
+      <div class="tiles">
+        <a class="tile" href="/tapkasa/pokladna.html" data-reveal style="--i:0">
+          <span class="tile-top"><img class="tile-icon" src="/tapkasa/icon-192.png" width="52" height="52" alt="" loading="lazy"><span class="tile-kicker mono" data-en="point of sale">pokladna</span></span>
+          <h3>Tapkasa</h3>
+          <p data-en="A pocket point of sale for stalls, markets and festivals. Works without internet, free for small events.">Pokladna do kapsy pro stánky, trhy a festivaly. Funguje i bez internetu, pro malé akce zdarma.</p>
+          <span class="tile-go" aria-hidden="true">&rarr;</span>
+        </a>
+        <div class="tile" data-reveal style="--i:1">
+          <span class="tile-top"><img class="tile-icon" src="/vzt-monter/icon-192.png" width="52" height="52" alt="" loading="lazy"><span class="tile-kicker mono" data-en="HVAC calculator">kalkulačka VZT</span></span>
+          <h3>VZT Montér</h3>
+          <p data-en="A calculator for ventilation installers: offsets, pressure losses and PDF reports straight on the building site.">Kalkulačka pro montéry vzduchotechniky. Odskoky, tlakové ztráty a PDF protokoly přímo na stavbě.</p>
+        </div>
+        <a class="tile" href="/sealslim/" data-reveal style="--i:2">
+          <span class="tile-top"><img class="tile-icon" src="/sealslim/icon-192.png" width="52" height="52" alt="" loading="lazy"><span class="tile-kicker mono" data-en="photo compression">komprese fotek</span></span>
+          <h3>SealSlim</h3>
+          <p data-en="Photo compression right on the phone. Smaller photos for forms, e-mail and the web; nothing is uploaded anywhere.">Komprese fotek přímo v telefonu. Menší fotky pro formuláře, e-mail i web, nic se nikam nenahrává.</p>
+          <span class="tile-go" aria-hidden="true">&rarr;</span>
+        </a>
+        <a class="tile" href="/fixbill/" data-reveal style="--i:3">
+          <span class="tile-top"><img class="tile-icon" src="/fixbill/icon-192.png" width="52" height="52" alt="" loading="lazy"><span class="tile-kicker mono" data-en="quotes and invoices">nabídky a faktury</span></span>
+          <h3>Fixbill</h3>
+          <p data-en="Quotes and invoices from the phone for tradespeople. The customer signs on the screen, the invoice carries a QR payment.">Cenové nabídky a faktury z telefonu pro řemeslníky a živnostníky. Zákazník podepíše na displeji, faktura má QR platbu.</p>
+          <span class="tile-go" aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+    </div>
+  </section>
 
-        function setLang(lang) {
-          for (var k = 0; k < nodes.length; k++) {
-            var val = nodes[k].getAttribute('data-' + lang);
-            if (val) { nodes[k].textContent = val; }
-          }
-          document.documentElement.lang = lang;
-          for (var m = 0; m < buttons.length; m++) {
-            buttons[m].classList.toggle('is-active', buttons[m].getAttribute('data-lang') === lang);
-          }
-          try { localStorage.setItem('dv-lang', lang); } catch (e) {}
-        }
+  <section class="sec sec--data" id="data" aria-labelledby="h-data">
+    <div class="wrap">
+      <header class="sec-head" data-reveal>
+        <p class="eyebrow" data-en="Data platform">Datová platforma</p>
+        <h2 class="display sec-title" id="h-data" data-en="Public data, collected properly">Veřejná data, sebraná pořádně</h2>
+        <p class="lede" data-en="Our sources are public data and official interfaces. We do not log in, do not bypass bot protection and do not collect personal profiles.">Naše zdroje jsou veřejná data a oficiální rozhraní. Nepřihlašujeme se, neobcházíme ochranu proti robotům a nesbíráme osobní profily.</p>
+      </header>
+      <div class="data-grid">
+        <a class="data-card data-card--wide" href="/tools/job-data-feed/" data-reveal style="--i:0">
+          <span class="tile-kicker mono" data-en="daily file or API">denní soubor nebo API</span>
+          <h3 data-en="Job data feed">Export nabídek práce</h3>
+          <p data-en="Every open job from the career sites of more than 47,000 companies on 14 applicant tracking systems, delivered daily. For job boards, HR products and labour market research.">Všechny otevřené nabídky z kariérních webů více než 47 000 firem na 14 náborových systémech, každý den. Pro pracovní portály, HR produkty a analýzy trhu práce.</p>
+          <span class="tile-go" aria-hidden="true">&rarr;</span>
+        </a>
+        <a class="data-card" href="https://apify.com/deriverge" target="_blank" rel="noopener" data-reveal style="--i:1">
+          <span class="tile-kicker mono">Apify Store</span>
+          <h3><span data-live="actors">85</span> <span data-en="data tools">datových nástrojů</span></h3>
+          <p data-en="Job listings, events, company registers, sport and more. You pay only for the records you get.">Nabídky práce, akce, obchodní rejstříky, sport a další. Platí se jen za získané záznamy.</p>
+          <span class="tile-go" aria-hidden="true">&nearr;</span>
+        </a>
+        <a class="data-card" href="https://rapidapi.com/David%C4%8Cag%C3%A1nek/api/job-search-career-sites-and-ats" target="_blank" rel="noopener" data-reveal style="--i:2">
+          <span class="tile-kicker mono">RapidAPI</span>
+          <h3 data-en="4 APIs with monthly plans">4 API s měsíčními plány</h3>
+          <p data-en="Job search, domain tools, phone number validation and URL status, with a free tier.">Vyhledávání nabídek práce, doménové nástroje, ověření telefonních čísel a stav URL, s bezplatnou úrovní.</p>
+          <span class="tile-go" aria-hidden="true">&nearr;</span>
+        </a>
+        <a class="data-card" href="/tools/" data-reveal style="--i:3">
+          <span class="tile-kicker mono" data-en="in the browser">v prohlížeči</span>
+          <h3 data-en="Free tools">Nástroje zdarma</h3>
+          <p data-en="DNS, WHOIS, domain availability, Wayback Machine, phone numbers and companies by applicant tracking system.">DNS, WHOIS, dostupnost domén, Wayback Machine, telefonní čísla a seznamy firem podle náborového systému.</p>
+          <span class="tile-go" aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+    </div>
+  </section>
 
-        for (var n = 0; n < buttons.length; n++) {
-          buttons[n].addEventListener('click', function () {
-            setLang(this.getAttribute('data-lang'));
-          });
-        }
+  <section class="sec" id="principy" aria-labelledby="h-principy">
+    <div class="wrap principles">
+      <header class="sec-head" data-reveal>
+        <p class="eyebrow" data-en="How we work">Jak pracujeme</p>
+        <h2 class="display sec-title" id="h-principy" data-en="Four rules we keep">Čtyři pravidla, která držíme</h2>
+      </header>
+      <ul class="rules">
+        <li data-reveal style="--i:0"><span class="rule-mark mono" aria-hidden="true">&lt;/&gt;</span><p data-en="We agree the scope up front. The price does not change on the way.">Rozsah dohodneme předem. Cena se cestou nemění.</p></li>
+        <li data-reveal style="--i:1"><span class="rule-mark mono" aria-hidden="true">&lt;/&gt;</span><p data-en="You get all of the code, including every access.">Kód předáváme celý, včetně všech přístupů.</p></li>
+        <li data-reveal style="--i:2"><span class="rule-mark mono" aria-hidden="true">&lt;/&gt;</span><p data-en="What we ship, we can also maintain.">Co nasadíme, umíme i udržovat.</p></li>
+        <li data-reveal style="--i:3"><span class="rule-mark mono" aria-hidden="true">&lt;/&gt;</span><p data-en="We do not talk about our clients. We would not talk about you either.">O klientech mlčíme. O vás bychom mlčeli také.</p></li>
+      </ul>
+    </div>
+  </section>
 
-        var saved = null;
-        try { saved = localStorage.getItem('dv-lang'); } catch (e) {}
-        if (!saved && (navigator.language || '').slice(0, 2) !== 'cs') { saved = 'en'; }
-        if (saved === 'en') { setLang('en'); }
+  <section class="sec sec--contact" id="kontakt" aria-labelledby="h-kontakt">
+    <div class="wrap contact">
+      <div data-reveal>
+        <p class="eyebrow" data-en="Contact">Kontakt</p>
+        <h2 class="display contact-title" id="h-kontakt"><a href="mailto:info@deriverge.com">info@deriverge.com</a></h2>
+        <p class="lede" data-en="Write what you need to build or what data you need. We reply in Czech or English.">Napište, co potřebujete postavit nebo jaká data hledáte. Odpovídáme česky i anglicky.</p>
+      </div>
+      <dl class="contact-meta" data-reveal style="--i:1">
+        <div><dt data-en="Phone">Telefon</dt><dd><a href="tel:+420777849095">+420 777 849 095</a></dd></div>
+        <div><dt data-en="Company">Společnost</dt><dd>deriverge s.r.o.</dd></div>
+        <div><dt data-en="Registered office">Sídlo</dt><dd>Korytná 201, 687 52 Korytná, <span data-en="Czech Republic">Česká republika</span></dd></div>
+        <div><dt data-en="Company and VAT ID">IČO a DIČ</dt><dd class="mono">19456361 · CZ19456361</dd></div>
+      </dl>
+    </div>
+  </section>
+</main>
 
-        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-          var blocks = document.querySelectorAll('.lede, .block, .foot');
-          for (var p = 0; p < blocks.length; p++) {
-            blocks[p].style.animationDelay = (0.45 + p * 0.12) + 's';
-            blocks[p].classList.add('reveal');
-          }
-        }
-      })();
-    </script>
-  </body>
+<footer class="site-foot">
+  <div class="wrap">
+    <div>
+      <a class="brand" href="/"><span class="br">&lt;/</span>deriverge<span class="br">&gt;</span></a>
+      <p style="margin-top:12px" data-en="Software studio in the Czech Republic.">Softwarové studio v České republice.</p>
+    </div>
+    <div>
+      <h4 data-en="Products">Produkty</h4>
+      <ul>
+        <li><a href="/tapkasa/pokladna.html">Tapkasa</a></li>
+        <li><a href="/sealslim/">SealSlim</a></li>
+        <li><a href="/fixbill/">Fixbill</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Data</h4>
+      <ul>
+        <li><a href="/tools/job-data-feed/" data-en="Job data feed">Export nabídek práce</a></li>
+        <li><a href="https://apify.com/deriverge" target="_blank" rel="noopener">Apify Store</a></li>
+        <li><a href="/tools/" data-en="Free tools">Nástroje zdarma</a></li>
+      </ul>
+    </div>
+    <p class="legal" data-en="deriverge s.r.o., Korytná 201, 687 52 Korytná, Czech Republic. Company ID 19456361, VAT ID CZ19456361. Registered in the Commercial Register kept by the Regional Court in Brno, section C, file 134680.">deriverge s.r.o., Korytná 201, 687 52 Korytná, Česká republika. IČO 19456361, DIČ CZ19456361. Zapsáno v obchodním rejstříku vedeném Krajským soudem v Brně, oddíl C, vložka 134680.</p>
+  </div>
+</footer>
+
+<script src="/js/site.js" defer></script>
+</body>
 </html>

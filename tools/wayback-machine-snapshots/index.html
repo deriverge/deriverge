@@ -9,7 +9,7 @@
 <meta name="robots" content="index, follow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300..800;1,300..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/style.css">
 <link rel="stylesheet" href="/tools/tools.css">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -129,15 +129,18 @@
 </script>
 </head>
 <body>
-<nav class="topbar">
-  <a class="tab" href="/tools/" translate="no">tools/wayback-machine-snapshots.js</a>
-  <div class="crumbs"><a href="/">deriverge</a><span class="punc">/</span><a href="/tools/">tools</a></div>
-</nav>
-<main class="file wide">
-  <div class="gutter" aria-hidden="true"></div>
-  <div class="source">
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head site-head--page">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="deriverge home"><span class="br">&lt;/</span>deriverge<span class="br">&gt;</span></a>
+    <div class="crumb"><a href="/tools/">tools</a></div>
+    <nav class="nav" aria-label="Main"><a class="nav-link" href="/tools/">Tools</a><a class="nav-link" href="/tools/job-data-feed/">Job data feed</a><a class="nav-link" href="/#kontakt">Contact</a></nav>
+  </div>
+</header>
+<main id="main" class="page">
+  <div class="wrap">
     <header class="hero hero--tool">
-      <p class="cmt">// free tool · runs in your browser</p>
+      <p class="cmt">free tool · runs in your browser</p>
       <h1 class="h1-tool">Wayback Machine snapshot finder</h1>
       <p class="lede">See when a page or domain was first saved by the Internet Archive, its most recent capture and the capture closest to a date you choose, for up to 20 URLs at once, with direct links to every archived copy.</p>
     </header>
@@ -157,7 +160,7 @@
       <div class="results" id="wb-results"></div>
     </section>
     <section class="block" aria-labelledby="h-how">
-      <p class="cmt">// how it works</p>
+      <p class="cmt">how it works</p>
       <h2 id="h-how" class="h2">How the snapshot finder works</h2>
       <div class="prose">
         <p>The Internet Archive's <strong>Wayback Machine</strong> has saved copies of web pages since 1996. For every URL this page asks the archive's <strong>Availability API</strong> three questions: the capture closest to 1 January 1996 (the first one), the capture closest to today (the latest one) and, if you pick a date, the capture closest to that date.</p>
@@ -166,7 +169,7 @@
       </div>
     </section>
     <section class="block" aria-labelledby="h-faq">
-      <p class="cmt">// questions</p>
+      <p class="cmt">questions</p>
       <h2 id="h-faq" class="h2">Frequently asked questions</h2>
 <div class="faq">
 <details><summary>How do I find when a website was first archived?</summary><div class="a"><p>Enter the domain above. <strong>First capture</strong> shows the date of the oldest snapshot when the Availability API reports it; otherwise <strong>open first capture</strong> takes you to the oldest capture in the Wayback Machine, where the date is in the address and the toolbar.</p></div></details>
@@ -178,19 +181,20 @@
 </div>
     </section>
     <section class="block" aria-labelledby="h-more-tools">
-      <p class="cmt">// more free tools</p>
+      <p class="cmt">more free tools</p>
       <h2 id="h-more-tools" class="h2">More free tools</h2>
       <ul class="linklist"><li><a href="/tools/bulk-dns-lookup/">Bulk DNS lookup</a><span>A, MX, TXT, NS, CAA for 20 domains</span></li><li><a href="/tools/rdap-whois-lookup/">RDAP WHOIS lookup</a><span>registrar, expiry, nameservers</span></li><li><a href="/tools/domain-availability-checker/">Domain availability checker</a><span>20 names across TLDs</span></li><li><a href="/tools/phone-number-validator/">Phone number validator</a><span>50 numbers, E.164 and type</span></li><li><a href="/tools/companies-using-ats/">Which ATS do companies use?</a><span>14 systems compared</span></li></ul>
     </section>
-    <section class="block block--last">
-<footer class="site-foot">
-  <p>Free tools by <a href="/">deriverge s.r.o.</a>, a software studio in the Czech Republic. Our data actors are in <a data-actor="" data-campaign="wayback-machine-snapshots" href="https://apify.com/deriverge?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=wayback-machine-snapshots&amp;fpr=b6jtb8" target="_blank" rel="noopener sponsored">Apify Store</a>. Links to Apify carry our affiliate code: if you become a paying Apify customer, Apify pays us a commission at no extra cost to you.</p>
-  <p>Questions or a company listed by mistake: <a href="mailto:info@deriverge.com">info@deriverge.com</a>. The tools are provided as is, without warranty.</p>
-</footer>
-    </section>
-    <p class="foot punc" translate="no">&lt;/html&gt;</p>
   </div>
 </main>
+<footer class="site-foot site-foot--tools">
+  <div class="wrap">
+<div class="foot-brand"><a class="brand" href="/"><span class="br">&lt;/</span>deriverge<span class="br">&gt;</span></a></div>
+<div class="foot-text">  <p>Free tools by <a href="/">deriverge s.r.o.</a>, a software studio in the Czech Republic. Our data actors are in <a data-actor="" data-campaign="wayback-machine-snapshots" href="https://apify.com/deriverge?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=wayback-machine-snapshots&amp;fpr=b6jtb8" target="_blank" rel="noopener sponsored">Apify Store</a>. Links to Apify carry our affiliate code: if you become a paying Apify customer, Apify pays us a commission at no extra cost to you.</p>
+  <p>Questions or a company listed by mistake: <a href="mailto:info@deriverge.com">info@deriverge.com</a>. The tools are provided as is, without warranty.</p>
+</div>
+  </div>
+</footer>
 <script src="/tools/config.js"></script>
 <script src="/tools/common.js"></script>
 <script src="/tools/js/wayback.js" defer></script>

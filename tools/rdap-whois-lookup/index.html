@@ -9,7 +9,7 @@
 <meta name="robots" content="index, follow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300..800;1,300..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/style.css">
 <link rel="stylesheet" href="/tools/tools.css">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -129,15 +129,18 @@
 </script>
 </head>
 <body>
-<nav class="topbar">
-  <a class="tab" href="/tools/" translate="no">tools/rdap-whois-lookup.js</a>
-  <div class="crumbs"><a href="/">deriverge</a><span class="punc">/</span><a href="/tools/">tools</a></div>
-</nav>
-<main class="file wide">
-  <div class="gutter" aria-hidden="true"></div>
-  <div class="source">
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head site-head--page">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="deriverge home"><span class="br">&lt;/</span>deriverge<span class="br">&gt;</span></a>
+    <div class="crumb"><a href="/tools/">tools</a></div>
+    <nav class="nav" aria-label="Main"><a class="nav-link" href="/tools/">Tools</a><a class="nav-link" href="/tools/job-data-feed/">Job data feed</a><a class="nav-link" href="/#kontakt">Contact</a></nav>
+  </div>
+</header>
+<main id="main" class="page">
+  <div class="wrap">
     <header class="hero hero--tool">
-      <p class="cmt">// free tool · runs in your browser</p>
+      <p class="cmt">free tool · runs in your browser</p>
       <h1 class="h1-tool">RDAP WHOIS lookup</h1>
       <p class="lede">Find the registrar of a domain, when it was registered and when it expires, its status codes and nameservers. Your browser asks the registry's own RDAP server, the modern replacement for WHOIS, for up to 20 domains at once.</p>
     </header>
@@ -153,7 +156,7 @@
       <div class="results" id="whois-results"></div>
     </section>
     <aside class="block cta" aria-label="WHOIS Domain Lookup on Apify">
-      <p class="cmt">// run it at scale</p>
+      <p class="cmt">run it at scale</p>
       <h2>WHOIS Domain Lookup on Apify</h2>
       <p>The same job runs as <strong>WHOIS Domain Lookup</strong> in Apify Store when one browser tab is not enough.</p>
       <ul><li>Thousands of domains, URLs or e-mail addresses per run, one row each</li><li>RDAP with a WHOIS fallback for .de, .eu, .it, .jp and other registries without RDAP</li><li>Registrar, creation and expiry dates, domain age, status codes, nameservers and DNSSEC</li><li>Scheduled runs that return only changed domains; API and CSV, Excel or JSON export</li></ul>
@@ -162,7 +165,7 @@
       <p class="more">Also: <a class="" data-actor="domain-whois-dns-lookup" data-campaign="rdap-whois-lookup" href="https://apify.com/deriverge/domain-whois-dns-lookup?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=rdap-whois-lookup&amp;fpr=b6jtb8" target="_blank" rel="noopener sponsored">Domain WHOIS and DNS Lookup</a> (from $1.00 per 1,000 domains)</p>
     </aside>
     <section class="block" aria-labelledby="h-rdap">
-      <p class="cmt">// how it works</p>
+      <p class="cmt">how it works</p>
       <h2 id="h-rdap" class="h2">RDAP, the successor of WHOIS</h2>
       <div class="prose">
         <p><strong>RDAP</strong> (Registration Data Access Protocol) is the structured, JSON based replacement for the old text WHOIS service. ICANN requires it from every generic top-level domain, and many country registries offer it too. This page loads the official IANA list of RDAP servers, then your browser asks the registry of each domain directly.</p>
@@ -173,7 +176,7 @@
       <div class="tbl-wrap"><table class="tbl tbl--fit"><thead><tr><th>Status</th><th>Meaning</th></tr></thead><tbody><tr><td class="k">clientTransferProhibited</td><td>The registrar locked transfers to another registrar. Normal for most domains; it protects against hijacking.</td></tr><tr><td class="k">serverTransferProhibited</td><td>The registry locked transfers, often for high-value domains or during a dispute.</td></tr><tr><td class="k">clientDeleteProhibited, clientUpdateProhibited</td><td>The registrar blocked deletion or changes. Also a normal protection.</td></tr><tr><td class="k">clientHold, serverHold</td><td>The domain is not published in DNS, so websites and e-mail on it stop working. Often unpaid renewal or a legal issue.</td></tr><tr><td class="k">autoRenewPeriod</td><td>The registry renewed the domain automatically and the registrar can still cancel the renewal.</td></tr><tr><td class="k">redemptionPeriod</td><td>The domain expired and was deleted by the registrar. The holder can still restore it, usually for a fee.</td></tr><tr><td class="k">pendingDelete</td><td>The domain will be released within days. After that, anyone can register it.</td></tr></tbody></table></div>
     </section>
     <section class="block" aria-labelledby="h-faq">
-      <p class="cmt">// questions</p>
+      <p class="cmt">questions</p>
       <h2 id="h-faq" class="h2">Frequently asked questions</h2>
 <div class="faq">
 <details><summary>What is the difference between RDAP and WHOIS?</summary><div class="a"><p>Both return the registration record of a domain. WHOIS is plain text in a different layout for every registry, over its own network port. RDAP uses HTTPS and JSON with fixed field names, so dates, status codes and nameservers mean the same thing everywhere.</p></div></details>
@@ -185,19 +188,20 @@
 </div>
     </section>
     <section class="block" aria-labelledby="h-more-tools">
-      <p class="cmt">// more free tools</p>
+      <p class="cmt">more free tools</p>
       <h2 id="h-more-tools" class="h2">More free tools</h2>
       <ul class="linklist"><li><a href="/tools/bulk-dns-lookup/">Bulk DNS lookup</a><span>A, MX, TXT, NS, CAA for 20 domains</span></li><li><a href="/tools/domain-availability-checker/">Domain availability checker</a><span>20 names across TLDs</span></li><li><a href="/tools/wayback-machine-snapshots/">Wayback Machine snapshot finder</a><span>first, latest and closest capture</span></li><li><a href="/tools/phone-number-validator/">Phone number validator</a><span>50 numbers, E.164 and type</span></li><li><a href="/tools/companies-using-ats/">Which ATS do companies use?</a><span>14 systems compared</span></li></ul>
     </section>
-    <section class="block block--last">
-<footer class="site-foot">
-  <p>Free tools by <a href="/">deriverge s.r.o.</a>, a software studio in the Czech Republic. Our data actors are in <a data-actor="" data-campaign="rdap-whois-lookup" href="https://apify.com/deriverge?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=rdap-whois-lookup&amp;fpr=b6jtb8" target="_blank" rel="noopener sponsored">Apify Store</a>. Links to Apify carry our affiliate code: if you become a paying Apify customer, Apify pays us a commission at no extra cost to you.</p>
-  <p>Questions or a company listed by mistake: <a href="mailto:info@deriverge.com">info@deriverge.com</a>. The tools are provided as is, without warranty.</p>
-</footer>
-    </section>
-    <p class="foot punc" translate="no">&lt;/html&gt;</p>
   </div>
 </main>
+<footer class="site-foot site-foot--tools">
+  <div class="wrap">
+<div class="foot-brand"><a class="brand" href="/"><span class="br">&lt;/</span>deriverge<span class="br">&gt;</span></a></div>
+<div class="foot-text">  <p>Free tools by <a href="/">deriverge s.r.o.</a>, a software studio in the Czech Republic. Our data actors are in <a data-actor="" data-campaign="rdap-whois-lookup" href="https://apify.com/deriverge?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=rdap-whois-lookup&amp;fpr=b6jtb8" target="_blank" rel="noopener sponsored">Apify Store</a>. Links to Apify carry our affiliate code: if you become a paying Apify customer, Apify pays us a commission at no extra cost to you.</p>
+  <p>Questions or a company listed by mistake: <a href="mailto:info@deriverge.com">info@deriverge.com</a>. The tools are provided as is, without warranty.</p>
+</div>
+  </div>
+</footer>
 <script src="/tools/config.js"></script>
 <script src="/tools/common.js"></script>
 <script src="/tools/js/rdap-core.js" defer></script>

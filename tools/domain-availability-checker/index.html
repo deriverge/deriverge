@@ -9,7 +9,7 @@
 <meta name="robots" content="index, follow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300..800;1,300..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/style.css">
 <link rel="stylesheet" href="/tools/tools.css">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -129,15 +129,18 @@
 </script>
 </head>
 <body>
-<nav class="topbar">
-  <a class="tab" href="/tools/" translate="no">tools/domain-availability-checker.js</a>
-  <div class="crumbs"><a href="/">deriverge</a><span class="punc">/</span><a href="/tools/">tools</a></div>
-</nav>
-<main class="file wide">
-  <div class="gutter" aria-hidden="true"></div>
-  <div class="source">
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head site-head--page">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="deriverge home"><span class="br">&lt;/</span>deriverge<span class="br">&gt;</span></a>
+    <div class="crumb"><a href="/tools/">tools</a></div>
+    <nav class="nav" aria-label="Main"><a class="nav-link" href="/tools/">Tools</a><a class="nav-link" href="/tools/job-data-feed/">Job data feed</a><a class="nav-link" href="/#kontakt">Contact</a></nav>
+  </div>
+</header>
+<main id="main" class="page">
+  <div class="wrap">
     <header class="hero hero--tool">
-      <p class="cmt">// free tool · runs in your browser</p>
+      <p class="cmt">free tool · runs in your browser</p>
       <h1 class="h1-tool">Bulk domain availability checker</h1>
       <p class="lede">Type up to 20 names, pick the extensions and see which domains are still unregistered. Every answer comes straight from the registry over RDAP, and your searches never pass through a reseller.</p>
     </header>
@@ -154,7 +157,7 @@
       <div class="results" id="avail-results"></div>
     </section>
     <aside class="block cta" aria-label="Domain Availability Checker on Apify">
-      <p class="cmt">// run it at scale</p>
+      <p class="cmt">run it at scale</p>
       <h2>Domain Availability Checker on Apify</h2>
       <p>The same job runs as <strong>Domain Availability Checker</strong> in Apify Store when one browser tab is not enough.</p>
       <ul><li>Thousands of name and extension combinations per run, one row each</li><li>RDAP plus WHOIS for registries without RDAP, such as .de, .eu and .it, with DNS as the last resort</li><li>Registrar, registration and expiry dates for names that are taken</li><li>Schedules to watch names you want, API and CSV, Excel or JSON export</li></ul>
@@ -163,7 +166,7 @@
       <p class="more">Also: <a class="" data-actor="whois-domain-lookup" data-campaign="domain-availability-checker" href="https://apify.com/deriverge/whois-domain-lookup?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=domain-availability-checker&amp;fpr=b6jtb8" target="_blank" rel="noopener sponsored">WHOIS Domain Lookup</a> (from $1.00 per 1,000 domains)</p>
     </aside>
     <section class="block" aria-labelledby="h-caveat">
-      <p class="cmt">// read this before you buy</p>
+      <p class="cmt">read this before you buy</p>
       <h2 id="h-caveat" class="h2">What &quot;likely available&quot; means</h2>
       <div class="prose">
         <p>Each check asks the registry of the extension over <strong>RDAP</strong>. When the registry answers <strong>404 Not Found</strong>, it has no registration record for the name, which almost always means you can register it. It is still not a guarantee:</p>
@@ -177,7 +180,7 @@
       </div>
     </section>
     <section class="block" aria-labelledby="h-faq">
-      <p class="cmt">// questions</p>
+      <p class="cmt">questions</p>
       <h2 id="h-faq" class="h2">Frequently asked questions</h2>
 <div class="faq">
 <details><summary>How does the checker know if a domain is available?</summary><div class="a"><p>It asks the registry that runs the extension, for example Verisign for <code>.com</code>, over RDAP. A 404 answer means there is no registration record for the name.</p></div></details>
@@ -189,19 +192,20 @@
 </div>
     </section>
     <section class="block" aria-labelledby="h-more-tools">
-      <p class="cmt">// more free tools</p>
+      <p class="cmt">more free tools</p>
       <h2 id="h-more-tools" class="h2">More free tools</h2>
       <ul class="linklist"><li><a href="/tools/bulk-dns-lookup/">Bulk DNS lookup</a><span>A, MX, TXT, NS, CAA for 20 domains</span></li><li><a href="/tools/rdap-whois-lookup/">RDAP WHOIS lookup</a><span>registrar, expiry, nameservers</span></li><li><a href="/tools/wayback-machine-snapshots/">Wayback Machine snapshot finder</a><span>first, latest and closest capture</span></li><li><a href="/tools/phone-number-validator/">Phone number validator</a><span>50 numbers, E.164 and type</span></li><li><a href="/tools/companies-using-ats/">Which ATS do companies use?</a><span>14 systems compared</span></li></ul>
     </section>
-    <section class="block block--last">
-<footer class="site-foot">
-  <p>Free tools by <a href="/">deriverge s.r.o.</a>, a software studio in the Czech Republic. Our data actors are in <a data-actor="" data-campaign="domain-availability-checker" href="https://apify.com/deriverge?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=domain-availability-checker&amp;fpr=b6jtb8" target="_blank" rel="noopener sponsored">Apify Store</a>. Links to Apify carry our affiliate code: if you become a paying Apify customer, Apify pays us a commission at no extra cost to you.</p>
-  <p>Questions or a company listed by mistake: <a href="mailto:info@deriverge.com">info@deriverge.com</a>. The tools are provided as is, without warranty.</p>
-</footer>
-    </section>
-    <p class="foot punc" translate="no">&lt;/html&gt;</p>
   </div>
 </main>
+<footer class="site-foot site-foot--tools">
+  <div class="wrap">
+<div class="foot-brand"><a class="brand" href="/"><span class="br">&lt;/</span>deriverge<span class="br">&gt;</span></a></div>
+<div class="foot-text">  <p>Free tools by <a href="/">deriverge s.r.o.</a>, a software studio in the Czech Republic. Our data actors are in <a data-actor="" data-campaign="domain-availability-checker" href="https://apify.com/deriverge?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=domain-availability-checker&amp;fpr=b6jtb8" target="_blank" rel="noopener sponsored">Apify Store</a>. Links to Apify carry our affiliate code: if you become a paying Apify customer, Apify pays us a commission at no extra cost to you.</p>
+  <p>Questions or a company listed by mistake: <a href="mailto:info@deriverge.com">info@deriverge.com</a>. The tools are provided as is, without warranty.</p>
+</div>
+  </div>
+</footer>
 <script src="/tools/config.js"></script>
 <script src="/tools/common.js"></script>
 <script src="/tools/js/rdap-core.js" defer></script>

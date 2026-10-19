@@ -9,7 +9,7 @@
 <meta name="robots" content="index, follow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300..800;1,300..700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/style.css">
 <link rel="stylesheet" href="/tools/tools.css">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -90,47 +90,51 @@
 </script>
 </head>
 <body>
-<nav class="topbar">
-  <a class="tab" href="/tools/" translate="no">tools/index.js</a>
-  <div class="crumbs"><a href="/">deriverge</a><span class="punc">/</span><a href="/tools/">tools</a></div>
-</nav>
-<main class="file wide">
-  <div class="gutter" aria-hidden="true"></div>
-  <div class="source">
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head site-head--page">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="deriverge home"><span class="br">&lt;/</span>deriverge<span class="br">&gt;</span></a>
+    <div class="crumb"><a href="/tools/">tools</a></div>
+    <nav class="nav" aria-label="Main"><a class="nav-link" href="/tools/" aria-current="page">Tools</a><a class="nav-link" href="/tools/job-data-feed/">Job data feed</a><a class="nav-link" href="/#kontakt">Contact</a></nav>
+  </div>
+</header>
+<main id="main" class="page">
+  <div class="wrap">
     <header class="hero hero--tool">
-      <p class="cmt">// free tools · no signup</p>
+      <p class="cmt">free tools · no signup</p>
       <h1 class="h1-tool">Free data tools</h1>
       <p class="lede">Small, fast tools for domains, DNS, web archives, phone numbers and hiring data. They run in your browser, and each one has a bulk version on Apify for when you need thousands of rows.</p>
     </header>
     <section class="block" aria-labelledby="h-tools">
-      <p class="cmt">// tools</p>
+      <p class="cmt">tools</p>
       <h2 id="h-tools" class="h2">Tools</h2>
       <ul class="cards"><li><a class="card" href="/tools/bulk-dns-lookup/"><span class="card-idx">01</span><h3>Bulk DNS lookup</h3><p>A, AAAA, MX, TXT, NS, CNAME, CAA, SOA and DMARC for up to 20 domains, over DNS over HTTPS.</p><span class="card-meta">Bulk version on Apify from $0.80 per 1,000</span></a></li><li><a class="card" href="/tools/rdap-whois-lookup/"><span class="card-idx">02</span><h3>RDAP WHOIS lookup</h3><p>Registrar, creation and expiry dates, status codes and nameservers, straight from the registry.</p><span class="card-meta">Bulk version on Apify from $1.00 per 1,000</span></a></li><li><a class="card" href="/tools/domain-availability-checker/"><span class="card-idx">03</span><h3>Domain availability checker</h3><p>Up to 20 names across .com, .io, .ai, .dev and 20 more extensions, checked with the registries.</p><span class="card-meta">Bulk version on Apify from $0.50 per 1,000</span></a></li><li><a class="card" href="/tools/wayback-machine-snapshots/"><span class="card-idx">04</span><h3>Wayback Machine snapshot finder</h3><p>First, latest and closest-to-date captures of up to 20 URLs, with links to every archived copy.</p><span class="card-meta"></span></a></li><li><a class="card" href="/tools/phone-number-validator/"><span class="card-idx">05</span><h3>Phone number validator</h3><p>Up to 50 numbers: valid or not, E.164, national format, line type and country, offline.</p><span class="card-meta">Bulk version on Apify from $0.55 per 1,000</span></a></li><li><a class="card" href="/tools/companies-using-ats/"><span class="card-idx">06</span><h3>Which ATS do companies use?</h3><p>38,256 companies on 14 applicant tracking systems, a company lookup and an ATS detector.</p><span class="card-meta">Bulk version on Apify from $0.50 per 1,000</span></a></li></ul>
     </section>
     <section class="block" aria-labelledby="h-data">
-      <p class="cmt">// data</p>
+      <p class="cmt">data</p>
       <h2 id="h-data" class="h2">Companies by applicant tracking system</h2>
       <div class="prose"><p>Lists of employers per ATS, built from 1,739,970 open jobs on public career sites. Search, sort and download each list.</p></div>
       <ul class="linklist"><li><a href="/tools/companies-using-bamboohr/">Companies using BambooHR</a><span>6,272</span></li><li><a href="/tools/companies-using-greenhouse/">Companies using Greenhouse</a><span>5,532</span></li><li><a href="/tools/companies-using-workable/">Companies using Workable</a><span>5,217</span></li><li><a href="/tools/companies-using-ashby/">Companies using Ashby</a><span>3,437</span></li><li><a href="/tools/companies-using-smartrecruiters/">Companies using SmartRecruiters</a><span>3,162</span></li><li><a href="/tools/companies-using-workday/">Companies using Workday</a><span>2,303</span></li><li><a href="/tools/companies-using-personio/">Companies using Personio</a><span>2,073</span></li><li><a href="/tools/companies-using-breezy/">Companies using Breezy HR</a><span>2,032</span></li><li><a href="/tools/companies-using-icims/">Companies using iCIMS</a><span>1,969</span></li><li><a href="/tools/companies-using-lever/">Companies using Lever</a><span>1,715</span></li><li><a href="/tools/companies-using-rippling/">Companies using Rippling</a><span>1,410</span></li><li><a href="/tools/companies-using-teamtailor/">Companies using Teamtailor</a><span>1,352</span></li><li><a href="/tools/companies-using-oracle/">Companies using Oracle Recruiting Cloud</a><span>904</span></li><li><a href="/tools/companies-using-recruitee/">Companies using Recruitee</a><span>878</span></li></ul>
       <div class="prose"><p>Need every job, every day? The <a href="/tools/job-data-feed/">job data feed</a> delivers the whole index as a daily file.</p></div>
     </section>
     <section class="block" aria-labelledby="h-how">
-      <p class="cmt">// why free</p>
+      <p class="cmt">why free</p>
       <h2 id="h-how" class="h2">How these tools work</h2>
       <div class="prose">
         <p>Every tool runs in your browser and talks directly to the public source: DNS resolvers, domain registries, the Internet Archive. There is no server of ours in between, no signup and no tracking of what you look up.</p>
         <p>Each tool does one small job well. When you need thousands of rows, a schedule, an API or an export into your own systems, the same job runs as an actor in <a data-actor="" data-campaign="tools-index" href="https://apify.com/deriverge?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=tools-index&amp;fpr=b6jtb8" target="_blank" rel="noopener sponsored">our Apify Store profile</a>, where you pay only for the results you get.</p>
       </div>
     </section>
-    <section class="block block--last">
-<footer class="site-foot">
-  <p>Free tools by <a href="/">deriverge s.r.o.</a>, a software studio in the Czech Republic. Our data actors are in <a data-actor="" data-campaign="tools-index" href="https://apify.com/deriverge?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=tools-index&amp;fpr=b6jtb8" target="_blank" rel="noopener sponsored">Apify Store</a>. Links to Apify carry our affiliate code: if you become a paying Apify customer, Apify pays us a commission at no extra cost to you.</p>
-  <p>Questions or a company listed by mistake: <a href="mailto:info@deriverge.com">info@deriverge.com</a>. The tools are provided as is, without warranty.</p>
-</footer>
-    </section>
-    <p class="foot punc" translate="no">&lt;/html&gt;</p>
   </div>
 </main>
+<footer class="site-foot site-foot--tools">
+  <div class="wrap">
+<div class="foot-brand"><a class="brand" href="/"><span class="br">&lt;/</span>deriverge<span class="br">&gt;</span></a></div>
+<div class="foot-text">  <p>Free tools by <a href="/">deriverge s.r.o.</a>, a software studio in the Czech Republic. Our data actors are in <a data-actor="" data-campaign="tools-index" href="https://apify.com/deriverge?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=tools-index&amp;fpr=b6jtb8" target="_blank" rel="noopener sponsored">Apify Store</a>. Links to Apify carry our affiliate code: if you become a paying Apify customer, Apify pays us a commission at no extra cost to you.</p>
+  <p>Questions or a company listed by mistake: <a href="mailto:info@deriverge.com">info@deriverge.com</a>. The tools are provided as is, without warranty.</p>
+</div>
+  </div>
+</footer>
 <script src="/tools/config.js"></script>
 <script src="/tools/common.js"></script>
 
