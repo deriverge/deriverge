@@ -98,10 +98,9 @@ def page(lang, data, tr, en, langs_present):
     ld = [
         {'@context': 'https://schema.org', '@type': 'Organization', '@id': SITE + '/#org', 'name': 'deriverge s.r.o.',
          'alternateName': 'deriverge', 'url': SITE + '/', 'logo': SITE + '/android-chrome-512x512.png',
-         'email': 'info@deriverge.com', 'telephone': '+420777849095', 'vatID': 'CZ19456361', 'taxID': '19456361',
+         'email': 'info@deriverge.com', 'vatID': 'CZ19456361', 'taxID': '19456361',
          'foundingDate': '2023-06-20', 'description': tr.get('meta.description') or en['meta.description'],
-         'address': {'@type': 'PostalAddress', 'streetAddress': 'Korytná 201', 'postalCode': '687 52',
-                     'addressLocality': 'Korytná', 'addressCountry': 'CZ'},
+         'address': {'@type': 'PostalAddress', 'addressCountry': 'CZ'},
          'areaServed': 'Worldwide', 'knowsLanguage': ['en', 'cs'],
          'makesOffer': [{'@type': 'Offer', 'itemOffered': {'@type': 'Service', 'name': s}} for s in services],
          'sameAs': ['https://apify.com/deriverge', 'https://www.postarna.cz/']},
