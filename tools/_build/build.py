@@ -1005,7 +1005,8 @@ def page_ats(a, rows, st, date, cn):
         (f'How can I tell if a company uses {name}?',
          '<p>Click <strong>Apply</strong> on one of its jobs and check the address. ' + strip_tags(ATS[a]['signs'][0]) + '</p>'),
         (f'Can I download the list of companies using {name}?',
-         '<p>Yes. <strong>Download CSV</strong> above the table saves the rows that match your search and filters: company, careers page, website where known, main country and open jobs.</p>'),
+         '<p>Yes. <strong>Download CSV</strong> above the table saves the rows that match your search and filters: company, careers page, website where known, main country and open jobs. '
+         'You may reuse the list under the <a href="https://creativecommons.org/licenses/by/4.0/" rel="license noopener" target="_blank">Creative Commons Attribution 4.0</a> licence with a link to this page.</p>'),
         (f'How do I get all open jobs from {name} companies?',
          f'<p>Run a job scraper on Apify: it reads every job from the boards you choose, or searches all {esc(name)} jobs in our daily index, with titles, locations, descriptions and apply links.</p>'),
         ('How fresh is this data?',
@@ -1031,7 +1032,8 @@ def page_ats(a, rows, st, date, cn):
     dataset = {'@context': 'https://schema.org', '@type': 'Dataset', 'name': f'Companies using {name}',
                'description': f'{st["companies"]:,} companies with a public {name} career site, with careers page URL, main hiring country and number of open jobs, built from public career sites by deriverge.',
                'url': SITE + path, 'dateModified': date, 'creator': {'@type': 'Organization', 'name': 'deriverge s.r.o.', 'url': SITE + '/'},
-               'isAccessibleForFree': True, 'keywords': [f'companies using {name}', f'{name} customers', 'applicant tracking system', 'ATS'],
+               'isAccessibleForFree': True, 'license': 'https://creativecommons.org/licenses/by/4.0/',
+               'keywords': [f'companies using {name}', f'{name} customers', 'applicant tracking system', 'ATS'],
                'distribution': [{'@type': 'DataDownload', 'encodingFormat': 'application/json', 'contentUrl': f'{SITE}/tools/data/ats/{a}.json'}]}
     layout(path=path, title=title, desc=desc, tab=f'companies-using-{a}.json', kicker=f'// free data · updated {nice_date}',
            h1=f'Companies using {name}', lede=lede, body=body, campaign=camp,
@@ -1163,7 +1165,8 @@ def page_compare(by, stats, date, cn):
     dataset = {'@context': 'https://schema.org', '@type': 'Dataset', 'name': 'Companies by applicant tracking system',
                'description': f'{total_c:,} companies and the applicant tracking system behind their public career site, across 14 systems, with careers page, main hiring country and open jobs. Built from public career sites by deriverge.',
                'url': SITE + path, 'dateModified': date, 'creator': {'@type': 'Organization', 'name': 'deriverge s.r.o.', 'url': SITE + '/'},
-               'isAccessibleForFree': True, 'keywords': ['ATS market share', 'applicant tracking system', 'companies using ATS'],
+               'isAccessibleForFree': True, 'license': 'https://creativecommons.org/licenses/by/4.0/',
+               'keywords': ['ATS market share', 'applicant tracking system', 'companies using ATS'],
                'distribution': [{'@type': 'DataDownload', 'encodingFormat': 'application/json', 'contentUrl': f'{SITE}/tools/data/ats/{a}.json'} for a in by_comp]}
     layout(path=path, title=title, desc=desc, tab='companies-using-ats.json', kicker=f'// free data · updated {nice_date}',
            h1='Which ATS do companies use?', campaign=camp,
@@ -1285,7 +1288,7 @@ def page_job_feed():
     ]
     body += '\n' + section('// faq', 'Questions', faq_block(faq), hid='faq')
     ld = [{'@context': 'https://schema.org', '@type': 'Dataset', 'name': 'Job data feed from company career sites', 'url': SITE + path,
-           'description': desc, 'isAccessibleForFree': False,
+           'description': desc, 'isAccessibleForFree': False, 'license': SITE + path + '#h-faq',
            'creator': {'@type': 'Organization', 'name': 'deriverge s.r.o.', 'url': SITE + '/'},
            'distribution': [{'@type': 'DataDownload', 'encodingFormat': 'application/x-ndjson', 'contentUrl': SITE + '/tools/data/job-feed-sample.jsonl.gz', 'name': 'Free sample'}]},
           faq_ld(faq)]
