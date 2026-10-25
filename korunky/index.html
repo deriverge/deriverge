@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Crowns (Korunky), a calm logic puzzle for iPhone and Android</title>
+<meta name="description" content="Place one crown in every row, column and colored region, with no two crowns touching. 150 levels, a daily puzzle and endless free play. No lives, no timers, no pressure.">
+<link rel="canonical" href="https://deriverge.com/korunky/">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="theme-color" content="#151A2D">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Crowns">
+<meta property="og:title" content="Crowns, a calm logic puzzle">
+<meta property="og:description" content="One crown in every row, column and colored region, and no two crowns may touch. 150 levels, a daily puzzle and endless free play, without lives, timers or pressure.">
+<meta property="og:url" content="https://deriverge.com/korunky/">
+<meta property="og:image" content="https://deriverge.com/korunky/icon-512.png">
+<meta property="og:image:width" content="512">
+<meta property="og:image:height" content="512">
+<meta property="og:image:alt" content="Crowns app icon: a gold crown on a dark navy background">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="cs_CZ">
+<meta property="og:locale:alternate" content="de_DE">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Crowns",
+  "alternateName": ["Korunky", "Kronen"],
+  "operatingSystem": "iOS, Android",
+  "applicationCategory": "GameApplication",
+  "description": "A calm logic puzzle: place one crown in every row, column and colored region, with no two crowns touching. 150 levels from 4x4 to 10x10, a daily puzzle, endless free play and logic hints. Works offline, in English, Czech and German.",
+  "inLanguage": ["en", "cs", "de"],
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+  "url": "https://deriverge.com/korunky/",
+  "image": "https://deriverge.com/korunky/icon-512.png",
+  "publisher": { "@type": "Organization", "name": "deriverge s.r.o.", "url": "https://deriverge.com/" }
+}
+</script>
+<style>
+  :root{
+    --bg:#0D1020;--bg-2:#151A2D;--card:#1A2038;--card-2:#20284A;--line:#2C3458;
+    --ink:#F4F1E8;--ink-2:#A7AEC6;--body:#CBD1E3;
+    --gold:#F5C451;--gold-dk:#C9972A;--gold-soft:rgba(245,196,81,.13);
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;background:var(--bg)}
+  body{margin:0;min-height:100vh;background:radial-gradient(1200px 700px at 85% -10%,#24305A 0%,rgba(36,48,90,0) 60%),linear-gradient(180deg,var(--bg-2) 0%,var(--bg) 70%);background-repeat:no-repeat;color:var(--ink);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+  a{color:var(--gold)}
+  .sprite{position:absolute;width:0;height:0;overflow:hidden}
+
+  /* Three language versions on one URL: English by default, the others at #cs and #de. English must stay last. */
+  .page{max-width:1040px;margin:0 auto;padding:28px 20px 56px;overflow-x:clip}
+  #cs,#de{display:none}
+  #cs:target,#de:target{display:block}
+  #cs:target~#en,#de:target~#en{display:none}
+
+  .top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px 20px;margin-bottom:44px}
+  .brand{display:flex;align-items:center;gap:12px}
+  .logo{width:46px;height:46px;border-radius:11px;flex:0 0 auto;display:block}
+  .brand b{display:block;font-size:17px;line-height:1.3}
+  .brand small{display:block;font-size:13px;color:var(--ink-2)}
+  .langs{font-size:14px;color:var(--ink-2)}
+  .langs a{color:var(--ink-2)}
+  .langs strong{color:var(--ink);font-weight:600}
+
+  .hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:48px;align-items:center}
+  .eyebrow{margin:0 0 12px;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gold)}
+  h1{margin:0 0 16px;font-size:50px;line-height:1.06;letter-spacing:-.025em;text-wrap:balance}
+  h1 em{font-style:normal;color:var(--gold)}
+  .lede{margin:0 0 24px;max-width:33em;font-size:18px;color:var(--body)}
+  .soon{display:inline-flex;align-items:center;gap:10px;margin:0 0 14px;padding:10px 16px;border:1px solid var(--line);border-radius:999px;background:var(--card);font-size:14.5px;font-weight:600;color:var(--ink)}
+  .soon::before{content:"";flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px var(--gold-soft)}
+  .note{margin:0;font-size:14.5px;color:var(--ink-2)}
+
+  .hero-art{position:relative;isolation:isolate;width:100%;max-width:380px;justify-self:center;padding-bottom:26px}
+  .hero-art::before{content:"";position:absolute;z-index:-1;top:-30px;right:-36px;width:78%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(245,196,81,.22) 0%,rgba(245,196,81,0) 70%)}
+  .mock{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:18px 18px 16px;box-shadow:0 30px 60px -30px rgba(0,0,0,.8)}
+  .m-top{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:0 0 14px}
+  .m-top b{font-size:16px}
+  .m-top small{font-size:13px;color:var(--ink-2)}
+  .board{display:block;width:100%;height:auto;aspect-ratio:1}
+  .m-tools{display:flex;gap:8px;margin:14px 0 0}
+  .m-tools span{flex:1 1 0;padding:8px 4px;border-radius:12px;background:var(--card-2);text-align:center;font-size:12.5px;font-weight:600;color:var(--body)}
+  .m-tools span:last-child{background:var(--gold-soft);color:var(--gold)}
+  .m-win{position:absolute;right:-14px;bottom:0;display:flex;align-items:center;gap:8px;padding:9px 15px;border-radius:14px;background:var(--gold);color:#1A1406;font-size:14px;font-weight:700;box-shadow:0 16px 32px -14px rgba(245,196,81,.6)}
+  .m-win svg{display:block;width:20px;height:20px}
+
+  h2{margin:76px 0 20px;font-size:30px;line-height:1.2;letter-spacing:-.015em;text-wrap:balance}
+  .sub{margin:-8px 0 22px;max-width:40em;color:var(--ink-2)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+  .rules{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px}
+  .num{display:grid;place-items:center;width:36px;height:36px;margin:0 0 12px;border-radius:50%;background:var(--gold);color:#1A1406;font-weight:800;font-size:16px}
+  .ic{display:grid;place-items:center;width:40px;height:40px;margin:0 0 12px;border-radius:11px;background:var(--gold-soft);color:var(--gold)}
+  .ic svg{display:block;width:22px;height:22px}
+  .card h3{margin:0 0 6px;font-size:17px;line-height:1.35}
+  .card p{margin:0;font-size:15px;color:var(--body)}
+  .controls{margin:16px 0 0;font-size:15px;color:var(--ink-2)}
+
+  .fair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:24px 44px;margin-top:76px;padding:38px;border-radius:24px;background:linear-gradient(135deg,#232C52 0%,#181E38 100%);border:1px solid var(--line)}
+  .fair h2{margin:0 0 12px}
+  .fair p{margin:0 0 16px;color:var(--body)}
+  .fair a{font-weight:600}
+  .checks{list-style:none;margin:0;padding:0;display:grid;gap:14px;align-content:center}
+  .checks li{position:relative;padding-left:34px;color:var(--ink)}
+  .checks li::before{content:"";position:absolute;left:0;top:2px;width:22px;height:22px;border-radius:50%;background:var(--gold) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.6 6.3l2.2 2.2 4.6-4.9' fill='none' stroke='%231A1406' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/13px no-repeat}
+
+  .cta{margin-top:76px;padding:40px 24px;border-radius:24px;background:var(--card);border:1px solid var(--line);text-align:center}
+  .appicon{display:block;width:96px;height:96px;margin:0 auto 16px;border-radius:22px;box-shadow:0 14px 34px -12px rgba(245,196,81,.45)}
+  .cta h2{margin:0 0 8px}
+  .cta .sub{margin:0 auto 20px}
+  .cta .soon{margin:0}
+  footer{margin-top:48px;padding-top:20px;border-top:1px solid var(--line);font-size:14px;color:var(--ink-2)}
+  footer a{color:var(--ink-2)}
+
+  @media (max-width:860px){
+    .hero{grid-template-columns:minmax(0,1fr);gap:44px}
+    h1{font-size:40px}
+    h2{margin-top:60px;font-size:26px}
+    .rules{grid-template-columns:minmax(0,1fr)}
+    .fair{grid-template-columns:minmax(0,1fr);margin-top:60px;padding:30px 24px}
+    .cta{margin-top:60px}
+  }
+  @media (max-width:480px){
+    .page{padding:20px 16px 44px}
+    .top{margin-bottom:32px}
+    h1{font-size:33px}
+    .lede{font-size:17px}
+    .soon{border-radius:16px}
+    .hero-art::before{top:-20px;right:-12px}
+    .mock{padding:14px 12px 12px}
+    .m-win{right:6px}
+    .fair{padding:26px 18px}
+  }
+</style>
+</head>
+<body>
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <symbol id="crown" viewBox="0 0 40 40"><path d="M9.5 28.5L7.5 14l7.5 6 5-9 5 9 7.5-6-2 14.5z" fill="#F5C451" stroke="#5A3E06" stroke-width="1.4" stroke-linejoin="round"/><rect x="9.5" y="29.5" width="21" height="3.2" rx="1.2" fill="#F5C451" stroke="#5A3E06" stroke-width="1.2"/><circle cx="20" cy="11" r="1.8" fill="#FFE7A6"/></symbol>
+  <symbol id="cross" viewBox="0 0 40 40"><path d="M15 15l10 10M25 15L15 25" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="2.4" stroke-linecap="round"/></symbol>
+  <symbol id="board" viewBox="0 0 206 206">
+    <rect width="206" height="206" rx="14" fill="#0D1020"/>
+    <g>
+      <rect x="4" y="4" width="38" height="38" rx="6" fill="#3E5C9E"/><rect x="44" y="4" width="38" height="38" rx="6" fill="#3E5C9E"/><rect x="84" y="4" width="38" height="38" rx="6" fill="#3E5C9E"/><rect x="124" y="4" width="38" height="38" rx="6" fill="#7A5CA8"/><rect x="164" y="4" width="38" height="38" rx="6" fill="#7A5CA8"/>
+      <rect x="4" y="44" width="38" height="38" rx="6" fill="#3E5C9E"/><rect x="44" y="44" width="38" height="38" rx="6" fill="#3E5C9E"/><rect x="84" y="44" width="38" height="38" rx="6" fill="#7A5CA8"/><rect x="124" y="44" width="38" height="38" rx="6" fill="#7A5CA8"/><rect x="164" y="44" width="38" height="38" rx="6" fill="#7A5CA8"/>
+      <rect x="4" y="84" width="38" height="38" rx="6" fill="#2D8A7B"/><rect x="44" y="84" width="38" height="38" rx="6" fill="#2D8A7B"/><rect x="84" y="84" width="38" height="38" rx="6" fill="#B0674A"/><rect x="124" y="84" width="38" height="38" rx="6" fill="#7A5CA8"/><rect x="164" y="84" width="38" height="38" rx="6" fill="#5F8040"/>
+      <rect x="4" y="124" width="38" height="38" rx="6" fill="#2D8A7B"/><rect x="44" y="124" width="38" height="38" rx="6" fill="#B0674A"/><rect x="84" y="124" width="38" height="38" rx="6" fill="#B0674A"/><rect x="124" y="124" width="38" height="38" rx="6" fill="#B0674A"/><rect x="164" y="124" width="38" height="38" rx="6" fill="#5F8040"/>
+      <rect x="4" y="164" width="38" height="38" rx="6" fill="#2D8A7B"/><rect x="44" y="164" width="38" height="38" rx="6" fill="#2D8A7B"/><rect x="84" y="164" width="38" height="38" rx="6" fill="#B0674A"/><rect x="124" y="164" width="38" height="38" rx="6" fill="#5F8040"/><rect x="164" y="164" width="38" height="38" rx="6" fill="#5F8040"/>
+    </g>
+    <use href="#crown" x="43" y="3" width="40" height="40"/>
+    <use href="#crown" x="123" y="43" width="40" height="40"/>
+    <use href="#crown" x="3" y="83" width="40" height="40"/>
+    <use href="#crown" x="83" y="123" width="40" height="40"/>
+    <use href="#crown" x="163" y="163" width="40" height="40"/>
+    <use href="#cross" x="3" y="3" width="40" height="40"/>
+    <use href="#cross" x="163" y="3" width="40" height="40"/>
+    <use href="#cross" x="3" y="43" width="40" height="40"/>
+    <use href="#cross" x="83" y="83" width="40" height="40"/>
+    <use href="#cross" x="163" y="123" width="40" height="40"/>
+    <use href="#cross" x="43" y="163" width="40" height="40"/>
+  </symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9.3 4v16M14.7 4v16M4 9.3h16M4 14.7h16"/></g></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5.5" width="16" height="14.5" rx="2"/><path d="M4 10h16M8.5 3.5v4M15.5 3.5v4M8.5 14h.01M12 14h.01M15.5 14h.01M8.5 17h.01M12 17h.01"/></g></symbol>
+  <symbol id="i-inf" viewBox="0 0 24 24"><path d="M12 12c-1.8-2.4-3.4-3.6-5-3.6a3.6 3.6 0 0 0 0 7.2c1.6 0 3.2-1.2 5-3.6zm0 0c1.8 2.4 3.4 3.6 5 3.6a3.6 3.6 0 0 0 0-7.2c-1.6 0-3.2 1.2-5 3.6z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-bulb" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.6 1.1 1.4 1.1 2.2h5c0-.8.4-1.6 1.1-2.2A6 6 0 0 0 12 3z"/></g></symbol>
+  <symbol id="i-palette" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5a8.5 8.5 0 0 0 0 17c1.2 0 1.8-.8 1.8-1.7 0-.5-.2-.9-.5-1.2-.3-.4-.5-.8-.5-1.2 0-1 .8-1.7 1.7-1.7h2a4.5 4.5 0 0 0 4-4.5c0-3.7-3.8-6.7-8.5-6.7z"/><path d="M7.5 11.5h.01M10 7.5h.01M14.5 7.5h.01M17 11h.01"/></g></symbol>
+  <symbol id="i-plane" viewBox="0 0 24 24"><path d="M10.5 13.5L4 11l1.5-1.5 7 .5 4-4.5a2 2 0 0 1 3 3L15 12.5l.5 7L14 21l-2.5-6.5-3 3V20l-1.5 1-1-3.5-3.5-1 1-1.5h2.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+<main>
+
+<div class="page" id="cs" lang="cs">
+  <header class="top">
+    <div class="brand"><img class="logo" src="icon-192.png" alt="" width="46" height="46"><span><b>Korunky</b><small>Logická hra s korunkami</small></span></div>
+    <nav class="langs" aria-label="Jazyk"><a href="#en" lang="en" hreflang="en">English</a> &middot; <strong aria-current="page">Čeština</strong> &middot; <a href="#de" lang="de" hreflang="de">Deutsch</a></nav>
+  </header>
+
+  <section class="hero">
+    <div>
+      <p class="eyebrow">Logická hra pro iPhone a Android</p>
+      <h1>Rozmístěte korunky. <em>V klidu.</em></h1>
+      <p class="lede">Korunky jsou poklidná logická hra. Do každého řádku, sloupce a barevné oblasti patří jedna korunka a žádné dvě se nesmí dotýkat. Každá hádanka má právě jedno řešení, ke kterému dojdete úvahou, nikdy hádáním.</p>
+      <p class="soon">Již brzy na Google Play a v App Store</p>
+      <p class="note">Hrajete zdarma. Bez účtu, bez životů, bez odpočtů.</p>
+    </div>
+    <div class="hero-art" role="img" aria-label="Vyřešená hádanka 5×5: pět barevných oblastí a v každém řádku, sloupci i oblasti jedna zlatá korunka. Žádné dvě korunky se nedotýkají.">
+      <div class="mock">
+        <div class="m-top"><b>Úroveň 12</b><small>5×5</small></div>
+        <svg class="board" viewBox="0 0 206 206"><use href="#board"/></svg>
+        <div class="m-tools"><span>Zpět</span><span>Vymazat</span><span>Nápověda</span></div>
+      </div>
+      <div class="m-win"><svg><use href="#crown"/></svg><span>Vyřešeno!</span></div>
+    </div>
+  </section>
+
+  <h2>Jak se hraje</h2>
+  <p class="sub">Tři pravidla. Nic víc.</p>
+  <div class="rules">
+    <div class="card"><span class="num">1</span><h3>Jedna v každém řádku a sloupci</h3><p>Do každého řádku a každého sloupce patří právě jedna korunka.</p></div>
+    <div class="card"><span class="num">2</span><h3>Jedna v každé oblasti</h3><p>Každá barevná oblast má také právě jednu korunku.</p></div>
+    <div class="card"><span class="num">3</span><h3>Žádné dotýkání</h3><p>Korunky se nesmí dotýkat, a to ani rohem.</p></div>
+  </div>
+  <p class="controls">Jedním ťuknutím dáte křížek, dvěma korunku. Tažením prstu označíte křížkem víc políček najednou.</p>
+
+  <h2>Hádanek dost, spěchat nemusíte</h2>
+  <div class="grid">
+    <div class="card"><span class="ic"><svg aria-hidden="true"><use href="#i-grid"/></svg></span><h3>150 úrovní</h3><p>Od malých ploch 4×4 až po mřížky 10×10. Každá hádanka má jediné řešení a dá se vyřešit čistě úvahou.</p></div>
+    <div class="card"><span class="ic"><svg aria-hidden="true"><use href="#i-cal"/></svg></span><h3>Hádanka dne</h3><p>Každý den nová hádanka. Když nějakou vynecháte, zahrajete si ji později z kalendáře. Žádná série, o kterou byste mohli přijít.</p></div>
+    <div class="card"><span class="ic"><svg aria-hidden="true"><use href="#i-inf"/></svg></span><h3>Nekonečná volná hra</h3><p>Vyberte si velikost a hrajte nové hádanky, jak dlouho chcete.</p></div>
+    <div class="card"><span class="ic"><svg aria-hidden="true"><use href="#i-bulb"/></svg></span><h3>Nápověda, která učí</h3><p>Když se zaseknete, nápověda nejdřív odebere korunku, která na místo nepatří, a pak ukáže další korunku, ke které se dá dojít úvahou.</p></div>
+    <div class="card"><span class="ic"><svg aria-hidden="true"><use href="#i-palette"/></svg></span><h3>8 motivů a 7 symbolů</h3><p>Za mince z vyřešených hádanek si odemknete nové motivy a symboly. Jsou jen pro radost a na hru nemají vliv.</p></div>
+    <div class="card"><span class="ic"><svg aria-hidden="true"><use href="#i-plane"/></svg></span><h3>Offline a ve třech jazycích</h3><p>Hrát můžete i bez připojení k internetu. Hra mluví česky, anglicky a německy.</p></div>
+  </div>
+
+  <section class="fair">
+    <div>
+      <h2>Férová hra už od návrhu</h2>
+      <p>Korunky jsou zdarma a vydělávají na reklamách a na volitelném nákupu. Obojí držíme stranou od samotného hraní.</p>
+      <p><a href="privacy.html#cs">Přečtěte si zásady ochrany soukromí</a></p>
+    </div>
+    <ul class="checks">
+      <li>Žádné životy, energie, odpočty ani upozornění.</li>
+      <li>Žádné loot boxy a nic náhodného za peníze.</li>
+      <li>Reklama jen mezi hádankami: nikdy po spuštění, nikdy uprostřed hádanky a během prvních 8 hádanek vůbec.</li>
+      <li>Reklamy s odměnou jen tehdy, když o ně sami požádáte, třeba za nápovědu nebo mince.</li>
+      <li>Reklamy odstraníte jednorázovým nákupem. Žádné předplatné.</li>
+    </ul>
+  </section>
+
+  <div class="cta">
+    <img class="appicon" src="icon-512.png" alt="" width="96" height="96">
+    <h2>Korunky už brzy</h2>
+    <p class="sub">Máte dotaz? Napište na <a href="mailto:info@deriverge.com">info@deriverge.com</a>.</p>
+    <p class="soon">Již brzy na Google Play a v App Store</p>
+  </div>
+
+  <footer><a href="support.html#cs">Podpora</a> &middot; <a href="privacy.html#cs">Soukromí</a> &middot; <a href="terms.html#cs">Podmínky použití</a> &middot; <a href="#en" lang="en" hreflang="en">English</a> &middot; <a href="#de" lang="de" hreflang="de">Deutsch</a><br>Provozovatel: <a href="/">deriverge s.r.o.</a> &middot; <a href="mailto:info@deriverge.com">info@deriverge.com</a></footer>
+</div>
+
+<div class="page" id="de" lang="de">
+  <header class="top">
+    <div class="brand"><img class="logo" src="icon-192.png" alt="" width="46" height="46"><span><b>Kronen</b><small>Ein ruhiges Logikrätsel</small></span></div>
+    <nav class="langs" aria-label="Sprache"><a href="#en" lang="en" hreflang="en">English</a> &middot; <a href="#cs" lang="cs" hreflang="cs">Čeština</a> &middot; <strong aria-current="page">Deutsch</strong></nav>
+  </header>
+
+  <section class="hero">
+    <div>
+      <p class="eyebrow">Logikrätsel für iPhone und Android</p>
+      <h1>Kronen setzen. <em>In aller Ruhe.</em></h1>
+      <p class="lede">Kronen ist ein ruhiges Logikrätsel. In jede Zeile, jede Spalte und jede farbige Region gehört eine Krone, und keine zwei Kronen dürfen sich berühren. Jedes Rätsel hat genau eine Lösung, die Sie durch Nachdenken finden, nie durch Raten.</p>
+      <p class="soon">Demnächst bei Google Play und im App Store</p>
+      <p class="note">Kostenlos spielen. Kein Konto, keine Leben, kein Countdown.</p>
+    </div>
+    <div class="hero-art" role="img" aria-label="Ein gelöstes 5×5-Rätsel: fünf farbige Regionen und in jeder Zeile, Spalte und Region eine goldene Krone. Keine zwei Kronen berühren sich.">
+      <div class="mock">
+        <div class="m-top"><b>Level 12</b><small>5×5</small></div>
+        <svg class="board" viewBox="0 0 206 206"><use href="#board"/></svg>
+        <div class="m-tools"><span>Zurück</span><span>Leeren</span><span>Tipp</span></div>
+      </div>
+      <div class="m-win"><svg><use href="#crown"/></svg><span>Gelöst!</span></div>
+    </div>
+  </section>
+
+  <h2>So wird gespielt</h2>
+  <p class="sub">Drei Regeln. Mehr nicht.</p>
+  <div class="rules">
+    <div class="card"><span class="num">1</span><h3>Eine pro Zeile und Spalte</h3><p>Jede Zeile und jede Spalte enthält genau eine Krone.</p></div>
+    <div class="card"><span class="num">2</span><h3>Eine pro Region</h3><p>Auch jede farbige Region enthält genau eine Krone.</p></div>
+    <div class="card"><span class="num">3</span><h3>Keine Berührung</h3><p>Kronen dürfen sich nicht berühren, auch nicht diagonal.</p></div>
+  </div>
+  <p class="controls">Einmal tippen setzt ein Kreuz, zweimal tippen eine Krone. Wenn Sie mit dem Finger ziehen, setzen Sie mehrere Kreuze auf einmal.</p>
+
+  <h2>Viel zu spielen, nichts zu hetzen</h2>
+  <div class="grid">
+    <div class="card"><span class="ic"><svg aria-hidden="true"><use href="#i-grid"/></svg></span><h3>150 Level</h3><p>Von kleinen 4×4-Feldern bis zu 10×10-Gittern. Jedes Rätsel hat genau eine Lösung und ist allein mit Logik lösbar.</p></div>
+    <div class="card"><span class="ic"><svg aria-hidden="true"><use href="#i-cal"/></svg></span><h3>Tagesrätsel</h3><p>Jeden Tag ein neues Rätsel. Einen Tag verpasst? Holen Sie ihn später im Kalender nach. Keine Serie, die Sie verlieren können.</p></div>
+    <div class="card"><span class="ic"><svg aria-hidden="true"><use href="#i-inf"/></svg></span><h3>Endloses freies Spiel</h3><p>Wählen Sie eine Größe und spielen Sie neue Rätsel, so lange Sie möchten.</p></div>
+    <div class="card"><span class="ic"><svg aria-hidden="true"><use href="#i-bulb"/></svg></span><h3>Tipps, die etwas erklären</h3><p>Wenn Sie feststecken, entfernt ein Tipp zuerst eine falsch gesetzte Krone und zeigt dann die nächste Krone, die sich logisch herleiten lässt.</p></div>
+    <div class="card"><span class="ic"><svg aria-hidden="true"><use href="#i-palette"/></svg></span><h3>8 Designs und 7 Symbole</h3><p>Mit Münzen aus gelösten Rätseln schalten Sie neue Designs und Symbole frei. Sie sind reine Optik und ändern nichts am Spiel.</p></div>
+    <div class="card"><span class="ic"><svg aria-hidden="true"><use href="#i-plane"/></svg></span><h3>Offline und in drei Sprachen</h3><p>Spielen Sie auch ohne Internetverbindung. Die App gibt es auf Deutsch, Englisch und Tschechisch.</p></div>
+  </div>
+
+  <section class="fair">
+    <div>
+      <h2>Fair, von Anfang an</h2>
+      <p>Kronen ist kostenlos und finanziert sich über Werbung und einen freiwilligen Kauf. Beides halten wir aus Ihrem Spiel heraus.</p>
+      <p><a href="privacy.html#de">Zur Datenschutzerklärung</a></p>
+    </div>
+    <ul class="checks">
+      <li>Keine Leben, keine Energie, kein Zeitdruck, keine Benachrichtigungen.</li>
+      <li>Keine Lootboxen und nichts Zufälliges gegen Geld.</li>
+      <li>Werbung nur zwischen Rätseln: nie beim Start, nie mitten im Rätsel und in den ersten 8 Rätseln gar nicht.</li>
+      <li>Belohnungswerbung nur, wenn Sie sie selbst wählen, etwa für einen Tipp oder Münzen.</li>
+      <li>Werbung entfernen Sie mit einem einmaligen Kauf. Kein Abo.</li>
+    </ul>
+  </section>
+
+  <div class="cta">
+    <img class="appicon" src="icon-512.png" alt="" width="96" height="96">
+    <h2>Kronen kommt bald</h2>
+    <p class="sub">Fragen? Schreiben Sie an <a href="mailto:info@deriverge.com">info@deriverge.com</a>.</p>
+    <p class="soon">Demnächst bei Google Play und im App Store</p>
+  </div>
+
+  <footer><a href="support.html#de">Hilfe</a> &middot; <a href="privacy.html#de">Datenschutz</a> &middot; <a href="terms.html#de">Nutzungsbedingungen</a> &middot; <a href="#en" lang="en" hreflang="en">English</a> &middot; <a href="#cs" lang="cs" hreflang="cs">Čeština</a><br>Betreiber: <a href="/">deriverge s.r.o.</a> &middot; <a href="mailto:info@deriverge.com">info@deriverge.com</a></footer>
+</div>
+
+<div class="page" id="en" lang="en">
+  <header class="top">
+    <div class="brand"><img class="logo" src="icon-192.png" alt="" width="46" height="46"><span><b>Crowns</b><small>A calm logic puzzle</small></span></div>
+    <nav class="langs" aria-label="Language"><strong aria-current="page">English</strong> &middot; <a href="#cs" lang="cs" hreflang="cs">Čeština</a> &middot; <a href="#de" lang="de" hreflang="de">Deutsch</a></nav>
+  </header>
+
+  <section class="hero">
+    <div>
+      <p class="eyebrow">Logic puzzle for iPhone and Android</p>
+      <h1>Place the crowns. <em>Take your time.</em></h1>
+      <p class="lede">Crowns is a calm logic puzzle. Every row, column and colored region gets one crown, and no two crowns may touch. Each puzzle has exactly one solution, and you reach it by thinking, never by guessing.</p>
+      <p class="soon">Coming soon to Google Play and the App Store</p>
+      <p class="note">Free to play. No account, no lives, no countdowns.</p>
+    </div>
+    <div class="hero-art" role="img" aria-label="A solved 5×5 puzzle: five colored regions with one gold crown in every row, column and region. No two crowns touch.">
+      <div class="mock">
+        <div class="m-top"><b>Level 12</b><small>5×5</small></div>
+        <svg class="board" viewBox="0 0 206 206"><use href="#board"/></svg>
+        <div class="m-tools"><span>Undo</span><span>Clear</span><span>Hint</span></div>
+      </div>
+      <div class="m-win"><svg><use href="#crown"/></svg><span>Solved!</span></div>
+    </div>
+  </section>
+
+  <h2>How to play</h2>
+  <p class="sub">Three rules. That is all.</p>
+  <div class="rules">
+    <div class="card"><span class="num">1</span><h3>One per row and column</h3><p>Every row and every column holds exactly one crown.</p></div>
+    <div class="card"><span class="num">2</span><h3>One per colored region</h3><p>Every colored region holds exactly one crown too.</p></div>
+    <div class="card"><span class="num">3</span><h3>No touching</h3><p>Crowns may not touch each other, not even diagonally.</p></div>
+  </div>
+  <p class="controls">Tap once for a cross, twice for a crown. Drag your finger to cross out several cells at once.</p>
+
+  <h2>Plenty to play, nothing to rush</h2>
+  <div class="grid">
+    <div class="card"><span class="ic"><svg aria-hidden="true"><use href="#i-grid"/></svg></span><h3>150 levels</h3><p>From small 4×4 boards up to 10×10 grids. Every puzzle has exactly one solution and can be solved by logic alone.</p></div>
+    <div class="card"><span class="ic"><svg aria-hidden="true"><use href="#i-cal"/></svg></span><h3>Daily puzzle</h3><p>A new puzzle every day. Missed one? Play it later from the calendar. There is no streak to lose.</p></div>
+    <div class="card"><span class="ic"><svg aria-hidden="true"><use href="#i-inf"/></svg></span><h3>Endless free play</h3><p>Pick a board size and play fresh puzzles for as long as you like.</p></div>
+    <div class="card"><span class="ic"><svg aria-hidden="true"><use href="#i-bulb"/></svg></span><h3>Hints that teach</h3><p>Stuck? A hint first removes a crown that does not belong, then shows the next crown you can find by logic.</p></div>
+    <div class="card"><span class="ic"><svg aria-hidden="true"><use href="#i-palette"/></svg></span><h3>8 themes and 7 symbols</h3><p>Unlock new themes and symbols with coins from solved puzzles. They are just for fun and do not change the game.</p></div>
+    <div class="card"><span class="ic"><svg aria-hidden="true"><use href="#i-plane"/></svg></span><h3>Offline, in three languages</h3><p>Play without an internet connection. The game speaks English, Czech and German.</p></div>
+  </div>
+
+  <section class="fair">
+    <div>
+      <h2>A fair game, by design</h2>
+      <p>Crowns is free and is paid for by ads and an optional purchase. We keep both out of the way of your game.</p>
+      <p><a href="privacy.html">Read the privacy policy</a></p>
+    </div>
+    <ul class="checks">
+      <li>No lives, no energy, no timers pushing you, no notifications.</li>
+      <li>No loot boxes and nothing random for sale.</li>
+      <li>Ads only between puzzles: never at launch, never mid-puzzle, and none at all during your first 8 puzzles.</li>
+      <li>Rewarded ads only when you ask for one, for example for a hint or coins.</li>
+      <li>Remove ads with a one-time purchase. No subscription.</li>
+    </ul>
+  </section>
+
+  <div class="cta">
+    <img class="appicon" src="icon-512.png" alt="" width="96" height="96">
+    <h2>Crowns is coming soon</h2>
+    <p class="sub">Questions? Write to <a href="mailto:info@deriverge.com">info@deriverge.com</a>.</p>
+    <p class="soon">Coming soon to Google Play and the App Store</p>
+  </div>
+
+  <footer><a href="support.html">Support</a> &middot; <a href="privacy.html">Privacy</a> &middot; <a href="terms.html">Terms of use</a> &middot; <a href="#cs" lang="cs" hreflang="cs">Čeština</a> &middot; <a href="#de" lang="de" hreflang="de">Deutsch</a><br>Operator: <a href="/">deriverge s.r.o.</a> &middot; <a href="mailto:info@deriverge.com">info@deriverge.com</a></footer>
+</div>
+
+</main>
+</body>
+</html>
