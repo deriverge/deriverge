@@ -80,7 +80,10 @@ def actor(slug):
         info['public'] = bool(d.get('isPublic'))
         info['title'] = d.get('title')
         pis = d.get('pricingInfos') or []
-        last = pis[-1] if pis else {}
+        # Cena platná dnes: ohlášené zdražení (budoucí startedAt) se na webu ukáže až od svého data.
+        now_iso = dt.datetime.now(dt.timezone.utc).isoformat()
+        active = [p for p in pis if (p.get('startedAt') or '') <= now_iso] or pis
+        last = active[-1] if active else {}
         events = ((last.get('pricingPerEvent') or {}).get('actorChargeEvents') or {})
         prim = [e for e in events.values() if e.get('isPrimaryEvent')] or [e for k, e in events.items() if 'start' not in k]
         if prim:
