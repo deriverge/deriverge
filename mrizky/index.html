@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Logic Grids (Mřížky), four calm logic puzzles for iPhone and Android</title>
+<meta name="description" content="Hashi, Tents and Trees, Slitherlink and Binairo in one calm app. 400 levels, four daily puzzles, endless free play and hints that explain each step. No lives, no timers, no pressure.">
+<link rel="canonical" href="https://deriverge.com/mrizky/">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="theme-color" content="#151A2D">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Logic Grids">
+<meta property="og:title" content="Logic Grids, four calm logic puzzles">
+<meta property="og:description" content="Hashi, Tents and Trees, Slitherlink and Binairo in one app. 400 levels, four daily puzzles and endless free play, without lives, timers or pressure.">
+<meta property="og:url" content="https://deriverge.com/mrizky/">
+<meta property="og:image" content="https://deriverge.com/mrizky/icon-512.png">
+<meta property="og:image:width" content="512">
+<meta property="og:image:height" content="512">
+<meta property="og:image:alt" content="Logic Grids app icon: four small puzzles, bridges, a tree with a tent, a loop and colored circles, on a light card over a dark navy background">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="cs_CZ">
+<meta property="og:locale:alternate" content="de_DE">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Logic Grids",
+  "alternateName": ["Mřížky", "Logikgitter", "Logic Puzzles: Hashi & Tents", "Mřížky: logické hádanky", "Logikrätsel: Hashi & Zelte"],
+  "operatingSystem": "iOS, Android",
+  "applicationCategory": "GameApplication",
+  "description": "Four classic logic puzzles in one calm app: Hashi (Bridges), Tents and Trees, Slitherlink and Binairo (Takuzu). 400 levels, 100 of each kind, four daily puzzles, endless free play and hints that explain each step. Works offline, in English, Czech and German.",
+  "inLanguage": ["en", "cs", "de"],
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+  "url": "https://deriverge.com/mrizky/",
+  "image": "https://deriverge.com/mrizky/icon-512.png",
+  "publisher": { "@type": "Organization", "name": "deriverge s.r.o.", "url": "https://deriverge.com/" }
+}
+</script>
+<style>
+  :root{
+    --bg:#0D1020;--bg-2:#151A2D;--card:#1A2038;--card-2:#20284A;--line:#2C3458;
+    --ink:#F4F1E8;--ink-2:#A7AEC6;--body:#CBD1E3;
+    --acc:#F0905A;--acc-dk:#C7612A;--acc-soft:rgba(240,144,90,.13);
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;background:var(--bg)}
+  body{margin:0;min-height:100vh;background:radial-gradient(1200px 700px at 85% -10%,#24305A 0%,rgba(36,48,90,0) 60%),linear-gradient(180deg,var(--bg-2) 0%,var(--bg) 70%);background-repeat:no-repeat;color:var(--ink);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+  a{color:var(--acc)}
+  .sprite{position:absolute;width:0;height:0;overflow:hidden}
+
+  /* Three language versions on one URL: English by default, the others at #cs and #de. English must stay last. */
+  .page{max-width:1040px;margin:0 auto;padding:28px 20px 56px;overflow-x:clip}
+  #cs,#de{display:none}
+  #cs:target,#de:target{display:block}
+  #cs:target~#en,#de:target~#en{display:none}
+
+  .top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px 20px;margin-bottom:44px}
+  .brand{display:flex;align-items:center;gap:12px}
+  .logo{width:46px;height:46px;border-radius:11px;flex:0 0 auto;display:block}
+  .brand b{display:block;font-size:17px;line-height:1.3}
+  .brand small{display:block;font-size:13px;color:var(--ink-2)}
+  .langs{font-size:14px;color:var(--ink-2)}
+  .langs a{color:var(--ink-2)}
+  .langs strong{color:var(--ink);font-weight:600}
+
+  .hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:48px;align-items:center}
+  .eyebrow{margin:0 0 12px;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--acc)}
+  h1{margin:0 0 16px;font-size:50px;line-height:1.06;letter-spacing:-.025em;text-wrap:balance}
+  h1 em{font-style:normal;color:var(--acc)}
+  .lede{margin:0 0 24px;max-width:33em;font-size:18px;color:var(--body)}
+  .soon{display:inline-flex;align-items:center;gap:10px;margin:0 0 14px;padding:10px 16px;border:1px solid var(--line);border-radius:999px;background:var(--card);font-size:14.5px;font-weight:600;color:var(--ink)}
+  .soon::before{content:"";flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--acc);box-shadow:0 0 0 4px var(--acc-soft)}
+  .note{margin:0;font-size:14.5px;color:var(--ink-2)}
+
+  .hero-art{position:relative;isolation:isolate;width:100%;max-width:380px;justify-self:center;padding-bottom:26px}
+  .hero-art::before{content:"";position:absolute;z-index:-1;top:-30px;right:-36px;width:78%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(240,144,90,.22) 0%,rgba(240,144,90,0) 70%)}
+  .mock{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:18px 18px 16px;box-shadow:0 30px 60px -30px rgba(0,0,0,.8)}
+  .m-top{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:0 0 14px}
+  .m-top b{font-size:16px}
+  .m-top small{font-size:13px;color:var(--ink-2)}
+  .board{display:block;width:100%;height:auto;aspect-ratio:1}
+  .m-win{position:absolute;right:-14px;bottom:0;display:flex;align-items:center;gap:8px;padding:9px 15px;border-radius:14px;background:var(--acc);color:#2A1206;font-size:14px;font-weight:700;box-shadow:0 16px 32px -14px rgba(240,144,90,.6)}
+  .m-win svg{display:block;width:20px;height:20px}
+
+  h2{margin:76px 0 20px;font-size:30px;line-height:1.2;letter-spacing:-.015em;text-wrap:balance}
+  .sub{margin:-8px 0 22px;max-width:40em;color:var(--ink-2)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px}
+  .rules{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px}
+  .num{display:grid;place-items:center;width:36px;height:36px;margin:0 0 12px;border-radius:50%;background:var(--acc);color:#2A1206;font-weight:800;font-size:16px}
+  .ic{display:grid;place-items:center;width:40px;height:40px;margin:0 0 12px;border-radius:11px;background:var(--acc-soft);color:var(--acc)}
+  .ic svg{display:block;width:22px;height:22px}
+  .card h3{margin:0 0 6px;font-size:17px;line-height:1.35}
+  .card p{margin:0;font-size:15px;color:var(--body)}
+  .controls{margin:16px 0 0;font-size:15px;color:var(--ink-2)}
+
+  .fair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:24px 44px;margin-top:76px;padding:38px;border-radius:24px;background:linear-gradient(135deg,#232C52 0%,#181E38 100%);border:1px solid var(--line)}
+  .fair h2{margin:0 0 12px}
+  .fair p{margin:0 0 16px;color:var(--body)}
+  .fair a{font-weight:600}
+  .checks{list-style:none;margin:0;padding:0;display:grid;gap:14px;align-content:center}
+  .checks li{position:relative;padding-left:34px;color:var(--ink)}
+  .checks li::before{content:"";position:absolute;left:0;top:2px;width:22px;height:22px;border-radius:50%;background:var(--acc) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.6 6.3l2.2 2.2 4.6-4.9' fill='none' stroke='%232A1206' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/13px no-repeat}
+
+  .cta{margin-top:76px;padding:40px 24px;border-radius:24px;background:var(--card);border:1px solid var(--line);text-align:center}
+  .appicon{display:block;width:96px;height:96px;margin:0 auto 16px;border-radius:22px;box-shadow:0 14px 34px -12px rgba(240,144,90,.45)}
+  .cta h2{margin:0 0 8px}
+  .cta .sub{margin:0 auto 20px}
+  .cta .soon{margin:0}
+  footer{margin-top:48px;padding-top:20px;border-top:1px solid var(--line);font-size:14px;color:var(--ink-2)}
+  footer a{color:var(--ink-2)}
+
+  @media (max-width:860px){
+    .hero{grid-template-columns:minmax(0,1fr);gap:44px}
+    h1{font-size:40px}
+    h2{margin-top:60px;font-size:26px}
+    .rules{grid-template-columns:minmax(0,1fr)}
+    .fair{grid-template-columns:minmax(0,1fr);margin-top:60px;padding:30px 24px}
+    .cta{margin-top:60px}
+  }
+  @media (max-width:480px){
+    .page{padding:20px 16px 44px}
+    .top{margin-bottom:32px}
+    h1{font-size:33px}
+    .lede{font-size:17px}
+    .soon{border-radius:16px}
+    .hero-art::before{top:-20px;right:-12px}
+    .mock{padding:14px 12px 12px}
+    .m-win{right:6px}
+    .fair{padding:26px 18px}
+  }
+</style>
+</head>
+<body>
+<svg class="sprite" aria-hidden="true" focusable="false">
+  <symbol id="check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#2A1206"/><path d="M7.4 12.4l3.1 3.1 6.1-6.6" fill="none" stroke="#F0905A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="board" viewBox="0 0 206 206">
+    <rect width="206" height="206" rx="14" fill="#0D1020"/>
+    <g font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif" font-weight="700" text-anchor="middle" dominant-baseline="central">
+      <!-- Hashi: every island has exactly as many bridges as its number -->
+      <g transform="translate(4 4)">
+        <rect width="97" height="97" rx="10" fill="#20284A"/>
+        <g stroke="#E9E4D8" stroke-width="2.4" stroke-linecap="round"><path d="M30 16.5H67M30 23.5H67M77 30V67M30 77H67"/></g>
+        <circle cx="20" cy="20" r="10" fill="#F4F1E8"/><circle cx="77" cy="20" r="10" fill="#F4F1E8"/><circle cx="20" cy="77" r="10" fill="#F4F1E8"/><circle cx="77" cy="77" r="10" fill="#F4F1E8"/>
+        <g fill="#1A2038" font-size="12"><text x="20" y="20.5">2</text><text x="77" y="20.5">3</text><text x="20" y="77.5">1</text><text x="77" y="77.5">2</text></g>
+      </g>
+      <!-- Tents and Trees: one tent per tree, tents never touch, clues count tents per row and column -->
+      <g transform="translate(105 4)">
+        <rect width="97" height="97" rx="10" fill="#20284A"/>
+        <g fill="#2C365E">
+          <rect x="10.5" y="10.5" width="16" height="16" rx="3"/><rect x="27.5" y="10.5" width="16" height="16" rx="3"/><rect x="44.5" y="10.5" width="16" height="16" rx="3"/><rect x="61.5" y="10.5" width="16" height="16" rx="3"/>
+          <rect x="10.5" y="27.5" width="16" height="16" rx="3"/><rect x="27.5" y="27.5" width="16" height="16" rx="3"/><rect x="44.5" y="27.5" width="16" height="16" rx="3"/><rect x="61.5" y="27.5" width="16" height="16" rx="3"/>
+          <rect x="10.5" y="44.5" width="16" height="16" rx="3"/><rect x="27.5" y="44.5" width="16" height="16" rx="3"/><rect x="44.5" y="44.5" width="16" height="16" rx="3"/><rect x="61.5" y="44.5" width="16" height="16" rx="3"/>
+          <rect x="10.5" y="61.5" width="16" height="16" rx="3"/><rect x="27.5" y="61.5" width="16" height="16" rx="3"/><rect x="44.5" y="61.5" width="16" height="16" rx="3"/><rect x="61.5" y="61.5" width="16" height="16" rx="3"/>
+        </g>
+        <g fill="#8A5A36"><rect x="34.3" y="19" width="2.4" height="5.5"/><rect x="68.3" y="53" width="2.4" height="5.5"/><rect x="17.3" y="70" width="2.4" height="5.5"/></g>
+        <g fill="#4F8A4B"><circle cx="35.5" cy="16.5" r="5"/><circle cx="69.5" cy="50.5" r="5"/><circle cx="18.5" cy="67.5" r="5"/></g>
+        <g fill="#E07A3F"><path d="M12.5 23.5L18.5 12.5L24.5 23.5Z"/><path d="M63.5 40.5L69.5 29.5L75.5 40.5Z"/><path d="M12.5 57.5L18.5 46.5L24.5 57.5Z"/></g>
+        <g fill="#2C365E"><path d="M16.7 23.5L18.5 19.8L20.3 23.5Z"/><path d="M67.7 40.5L69.5 36.8L71.3 40.5Z"/><path d="M16.7 57.5L18.5 53.8L20.3 57.5Z"/></g>
+        <g fill="#A7AEC6" font-size="10"><text x="87.5" y="18.5">1</text><text x="87.5" y="35.5">1</text><text x="87.5" y="52.5">1</text><text x="87.5" y="69.5">0</text><text x="18.5" y="88">2</text><text x="35.5" y="88">0</text><text x="52.5" y="88">0</text><text x="69.5" y="88">1</text></g>
+      </g>
+      <!-- Slitherlink: one closed loop, each number counts how many of its sides the loop uses -->
+      <g transform="translate(4 105)">
+        <rect width="97" height="97" rx="10" fill="#20284A"/>
+        <path d="M15.5 15.5H59.5V37.5H37.5V59.5H59.5V81.5H15.5Z" fill="none" stroke="#6E9BD6" stroke-width="3.4" stroke-linejoin="round"/>
+        <g fill="#F4F1E8" font-size="12"><text x="26.5" y="27">2</text><text x="48.5" y="27">3</text><text x="48.5" y="49">3</text><text x="70.5" y="49">0</text><text x="48.5" y="71">3</text><text x="70.5" y="71">1</text></g>
+        <g fill="#F4F1E8">
+          <circle cx="15.5" cy="15.5" r="2.2"/><circle cx="37.5" cy="15.5" r="2.2"/><circle cx="59.5" cy="15.5" r="2.2"/><circle cx="81.5" cy="15.5" r="2.2"/>
+          <circle cx="15.5" cy="37.5" r="2.2"/><circle cx="37.5" cy="37.5" r="2.2"/><circle cx="59.5" cy="37.5" r="2.2"/><circle cx="81.5" cy="37.5" r="2.2"/>
+          <circle cx="15.5" cy="59.5" r="2.2"/><circle cx="37.5" cy="59.5" r="2.2"/><circle cx="59.5" cy="59.5" r="2.2"/><circle cx="81.5" cy="59.5" r="2.2"/>
+          <circle cx="15.5" cy="81.5" r="2.2"/><circle cx="37.5" cy="81.5" r="2.2"/><circle cx="59.5" cy="81.5" r="2.2"/><circle cx="81.5" cy="81.5" r="2.2"/>
+        </g>
+      </g>
+      <!-- Binairo: two colors, no three alike in a line, equal counts, no two equal lines -->
+      <g transform="translate(105 105)">
+        <rect width="97" height="97" rx="10" fill="#20284A"/>
+        <g fill="#E07A3F"><circle cx="15.5" cy="15.5" r="9"/><circle cx="81.5" cy="15.5" r="9"/><circle cx="37.5" cy="37.5" r="9"/><circle cx="59.5" cy="37.5" r="9"/><circle cx="15.5" cy="59.5" r="9"/><circle cx="37.5" cy="59.5" r="9"/><circle cx="59.5" cy="81.5" r="9"/><circle cx="81.5" cy="81.5" r="9"/></g>
+        <g fill="#4A7DBA"><circle cx="37.5" cy="15.5" r="9"/><circle cx="59.5" cy="15.5" r="9"/><circle cx="15.5" cy="37.5" r="9"/><circle cx="81.5" cy="37.5" r="9"/><circle cx="59.5" cy="59.5" r="9"/><circle cx="81.5" cy="59.5" r="9"/><circle cx="15.5" cy="81.5" r="9"/><circle cx="37.5" cy="81.5" r="9"/></g>
+        <g fill="none" stroke="rgba(255,255,255,.85)" stroke-width="1.6"><circle cx="15.5" cy="15.5" r="3.4"/><circle cx="59.5" cy="37.5" r="3.4"/><circle cx="81.5" cy="59.5" r="3.4"/><circle cx="37.5" cy="81.5" r="3.4"/></g>
+      </g>
+    </g>
+  </symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9.3 4v16M14.7 4v16M4 9.3h16M4 14.7h16"/></g></symbol>
+  <symbol id="i-cal" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5.5" width="16" height="14.5" rx="2"/><path d="M4 10h16M8.5 3.5v4M15.5 3.5v4M8.5 14h.01M12 14h.01M15.5 14h.01M8.5 17h.01M12 17h.01"/></g></symbol>
+  <symbol id="i-inf" viewBox="0 0 24 24"><path d="M12 12c-1.8-2.4-3.4-3.6-5-3.6a3.6 3.6 0 0 0 0 7.2c1.6 0 3.2-1.2 5-3.6zm0 0c1.8 2.4 3.4 3.6 5 3.6a3.6 3.6 0 0 0 0-7.2c-1.6 0-3.2 1.2-5 3.6z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-bulb" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.6 1.1 1.4 1.1 2.2h5c0-.8.4-1.6 1.1-2.2A6 6 0 0 0 12 3z"/></g></symbol>
+  <symbol id="i-palette" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5a8.5 8.5 0 0 0 0 17c1.2 0 1.8-.8 1.8-1.7 0-.5-.2-.9-.5-1.2-.3-.4-.5-.8-.5-1.2 0-1 .8-1.7 1.7-1.7h2a4.5 4.5 0 0 0 4-4.5c0-3.7-3.8-6.7-8.5-6.7z"/><path d="M7.5 11.5h.01M10 7.5h.01M14.5 7.5h.01M17 11h.01"/></g></symbol>
+  <symbol id="i-plane" viewBox="0 0 24 24"><path d="M10.5 13.5L4 11l1.5-1.5 7 .5 4-4.5a2 2 0 0 1 3 3L15 12.5l.5 7L14 21l-2.5-6.5-3 3V20l-1.5 1-1-3.5-3.5-1 1-1.5h2.5z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+<main>
+
+<div class="page" id="cs" lang="cs">
+  <header class="top">
+    <div class="brand"><img class="logo" src="icon-192.png" alt="" width="46" height="46"><span><b>Mřížky</b><small>Klidné logické hádanky</small></span></div>
+    <nav class="langs" aria-label="Jazyk"><a href="#en" lang="en" hreflang="en">English</a> &middot; <strong aria-current="page">Čeština</strong> &middot; <a href="#de" lang="de" hreflang="de">Deutsch</a></nav>
+  </header>
+
+  <section class="hero">
+    <div>
+      <p class="eyebrow">Logické hádanky pro iPhone a Android</p>
+      <h1>Čtyři klasické hádanky. <em>V klidu.</em></h1>
+      <p class="lede">Mřížky spojují čtyři klasické logické hádanky v jedné klidné aplikaci: Hashi, Stany a stromy, Slitherlink a Binairo. Každá hádanka má právě jedno řešení, ke kterému dojdete úvahou, nikdy hádáním.</p>
+      <p class="soon">Již brzy v App Store a na Google Play</p>
+      <p class="note">Hrajete zdarma. Bez účtu, bez životů, bez odpočtů.</p>
+    </div>
+    <div class="hero-art" role="img" aria-label="Čtyři vyřešené hádanky dne: Hashi s ostrovy propojenými mosty, Stany a stromy se stanem u každého stromu, Slitherlink s jednou uzavřenou smyčkou a Binairo s oranžovými a modrými kolečky.">
+      <div class="mock">
+        <div class="m-top"><b>Hádanky dne</b><small>Dnes 4 ze 4</small></div>
+        <svg class="board" viewBox="0 0 206 206"><use href="#board"/></svg>
+      </div>
+      <div class="m-win"><svg><use href="#check"/></svg><span>Vyřešeno!</span></div>
+    </div>
+  </section>
+
+  <h2>Čtyři hádanky v jedné aplikaci</h2>
+  <p class="sub">Pár jednoduchých pravidel u každé. Zbytek je čistá úvaha.</p>
+  <div class="rules">
+    <div class="card"><span class="num">1</span><h3>Hashi (mosty)</h3><p>Propojte ostrovy mosty. Číslo na ostrově říká, kolik mostů z něj vede. Mosty vedou rovně, nekříží se a mezi dvěma ostrovy jsou nejvýš dva. Nakonec musí být všechny ostrovy propojené.</p></div>
+    <div class="card"><span class="num">2</span><h3>Stany a stromy</h3><p>Ke každému stromu patří jeden stan na sousedním políčku. Stany se nedotýkají, ani úhlopříčně, a čísla u řádků a sloupců říkají, kolik je v nich stanů.</p></div>
+    <div class="card"><span class="num">3</span><h3>Slitherlink</h3><p>Nakreslete po tečkách jednu uzavřenou smyčku. Číslo v políčku říká, kolik jeho stran smyčka použije.</p></div>
+    <div class="card"><span class="num">4</span><h3>Binairo (Takuzu)</h3><p>Vyplňte mřížku kolečky dvou barev. Nikde nesmí být tři stejná za sebou, každý řádek a sloupec má obou barev stejně a žádné dvě řady nejsou stejné.</p></div>
+  </div>
+  <p class="controls">Ovládání každé hádanky vám hra ukáže, když ji poprvé otevřete. Kreslíte a značíte ťuknutím nebo tažením prstu, chyby se zvýrazní a vždy můžete vzít tah zpět.</p>
+
+  <h2>Hádanek dost, spěchat nemusíte</h2>
+  <div class="grid">
+    <div class="card"><span class="ic"><svg aria-hidden="true"><use href="#i-grid"/></svg></span><h3>400 úrovní</h3><p>Sto ověřených úrovní od každého druhu, od lehkých po náročné. Každá hádanka má jediné řešení a dá se vyřešit čistě úvahou.</p></div>
+    <div class="card"><span class="ic"><svg aria-hidden="true"><use href="#i-cal"/></svg></span><h3>Čtyři hádanky dne</h3><p>Každý den jedna nová hádanka od každého druhu. Vynechané dny si zahrajete později z kalendáře. Žádná série, o kterou byste mohli přijít.</p></div>
+    <div class="card"><span class="ic"><svg aria-hidden="true"><use href="#i-inf"/></svg></span><h3>Nekonečná volná hra</h3><p>Vyberte si hádanku, velikost a obtížnost a hrajte nové hádanky, jak dlouho chcete.</p></div>
+    <div class="card"><span class="ic"><svg aria-hidden="true"><use href="#i-bulb"/></svg></span><h3>Nápověda, která vysvětlí krok</h3><p>Když nevíte kudy kam, nápověda udělá další logický krok a řekne vám proč. Pokud jste udělali chybu, nejdřív ji opraví.</p></div>
+    <div class="card"><span class="ic"><svg aria-hidden="true"><use href="#i-palette"/></svg></span><h3>7 motivů</h3><p>Včetně tmavého. Další motivy si odemknete za mince z vyřešených hádanek. Jsou jen pro radost a na hru nemají vliv.</p></div>
+    <div class="card"><span class="ic"><svg aria-hidden="true"><use href="#i-plane"/></svg></span><h3>Offline a ve třech jazycích</h3><p>Hrát můžete i bez připojení k internetu. Hra mluví česky, anglicky a německy.</p></div>
+  </div>
+
+  <section class="fair">
+    <div>
+      <h2>Férová hra už od návrhu</h2>
+      <p>Mřížky jsou zdarma a vydělávají na reklamách a na volitelných nákupech. Obojí držíme stranou od samotného hraní.</p>
+      <p><a href="privacy.html#cs">Přečtěte si zásady ochrany soukromí</a></p>
+    </div>
+    <ul class="checks">
+      <li>Žádné životy, energie, odpočty ani upozornění.</li>
+      <li>Mince získáváte hraním v pevných částkách. Žádné truhly s překvapením a nic náhodného za peníze.</li>
+      <li>Reklama jen mezi hádankami: nikdy po spuštění, nikdy uprostřed hádanky a během prvních 8 hádanek vůbec.</li>
+      <li>Reklamy s odměnou jen tehdy, když o ně sami požádáte, třeba za nápovědu nebo mince.</li>
+      <li>Reklamy odstraníte jednorázovým nákupem. Žádné předplatné.</li>
+    </ul>
+  </section>
+
+  <div class="cta">
+    <img class="appicon" src="icon-512.png" alt="" width="96" height="96">
+    <h2>Mřížky už brzy</h2>
+    <p class="sub">Máte dotaz nebo nápad? Napište na <a href="mailto:info@deriverge.com">info@deriverge.com</a>.</p>
+    <p class="soon">Již brzy v App Store a na Google Play</p>
+  </div>
+
+  <footer><a href="support.html#cs">Podpora</a> &middot; <a href="privacy.html#cs">Soukromí</a> &middot; <a href="terms.html#cs">Podmínky použití</a> &middot; <a href="#en" lang="en" hreflang="en">English</a> &middot; <a href="#de" lang="de" hreflang="de">Deutsch</a><br>Provozovatel: <a href="/">deriverge s.r.o.</a> &middot; <a href="mailto:info@deriverge.com">info@deriverge.com</a></footer>
+</div>
+
+<div class="page" id="de" lang="de">
+  <header class="top">
+    <div class="brand"><img class="logo" src="icon-192.png" alt="" width="46" height="46"><span><b>Logikgitter</b><small>Ruhige klassische Logikrätsel</small></span></div>
+    <nav class="langs" aria-label="Sprache"><a href="#en" lang="en" hreflang="en">English</a> &middot; <a href="#cs" lang="cs" hreflang="cs">Čeština</a> &middot; <strong aria-current="page">Deutsch</strong></nav>
+  </header>
+
+  <section class="hero">
+    <div>
+      <p class="eyebrow">Logikrätsel für iPhone und Android</p>
+      <h1>Vier klassische Rätsel. <em>In aller Ruhe.</em></h1>
+      <p class="lede">Logikgitter vereint vier klassische Logikrätsel in einer ruhigen App: Hashi, Zelte und Bäume, Slitherlink und Binairo. Jedes Rätsel hat genau eine Lösung, die Sie durch Nachdenken finden, nie durch Raten.</p>
+      <p class="soon">Demnächst im App Store und bei Google Play</p>
+      <p class="note">Kostenlos spielen. Kein Konto, keine Leben, kein Countdown.</p>
+    </div>
+    <div class="hero-art" role="img" aria-label="Vier gelöste Tagesrätsel: Hashi mit durch Brücken verbundenen Inseln, Zelte und Bäume mit einem Zelt neben jedem Baum, Slitherlink mit einer geschlossenen Schleife und Binairo mit orangen und blauen Kreisen.">
+      <div class="mock">
+        <div class="m-top"><b>Tagesrätsel</b><small>Heute 4 von 4</small></div>
+        <svg class="board" viewBox="0 0 206 206"><use href="#board"/></svg>
+      </div>
+      <div class="m-win"><svg><use href="#check"/></svg><span>Gelöst!</span></div>
+    </div>
+  </section>
+
+  <h2>Vier Rätsel in einer App</h2>
+  <p class="sub">Jedes mit ein paar einfachen Regeln. Der Rest ist reine Logik.</p>
+  <div class="rules">
+    <div class="card"><span class="num">1</span><h3>Hashi (Brücken)</h3><p>Verbinden Sie die Inseln mit Brücken. Die Zahl auf einer Insel gibt an, wie viele Brücken von ihr ausgehen. Brücken verlaufen gerade, kreuzen sich nicht, und zwischen zwei Inseln liegen höchstens zwei. Am Ende sind alle Inseln verbunden.</p></div>
+    <div class="card"><span class="num">2</span><h3>Zelte und Bäume</h3><p>Zu jedem Baum gehört ein Zelt auf einem Nachbarfeld. Zelte berühren sich nicht, auch nicht diagonal, und die Zahlen an Zeilen und Spalten geben an, wie viele Zelte darin stehen.</p></div>
+    <div class="card"><span class="num">3</span><h3>Slitherlink</h3><p>Zeichnen Sie entlang der Punkte eine einzige geschlossene Schleife. Die Zahl in einem Feld gibt an, wie viele seiner Seiten die Schleife nutzt.</p></div>
+    <div class="card"><span class="num">4</span><h3>Binairo (Takuzu)</h3><p>Füllen Sie das Gitter mit Kreisen in zwei Farben. Nie drei gleiche nebeneinander, in jeder Zeile und Spalte gleich viele von beiden Farben, und keine zwei Reihen sind gleich.</p></div>
+  </div>
+  <p class="controls">Die Steuerung jedes Rätsels zeigt Ihnen das Spiel, wenn Sie es zum ersten Mal öffnen. Sie zeichnen und markieren durch Tippen oder Ziehen, Fehler werden hervorgehoben, und jeder Zug lässt sich zurücknehmen.</p>
+
+  <h2>Viel zu spielen, nichts zu hetzen</h2>
+  <div class="grid">
+    <div class="card"><span class="ic"><svg aria-hidden="true"><use href="#i-grid"/></svg></span><h3>400 Level</h3><p>Hundert geprüfte Level von jeder Art, von leicht bis knifflig. Jedes Rätsel hat genau eine Lösung und ist allein mit Logik lösbar.</p></div>
+    <div class="card"><span class="ic"><svg aria-hidden="true"><use href="#i-cal"/></svg></span><h3>Vier Tagesrätsel</h3><p>Jeden Tag ein neues Rätsel von jeder Art. Verpasste Tage holen Sie später im Kalender nach. Keine Serie, die Sie verlieren können.</p></div>
+    <div class="card"><span class="ic"><svg aria-hidden="true"><use href="#i-inf"/></svg></span><h3>Endloses freies Spiel</h3><p>Wählen Sie Rätselart, Größe und Schwierigkeit und spielen Sie neue Rätsel, so lange Sie möchten.</p></div>
+    <div class="card"><span class="ic"><svg aria-hidden="true"><use href="#i-bulb"/></svg></span><h3>Tipps, die den Schritt erklären</h3><p>Wenn Sie feststecken, macht ein Tipp den nächsten logischen Schritt und sagt Ihnen, warum. Einen Fehler korrigiert er zuerst.</p></div>
+    <div class="card"><span class="ic"><svg aria-hidden="true"><use href="#i-palette"/></svg></span><h3>7 Designs</h3><p>Inklusive Dunkelmodus. Weitere Designs schalten Sie mit Münzen aus gelösten Rätseln frei. Sie sind reine Optik und ändern nichts am Spiel.</p></div>
+    <div class="card"><span class="ic"><svg aria-hidden="true"><use href="#i-plane"/></svg></span><h3>Offline und in drei Sprachen</h3><p>Spielen Sie auch ohne Internetverbindung. Die App gibt es auf Deutsch, Englisch und Tschechisch.</p></div>
+  </div>
+
+  <section class="fair">
+    <div>
+      <h2>Fair, von Anfang an</h2>
+      <p>Logikgitter ist kostenlos und finanziert sich über Werbung und freiwillige Käufe. Beides halten wir aus Ihrem Spiel heraus.</p>
+      <p><a href="privacy.html#de">Zur Datenschutzerklärung</a></p>
+    </div>
+    <ul class="checks">
+      <li>Keine Leben, keine Energie, kein Zeitdruck, keine Benachrichtigungen.</li>
+      <li>Münzen gibt es fürs Spielen in festen Beträgen. Keine Lootboxen und nichts Zufälliges gegen Geld.</li>
+      <li>Werbung nur zwischen Rätseln: nie beim Start, nie mitten im Rätsel und in den ersten 8 Rätseln gar nicht.</li>
+      <li>Belohnungswerbung nur, wenn Sie sie selbst wählen, etwa für einen Tipp oder Münzen.</li>
+      <li>Werbung entfernen Sie mit einem einmaligen Kauf. Kein Abo.</li>
+    </ul>
+  </section>
+
+  <div class="cta">
+    <img class="appicon" src="icon-512.png" alt="" width="96" height="96">
+    <h2>Logikgitter kommt bald</h2>
+    <p class="sub">Fragen oder Ideen? Schreiben Sie an <a href="mailto:info@deriverge.com">info@deriverge.com</a>.</p>
+    <p class="soon">Demnächst im App Store und bei Google Play</p>
+  </div>
+
+  <footer><a href="support.html#de">Hilfe</a> &middot; <a href="privacy.html#de">Datenschutz</a> &middot; <a href="terms.html#de">Nutzungsbedingungen</a> &middot; <a href="#en" lang="en" hreflang="en">English</a> &middot; <a href="#cs" lang="cs" hreflang="cs">Čeština</a><br>Betreiber: <a href="/">deriverge s.r.o.</a> &middot; <a href="mailto:info@deriverge.com">info@deriverge.com</a></footer>
+</div>
+
+<div class="page" id="en" lang="en">
+  <header class="top">
+    <div class="brand"><img class="logo" src="icon-192.png" alt="" width="46" height="46"><span><b>Logic Grids</b><small>Calm classic logic puzzles</small></span></div>
+    <nav class="langs" aria-label="Language"><strong aria-current="page">English</strong> &middot; <a href="#cs" lang="cs" hreflang="cs">Čeština</a> &middot; <a href="#de" lang="de" hreflang="de">Deutsch</a></nav>
+  </header>
+
+  <section class="hero">
+    <div>
+      <p class="eyebrow">Logic puzzles for iPhone and Android</p>
+      <h1>Four classic puzzles. <em>Take your time.</em></h1>
+      <p class="lede">Logic Grids brings four classic logic puzzles together in one calm app: Hashi, Tents and Trees, Slitherlink and Binairo. Each puzzle has exactly one solution, and you reach it by thinking, never by guessing.</p>
+      <p class="soon">Coming soon to the App Store and Google Play</p>
+      <p class="note">Free to play. No account, no lives, no countdowns.</p>
+    </div>
+    <div class="hero-art" role="img" aria-label="Four solved daily puzzles: Hashi with islands linked by bridges, Tents and Trees with a tent beside every tree, Slitherlink with one closed loop, and Binairo with orange and blue circles.">
+      <div class="mock">
+        <div class="m-top"><b>Daily puzzles</b><small>4 of 4 today</small></div>
+        <svg class="board" viewBox="0 0 206 206"><use href="#board"/></svg>
+      </div>
+      <div class="m-win"><svg><use href="#check"/></svg><span>Solved!</span></div>
+    </div>
+  </section>
+
+  <h2>Four puzzles in one app</h2>
+  <p class="sub">A few simple rules for each. The rest is pure logic.</p>
+  <div class="rules">
+    <div class="card"><span class="num">1</span><h3>Hashi (Bridges)</h3><p>Connect the islands with bridges. The number on an island tells how many bridges start there. Bridges run straight, never cross, and at most two link any pair. In the end, every island is connected.</p></div>
+    <div class="card"><span class="num">2</span><h3>Tents and Trees</h3><p>Every tree gets its own tent on a neighboring cell. Tents never touch, not even diagonally, and the numbers beside the rows and columns tell how many tents they hold.</p></div>
+    <div class="card"><span class="num">3</span><h3>Slitherlink</h3><p>Draw one closed loop along the dots. The number in a cell tells how many of its sides the loop uses.</p></div>
+    <div class="card"><span class="num">4</span><h3>Binairo (Takuzu)</h3><p>Fill the grid with circles in two colors. Never three alike in a line, the same count of each color in every row and column, and no two lines the same.</p></div>
+  </div>
+  <p class="controls">The game shows you the controls of each puzzle the first time you open it. You draw and mark by tapping or dragging, mistakes are highlighted, and you can always undo.</p>
+
+  <h2>Plenty to play, nothing to rush</h2>
+  <div class="grid">
+    <div class="card"><span class="ic"><svg aria-hidden="true"><use href="#i-grid"/></svg></span><h3>400 levels</h3><p>A hundred checked levels of each kind, from gentle to tough. Every puzzle has exactly one solution and can be solved by logic alone.</p></div>
+    <div class="card"><span class="ic"><svg aria-hidden="true"><use href="#i-cal"/></svg></span><h3>Four daily puzzles</h3><p>A new puzzle of each kind every day. Missed a day? Play it later from the calendar. There is no streak to lose.</p></div>
+    <div class="card"><span class="ic"><svg aria-hidden="true"><use href="#i-inf"/></svg></span><h3>Endless free play</h3><p>Pick a puzzle, a size and a difficulty, and play fresh puzzles for as long as you like.</p></div>
+    <div class="card"><span class="ic"><svg aria-hidden="true"><use href="#i-bulb"/></svg></span><h3>Hints that explain</h3><p>Stuck? A hint makes the next logical step and tells you why. If you made a mistake, it fixes that first.</p></div>
+    <div class="card"><span class="ic"><svg aria-hidden="true"><use href="#i-palette"/></svg></span><h3>7 themes</h3><p>Including dark mode. Unlock more themes with coins from solved puzzles. They are just for fun and do not change the game.</p></div>
+    <div class="card"><span class="ic"><svg aria-hidden="true"><use href="#i-plane"/></svg></span><h3>Offline, in three languages</h3><p>Play without an internet connection. The game speaks English, Czech and German.</p></div>
+  </div>
+
+  <section class="fair">
+    <div>
+      <h2>A fair game, by design</h2>
+      <p>Logic Grids is free and is paid for by ads and optional purchases. We keep both out of the way of your game.</p>
+      <p><a href="privacy.html">Read the privacy policy</a></p>
+    </div>
+    <ul class="checks">
+      <li>No lives, no energy, no timers pushing you, no notifications.</li>
+      <li>Coins are earned by playing, in fixed amounts. No loot boxes and nothing random for sale.</li>
+      <li>Ads only between puzzles: never at launch, never mid-puzzle, and none at all during your first 8 puzzles.</li>
+      <li>Rewarded ads only when you ask for one, for example for a hint or coins.</li>
+      <li>Remove ads with a one-time purchase. No subscription.</li>
+    </ul>
+  </section>
+
+  <div class="cta">
+    <img class="appicon" src="icon-512.png" alt="" width="96" height="96">
+    <h2>Logic Grids is coming soon</h2>
+    <p class="sub">Questions or ideas? Write to <a href="mailto:info@deriverge.com">info@deriverge.com</a>.</p>
+    <p class="soon">Coming soon to the App Store and Google Play</p>
+  </div>
+
+  <footer><a href="support.html">Support</a> &middot; <a href="privacy.html">Privacy</a> &middot; <a href="terms.html">Terms of use</a> &middot; <a href="#cs" lang="cs" hreflang="cs">Čeština</a> &middot; <a href="#de" lang="de" hreflang="de">Deutsch</a><br>Operator: <a href="/">deriverge s.r.o.</a> &middot; <a href="mailto:info@deriverge.com">info@deriverge.com</a></footer>
+</div>
+
+</main>
+</body>
+</html>
