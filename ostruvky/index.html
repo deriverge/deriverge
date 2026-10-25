@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Little Isles, a cozy island builder for iPhone and Android</title>
+<meta name="description" content="Place hexagon tiles with meadows, forests, fields, villages and lakes, and grow your own little island. Relaxing, offline, no timers, no energy.">
+<link rel="canonical" href="https://deriverge.com/ostruvky/">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="theme-color" content="#5FB3D6">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Little Isles">
+<meta property="og:title" content="Little Isles, a cozy island builder for iPhone and Android">
+<meta property="og:description" content="Place hexagon tiles with meadows, forests, fields, villages and lakes, and grow your own little island. Relaxing, offline, no timers, no energy.">
+<meta property="og:url" content="https://deriverge.com/ostruvky/">
+<meta property="og:image" content="https://deriverge.com/ostruvky/icon-512.png">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"VideoGame","name":"Little Isles","alternateName":["Ostrůvky"],
+"operatingSystem":"iOS, Android","applicationCategory":"GameApplication","gamePlatform":["iOS","Android"],
+"genre":["Puzzle","Simulation"],"description":"A calm 3D tile-laying game: place hexagon tiles with meadows, forests, fields, villages and lakes and grow your own island. No timers, no energy, plays offline, in 35 languages.",
+"offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"url":"https://deriverge.com/ostruvky/","image":"https://deriverge.com/ostruvky/icon-512.png",
+"publisher":{"@type":"Organization","name":"deriverge s.r.o.","url":"https://deriverge.com/"}}
+</script>
+<style>
+:root{--sky:#5FB3D6;--sky-dk:#2E7FA3;--sea:#1E5F7C;--ink:#1F2A33;--ink-2:#55636E;--card:#FFFDF7;--line:#E6E1D3;--green:#2F9A8A;--warm:#F29A4A}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;background:#EAF5FA}
+body{margin:0;min-height:100vh;color:var(--ink);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:linear-gradient(180deg,#8FD0EA 0%,#CFEAF5 360px,#EAF5FA 760px)}
+a{color:var(--sky-dk)}
+.page{max-width:1040px;margin:0 auto;padding:24px 20px 56px;overflow-x:clip}
+#cs,#de{display:none}
+#cs:target,#de:target{display:block}
+#cs:target~#en,#de:target~#en{display:none}
+.top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px 20px;margin-bottom:36px}
+.brand{display:flex;align-items:center;gap:12px;color:var(--ink);text-decoration:none}
+.logo{width:48px;height:48px;border-radius:12px;display:block;box-shadow:0 6px 16px -8px rgba(20,60,80,.6)}
+.brand b{display:block;font-size:18px;line-height:1.25}
+.brand small{display:block;font-size:13px;color:var(--ink-2)}
+.langs{font-size:14px;color:var(--ink-2)}.langs a{color:var(--ink-2)}.langs strong{color:var(--ink)}
+.hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:44px;align-items:center}
+.eyebrow{margin:0 0 10px;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--sea)}
+h1{margin:0 0 16px;font-size:48px;line-height:1.08;letter-spacing:-.02em;text-wrap:balance}
+h1 em{font-style:normal;color:var(--green)}
+.lede{margin:0 0 22px;max-width:32em;font-size:18px;color:var(--ink-2)}
+.stores{display:flex;flex-wrap:wrap;gap:12px;margin:0 0 10px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:12px 20px;border-radius:14px;background:var(--ink);color:#fff;text-decoration:none;font-weight:600;font-size:15px}
+.soon{display:inline-flex;align-items:center;gap:10px;padding:10px 16px;border-radius:999px;background:var(--card);border:1px solid var(--line);font-weight:600;font-size:14.5px}
+.soon::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--warm);box-shadow:0 0 0 4px rgba(242,154,74,.2)}
+.phone{width:100%;max-width:330px;justify-self:center;border-radius:30px;box-shadow:0 30px 60px -28px rgba(10,50,70,.6);display:block}
+h2{margin:56px 0 18px;font-size:30px;letter-spacing:-.01em}
+.grid{display:grid;gap:16px}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px 20px 18px;box-shadow:0 10px 30px -24px rgba(20,60,80,.5)}
+.card b{display:block;font-size:18px;margin-bottom:6px}
+.card p{margin:0;color:var(--ink-2)}
+.num{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--green);color:#fff;font-weight:700;margin-bottom:10px}
+.fair{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 24px}
+.fair li{position:relative;padding-left:30px}
+.fair li::before{content:"";position:absolute;left:0;top:6px;width:18px;height:12px;border-left:3px solid var(--green);border-bottom:3px solid var(--green);transform:rotate(-45deg) scale(.8)}
+.shots{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.shots img{width:100%;border-radius:18px;display:block;box-shadow:0 16px 30px -22px rgba(10,50,70,.6)}
+footer{margin-top:60px;padding-top:20px;border-top:1px solid var(--line);font-size:14px;color:var(--ink-2)}
+footer a{color:var(--ink-2)}
+.doc{max-width:780px}
+.doc h1{font-size:38px}
+.meta{color:var(--ink-2);font-size:14px;margin:-6px 0 20px}
+.doc h2{font-size:22px;margin:34px 0 10px}
+.doc ul{padding-left:20px}
+.faq details{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px 18px;margin:0 0 10px}
+.faq summary{font-weight:600;cursor:pointer}
+.faq p{margin:10px 0 2px;color:var(--ink-2)}
+@media (max-width:820px){.hero{grid-template-columns:1fr}.g3,.g4{grid-template-columns:1fr 1fr}.shots{grid-template-columns:1fr 1fr}h1{font-size:38px}.fair{grid-template-columns:1fr}}
+@media (max-width:520px){.g3,.g4{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="page" id="cs" lang="cs">
+<header class="top"><a class="brand" href="./#cs"><img class="logo" src="icon-192.png" alt="" width="48" height="48"><span><b>Ostrůvky</b><small>deriverge s.r.o.</small></span></a><nav class="langs" aria-label="Jazyk"><a href="#en" lang="en" hreflang="en">English</a> &middot; <strong aria-current="page">Čeština</strong> &middot; <a href="#de" lang="de" hreflang="de">Deutsch</a></nav></header>
+<section class="hero"><div><p class="eyebrow">Klidná 3D hra o pokládání dílků</p><h1>Postavte si ostrůvek, <em>dílek po dílku</em></h1><p class="lede">Každý šestiúhelníkový dílek nese kus krajiny. Otočte ho tak, aby hrany seděly k sousedům, a dívejte se, jak samy vyrůstají domky, mlýny, stromy i loďky.</p><p class="soon">Brzy v App Store a na Google Play</p></div>
+<img class="phone" src="shot-cs-2_play.jpg" alt="Pokládání dílku se sedícími hranami" width="660" height="1225"></section>
+<h2>Jak se hraje</h2><div class="grid g3"><div class="card"><span class="num">1</span><b>Položte</b><p>Ťukněte na svítící místo vedle ostrova. Dílek se sám natočí, jak nejlépe pasuje.</p></div><div class="card"><span class="num">2</span><b>Přiložte</b><p>Každá sedící hrana boduje. Když sedí všech šest, dílek je dokonalý a dostanete další.</p></div><div class="card"><span class="num">3</span><b>Rozšiřujte</b><p>Klidné úkoly chtějí větší les, pole, vesnici nebo jezero. Za splnění jsou dílky navíc.</p></div></div>
+<h2>Čtyři způsoby hry</h2><div class="grid g4"><div class="card"><b>Klasika</b><p>Ostrov roste, dokud nedojdou dílky, a vy honíte svůj rekord.</p></div><div class="card"><b>Výprava</b><p>30 ostrůvků s různou krajinou a hvězdami k získání.</p></div><div class="card"><b>Ostrůvek dne</b><p>Dnes pro všechny stejný. Vynechaný den nevadí.</p></div><div class="card"><b>Pohoda</b><p>Nekonečně dílků a výměna dílku zdarma. Prostě stavíte.</p></div></div>
+<h2>Klidná a férová od základu</h2><ul class="fair"><li>Žádný časovač, energie ani životy</li><li>Nápověda a krok zpět zdarma</li><li>Reklama jen mezi dokončenými ostrovy, nikdy uprostřed hry, a jen občas</li><li>Videa jen když o ně sami požádáte</li><li>Jen jednorázové nákupy, žádné předplatné ani loot boxy</li><li>Hraje se bez internetu, ve 35 jazycích</li></ul>
+<h2>Roční období k odemčení</h2><p class="lede">Jaro, léto, podzim, zima, sakury a večer, vše se odemyká jen hraním.</p><div class="shots"><img src="shot-cs-1_isle.jpg" alt="Zelený ostrov s poli, lesy a vesnicí" loading="lazy" width="660" height="1225"><img src="shot-cs-2_play.jpg" alt="Pokládání dílku se sedícími hranami" loading="lazy" width="660" height="1225"><img src="shot-cs-3_tasks.jpg" alt="Podzimní ostrov s úkoly" loading="lazy" width="660" height="1225"><img src="shot-cs-4_looks.jpg" alt="Zasněžený zimní ostrov" loading="lazy" width="660" height="1225"></div>
+<footer><a href="support.html#cs">Podpora</a> &middot; <a href="privacy.html#cs">Soukromí</a> &middot; <a href="terms.html#cs">Podmínky použití</a><br>Provozovatel: <a href="/">deriverge s.r.o.</a> &middot; <a href="mailto:info@deriverge.com">info@deriverge.com</a></footer>
+</div><div class="page" id="de" lang="de">
+<header class="top"><a class="brand" href="./#de"><img class="logo" src="icon-192.png" alt="" width="48" height="48"><span><b>Little Isles</b><small>deriverge s.r.o.</small></span></a><nav class="langs" aria-label="Sprache"><a href="#en" lang="en" hreflang="en">English</a> &middot; <a href="#cs" lang="cs" hreflang="cs">Čeština</a> &middot; <strong aria-current="page">Deutsch</strong></nav></header>
+<section class="hero"><div><p class="eyebrow">Ein ruhiges 3D-Legespiel</p><h1>Bau eine kleine Insel, <em>Plättchen für Plättchen</em></h1><p class="lede">Jedes Sechseckplättchen trägt ein Stück Landschaft. Dreh es so, dass die Kanten passen, und sieh zu, wie Häuser, Mühlen, Bäume und Boote von selbst entstehen.</p><p class="soon">Bald im App Store und bei Google Play</p></div>
+<img class="phone" src="shot-de-2_play.jpg" alt="Ein Plättchen mit passenden Kanten anlegen" width="660" height="1225"></section>
+<h2>So wird gespielt</h2><div class="grid g3"><div class="card"><span class="num">1</span><b>Legen</b><p>Tippe auf einen leuchtenden Platz neben deiner Insel. Das Plättchen dreht sich so, dass es am besten passt.</p></div><div class="card"><span class="num">2</span><b>Anlegen</b><p>Jede passende Kante bringt Punkte. Passen alle sechs, ist das Plättchen perfekt und du bekommst ein weiteres.</p></div><div class="card"><span class="num">3</span><b>Wachsen</b><p>Ruhige Aufgaben wünschen sich einen größeren Wald, ein Feld, ein Dorf oder einen See. Dafür gibt es Extra-Plättchen.</p></div></div>
+<h2>Vier Spielweisen</h2><div class="grid g4"><div class="card"><b>Klassisch</b><p>Die Insel wächst, bis die Plättchen ausgehen. Jage deinen Rekord.</p></div><div class="card"><b>Reise</b><p>30 Inseln mit unterschiedlichen Landschaften und Sternen.</p></div><div class="card"><b>Tagesinsel</b><p>Heute für alle dieselbe Insel. Einen Tag verpasst? Kein Problem.</p></div><div class="card"><b>Entspannt</b><p>Endlos Plättchen und kostenloser Tausch. Einfach bauen.</p></div></div>
+<h2>Entspannt und fair, von Anfang an</h2><ul class="fair"><li>Kein Zeitdruck, keine Energie, keine Leben</li><li>Tipps und Rückgängig kostenlos</li><li>Werbung nur zwischen fertigen Inseln, nie mitten im Spiel, und nur selten</li><li>Videos nur, wenn du sie selbst möchtest</li><li>Nur Einmalkäufe, keine Abos und keine Lootboxen</li><li>Spielbar offline, in 35 Sprachen</li></ul>
+<h2>Jahreszeiten zum Freischalten</h2><p class="lede">Frühling, Sommer, Herbst, Winter, Kirschblüte und Abend, alles nur durchs Spielen freigeschaltet.</p><div class="shots"><img src="shot-de-1_isle.jpg" alt="Eine grüne Insel mit Feldern, Wäldern und einem Dorf" loading="lazy" width="660" height="1225"><img src="shot-de-2_play.jpg" alt="Ein Plättchen mit passenden Kanten anlegen" loading="lazy" width="660" height="1225"><img src="shot-de-3_tasks.jpg" alt="Eine Herbstinsel mit Aufgaben" loading="lazy" width="660" height="1225"><img src="shot-de-4_looks.jpg" alt="Eine verschneite Winterinsel" loading="lazy" width="660" height="1225"></div>
+<footer><a href="support.html#de">Hilfe</a> &middot; <a href="privacy.html#de">Datenschutz</a> &middot; <a href="terms.html#de">Nutzungsbedingungen</a><br>Betreiber: <a href="/">deriverge s.r.o.</a> &middot; <a href="mailto:info@deriverge.com">info@deriverge.com</a></footer>
+</div><div class="page" id="en" lang="en">
+<header class="top"><a class="brand" href="./#en"><img class="logo" src="icon-192.png" alt="" width="48" height="48"><span><b>Little Isles</b><small>deriverge s.r.o.</small></span></a><nav class="langs" aria-label="Language"><strong aria-current="page">English</strong> &middot; <a href="#cs" lang="cs" hreflang="cs">Čeština</a> &middot; <a href="#de" lang="de" hreflang="de">Deutsch</a></nav></header>
+<section class="hero"><div><p class="eyebrow">A calm 3D tile-laying game</p><h1>Build a little island, <em>one tile at a time</em></h1><p class="lede">Each hexagon tile carries a piece of landscape. Turn it so the edges match its neighbours and watch houses, windmills, trees and boats appear on their own.</p><p class="soon">Coming soon to the App Store and Google Play</p></div>
+<img class="phone" src="shot-en-2_play.jpg" alt="Placing a tile with matching edges" width="660" height="1225"></section>
+<h2>How to play</h2><div class="grid g3"><div class="card"><span class="num">1</span><b>Place</b><p>Tap a glowing spot next to your island. The tile turns to fit as well as it can.</p></div><div class="card"><span class="num">2</span><b>Match</b><p>Every edge that matches scores. Match all six sides for a perfect tile and an extra tile.</p></div><div class="card"><span class="num">3</span><b>Grow</b><p>Gentle tasks ask for a bigger forest, field, village or lake. Finish them for bonus tiles.</p></div></div>
+<h2>Four ways to play</h2><div class="grid g4"><div class="card"><b>Classic</b><p>Grow your island until the tiles run out and chase your best score.</p></div><div class="card"><b>Journey</b><p>30 isles with different landscapes and stars to earn.</p></div><div class="card"><b>Daily Isle</b><p>The same island for everyone today. Missed a day? No problem.</p></div><div class="card"><b>Relax</b><p>Endless tiles and a free tile swap. Just build.</p></div></div>
+<h2>Fair and relaxing, by design</h2><ul class="fair"><li>No timers, no energy, no lives</li><li>Free hints and undo</li><li>Ads only between finished islands, never mid-game, and only rarely</li><li>Videos only when you ask for them</li><li>One-time purchases only, no subscriptions or loot boxes</li><li>Plays offline, in 35 languages</li></ul>
+<h2>Seasons to unlock</h2><p class="lede">Spring, summer, autumn, winter, cherry blossom and evening, all unlocked just by playing.</p><div class="shots"><img src="shot-en-1_isle.jpg" alt="A green island with fields, forests and a village" loading="lazy" width="660" height="1225"><img src="shot-en-2_play.jpg" alt="Placing a tile with matching edges" loading="lazy" width="660" height="1225"><img src="shot-en-3_tasks.jpg" alt="An autumn island with tasks" loading="lazy" width="660" height="1225"><img src="shot-en-4_looks.jpg" alt="A snowy winter island" loading="lazy" width="660" height="1225"></div>
+<footer><a href="support.html">Support</a> &middot; <a href="privacy.html">Privacy</a> &middot; <a href="terms.html">Terms of use</a><br>Operator: <a href="/">deriverge s.r.o.</a> &middot; <a href="mailto:info@deriverge.com">info@deriverge.com</a></footer>
+</div>
+</body>
+</html>
