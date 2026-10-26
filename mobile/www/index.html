@@ -4866,6 +4866,8 @@
   var archSig = null;        // id archivů naposledy zapsaných do úložišť
   var archMissing = [];      // id z hlavního stavu, jejichž archiv se zatím nenašel
   var archPool = {};         // archivy podle id ze všech přečtených kopií
+  var archStore = {};        // jen ze samostatných kopií archivu (1.0.6+)
+  var loadedLegacy = false;  // stav při startu byl ve tvaru starší verze
   var archToDb = true;       // archiv do IndexedDB ještě nebyl zapsaný
   var archToNative = true;   // archiv do souboru aplikace ještě nebyl zapsaný
   var legacyRaw = "";        // stav ze starší verze, jak byl načtený
@@ -4991,9 +4993,27 @@
     });
   }
 
+  // Samostatná kopie archivu (localStorage, soubor, IndexedDB) jde i do
+  // archStore: z ní se doplní stav ve starším tvaru, který zapsala starší
+  // verze otevřená v jiné kartě (ta archiv nezná a uložila by ho prázdný).
   function poolArchiveText(raw) {
     if (!raw) { return; }
-    try { poolArchives(JSON.parse(raw)); } catch (e) {}
+    var list = null;
+    try { list = JSON.parse(raw); } catch (e) { return; }
+    poolArchives(list);
+    if (Array.isArray(list)) {
+      list.forEach(function (a) { if (isObj(a) && typeof a.id === "string" && a.id) { archStore[a.id] = a; } });
+    }
+  }
+
+  function mergeStoreArchives(d) {
+    var have = {}, added = false;
+    d.archives.forEach(function (a) { have[a.id] = true; });
+    Object.keys(archStore).forEach(function (id) {
+      if (!have[id]) { d.archives.push(archStore[id]); added = true; }
+    });
+    if (added) { d.archives.sort(function (a, b) { return (a.closedAt || 0) - (b.closedAt || 0); }); }
+    return added;
   }
 
   // Stav 1.0.6 dostane archiv podle svého seznamu id. Co se zatím nenašlo
@@ -5059,6 +5079,8 @@
       // stav ze starší verze: archiv je v něm celý; při prvním uložení se
       // zapíše zvlášť a původní text se odloží do IndexedDB
       legacyRaw = typeof bestRaw === "string" ? bestRaw : "";
+      loadedLegacy = true;
+      mergeStoreArchives(best);
     }
     return best;
   }
@@ -9662,6 +9684,7 @@
     try { poolArchiveText(localStorage.getItem(ARCH_KEY)); } catch (e) {}
     var newFormat = Array.isArray(other.archIds);
     var miss = attachArchives(other);
+    if (!newFormat) { mergeStoreArchives(other); }
     var keepOrder = state.order, keepEv = state.evId, prevPair = state.pair;
     state = other;
     archMissing = miss;
@@ -9690,6 +9713,7 @@
             ((isEmpty(state) && !archMissing.length) || (backup.savedAt || 0) > (state.savedAt || 0))) {
           state = backup;
           archMissing = bMiss;
+          loadedLegacy = backupLegacy;
           if (backupLegacy && typeof rec === "string") { legacyRaw = rec; }
           afterReplace();
           render();
@@ -9697,7 +9721,9 @@
         }
         var finish = function () {
           dbSettled = true;
-          if (resolveMissing()) { render(); }
+          var more = resolveMissing();
+          if (loadedLegacy && mergeStoreArchives(state)) { more = true; }
+          if (more) { render(); }
           keepLegacy();
           saveNow();
         };
