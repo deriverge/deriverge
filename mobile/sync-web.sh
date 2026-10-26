@@ -38,4 +38,9 @@ for f in manifest.webmanifest icon-192.png icon-512.png icon-maskable-512.png ap
   [ -f "$DIR/../tapkasa/$f" ] && cp "$DIR/../tapkasa/$f" "$DST/$f"
 done
 
+# Přibalená písma (Archivo, JetBrains Mono) s licencí OFL: aplikace je bere
+# odsud, ne z Google Fonts, takže fungují i bez internetu.
+mkdir -p "$DST/fonts"
+cp "$DIR/../tapkasa/fonts/"*.woff2 "$DIR/../tapkasa/fonts/"OFL-*.txt "$DST/fonts/"
+
 echo "sync-web.sh: www/ aktualizováno ($(wc -c < "$DST/index.html") B index.html)"

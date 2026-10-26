@@ -1,9 +1,11 @@
 /* Kasa na stánek — offline cache.
    The stand may have no signal; once the app has been opened online it keeps working. */
 
-var CACHE = "kasa-v4";
+var CACHE = "kasa-v5";
 var SHELL = ["./", "./index.html", "./manifest.webmanifest",
-  "./icon-192.png", "./icon-512.png", "./icon-maskable-512.png", "./apple-touch-icon.png"];
+  "./icon-192.png", "./icon-512.png", "./icon-maskable-512.png", "./apple-touch-icon.png",
+  "./fonts/archivo-latin.woff2", "./fonts/archivo-latin-ext.woff2",
+  "./fonts/jetbrainsmono-latin.woff2", "./fonts/jetbrainsmono-latin-ext.woff2"];
 
 self.addEventListener("install", function (e) {
   e.waitUntil(
@@ -33,12 +35,11 @@ self.addEventListener("fetch", function (e) {
   // Cizí adresy necháváme projít rovnou na síť. Párování si povídá se
   // vzdáleným serverem a kdyby jeho odpovědi šly přes zdejší cache, vracela
   // by se pořád ta první — nové objednávky by nedorazily nikdy a navenek by
-  // to vypadalo jako v pořádku. Cachujeme jen sebe a písma.
+  // to vypadalo jako v pořádku. Cachujeme jen sebe (písma jsou od 1.0.6
+  // přibalená ve fonts/, Google Fonts se už nepoužívají).
   var url;
   try { url = new URL(req.url); } catch (err) { return; }
-  var mine = url.origin === self.location.origin;
-  var font = url.hostname === "fonts.googleapis.com" || url.hostname === "fonts.gstatic.com";
-  if (!mine && !font) { return; }
+  if (url.origin !== self.location.origin) { return; }
 
   // Page loads: fresh copy when online, cached copy when not.
   if (req.mode === "navigate") {
