@@ -39,13 +39,13 @@
   <p class="langs"><a href="#cs">Čeština</a> <a href="#en">English</a> <a href="#sk">Slovenčina</a> <a href="#de">Deutsch</a> <a href="#fr">Français</a> <a href="#es">Español</a> <a href="#it">Italiano</a> <a href="#pl">Polski</a> <a href="#pt">Português</a></p>
   <h1 id="cs">Zásady ochrany soukromí</h1>
 
-  <p class="muted">Tapkasa &middot; účinné od 31. 8. 2026 &middot; provozovatel: deriverge s.r.o. &middot; kontakt: <a href="mailto:info@deriverge.com">info@deriverge.com</a></p>
+  <p class="muted">Tapkasa &middot; účinné od 31. 8. 2026 &middot; aktualizováno 26. 10. 2026 &middot; provozovatel: deriverge s.r.o. &middot; kontakt: <a href="mailto:info@deriverge.com">info@deriverge.com</a></p>
 
   <p>Tapkasa je pokladní aplikace pro zaznamenávání prodeje na stáncích a akcích. Krátká verze: <strong>žádné účty, žádná analytika, žádné reklamy, žádné sledování. Prodejní data zůstávají ve vašem zařízení.</strong></p>
 
   <h2>1. Co aplikace neshromažďuje</h2>
 
-  <ul><li>Nevyžaduje účet, nezná vaše jméno, e-mail ani telefon.</li><li>Neobsahuje analytické, reklamní ani marketingové nástroje třetích stran.</li><li>Nezjišťuje polohu, nepřistupuje ke kontaktům ani fotografiím.</li><li>Nezpracovává platby ani platební údaje, hotovost i kartu přijímáte mimo aplikaci, Tapkasa prodej pouze zaznamená. Údaje o kartách zákazníků aplikací nikdy neprocházejí.</li><li>Neukládá žádné údaje o vašich zákaznících. Účtenka obsahuje jen položky, počty, ceny, způsob platby a čas.</li></ul>
+  <ul><li>Nevyžaduje účet, nezná vaše jméno, e-mail ani telefon.</li><li>Neobsahuje analytické, reklamní ani marketingové nástroje třetích stran.</li><li>Nezjišťuje polohu, nepřistupuje ke kontaktům ani fotografiím.</li><li>Nezpracovává platby ani platební údaje, hotovost i kartu přijímáte mimo aplikaci, Tapkasa prodej pouze zaznamená. Údaje o kartách zákazníků aplikací nikdy neprocházejí.</li><li>Neukládá žádné údaje o vašich zákaznících. Účtenka obsahuje jen položky, počty, ceny, způsob platby a čas.</li><li>Nestahuje písma, reklamy ani jiný obsah ze serverů třetích stran, písma jsou součástí aplikace.</li></ul>
 
   <h2>2. Data ve vašem zařízení</h2>
 
@@ -53,7 +53,11 @@
 
   <h2>3. Volitelné párování zařízení</h2>
 
-  <p>Spárovaná zařízení (kasa + výdej) si posílají <strong>jen obsah objednávek</strong>: názvy položek, počty, ceny, čísla objednávek a stav vydání, nikdy nastavení, archiv ani nic o vašem zařízení. Zprávy putují šifrovaně (HTTPS) přes předávací server pod náhodným párovacím kódem a server je drží nejvýše 12 hodin, pak je smaže. V nativní aplikaci se zařízení navíc umí spojit přímo (Bonjour/Multipeer) bez internetu, pak žádný server nepoužijí. Párování je vypnuté, dokud ho sami nezapnete.</p>
+  <p>Párování je vypnuté, dokud ho sami nezapnete párovacím kódem. Spárovaná zařízení (kasa a výdej) si pak posílají <strong>obsah objednávek</strong>: názvy položek, počty, ceny a sazby DPH, čísla objednávek, stav vydání a název akce. Jen když o to na jednom zařízení výslovně požádáte („Převzít menu a údaje z druhého zařízení“) a druhé zařízení žádost potvrdí, přenese se i kopie menu, cen, DPH, měny a údajů prodejce (jméno nebo firma, IČO, DIČ, adresa, e-mail, telefon, poznámka).</p>
+
+  <p>Přes internet jdou zprávy přes veřejné přeposílače ntfy.sh a ntfy.envs.net, které provozují třetí strany. Spojení je šifrované (HTTPS). U kódů vytvořených ve verzi 1.0.6 a novější je obsah navíc zašifrovaný klíčem odvozeným z párovacího kódu (AES-GCM), přeposílač tedy vidí jen nečitelná data, název tématu odvozený z kódu, čas a IP adresu zařízení. Starší kódy posílají obsah bez tohoto šifrování. Přeposílače zprávy uchovávají jen krátce (ntfy.sh nejvýše 12 hodin), aby je druhé zařízení stihlo převzít.</p>
+
+  <p>V aplikaci se zařízení umí spojit i přímo, bez internetu: na iPhonu a iPadu přes Multipeer Connectivity (Wi-Fi a Bluetooth), na Androidu 13 a novějším přes Nearby Connections ze služeb Google Play (Bluetooth a Wi-Fi). Data pak jdou přímo mezi zařízeními a žádný server se nepoužije.</p>
 
   <h2>4. Předplatné Tapkasa Pro</h2>
 
@@ -67,13 +71,13 @@
 
   <h1 id="en">Privacy Policy</h1>
 
-  <p class="muted">Tapkasa &middot; effective 31 Aug 2026 &middot; operator: deriverge s.r.o. &middot; contact: <a href="mailto:info@deriverge.com">info@deriverge.com</a></p>
+  <p class="muted">Tapkasa &middot; effective 31 Aug 2026 &middot; updated 26 Oct 2026 &middot; operator: deriverge s.r.o. &middot; contact: <a href="mailto:info@deriverge.com">info@deriverge.com</a></p>
 
   <p>Tapkasa is a point-of-sale app that records sales at stands and events. Short version: <strong>no accounts, no analytics, no ads, no tracking. Your sales data stays on your device.</strong></p>
 
   <h2>1. What the app does not collect</h2>
 
-  <ul><li>No account, the app doesn't know your name, e-mail or phone number.</li><li>No third-party analytics, advertising or marketing tools.</li><li>No location, contacts or photos access.</li><li>No payment processing and no payment data, you take cash and cards outside the app; Tapkasa only records the sale. Your customers' card details never pass through the app.</li><li>No data about your customers. A receipt holds only items, quantities, prices, payment method and time.</li></ul>
+  <ul><li>No account, the app doesn't know your name, e-mail or phone number.</li><li>No third-party analytics, advertising or marketing tools.</li><li>No location, contacts or photos access.</li><li>No payment processing and no payment data, you take cash and cards outside the app; Tapkasa only records the sale. Your customers' card details never pass through the app.</li><li>No data about your customers. A receipt holds only items, quantities, prices, payment method and time.</li><li>No fonts, ads or other content downloaded from third-party servers; the fonts are part of the app.</li></ul>
 
   <h2>2. Data on your device</h2>
 
@@ -81,7 +85,11 @@
 
   <h2>3. Optional device pairing</h2>
 
-  <p>Paired devices (till + prep counter) exchange <strong>order contents only</strong>: item names, quantities, prices, order numbers and served status, never settings, archives or anything about your device. Messages travel encrypted (HTTPS) through a relay server under a random pairing code, and the relay keeps them for at most 12 hours before deleting them. In the native app, devices can also connect directly (Bonjour/Multipeer) with no internet, then no server is used at all. Pairing is off until you turn it on yourself.</p>
+  <p>Pairing is off until you turn it on with a pairing code. Paired devices (till and prep counter) then exchange <strong>order contents</strong>: item names, quantities, prices and VAT rates, order numbers, served status and the event name. Only when you explicitly ask for it on one device (“Copy menu and details from the other device”) and the other device confirms the request is a copy of the menu, prices, VAT, currency and seller details (name or business, company and VAT numbers, address, e-mail, phone, note) transferred as well.</p>
+
+  <p>Over the internet, messages go through the public relays ntfy.sh and ntfy.envs.net, run by third parties. The connection is encrypted (HTTPS). For codes created in version 1.0.6 or later, the content is additionally encrypted with a key derived from the pairing code (AES-GCM), so the relay only sees unreadable data, a topic name derived from the code, the time and the device's IP address. Older codes send content without this extra encryption. The relays keep messages only briefly (ntfy.sh at most 12 hours) so that the other device can pick them up.</p>
+
+  <p>In the app, devices can also connect directly without internet: on iPhone and iPad through Multipeer Connectivity (Wi-Fi and Bluetooth), on Android 13 and later through Nearby Connections from Google Play services (Bluetooth and Wi-Fi). The data then goes straight between the devices and no server is used.</p>
 
   <h2>4. Tapkasa Pro subscription</h2>
 
@@ -95,13 +103,13 @@
 
   <h1 id="sk">Zásady ochrany súkromia</h1>
 
-  <p class="muted">Tapkasa &middot; účinné od 31. 8. 2026 &middot; prevádzkovateľ: deriverge s.r.o. &middot; kontakt: <a href="mailto:info@deriverge.com">info@deriverge.com</a></p>
+  <p class="muted">Tapkasa &middot; účinné od 31. 8. 2026 &middot; aktualizované 26. 10. 2026 &middot; prevádzkovateľ: deriverge s.r.o. &middot; kontakt: <a href="mailto:info@deriverge.com">info@deriverge.com</a></p>
 
   <p>Tapkasa je pokladničná aplikácia na zaznamenávanie predaja na stánkoch a akciách. Krátka verzia: <strong>žiadne účty, žiadna analytika, žiadne reklamy, žiadne sledovanie. Predajné dáta zostávajú vo vašom zariadení.</strong></p>
 
   <h2>1. Čo aplikácia nezhromažďuje</h2>
 
-  <ul><li>Nevyžaduje účet, nepozná vaše meno, e-mail ani telefón.</li><li>Neobsahuje analytické, reklamné ani marketingové nástroje tretích strán.</li><li>Nezisťuje polohu, nepristupuje ku kontaktom ani fotografiám.</li><li>Nespracúva platby ani platobné údaje, hotovosť aj kartu prijímate mimo aplikácie, Tapkasa predaj iba zaznamená. Údaje o kartách zákazníkov aplikáciou nikdy neprechádzajú.</li><li>Neukladá žiadne údaje o vašich zákazníkoch. Účtenka obsahuje len položky, počty, ceny, spôsob platby a čas.</li></ul>
+  <ul><li>Nevyžaduje účet, nepozná vaše meno, e-mail ani telefón.</li><li>Neobsahuje analytické, reklamné ani marketingové nástroje tretích strán.</li><li>Nezisťuje polohu, nepristupuje ku kontaktom ani fotografiám.</li><li>Nespracúva platby ani platobné údaje, hotovosť aj kartu prijímate mimo aplikácie, Tapkasa predaj iba zaznamená. Údaje o kartách zákazníkov aplikáciou nikdy neprechádzajú.</li><li>Neukladá žiadne údaje o vašich zákazníkoch. Účtenka obsahuje len položky, počty, ceny, spôsob platby a čas.</li><li>Nesťahuje písma, reklamy ani iný obsah zo serverov tretích strán, písma sú súčasťou aplikácie.</li></ul>
 
   <h2>2. Dáta vo vašom zariadení</h2>
 
@@ -109,7 +117,11 @@
 
   <h2>3. Voliteľné párovanie zariadení</h2>
 
-  <p>Spárované zariadenia (kasa + výdaj) si posielajú <strong>iba obsah objednávok</strong>: názvy položiek, počty, ceny, čísla objednávok a stav vydania, nikdy nastavenia, archív ani nič o vašom zariadení. Správy putujú šifrovane (HTTPS) cez odovzdávací server pod náhodným párovacím kódom a server ich drží najviac 12 hodín, potom ich zmaže. V natívnej aplikácii sa zariadenia navyše vedia spojiť priamo (Bonjour/Multipeer) bez internetu, vtedy žiadny server nepoužijú. Párovanie je vypnuté, kým ho sami nezapnete.</p>
+  <p>Párovanie je vypnuté, kým ho sami nezapnete párovacím kódom. Spárované zariadenia (kasa a výdaj) si potom posielajú <strong>obsah objednávok</strong>: názvy položiek, počty, ceny a sadzby DPH, čísla objednávok, stav vydania a názov akcie. Len keď o to na jednom zariadení výslovne požiadate („Prevziať menu a údaje z druhého zariadenia“) a druhé zariadenie žiadosť potvrdí, prenesie sa aj kópia menu, cien, DPH, meny a údajov predajcu (meno alebo firma, IČO, DIČ, adresa, e-mail, telefón, poznámka).</p>
+
+  <p>Cez internet idú správy cez verejné preposielače ntfy.sh a ntfy.envs.net, ktoré prevádzkujú tretie strany. Spojenie je šifrované (HTTPS). Pri kódoch vytvorených vo verzii 1.0.6 a novšej je obsah navyše zašifrovaný kľúčom odvodeným z párovacieho kódu (AES-GCM), preposielač teda vidí len nečitateľné dáta, názov témy odvodený z kódu, čas a IP adresu zariadenia. Staršie kódy posielajú obsah bez tohto šifrovania. Preposielače správy uchovávajú len krátko (ntfy.sh najviac 12 hodín), aby ich druhé zariadenie stihlo prevziať.</p>
+
+  <p>V aplikácii sa zariadenia vedia spojiť aj priamo, bez internetu: na iPhone a iPade cez Multipeer Connectivity (Wi-Fi a Bluetooth), na Androide 13 a novšom cez Nearby Connections zo služieb Google Play (Bluetooth a Wi-Fi). Dáta potom idú priamo medzi zariadeniami a žiadny server sa nepoužije.</p>
 
   <h2>4. Predplatné Tapkasa Pro</h2>
 
@@ -123,13 +135,13 @@
 
   <h1 id="de">Datenschutzerklärung</h1>
 
-  <p class="muted">Tapkasa &middot; gültig ab 31. 8. 2026 &middot; Betreiber: deriverge s.r.o. &middot; Kontakt: <a href="mailto:info@deriverge.com">info@deriverge.com</a></p>
+  <p class="muted">Tapkasa &middot; gültig ab 31. 8. 2026 &middot; aktualisiert am 26. 10. 2026 &middot; Betreiber: deriverge s.r.o. &middot; Kontakt: <a href="mailto:info@deriverge.com">info@deriverge.com</a></p>
 
   <p>Tapkasa ist eine Kassen-App zum Erfassen von Verkäufen an Ständen und auf Veranstaltungen. Kurzfassung: <strong>keine Konten, keine Analysen, keine Werbung, kein Tracking. Ihre Verkaufsdaten bleiben auf Ihrem Gerät.</strong></p>
 
   <h2>1. Was die App nicht sammelt</h2>
 
-  <ul><li>Kein Konto, die App kennt weder Namen noch E-Mail oder Telefonnummer.</li><li>Keine Analyse-, Werbe- oder Marketingwerkzeuge von Drittanbietern.</li><li>Kein Zugriff auf Standort, Kontakte oder Fotos.</li><li>Keine Zahlungsabwicklung und keine Zahlungsdaten, Bargeld und Karten nehmen Sie außerhalb der App an; Tapkasa erfasst nur den Verkauf. Kartendaten Ihrer Kunden laufen nie durch die App.</li><li>Keine Daten über Ihre Kunden. Ein Beleg enthält nur Positionen, Mengen, Preise, Zahlungsart und Uhrzeit.</li></ul>
+  <ul><li>Kein Konto, die App kennt weder Namen noch E-Mail oder Telefonnummer.</li><li>Keine Analyse-, Werbe- oder Marketingwerkzeuge von Drittanbietern.</li><li>Kein Zugriff auf Standort, Kontakte oder Fotos.</li><li>Keine Zahlungsabwicklung und keine Zahlungsdaten, Bargeld und Karten nehmen Sie außerhalb der App an; Tapkasa erfasst nur den Verkauf. Kartendaten Ihrer Kunden laufen nie durch die App.</li><li>Keine Daten über Ihre Kunden. Ein Beleg enthält nur Positionen, Mengen, Preise, Zahlungsart und Uhrzeit.</li><li>Sie lädt keine Schriften, Werbung oder sonstigen Inhalte von Servern Dritter; die Schriften sind Teil der App.</li></ul>
 
   <h2>2. Daten auf Ihrem Gerät</h2>
 
@@ -137,7 +149,11 @@
 
   <h2>3. Optionale Gerätekopplung</h2>
 
-  <p>Gekoppelte Geräte (Kasse + Ausgabe) tauschen <strong>nur Bestellinhalte</strong> aus: Positionsnamen, Mengen, Preise, Bestellnummern und Ausgabestatus, nie Einstellungen, Archive oder etwas über Ihr Gerät. Nachrichten laufen verschlüsselt (HTTPS) über einen Relay-Server unter einem zufälligen Kopplungscode; der Server hält sie höchstens 12 Stunden und löscht sie dann. In der nativen App können sich Geräte zusätzlich direkt verbinden (Bonjour/Multipeer), ganz ohne Internet, dann wird kein Server genutzt. Die Kopplung ist aus, bis Sie sie selbst einschalten.</p>
+  <p>Die Kopplung ist aus, bis Sie sie selbst mit einem Kopplungscode einschalten. Gekoppelte Geräte (Kasse und Ausgabe) tauschen dann <strong>Bestellinhalte</strong> aus: Artikelnamen, Mengen, Preise und MwSt.-Sätze, Bestellnummern, Ausgabestatus und den Namen des Events. Nur wenn Sie es auf einem Gerät ausdrücklich anfordern („Menü und Daten vom anderen Gerät übernehmen“) und das andere Gerät die Anfrage bestätigt, wird auch eine Kopie von Menü, Preisen, MwSt., Währung und Verkäuferangaben (Name oder Firma, Firmen- und USt-Nummer, Adresse, E-Mail, Telefon, Notiz) übertragen.</p>
+
+  <p>Über das Internet laufen die Nachrichten über die öffentlichen Relays ntfy.sh und ntfy.envs.net, die von Dritten betrieben werden. Die Verbindung ist verschlüsselt (HTTPS). Bei Codes, die ab Version 1.0.6 erstellt wurden, ist der Inhalt zusätzlich mit einem aus dem Kopplungscode abgeleiteten Schlüssel verschlüsselt (AES-GCM); das Relay sieht also nur unlesbare Daten, einen aus dem Code abgeleiteten Themennamen, die Uhrzeit und die IP-Adresse des Geräts. Ältere Codes senden den Inhalt ohne diese zusätzliche Verschlüsselung. Die Relays speichern Nachrichten nur kurz (ntfy.sh höchstens 12 Stunden), damit das andere Gerät sie abholen kann.</p>
+
+  <p>In der App können sich Geräte auch direkt ohne Internet verbinden: auf iPhone und iPad über Multipeer Connectivity (WLAN und Bluetooth), auf Android 13 und neuer über Nearby Connections aus den Google-Play-Diensten (Bluetooth und WLAN). Die Daten gehen dann direkt zwischen den Geräten, ein Server wird nicht verwendet.</p>
 
   <h2>4. Tapkasa-Pro-Abo</h2>
 
@@ -151,13 +167,13 @@
 
   <h1 id="fr">Politique de confidentialité</h1>
 
-  <p class="muted">Tapkasa &middot; en vigueur depuis le 31/08/2026 &middot; exploitant : deriverge s.r.o. &middot; contact : <a href="mailto:info@deriverge.com">info@deriverge.com</a></p>
+  <p class="muted">Tapkasa &middot; en vigueur depuis le 31/08/2026 &middot; mise à jour le 26/10/2026 &middot; exploitant : deriverge s.r.o. &middot; contact : <a href="mailto:info@deriverge.com">info@deriverge.com</a></p>
 
   <p>Tapkasa est une application de caisse qui enregistre les ventes sur les stands et les événements. En bref : <strong>pas de comptes, pas d'analytique, pas de publicité, pas de suivi. Vos données de vente restent sur votre appareil.</strong></p>
 
   <h2>1. Ce que l'application ne collecte pas</h2>
 
-  <ul><li>Aucun compte : l'application ne connaît ni votre nom, ni votre e-mail, ni votre téléphone.</li><li>Aucun outil tiers d'analyse, de publicité ou de marketing.</li><li>Aucun accès à la position, aux contacts ni aux photos.</li><li>Aucun traitement de paiement ni donnée de paiement : espèces et cartes sont encaissées hors de l'application, Tapkasa ne fait qu'enregistrer la vente. Les données de carte de vos clients ne transitent jamais par l'application.</li><li>Aucune donnée sur vos clients. Un ticket ne contient que les articles, quantités, prix, mode de paiement et l'heure.</li></ul>
+  <ul><li>Aucun compte : l'application ne connaît ni votre nom, ni votre e-mail, ni votre téléphone.</li><li>Aucun outil tiers d'analyse, de publicité ou de marketing.</li><li>Aucun accès à la position, aux contacts ni aux photos.</li><li>Aucun traitement de paiement ni donnée de paiement : espèces et cartes sont encaissées hors de l'application, Tapkasa ne fait qu'enregistrer la vente. Les données de carte de vos clients ne transitent jamais par l'application.</li><li>Aucune donnée sur vos clients. Un ticket ne contient que les articles, quantités, prix, mode de paiement et l'heure.</li><li>Elle ne télécharge ni polices, ni publicités, ni autre contenu depuis des serveurs tiers ; les polices font partie de l'application.</li></ul>
 
   <h2>2. Données sur votre appareil</h2>
 
@@ -165,7 +181,11 @@
 
   <h2>3. Association facultative d'appareils</h2>
 
-  <p>Les appareils associés (caisse + préparation) n'échangent <strong>que le contenu des commandes</strong> : noms d'articles, quantités, prix, numéros de commande et état de remise, jamais les réglages, archives ou quoi que ce soit sur votre appareil. Les messages voyagent chiffrés (HTTPS) via un serveur relais sous un code d'association aléatoire ; le relais les garde au maximum 12 heures puis les supprime. Dans l'application native, les appareils peuvent aussi se connecter directement (Bonjour/Multipeer) sans internet, aucun serveur n'est alors utilisé. L'association est désactivée tant que vous ne l'activez pas vous-même.</p>
+  <p>L'association est désactivée tant que vous ne l'activez pas vous-même avec un code. Les appareils associés (caisse et comptoir) échangent alors <strong>le contenu des commandes</strong> : noms des articles, quantités, prix et taux de TVA, numéros de commande, statut de service et nom de l'événement. Une copie du menu, des prix, de la TVA, de la devise et des coordonnées du vendeur (nom ou société, numéros d'entreprise et de TVA, adresse, e-mail, téléphone, note) n'est transmise que si vous la demandez expressément sur un appareil (« Reprendre le menu et les infos de l’autre appareil ») et que l'autre appareil confirme la demande.</p>
+
+  <p>Par Internet, les messages passent par les relais publics ntfy.sh et ntfy.envs.net, exploités par des tiers. La connexion est chiffrée (HTTPS). Pour les codes créés dans la version 1.0.6 ou ultérieure, le contenu est en outre chiffré avec une clé dérivée du code (AES-GCM) : le relais ne voit que des données illisibles, un nom de sujet dérivé du code, l'heure et l'adresse IP de l'appareil. Les codes plus anciens envoient le contenu sans ce chiffrement supplémentaire. Les relais ne conservent les messages que brièvement (ntfy.sh 12 heures au plus) pour que l'autre appareil puisse les récupérer.</p>
+
+  <p>Dans l'application, les appareils peuvent aussi se connecter directement, sans Internet : sur iPhone et iPad via Multipeer Connectivity (Wi-Fi et Bluetooth), sur Android 13 et versions ultérieures via Nearby Connections des services Google Play (Bluetooth et Wi-Fi). Les données passent alors directement d'un appareil à l'autre, sans serveur.</p>
 
   <h2>4. Abonnement Tapkasa Pro</h2>
 
@@ -179,13 +199,13 @@
 
   <h1 id="es">Política de privacidad</h1>
 
-  <p class="muted">Tapkasa &middot; vigente desde el 31/08/2026 &middot; operador: deriverge s.r.o. &middot; contacto: <a href="mailto:info@deriverge.com">info@deriverge.com</a></p>
+  <p class="muted">Tapkasa &middot; vigente desde el 31/08/2026 &middot; actualizada el 26/10/2026 &middot; operador: deriverge s.r.o. &middot; contacto: <a href="mailto:info@deriverge.com">info@deriverge.com</a></p>
 
   <p>Tapkasa es una aplicación de caja que registra ventas en puestos y eventos. En resumen: <strong>sin cuentas, sin analítica, sin anuncios, sin rastreo. Sus datos de venta permanecen en su dispositivo.</strong></p>
 
   <h2>1. Qué no recopila la aplicación</h2>
 
-  <ul><li>No requiere cuenta: la aplicación no conoce su nombre, correo ni teléfono.</li><li>No incluye herramientas de análisis, publicidad ni marketing de terceros.</li><li>No accede a la ubicación, contactos ni fotos.</li><li>No procesa pagos ni datos de pago: efectivo y tarjetas se cobran fuera de la aplicación, Tapkasa solo registra la venta. Los datos de tarjeta de sus clientes nunca pasan por la aplicación.</li><li>No guarda datos de sus clientes. Un recibo contiene solo artículos, cantidades, precios, forma de pago y hora.</li></ul>
+  <ul><li>No requiere cuenta: la aplicación no conoce su nombre, correo ni teléfono.</li><li>No incluye herramientas de análisis, publicidad ni marketing de terceros.</li><li>No accede a la ubicación, contactos ni fotos.</li><li>No procesa pagos ni datos de pago: efectivo y tarjetas se cobran fuera de la aplicación, Tapkasa solo registra la venta. Los datos de tarjeta de sus clientes nunca pasan por la aplicación.</li><li>No guarda datos de sus clientes. Un recibo contiene solo artículos, cantidades, precios, forma de pago y hora.</li><li>No descarga fuentes, anuncios ni otro contenido de servidores de terceros; las fuentes forman parte de la aplicación.</li></ul>
 
   <h2>2. Datos en su dispositivo</h2>
 
@@ -193,7 +213,11 @@
 
   <h2>3. Emparejamiento opcional de dispositivos</h2>
 
-  <p>Los dispositivos emparejados (caja + entrega) intercambian <strong>solo el contenido de los pedidos</strong>: nombres de artículos, cantidades, precios, números de pedido y estado de entrega, nunca ajustes, archivos ni nada sobre su dispositivo. Los mensajes viajan cifrados (HTTPS) por un servidor de relevo bajo un código de emparejamiento aleatorio; el servidor los guarda como máximo 12 horas y luego los borra. En la aplicación nativa los dispositivos también pueden conectarse directamente (Bonjour/Multipeer) sin internet, entonces no se usa ningún servidor. El emparejamiento está desactivado hasta que usted lo active.</p>
+  <p>El emparejamiento está desactivado hasta que usted lo active con un código. Los dispositivos emparejados (caja y barra) intercambian entonces <strong>el contenido de los pedidos</strong>: nombres de artículos, cantidades, precios y tipos de IVA, números de pedido, estado de entrega y nombre del evento. Solo si usted lo pide expresamente en un dispositivo («Copiar el menú y los datos del otro dispositivo») y el otro dispositivo confirma la solicitud, se transfiere también una copia del menú, precios, IVA, moneda y datos del vendedor (nombre o empresa, números de empresa y de IVA, dirección, correo, teléfono, nota).</p>
+
+  <p>Por Internet, los mensajes pasan por los repetidores públicos ntfy.sh y ntfy.envs.net, gestionados por terceros. La conexión está cifrada (HTTPS). En los códigos creados en la versión 1.0.6 o posterior, el contenido se cifra además con una clave derivada del código (AES-GCM), de modo que el repetidor solo ve datos ilegibles, un nombre de tema derivado del código, la hora y la dirección IP del dispositivo. Los códigos anteriores envían el contenido sin este cifrado adicional. Los repetidores guardan los mensajes solo poco tiempo (ntfy.sh como máximo 12 horas) para que el otro dispositivo pueda recogerlos.</p>
+
+  <p>En la aplicación, los dispositivos también pueden conectarse directamente, sin Internet: en iPhone y iPad mediante Multipeer Connectivity (Wi-Fi y Bluetooth), en Android 13 y posterior mediante Nearby Connections de los servicios de Google Play (Bluetooth y Wi-Fi). Los datos van entonces directamente de un dispositivo a otro y no se usa ningún servidor.</p>
 
   <h2>4. Suscripción Tapkasa Pro</h2>
 
@@ -207,13 +231,13 @@
 
   <h1 id="it">Informativa sulla privacy</h1>
 
-  <p class="muted">Tapkasa &middot; in vigore dal 31/08/2026 &middot; operatore: deriverge s.r.o. &middot; contatto: <a href="mailto:info@deriverge.com">info@deriverge.com</a></p>
+  <p class="muted">Tapkasa &middot; in vigore dal 31/08/2026 &middot; aggiornata il 26/10/2026 &middot; operatore: deriverge s.r.o. &middot; contatto: <a href="mailto:info@deriverge.com">info@deriverge.com</a></p>
 
   <p>Tapkasa è un'app di cassa che registra le vendite a bancarelle ed eventi. In breve: <strong>niente account, niente analisi, niente pubblicità, niente tracciamento. I dati di vendita restano sul vostro dispositivo.</strong></p>
 
   <h2>1. Cosa l'app non raccoglie</h2>
 
-  <ul><li>Nessun account: l'app non conosce nome, e-mail né telefono.</li><li>Nessuno strumento di terze parti per analisi, pubblicità o marketing.</li><li>Nessun accesso a posizione, contatti o foto.</li><li>Nessuna elaborazione di pagamenti né dati di pagamento: contanti e carte vengono incassati fuori dall'app, Tapkasa registra solo la vendita. I dati delle carte dei clienti non passano mai per l'app.</li><li>Nessun dato sui vostri clienti. Uno scontrino contiene solo articoli, quantità, prezzi, metodo di pagamento e orario.</li></ul>
+  <ul><li>Nessun account: l'app non conosce nome, e-mail né telefono.</li><li>Nessuno strumento di terze parti per analisi, pubblicità o marketing.</li><li>Nessun accesso a posizione, contatti o foto.</li><li>Nessuna elaborazione di pagamenti né dati di pagamento: contanti e carte vengono incassati fuori dall'app, Tapkasa registra solo la vendita. I dati delle carte dei clienti non passano mai per l'app.</li><li>Nessun dato sui vostri clienti. Uno scontrino contiene solo articoli, quantità, prezzi, metodo di pagamento e orario.</li><li>Non scarica font, pubblicità o altri contenuti da server di terzi; i font fanno parte dell'app.</li></ul>
 
   <h2>2. Dati sul vostro dispositivo</h2>
 
@@ -221,7 +245,11 @@
 
   <h2>3. Abbinamento facoltativo dei dispositivi</h2>
 
-  <p>I dispositivi abbinati (cassa + consegna) si scambiano <strong>solo il contenuto degli ordini</strong>: nomi degli articoli, quantità, prezzi, numeri d'ordine e stato di consegna, mai impostazioni, archivi o informazioni sul dispositivo. I messaggi viaggiano cifrati (HTTPS) tramite un server di inoltro sotto un codice di abbinamento casuale; il server li conserva al massimo 12 ore e poi li elimina. Nell'app nativa i dispositivi possono anche collegarsi direttamente (Bonjour/Multipeer) senza internet, in tal caso nessun server viene usato. L'abbinamento è spento finché non lo attivate voi.</p>
+  <p>L'abbinamento è disattivato finché non lo attivate voi con un codice. I dispositivi abbinati (cassa e banco) si scambiano allora <strong>il contenuto degli ordini</strong>: nomi degli articoli, quantità, prezzi e aliquote IVA, numeri d'ordine, stato di consegna e nome dell'evento. Solo se lo chiedete espressamente su un dispositivo («Copia menu e dati dall’altro dispositivo») e l'altro dispositivo conferma la richiesta, viene trasferita anche una copia di menu, prezzi, IVA, valuta e dati del venditore (nome o ditta, partita IVA e codici, indirizzo, e-mail, telefono, nota).</p>
+
+  <p>Via Internet i messaggi passano attraverso i relay pubblici ntfy.sh e ntfy.envs.net, gestiti da terzi. La connessione è cifrata (HTTPS). Per i codici creati con la versione 1.0.6 o successiva il contenuto è inoltre cifrato con una chiave derivata dal codice (AES-GCM): il relay vede solo dati illeggibili, un nome di argomento derivato dal codice, l'ora e l'indirizzo IP del dispositivo. I codici precedenti inviano il contenuto senza questa cifratura aggiuntiva. I relay conservano i messaggi solo per poco (ntfy.sh al massimo 12 ore), così che l'altro dispositivo possa riceverli.</p>
+
+  <p>Nell'app i dispositivi possono anche collegarsi direttamente, senza Internet: su iPhone e iPad tramite Multipeer Connectivity (Wi-Fi e Bluetooth), su Android 13 e successivi tramite Nearby Connections dei servizi Google Play (Bluetooth e Wi-Fi). I dati passano allora direttamente tra i dispositivi e non si usa alcun server.</p>
 
   <h2>4. Abbonamento Tapkasa Pro</h2>
 
@@ -235,13 +263,13 @@
 
   <h1 id="pl">Polityka prywatności</h1>
 
-  <p class="muted">Tapkasa &middot; obowiązuje od 31.08.2026 &middot; operator: deriverge s.r.o. &middot; kontakt: <a href="mailto:info@deriverge.com">info@deriverge.com</a></p>
+  <p class="muted">Tapkasa &middot; obowiązuje od 31.08.2026 &middot; aktualizacja 26.10.2026 &middot; operator: deriverge s.r.o. &middot; kontakt: <a href="mailto:info@deriverge.com">info@deriverge.com</a></p>
 
   <p>Tapkasa to aplikacja kasowa rejestrująca sprzedaż na stoiskach i imprezach. W skrócie: <strong>bez kont, bez analityki, bez reklam, bez śledzenia. Dane sprzedaży pozostają na Państwa urządzeniu.</strong></p>
 
   <h2>1. Czego aplikacja nie zbiera</h2>
 
-  <ul><li>Nie wymaga konta, nie zna Państwa imienia, adresu e-mail ani telefonu.</li><li>Nie zawiera narzędzi analitycznych, reklamowych ani marketingowych firm trzecich.</li><li>Nie sprawdza lokalizacji, nie sięga do kontaktów ani zdjęć.</li><li>Nie przetwarza płatności ani danych płatniczych: gotówkę i karty przyjmują Państwo poza aplikacją, Tapkasa jedynie rejestruje sprzedaż. Dane kart klientów nigdy nie przechodzą przez aplikację.</li><li>Nie zapisuje żadnych danych o Państwa klientach. Paragon zawiera tylko pozycje, ilości, ceny, formę płatności i czas.</li></ul>
+  <ul><li>Nie wymaga konta, nie zna Państwa imienia, adresu e-mail ani telefonu.</li><li>Nie zawiera narzędzi analitycznych, reklamowych ani marketingowych firm trzecich.</li><li>Nie sprawdza lokalizacji, nie sięga do kontaktów ani zdjęć.</li><li>Nie przetwarza płatności ani danych płatniczych: gotówkę i karty przyjmują Państwo poza aplikacją, Tapkasa jedynie rejestruje sprzedaż. Dane kart klientów nigdy nie przechodzą przez aplikację.</li><li>Nie zapisuje żadnych danych o Państwa klientach. Paragon zawiera tylko pozycje, ilości, ceny, formę płatności i czas.</li><li>Nie pobiera czcionek, reklam ani innych treści z serwerów stron trzecich; czcionki są częścią aplikacji.</li></ul>
 
   <h2>2. Dane na Państwa urządzeniu</h2>
 
@@ -249,7 +277,11 @@
 
   <h2>3. Opcjonalne parowanie urządzeń</h2>
 
-  <p>Sparowane urządzenia (kasa + wydawanie) wymieniają <strong>wyłącznie treść zamówień</strong>: nazwy pozycji, ilości, ceny, numery zamówień i stan wydania, nigdy ustawienia, archiwa ani nic o urządzeniu. Wiadomości wędrują zaszyfrowane (HTTPS) przez serwer przekazujący pod losowym kodem parowania; serwer trzyma je najwyżej 12 godzin, potem je usuwa. W aplikacji natywnej urządzenia potrafią też połączyć się bezpośrednio (Bonjour/Multipeer) bez internetu, wtedy żaden serwer nie jest używany. Parowanie jest wyłączone, dopóki sami go Państwo nie włączą.</p>
+  <p>Parowanie jest wyłączone, dopóki sam go nie włączysz kodem. Sparowane urządzenia (kasa i wydawka) wymieniają wtedy <strong>treść zamówień</strong>: nazwy pozycji, ilości, ceny i stawki VAT, numery zamówień, stan wydania i nazwę imprezy. Kopia menu, cen, VAT, waluty i danych sprzedawcy (imię i nazwisko lub firma, NIP i numery rejestrowe, adres, e-mail, telefon, notatka) jest przesyłana tylko wtedy, gdy wyraźnie o to poprosisz na jednym urządzeniu („Przejmij menu i dane z drugiego urządzenia”), a drugie urządzenie prośbę potwierdzi.</p>
+
+  <p>Przez internet wiadomości idą przez publiczne przekaźniki ntfy.sh i ntfy.envs.net, prowadzone przez strony trzecie. Połączenie jest szyfrowane (HTTPS). W kodach utworzonych w wersji 1.0.6 i nowszej treść jest dodatkowo szyfrowana kluczem wyprowadzonym z kodu (AES-GCM), więc przekaźnik widzi tylko nieczytelne dane, nazwę tematu wyprowadzoną z kodu, czas i adres IP urządzenia. Starsze kody wysyłają treść bez tego dodatkowego szyfrowania. Przekaźniki przechowują wiadomości tylko krótko (ntfy.sh najwyżej 12 godzin), żeby drugie urządzenie zdążyło je odebrać.</p>
+
+  <p>W aplikacji urządzenia mogą też połączyć się bezpośrednio, bez internetu: na iPhonie i iPadzie przez Multipeer Connectivity (Wi-Fi i Bluetooth), na Androidzie 13 i nowszym przez Nearby Connections z usług Google Play (Bluetooth i Wi-Fi). Dane idą wtedy bezpośrednio między urządzeniami i żaden serwer nie jest używany.</p>
 
   <h2>4. Subskrypcja Tapkasa Pro</h2>
 
@@ -263,13 +295,13 @@
 
   <h1 id="pt">Política de privacidade</h1>
 
-  <p class="muted">Tapkasa &middot; em vigor desde 31/08/2026 &middot; operador: deriverge s.r.o. &middot; contacto: <a href="mailto:info@deriverge.com">info@deriverge.com</a></p>
+  <p class="muted">Tapkasa &middot; em vigor desde 31/08/2026 &middot; atualizada em 26/10/2026 &middot; operador: deriverge s.r.o. &middot; contacto: <a href="mailto:info@deriverge.com">info@deriverge.com</a></p>
 
   <p>A Tapkasa é uma aplicação de caixa que regista vendas em bancas e eventos. Em resumo: <strong>sem contas, sem análises, sem anúncios, sem rastreio. Os seus dados de venda ficam no seu dispositivo.</strong></p>
 
   <h2>1. O que a aplicação não recolhe</h2>
 
-  <ul><li>Não exige conta: a aplicação não conhece o seu nome, e-mail nem telefone.</li><li>Não inclui ferramentas de análise, publicidade ou marketing de terceiros.</li><li>Não acede à localização, contactos nem fotografias.</li><li>Não processa pagamentos nem dados de pagamento: dinheiro e cartões são recebidos fora da aplicação, a Tapkasa apenas regista a venda. Os dados de cartão dos seus clientes nunca passam pela aplicação.</li><li>Não guarda dados sobre os seus clientes. Um recibo contém apenas artigos, quantidades, preços, forma de pagamento e hora.</li></ul>
+  <ul><li>Não exige conta: a aplicação não conhece o seu nome, e-mail nem telefone.</li><li>Não inclui ferramentas de análise, publicidade ou marketing de terceiros.</li><li>Não acede à localização, contactos nem fotografias.</li><li>Não processa pagamentos nem dados de pagamento: dinheiro e cartões são recebidos fora da aplicação, a Tapkasa apenas regista a venda. Os dados de cartão dos seus clientes nunca passam pela aplicação.</li><li>Não guarda dados sobre os seus clientes. Um recibo contém apenas artigos, quantidades, preços, forma de pagamento e hora.</li><li>Não descarrega tipos de letra, anúncios nem outro conteúdo de servidores de terceiros; os tipos de letra fazem parte da aplicação.</li></ul>
 
   <h2>2. Dados no seu dispositivo</h2>
 
@@ -277,7 +309,11 @@
 
   <h2>3. Emparelhamento opcional de dispositivos</h2>
 
-  <p>Os dispositivos emparelhados (caixa + entrega) trocam <strong>apenas o conteúdo dos pedidos</strong>: nomes dos artigos, quantidades, preços, números de pedido e estado de entrega, nunca definições, arquivos nem nada sobre o seu dispositivo. As mensagens viajam cifradas (HTTPS) através de um servidor de retransmissão sob um código de emparelhamento aleatório; o servidor guarda-as no máximo 12 horas e depois apaga-as. Na aplicação nativa os dispositivos também se podem ligar diretamente (Bonjour/Multipeer) sem internet, e então nenhum servidor é usado. O emparelhamento está desligado até que o ative.</p>
+  <p>O emparelhamento está desligado até ser o próprio a ligá-lo com um código. Os dispositivos emparelhados (caixa e balcão) trocam então <strong>o conteúdo dos pedidos</strong>: nomes dos artigos, quantidades, preços e taxas de IVA, números de pedido, estado de entrega e nome do evento. Só quando o pede expressamente num dispositivo («Copiar o menu e os dados do outro aparelho») e o outro dispositivo confirma o pedido é que se transfere também uma cópia do menu, preços, IVA, moeda e dados do vendedor (nome ou empresa, NIF e números de registo, morada, e-mail, telefone, nota).</p>
+
+  <p>Pela Internet, as mensagens passam pelos retransmissores públicos ntfy.sh e ntfy.envs.net, geridos por terceiros. A ligação é cifrada (HTTPS). Nos códigos criados na versão 1.0.6 ou posterior, o conteúdo é ainda cifrado com uma chave derivada do código (AES-GCM), pelo que o retransmissor só vê dados ilegíveis, um nome de tópico derivado do código, a hora e o endereço IP do dispositivo. Os códigos anteriores enviam o conteúdo sem esta cifragem adicional. Os retransmissores guardam as mensagens apenas por pouco tempo (ntfy.sh no máximo 12 horas), para que o outro dispositivo as possa receber.</p>
+
+  <p>Na aplicação, os dispositivos podem também ligar-se diretamente, sem Internet: no iPhone e iPad através de Multipeer Connectivity (Wi-Fi e Bluetooth), no Android 13 e posterior através de Nearby Connections dos serviços Google Play (Bluetooth e Wi-Fi). Os dados vão então diretamente entre os dispositivos e não é usado nenhum servidor.</p>
 
   <h2>4. Subscrição Tapkasa Pro</h2>
 
