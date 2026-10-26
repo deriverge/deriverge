@@ -1,6 +1,6 @@
 {
   "name": "tapkasa-mobile",
-  "version": "0.1.0",
+  "version": "1.0.6",
   "private": true,
   "description": "Tapkasa — nativní obal (Capacitor) pro pokladní web z tapkasa/index.html",
   "scripts": {

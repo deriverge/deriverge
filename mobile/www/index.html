@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
-<meta name="description" content="Tapkasa, pokladna do kapsy pro stánky, trhy a festivaly. Prodej na tři ťuknutí, fronta objednávek, tržby a DPH doklady. Funguje i bez internetu.">
+<meta name="description" content="Tapkasa, pokladna do kapsy pro stánky, trhy a festivaly. Prodej na tři ťuknutí, fronta objednávek, tržby a souhrn tržeb s rozpisem DPH. Funguje i bez internetu.">
 <link rel="canonical" href="https://deriverge.com/tapkasa/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Tapkasa, pokladna do kapsy">
@@ -24,14 +24,23 @@
 </head>
 <body>
 <!-- APP:START -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- Písma se načítají bez blokování: stylopis Google Fonts v <body> před
-     skriptem aplikace držel start, dokud nevypršel požadavek. Na festivalu
-     s přetíženou sítí nebo na routeru bez internetu tak kasa desítky sekund
-     ukazovala prázdnou obrazovku. Bez sítě se použijí systémová písma. -->
-<link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
 <style>
+  /* Písma jsou přibalená v aplikaci (fonts/, licence SIL OFL 1.1 vedle nich).
+     Dřív se stahovala z Google Fonts: každý start posílal IP adresu Googlu
+     a bez internetu se písma nenačetla. Variabilní soubory pokrývají
+     všechny používané řezy; latin-ext nese češtinu, slovenštinu i polštinu. */
+  @font-face{font-family:"Archivo";font-style:normal;font-weight:400 700;font-display:swap;
+    src:url("fonts/archivo-latin-ext.woff2") format("woff2");
+    unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
+  @font-face{font-family:"Archivo";font-style:normal;font-weight:400 700;font-display:swap;
+    src:url("fonts/archivo-latin.woff2") format("woff2");
+    unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+  @font-face{font-family:"JetBrains Mono";font-style:normal;font-weight:500 700;font-display:swap;
+    src:url("fonts/jetbrainsmono-latin-ext.woff2") format("woff2");
+    unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
+  @font-face{font-family:"JetBrains Mono";font-style:normal;font-weight:500 700;font-display:swap;
+    src:url("fonts/jetbrainsmono-latin.woff2") format("woff2");
+    unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
   :root{
     color-scheme: light;
     --paper:#FBFAF7;
@@ -306,6 +315,7 @@
   .act:active{background:var(--sunk)}
   .act.danger{color:var(--accent);border-color:#F0C7BF}
   .act.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .act.ghostlink{flex:0 0 auto;padding:6px 0;border:0;background:none;font-size:13px;font-weight:500;color:var(--ink-3);text-decoration:underline}
 
   /* ---------- menu editor ---------- */
   .field{padding:0 16px 14px}
@@ -499,6 +509,7 @@
   .pw-plan .k{font-size:12px;font-weight:700;color:var(--ink-2);text-transform:uppercase;letter-spacing:.05em}
   .pw-plan .p{font-size:clamp(15px,5.6vw,22px);max-width:100%;text-align:center;overflow-wrap:anywhere;line-height:1.1}
   .pw-plan .s{font-size:11px;color:var(--ink-3)}
+  .pw-plan .tr{margin-top:4px;font-size:12px;font-weight:600;line-height:1.3;color:var(--cash);text-align:center}
   .pw-plan.best{border-color:var(--accent);background:var(--accent-tint)}
   .pw-plan:active{transform:scale(.98)}
   .pw-legal{padding:6px 4px 0;text-align:center;font-size:12px;color:var(--ink-3)}
@@ -545,6 +556,7 @@
   .ob-row i{flex:0 0 auto;width:38px;height:38px;border-radius:11px;display:grid;place-items:center;color:#fff}
   .ob-row i svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
   .ob-row p{margin:0;font-size:14px;line-height:1.45;color:var(--ink-2);padding-top:8px}
+  .ob-note{margin:18px 0 0;font-size:13px;line-height:1.45;color:var(--ink-3)}
   .ob-spacer{flex:1;min-height:22px}
   .ob .btn-done{margin-top:10px}
   .ob .btn-ghost{margin-top:8px}
@@ -847,7 +859,7 @@
     receiptsHead: "Účtenky",
     delReceiptAria: "Smazat účtenku",
     sellerHead: "Údaje obchodníka",
-    sellerHint: "Vyplňte, co vyžaduje vaše země. Prázdná pole se na dokladu neobjeví.",
+    sellerHint: "Vyplňte, co má být na souhrnu tržeb. Prázdná pole se na něm neobjeví.",
     sellerSet: "Údaje obchodníka · vyplněno",
     sellerEmpty: "Údaje obchodníka · doplnit",
     sfName: "Název firmy nebo jméno",
@@ -860,7 +872,7 @@
     sfEmail: "E-mail",
     sfPhone: "Telefon",
     sfNote: "Další údaje",
-    sfNotePh: "Cokoli navíc, co má být na dokladu",
+    sfNotePh: "Cokoli navíc, co má být na souhrnu",
     closedHead: "Uzavřené akce",
     archReopen: "Vrátit do kasy",
     archReopenAria: "Vrátit akci {0} zpět do kasy",
@@ -875,16 +887,16 @@
     closeEvent: "Uzavřít akci",
     emptyStats: "Zatím nic neprodáno.<br>Jakmile uložíte první účet, objeví se tu statistika.",
     tourS1: "Ťukněte na kartu produktu, položka skočí na účet.",
-    tourS1b: "Teď kartu podržte, dokud se nenaplní proužek, položka z účtu zmizí.",
+    tourS1b: "Teď kartu podržte, dokud se nenaplní proužek: ubere se jeden kus.",
     tourS1c: "A ťukněte na kartu znovu, ať máme co účtovat.",
     tourS2: "Ťukněte na Zaplatit.",
     tourS3: "Zvolte Hotově.",
     tourS4: "Ťukněte na Přesně a potom na Hotovo.",
     tourS5: "Otevřete Objednávky, zaplacený účet čeká ve frontě.",
     tourS6: "Otevřete lístek a ťukněte na Vydáno.",
-    tourS7: "V Přehledu vidíte tržbu; odtud se dělá i daňový doklad.",
+    tourS7: "V Přehledu vidíte tržbu; odtud se dělá i souhrn tržeb do PDF.",
     tourS8: "Otevřete Menu.",
-    tourS9: "Tady vyplňte údaje obchodníka, tisknou se na doklad.",
+    tourS9: "Tady vyplňte údaje prodejce, tisknou se na souhrn tržeb.",
     tourSkip: "Přeskočit",
     tourNeedsItems: "Průvodce vás provede prodejem, nejdřív ale přidejte do menu aspoň jednu položku.",
     tourDoneToast: "Hotovo! Umíte všechno podstatné.",
@@ -1024,11 +1036,11 @@
     toastRestored: "Data obnovena ze zálohy",
     toastCode: "Kód {0}. Zadejte ho ve druhém zařízení.",
     toastJoining: "Spojuje se přes kód {0}…",
-    toastEnterCode: "Zadejte kód z druhého zařízení",
+    toastEnterCode: "Zadejte kód z druhého zařízení (8 znaků)",
     toastResent: "Fronta odeslána znovu",
     setupImportBtn: "Převzít menu a údaje z druhého zařízení",
     setupImportAsk: ["Převzít nastavení?", "Menu, ceny, barvy, DPH, měna a údaje prodejce se na tomto zařízení nahradí kopií z druhého zařízení. Objednávky zůstanou.", "Převzít"],
-    setupImportWait: "Žádost odeslána, čekám na druhé zařízení.",
+    setupImportWait: "Žádost odeslána. Potvrďte ji na druhém zařízení.",
     setupImportDone: "Menu a údaje převzaty z druhého zařízení.",
     toastModeKasa: "Zařízení je teď kasa",
     toastModeVydej: "Zařízení je teď výdej",
@@ -1073,7 +1085,7 @@
     obLang: "Jazyk",
     obCurrency: "Měna",
     obNext: "Pokračovat",
-    obHow1: "Klepnutím na barevnou kartu přidáte položku na účet. Podržením ji zase smažete.",
+    obHow1: "Klepnutím na barevnou kartu přidáte položku na účet. Podržením jeden kus uberete.",
     obHow2: "Zaplacené účty se řadí do fronty s odškrtáváním. Nic se neztratí.",
     obHow3: "Druhé zařízení může frontu přijímat a odbavovat. To už je Tapkasa Pro.",
     obDemo: "Začít s ukázkovým menu",
@@ -1120,17 +1132,17 @@
     langHead: "Jazyk",
     currencyHead: "Měna",
     currencyHint: "Ovlivní jen zobrazování a rychlé bankovky. Uložené ceny se nepřepočítávají.",
-    docBtn: "Daňový doklad",
-    docHead: "Souhrnný doklad",
-    docHint: "Sestaví souhrnný prodejní doklad za zvolené období. Účtenky se počítají podle data prodeje.",
+    docBtn: "Souhrn tržeb (PDF)",
+    docHead: "Souhrn tržeb",
+    docHint: "Sestaví souhrn tržeb za zvolené období jako PDF, třeba pro účetní. Není to daňový doklad ani účtenka pro zákazníka. Účtenky se počítají podle data prodeje.",
     docFrom: "Od",
     docTo: "Do",
     bizHead: "Údaje prodejce",
-    bizHint: "Vyplňte jednou a budou se předvyplňovat na každý doklad. Použijte údaje, které vyžaduje vaše země, jeden na řádek.",
+    bizHint: "Vyplňte jednou a budou se předvyplňovat na každý souhrn tržeb. Použijte údaje, které chcete mít na souhrnu, jeden na řádek.",
     vatHead: "DPH",
     vatOn: "Jsem plátce DPH",
     vatOff: "Nejsem plátce DPH",
-    vatHint: "Když je zapnuto, můžete u každé položky zadat sazbu v procentech. Ceny zadáváte včetně DPH, na dokladu se rozpad na základ a daň dopočítá sám.",
+    vatHint: "Když je zapnuto, můžete u každé položky zadat sazbu v procentech. Ceny zadáváte včetně DPH, souhrn tržeb rozpad na základ a daň dopočítá sám.",
     vatAria: "Sazba DPH v procentech",
     docVatHead: "Rozpis DPH",
     docVatBase: "Základ",
@@ -1139,11 +1151,11 @@
     docVatNone: "bez DPH",
     docVatTotalBase: "Základ celkem:",
     docVatTotalTax: "DPH celkem:",
-    docMake: "Sestavit doklad",
-    docTitle: "SOUHRNNÝ PRODEJNÍ DOKLAD",
-    docNo: "Číslo dokladu:",
+    docMake: "Sestavit souhrn",
+    docTitle: "SOUHRN TRŽEB",
+    docNo: "Číslo souhrnu:",
     docPeriod: "Období:",
-    docIssued: "Vystaveno:",
+    docIssued: "Vytvořeno:",
     docEvents: "Zahrnuté akce:",
     docItemsHead: "Prodané položky",
     docReceipts: "Počet účtů:",
@@ -1157,14 +1169,44 @@
     docColUnit: "Cena",
     docColSum: "Celkem",
     docPageOf: "Strana {0} z {1}",
-    docFile: "doklad",
-    docMailBody: "V příloze posílám souhrnný prodejní doklad.",
-    pdfFail: "Doklad se nepodařilo vytvořit.",
-    pdfSaved: "Doklad uložen jako PDF.",
-    pdfSavedMail: "Doklad uložen jako PDF, přiložte ho ke zprávě.",
+    docFile: "souhrn-trzeb",
+    docMailBody: "V příloze posílám souhrn tržeb.",
+    pdfFail: "Souhrn se nepodařilo vytvořit.",
+    pdfSaved: "Souhrn uložen jako PDF.",
+    pdfSavedMail: "Souhrn uložen jako PDF, přiložte ho ke zprávě.",
     docEmpty: "Ve zvoleném období nejsou žádné prodeje.",
-    docFooter: "Vystaveno aplikací Tapkasa.",
-    supportRow: "Napsat podpoře"
+    docFooter: "Souhrn tržeb vytvořený aplikací Tapkasa. Nejde o daňový doklad.",
+    supportRow: "Napsat podpoře",
+    toastModeKasaHeld: "Zařízení je teď kasa. Objednávky z druhé kasy ({0}) se do jeho tržby nepočítají.",
+    pairNowActive: "Propojení je aktivní.",
+    pairWaitPro: "Čekám, až se ozve zařízení s Tapkasa Pro, které kód vytvořilo. Objednávky začnou chodit potom.",
+    pairNoPro: "Druhé zařízení nemá Tapkasa Pro. Kód musí vytvořit zařízení s Pro, pak se k němu připojte.",
+    pairLegacy: "Tento kód je ze starší verze a není šifrovaný. Požádejte zařízení s Tapkasa Pro o nový kód.",
+    pairLegacyPro: "Tento kód je ze starší verze a není šifrovaný. Až budou obě zařízení aktualizovaná, zrušte spojení a vytvořte nový kód.",
+    pairUpdateOther: "Zatím se nic neozvalo. Zkontrolujte, že je na druhém zařízení stejný kód a Tapkasa 1.0.6 nebo novější. Starší verzi aktualizujte, s tímto kódem se nespojí.",
+    pairBadCheck: "Kód nesedí. Zkontrolujte ho znak po znaku.",
+    pairOldCode: "Tento kód je ze starší verze Tapkasy. Aktualizujte druhé zařízení a vytvořte na něm nový kód.",
+    pairNoCrypto: "Toto zařízení neumí šifrované párování. Aktualizujte systém nebo prohlížeč.",
+    setupSendAsk: ["Poslat menu a údaje?", "Druhé zařízení se stejným kódem žádá o kopii menu, cen, DPH, měny a údajů prodejce. Pošlete ji, jen pokud to zařízení znáte.", "Poslat"],
+    setupSendLate: "Žádost už vypršela. Ať ji druhé zařízení pošle znovu.",
+    setupSent: "Menu a údaje odeslány.",
+    diagShow: "Podrobnosti spojení",
+    diagHide: "Skrýt podrobnosti",
+    diagNoBridge: "most nenačten",
+    diagReady: "modul připraven",
+    diagMissing: "modul chybí",
+    daysN: ["den", "dny", "dní"],
+    monthsN: ["měsíc", "měsíce", "měsíců"],
+    proTrialThenM: "{0} zdarma, pak {1} měsíčně",
+    proTrialThenY: "{0} zdarma, pak {1} ročně",
+    proTrialTerms: "Zkušební doba je zdarma. Po jejím skončení se předplatné automaticky obnoví za uvedenou cenu, pokud ho nejméně 24 hodin před koncem nezrušíte.",
+    billSetupFail: "Nákup se nepodařilo připravit.",
+    billModuleMissing: "Nákupní modul se nenačetl. Zkuste aplikaci zavřít a znovu otevřít.",
+    obFiscal: "Tapkasa není fiskální pokladna (EET, eKasa a podobně) a nezpracovává platby.",
+    toastRemovedOne: "{0}: o kus méně",
+    shortAsk: "Uložit i s nedoplatkem {0}",
+    shortAskHint: "Zákazník dal méně, než je částka účtu. Opravdu uložit?",
+    rateRow: "Ohodnotit Tapkasu"
   };
 
   I18N.en = {
@@ -1207,7 +1249,7 @@
     receiptsHead: "Receipts",
     delReceiptAria: "Delete receipt",
     sellerHead: "Seller details",
-    sellerHint: "Fill in whatever your country requires. Empty fields never appear on the document.",
+    sellerHint: "Fill in what should appear on the sales summary. Empty fields never appear on it.",
     sellerSet: "Seller details · filled in",
     sellerEmpty: "Seller details · add them",
     sfName: "Business or personal name",
@@ -1220,7 +1262,7 @@
     sfEmail: "E-mail",
     sfPhone: "Phone",
     sfNote: "Anything else",
-    sfNotePh: "Anything else that belongs on the document",
+    sfNotePh: "Anything else that belongs on the summary",
     closedHead: "Closed events",
     archReopen: "Reopen in the till",
     archReopenAria: "Reopen event {0} in the till",
@@ -1235,16 +1277,16 @@
     closeEvent: "Close event",
     emptyStats: "Nothing sold yet.<br>Save your first sale and stats appear here.",
     tourS1: "Tap a product card, the item jumps onto the bill.",
-    tourS1b: "Now press and hold the card until the bar fills, the item leaves the bill.",
+    tourS1b: "Now press and hold the card until the bar fills: one item comes off the bill.",
     tourS1c: "Tap the card again so there is something to charge.",
     tourS2: "Tap Charge.",
     tourS3: "Choose Cash.",
     tourS4: "Tap Exact, then Done.",
     tourS5: "Open Orders, the paid bill is waiting in the queue.",
     tourS6: "Open the ticket and tap Served.",
-    tourS7: "Stats shows your revenue; tax documents live here too.",
+    tourS7: "Stats shows your revenue; the PDF sales summary lives here too.",
     tourS8: "Open Menu.",
-    tourS9: "Fill in your seller details here, they print on documents.",
+    tourS9: "Fill in your seller details here, they print on the sales summary.",
     tourSkip: "Skip",
     tourNeedsItems: "The tour walks you through a sale, so add at least one item to the menu first.",
     tourDoneToast: "Done! You know everything that matters.",
@@ -1382,11 +1424,11 @@
     toastRestored: "Data restored from backup",
     toastCode: "Code {0}. Enter it on the other device.",
     toastJoining: "Joining with code {0}…",
-    toastEnterCode: "Enter the code from the other device",
+    toastEnterCode: "Enter the code from the other device (8 characters)",
     toastResent: "Queue sent again",
     setupImportBtn: "Copy menu and details from the other device",
     setupImportAsk: ["Copy settings?", "The menu, prices, colours, VAT, currency and seller details on this device will be replaced with a copy from the other device. Orders stay.", "Copy"],
-    setupImportWait: "Request sent, waiting for the other device.",
+    setupImportWait: "Request sent. Confirm it on the other device.",
     setupImportDone: "Menu and details copied from the other device.",
     toastModeKasa: "This device is now the till",
     toastModeVydej: "This device is now the counter",
@@ -1431,7 +1473,7 @@
     obLang: "Language",
     obCurrency: "Currency",
     obNext: "Continue",
-    obHow1: "Tap a colour card and the item is on the order. Hold it to remove it again.",
+    obHow1: "Tap a colour card and the item is on the order. Hold it to take one off again.",
     obHow2: "Paid orders line up in a queue with checklists. Nothing gets lost.",
     obHow3: "A second device can receive and serve the queue. That’s Tapkasa Pro.",
     obDemo: "Start with a sample menu",
@@ -1480,17 +1522,17 @@
     currencyHint: "Affects display and quick cash buttons only. Stored prices are not converted.",
     colCustom: "Custom colour",
     colApply: "Use colour",
-    docBtn: "Tax document",
-    docHead: "Summary document",
-    docHint: "Builds a summary sales document for the chosen period. Receipts count by their sale date.",
+    docBtn: "Sales summary (PDF)",
+    docHead: "Sales summary",
+    docHint: "Builds a sales summary for the chosen period as a PDF, for example for your accountant. It is not a tax invoice or a customer receipt. Receipts count by their sale date.",
     docFrom: "From",
     docTo: "To",
     bizHead: "Seller details",
-    bizHint: "Fill this in once and it will be pre-filled on every document. Use whatever your country requires, one item per line.",
+    bizHint: "Fill this in once and it will be pre-filled on every sales summary. Use whatever you want on the summary, one item per line.",
     vatHead: "VAT",
     vatOn: "I am VAT registered",
     vatOff: "Not VAT registered",
-    vatHint: "When on, you can set a rate in percent for each item. You enter prices including VAT; the document works out the net amount and the tax on its own.",
+    vatHint: "When on, you can set a rate in percent for each item. You enter prices including VAT; the sales summary works out the net amount and the tax on its own.",
     vatAria: "VAT rate in percent",
     docVatHead: "VAT breakdown",
     docVatBase: "Net",
@@ -1499,11 +1541,11 @@
     docVatNone: "no VAT",
     docVatTotalBase: "Net total:",
     docVatTotalTax: "VAT total:",
-    docMake: "Build document",
-    docTitle: "SUMMARY SALES DOCUMENT",
-    docNo: "Document no.:",
+    docMake: "Build summary",
+    docTitle: "SALES SUMMARY",
+    docNo: "Summary no.:",
     docPeriod: "Period:",
-    docIssued: "Issued:",
+    docIssued: "Created:",
     docEvents: "Included events:",
     docItemsHead: "Items sold",
     docReceipts: "Receipts:",
@@ -1517,14 +1559,44 @@
     docColUnit: "Price",
     docColSum: "Total",
     docPageOf: "Page {0} of {1}",
-    docFile: "document",
-    docMailBody: "Please find the summary sales document attached.",
-    pdfFail: "The document could not be created.",
-    pdfSaved: "Document saved as PDF.",
-    pdfSavedMail: "Document saved as PDF, attach it to your message.",
+    docFile: "sales-summary",
+    docMailBody: "Please find the sales summary attached.",
+    pdfFail: "The summary could not be created.",
+    pdfSaved: "Summary saved as PDF.",
+    pdfSavedMail: "Summary saved as PDF, attach it to your message.",
     docEmpty: "No sales in the chosen period.",
-    docFooter: "Issued with the Tapkasa app.",
-    supportRow: "Contact support"
+    docFooter: "Sales summary created with the Tapkasa app. Not a tax invoice.",
+    supportRow: "Contact support",
+    toastModeKasaHeld: "This device is now the till. Orders from the other till ({0}) are not counted in its takings.",
+    pairNowActive: "The devices are now linked.",
+    pairWaitPro: "Waiting for the device with Tapkasa Pro that created the code. Orders will start arriving after that.",
+    pairNoPro: "The other device does not have Tapkasa Pro. The code must be created on a device with Pro, then join it here.",
+    pairLegacy: "This code comes from an older version and is not encrypted. Ask the device with Tapkasa Pro for a new code.",
+    pairLegacyPro: "This code comes from an older version and is not encrypted. Once both devices are updated, unlink and create a new code.",
+    pairUpdateOther: "Nothing has come in yet. Check that the other device has the same code and Tapkasa 1.0.6 or newer. Please update an older version, it cannot connect with this code.",
+    pairBadCheck: "The code does not match. Check it character by character.",
+    pairOldCode: "This code comes from an older version of Tapkasa. Update the other device and create a new code on it.",
+    pairNoCrypto: "This device does not support encrypted pairing. Please update the system or browser.",
+    setupSendAsk: ["Send menu and details?", "The other device with the same code is asking for a copy of the menu, prices, VAT, currency and seller details. Only send it if you know that device.", "Send"],
+    setupSendLate: "The request has expired. Ask the other device to send it again.",
+    setupSent: "Menu and details sent.",
+    diagShow: "Connection details",
+    diagHide: "Hide details",
+    diagNoBridge: "bridge not loaded",
+    diagReady: "module ready",
+    diagMissing: "module missing",
+    daysN: ["day", "days", "days"],
+    monthsN: ["month", "months", "months"],
+    proTrialThenM: "{0} free, then {1} per month",
+    proTrialThenY: "{0} free, then {1} per year",
+    proTrialTerms: "The trial is free. When it ends, the subscription renews automatically at the price shown unless you cancel at least 24 hours before the trial ends.",
+    billSetupFail: "The purchase could not be prepared.",
+    billModuleMissing: "The purchase module did not load. Try closing and reopening the app.",
+    obFiscal: "Tapkasa is not a certified fiscal cash register and does not process payments.",
+    toastRemovedOne: "{0}: one less",
+    shortAsk: "Save with {0} still owed",
+    shortAskHint: "The customer paid less than the total. Save anyway?",
+    rateRow: "Rate Tapkasa"
   };
 
   // ==== strojově vkládané překlady (gen-i18n.cjs) ====
@@ -1568,7 +1640,7 @@
     receiptsHead: "Bločky",
     delReceiptAria: "Zmazať bloček",
     sellerHead: "Údaje predajcu",
-    sellerHint: "Vyplňte, čo vyžaduje vaša krajina. Prázdne polia sa na doklade neobjavia.",
+    sellerHint: "Vyplňte, čo má byť na súhrne tržieb. Prázdne polia sa na ňom neobjavia.",
     sellerSet: "Údaje predajcu · vyplnené",
     sellerEmpty: "Údaje predajcu · doplniť",
     sfName: "Názov firmy alebo meno",
@@ -1581,7 +1653,7 @@
     sfEmail: "E-mail",
     sfPhone: "Telefón",
     sfNote: "Ďalšie údaje",
-    sfNotePh: "Čokoľvek navyše, čo má byť na doklade",
+    sfNotePh: "Čokoľvek navyše, čo má byť na súhrne",
     closedHead: "Uzavreté akcie",
     archReopen: "Vrátiť do kasy",
     archReopenAria: "Vrátiť akciu {0} späť do kasy",
@@ -1596,16 +1668,16 @@
     closeEvent: "Uzavrieť akciu",
     emptyStats: "Zatiaľ sa nič nepredalo.<br>Len čo uložíte prvý účet, objaví sa tu štatistika.",
     tourS1: "Ťuknite na kartu produktu, položka skočí na účet.",
-    tourS1b: "Teraz kartu podržte, kým sa nenaplní prúžok, položka z účtu zmizne.",
+    tourS1b: "Teraz kartu podržte, kým sa nenaplní prúžok: uberie sa jeden kus.",
     tourS1c: "A ťuknite na kartu znova, nech máme čo účtovať.",
     tourS2: "Ťuknite na Zaplatiť.",
     tourS3: "Zvoľte Hotovosť.",
     tourS4: "Ťuknite na Presne a potom na Hotovo.",
     tourS5: "Otvorte Objednávky, zaplatený účet čaká vo fronte.",
     tourS6: "Otvorte lístok a ťuknite na Vydané.",
-    tourS7: "V Prehľade vidíte tržbu; odtiaľ sa robí aj daňový doklad.",
+    tourS7: "V Prehľade vidíte tržbu; odtiaľ sa robí aj súhrn tržieb do PDF.",
     tourS8: "Otvorte Menu.",
-    tourS9: "Tu vyplňte údaje predajcu, tlačia sa na doklad.",
+    tourS9: "Tu vyplňte údaje predajcu, tlačia sa na súhrn tržieb.",
     tourSkip: "Preskočiť",
     tourNeedsItems: "Sprievodca vás prevedie predajom, najskôr však pridajte do menu aspoň jednu položku.",
     tourDoneToast: "Hotovo! Ovládate všetko podstatné.",
@@ -1745,11 +1817,11 @@
     toastRestored: "Dáta obnovené zo zálohy",
     toastCode: "Kód {0}, zadajte ho na druhom zariadení",
     toastJoining: "Spája sa cez kód {0}…",
-    toastEnterCode: "Zadajte kód z druhého zariadenia",
+    toastEnterCode: "Zadajte kód z druhého zariadenia (8 znakov)",
     toastResent: "Objednávky odoslané znova",
     setupImportBtn: "Prevziať menu a údaje z druhého zariadenia",
     setupImportAsk: ["Prevziať nastavenie?", "Menu, ceny, farby, DPH, mena a údaje predajcu sa na tomto zariadení nahradia kópiou z druhého zariadenia. Objednávky zostanú.", "Prevziať"],
-    setupImportWait: "Žiadosť odoslaná, čakám na druhé zariadenie.",
+    setupImportWait: "Žiadosť odoslaná. Potvrďte ju na druhom zariadení.",
     setupImportDone: "Menu a údaje prevzaté z druhého zariadenia.",
     toastModeKasa: "Zariadenie je teraz kasa",
     toastModeVydej: "Zariadenie je teraz výdaj",
@@ -1794,7 +1866,7 @@
     obLang: "Jazyk",
     obCurrency: "Mena",
     obNext: "Pokračovať",
-    obHow1: "Ťuknite na farebnú kartu a položka je na účte. Podržaním ju zasa zmažete.",
+    obHow1: "Ťuknite na farebnú kartu a položka je na účte. Podržaním uberiete jeden kus.",
     obHow2: "Zaplatené účty sa zaradia do radu s odškrtávaním, nič sa nestratí.",
     obHow3: "Druhé zariadenie môže rad prijímať a vybavovať. To už je Tapkasa Pro.",
     obDemo: "Začať s ukážkovým menu",
@@ -1841,17 +1913,17 @@
     langHead: "Jazyk",
     currencyHead: "Mena",
     currencyHint: "Ovplyvní len zobrazovanie a rýchle bankovky. Uložené ceny sa neprepočítavajú.",
-    docBtn: "Daňový doklad",
-    docHead: "Súhrnný doklad",
-    docHint: "Zostaví súhrnný predajný doklad za zvolené obdobie. Účtenky sa počítajú podľa dátumu predaja.",
+    docBtn: "Súhrn tržieb (PDF)",
+    docHead: "Súhrn tržieb",
+    docHint: "Zostaví súhrn tržieb za zvolené obdobie ako PDF, napríklad pre účtovníka. Nie je to daňový doklad ani pokladničný doklad pre zákazníka. Účtenky sa počítajú podľa dátumu predaja.",
     docFrom: "Od",
     docTo: "Do",
     bizHead: "Údaje predajcu",
-    bizHint: "Vyplňte raz a budú sa predvypĺňať na každom doklade. Použite údaje, ktoré vyžaduje vaša krajina, jeden na riadok.",
+    bizHint: "Vyplňte raz a budú sa predvypĺňať na každom súhrne tržieb. Použite údaje, ktoré chcete mať na súhrne, jeden na riadok.",
     vatHead: "DPH",
     vatOn: "Som platca DPH",
     vatOff: "Nie som platca DPH",
-    vatHint: "Keď je zapnuté, môžete pri každej položke zadať sadzbu v percentách. Ceny zadávate vrátane DPH, na doklade sa rozpad na základ a daň dopočíta sám.",
+    vatHint: "Keď je zapnuté, môžete pri každej položke zadať sadzbu v percentách. Ceny zadávate vrátane DPH, súhrn tržieb rozpad na základ a daň dopočíta sám.",
     vatAria: "Sadzba DPH v percentách",
     docVatHead: "Rozpis DPH",
     docVatBase: "Základ",
@@ -1860,11 +1932,11 @@
     docVatNone: "bez DPH",
     docVatTotalBase: "Základ spolu:",
     docVatTotalTax: "DPH spolu:",
-    docMake: "Zostaviť doklad",
-    docTitle: "SÚHRNNÝ PREDAJNÝ DOKLAD",
-    docNo: "Číslo dokladu:",
+    docMake: "Zostaviť súhrn",
+    docTitle: "SÚHRN TRŽIEB",
+    docNo: "Číslo súhrnu:",
     docPeriod: "Obdobie:",
-    docIssued: "Vystavené:",
+    docIssued: "Vytvorené:",
     docEvents: "Zahrnuté akcie:",
     docItemsHead: "Predané položky",
     docReceipts: "Počet bločkov:",
@@ -1878,14 +1950,44 @@
     docColUnit: "Cena",
     docColSum: "Spolu",
     docPageOf: "Strana {0} z {1}",
-    docFile: "doklad",
-    docMailBody: "V prílohe posielam súhrnný predajný doklad.",
-    pdfFail: "Doklad sa nepodarilo vytvoriť.",
-    pdfSaved: "Doklad uložený ako PDF.",
-    pdfSavedMail: "Doklad uložený ako PDF, priložte ho k správe.",
+    docFile: "suhrn-trzieb",
+    docMailBody: "V prílohe posielam súhrn tržieb.",
+    pdfFail: "Súhrn sa nepodarilo vytvoriť.",
+    pdfSaved: "Súhrn uložený ako PDF.",
+    pdfSavedMail: "Súhrn uložený ako PDF, priložte ho k správe.",
     docEmpty: "Vo zvolenom období nie sú žiadne predaje.",
-    docFooter: "Vystavené aplikáciou Tapkasa.",
-    supportRow: "Napísať podpore"
+    docFooter: "Súhrn tržieb vytvorený aplikáciou Tapkasa. Nejde o daňový doklad.",
+    supportRow: "Napísať podpore",
+    toastModeKasaHeld: "Zariadenie je teraz kasa. Objednávky z druhej kasy ({0}) sa do jeho tržby nepočítajú.",
+    pairNowActive: "Prepojenie je aktívne.",
+    pairWaitPro: "Čakám, kým sa ozve zariadenie s Tapkasa Pro, ktoré kód vytvorilo. Objednávky začnú chodiť potom.",
+    pairNoPro: "Druhé zariadenie nemá Tapkasa Pro. Kód musí vytvoriť zariadenie s Pro, potom sa k nemu pripojte.",
+    pairLegacy: "Tento kód je zo staršej verzie a nie je šifrovaný. Požiadajte zariadenie s Tapkasa Pro o nový kód.",
+    pairLegacyPro: "Tento kód je zo staršej verzie a nie je šifrovaný. Keď budú obe zariadenia aktualizované, zrušte spojenie a vytvorte nový kód.",
+    pairUpdateOther: "Zatiaľ sa nič neozvalo. Skontrolujte, či je na druhom zariadení rovnaký kód a Tapkasa 1.0.6 alebo novšia. Staršiu verziu aktualizujte, s týmto kódom sa nespojí.",
+    pairBadCheck: "Kód nesedí. Skontrolujte ho znak po znaku.",
+    pairOldCode: "Tento kód je zo staršej verzie Tapkasy. Aktualizujte druhé zariadenie a vytvorte na ňom nový kód.",
+    pairNoCrypto: "Toto zariadenie nevie šifrované párovanie. Aktualizujte systém alebo prehliadač.",
+    setupSendAsk: ["Poslať menu a údaje?", "Druhé zariadenie s rovnakým kódom žiada o kópiu menu, cien, DPH, meny a údajov predajcu. Pošlite ju, len ak to zariadenie poznáte.", "Poslať"],
+    setupSendLate: "Žiadosť už vypršala. Nech ju druhé zariadenie pošle znova.",
+    setupSent: "Menu a údaje odoslané.",
+    diagShow: "Podrobnosti spojenia",
+    diagHide: "Skryť podrobnosti",
+    diagNoBridge: "most nenačítaný",
+    diagReady: "modul pripravený",
+    diagMissing: "modul chýba",
+    daysN: ["deň", "dni", "dní"],
+    monthsN: ["mesiac", "mesiace", "mesiacov"],
+    proTrialThenM: "{0} zadarmo, potom {1} mesačne",
+    proTrialThenY: "{0} zadarmo, potom {1} ročne",
+    proTrialTerms: "Skúšobná doba je zadarmo. Po jej skončení sa predplatné automaticky obnoví za uvedenú cenu, ak ho najmenej 24 hodín pred koncom nezrušíte.",
+    billSetupFail: "Nákup sa nepodarilo pripraviť.",
+    billModuleMissing: "Nákupný modul sa nenačítal. Skúste aplikáciu zavrieť a znova otvoriť.",
+    obFiscal: "Tapkasa nie je registračná pokladnica (eKasa a podobne) a nespracúva platby.",
+    toastRemovedOne: "{0}: o kus menej",
+    shortAsk: "Uložiť aj s nedoplatkom {0}",
+    shortAskHint: "Zákazník dal menej, než je suma účtu. Naozaj uložiť?",
+    rateRow: "Ohodnotiť Tapkasu"
   };
 
   I18N.de = {
@@ -1928,7 +2030,7 @@
     receiptsHead: "Belege",
     delReceiptAria: "Beleg löschen",
     sellerHead: "Angaben zum Verkäufer",
-    sellerHint: "Tragen Sie ein, was Ihr Land verlangt. Leere Felder erscheinen nicht auf dem Beleg.",
+    sellerHint: "Tragen Sie ein, was auf dem Umsatzbericht stehen soll. Leere Felder erscheinen nicht.",
     sellerSet: "Angaben zum Verkäufer · ausgefüllt",
     sellerEmpty: "Angaben zum Verkäufer · ergänzen",
     sfName: "Firmen- oder Personenname",
@@ -1941,7 +2043,7 @@
     sfEmail: "E-Mail",
     sfPhone: "Telefon",
     sfNote: "Weitere Angaben",
-    sfNotePh: "Alles Weitere, was auf den Beleg gehört",
+    sfNotePh: "Alles Weitere, was auf den Bericht gehört",
     closedHead: "Abgeschlossene Events",
     archReopen: "Zurück in die Kasse",
     archReopenAria: "Event {0} zurück in die Kasse holen",
@@ -1956,16 +2058,16 @@
     closeEvent: "Event abschließen",
     emptyStats: "Noch nichts verkauft.<br>Sobald Sie den ersten Verkauf speichern, taucht hier die Statistik auf.",
     tourS1: "Tippen Sie auf eine Produktkarte, der Artikel springt auf den Bon.",
-    tourS1b: "Halten Sie die Karte nun gedrückt, bis der Balken voll ist, der Artikel verschwindet vom Bon.",
+    tourS1b: "Halten Sie die Karte nun gedrückt, bis der Balken voll ist: ein Artikel verschwindet vom Bon.",
     tourS1c: "Tippen Sie die Karte erneut an, damit es etwas zu kassieren gibt.",
     tourS2: "Tippen Sie auf Kassieren.",
     tourS3: "Wählen Sie Bar.",
     tourS4: "Tippen Sie auf Passend, dann auf Fertig.",
     tourS5: "Öffnen Sie Bestellungen, der bezahlte Bon wartet in der Reihe.",
     tourS6: "Öffnen Sie den Bon und tippen Sie auf Ausgegeben.",
-    tourS7: "Die Übersicht zeigt den Umsatz; hier entsteht auch der Beleg.",
+    tourS7: "Die Übersicht zeigt den Umsatz; hier entsteht auch der Umsatzbericht als PDF.",
     tourS8: "Öffnen Sie das Menü.",
-    tourS9: "Tragen Sie hier die Verkäuferdaten ein, sie stehen auf dem Beleg.",
+    tourS9: "Tragen Sie hier die Verkäuferdaten ein, sie stehen auf dem Umsatzbericht.",
     tourSkip: "Überspringen",
     tourNeedsItems: "Die Tour führt Sie durch einen Verkauf, fügen Sie also zuerst mindestens einen Artikel zum Menü hinzu.",
     tourDoneToast: "Fertig! Sie können alles Wichtige.",
@@ -2105,11 +2207,11 @@
     toastRestored: "Daten aus dem Backup wiederhergestellt",
     toastCode: "Code {0}: Geben Sie ihn am anderen Gerät ein",
     toastJoining: "Verbindung über Code {0}…",
-    toastEnterCode: "Geben Sie den Code vom anderen Gerät ein",
+    toastEnterCode: "Code vom anderen Gerät eingeben (8 Zeichen)",
     toastResent: "Warteschlange erneut gesendet",
     setupImportBtn: "Menü und Daten vom anderen Gerät übernehmen",
     setupImportAsk: ["Einstellungen übernehmen?", "Menü, Preise, Farben, MwSt., Währung und Verkäuferdaten auf diesem Gerät werden durch eine Kopie vom anderen Gerät ersetzt. Bestellungen bleiben.", "Übernehmen"],
-    setupImportWait: "Anfrage gesendet, warte auf das andere Gerät.",
+    setupImportWait: "Anfrage gesendet. Bitte am anderen Gerät bestätigen.",
     setupImportDone: "Menü und Daten vom anderen Gerät übernommen.",
     toastModeKasa: "Dieses Gerät ist jetzt die Kasse",
     toastModeVydej: "Dieses Gerät ist jetzt die Ausgabe",
@@ -2154,7 +2256,7 @@
     obLang: "Sprache",
     obCurrency: "Währung",
     obNext: "Weiter",
-    obHow1: "Tippen Sie auf eine farbige Kachel und der Artikel ist auf der Bestellung. Gedrückt halten löscht ihn wieder.",
+    obHow1: "Tippen Sie auf eine farbige Kachel und der Artikel ist auf der Bestellung. Gedrückt halten nimmt einen wieder weg.",
     obHow2: "Bezahlte Bestellungen reihen sich in eine Warteschlange zum Abhaken ein, nichts geht verloren.",
     obHow3: "Ein zweites Gerät kann die Warteschlange empfangen und abarbeiten. Das ist dann Tapkasa Pro.",
     obDemo: "Mit Beispielmenü starten",
@@ -2201,17 +2303,17 @@
     langHead: "Sprache",
     currencyHead: "Währung",
     currencyHint: "Betrifft nur die Anzeige und die Schnelltasten für Scheine. Gespeicherte Preise werden nicht umgerechnet.",
-    docBtn: "Steuerbeleg",
-    docHead: "Sammelbeleg",
-    docHint: "Erstellt einen zusammenfassenden Verkaufsbeleg für den gewählten Zeitraum. Belege zählen nach ihrem Verkaufsdatum.",
+    docBtn: "Umsatzbericht (PDF)",
+    docHead: "Umsatzbericht",
+    docHint: "Erstellt einen Umsatzbericht für den gewählten Zeitraum als PDF, etwa für die Buchhaltung. Er ist kein Steuerbeleg und kein Kassenbon für Kunden. Belege zählen nach ihrem Verkaufsdatum.",
     docFrom: "Von",
     docTo: "Bis",
     bizHead: "Angaben zum Verkäufer",
-    bizHint: "Einmal ausfüllen, danach werden sie auf jedem Beleg vorausgefüllt. Verwenden Sie die in Ihrem Land verlangten Angaben, eine pro Zeile.",
+    bizHint: "Einmal ausfüllen, danach werden sie auf jedem Umsatzbericht vorausgefüllt. Verwenden Sie die gewünschten Angaben, eine pro Zeile.",
     vatHead: "Umsatzsteuer",
     vatOn: "Ich bin umsatzsteuerpflichtig",
     vatOff: "Nicht umsatzsteuerpflichtig",
-    vatHint: "Wenn aktiviert, können Sie je Artikel einen Satz in Prozent angeben. Preise geben Sie inklusive Steuer ein, der Beleg rechnet Netto und Steuer selbst aus.",
+    vatHint: "Wenn aktiviert, können Sie je Artikel einen Satz in Prozent angeben. Preise geben Sie inklusive Steuer ein, der Umsatzbericht rechnet Netto und Steuer selbst aus.",
     vatAria: "Umsatzsteuersatz in Prozent",
     docVatHead: "Umsatzsteuer-Aufstellung",
     docVatBase: "Netto",
@@ -2220,11 +2322,11 @@
     docVatNone: "ohne USt",
     docVatTotalBase: "Netto gesamt:",
     docVatTotalTax: "USt gesamt:",
-    docMake: "Beleg erstellen",
-    docTitle: "ZUSAMMENFASSENDER VERKAUFSBELEG",
-    docNo: "Belegnummer:",
+    docMake: "Bericht erstellen",
+    docTitle: "UMSATZBERICHT",
+    docNo: "Berichtsnummer:",
     docPeriod: "Zeitraum:",
-    docIssued: "Ausgestellt:",
+    docIssued: "Erstellt:",
     docEvents: "Enthaltene Events:",
     docItemsHead: "Verkaufte Artikel",
     docReceipts: "Belege:",
@@ -2238,14 +2340,44 @@
     docColUnit: "Preis",
     docColSum: "Summe",
     docPageOf: "Seite {0} von {1}",
-    docFile: "beleg",
-    docMailBody: "Anbei der zusammenfassende Verkaufsbeleg.",
-    pdfFail: "Der Beleg konnte nicht erstellt werden.",
-    pdfSaved: "Beleg als PDF gespeichert.",
-    pdfSavedMail: "Beleg als PDF gespeichert, hängen Sie ihn an die Nachricht an.",
+    docFile: "umsatzbericht",
+    docMailBody: "Anbei der Umsatzbericht.",
+    pdfFail: "Der Bericht konnte nicht erstellt werden.",
+    pdfSaved: "Bericht als PDF gespeichert.",
+    pdfSavedMail: "Bericht als PDF gespeichert, hängen Sie ihn an die Nachricht an.",
     docEmpty: "Im gewählten Zeitraum gibt es keine Verkäufe.",
-    docFooter: "Erstellt mit der Tapkasa App.",
-    supportRow: "Support kontaktieren"
+    docFooter: "Umsatzbericht, erstellt mit der Tapkasa App. Kein Steuerbeleg.",
+    supportRow: "Support kontaktieren",
+    toastModeKasaHeld: "Dieses Gerät ist jetzt die Kasse. Bestellungen der anderen Kasse ({0}) zählen nicht zu seinem Umsatz.",
+    pairNowActive: "Die Geräte sind jetzt verbunden.",
+    pairWaitPro: "Warte auf das Gerät mit Tapkasa Pro, das den Code erstellt hat. Danach kommen die Bestellungen an.",
+    pairNoPro: "Das andere Gerät hat kein Tapkasa Pro. Den Code muss ein Gerät mit Pro erstellen, dann hier verbinden.",
+    pairLegacy: "Dieser Code stammt aus einer älteren Version und ist nicht verschlüsselt. Lassen Sie am Gerät mit Tapkasa Pro einen neuen Code erstellen.",
+    pairLegacyPro: "Dieser Code stammt aus einer älteren Version und ist nicht verschlüsselt. Sobald beide Geräte aktualisiert sind, trennen und einen neuen Code erstellen.",
+    pairUpdateOther: "Bisher ist nichts angekommen. Prüfen Sie, ob das andere Gerät denselben Code und Tapkasa 1.0.6 oder neuer hat. Bitte aktualisieren Sie eine ältere Version, sie kann sich mit diesem Code nicht verbinden.",
+    pairBadCheck: "Der Code stimmt nicht. Bitte Zeichen für Zeichen prüfen.",
+    pairOldCode: "Dieser Code stammt aus einer älteren Tapkasa-Version. Aktualisieren Sie das andere Gerät und erstellen Sie dort einen neuen Code.",
+    pairNoCrypto: "Dieses Gerät unterstützt keine verschlüsselte Kopplung. Bitte System oder Browser aktualisieren.",
+    setupSendAsk: ["Menü und Angaben senden?", "Das andere Gerät mit demselben Code bittet um eine Kopie von Menü, Preisen, MwSt., Währung und Verkäuferangaben. Senden Sie sie nur, wenn Sie das Gerät kennen.", "Senden"],
+    setupSendLate: "Die Anfrage ist abgelaufen. Bitte am anderen Gerät erneut senden.",
+    setupSent: "Menü und Angaben gesendet.",
+    diagShow: "Verbindungsdetails",
+    diagHide: "Details ausblenden",
+    diagNoBridge: "Bridge nicht geladen",
+    diagReady: "Modul bereit",
+    diagMissing: "Modul fehlt",
+    daysN: ["Tag", "Tage", "Tage"],
+    monthsN: ["Monat", "Monate", "Monate"],
+    proTrialThenM: "{0} gratis, danach {1} pro Monat",
+    proTrialThenY: "{0} gratis, danach {1} pro Jahr",
+    proTrialTerms: "Der Testzeitraum ist kostenlos. Danach verlängert sich das Abo automatisch zum angezeigten Preis, wenn Sie es nicht mindestens 24 Stunden vor Ablauf kündigen.",
+    billSetupFail: "Der Kauf konnte nicht vorbereitet werden.",
+    billModuleMissing: "Das Kaufmodul wurde nicht geladen. Bitte die App schließen und neu öffnen.",
+    obFiscal: "Tapkasa ist keine zertifizierte Registrierkasse (TSE, RKSV und Ähnliches) und wickelt keine Zahlungen ab.",
+    toastRemovedOne: "{0}: eins weniger",
+    shortAsk: "Trotz {0} Fehlbetrag speichern",
+    shortAskHint: "Der Kunde hat weniger als den Betrag gezahlt. Trotzdem speichern?",
+    rateRow: "Tapkasa bewerten"
   };
 
   I18N.fr = {
@@ -2288,7 +2420,7 @@
     receiptsHead: "Tickets",
     delReceiptAria: "Supprimer le ticket",
     sellerHead: "Coordonnées du vendeur",
-    sellerHint: "Renseignez ce que votre pays exige. Les champs vides n'apparaissent pas sur le document.",
+    sellerHint: "Renseignez ce qui doit figurer sur le récapitulatif. Les champs vides n'y apparaissent pas.",
     sellerSet: "Coordonnées du vendeur · renseignées",
     sellerEmpty: "Coordonnées du vendeur · à compléter",
     sfName: "Raison sociale ou nom",
@@ -2301,7 +2433,7 @@
     sfEmail: "E-mail",
     sfPhone: "Téléphone",
     sfNote: "Autres mentions",
-    sfNotePh: "Tout ce qui doit encore figurer sur le document",
+    sfNotePh: "Tout ce qui doit encore figurer sur le récapitulatif",
     closedHead: "Événements clôturés",
     archReopen: "Remettre en caisse",
     archReopenAria: "Remettre l'événement {0} en caisse",
@@ -2316,16 +2448,16 @@
     closeEvent: "Clôturer l’événement",
     emptyStats: "Rien de vendu pour l’instant.<br>Encaissez une première vente et les statistiques apparaîtront ici.",
     tourS1: "Touchez une carte produit, l'article saute sur l'addition.",
-    tourS1b: "Maintenant, maintenez la carte jusqu'à ce que la barre se remplisse, l'article quitte l'addition.",
+    tourS1b: "Maintenant, maintenez la carte jusqu'à ce que la barre se remplisse : un article quitte l'addition.",
     tourS1c: "Touchez à nouveau la carte pour avoir quelque chose à encaisser.",
     tourS2: "Touchez Encaisser.",
     tourS3: "Choisissez Espèces.",
     tourS4: "Touchez Appoint, puis Terminé.",
     tourS5: "Ouvrez Commandes, l'addition payée attend dans la file.",
     tourS6: "Ouvrez le ticket et touchez Servie.",
-    tourS7: "Le Bilan montre la recette ; le document fiscal se fait ici.",
+    tourS7: "Le Bilan montre la recette ; le récapitulatif des ventes en PDF se fait ici.",
     tourS8: "Ouvrez le Menu.",
-    tourS9: "Renseignez ici les coordonnées du vendeur, elles figurent sur le document.",
+    tourS9: "Renseignez ici les coordonnées du vendeur, elles figurent sur le récapitulatif.",
     tourSkip: "Passer",
     tourNeedsItems: "Le guide vous accompagne pour une vente, ajoutez donc d’abord au moins un article au menu.",
     tourDoneToast: "Terminé ! Vous maîtrisez l'essentiel.",
@@ -2465,11 +2597,11 @@
     toastRestored: "Données restaurées depuis la sauvegarde",
     toastCode: "Code {0} : saisissez-le sur l’autre appareil",
     toastJoining: "Connexion avec le code {0}…",
-    toastEnterCode: "Saisissez le code de l’autre appareil",
+    toastEnterCode: "Saisissez le code de l'autre appareil (8 caractères)",
     toastResent: "File renvoyée",
     setupImportBtn: "Reprendre le menu et les infos de l’autre appareil",
     setupImportAsk: ["Reprendre les réglages ?", "Le menu, les prix, les couleurs, la TVA, la devise et les infos du vendeur de cet appareil seront remplacés par une copie de l’autre appareil. Les commandes restent.", "Reprendre"],
-    setupImportWait: "Demande envoyée, en attente de l’autre appareil.",
+    setupImportWait: "Demande envoyée. Confirmez-la sur l'autre appareil.",
     setupImportDone: "Menu et infos repris de l’autre appareil.",
     toastModeKasa: "Cet appareil est maintenant la caisse",
     toastModeVydej: "Cet appareil est maintenant le comptoir",
@@ -2514,7 +2646,7 @@
     obLang: "Langue",
     obCurrency: "Devise",
     obNext: "Continuer",
-    obHow1: "Touchez une carte colorée : l’article s’ajoute à la commande. Un appui long le retire.",
+    obHow1: "Touchez une carte colorée : l’article s’ajoute à la commande. Un appui long en retire un.",
     obHow2: "Les commandes payées rejoignent une file où l’on coche chaque article : rien ne se perd.",
     obHow3: "Un deuxième appareil peut recevoir la file et servir les commandes. Cette fonctionnalité fait partie de Tapkasa Pro.",
     obDemo: "Démarrer avec un menu d’exemple",
@@ -2561,17 +2693,17 @@
     langHead: "Langue",
     currencyHead: "Devise",
     currencyHint: "Ne change que l’affichage et les boutons de billets. Les prix enregistrés ne sont pas convertis.",
-    docBtn: "Justificatif fiscal",
-    docHead: "Document récapitulatif",
-    docHint: "Établit un récapitulatif des ventes pour la période choisie. Les tickets comptent à leur date de vente.",
+    docBtn: "Récapitulatif des ventes (PDF)",
+    docHead: "Récapitulatif des ventes",
+    docHint: "Établit un récapitulatif des ventes de la période choisie en PDF, par exemple pour votre comptable. Ce n'est ni une facture ni un ticket de caisse pour le client. Les tickets comptent à leur date de vente.",
     docFrom: "Du",
     docTo: "Au",
     bizHead: "Coordonnées du vendeur",
-    bizHint: "Renseignez-les une fois, elles seront pré-remplies sur chaque document. Utilisez les mentions exigées par votre pays, une par ligne.",
+    bizHint: "Renseignez-les une fois, elles seront pré-remplies sur chaque récapitulatif. Indiquez ce que vous voulez y voir, une mention par ligne.",
     vatHead: "TVA",
     vatOn: "Je suis assujetti à la TVA",
     vatOff: "Non assujetti à la TVA",
-    vatHint: "Une fois activé, vous pouvez saisir un taux en pourcentage pour chaque article. Vous saisissez les prix TTC, le document calcule seul le HT et la taxe.",
+    vatHint: "Une fois activé, vous pouvez saisir un taux en pourcentage pour chaque article. Vous saisissez les prix TTC, le récapitulatif calcule seul le HT et la taxe.",
     vatAria: "Taux de TVA en pourcentage",
     docVatHead: "Détail de la TVA",
     docVatBase: "HT",
@@ -2580,11 +2712,11 @@
     docVatNone: "hors TVA",
     docVatTotalBase: "Total HT :",
     docVatTotalTax: "Total TVA :",
-    docMake: "Établir le document",
+    docMake: "Établir le récapitulatif",
     docTitle: "RÉCAPITULATIF DES VENTES",
-    docNo: "N° du document :",
+    docNo: "N° du récapitulatif :",
     docPeriod: "Période :",
-    docIssued: "Émis le :",
+    docIssued: "Établi le :",
     docEvents: "Événements inclus :",
     docItemsHead: "Articles vendus",
     docReceipts: "Tickets :",
@@ -2598,14 +2730,44 @@
     docColUnit: "Prix",
     docColSum: "Total",
     docPageOf: "Page {0} sur {1}",
-    docFile: "document",
-    docMailBody: "Veuillez trouver ci-joint le document récapitulatif des ventes.",
-    pdfFail: "Le document n'a pas pu être créé.",
-    pdfSaved: "Document enregistré en PDF.",
-    pdfSavedMail: "Document enregistré en PDF, joignez-le à votre message.",
+    docFile: "recapitulatif-ventes",
+    docMailBody: "Veuillez trouver ci-joint le récapitulatif des ventes.",
+    pdfFail: "Le récapitulatif n'a pas pu être créé.",
+    pdfSaved: "Récapitulatif enregistré en PDF.",
+    pdfSavedMail: "Récapitulatif enregistré en PDF, joignez-le à votre message.",
     docEmpty: "Aucune vente sur la période choisie.",
-    docFooter: "Émis avec l’application Tapkasa.",
-    supportRow: "Contacter l’assistance"
+    docFooter: "Récapitulatif établi avec l’application Tapkasa. Ce n’est pas une facture.",
+    supportRow: "Contacter l’assistance",
+    toastModeKasaHeld: "Cet appareil est maintenant la caisse. Les commandes de l'autre caisse ({0}) ne comptent pas dans son chiffre.",
+    pairNowActive: "Les appareils sont maintenant reliés.",
+    pairWaitPro: "En attente de l'appareil avec Tapkasa Pro qui a créé le code. Les commandes arriveront ensuite.",
+    pairNoPro: "L'autre appareil n'a pas Tapkasa Pro. Le code doit être créé sur un appareil avec Pro, puis rejoignez-le ici.",
+    pairLegacy: "Ce code vient d'une ancienne version et n'est pas chiffré. Demandez un nouveau code à l'appareil avec Tapkasa Pro.",
+    pairLegacyPro: "Ce code vient d'une ancienne version et n'est pas chiffré. Quand les deux appareils seront à jour, déconnectez-les et créez un nouveau code.",
+    pairUpdateOther: "Rien n'est encore arrivé. Vérifiez que l'autre appareil a le même code et Tapkasa 1.0.6 ou plus récent. Mettez à jour une version plus ancienne : elle ne peut pas se connecter avec ce code.",
+    pairBadCheck: "Le code ne correspond pas. Vérifiez-le caractère par caractère.",
+    pairOldCode: "Ce code vient d'une ancienne version de Tapkasa. Mettez à jour l'autre appareil et créez-y un nouveau code.",
+    pairNoCrypto: "Cet appareil ne prend pas en charge le jumelage chiffré. Mettez à jour le système ou le navigateur.",
+    setupSendAsk: ["Envoyer le menu et les coordonnées ?", "L'autre appareil avec le même code demande une copie du menu, des prix, de la TVA, de la devise et des coordonnées du vendeur. Envoyez-la seulement si vous connaissez cet appareil.", "Envoyer"],
+    setupSendLate: "La demande a expiré. Demandez à l'autre appareil de la renvoyer.",
+    setupSent: "Menu et coordonnées envoyés.",
+    diagShow: "Détails de la connexion",
+    diagHide: "Masquer les détails",
+    diagNoBridge: "pont non chargé",
+    diagReady: "module prêt",
+    diagMissing: "module absent",
+    daysN: ["jour", "jours", "jours"],
+    monthsN: ["mois", "mois", "mois"],
+    proTrialThenM: "Gratuit pendant {0}, puis {1} par mois",
+    proTrialThenY: "Gratuit pendant {0}, puis {1} par an",
+    proTrialTerms: "L'essai est gratuit. À sa fin, l'abonnement se renouvelle automatiquement au prix indiqué, sauf résiliation au moins 24 heures avant la fin de l'essai.",
+    billSetupFail: "L'achat n'a pas pu être préparé.",
+    billModuleMissing: "Le module d'achat ne s'est pas chargé. Fermez puis rouvrez l'application.",
+    obFiscal: "Tapkasa n’est pas une caisse certifiée (NF525 ou équivalent) et ne traite pas les paiements.",
+    toastRemovedOne: "{0} : un de moins",
+    shortAsk: "Enregistrer malgré {0} manquant",
+    shortAskHint: "Le client a donné moins que le total. Enregistrer quand même ?",
+    rateRow: "Noter Tapkasa"
   };
 
   I18N.es = {
@@ -2648,7 +2810,7 @@
     receiptsHead: "Recibos",
     delReceiptAria: "Eliminar recibo",
     sellerHead: "Datos del vendedor",
-    sellerHint: "Rellene lo que exija su país. Los campos vacíos no salen en el documento.",
+    sellerHint: "Rellene lo que deba figurar en el resumen de ventas. Los campos vacíos no aparecen.",
     sellerSet: "Datos del vendedor · rellenados",
     sellerEmpty: "Datos del vendedor · completar",
     sfName: "Razón social o nombre",
@@ -2661,7 +2823,7 @@
     sfEmail: "Correo",
     sfPhone: "Teléfono",
     sfNote: "Otros datos",
-    sfNotePh: "Cualquier otra cosa que deba figurar en el documento",
+    sfNotePh: "Cualquier otra cosa que deba figurar en el resumen",
     closedHead: "Eventos cerrados",
     archReopen: "Devolver a la caja",
     archReopenAria: "Devolver el evento {0} a la caja",
@@ -2676,16 +2838,16 @@
     closeEvent: "Cerrar evento",
     emptyStats: "Aún no se ha vendido nada.<br>Guarde la primera venta y aquí aparecerán las estadísticas.",
     tourS1: "Toque una tarjeta de producto, el artículo salta a la cuenta.",
-    tourS1b: "Ahora mantenga pulsada la tarjeta hasta que se llene la barra, el artículo sale de la cuenta.",
+    tourS1b: "Ahora mantenga pulsada la tarjeta hasta que se llene la barra: un artículo sale de la cuenta.",
     tourS1c: "Toque la tarjeta otra vez para tener algo que cobrar.",
     tourS2: "Toque Cobrar.",
     tourS3: "Elija Efectivo.",
     tourS4: "Toque Exacto y luego Listo.",
     tourS5: "Abra Pedidos, la cuenta pagada espera en la cola.",
     tourS6: "Abra el ticket y toque Entregado.",
-    tourS7: "El Resumen muestra los ingresos; aquí se hace el documento fiscal.",
+    tourS7: "El Resumen muestra los ingresos; aquí se hace también el resumen de ventas en PDF.",
     tourS8: "Abra el Menú.",
-    tourS9: "Rellene aquí los datos del vendedor, salen en el documento.",
+    tourS9: "Rellene aquí los datos del vendedor, salen en el resumen de ventas.",
     tourSkip: "Omitir",
     tourNeedsItems: "La guía le acompaña en una venta, así que añada primero al menos un artículo al menú.",
     tourDoneToast: "¡Listo! Ya domina lo esencial.",
@@ -2825,11 +2987,11 @@
     toastRestored: "Datos restaurados desde la copia de seguridad",
     toastCode: "Código {0}: introdúzcalo en el otro dispositivo",
     toastJoining: "Conectando con el código {0}…",
-    toastEnterCode: "Introduzca el código del otro dispositivo",
+    toastEnterCode: "Introduzca el código del otro dispositivo (8 caracteres)",
     toastResent: "Cola reenviada",
     setupImportBtn: "Copiar el menú y los datos del otro dispositivo",
     setupImportAsk: ["¿Copiar la configuración?", "El menú, los precios, los colores, el IVA, la moneda y los datos del vendedor de este dispositivo se sustituirán por una copia del otro dispositivo. Los pedidos se conservan.", "Copiar"],
-    setupImportWait: "Solicitud enviada, esperando al otro dispositivo.",
+    setupImportWait: "Solicitud enviada. Confírmela en el otro dispositivo.",
     setupImportDone: "Menú y datos copiados del otro dispositivo.",
     toastModeKasa: "Este dispositivo ahora es la caja",
     toastModeVydej: "Este dispositivo ahora es la barra",
@@ -2874,7 +3036,7 @@
     obLang: "Idioma",
     obCurrency: "Moneda",
     obNext: "Continuar",
-    obHow1: "Toque una tarjeta de color y el artículo entra en la cuenta. Manténgala pulsada para quitarlo.",
+    obHow1: "Toque una tarjeta de color y el artículo entra en la cuenta. Manténgala pulsada para quitar uno.",
     obHow2: "Las cuentas cobradas se ponen en cola para ir marcándolas: no se pierde nada.",
     obHow3: "Un segundo dispositivo puede recibir la cola e ir despachando. Eso ya es Tapkasa Pro.",
     obDemo: "Empezar con un menú de ejemplo",
@@ -2921,17 +3083,17 @@
     langHead: "Idioma",
     currencyHead: "Moneda",
     currencyHint: "Solo afecta a lo que se muestra y a los billetes rápidos. Los precios guardados no se recalculan.",
-    docBtn: "Documento fiscal",
-    docHead: "Documento resumen",
-    docHint: "Genera un documento resumen de ventas del periodo elegido. Los tickets cuentan por su fecha de venta.",
+    docBtn: "Resumen de ventas (PDF)",
+    docHead: "Resumen de ventas",
+    docHint: "Genera un resumen de ventas del periodo elegido en PDF, por ejemplo para su gestor. No es una factura ni un ticket para el cliente. Los tickets cuentan por su fecha de venta.",
     docFrom: "Desde",
     docTo: "Hasta",
     bizHead: "Datos del vendedor",
-    bizHint: "Rellénelos una vez y se pondrán solos en cada documento. Use los datos que exija su país, uno por línea.",
+    bizHint: "Rellénelos una vez y se pondrán solos en cada resumen de ventas. Use los datos que quiera ver en el resumen, uno por línea.",
     vatHead: "IVA",
     vatOn: "Estoy dado de alta en el IVA",
     vatOff: "No aplico IVA",
-    vatHint: "Al activarlo puede indicar un tipo en porcentaje para cada artículo. Los precios se introducen con IVA y el documento calcula solo la base y el impuesto.",
+    vatHint: "Al activarlo puede indicar un tipo en porcentaje para cada artículo. Los precios se introducen con IVA y el resumen de ventas calcula solo la base y el impuesto.",
     vatAria: "Tipo de IVA en porcentaje",
     docVatHead: "Desglose del IVA",
     docVatBase: "Base",
@@ -2940,11 +3102,11 @@
     docVatNone: "sin IVA",
     docVatTotalBase: "Base total:",
     docVatTotalTax: "IVA total:",
-    docMake: "Generar documento",
-    docTitle: "DOCUMENTO RESUMEN DE VENTAS",
-    docNo: "N.º de documento:",
+    docMake: "Generar resumen",
+    docTitle: "RESUMEN DE VENTAS",
+    docNo: "N.º de resumen:",
     docPeriod: "Periodo:",
-    docIssued: "Emitido:",
+    docIssued: "Creado:",
     docEvents: "Eventos incluidos:",
     docItemsHead: "Artículos vendidos",
     docReceipts: "Recibos:",
@@ -2958,14 +3120,44 @@
     docColUnit: "Precio",
     docColSum: "Total",
     docPageOf: "Página {0} de {1}",
-    docFile: "documento",
-    docMailBody: "Adjunto el documento resumen de ventas.",
-    pdfFail: "No se pudo crear el documento.",
-    pdfSaved: "Documento guardado en PDF.",
-    pdfSavedMail: "Documento guardado en PDF, adjúntelo al mensaje.",
+    docFile: "resumen-ventas",
+    docMailBody: "Adjunto el resumen de ventas.",
+    pdfFail: "No se pudo crear el resumen.",
+    pdfSaved: "Resumen guardado en PDF.",
+    pdfSavedMail: "Resumen guardado en PDF, adjúntelo al mensaje.",
     docEmpty: "No hay ventas en el periodo elegido.",
-    docFooter: "Emitido con la aplicación Tapkasa.",
-    supportRow: "Contactar con soporte"
+    docFooter: "Resumen creado con la aplicación Tapkasa. No es una factura.",
+    supportRow: "Contactar con soporte",
+    toastModeKasaHeld: "Este dispositivo es ahora la caja. Los pedidos de la otra caja ({0}) no cuentan en su recaudación.",
+    pairNowActive: "Los dispositivos ya están enlazados.",
+    pairWaitPro: "Esperando al dispositivo con Tapkasa Pro que creó el código. Después empezarán a llegar los pedidos.",
+    pairNoPro: "El otro dispositivo no tiene Tapkasa Pro. El código debe crearlo un dispositivo con Pro y luego unirse aquí.",
+    pairLegacy: "Este código es de una versión anterior y no está cifrado. Pida un código nuevo al dispositivo con Tapkasa Pro.",
+    pairLegacyPro: "Este código es de una versión anterior y no está cifrado. Cuando ambos dispositivos estén actualizados, desconéctelos y cree un código nuevo.",
+    pairUpdateOther: "Todavía no ha llegado nada. Compruebe que el otro dispositivo tiene el mismo código y Tapkasa 1.0.6 o posterior. Actualice una versión anterior: no puede conectarse con este código.",
+    pairBadCheck: "El código no coincide. Revíselo carácter por carácter.",
+    pairOldCode: "Este código es de una versión anterior de Tapkasa. Actualice el otro dispositivo y cree en él un código nuevo.",
+    pairNoCrypto: "Este dispositivo no admite el emparejamiento cifrado. Actualice el sistema o el navegador.",
+    setupSendAsk: ["¿Enviar menú y datos?", "El otro dispositivo con el mismo código pide una copia del menú, precios, IVA, moneda y datos del vendedor. Envíela solo si conoce ese dispositivo.", "Enviar"],
+    setupSendLate: "La solicitud ha caducado. Pida al otro dispositivo que la envíe de nuevo.",
+    setupSent: "Menú y datos enviados.",
+    diagShow: "Detalles de la conexión",
+    diagHide: "Ocultar detalles",
+    diagNoBridge: "puente no cargado",
+    diagReady: "módulo listo",
+    diagMissing: "falta el módulo",
+    daysN: ["día", "días", "días"],
+    monthsN: ["mes", "meses", "meses"],
+    proTrialThenM: "{0} gratis, después {1} al mes",
+    proTrialThenY: "{0} gratis, después {1} al año",
+    proTrialTerms: "La prueba es gratuita. Al terminar, la suscripción se renueva automáticamente al precio indicado, salvo que la cancele al menos 24 horas antes del final.",
+    billSetupFail: "No se pudo preparar la compra.",
+    billModuleMissing: "El módulo de compra no se cargó. Cierre la aplicación y vuelva a abrirla.",
+    obFiscal: "Tapkasa no es una caja registradora fiscal (TicketBAI, Verifactu y similares) y no procesa pagos.",
+    toastRemovedOne: "{0}: uno menos",
+    shortAsk: "Guardar aunque faltan {0}",
+    shortAskHint: "El cliente pagó menos que el total. ¿Guardar de todos modos?",
+    rateRow: "Valorar Tapkasa"
   };
 
   I18N.it = {
@@ -3008,7 +3200,7 @@
     receiptsHead: "Scontrini",
     delReceiptAria: "Eliminare lo scontrino",
     sellerHead: "Dati del venditore",
-    sellerHint: "Compilate quello che richiede il vostro paese. I campi vuoti non compaiono sul documento.",
+    sellerHint: "Compilate quello che deve comparire sul riepilogo. I campi vuoti non compaiono.",
     sellerSet: "Dati del venditore · compilati",
     sellerEmpty: "Dati del venditore · da compilare",
     sfName: "Ragione sociale o nome",
@@ -3021,7 +3213,7 @@
     sfEmail: "E-mail",
     sfPhone: "Telefono",
     sfNote: "Altri dati",
-    sfNotePh: "Qualsiasi altra cosa debba comparire sul documento",
+    sfNotePh: "Qualsiasi altra cosa debba comparire sul riepilogo",
     closedHead: "Eventi chiusi",
     archReopen: "Riportare in cassa",
     archReopenAria: "Riportare l'evento {0} in cassa",
@@ -3036,16 +3228,16 @@
     closeEvent: "Chiudere l’evento",
     emptyStats: "Ancora nessuna vendita.<br>Appena viene salvato il primo conto, qui compaiono le statistiche.",
     tourS1: "Toccate una scheda prodotto, l'articolo salta sul conto.",
-    tourS1b: "Ora tenete premuta la scheda finché la barra non si riempie, l’articolo sparisce dal conto.",
+    tourS1b: "Ora tenete premuta la scheda finché la barra non si riempie: un articolo sparisce dal conto.",
     tourS1c: "Toccate di nuovo la scheda, così c’è qualcosa da incassare.",
     tourS2: "Toccate Incassare.",
     tourS3: "Scegliete Contanti.",
     tourS4: "Toccate Esatto e poi Fatto.",
     tourS5: "Aprite Ordini, il conto pagato aspetta in coda.",
     tourS6: "Aprite lo scontrino e toccate Servito.",
-    tourS7: "Incassi mostra l’incasso; qui si fa anche il documento fiscale.",
+    tourS7: "Incassi mostra l’incasso; qui si fa anche il riepilogo vendite in PDF.",
     tourS8: "Aprite il Menu.",
-    tourS9: "Compilate qui i dati del venditore, finiscono sul documento.",
+    tourS9: "Compilate qui i dati del venditore, finiscono sul riepilogo.",
     tourSkip: "Salta",
     tourNeedsItems: "La guida vi accompagna in una vendita, quindi aggiungete prima almeno un articolo al menu.",
     tourDoneToast: "Fatto! Sapete tutto l’essenziale.",
@@ -3185,11 +3377,11 @@
     toastRestored: "Dati ripristinati dal backup",
     toastCode: "Codice {0}: da inserire sull’altro dispositivo",
     toastJoining: "Collegamento con il codice {0}…",
-    toastEnterCode: "Inserire il codice dell’altro dispositivo",
+    toastEnterCode: "Inserite il codice dell'altro dispositivo (8 caratteri)",
     toastResent: "Coda inviata di nuovo",
     setupImportBtn: "Copia menu e dati dall’altro dispositivo",
     setupImportAsk: ["Copiare le impostazioni?", "Menu, prezzi, colori, IVA, valuta e dati del venditore su questo dispositivo verranno sostituiti con una copia dall’altro dispositivo. Gli ordini restano.", "Copia"],
-    setupImportWait: "Richiesta inviata, in attesa dell’altro dispositivo.",
+    setupImportWait: "Richiesta inviata. Confermatela sull'altro dispositivo.",
     setupImportDone: "Menu e dati copiati dall’altro dispositivo.",
     toastModeKasa: "Questo dispositivo ora è la cassa",
     toastModeVydej: "Questo dispositivo ora è il banco",
@@ -3234,7 +3426,7 @@
     obLang: "Lingua",
     obCurrency: "Valuta",
     obNext: "Avanti",
-    obHow1: "Toccare un riquadro colorato per aggiungere l’articolo al conto. Tenerlo premuto per toglierlo.",
+    obHow1: "Toccare un riquadro colorato per aggiungere l’articolo al conto. Tenerlo premuto per toglierne uno.",
     obHow2: "I conti pagati si mettono in coda con le spunte: non si perde niente.",
     obHow3: "Un secondo dispositivo può ricevere la coda e servire gli ordini. Questo è Tapkasa Pro.",
     obDemo: "Iniziare con un menu di esempio",
@@ -3281,17 +3473,17 @@
     langHead: "Lingua",
     currencyHead: "Valuta",
     currencyHint: "Cambia solo la visualizzazione e i tagli rapidi delle banconote. I prezzi salvati non si riconvertono.",
-    docBtn: "Documento fiscale",
-    docHead: "Documento riepilogativo",
-    docHint: "Genera un riepilogo delle vendite per il periodo scelto. Gli scontrini contano per la data di vendita.",
+    docBtn: "Riepilogo vendite (PDF)",
+    docHead: "Riepilogo vendite",
+    docHint: "Genera un riepilogo delle vendite del periodo scelto in PDF, ad esempio per il commercialista. Non è un documento fiscale né uno scontrino per il cliente. Gli scontrini contano per la data di vendita.",
     docFrom: "Dal",
     docTo: "Al",
     bizHead: "Dati del venditore",
-    bizHint: "Compilateli una volta e verranno inseriti da soli su ogni documento. Usate i dati richiesti dal vostro paese, uno per riga.",
+    bizHint: "Compilateli una volta e verranno inseriti da soli su ogni riepilogo. Usate i dati che volete sul riepilogo, uno per riga.",
     vatHead: "IVA",
     vatOn: "Sono soggetto a IVA",
     vatOff: "Non applico IVA",
-    vatHint: "Se attivo, potete indicare un'aliquota in percentuale per ogni articolo. I prezzi si inseriscono IVA inclusa, il documento calcola da solo imponibile e imposta.",
+    vatHint: "Se attivo, potete indicare un'aliquota in percentuale per ogni articolo. I prezzi si inseriscono IVA inclusa, il riepilogo calcola da solo imponibile e imposta.",
     vatAria: "Aliquota IVA in percentuale",
     docVatHead: "Riepilogo IVA",
     docVatBase: "Imponibile",
@@ -3300,11 +3492,11 @@
     docVatNone: "senza IVA",
     docVatTotalBase: "Imponibile totale:",
     docVatTotalTax: "IVA totale:",
-    docMake: "Generare il documento",
+    docMake: "Generare il riepilogo",
     docTitle: "RIEPILOGO VENDITE",
-    docNo: "Numero documento:",
+    docNo: "Numero riepilogo:",
     docPeriod: "Periodo:",
-    docIssued: "Emesso:",
+    docIssued: "Creato:",
     docEvents: "Eventi inclusi:",
     docItemsHead: "Articoli venduti",
     docReceipts: "Scontrini:",
@@ -3318,14 +3510,44 @@
     docColUnit: "Prezzo",
     docColSum: "Totale",
     docPageOf: "Pagina {0} di {1}",
-    docFile: "documento",
-    docMailBody: "In allegato il documento riepilogativo delle vendite.",
-    pdfFail: "Non è stato possibile creare il documento.",
-    pdfSaved: "Documento salvato in PDF.",
-    pdfSavedMail: "Documento salvato in PDF, allegatelo al messaggio.",
+    docFile: "riepilogo-vendite",
+    docMailBody: "In allegato il riepilogo delle vendite.",
+    pdfFail: "Non è stato possibile creare il riepilogo.",
+    pdfSaved: "Riepilogo salvato in PDF.",
+    pdfSavedMail: "Riepilogo salvato in PDF, allegatelo al messaggio.",
     docEmpty: "Nessuna vendita nel periodo scelto.",
-    docFooter: "Emesso con l’app Tapkasa.",
-    supportRow: "Contattare l’assistenza"
+    docFooter: "Riepilogo creato con l’app Tapkasa. Non è un documento fiscale.",
+    supportRow: "Contattare l’assistenza",
+    toastModeKasaHeld: "Questo dispositivo ora è la cassa. Gli ordini dell'altra cassa ({0}) non rientrano nel suo incasso.",
+    pairNowActive: "I dispositivi ora sono collegati.",
+    pairWaitPro: "In attesa del dispositivo con Tapkasa Pro che ha creato il codice. Poi arriveranno gli ordini.",
+    pairNoPro: "L'altro dispositivo non ha Tapkasa Pro. Il codice deve crearlo un dispositivo con Pro, poi collegatevi qui.",
+    pairLegacy: "Questo codice proviene da una versione precedente e non è cifrato. Chiedete un nuovo codice al dispositivo con Tapkasa Pro.",
+    pairLegacyPro: "Questo codice proviene da una versione precedente e non è cifrato. Quando entrambi i dispositivi saranno aggiornati, scollegateli e create un nuovo codice.",
+    pairUpdateOther: "Non è ancora arrivato nulla. Controllate che l'altro dispositivo abbia lo stesso codice e Tapkasa 1.0.6 o successiva. Aggiornate una versione precedente: con questo codice non si collega.",
+    pairBadCheck: "Il codice non corrisponde. Controllatelo carattere per carattere.",
+    pairOldCode: "Questo codice proviene da una versione precedente di Tapkasa. Aggiornate l'altro dispositivo e create lì un nuovo codice.",
+    pairNoCrypto: "Questo dispositivo non supporta l'abbinamento cifrato. Aggiornate il sistema o il browser.",
+    setupSendAsk: ["Inviare menu e dati?", "L'altro dispositivo con lo stesso codice chiede una copia di menu, prezzi, IVA, valuta e dati del venditore. Inviatela solo se conoscete quel dispositivo.", "Invia"],
+    setupSendLate: "La richiesta è scaduta. Chiedete all'altro dispositivo di inviarla di nuovo.",
+    setupSent: "Menu e dati inviati.",
+    diagShow: "Dettagli della connessione",
+    diagHide: "Nascondi dettagli",
+    diagNoBridge: "bridge non caricato",
+    diagReady: "modulo pronto",
+    diagMissing: "modulo mancante",
+    daysN: ["giorno", "giorni", "giorni"],
+    monthsN: ["mese", "mesi", "mesi"],
+    proTrialThenM: "{0} gratis, poi {1} al mese",
+    proTrialThenY: "{0} gratis, poi {1} all'anno",
+    proTrialTerms: "La prova è gratuita. Al termine l'abbonamento si rinnova automaticamente al prezzo indicato, a meno che non lo disdiciate almeno 24 ore prima della fine.",
+    billSetupFail: "Non è stato possibile preparare l'acquisto.",
+    billModuleMissing: "Il modulo di acquisto non si è caricato. Chiudete e riaprite l'app.",
+    obFiscal: "Tapkasa non è un registratore telematico (cassa fiscale) e non elabora pagamenti.",
+    toastRemovedOne: "{0}: uno in meno",
+    shortAsk: "Salvare anche se mancano {0}",
+    shortAskHint: "Il cliente ha pagato meno del totale. Salvare comunque?",
+    rateRow: "Valuta Tapkasa"
   };
 
   I18N.pl = {
@@ -3368,7 +3590,7 @@
     receiptsHead: "Paragony",
     delReceiptAria: "Usunąć paragon",
     sellerHead: "Dane sprzedawcy",
-    sellerHint: "Wypełnij to, czego wymaga twój kraj. Puste pola nie pojawią się na dokumencie.",
+    sellerHint: "Wypełnij to, co ma być na podsumowaniu. Puste pola się na nim nie pojawią.",
     sellerSet: "Dane sprzedawcy · wypełnione",
     sellerEmpty: "Dane sprzedawcy · uzupełnij",
     sfName: "Nazwa firmy lub imię i nazwisko",
@@ -3381,7 +3603,7 @@
     sfEmail: "E-mail",
     sfPhone: "Telefon",
     sfNote: "Dodatkowe dane",
-    sfNotePh: "Cokolwiek jeszcze ma być na dokumencie",
+    sfNotePh: "Cokolwiek jeszcze ma być na podsumowaniu",
     closedHead: "Zamknięte imprezy",
     archReopen: "Wróć do kasy",
     archReopenAria: "Przywróć imprezę {0} do kasy",
@@ -3396,16 +3618,16 @@
     closeEvent: "Zamknięcie imprezy",
     emptyStats: "Na razie nic nie sprzedano.<br>Po zapisaniu pierwszego rachunku pojawią się tu statystyki.",
     tourS1: "Stuknij kartę produktu, pozycja wskoczy na rachunek.",
-    tourS1b: "Teraz przytrzymaj kartę, aż pasek się zapełni, pozycja zniknie z rachunku.",
+    tourS1b: "Teraz przytrzymaj kartę, aż pasek się zapełni: jedna sztuka zniknie z rachunku.",
     tourS1c: "Stuknij kartę ponownie, żeby było co kasować.",
     tourS2: "Stuknij Zapłata.",
     tourS3: "Wybierz Gotówkę.",
     tourS4: "Stuknij Równo, a potem Gotowe.",
     tourS5: "Otwórz Zamówienia, opłacony rachunek czeka w kolejce.",
     tourS6: "Otwórz bon i stuknij Wydano.",
-    tourS7: "Utarg pokazuje sprzedaż; tu też robi się dokument.",
+    tourS7: "Utarg pokazuje sprzedaż; tu też robi się podsumowanie w PDF.",
     tourS8: "Otwórz Menu.",
-    tourS9: "Tu wypełnij dane sprzedawcy, trafią na dokument.",
+    tourS9: "Tu wypełnij dane sprzedawcy, trafią na podsumowanie.",
     tourSkip: "Pomiń",
     tourNeedsItems: "Przewodnik przeprowadzi Cię przez sprzedaż, najpierw dodaj do menu co najmniej jedną pozycję.",
     tourDoneToast: "Gotowe! Znasz wszystko, co ważne.",
@@ -3545,11 +3767,11 @@
     toastRestored: "Dane przywrócone z kopii zapasowej",
     toastCode: "Kod {0}, do wpisania na drugim urządzeniu",
     toastJoining: "Łączenie przez kod {0}…",
-    toastEnterCode: "Proszę wpisać kod z drugiego urządzenia",
+    toastEnterCode: "Wpisz kod z drugiego urządzenia (8 znaków)",
     toastResent: "Kolejka wysłana ponownie",
     setupImportBtn: "Przejmij menu i dane z drugiego urządzenia",
     setupImportAsk: ["Przejąć ustawienia?", "Menu, ceny, kolory, VAT, waluta i dane sprzedawcy na tym urządzeniu zostaną zastąpione kopią z drugiego urządzenia. Zamówienia zostaną.", "Przejmij"],
-    setupImportWait: "Prośba wysłana, czekam na drugie urządzenie.",
+    setupImportWait: "Prośba wysłana. Potwierdź ją na drugim urządzeniu.",
     setupImportDone: "Menu i dane przejęte z drugiego urządzenia.",
     toastModeKasa: "To urządzenie jest teraz kasą",
     toastModeVydej: "To urządzenie jest teraz wydawką",
@@ -3594,7 +3816,7 @@
     obLang: "Język",
     obCurrency: "Waluta",
     obNext: "Dalej",
-    obHow1: "Stuknięcie kolorowego kafelka dodaje pozycję do rachunku, a przytrzymanie ją usuwa.",
+    obHow1: "Stuknięcie kolorowego kafelka dodaje pozycję do rachunku, a przytrzymanie odejmuje jedną sztukę.",
     obHow2: "Opłacone rachunki ustawiają się w kolejce do odhaczania. Nic się nie zgubi.",
     obHow3: "Drugie urządzenie może odbierać kolejkę i wydawać zamówienia. To już Tapkasa Pro.",
     obDemo: "Start z przykładowym menu",
@@ -3641,17 +3863,17 @@
     langHead: "Język",
     currencyHead: "Waluta",
     currencyHint: "Wpływa tylko na wyświetlanie i szybkie banknoty. Zapisane ceny się nie przeliczają.",
-    docBtn: "Dokument podatkowy",
-    docHead: "Dokument zbiorczy",
-    docHint: "Tworzy zbiorczy dokument sprzedaży za wybrany okres. Paragony liczą się według daty sprzedaży.",
+    docBtn: "Podsumowanie sprzedaży (PDF)",
+    docHead: "Podsumowanie sprzedaży",
+    docHint: "Tworzy podsumowanie sprzedaży za wybrany okres jako PDF, na przykład dla księgowej. To nie jest dokument podatkowy ani paragon dla klienta. Paragony liczą się według daty sprzedaży.",
     docFrom: "Od",
     docTo: "Do",
     bizHead: "Dane sprzedawcy",
-    bizHint: "Wypełnij raz, a będą się uzupełniać na każdym dokumencie. Podaj dane wymagane w twoim kraju, po jednym w wierszu.",
+    bizHint: "Wypełnij raz, a będą się uzupełniać na każdym podsumowaniu. Podaj dane, które chcesz na nim mieć, po jednym w wierszu.",
     vatHead: "VAT",
     vatOn: "Jestem podatnikiem VAT",
     vatOff: "Nie jestem podatnikiem VAT",
-    vatHint: "Po włączeniu możesz podać stawkę w procentach przy każdej pozycji. Ceny wpisujesz z VAT, dokument sam wyliczy kwotę netto i podatek.",
+    vatHint: "Po włączeniu możesz podać stawkę w procentach przy każdej pozycji. Ceny wpisujesz z VAT, podsumowanie samo wyliczy kwotę netto i podatek.",
     vatAria: "Stawka VAT w procentach",
     docVatHead: "Rozliczenie VAT",
     docVatBase: "Netto",
@@ -3660,11 +3882,11 @@
     docVatNone: "bez VAT",
     docVatTotalBase: "Netto razem:",
     docVatTotalTax: "VAT razem:",
-    docMake: "Utworzyć dokument",
-    docTitle: "ZBIORCZY DOKUMENT SPRZEDAŻY",
-    docNo: "Numer dokumentu:",
+    docMake: "Utwórz podsumowanie",
+    docTitle: "PODSUMOWANIE SPRZEDAŻY",
+    docNo: "Numer podsumowania:",
     docPeriod: "Okres:",
-    docIssued: "Wystawiono:",
+    docIssued: "Utworzono:",
     docEvents: "Uwzględnione imprezy:",
     docItemsHead: "Sprzedane pozycje",
     docReceipts: "Paragony:",
@@ -3678,14 +3900,44 @@
     docColUnit: "Cena",
     docColSum: "Razem",
     docPageOf: "Strona {0} z {1}",
-    docFile: "dokument",
-    docMailBody: "W załączeniu zbiorczy dokument sprzedaży.",
-    pdfFail: "Nie udało się utworzyć dokumentu.",
-    pdfSaved: "Dokument zapisany jako PDF.",
-    pdfSavedMail: "Dokument zapisany jako PDF, dołącz go do wiadomości.",
+    docFile: "podsumowanie-sprzedazy",
+    docMailBody: "W załączniku podsumowanie sprzedaży.",
+    pdfFail: "Nie udało się utworzyć podsumowania.",
+    pdfSaved: "Podsumowanie zapisane jako PDF.",
+    pdfSavedMail: "Podsumowanie zapisane jako PDF, dołącz je do wiadomości.",
     docEmpty: "Brak sprzedaży w wybranym okresie.",
-    docFooter: "Wystawiono w aplikacji Tapkasa.",
-    supportRow: "Kontakt z pomocą"
+    docFooter: "Podsumowanie utworzone w aplikacji Tapkasa. To nie jest dokument podatkowy.",
+    supportRow: "Kontakt z pomocą",
+    toastModeKasaHeld: "To urządzenie jest teraz kasą. Zamówienia z drugiej kasy ({0}) nie liczą się do jego utargu.",
+    pairNowActive: "Urządzenia są teraz połączone.",
+    pairWaitPro: "Czekam na urządzenie z Tapkasa Pro, które utworzyło kod. Potem zaczną przychodzić zamówienia.",
+    pairNoPro: "Drugie urządzenie nie ma Tapkasa Pro. Kod musi utworzyć urządzenie z Pro, potem połącz się tutaj.",
+    pairLegacy: "Ten kod pochodzi ze starszej wersji i nie jest szyfrowany. Poproś urządzenie z Tapkasa Pro o nowy kod.",
+    pairLegacyPro: "Ten kod pochodzi ze starszej wersji i nie jest szyfrowany. Gdy oba urządzenia będą zaktualizowane, rozłącz je i utwórz nowy kod.",
+    pairUpdateOther: "Na razie nic nie przyszło. Sprawdź, czy drugie urządzenie ma ten sam kod i Tapkasa 1.0.6 lub nowszą. Starszą wersję zaktualizuj, z tym kodem się nie połączy.",
+    pairBadCheck: "Kod się nie zgadza. Sprawdź go znak po znaku.",
+    pairOldCode: "Ten kod pochodzi ze starszej wersji Tapkasy. Zaktualizuj drugie urządzenie i utwórz na nim nowy kod.",
+    pairNoCrypto: "To urządzenie nie obsługuje szyfrowanego parowania. Zaktualizuj system lub przeglądarkę.",
+    setupSendAsk: ["Wysłać menu i dane?", "Drugie urządzenie z tym samym kodem prosi o kopię menu, cen, VAT, waluty i danych sprzedawcy. Wyślij ją tylko, jeśli znasz to urządzenie.", "Wyślij"],
+    setupSendLate: "Prośba wygasła. Niech drugie urządzenie wyśle ją ponownie.",
+    setupSent: "Menu i dane wysłane.",
+    diagShow: "Szczegóły połączenia",
+    diagHide: "Ukryj szczegóły",
+    diagNoBridge: "most nie załadowany",
+    diagReady: "moduł gotowy",
+    diagMissing: "brak modułu",
+    daysN: ["dzień", "dni", "dni"],
+    monthsN: ["miesiąc", "miesiące", "miesięcy"],
+    proTrialThenM: "{0} za darmo, potem {1} miesięcznie",
+    proTrialThenY: "{0} za darmo, potem {1} rocznie",
+    proTrialTerms: "Okres próbny jest bezpłatny. Po jego zakończeniu subskrypcja odnowi się automatycznie w podanej cenie, chyba że anulujesz ją co najmniej 24 godziny przed końcem.",
+    billSetupFail: "Nie udało się przygotować zakupu.",
+    billModuleMissing: "Moduł zakupów się nie załadował. Zamknij aplikację i otwórz ją ponownie.",
+    obFiscal: "Tapkasa nie jest kasą fiskalną i nie obsługuje płatności.",
+    toastRemovedOne: "{0}: o jeden mniej",
+    shortAsk: "Zapisz mimo brakujących {0}",
+    shortAskHint: "Klient zapłacił mniej, niż wynosi rachunek. Zapisać mimo to?",
+    rateRow: "Oceń Tapkasę"
   };
 
   I18N.pt = {
@@ -3728,7 +3980,7 @@
     receiptsHead: "Recibos",
     delReceiptAria: "Apagar recibo",
     sellerHead: "Dados do vendedor",
-    sellerHint: "Preencha o que o seu país exigir. Os campos vazios não aparecem no documento.",
+    sellerHint: "Preencha o que deve constar do resumo de vendas. Os campos vazios não aparecem.",
     sellerSet: "Dados do vendedor · preenchidos",
     sellerEmpty: "Dados do vendedor · preencher",
     sfName: "Nome da empresa ou pessoal",
@@ -3741,7 +3993,7 @@
     sfEmail: "E-mail",
     sfPhone: "Telefone",
     sfNote: "Outros dados",
-    sfNotePh: "Tudo o mais que deva constar do documento",
+    sfNotePh: "Tudo o mais que deva constar do resumo",
     closedHead: "Eventos fechados",
     archReopen: "Devolver à caixa",
     archReopenAria: "Devolver o evento {0} à caixa",
@@ -3756,16 +4008,16 @@
     closeEvent: "Fechar evento",
     emptyStats: "Ainda não vendeu nada.<br>Assim que guardar a primeira conta, aparecem aqui as estatísticas.",
     tourS1: "Toque num cartão de produto, o artigo salta para a conta.",
-    tourS1b: "Agora mantenha o cartão premido até a barra encher, o artigo sai da conta.",
+    tourS1b: "Agora mantenha o cartão premido até a barra encher: um artigo sai da conta.",
     tourS1c: "Toque no cartão outra vez para haver algo a cobrar.",
     tourS2: "Toque em Cobrar.",
     tourS3: "Escolha Dinheiro.",
     tourS4: "Toque em Certo e depois em Feito.",
     tourS5: "Abra Pedidos, a conta paga espera na fila.",
     tourS6: "Abra o talão e toque em Entregue.",
-    tourS7: "O Resumo mostra a receita; o documento fiscal faz-se aqui.",
+    tourS7: "O Resumo mostra a receita; o resumo de vendas em PDF faz-se aqui.",
     tourS8: "Abra o Menu.",
-    tourS9: "Preencha aqui os dados do vendedor, saem no documento.",
+    tourS9: "Preencha aqui os dados do vendedor, saem no resumo de vendas.",
     tourSkip: "Saltar",
     tourNeedsItems: "O guia acompanha-o numa venda, por isso adicione primeiro pelo menos um artigo ao menu.",
     tourDoneToast: "Pronto! Já domina o essencial.",
@@ -3905,11 +4157,11 @@
     toastRestored: "Dados repostos da cópia de segurança",
     toastCode: "Código {0}: escreva-o no outro dispositivo",
     toastJoining: "A ligar com o código {0}…",
-    toastEnterCode: "Escreva o código do outro dispositivo",
+    toastEnterCode: "Introduza o código do outro dispositivo (8 caracteres)",
     toastResent: "Fila enviada de novo",
     setupImportBtn: "Copiar o menu e os dados do outro aparelho",
     setupImportAsk: ["Copiar as definições?", "O menu, os preços, as cores, o IVA, a moeda e os dados do vendedor neste aparelho serão substituídos por uma cópia do outro aparelho. Os pedidos ficam.", "Copiar"],
-    setupImportWait: "Pedido enviado, à espera do outro aparelho.",
+    setupImportWait: "Pedido enviado. Confirme-o no outro dispositivo.",
     setupImportDone: "Menu e dados copiados do outro aparelho.",
     toastModeKasa: "Este dispositivo é agora a caixa",
     toastModeVydej: "Este dispositivo é agora o balcão",
@@ -3954,7 +4206,7 @@
     obLang: "Idioma",
     obCurrency: "Moeda",
     obNext: "Continuar",
-    obHow1: "Toque num cartão colorido e o artigo entra na conta. Mantenha premido para o tirar.",
+    obHow1: "Toque num cartão colorido e o artigo entra na conta. Mantenha premido para tirar um.",
     obHow2: "As contas pagas entram numa fila onde vai dando baixa. Não se perde nada.",
     obHow3: "Um segundo dispositivo pode receber a fila e despachar os pedidos. Isso já é Tapkasa Pro.",
     obDemo: "Começar com o menu de exemplo",
@@ -4001,17 +4253,17 @@
     langHead: "Idioma",
     currencyHead: "Moeda",
     currencyHint: "Só afeta o que aparece no ecrã e os botões das notas. Os preços guardados não são convertidos.",
-    docBtn: "Documento fiscal",
-    docHead: "Documento resumo",
-    docHint: "Gera um documento resumo das vendas do período escolhido. Os talões contam pela data de venda.",
+    docBtn: "Resumo de vendas (PDF)",
+    docHead: "Resumo de vendas",
+    docHint: "Gera um resumo das vendas do período escolhido em PDF, por exemplo para o contabilista. Não é uma fatura nem um talão para o cliente. Os talões contam pela data de venda.",
     docFrom: "De",
     docTo: "Até",
     bizHead: "Dados do vendedor",
-    bizHint: "Preencha uma vez e ficam preenchidos em cada documento. Use os dados exigidos no seu país, um por linha.",
+    bizHint: "Preencha uma vez e ficam preenchidos em cada resumo de vendas. Use os dados que quer no resumo, um por linha.",
     vatHead: "IVA",
     vatOn: "Sou sujeito passivo de IVA",
     vatOff: "Não aplico IVA",
-    vatHint: "Quando ligado, pode indicar uma taxa em percentagem para cada artigo. Os preços são introduzidos com IVA e o documento calcula sozinho a base e o imposto.",
+    vatHint: "Quando ligado, pode indicar uma taxa em percentagem para cada artigo. Os preços são introduzidos com IVA e o resumo de vendas calcula sozinho a base e o imposto.",
     vatAria: "Taxa de IVA em percentagem",
     docVatHead: "Resumo do IVA",
     docVatBase: "Base",
@@ -4020,11 +4272,11 @@
     docVatNone: "sem IVA",
     docVatTotalBase: "Base total:",
     docVatTotalTax: "IVA total:",
-    docMake: "Gerar documento",
-    docTitle: "DOCUMENTO RESUMO DE VENDAS",
-    docNo: "N.º do documento:",
+    docMake: "Gerar resumo",
+    docTitle: "RESUMO DE VENDAS",
+    docNo: "N.º do resumo:",
     docPeriod: "Período:",
-    docIssued: "Emitido:",
+    docIssued: "Criado:",
     docEvents: "Eventos incluídos:",
     docItemsHead: "Artigos vendidos",
     docReceipts: "Recibos:",
@@ -4038,14 +4290,44 @@
     docColUnit: "Preço",
     docColSum: "Total",
     docPageOf: "Página {0} de {1}",
-    docFile: "documento",
-    docMailBody: "Em anexo segue o documento resumo de vendas.",
-    pdfFail: "Não foi possível criar o documento.",
-    pdfSaved: "Documento guardado em PDF.",
-    pdfSavedMail: "Documento guardado em PDF, anexe-o à mensagem.",
+    docFile: "resumo-vendas",
+    docMailBody: "Em anexo segue o resumo de vendas.",
+    pdfFail: "Não foi possível criar o resumo.",
+    pdfSaved: "Resumo guardado em PDF.",
+    pdfSavedMail: "Resumo guardado em PDF, anexe-o à mensagem.",
     docEmpty: "Sem vendas no período escolhido.",
-    docFooter: "Emitido com a aplicação Tapkasa.",
-    supportRow: "Contactar o suporte"
+    docFooter: "Resumo criado com a aplicação Tapkasa. Não é uma fatura.",
+    supportRow: "Contactar o suporte",
+    toastModeKasaHeld: "Este dispositivo é agora a caixa. Os pedidos da outra caixa ({0}) não contam para a sua faturação.",
+    pairNowActive: "Os dispositivos estão agora ligados.",
+    pairWaitPro: "À espera do dispositivo com Tapkasa Pro que criou o código. Depois disso, os pedidos começam a chegar.",
+    pairNoPro: "O outro dispositivo não tem Tapkasa Pro. O código tem de ser criado num dispositivo com Pro; depois ligue-se aqui.",
+    pairLegacy: "Este código é de uma versão anterior e não está cifrado. Peça um código novo ao dispositivo com Tapkasa Pro.",
+    pairLegacyPro: "Este código é de uma versão anterior e não está cifrado. Quando os dois dispositivos estiverem atualizados, desligue-os e crie um código novo.",
+    pairUpdateOther: "Ainda não chegou nada. Confirme que o outro dispositivo tem o mesmo código e a Tapkasa 1.0.6 ou mais recente. Atualize uma versão anterior: não se liga com este código.",
+    pairBadCheck: "O código não corresponde. Verifique-o carácter a carácter.",
+    pairOldCode: "Este código é de uma versão anterior da Tapkasa. Atualize o outro dispositivo e crie nele um código novo.",
+    pairNoCrypto: "Este dispositivo não suporta o emparelhamento cifrado. Atualize o sistema ou o navegador.",
+    setupSendAsk: ["Enviar menu e dados?", "O outro dispositivo com o mesmo código pede uma cópia do menu, preços, IVA, moeda e dados do vendedor. Envie-a só se conhecer esse dispositivo.", "Enviar"],
+    setupSendLate: "O pedido expirou. Peça ao outro dispositivo que o envie de novo.",
+    setupSent: "Menu e dados enviados.",
+    diagShow: "Detalhes da ligação",
+    diagHide: "Ocultar detalhes",
+    diagNoBridge: "ponte não carregada",
+    diagReady: "módulo pronto",
+    diagMissing: "módulo em falta",
+    daysN: ["dia", "dias", "dias"],
+    monthsN: ["mês", "meses", "meses"],
+    proTrialThenM: "{0} grátis, depois {1} por mês",
+    proTrialThenY: "{0} grátis, depois {1} por ano",
+    proTrialTerms: "O período experimental é gratuito. Quando terminar, a subscrição renova-se automaticamente ao preço indicado, a menos que a cancele pelo menos 24 horas antes do fim.",
+    billSetupFail: "Não foi possível preparar a compra.",
+    billModuleMissing: "O módulo de compras não carregou. Feche e volte a abrir a aplicação.",
+    obFiscal: "A Tapkasa não é um programa de faturação certificado (AT) e não processa pagamentos.",
+    toastRemovedOne: "{0}: menos um",
+    shortAsk: "Guardar mesmo faltando {0}",
+    shortAskHint: "O cliente pagou menos do que o total. Guardar mesmo assim?",
+    rateRow: "Avaliar a Tapkasa"
   };
   // ==== konec vkládaných překladů ====
 
@@ -4263,6 +4545,30 @@
     return plan === "yearly" ? "$39.99" : "$4.99";
   }
 
+  // Zkušební doba zdarma z obchodu (mobile/billing.js ji dodá, jen když na
+  // ni má uživatel nárok): {n, unit: "DAY"|"MONTH"} nebo null.
+  function trialOf(plan) {
+    var p = window.__KASA_PRICES__ || {};
+    var t = plan === "yearly" ? p.yearlyTrial : p.monthlyTrial;
+    return t && t.n > 0 && (t.unit === "DAY" || t.unit === "MONTH") ? t : null;
+  }
+
+  function trialText(t) {
+    return t.n + " " + tp(t.unit === "MONTH" ? "monthsN" : "daysN", t.n);
+  }
+
+  // Cena je na tlačítku největší (tu obchod účtuje); pod ní, kolik dní je
+  // zdarma a kolik se platí potom (pravidlo 3.1.2).
+  function planButton(plan) {
+    var yearly = plan === "yearly";
+    var price = priceOf(plan), tr = trialOf(plan);
+    return '<button class="pw-plan' + (yearly ? " best" : "") + '" data-buy="' + plan + '"><span class="k">' +
+           esc(T(yearly ? "proYearly" : "proMonthly")) + '</span><span class="p num">' + esc(price) + "</span>" +
+           '<span class="s">' + esc(T(yearly ? "proPerYear" : "proPerMonth", "")).replace(" / ", "/") + "</span>" +
+           (tr ? '<span class="tr">' + esc(T(yearly ? "proTrialThenY" : "proTrialThenM", trialText(tr), price)) + "</span>" : "") +
+           "</button>";
+  }
+
   var PRO_MARK = '<svg viewBox="0 0 48 48" aria-hidden="true"><rect x="4" y="4" width="19" height="19" rx="5" fill="#D6402A"/><rect x="25" y="4" width="19" height="19" rx="5" fill="#F5CE3E"/><rect x="4" y="25" width="19" height="19" rx="5" fill="#2158C4"/><rect x="25" y="25" width="19" height="19" rx="5" fill="#127A4E"/></svg>';
   var PW_CHECK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>';
 
@@ -4307,7 +4613,7 @@
   // jen ten, kdo kód vytváří, takže stánku stačí jedno předplatné.
 
   var FREE_LIMIT = 10;
-  var APP_VERSION = "1.0.5";
+  var APP_VERSION = "1.0.6";
   var SUPPORT_MAIL = "info@deriverge.com";
 
   // Pro se získá jedině nákupem v obchodě. Výjimkou jsou instalace z doby
@@ -4365,6 +4671,8 @@
     showToast(msg);
   };
   window.__kasaPricesChanged = function () { render(); };
+  // překlady pro mobile/billing.js (hlášky mimo stránku)
+  window.__kasaT = function (key, a) { return T(key, a); };
 
   var proCeleTimer = null;
   function closeCelebration() {
@@ -4416,21 +4724,27 @@
     return !!(d && d.plugin && d.supported !== false);
   }
 
+  // Hlášky jsou přeložené; technický důvod jde do závorky, ať se dá
+  // nahlásit podpoře.
+  function billAlert(key, why) {
+    alert(T(key) + (why ? " (" + why + ")" : ""));
+  }
+
   function billingBuy(plan) {
     if (window.__kasaBuy) {
       try { window.__kasaBuy(plan); return; }
-      catch (e) { alert(String(e && e.message || e)); return; }
+      catch (e) { billAlert("billSetupFail", String(e && e.message || e)); return; }
     }
-    if (nativeApp()) { alert(window.__kasaBillingError || "Nákupní modul se nenačetl."); return; }
+    if (nativeApp()) { billAlert("billModuleMissing", window.__kasaBillingError || ""); return; }
     showToast(T("proWebHint"));
   }
 
   function billingRestore() {
     if (window.__kasaRestore) {
       try { window.__kasaRestore(); return; }
-      catch (e) { alert(String(e && e.message || e)); return; }
+      catch (e) { billAlert("billSetupFail", String(e && e.message || e)); return; }
     }
-    if (nativeApp()) { alert(window.__kasaBillingError || "Nákupní modul se nenačetl."); return; }
+    if (nativeApp()) { billAlert("billModuleMissing", window.__kasaBillingError || ""); return; }
     showToast(T("proWebHint"));
   }
 
@@ -4487,7 +4801,7 @@
       setup: false, license: "", payDay: "", payN: 0, biz: "", vat: false, tourDone: false,
       rateN: 0, rateAsked: 0,
       seller: {},
-      items: [], order: [], sales: [], archives: [],
+      items: [], order: [], sales: [], archives: [], held: [],
       // Další otevřené akce vedle té, ve které se právě prodává. Aktivní akce
       // zůstává v kořeni stavu (event, evId, items, sales, nextNo), takže
       // zbytek aplikace s ní pracuje jako dřív a starší zálohy platí dál.
@@ -4530,12 +4844,32 @@
 
   // ---------- ukládání ----------
   // Tři nezávislé kopie, aby ani vybitý a restartovaný tablet o tržbu nepřipravil:
-  //   1. localStorage, okamžitý zápis při každé změně
+  //   1. localStorage
   //   2. IndexedDB, přežije i to, když prohlížeč localStorage zahodí
-  //   3. soubor v úložišti zařízení, když appka běží v nativním obalu (ios/)
+  //   3. soubor v úložišti zařízení, když appka běží v nativním obalu
+  //      (iOS i Android: kasa.json a kasa-archive.json, čtou se při startu)
+  //
+  // Od 1.0.6 se archiv uzavřených akcí (nese všechny jejich účtenky a roste
+  // celou sezónu) ukládá zvlášť a jen tehdy, když se změní. Hlavní stav nese
+  // místo něj seznam id archivů (archIds). Uložení se navíc odkládá o chvilku,
+  // ať každé ťuknutí na kartu nepřepisuje celý stav; zaplacení, uzávěrka
+  // a skrytí aplikace ukládají hned.
+  //
+  // Převod ze starší verze: stav s vloženým polem archives je úplný a platí
+  // tak, jak je. Původní text se navíc jednou odloží do IndexedDB (pre106).
 
-  var DB_NAME = "kavakasa", DB_STORE = "state", DB_KEY = "current";
-  var db = null, dbSettled = false, dbTimer = null;
+  var ARCH_KEY = KEY + ".arch";
+  var DB_NAME = "kavakasa", DB_STORE = "state", DB_KEY = "current", DB_ARCH = "archives", DB_PRE = "pre106";
+  var db = null, dbSettled = false;
+  var SAVE_DELAY = 400;
+  var saveTimer = null;
+  var archSig = null;        // id archivů naposledy zapsaných do úložišť
+  var archMissing = [];      // id z hlavního stavu, jejichž archiv se zatím nenašel
+  var archPool = {};         // archivy podle id ze všech přečtených kopií
+  var archToDb = true;       // archiv do IndexedDB ještě nebyl zapsaný
+  var archToNative = true;   // archiv do souboru aplikace ještě nebyl zapsaný
+  var legacyRaw = "";        // stav ze starší verze, jak byl načtený
+  var lastStoreError = "";
 
   // own = data z úložiště tohoto zařízení. Jen jim patří licence a denní
   // počítadlo; z vložené zálohy se nepřebírají, jinak by stačilo zálohu
@@ -4548,7 +4882,16 @@
     d.items = d.items.filter(isObj);
     d.order = Array.isArray(d.order) ? d.order.filter(isObj) : [];
     d.sales = Array.isArray(d.sales) ? d.sales.filter(isObj) : [];
+    // Stav z 1.0.6 nese místo archivu jen jeho id (archiv se ukládá zvlášť),
+    // starší stavy a zálohy archiv vložený celý. Vložený archiv má přednost.
+    if (Array.isArray(d.archives) || !Array.isArray(d.archIds)) {
+      delete d.archIds;
+    } else {
+      d.archIds = d.archIds.filter(function (x) { return typeof x === "string" && x; });
+    }
     d.archives = Array.isArray(d.archives) ? d.archives.filter(isObj) : [];
+    // fronta výdeje odložená při přepnutí na kasu (účtenky jiného zařízení)
+    d.held = Array.isArray(d.held) ? d.held.filter(isObj) : [];
     d.evId = typeof d.evId === "string" && d.evId ? d.evId : uid();
     // id smazaných a vrácených účtenek, ať je protějšek, který smazání
     // nezachytil, nevrátí zpátky do tržby
@@ -4588,6 +4931,12 @@
     // dostanou započtené akce, které už v archivu mají
     d.rateN = typeof d.rateN === "number" ? d.rateN : d.archives.length;
     d.rateAsked = typeof d.rateAsked === "number" ? d.rateAsked : 0;
+    d.rateAskedAt = typeof d.rateAskedAt === "number" ? d.rateAskedAt : 0;
+    d.ratePending = typeof d.ratePending === "string" ? d.ratePending : "";
+    d.rateBusyDay = typeof d.rateBusyDay === "string" ? d.rateBusyDay : "";
+    // potvrzení od zařízení s Pro pro aktuální kód (placené párování)
+    d.pairProAt = typeof d.pairProAt === "number" ? d.pairProAt : 0;
+    d.pairProCode = typeof d.pairProCode === "string" ? d.pairProCode : "";
     // průvodce je pro nové: kdo už má prodeje nebo párování, obtěžovat nebudeme
     d.tourDone = d.tourDone === true || d.sales.length > 0 || d.archives.length > 0 || !!d.pair ||
                  d.parked.some(function (pk) { return pk.sales.length > 0; });
@@ -4616,7 +4965,70 @@
 
   function isEmpty(d) {
     return !d || (!d.sales.length && !d.archives.length && !d.order.length &&
+                  !(d.archIds && d.archIds.length) &&
                   !d.parked.some(function (pk) { return pk.sales.length > 0; }));
+  }
+
+  // Nativní kopie: iOS ji vkládá před startem stránky (__KASA_BOOT__,
+  // __KASA_BOOT_ARCH__), Android ji vydává synchronně přes rozhraní
+  // __kasaStore (PeerLinkPlugin.java). Na webu nic.
+  function nativeBoot(which) {
+    var v = which === "archive" ? window.__KASA_BOOT_ARCH__ : window.__KASA_BOOT__;
+    if (typeof v === "string" && v) { return v; }
+    try {
+      if (window.__kasaStore && typeof window.__kasaStore.read === "function") {
+        return String(window.__kasaStore.read(which === "archive" ? "archive" : "main") || "");
+      }
+    } catch (e) {}
+    return "";
+  }
+
+  // Archivy z jedné kopie do společné zásoby podle id.
+  function poolArchives(list) {
+    if (!Array.isArray(list)) { return; }
+    list.forEach(function (a) {
+      if (isObj(a) && typeof a.id === "string" && a.id && !archPool[a.id]) { archPool[a.id] = a; }
+    });
+  }
+
+  function poolArchiveText(raw) {
+    if (!raw) { return; }
+    try { poolArchives(JSON.parse(raw)); } catch (e) {}
+  }
+
+  // Stav 1.0.6 dostane archiv podle svého seznamu id. Co se zatím nenašlo
+  // (třeba je jen v IndexedDB, která se čte později), zůstane v archMissing
+  // a do hlavního stavu se dál zapisuje, takže se na nic nezapomene.
+  function attachArchives(d) {
+    if (!d || !Array.isArray(d.archIds)) { return []; }
+    var ids = d.archIds, out = [], missing = [], seen = {};
+    delete d.archIds;
+    ids.forEach(function (id) {
+      if (seen[id]) { return; }
+      seen[id] = true;
+      if (archPool[id]) { out.push(archPool[id]); } else { missing.push(id); }
+    });
+    d.archives = out;
+    return missing;
+  }
+
+  // Doplní archivy, které se našly později (IndexedDB, záloha pre106).
+  function resolveMissing() {
+    if (!archMissing.length) { return false; }
+    var found = false, still = [];
+    archMissing.forEach(function (id) {
+      if (archPool[id] && !state.archives.some(function (a) { return a.id === id; })) {
+        state.archives.push(archPool[id]);
+        found = true;
+      } else if (!archPool[id]) {
+        still.push(id);
+      }
+    });
+    archMissing = still;
+    if (found) {
+      state.archives.sort(function (a, b) { return (a.closedAt || 0) - (b.closedAt || 0); });
+    }
+    return found;
   }
 
   // Vyhrává nejnovější kopie (savedAt). Na iOS nese __KASA_BOOT__ stav
@@ -4625,15 +5037,30 @@
   // přepsalo celý den prodeje. localStorage i nativní soubor se ukládají
   // při každé změně, takže novější z nich je vždy ten správný.
   function load() {
-    var best = null;
-    function consider(d) { if (d && (!best || (d.savedAt || 0) > (best.savedAt || 0))) { best = d; } }
-    if (typeof window.__KASA_BOOT__ === "string" && window.__KASA_BOOT__) {
-      consider(parseState(window.__KASA_BOOT__, true));
+    var best = null, bestRaw = "";
+    function consider(raw) {
+      var d = parseState(raw, true);
+      if (!d) { return; }
+      // vložené archivy (starší verze) jdou do zásoby i z kopie, která
+      // neplatí celá: může být jediná, kde se archiv zachoval
+      poolArchives(d.archives);
+      if (!best || (d.savedAt || 0) > (best.savedAt || 0)) { best = d; bestRaw = raw; }
     }
     var raw = null;
     try { raw = localStorage.getItem(KEY); } catch (e) { raw = null; }
-    consider(parseState(raw, true));
-    return best || fresh();
+    consider(nativeBoot("main"));
+    consider(raw);
+    try { poolArchiveText(localStorage.getItem(ARCH_KEY)); } catch (e) {}
+    poolArchiveText(nativeBoot("archive"));
+    if (!best) { return fresh(); }
+    if (Array.isArray(best.archIds)) {
+      archMissing = attachArchives(best);
+    } else {
+      // stav ze starší verze: archiv je v něm celý; při prvním uložení se
+      // zapíše zvlášť a původní text se odloží do IndexedDB
+      legacyRaw = typeof bestRaw === "string" ? bestRaw : "";
+    }
+    return best;
   }
 
   // Po výměně celého stavu (záloha, obnova z IndexedDB, jiná karta):
@@ -4643,43 +5070,120 @@
     rebuildMoneyFmt();
     state.sales.forEach(function (s) { announced[s.id] = true; });
     if (prevPair === undefined || prevPair !== state.pair) {
-      relayOpen();
-      nativeLink();
+      pairOpen();
     }
   }
 
+  // Běžná změna (ťuknutí na kartu, odškrtnutí, psaní v Menu): uloží se
+  // nejpozději za SAVE_DELAY. Časovač se neposouvá, takže ani rychlé
+  // ťukání uložení neodkládá donekonečna.
   function save() {
+    if (saveTimer) { return; }
+    saveTimer = setTimeout(flushSave, SAVE_DELAY);
+  }
+
+  // Zaplacení, uzávěrka, obnova zálohy, skrytí aplikace: hned.
+  function saveNow() { flushSave(); }
+
+  function archIdList() {
+    var ids = state.archives.map(function (a) { return a.id; });
+    archMissing.forEach(function (id) { if (ids.indexOf(id) < 0) { ids.push(id); } });
+    return ids;
+  }
+
+  // Hlavní stav bez archivu, s id archivů.
+  function mainJson() {
+    var o = {};
+    Object.keys(state).forEach(function (k) { if (k !== "archives") { o[k] = state[k]; } });
+    o.archIds = archIdList();
+    return JSON.stringify(o);
+  }
+
+  function nativeSaveHook() {
+    if (typeof window.__kasaSave === "function") { return window.__kasaSave; }
+    if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.kasa) {
+      return function (j) { window.webkit.messageHandlers.kasa.postMessage(j); };
+    }
+    return null;
+  }
+
+  function flushSave() {
+    if (saveTimer) { clearTimeout(saveTimer); saveTimer = null; }
+    if (!state) { return; }
     state.savedAt = Date.now();
-    var json;
-    try { json = JSON.stringify(state); } catch (e) { return; }
-
-    try { localStorage.setItem(KEY, json); } catch (e) {}
-
+    var sig = archIdList().join(",");
+    var archJson = null, mj;
     try {
-      if (typeof window.__kasaSave === "function") {
-        window.__kasaSave(json);
-      } else if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.kasa) {
-        window.webkit.messageHandlers.kasa.postMessage(json);
+      if (sig !== archSig) { archJson = JSON.stringify(state.archives); }
+      mj = mainJson();
+    } catch (e) { return; }
+    var hook = nativeSaveHook();
+    var archHook = typeof window.__kasaSaveArchive === "function" ? window.__kasaSaveArchive : null;
+
+    // Archiv vždy dřív než hlavní stav, který se na něj odkazuje.
+    if (archJson !== null) {
+      try { localStorage.setItem(ARCH_KEY, archJson); lastStoreError = ""; }
+      catch (e) { lastStoreError = "arch"; }
+      archSig = sig;
+      archToDb = true;
+      archToNative = true;
+    }
+    // most (bridge.js) se načítá až za stránkou: dokud tu není, archiv do
+    // souboru počká na další uložení
+    if (archHook && archToNative) {
+      try {
+        archHook(archJson !== null ? archJson : JSON.stringify(state.archives));
+        archToNative = false;
+      } catch (e) {}
+    }
+
+    try { localStorage.setItem(KEY, mj); } catch (e) { lastStoreError = "main"; }
+
+    if (hook) {
+      try {
+        if (archHook || !state.archives.length) {
+          hook(mj);
+        } else {
+          // Nativní obal bez souboru pro archiv: soubor dostane úplný stav,
+          // vložený archiv pak při čtení platí celý.
+          var full = archJson !== null ? archJson : JSON.stringify(state.archives);
+          hook(mj.slice(0, -1) + ',"archives":' + full + "}");
+        }
+      } catch (e) {}
+    }
+
+    if (!dbSettled || !db) { return; }
+    try {
+      var tx = db.transaction(DB_STORE, "readwrite");
+      tx.onerror = tx.onabort = function () { archToDb = true; };
+      var st = tx.objectStore(DB_STORE);
+      if (archToDb) {
+        st.put(archJson !== null ? archJson : JSON.stringify(state.archives), DB_ARCH);
+        archToDb = false;
       }
-    } catch (e) {}
-
-    if (!dbSettled) { return; }
-    if (dbTimer) { clearTimeout(dbTimer); }
-    dbTimer = setTimeout(function () { dbWrite(json); }, 300);
+      st.put(mj, DB_KEY);
+    } catch (e) { archToDb = true; }
   }
 
-  function dbWrite(json) {
-    if (!db) { return; }
-    try { db.transaction(DB_STORE, "readwrite").objectStore(DB_STORE).put(json, DB_KEY); } catch (e) {}
-  }
-
-  function dbRead(cb) {
+  function dbRead(cb, key) {
     if (!db) { cb(null); return; }
     try {
-      var rq = db.transaction(DB_STORE, "readonly").objectStore(DB_STORE).get(DB_KEY);
+      var rq = db.transaction(DB_STORE, "readonly").objectStore(DB_STORE).get(key || DB_KEY);
       rq.onsuccess = function () { cb(rq.result || null); };
       rq.onerror = function () { cb(null); };
     } catch (e) { cb(null); }
+  }
+
+  // Původní stav ze starší verze se jednou odloží do IndexedDB. Kdyby se
+  // archiv při převodu někde ztratil, při startu se odtud doplní.
+  function keepLegacy() {
+    if (!legacyRaw || !db) { return; }
+    var text = legacyRaw;
+    legacyRaw = "";
+    dbRead(function (have) {
+      if (have) { return; }
+      try { db.transaction(DB_STORE, "readwrite").objectStore(DB_STORE).put(text, DB_PRE); } catch (e) {}
+    }, DB_PRE);
   }
 
   function dbInit(done) {
@@ -4793,7 +5297,8 @@
     state.order = [];
     linesOpen = false;
     sheet = null;
-    save();
+    noteBusyDay();
+    saveNow();
     pushOrder(sale, true);
     render();
     if (state.mode === "kasa" && state.voice) { sayThanks(); }
@@ -4817,7 +5322,7 @@
     if (state.payDay === todayKey() && state.payN > 0 && sale.ts >= new Date().setHours(0, 0, 0, 0)) { state.payN -= 1; }
     if (sale.no === state.nextNo - 1) { state.nextNo = sale.no; }
     hideToast();
-    save();
+    saveNow();
     pushDelete([sale.id]);
     render();
     say(T("undoBtn"));
@@ -4931,17 +5436,198 @@
     speak(parts.join(" "));
   }
 
+  // ---------- kód spárování a šifrování ----------
+  // Od 1.0.6 má kód 8 znaků: 7 náhodných z abecedy bez 0/O a 1/I a kontrolní
+  // znak (Luhn mod 32), takže překlep i ručně vymyšlený kód se pozná hned.
+  // Z kódu se odvodí (PBKDF2) klíč AES-GCM a z něj nezávisle název tématu
+  // přeposílače a jméno pro nativní hledání. Přeposílač ani zařízení
+  // v okolí tak kód nevidí a obsah zpráv nepřečtou ani nepodvrhnou.
+  // Starší kódy (5 znaků nebo vlastní) fungují dál po staru, bez šifrování;
+  // nově se k nim připojit nejde. Starší verze aplikace se s novým kódem
+  // nespojí (jiné téma i jméno), nic si tedy navzájem nepřepíšou.
+  var CODE_ABC = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  var CODE_LEN = 8;
+  var PAIR_SALT = "tapkasa-pair-v2";
+  var PAIR_ITER = 100000;
+
+  function codeCheck(body) {
+    var n = CODE_ABC.length, factor = 2, sum = 0;
+    for (var i = body.length - 1; i >= 0; i--) {
+      var add = factor * CODE_ABC.indexOf(body.charAt(i));
+      factor = factor === 2 ? 1 : 2;
+      sum += Math.floor(add / n) + (add % n);
+    }
+    return CODE_ABC.charAt((n - (sum % n)) % n);
+  }
+
+  function newPairCode() {
+    var body = "", rnd = [];
+    try {
+      var buf = new Uint32Array(CODE_LEN - 1);
+      crypto.getRandomValues(buf);
+      rnd = Array.prototype.slice.call(buf);
+    } catch (e) {
+      for (var j = 0; j < CODE_LEN - 1; j++) { rnd.push(Math.floor(Math.random() * 4294967296)); }
+    }
+    rnd.forEach(function (r) { body += CODE_ABC.charAt(r % CODE_ABC.length); });
+    return body + codeCheck(body);
+  }
+
+  function normCode(raw) { return String(raw || "").toUpperCase().replace(/[^A-Z0-9]/g, ""); }
+
+  function isNewCode(c) {
+    return typeof c === "string" && c.length === CODE_LEN && /^[A-HJ-NP-Z2-9]+$/.test(c) &&
+           codeCheck(c.slice(0, -1)) === c.slice(-1);
+  }
+
+  function showCode(c) { return isNewCode(c) ? c.slice(0, 4) + "-" + c.slice(4) : c; }
+
+  function canCrypt() {
+    return !!(window.crypto && crypto.subtle && typeof crypto.subtle.deriveBits === "function" &&
+              typeof TextEncoder === "function");
+  }
+
+  function b64(bytes) {
+    var s = "";
+    for (var i = 0; i < bytes.length; i += 0x8000) {
+      s += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
+    }
+    return btoa(s);
+  }
+
+  function unb64(text) {
+    var s = atob(text), out = new Uint8Array(s.length);
+    for (var i = 0; i < s.length; i++) { out[i] = s.charCodeAt(i); }
+    return out;
+  }
+
+  function hex(bytes) {
+    var s = "";
+    for (var i = 0; i < bytes.length; i++) { s += ("0" + bytes[i].toString(16)).slice(-2); }
+    return s;
+  }
+
+  // Délka v bajtech UTF-8 (přeposílač i Nearby měří bajty, ne znaky).
+  var utf8 = typeof TextEncoder === "function" ? new TextEncoder() : null;
+  function blen(text) { return utf8 ? utf8.encode(text).length : unescape(encodeURIComponent(text)).length; }
+
+  // Spárování pro aktuální kód: {code, enc, key, topic, room, ready, err}
+  var pairCtx = null, pairGen = 0;
+
+  function pairPrepare(done) {
+    var code = state.pair || "";
+    var gen = ++pairGen;
+    if (!code) { pairCtx = null; if (done) { done(); } return; }
+    if (!isNewCode(code)) {
+      pairCtx = { code: code, enc: false, topic: "kasa-stanek-" + code, room: code, ready: true };
+      if (done) { done(); }
+      return;
+    }
+    pairCtx = { code: code, enc: true, ready: false, topic: "", room: "", key: null, err: "" };
+    if (!canCrypt()) { pairCtx.err = "crypto"; render(); return; }
+    var ctx = pairCtx;
+    crypto.subtle.importKey("raw", utf8.encode(code), "PBKDF2", false, ["deriveBits"])
+      .then(function (base) {
+        return crypto.subtle.deriveBits({ name: "PBKDF2", salt: utf8.encode(PAIR_SALT), iterations: PAIR_ITER, hash: "SHA-256" }, base, 384);
+      })
+      .then(function (bits) {
+        var b = new Uint8Array(bits);
+        var id = hex(b.subarray(32, 48));
+        return crypto.subtle.importKey("raw", b.subarray(0, 32), { name: "AES-GCM" }, false, ["encrypt", "decrypt"])
+          .then(function (key) {
+            if (gen !== pairGen) { return; }   // kód se mezitím změnil
+            ctx.key = key;
+            ctx.topic = "tk2-" + id;
+            ctx.room = "T2" + id.slice(0, 16).toUpperCase();
+            ctx.ready = true;
+            if (done) { done(); }
+          });
+      })
+      .catch(function () { if (gen === pairGen) { ctx.err = "crypto"; render(); } });
+  }
+
+  // Zprávy jdou ven v pořadí, v jakém vznikly, i když šifrování běží asynchronně.
+  var sealChain = Promise.resolve();
+  function sealed(msg, send) {
+    var ctx = pairCtx;
+    if (!ctx || !ctx.enc) { send(JSON.stringify(msg)); return; }
+    if (!ctx.ready || !ctx.key) { return; }
+    sealChain = sealChain.then(function () {
+      var iv = new Uint8Array(12);
+      crypto.getRandomValues(iv);
+      return crypto.subtle.encrypt({ name: "AES-GCM", iv: iv }, ctx.key, utf8.encode(JSON.stringify(msg)))
+        .then(function (ct) {
+          if (ctx !== pairCtx) { return; }
+          send(JSON.stringify({ e: 2, n: b64(iv), c: b64(new Uint8Array(ct)) }));
+        });
+    }).catch(function () {});
+  }
+
+  function isSealed(o) { return !!o && o.e === 2 && typeof o.n === "string" && typeof o.c === "string"; }
+
+  // Rozšifruje obálku; cokoli, co nejde ověřit klíčem z našeho kódu, zahodí.
+  function unseal(o, done) {
+    var ctx = pairCtx;
+    if (!ctx || !ctx.enc || !ctx.ready || !ctx.key || !isSealed(o)) { return; }
+    var iv, ct;
+    try { iv = unb64(o.n); ct = unb64(o.c); } catch (e) { return; }
+    crypto.subtle.decrypt({ name: "AES-GCM", iv: iv }, ctx.key, ct).then(function (plain) {
+      if (ctx !== pairCtx) { return; }
+      var msg = null;
+      try { msg = JSON.parse(new TextDecoder().decode(plain)); } catch (e) { return; }
+      if (msg && typeof msg === "object") { done(msg); }
+    }, function () {});
+  }
+
+  // Bez šifrování se na přeposílač vejde 3,5 kB textu, se šifrováním
+  // (base64 přidá třetinu) méně; přeposílač bere nejvýš 4 kB.
+  function relayBudget() { return pairCtx && pairCtx.enc ? 2600 : 3500; }
+  function nativeBudget() { return pairCtx && pairCtx.enc ? 22000 : 24000; }
+
+  // ---------- placené párování ----------
+  // Kód vytváří jen Pro. Zařízení bez Pro se k novému kódu připojí, ale
+  // objednávky začne brát a posílat, až se mu ozve zařízení s Pro (zpráva
+  // „hi“ s příznakem pro). Bez toho by si dvě zařízení zdarma zadala stejný
+  // kód a párování by měla bez předplatného. Potvrzení platí 30 dní a každé
+  // další ozvání ho prodlouží; nativní cesta funguje stejně.
+  var PRO_SEEN_MS = 30 * 86400000;
+  var lastHiNoPro = 0;
+
+  function pairActive() {
+    if (!state.pair) { return false; }
+    if (!pairCtx || !pairCtx.enc) { return true; }   // starší kód: jako dřív
+    if (isPro()) { return true; }
+    return state.pairProCode === state.pair && Date.now() - (state.pairProAt || 0) < PRO_SEEN_MS;
+  }
+
+  function mayCarry(msg) {
+    return msg.t === "hi" || msg.t === "ping" || pairActive();
+  }
+
   // Nativní hledání protějšku smí běžet jen v rámci našeho kódu spárování.
   // Voláme při startu a po každé změně kódu; prázdný kód spojení vypne.
+  // U nového kódu se hledá pod jménem odvozeným z kódu, ne pod kódem.
+  function nativeRoom() {
+    return pairCtx && pairCtx.ready ? pairCtx.room : "";
+  }
+
   function nativeLink() {
     try {
-      if (typeof window.__kasaPeerLink === "function") { window.__kasaPeerLink(state.pair || ""); }
+      if (typeof window.__kasaPeerLink === "function") { window.__kasaPeerLink(nativeRoom()); }
     } catch (e) {}
+  }
+
+  // Nový kód: odvodit klíč, pak otevřít přeposílač i nativní hledání.
+  function pairOpen() {
+    relayClose();
+    pairPrepare(function () { relayOpen(); nativeLink(); render(); });
+    // klíč se teprve odvozuje: staré hledání zatím zastavit
+    if (!pairCtx || !pairCtx.ready) { nativeLink(); }
   }
 
   // Most se načítá až za touhle stránkou, takže při startu ještě nemusí být
   // po ruce. Necháme mu proto způsob, jak si kód vyzvednout sám.
-  window.__kasaRoom = function () { return (state && state.pair) || ""; };
+  window.__kasaRoom = function () { return state ? nativeRoom() : ""; };
 
   // Zprávy odeslané, když není žádný nativní protějšek (zamčený iPad,
   // vypnutý Bluetooth), se dřív ztratily: smazání, uzávěrka i „Vydáno“.
@@ -4959,16 +5645,19 @@
 
   function nativeSend(msg) {
     try {
-      if (!state.pair) { return; }
+      if (!state.pair || !mayCarry(msg)) { return; }
       msg.src = myId;
       msg.room = state.pair;
-      var json = JSON.stringify(msg);
-      if (nativeKnown && nativePeers === 0 && peerLinkApp() && msg.t !== "setupReq" && msg.t !== "setup") {
-        nativeOutbox.push({ room: state.pair, json: json });
-        if (nativeOutbox.length > 80) { nativeOutbox.shift(); }
-        return;
-      }
-      nativeRaw(json);
+      var code = state.pair;
+      sealed(msg, function (json) {
+        if (code !== state.pair) { return; }
+        if (nativeKnown && nativePeers === 0 && peerLinkApp() && msg.t !== "setupReq" && msg.t !== "setup" && msg.t !== "hi") {
+          nativeOutbox.push({ room: code, json: json });
+          if (nativeOutbox.length > 80) { nativeOutbox.shift(); }
+          return;
+        }
+        try { nativeRaw(json); } catch (e) {}
+      });
     } catch (e) {}
   }
 
@@ -5014,7 +5703,7 @@
   function pushDelete(ids) {
     markGone(ids);
     if (muted) { return; }
-    save();   // záznam o smazání musí přežít restart, volající ukládal dřív
+    saveNow();   // záznam o smazání musí přežít restart, volající ukládal dřív
     flushOrders();
     nativeSend({ t: "del", ids: ids });
     relayDeleted(ids);
@@ -5035,14 +5724,13 @@
 
   // Účtenky jedné akce ven: nativně i přes přeposílač, obojí po dávkách.
   // Nearby na Androidu větší zprávu odmítne a zůstane po ní jen řádek
-  // v diagnostice, proto i nativní cesta dělí seznam.
-  var NATIVE_MAX = 24000;
+  // v diagnostice, proto i nativní cesta dělí seznam (nativeBudget).
   function sendSales(list, evId, name) {
-    var batch = [], size = 0;
+    var batch = [], size = 0, max = nativeBudget();
     list.forEach(function (sl) {
       var one = slim(sl);
-      var len = JSON.stringify(one).length;
-      if (batch.length && size + len > NATIVE_MAX) {
+      var len = blen(JSON.stringify(one));
+      if (batch.length && size + len > max) {
         nativeSend({ t: "sync", event: name, ev: evId, sales: batch });
         batch = []; size = 0;
       }
@@ -5060,7 +5748,7 @@
   // pošle vše najednou. Části se slučují podle id, duplicity z druhého
   // přeposílače tedy nevadí.
   var setupWanted = 0, setupParts = null;
-  var SETUP_WAIT_MS = 90000;
+  var SETUP_WAIT_MS = 180000;   // druhé zařízení musí žádost potvrdit
 
   function setupPayload() {
     return {
@@ -5073,7 +5761,32 @@
     };
   }
 
+  // Žádost o kopii menu a údajů prodejce musí potvrdit zařízení, které je
+  // posílá. Dřív odpovědělo samo a údaje prodejce dostal kdokoli se stejným
+  // kódem. Když je zrovna otevřené placení nebo jiný panel, dotaz počká.
+  var setupAskAt = 0, setupAskWaiting = false;
+  var SETUP_ASK_MS = 150000;
+
+  function askSendSetup() {
+    if (setupAskAt && Date.now() - setupAskAt < 20000) { return; }   // stejná žádost z druhé cesty
+    setupAskAt = Date.now();
+    setupAskWaiting = true;
+    if (!sheet && state.setup) { openSetupAsk(); } else { render(); }
+  }
+
+  function openSetupAsk() {
+    setupAskWaiting = false;
+    var at = setupAskAt;
+    var q = T("setupSendAsk");
+    ask(q[0], q[1], q[2], function () {
+      if (Date.now() - at > SETUP_ASK_MS) { showToast(T("setupSendLate")); return; }
+      sendSetup();
+      showToast(T("setupSent"));
+    });
+  }
+
   function requestSetup() {
+    if (!pairActive()) { showToast(T("pairWaitPro")); return; }
     setupWanted = Date.now(); setupParts = null;
     nativeSend({ t: "setupReq" });
     relayPost({ t: "setupReq" });
@@ -5083,10 +5796,11 @@
   function sendSetup() {
     var p = setupPayload();
     nativeSend({ t: "setup", seq: 0, last: true, full: true, seller: p.seller, currency: p.currency, vat: p.vat, event: p.event, items: p.items });
-    var chunks = [], cur = [], size = 0;
+    // první část nese i údaje prodejce, vejde se do ní tedy méně položek
+    var chunks = [], cur = [], size = blen(JSON.stringify(p.seller)) + 300;
     p.items.forEach(function (it) {
-      var len = JSON.stringify(it).length;
-      if (cur.length && size + len > MAX_BYTES - 700) { chunks.push(cur); cur = []; size = 0; }
+      var len = blen(JSON.stringify(it));
+      if (cur.length && size + len > relayBudget() - 300) { chunks.push(cur); cur = []; size = 0; }
       cur.push(it); size += len;
     });
     chunks.push(cur);
@@ -5154,15 +5868,36 @@
     });
   }
 
+  // Zpráva z nativního spojení (mobile/bridge.js). U nového kódu jen
+  // zašifrovaná naším klíčem, jinak se zahodí.
   window.__kasaPeer = function (raw) {
     var msg = null;
     try { msg = typeof raw === "string" ? JSON.parse(raw) : raw; } catch (e) { return; }
-    if (msg && (msg.t === "setupReq" || msg.t === "setup")) {
-      if (!state.pair || (msg.room && msg.room !== state.pair)) { return; }
-      lastIn = Date.now();
-      if (msg.t === "setupReq") { sendSetup(); } else { takeSetup(msg); }
+    if (!msg) { return; }
+    if (pairCtx && pairCtx.enc) {
+      unseal(msg, function (inner) { nativeMsg(inner); });
       return;
     }
+    if (isSealed(msg)) { return; }
+    nativeMsg(msg);
+  };
+
+  function nativeMsg(msg) {
+    if (msg.t === "hi") { gotHello(msg, "native"); return; }
+    if (msg.t === "ping") { return; }
+    peerMsg(msg);
+  }
+
+  function peerMsg(msg) {
+    if (msg && (msg.t === "setupReq" || msg.t === "setup")) {
+      if (!state.pair || (msg.room && msg.room !== state.pair)) { return; }
+      if (!pairActive()) { return; }
+      lastIn = Date.now();
+      if (msg.t === "setupReq") { askSendSetup(); } else { takeSetup(msg); }
+      return;
+    }
+    // Zařízení bez Pro čeká na potvrzení od zařízení s Pro (gotHello).
+    if (!pairActive()) { return; }
     if (msg && msg.t === "drop" && Array.isArray(msg.ids)) {
       // jen výdej: zastaralé objednávky z fronty pryč, kasa nic nemaže
       if (state.mode !== "vydej" || !state.pair || (msg.room && msg.room !== state.pair)) { return; }
@@ -5323,7 +6058,6 @@
     ? window.__KASA_RELAY__.split(",")
     : ["https://ntfy.sh/", "https://ntfy.envs.net/"];
 
-  var MAX_BYTES = 3500;
   // Id zařízení musí přežít restart: přeposílač po startu přehraje zprávy
   // za posledních 5 minut a vlastní starý „clear“ by jinak smazal účtenky.
   var runId = Math.random().toString(36).slice(2, 10);
@@ -5350,7 +6084,7 @@
   var seen = {}, relayError = "", lastIn = 0, lastOut = 0, sentOpen = false;
   var pingAt = 0, testResult = "";
 
-  function relayTopic() { return state.pair ? "kasa-stanek-" + state.pair : ""; }
+  function relayTopic() { return state.pair && pairCtx && pairCtx.ready && pairCtx.code === state.pair ? pairCtx.topic : ""; }
 
   function anySse() {
     for (var i = 0; i < links.length; i++) { if (links[i].sseUp) { return true; } }
@@ -5397,12 +6131,14 @@
   // Pošle na všechny přeposílače. Chybu hlásíme, teprve když selžou všechny.
   function relayPost(msg, done) {
     var topic = relayTopic();
-    if (!topic || !window.fetch || !links.length) { return; }
+    if (!topic || !window.fetch || !links.length || !mayCarry(msg)) { return; }
     msg.src = myId;
     msg.run = runId;
-    var body;
-    try { body = JSON.stringify(msg); } catch (e) { return; }
+    try { sealed(msg, function (body) { if (topic === relayTopic()) { relayPostBody(msg, body, done); } }); } catch (e) {}
+  }
 
+  function relayPostBody(msg, body, done) {
+    var topic = relayTopic();
     var left = links.length, ok = false, worst = 0;
     links.forEach(function (link) {
       fetch(link.base + topic, { method: "POST", body: body }).then(function (r) {
@@ -5454,11 +6190,11 @@
   function relaySales(list, evId, name) {
     evId = evId || state.evId;
     name = typeof name === "string" ? name : state.event;
-    var batch = [], size = 0;
+    var batch = [], size = 0, max = relayBudget();
     list.forEach(function (s) {
       var one = slim(s);
-      var len = JSON.stringify(one).length;
-      if (batch.length && size + len > MAX_BYTES) {
+      var len = blen(JSON.stringify(one));
+      if (batch.length && size + len > max) {
         relayPost({ t: "sync", event: name, ev: evId, sales: batch });
         batch = []; size = 0;
       }
@@ -5473,12 +6209,18 @@
   // zařízení visí na jiném kódu.
   var lastHello = 0, helloBack = 0, lastQueueSent = 0;
 
+  function helloMsg() { return { t: "hi", role: state.mode, pro: isPro() ? 1 : 0, v: APP_VERSION }; }
+
   function sayHello(force) {
     var now = Date.now();
     if (!force && now - lastHello < 15000) { return; }
     lastHello = now;
-    relayPost({ t: "hi", role: state.mode });
+    relayPost(helloMsg());
   }
+
+  // Nativní spojení: pozdrav hned po spojení, ať se párování bez Pro zapne
+  // i bez internetu.
+  function nativeHello() { nativeSend(helloMsg()); }
 
   function relayDeleted(ids) { relayPost({ t: "del", ids: ids }); }
   // Otevřené objednávky všech akcí jen přes přeposílač (po připojení nebo
@@ -5544,7 +6286,15 @@
     var msg = null;
     try { msg = JSON.parse(env.message); } catch (e) { return; }
     if (!msg) { return; }
+    if (pairCtx && pairCtx.enc) {
+      // nový kód: bereme jen to, co jde rozšifrovat naším klíčem
+      unseal(msg, function (inner) { relayHandle(inner, env); });
+      return;
+    }
+    relayHandle(msg, env);
+  }
 
+  function relayHandle(msg, env) {
     if (msg.t === "ping") {
       if (msg.src === myId && pingAt) {
         testResult = T("testOk", (function (x) { try { return new Intl.NumberFormat(langInfo().loc, { minimumFractionDigits: 1, maximumFractionDigits: 1 }).format(x); } catch (e) { return x.toFixed(1); } })((Date.now() - pingAt) / 1000));
@@ -5560,23 +6310,48 @@
     if (msg.src === myId && (msg.run ? myRuns.indexOf(msg.run) >= 0 : (env.time || 0) * 1000 < bootAt)) { return; }
 
     if (msg.t === "hi") {
-      lastIn = Date.now();
-      refreshLink();
-      if (state.mode === "kasa" && msg.role === "vydej" && Date.now() - lastQueueSent > 20000) {
-        lastQueueSent = Date.now();
-        relayAllOpen();
-      }
-      if (Date.now() - helloBack > 5000) {   // ozveme se zpátky, ale ne donekonečna
-        helloBack = Date.now();
-        sayHello(true);
-      }
-      render();
+      gotHello(msg, "relay");
       return;
     }
 
     lastIn = Date.now();
     refreshLink();
-    window.__kasaPeer(msg);
+    peerMsg(msg);
+  }
+
+  // Pozdrav z druhého zařízení (přeposílač i nativní spojení). Nese roli
+  // a příznak Pro; podle něj se zapne párování na zařízení bez Pro.
+  function gotHello(msg, via) {
+    if (!state.pair || (msg.room && msg.room !== state.pair)) { return; }
+    lastIn = Date.now();
+    refreshLink();
+    var wasActive = pairActive();
+    if (pairCtx && pairCtx.enc) {
+      if (msg.pro) {
+        lastHiNoPro = 0;
+        if (state.pairProCode !== state.pair || Date.now() - (state.pairProAt || 0) > 3600000) {
+          state.pairProCode = state.pair;
+          state.pairProAt = Date.now();
+          save();
+        }
+      } else if (!isPro()) {
+        lastHiNoPro = Date.now();
+      }
+    }
+    var nowActive = pairActive();
+    if (nowActive && !wasActive) {
+      // právě se zapnulo: kasa pošle frontu, výdej se ohlásí znovu
+      pushEverything();
+      showToast(T("pairNowActive"));
+    } else if (nowActive && state.mode === "kasa" && msg.role === "vydej" && Date.now() - lastQueueSent > 20000) {
+      lastQueueSent = Date.now();
+      if (via === "native") { pushEverything(); } else { relayAllOpen(); }
+    }
+    if (Date.now() - helloBack > 5000) {   // ozveme se zpátky, ale ne donekonečna
+      helloBack = Date.now();
+      if (via === "native") { nativeHello(); } else { sayHello(true); }
+    }
+    render();
   }
 
   // Stálé spojení je hlavní cesta; dotazování je záloha, když ho síť nepustí.
@@ -5650,7 +6425,7 @@
 
   // Diagnostika nativního párování (mobile/bridge.js): text se ukazuje
   // v Propojených zařízeních, ať jde z telefonu poznat, kde se hledání zastavilo.
-  var peerDiag = null;
+  var peerDiag = null, diagOpen = false;
   window.__kasaPeerState = function (d) { peerDiag = d; render(); };
 
   window.__kasaPeerCount = function (n) {
@@ -5659,6 +6434,7 @@
     refreshLink();
     if (nativePeers > 0) {
       setRelayError("");   // bez internetu nese zprávy nativní spojení, hláška přeposílače by mátla
+      nativeHello();       // role a příznak Pro (zapne párování zařízení bez Pro)
       flushNativeOutbox(); // co se nestihlo poslat během výpadku, v původním pořadí
       pushEverything();    // nový protějšek dostane frontu
     }
@@ -5849,6 +6625,41 @@
     view = items.length ? "sell" : "menu";
     save(); render(true);
     showToast(T("toastEvSwitched", evLabel(activeEvent())));
+  }
+
+  // Změna role. Výdej drží ve state.sales frontu cizí kasy (účtenky s jejím
+  // id akce). Po přepnutí zpět na kasu by se dřív sečetly do tržby, uzávěrky
+  // i souhrnu tohoto zařízení. Odloží se proto stranou (state.held) a při
+  // návratu na výdej se do fronty vrátí. Vrací počet odložených účtenek.
+  function switchRoleSales(nextMode) {
+    if (nextMode === "kasa") {
+      var own = [], foreign = [];
+      state.sales.forEach(function (s) { (s.ev && s.ev === state.evId ? own : foreign).push(s); });
+      if (!foreign.length) { return 0; }
+      var byId = {};
+      state.held.forEach(function (s) { byId[s.id] = s; });
+      foreign.forEach(function (s) {
+        if (!byId[s.id] || (s.updatedAt || 0) >= (byId[s.id].updatedAt || 0)) { byId[s.id] = s; }
+      });
+      state.held = Object.keys(byId).map(function (k) { return byId[k]; });
+      state.sales = own;
+      // čísla objednávek pokračují za vlastními účtenkami, ne za cizími
+      var maxNo = 0;
+      own.forEach(function (s) { if (s.no > maxNo) { maxNo = s.no; } });
+      state.nextNo = maxNo + 1;
+      return foreign.length;
+    }
+    if (state.held.length) {
+      var have = {}, goneSet = {};
+      state.sales.forEach(function (s) { have[s.id] = true; });
+      (state.gone || []).forEach(function (x) { goneSet[x] = true; });
+      state.held.forEach(function (s) {
+        if (!have[s.id] && !goneSet[s.id] && !archivedSale(s.id)) { state.sales.push(s); }
+      });
+      state.sales.sort(function (a, b) { return (a.ts || 0) - (b.ts || 0); });
+      state.held = [];
+    }
+    return 0;
   }
 
   // ---------- stats ----------
@@ -6845,17 +7656,31 @@
              : "") +
            (ios ? '<div class="acts" style="padding-top:0;padding-bottom:6px"><button class="act" data-offlinehelp="1">' +
            esc(T("offHelpBtn")) + "</button></div>" : "");
-      var dg = peerDiag || window.__kasaPeerDiag || null;
-      var dgText = !dg ? "most nenačten" : (dg.plugin ? "modul připraven" : "modul chybí") +
-        (dg.log && dg.log.length ? "\n" + dg.log.slice(-6).join("\n") : "");
-      // dlouhé řádky (JSON stavu) se musí zalomit, jinak by úzký telefon
-      // získal vodorovný posun celé stránky
-      h += '<p class="hint" style="text-align:left;padding-top:0;padding-bottom:4px;font-family:var(--mono);font-size:11px;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;max-width:100%">PeerLink: ' + esc(dgText) + "</p>";
+      // Technický protokol nativního spojení je schovaný pod Podrobnostmi:
+      // běžnému uživateli nic neříká a vypadal jako chyba.
+      h += '<div class="acts" style="padding-top:0;padding-bottom:4px"><button class="act ghostlink" data-diag="1" aria-expanded="' +
+           (diagOpen ? "true" : "false") + '">' + esc(T(diagOpen ? "diagHide" : "diagShow")) + "</button></div>";
+      if (diagOpen) {
+        var dg = peerDiag || window.__kasaPeerDiag || null;
+        var dgText = !dg ? T("diagNoBridge") : (dg.plugin ? T("diagReady") : T("diagMissing")) +
+          (dg.log && dg.log.length ? "\n" + dg.log.slice(-6).join("\n") : "");
+        // dlouhé řádky (JSON stavu) se musí zalomit, jinak by úzký telefon
+        // získal vodorovný posun celé stránky
+        h += '<p class="hint" style="text-align:left;padding-top:0;padding-bottom:4px;font-family:var(--mono);font-size:11px;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;max-width:100%">PeerLink: ' + esc(dgText) + "</p>";
+      }
     }
     if (state.pair) {
-      h += '<div class="link on" style="padding-top:0"><i></i>' + esc(T("pairCode")) + " <strong>" + esc(state.pair) + "</strong></div>" +
-        (relayError ? '<p class="hint" style="color:var(--accent);text-align:left;padding-top:0;padding-bottom:2px">' + esc(relayError) + "</p>" : "") +
-        (!lastIn && anySse()
+      var warn = function (text) {
+        return '<p class="hint" style="color:var(--accent);text-align:left;padding-top:0;padding-bottom:2px">' + esc(text) + "</p>";
+      };
+      var fresh = isNewCode(state.pair);
+      h += '<div class="link on" style="padding-top:0"><i></i>' + esc(T("pairCode")) + " <strong>" + esc(showCode(state.pair)) + "</strong></div>" +
+        (pairCtx && pairCtx.err ? warn(T("pairNoCrypto")) : "") +
+        (fresh && !pairActive() ? warn(T(lastHiNoPro && Date.now() - lastHiNoPro < LINK_FRESH_MS ? "pairNoPro" : "pairWaitPro")) : "") +
+        (!fresh ? warn(T(isPro() ? "pairLegacyPro" : "pairLegacy")) : "") +
+        (relayError ? warn(relayError) : "") +
+        (!lastIn && fresh ? warn(T("pairUpdateOther")) : "") +
+        (!lastIn && !fresh && anySse()
           ? '<p class="hint" style="color:var(--accent);text-align:left;padding-top:0;padding-bottom:2px">' + T("pairMismatch") + "</p>"
           : "") +
         '<p class="hint" style="text-align:left;padding-top:0;padding-bottom:2px">' +
@@ -7140,6 +7965,9 @@
       '<div class="acts" style="padding-top:0;padding-bottom:8px">' +
         '<a class="act" style="text-align:center;text-decoration:none" href="mailto:' + SUPPORT_MAIL +
           '?subject=' + encodeURIComponent("Tapkasa " + APP_VERSION) + '">' + esc(T("supportRow")) + "</a>" +
+        // hodnocení jen v aplikaci z obchodu; Capacitor odkaz otevře v obchodě
+        (nativeApp() ? '<a class="act" style="text-align:center;text-decoration:none" href="' + rateUrl() +
+          '" target="_blank" rel="noopener">' + esc(T("rateRow")) + "</a>" : "") +
         '<div class="act" style="color:var(--ink-3)">' + esc(T("aboutRow", APP_VERSION)) + "</div>" +
       "</div>";
   }
@@ -7285,8 +8113,11 @@
             ? '<div class="recv give"><span class="lbl">' + esc(T("change")) + '</span><span class="val num">' + czk(back) + "</span></div>"
             : '<div class="recv short"><span class="lbl">' + esc(T("short")) + '</span><span class="val num">' + czk(-back) + "</span></div>");
 
-      h += '<button class="btn-done" data-commit="1">' + esc(T("done")) + "</button>" +
-           '<button class="btn-ghost" data-cancel="1">' + esc(T("back")) + "</button>";
+      h += sheet.shortAsk && got && back < 0
+        ? '<p class="sub" style="color:var(--accent);font-weight:600">' + esc(T("shortAskHint")) + "</p>" +
+          '<button class="btn-done warn" data-shortok="1">' + esc(T("shortAsk", czk(-back))) + "</button>"
+        : '<button class="btn-done" data-commit="1">' + esc(T("done")) + "</button>";
+      h += '<button class="btn-ghost" data-cancel="1">' + esc(T("back")) + "</button>";
     }
 
     if (sheet.step === "card") {
@@ -7536,13 +8367,11 @@
              '<div class="pw-b">' + PW_CHECK + esc(T("proB2")) + "</div>" +
              '<div class="pw-b">' + PW_CHECK + esc(T("proB3")) + "</div>" +
            "</div>" +
-           '<div class="pw-plans">' +
-             '<button class="pw-plan" data-buy="monthly"><span class="k">' + esc(T("proMonthly")) + '</span><span class="p num">' + esc(priceOf("monthly")) + "</span><span class=\"s\">" + esc(T("proPerMonth", "")) .replace(" / ", "/") + "</span></button>" +
-             '<button class="pw-plan best" data-buy="yearly"><span class="k">' + esc(T("proYearly")) + '</span><span class="p num">' + esc(priceOf("yearly")) + "</span><span class=\"s\">" + esc(T("proPerYear", "")).replace(" / ", "/") + "</span></button>" +
-           "</div>" +
+           '<div class="pw-plans">' + planButton("monthly") + planButton("yearly") + "</div>" +
            '<button class="btn-ghost" data-restorebuy="1">' + esc(T("proRestore")) + "</button>" +
            '<button class="btn-ghost" data-cancel="1">' + esc(T("proLater")) + "</button>" +
-           '<p class="hint" style="padding:10px 4px 0">' + esc(T("proTerms")) + "</p>" +
+           '<p class="hint" style="padding:10px 4px 0">' +
+             (trialOf("monthly") || trialOf("yearly") ? esc(T("proTrialTerms")) + " " : "") + esc(T("proTerms")) + "</p>" +
            '<p class="pw-legal"><a href="https://www.deriverge.com/tapkasa/privacy.html" target="_blank" rel="noopener">' + esc(T("proPrivacy")) + "</a>" +
            ' · <a href="https://www.deriverge.com/tapkasa/terms.html" target="_blank" rel="noopener">' + esc(T("proTermsLink")) + "</a></p>";
     }
@@ -7687,6 +8516,8 @@
         '<div class="ob-row"><i style="background:#2158C4">' + ICON.orders + "</i><p>" + esc(T("obHow2")) + "</p></div>" +
         '<div class="ob-row"><i style="background:#127A4E"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="12" height="16" rx="2"/><rect x="16" y="8" width="6" height="12" rx="2"/></svg></i><p>' + esc(T("obHow3")) + "</p></div>" +
       "</div>" +
+      // poctivé vymezení: nejde o fiskální pokladnu (EET, eKasa, TSE…)
+      '<p class="ob-note">' + esc(T("obFiscal")) + "</p>" +
       '<div class="ob-spacer"></div>' +
       '<button class="btn-done" data-obdemo="1">' + esc(T("obDemo")) + "</button>" +
       '<button class="btn-ghost" data-obempty="1">' + esc(T("obEmpty")) + "</button>";
@@ -7848,22 +8679,64 @@
   }
 
   // ---------- žádost o hodnocení ----------
-  // Ptáme se až lidí, kterým aplikace prokazatelně slouží: po desáté
-  // uzavřené akci, a znovu až po padesáté a stopadesáté. Okno vyvolává
-  // systém (v nativním obalu přes hook z bridge.js) a sám si hlídá,
-  // aby se neukazovalo příliš často; na webu hook není a nestane se nic.
-  var RATE_AT = [10, 50, 150];
+  // Ptáme se lidí, kterým aplikace prokazatelně slouží: po druhé uzavřené
+  // akci (pak po desáté a padesáté) a po dni s aspoň 30 účty. Rušný den se
+  // jen poznamená a zeptáme se až při příští uzávěrce nebo při dalším
+  // spuštění jiný den, ne uprostřed fronty u stánku. Okno vyvolává systém
+  // (v nativním obalu přes hook z bridge.js) a sám si hlídá, aby se
+  // neukazovalo příliš často (Apple nejvýš 3× za rok); my navíc držíme
+  // odstup 60 dní. Na webu hook není a nestane se nic.
+  var RATE_AT = [2, 10, 50];
+  var RATE_BUSY = 30;
+  var RATE_GAP_MS = 60 * 86400000;
+
+  function askReviewNow(delay) {
+    state.rateAskedAt = Date.now();
+    state.ratePending = "";
+    save();
+    // chvilku po potvrzení uzávěrky, ať okno nepřekryje oznámení
+    setTimeout(function () { try { window.__kasaAskReview(); } catch (e) {} }, delay || 1600);
+  }
+
+  function reviewTooSoon() { return Date.now() - (state.rateAskedAt || 0) < RATE_GAP_MS; }
+
   function maybeAskReview() {
     if (typeof window.__kasaAskReview !== "function") { return; }
     for (var i = 0; i < RATE_AT.length; i++) {
       if (state.rateN >= RATE_AT[i] && state.rateAsked < RATE_AT[i]) {
         state.rateAsked = state.rateN;
-        save();
-        // chvilku po potvrzení uzávěrky, ať okno nepřekryje oznámení
-        setTimeout(function () { window.__kasaAskReview(); }, 1600);
+        if (reviewTooSoon()) { save(); return; }
+        askReviewNow();
         return;
       }
     }
+    if (state.ratePending && !reviewTooSoon()) { askReviewNow(); }
+  }
+
+  // Po zaplacení: kolik vlastních účtů má dnešek. Při 30. se den poznamená.
+  function noteBusyDay() {
+    if (state.mode !== "kasa" || state.ratePending || state.rateBusyDay === todayKey()) { return; }
+    var start = new Date().setHours(0, 0, 0, 0), n = 0;
+    state.sales.forEach(function (s) { if ((s.ts || 0) >= start && s.ev === state.evId) { n += 1; } });
+    if (n < RATE_BUSY) { return; }
+    state.rateBusyDay = todayKey();
+    state.ratePending = todayKey();
+  }
+
+  // Při spuštění jiný den po rušném dni, v klidu (bez otevřeného panelu).
+  function askPendingReview() {
+    if (typeof window.__kasaAskReview !== "function") { return; }
+    if (!state.ratePending || state.ratePending === todayKey() || reviewTooSoon()) { return; }
+    if (sheet || tourActive() || state.order.length) { return; }
+    askReviewNow(800);
+  }
+
+  // Ruční hodnocení z Menu: stránka aplikace v obchodě.
+  function rateUrl() {
+    var c = window.Capacitor;
+    var android = nativeApp() && typeof c.getPlatform === "function" && c.getPlatform() === "android";
+    return android ? "https://play.google.com/store/apps/details?id=com.deriverge.tapkasa"
+                   : "https://apps.apple.com/app/id6807075649?action=write-review";
   }
 
   // Android: tlačítko Zpět (mobile/.../MainActivity). Vrací true, když
@@ -7913,6 +8786,11 @@
   }
 
   function render(toTop) {
+    // žádost o kopii menu čekala, až se zavře otevřený panel
+    if (setupAskWaiting && !sheet && state.setup && !tourActive()) {
+      if (Date.now() - setupAskAt < SETUP_ASK_MS) { openSetupAsk(); return; }
+      setupAskWaiting = false;
+    }
     // role bez prodeje nesmí zůstat viset na obrazovce, kterou nemá
     var allowed = tabsFor().map(function (t) { return t[0]; });
     if (allowed.indexOf(view) < 0) { view = allowed[0]; }
@@ -7969,7 +8847,8 @@
             "[data-paircreate],[data-pairjoin],[data-pairoff],[data-resync],[data-relaytest],[data-setupimport]," +
             "[data-tourskip],[data-tourstart],[data-offlinehelp],[data-country],[data-docmail],[data-docshare],[data-docsave],[data-sellersheet],[data-archopen],[data-archdel],[data-vatmode],[data-langsheet],[data-cursheet],[data-setlang],[data-setcur],[data-paywall],[data-buy]," +
             "[data-restorebuy],[data-oblang],[data-obcur],[data-obnext],[data-obdemo],[data-obempty]," +
-            "[data-evsheet],[data-evswitch],[data-evnew],[data-evcreate],[data-evdel],[data-cvat],[data-backupfile]";
+            "[data-evsheet],[data-evswitch],[data-evnew],[data-evcreate],[data-evdel],[data-cvat],[data-backupfile]," +
+            "[data-diag],[data-shortok]";
 
   document.addEventListener("click", function (ev) {
     if (suppressClick) { suppressClick = false; return; }
@@ -8046,10 +8925,21 @@
     }
     if ((d.method || d.commit) && Date.now() - stepShownAt < 450) { return; }
     if (d.method) { sheet.method = d.method; sheet.step = d.method; render(); return; }
-    if (d.note) { sheet.received = mr(sheet.received + parseFloat(d.note)); render(); return; }
-    if (d.exact) { sheet.received = sheet.total; render(); return; }
-    if (d.zero) { sheet.received = 0; render(); return; }
-    if (d.commit) { commit(); return; }
+    if (d.note) { sheet.received = mr(sheet.received + parseFloat(d.note)); sheet.shortAsk = 0; render(); return; }
+    if (d.exact) { sheet.received = sheet.total; sheet.shortAsk = 0; render(); return; }
+    if (d.zero) { sheet.received = 0; sheet.shortAsk = 0; render(); return; }
+    // Hotově s nedoplatkem: první ťuknutí jen upozorní, uložit jde až
+    // druhým, výslovným potvrzením. Nic nenaťukáno (0) = bez počítání vrácení.
+    if (d.commit) {
+      if (sheet && sheet.step === "cash" && sheet.received > 0 && mr(sheet.received - sheet.total) < 0) {
+        sheet.shortAsk = Date.now(); render(); return;
+      }
+      commit(); return;
+    }
+    if (d.shortok) {
+      if (!sheet || !sheet.shortAsk || Date.now() - sheet.shortAsk < 450) { return; }
+      commit(); return;
+    }
 
     if (d.yes) {
       var fn = pending;
@@ -8079,7 +8969,7 @@
       var cd = T("confirmDelReceipt");
       ask(cd[0], cd[1], cd[2], function () {
         state.sales = state.sales.filter(function (s) { return s.id !== id; });
-        save(); pushDelete([id]);
+        saveNow(); pushDelete([id]);
       });
       return;
     }
@@ -8202,7 +9092,7 @@
         state.sales = [];
         state.nextNo = 1;
         state.rateN += 1;
-        save(); pushClear(state.evId);
+        saveNow(); pushClear(state.evId);
         // starší verze výdeje po uzávěrce smaže frontu celou, i objednávky
         // jiných otevřených akcí; ty mu hned pošleme znovu
         if (state.parked.length) { pushEverything(); }
@@ -8265,7 +9155,7 @@
           });
           swapInEvent({ id: rid, event: ao.event, items: ritems, sales: rsales, nextNo: rnext, createdAt: Date.now() });
         }
-        save(); pushEverything(); render();
+        saveNow(); pushEverything(); render();
         showToast(T("toastArchOpen", ao.event));
       });
       return;
@@ -8280,7 +9170,7 @@
       var dx = T("confirmArchDel");
       ask(dx[0], dx[1].split("{0}").join(ad.event), dx[2], function () {
         state.archives = state.archives.filter(function (x) { return x.id !== ad.id; });
-        save(); render();
+        saveNow(); render();
         showToast(T("toastArchDel"));
       });
       return;
@@ -8397,27 +9287,34 @@
 
     if (d.paircreate) {
       if (!isPro()) { sheet = { step: "paywall", reason: "pair" }; render(); return; }
-      var abc = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789", code = "";
-      for (var ci = 0; ci < 5; ci++) { code += abc.charAt(Math.floor(Math.random() * abc.length)); }
+      if (!canCrypt()) { showToast(T("pairNoCrypto")); return; }
+      var code = newPairCode();
       state.pair = code;
-      save(); relayOpen(); nativeLink(); render();
-      sayHello(true);
-      showToast(T("toastCode", code));
+      saveNow(); pairOpen(); render();
+      showToast(T("toastCode", showCode(code)));
       return;
     }
 
     if (d.pairjoin) {
       var fld = document.getElementById("pairCode");
-      var code2 = (fld ? fld.value : "").toUpperCase().replace(/[^A-Z0-9]/g, "");
-      if (code2.length < 3) { showToast(T("toastEnterCode")); return; }
+      var code2 = normCode(fld ? fld.value : "");
+      // Připojit jde jen ke kódu stejného tvaru, jaký aplikace vytváří.
+      // Kratší kód je ze starší verze, ta se s touhle nespojí.
+      if (!isNewCode(code2)) {
+        showToast(code2.length === CODE_LEN ? T("pairBadCheck")
+          : code2.length >= 3 && code2.length < CODE_LEN ? T("pairOldCode")
+          : T("toastEnterCode"));
+        return;
+      }
+      if (!canCrypt()) { showToast(T("pairNoCrypto")); return; }
       state.pair = code2;
-      save(); relayOpen(); nativeLink(); render();
-      sayHello(true);
-      showToast(T("toastJoining", code2));
+      saveNow(); pairOpen(); render();
+      showToast(T("toastJoining", showCode(code2)));
       return;
     }
 
     if (d.relaytest) { relayTest(); return; }
+    if (d.diag) { diagOpen = !diagOpen; render(); return; }
 
     if (d.resync) {
       pushEverything();
@@ -8435,8 +9332,8 @@
       state.pair = "";
       peers = 0;
       nativePeers = 0;
-      relayClose();
-      nativeLink();   // bez kódu se nativní hledání vypne
+      lastIn = 0; lastHiNoPro = 0;
+      pairOpen();     // bez kódu se přeposílač i nativní hledání vypne
       save(); render();
       return;
     }
@@ -8491,11 +9388,14 @@
     if (d.mode) {
       var nextMode = d.mode === "vydej" ? "vydej" : "kasa";
       if (nextMode === state.mode) { return; }   // ťuknutí na už zvolenou roli nesmí smazat účet
+      var heldN = switchRoleSales(nextMode);
       state.mode = nextMode;
       state.order = [];
       linesOpen = false;
-      save(); render();
-      showToast(state.mode === "kasa" ? T("toastModeKasa") : T("toastModeVydej"));
+      saveNow(); render();
+      showToast(state.mode === "kasa"
+        ? (heldN ? T("toastModeKasaHeld", heldN) : T("toastModeKasa"))
+        : T("toastModeVydej"));
       return;
     }
 
@@ -8553,22 +9453,27 @@
         sheet.error = T("restoreBad");
         render(); return;
       }
-      // licence a denní počítadlo zůstávají zařízení, ne záloze
+      // licence, denní počítadlo a potvrzení Pro pro párování zůstávají
+      // zařízení, ne záloze
       next.license = state.license;
+      next.pairProAt = state.pairProAt;
+      next.pairProCode = state.pairProCode;
       next.payDay = state.payDay;
       next.payN = state.payN;
       state = next;
+      archMissing = [];   // záloha nese archiv celý
       sheet = null;
       // Dřív šlo na protějšek i „clear“, a když zálohu obnovil výdej,
       // kasa přišla o všechny neuzavřené účtenky. Posíláme jen otevřené.
-      save(); afterReplace(); pushEverything(); render();
+      saveNow(); afterReplace(); pushEverything(); render();
       showToast(T("toastRestored"));
       return;
     }
   });
 
-  // ---------- podržení karty = odebrání té jedné položky z účtu ----------
-  // Obsluha se ukliká, podrží prst na kartě a řádek zmizí, bez rušení celého účtu.
+  // ---------- podržení karty = o jeden kus méně ----------
+  // Obsluha se ukliká, podrží prst na kartě a ubere se jeden kus, jak to
+  // slibuje popis i průvodce. Dřív zmizel celý řádek (3× espresso naráz).
   // HOLD_MS musí sedět s délkou přechodu u .prod.is-hold .hold v CSS.
   var HOLD_MS = 1000;
   var holdTimer = null, holdCard = null, holdX = 0, holdY = 0;
@@ -8596,19 +9501,22 @@
     card.classList.add("is-hold");
 
     holdTimer = setTimeout(function () {
-      var name = "";
-      state.order = state.order.filter(function (l) {
-        if (l.ref !== id) { return true; }
-        name = l.name;
-        return false;
-      });
+      // ubírá se z posledního řádku té položky (po změně ceny jich může být víc)
+      var at = -1;
+      for (var i = state.order.length - 1; i >= 0; i--) { if (state.order[i].ref === id) { at = i; break; } }
+      if (at < 0) { endHold(); return; }
+      var line = state.order[at], name = line.name;
+      line.qty -= 1;
+      var gone = line.qty <= 0;
+      if (gone) { state.order.splice(at, 1); }
       if (!state.order.length) { linesOpen = false; }
       suppressClick = true;   // ať uvolnění prstu položku hned nepřidá zpátky
       endHold();
       save();
       render();
-      showToast(T("toastRemoved", name));
-      say(T("toastRemoved", name));
+      var msg = gone ? T("toastRemoved", name) : T("toastRemovedOne", name);
+      showToast(msg);
+      say(msg);
     }, HOLD_MS);
   });
 
@@ -8703,8 +9611,12 @@
     } catch (e) { wakeAsked = false; }
   }
   document.addEventListener("visibilitychange", function () {
-    if (document.visibilityState === "visible" && !wakeLock) { wakeAsked = false; keepAwake(); }
+    if (document.visibilityState === "hidden") { saveNow(); return; }
+    if (!wakeLock) { wakeAsked = false; keepAwake(); }
   });
+  // Odložené uložení nesmí zůstat viset, když systém aplikaci uspí nebo zavře.
+  window.addEventListener("pagehide", function () { saveNow(); });
+  window.addEventListener("beforeunload", function () { if (saveTimer) { saveNow(); } });
 
   // ---------- boot ----------
   state = load();
@@ -8715,8 +9627,9 @@
   state.sales.forEach(function (s) { announced[s.id] = true; });
   render();
 
-  relayOpen();
-  nativeLink();
+  pairOpen();
+  // po rušném dni: o hodnocení požádat při dalším spuštění, v klidu
+  setTimeout(function () { try { askPendingReview(); } catch (e) {} }, 6000);
 
   // Stav spojení se mění i pouhým plynutím času (čerstvost poslední zprávy).
   // Otevřené menu se proto jednou za půl minuty překreslí; díky diffování
@@ -8744,8 +9657,15 @@
     if (ev.key !== KEY || !ev.newValue) { return; }
     var other = parseState(ev.newValue, true);
     if (!other || (other.savedAt || 0) <= (state.savedAt || 0)) { return; }
+    // druhá karta zapsala archiv do localStorage dřív než hlavní stav
+    poolArchives(state.archives);
+    try { poolArchiveText(localStorage.getItem(ARCH_KEY)); } catch (e) {}
+    var newFormat = Array.isArray(other.archIds);
+    var miss = attachArchives(other);
     var keepOrder = state.order, keepEv = state.evId, prevPair = state.pair;
     state = other;
+    archMissing = miss;
+    if (newFormat) { archSig = archIdList().join(","); }
     // Rozpracovaný účet patří této kartě; cizí by rozhodil otevřené placení.
     if (state.evId === keepEv) { state.order = keepOrder; }
     else if (sheet) { sheet = null; }
@@ -8754,20 +9674,41 @@
   });
 
   dbInit(function () {
-    dbSettled = true;
-    dbRead(function (rec) {
-      var backup = parseState(rec, true);   // záloha z tohoto zařízení
-      // V zařízení nic není, ale záložní kopie ano, nebo je záložní kopie
-      // novější (localStorage se přestal ukládat, když došlo místo) → obnovit.
-      if (backup && !isEmpty(backup) &&
-          (isEmpty(state) || (backup.savedAt || 0) > (state.savedAt || 0))) {
-        state = backup;
-        afterReplace();
-        render();
-        showToast(T("toastDbRestore"));
-      }
-      save();
-    });
+    // Nejdřív se všechno přečte (archiv, hlavní stav, případně pre106),
+    // teprve pak se do IndexedDB zapisuje. Do té doby flushSave do ní nesahá.
+    dbRead(function (arch) {
+      poolArchiveText(arch);
+      dbRead(function (rec) {
+        var backup = parseState(rec, true);   // záloha z tohoto zařízení
+        var backupEmpty = isEmpty(backup);
+        var backupLegacy = !!backup && !Array.isArray(backup.archIds);
+        var bMiss = [];
+        if (backup) { poolArchives(backup.archives); bMiss = attachArchives(backup); }
+        // V zařízení nic není, ale záložní kopie ano, nebo je záložní kopie
+        // novější (localStorage se přestal ukládat, když došlo místo) → obnovit.
+        if (backup && !backupEmpty &&
+            ((isEmpty(state) && !archMissing.length) || (backup.savedAt || 0) > (state.savedAt || 0))) {
+          state = backup;
+          archMissing = bMiss;
+          if (backupLegacy && typeof rec === "string") { legacyRaw = rec; }
+          afterReplace();
+          render();
+          showToast(T("toastDbRestore"));
+        }
+        var finish = function () {
+          dbSettled = true;
+          if (resolveMissing()) { render(); }
+          keepLegacy();
+          saveNow();
+        };
+        if (!archMissing.length) { finish(); return; }
+        dbRead(function (pre) {
+          var d = parseState(pre, true);
+          if (d) { poolArchives(d.archives); }
+          finish();
+        }, DB_PRE);
+      });
+    }, DB_ARCH);
   });
 })();
 </script>

@@ -14,6 +14,9 @@ vrstvou přes pět hooků. Capacitor obal je obsluhuje **beze změny webu** —
 | `window.webkit.messageHandlers.kasa.postMessage(json)` | web → nativní | `bridge.js` podstrčí objekt `kasa`, jehož `postMessage` volá `PeerLink.save({ json })` → zápis do `Documents/kasa.json` |
 | `window.__kasaPeer(json)` | nativní → web | událost pluginu `"message"` `{ json }`; `bridge.js` ji přeposílá do `window.__kasaPeer` |
 | `window.__kasaPeerCount(n)` | nativní → web | událost pluginu `"peerCount"` `{ n }`; `bridge.js` ji přeposílá do `window.__kasaPeerCount` |
+| `window.__kasaSaveArchive(json)` | web → nativní | `bridge.js` volá `PeerLink.save({ json, file: "archive" })` → `kasa-archive.json` (od 1.0.6) |
+| `window.__KASA_BOOT_ARCH__` | nativní → web, před startem stránky (iOS) | `TapkasaViewController` vloží obsah `kasa-archive.json` spolu s `__KASA_BOOT__` |
+| `window.__kasaStore.read("main" \| "archive")` | web → nativní, synchronně (Android) | rozhraní přidané v `PeerLinkPlugin.load()`, čte `kasa.json` a `kasa-archive.json` |
 | `window.__KASA_BOOT__` | nativní → web, **před startem stránky** | `TapkasaViewController.webViewConfiguration(for:)` vloží `WKUserScript` (atDocumentStart) s obsahem `Documents/kasa.json` — `bridge.js` to řešit nemůže, protože `load()` ve webu čte hodnotu synchronně při spuštění |
 
 ## Jak to do sebe zapadá
@@ -53,13 +56,26 @@ vrstvou přes pět hooků. Capacitor obal je obsluhuje **beze změny webu** —
 
 ## Android
 
-Nativní implementace `PeerLink` pro Android zatím **není** — Multipeer
-Connectivity je jen na Apple platformách (androidí obdoba by stála na
-Wi-Fi Direct / Nearby Connections). `bridge.js` s tím počítá: každé volání
-pluginu chytá výjimku „not implemented“, takže aplikace na Androidu běží
-normálně, jen bez lokálního párování — objednávky mezi zařízeními chodí
-přes volitelný relay, jako ve webové verzi. Stav se ukládá do
-localStorage/IndexedDB WebView (hook `kasa` a `__KASA_BOOT__` se neuplatní).
+Nativní `PeerLink` pro Android je v
+`android/app/src/main/java/com/deriverge/tapkasa/PeerLinkPlugin.java`: Google
+Nearby Connections (P2P_CLUSTER), Android 13 a novější, stejné JS rozhraní
+jako na iOS (start/stop/send/save/status, události message/peerCount/state).
+Na starším Androidu `status()` hlásí `supported: false` a párování jde přes
+internetový přeposílač.
+
+Ukládání: `save({ json })` zapisuje `kasa.json`, `save({ json, file: "archive" })`
+`kasa-archive.json`, obojí přes dočasný soubor a přejmenování. `__KASA_BOOT__`
+na Androidu není; místo něj plugin při načtení přidá do webview rozhraní
+`window.__kasaStore` a stránka si při startu synchronně přečte
+`__kasaStore.read("main")` a `__kasaStore.read("archive")`.
+
+## Párování od 1.0.6
+
+Kód má 8 znaků s kontrolním znakem. Stránka z něj odvodí (PBKDF2) klíč
+AES-GCM a jméno místnosti `T2…`; `__kasaPeerLink(room)` tedy nativní vrstvě
+předává odvozené jméno, ne kód, a zprávy přes `send` jsou zašifrované obálky
+`{e:2,n,c}`. Nativní kód je jen přenáší, nic na něm měnit nebylo potřeba.
+Starší kódy (5 znaků nebo vlastní) jdou dál bez šifrování pod kódem samotným.
 
 ## Fakturace (`billing.js`)
 
