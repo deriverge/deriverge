@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
-<meta name="description" content="Tapkasa, pokladna do kapsy pro stánky, trhy a festivaly. Prodej na tři ťuknutí, fronta objednávek, tržby a DPH doklady. Funguje i bez internetu.">
+<meta name="description" content="Tapkasa, pokladna do kapsy pro stánky, trhy a festivaly. Prodej na tři ťuknutí, fronta objednávek, tržby a souhrn tržeb s rozpisem DPH. Funguje i bez internetu.">
 <link rel="canonical" href="https://deriverge.com/tapkasa/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Tapkasa, pokladna do kapsy">
@@ -547,6 +547,7 @@
   .ob-row i{flex:0 0 auto;width:38px;height:38px;border-radius:11px;display:grid;place-items:center;color:#fff}
   .ob-row i svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
   .ob-row p{margin:0;font-size:14px;line-height:1.45;color:var(--ink-2);padding-top:8px}
+  .ob-note{margin:18px 0 0;font-size:13px;line-height:1.45;color:var(--ink-3)}
   .ob-spacer{flex:1;min-height:22px}
   .ob .btn-done{margin-top:10px}
   .ob .btn-ghost{margin-top:8px}
@@ -849,7 +850,7 @@
     receiptsHead: "Účtenky",
     delReceiptAria: "Smazat účtenku",
     sellerHead: "Údaje obchodníka",
-    sellerHint: "Vyplňte, co vyžaduje vaše země. Prázdná pole se na dokladu neobjeví.",
+    sellerHint: "Vyplňte, co má být na souhrnu tržeb. Prázdná pole se na něm neobjeví.",
     sellerSet: "Údaje obchodníka · vyplněno",
     sellerEmpty: "Údaje obchodníka · doplnit",
     sfName: "Název firmy nebo jméno",
@@ -862,7 +863,7 @@
     sfEmail: "E-mail",
     sfPhone: "Telefon",
     sfNote: "Další údaje",
-    sfNotePh: "Cokoli navíc, co má být na dokladu",
+    sfNotePh: "Cokoli navíc, co má být na souhrnu",
     closedHead: "Uzavřené akce",
     archReopen: "Vrátit do kasy",
     archReopenAria: "Vrátit akci {0} zpět do kasy",
@@ -877,16 +878,16 @@
     closeEvent: "Uzavřít akci",
     emptyStats: "Zatím nic neprodáno.<br>Jakmile uložíte první účet, objeví se tu statistika.",
     tourS1: "Ťukněte na kartu produktu, položka skočí na účet.",
-    tourS1b: "Teď kartu podržte, dokud se nenaplní proužek, položka z účtu zmizí.",
+    tourS1b: "Teď kartu podržte, dokud se nenaplní proužek: ubere se jeden kus.",
     tourS1c: "A ťukněte na kartu znovu, ať máme co účtovat.",
     tourS2: "Ťukněte na Zaplatit.",
     tourS3: "Zvolte Hotově.",
     tourS4: "Ťukněte na Přesně a potom na Hotovo.",
     tourS5: "Otevřete Objednávky, zaplacený účet čeká ve frontě.",
     tourS6: "Otevřete lístek a ťukněte na Vydáno.",
-    tourS7: "V Přehledu vidíte tržbu; odtud se dělá i daňový doklad.",
+    tourS7: "V Přehledu vidíte tržbu; odtud se dělá i souhrn tržeb do PDF.",
     tourS8: "Otevřete Menu.",
-    tourS9: "Tady vyplňte údaje obchodníka, tisknou se na doklad.",
+    tourS9: "Tady vyplňte údaje prodejce, tisknou se na souhrn tržeb.",
     tourSkip: "Přeskočit",
     tourNeedsItems: "Průvodce vás provede prodejem, nejdřív ale přidejte do menu aspoň jednu položku.",
     tourDoneToast: "Hotovo! Umíte všechno podstatné.",
@@ -1075,7 +1076,7 @@
     obLang: "Jazyk",
     obCurrency: "Měna",
     obNext: "Pokračovat",
-    obHow1: "Klepnutím na barevnou kartu přidáte položku na účet. Podržením ji zase smažete.",
+    obHow1: "Klepnutím na barevnou kartu přidáte položku na účet. Podržením jeden kus uberete.",
     obHow2: "Zaplacené účty se řadí do fronty s odškrtáváním. Nic se neztratí.",
     obHow3: "Druhé zařízení může frontu přijímat a odbavovat. To už je Tapkasa Pro.",
     obDemo: "Začít s ukázkovým menu",
@@ -1122,17 +1123,17 @@
     langHead: "Jazyk",
     currencyHead: "Měna",
     currencyHint: "Ovlivní jen zobrazování a rychlé bankovky. Uložené ceny se nepřepočítávají.",
-    docBtn: "Daňový doklad",
-    docHead: "Souhrnný doklad",
-    docHint: "Sestaví souhrnný prodejní doklad za zvolené období. Účtenky se počítají podle data prodeje.",
+    docBtn: "Souhrn tržeb (PDF)",
+    docHead: "Souhrn tržeb",
+    docHint: "Sestaví souhrn tržeb za zvolené období jako PDF, třeba pro účetní. Není to daňový doklad ani účtenka pro zákazníka. Účtenky se počítají podle data prodeje.",
     docFrom: "Od",
     docTo: "Do",
     bizHead: "Údaje prodejce",
-    bizHint: "Vyplňte jednou a budou se předvyplňovat na každý doklad. Použijte údaje, které vyžaduje vaše země, jeden na řádek.",
+    bizHint: "Vyplňte jednou a budou se předvyplňovat na každý souhrn tržeb. Použijte údaje, které chcete mít na souhrnu, jeden na řádek.",
     vatHead: "DPH",
     vatOn: "Jsem plátce DPH",
     vatOff: "Nejsem plátce DPH",
-    vatHint: "Když je zapnuto, můžete u každé položky zadat sazbu v procentech. Ceny zadáváte včetně DPH, na dokladu se rozpad na základ a daň dopočítá sám.",
+    vatHint: "Když je zapnuto, můžete u každé položky zadat sazbu v procentech. Ceny zadáváte včetně DPH, souhrn tržeb rozpad na základ a daň dopočítá sám.",
     vatAria: "Sazba DPH v procentech",
     docVatHead: "Rozpis DPH",
     docVatBase: "Základ",
@@ -1141,11 +1142,11 @@
     docVatNone: "bez DPH",
     docVatTotalBase: "Základ celkem:",
     docVatTotalTax: "DPH celkem:",
-    docMake: "Sestavit doklad",
-    docTitle: "SOUHRNNÝ PRODEJNÍ DOKLAD",
-    docNo: "Číslo dokladu:",
+    docMake: "Sestavit souhrn",
+    docTitle: "SOUHRN TRŽEB",
+    docNo: "Číslo souhrnu:",
     docPeriod: "Období:",
-    docIssued: "Vystaveno:",
+    docIssued: "Vytvořeno:",
     docEvents: "Zahrnuté akce:",
     docItemsHead: "Prodané položky",
     docReceipts: "Počet účtů:",
@@ -1159,13 +1160,13 @@
     docColUnit: "Cena",
     docColSum: "Celkem",
     docPageOf: "Strana {0} z {1}",
-    docFile: "doklad",
-    docMailBody: "V příloze posílám souhrnný prodejní doklad.",
-    pdfFail: "Doklad se nepodařilo vytvořit.",
-    pdfSaved: "Doklad uložen jako PDF.",
-    pdfSavedMail: "Doklad uložen jako PDF, přiložte ho ke zprávě.",
+    docFile: "souhrn-trzeb",
+    docMailBody: "V příloze posílám souhrn tržeb.",
+    pdfFail: "Souhrn se nepodařilo vytvořit.",
+    pdfSaved: "Souhrn uložen jako PDF.",
+    pdfSavedMail: "Souhrn uložen jako PDF, přiložte ho ke zprávě.",
     docEmpty: "Ve zvoleném období nejsou žádné prodeje.",
-    docFooter: "Vystaveno aplikací Tapkasa.",
+    docFooter: "Souhrn tržeb vytvořený aplikací Tapkasa. Nejde o daňový doklad.",
     supportRow: "Napsat podpoře",
     toastModeKasaHeld: "Zařízení je teď kasa. Objednávky z druhé kasy ({0}) se do jeho tržby nepočítají.",
     pairNowActive: "Propojení je aktivní.",
@@ -1191,7 +1192,12 @@
     proTrialThenY: "{0} zdarma, pak {1} ročně",
     proTrialTerms: "Zkušební doba je zdarma. Po jejím skončení se předplatné automaticky obnoví za uvedenou cenu, pokud ho nejméně 24 hodin před koncem nezrušíte.",
     billSetupFail: "Nákup se nepodařilo připravit.",
-    billModuleMissing: "Nákupní modul se nenačetl. Zkuste aplikaci zavřít a znovu otevřít."
+    billModuleMissing: "Nákupní modul se nenačetl. Zkuste aplikaci zavřít a znovu otevřít.",
+    obFiscal: "Tapkasa není fiskální pokladna (EET, eKasa a podobně) a nezpracovává platby.",
+    toastRemovedOne: "{0}: o kus méně",
+    shortAsk: "Uložit i s nedoplatkem {0}",
+    shortAskHint: "Zákazník dal méně, než je částka účtu. Opravdu uložit?",
+    rateRow: "Ohodnotit Tapkasu"
   };
 
   I18N.en = {
@@ -1234,7 +1240,7 @@
     receiptsHead: "Receipts",
     delReceiptAria: "Delete receipt",
     sellerHead: "Seller details",
-    sellerHint: "Fill in whatever your country requires. Empty fields never appear on the document.",
+    sellerHint: "Fill in what should appear on the sales summary. Empty fields never appear on it.",
     sellerSet: "Seller details · filled in",
     sellerEmpty: "Seller details · add them",
     sfName: "Business or personal name",
@@ -1247,7 +1253,7 @@
     sfEmail: "E-mail",
     sfPhone: "Phone",
     sfNote: "Anything else",
-    sfNotePh: "Anything else that belongs on the document",
+    sfNotePh: "Anything else that belongs on the summary",
     closedHead: "Closed events",
     archReopen: "Reopen in the till",
     archReopenAria: "Reopen event {0} in the till",
@@ -1262,16 +1268,16 @@
     closeEvent: "Close event",
     emptyStats: "Nothing sold yet.<br>Save your first sale and stats appear here.",
     tourS1: "Tap a product card, the item jumps onto the bill.",
-    tourS1b: "Now press and hold the card until the bar fills, the item leaves the bill.",
+    tourS1b: "Now press and hold the card until the bar fills: one item comes off the bill.",
     tourS1c: "Tap the card again so there is something to charge.",
     tourS2: "Tap Charge.",
     tourS3: "Choose Cash.",
     tourS4: "Tap Exact, then Done.",
     tourS5: "Open Orders, the paid bill is waiting in the queue.",
     tourS6: "Open the ticket and tap Served.",
-    tourS7: "Stats shows your revenue; tax documents live here too.",
+    tourS7: "Stats shows your revenue; the PDF sales summary lives here too.",
     tourS8: "Open Menu.",
-    tourS9: "Fill in your seller details here, they print on documents.",
+    tourS9: "Fill in your seller details here, they print on the sales summary.",
     tourSkip: "Skip",
     tourNeedsItems: "The tour walks you through a sale, so add at least one item to the menu first.",
     tourDoneToast: "Done! You know everything that matters.",
@@ -1458,7 +1464,7 @@
     obLang: "Language",
     obCurrency: "Currency",
     obNext: "Continue",
-    obHow1: "Tap a colour card and the item is on the order. Hold it to remove it again.",
+    obHow1: "Tap a colour card and the item is on the order. Hold it to take one off again.",
     obHow2: "Paid orders line up in a queue with checklists. Nothing gets lost.",
     obHow3: "A second device can receive and serve the queue. That’s Tapkasa Pro.",
     obDemo: "Start with a sample menu",
@@ -1507,17 +1513,17 @@
     currencyHint: "Affects display and quick cash buttons only. Stored prices are not converted.",
     colCustom: "Custom colour",
     colApply: "Use colour",
-    docBtn: "Tax document",
-    docHead: "Summary document",
-    docHint: "Builds a summary sales document for the chosen period. Receipts count by their sale date.",
+    docBtn: "Sales summary (PDF)",
+    docHead: "Sales summary",
+    docHint: "Builds a sales summary for the chosen period as a PDF, for example for your accountant. It is not a tax invoice or a customer receipt. Receipts count by their sale date.",
     docFrom: "From",
     docTo: "To",
     bizHead: "Seller details",
-    bizHint: "Fill this in once and it will be pre-filled on every document. Use whatever your country requires, one item per line.",
+    bizHint: "Fill this in once and it will be pre-filled on every sales summary. Use whatever you want on the summary, one item per line.",
     vatHead: "VAT",
     vatOn: "I am VAT registered",
     vatOff: "Not VAT registered",
-    vatHint: "When on, you can set a rate in percent for each item. You enter prices including VAT; the document works out the net amount and the tax on its own.",
+    vatHint: "When on, you can set a rate in percent for each item. You enter prices including VAT; the sales summary works out the net amount and the tax on its own.",
     vatAria: "VAT rate in percent",
     docVatHead: "VAT breakdown",
     docVatBase: "Net",
@@ -1526,11 +1532,11 @@
     docVatNone: "no VAT",
     docVatTotalBase: "Net total:",
     docVatTotalTax: "VAT total:",
-    docMake: "Build document",
-    docTitle: "SUMMARY SALES DOCUMENT",
-    docNo: "Document no.:",
+    docMake: "Build summary",
+    docTitle: "SALES SUMMARY",
+    docNo: "Summary no.:",
     docPeriod: "Period:",
-    docIssued: "Issued:",
+    docIssued: "Created:",
     docEvents: "Included events:",
     docItemsHead: "Items sold",
     docReceipts: "Receipts:",
@@ -1544,13 +1550,13 @@
     docColUnit: "Price",
     docColSum: "Total",
     docPageOf: "Page {0} of {1}",
-    docFile: "document",
-    docMailBody: "Please find the summary sales document attached.",
-    pdfFail: "The document could not be created.",
-    pdfSaved: "Document saved as PDF.",
-    pdfSavedMail: "Document saved as PDF, attach it to your message.",
+    docFile: "sales-summary",
+    docMailBody: "Please find the sales summary attached.",
+    pdfFail: "The summary could not be created.",
+    pdfSaved: "Summary saved as PDF.",
+    pdfSavedMail: "Summary saved as PDF, attach it to your message.",
     docEmpty: "No sales in the chosen period.",
-    docFooter: "Issued with the Tapkasa app.",
+    docFooter: "Sales summary created with the Tapkasa app. Not a tax invoice.",
     supportRow: "Contact support",
     toastModeKasaHeld: "This device is now the till. Orders from the other till ({0}) are not counted in its takings.",
     pairNowActive: "The devices are now linked.",
@@ -1576,7 +1582,12 @@
     proTrialThenY: "{0} free, then {1} per year",
     proTrialTerms: "The trial is free. When it ends, the subscription renews automatically at the price shown unless you cancel at least 24 hours before the trial ends.",
     billSetupFail: "The purchase could not be prepared.",
-    billModuleMissing: "The purchase module did not load. Try closing and reopening the app."
+    billModuleMissing: "The purchase module did not load. Try closing and reopening the app.",
+    obFiscal: "Tapkasa is not a certified fiscal cash register and does not process payments.",
+    toastRemovedOne: "{0}: one less",
+    shortAsk: "Save with {0} still owed",
+    shortAskHint: "The customer paid less than the total. Save anyway?",
+    rateRow: "Rate Tapkasa"
   };
 
   // ==== strojově vkládané překlady (gen-i18n.cjs) ====
@@ -1620,7 +1631,7 @@
     receiptsHead: "Bločky",
     delReceiptAria: "Zmazať bloček",
     sellerHead: "Údaje predajcu",
-    sellerHint: "Vyplňte, čo vyžaduje vaša krajina. Prázdne polia sa na doklade neobjavia.",
+    sellerHint: "Vyplňte, čo má byť na súhrne tržieb. Prázdne polia sa na ňom neobjavia.",
     sellerSet: "Údaje predajcu · vyplnené",
     sellerEmpty: "Údaje predajcu · doplniť",
     sfName: "Názov firmy alebo meno",
@@ -1633,7 +1644,7 @@
     sfEmail: "E-mail",
     sfPhone: "Telefón",
     sfNote: "Ďalšie údaje",
-    sfNotePh: "Čokoľvek navyše, čo má byť na doklade",
+    sfNotePh: "Čokoľvek navyše, čo má byť na súhrne",
     closedHead: "Uzavreté akcie",
     archReopen: "Vrátiť do kasy",
     archReopenAria: "Vrátiť akciu {0} späť do kasy",
@@ -1648,16 +1659,16 @@
     closeEvent: "Uzavrieť akciu",
     emptyStats: "Zatiaľ sa nič nepredalo.<br>Len čo uložíte prvý účet, objaví sa tu štatistika.",
     tourS1: "Ťuknite na kartu produktu, položka skočí na účet.",
-    tourS1b: "Teraz kartu podržte, kým sa nenaplní prúžok, položka z účtu zmizne.",
+    tourS1b: "Teraz kartu podržte, kým sa nenaplní prúžok: uberie sa jeden kus.",
     tourS1c: "A ťuknite na kartu znova, nech máme čo účtovať.",
     tourS2: "Ťuknite na Zaplatiť.",
     tourS3: "Zvoľte Hotovosť.",
     tourS4: "Ťuknite na Presne a potom na Hotovo.",
     tourS5: "Otvorte Objednávky, zaplatený účet čaká vo fronte.",
     tourS6: "Otvorte lístok a ťuknite na Vydané.",
-    tourS7: "V Prehľade vidíte tržbu; odtiaľ sa robí aj daňový doklad.",
+    tourS7: "V Prehľade vidíte tržbu; odtiaľ sa robí aj súhrn tržieb do PDF.",
     tourS8: "Otvorte Menu.",
-    tourS9: "Tu vyplňte údaje predajcu, tlačia sa na doklad.",
+    tourS9: "Tu vyplňte údaje predajcu, tlačia sa na súhrn tržieb.",
     tourSkip: "Preskočiť",
     tourNeedsItems: "Sprievodca vás prevedie predajom, najskôr však pridajte do menu aspoň jednu položku.",
     tourDoneToast: "Hotovo! Ovládate všetko podstatné.",
@@ -1846,7 +1857,7 @@
     obLang: "Jazyk",
     obCurrency: "Mena",
     obNext: "Pokračovať",
-    obHow1: "Ťuknite na farebnú kartu a položka je na účte. Podržaním ju zasa zmažete.",
+    obHow1: "Ťuknite na farebnú kartu a položka je na účte. Podržaním uberiete jeden kus.",
     obHow2: "Zaplatené účty sa zaradia do radu s odškrtávaním, nič sa nestratí.",
     obHow3: "Druhé zariadenie môže rad prijímať a vybavovať. To už je Tapkasa Pro.",
     obDemo: "Začať s ukážkovým menu",
@@ -1893,17 +1904,17 @@
     langHead: "Jazyk",
     currencyHead: "Mena",
     currencyHint: "Ovplyvní len zobrazovanie a rýchle bankovky. Uložené ceny sa neprepočítavajú.",
-    docBtn: "Daňový doklad",
-    docHead: "Súhrnný doklad",
-    docHint: "Zostaví súhrnný predajný doklad za zvolené obdobie. Účtenky sa počítajú podľa dátumu predaja.",
+    docBtn: "Súhrn tržieb (PDF)",
+    docHead: "Súhrn tržieb",
+    docHint: "Zostaví súhrn tržieb za zvolené obdobie ako PDF, napríklad pre účtovníka. Nie je to daňový doklad ani pokladničný doklad pre zákazníka. Účtenky sa počítajú podľa dátumu predaja.",
     docFrom: "Od",
     docTo: "Do",
     bizHead: "Údaje predajcu",
-    bizHint: "Vyplňte raz a budú sa predvypĺňať na každom doklade. Použite údaje, ktoré vyžaduje vaša krajina, jeden na riadok.",
+    bizHint: "Vyplňte raz a budú sa predvypĺňať na každom súhrne tržieb. Použite údaje, ktoré chcete mať na súhrne, jeden na riadok.",
     vatHead: "DPH",
     vatOn: "Som platca DPH",
     vatOff: "Nie som platca DPH",
-    vatHint: "Keď je zapnuté, môžete pri každej položke zadať sadzbu v percentách. Ceny zadávate vrátane DPH, na doklade sa rozpad na základ a daň dopočíta sám.",
+    vatHint: "Keď je zapnuté, môžete pri každej položke zadať sadzbu v percentách. Ceny zadávate vrátane DPH, súhrn tržieb rozpad na základ a daň dopočíta sám.",
     vatAria: "Sadzba DPH v percentách",
     docVatHead: "Rozpis DPH",
     docVatBase: "Základ",
@@ -1912,11 +1923,11 @@
     docVatNone: "bez DPH",
     docVatTotalBase: "Základ spolu:",
     docVatTotalTax: "DPH spolu:",
-    docMake: "Zostaviť doklad",
-    docTitle: "SÚHRNNÝ PREDAJNÝ DOKLAD",
-    docNo: "Číslo dokladu:",
+    docMake: "Zostaviť súhrn",
+    docTitle: "SÚHRN TRŽIEB",
+    docNo: "Číslo súhrnu:",
     docPeriod: "Obdobie:",
-    docIssued: "Vystavené:",
+    docIssued: "Vytvorené:",
     docEvents: "Zahrnuté akcie:",
     docItemsHead: "Predané položky",
     docReceipts: "Počet bločkov:",
@@ -1930,13 +1941,13 @@
     docColUnit: "Cena",
     docColSum: "Spolu",
     docPageOf: "Strana {0} z {1}",
-    docFile: "doklad",
-    docMailBody: "V prílohe posielam súhrnný predajný doklad.",
-    pdfFail: "Doklad sa nepodarilo vytvoriť.",
-    pdfSaved: "Doklad uložený ako PDF.",
-    pdfSavedMail: "Doklad uložený ako PDF, priložte ho k správe.",
+    docFile: "suhrn-trzieb",
+    docMailBody: "V prílohe posielam súhrn tržieb.",
+    pdfFail: "Súhrn sa nepodarilo vytvoriť.",
+    pdfSaved: "Súhrn uložený ako PDF.",
+    pdfSavedMail: "Súhrn uložený ako PDF, priložte ho k správe.",
     docEmpty: "Vo zvolenom období nie sú žiadne predaje.",
-    docFooter: "Vystavené aplikáciou Tapkasa.",
+    docFooter: "Súhrn tržieb vytvorený aplikáciou Tapkasa. Nejde o daňový doklad.",
     supportRow: "Napísať podpore",
     toastModeKasaHeld: "Zariadenie je teraz kasa. Objednávky z druhej kasy ({0}) sa do jeho tržby nepočítajú.",
     pairNowActive: "Prepojenie je aktívne.",
@@ -1962,7 +1973,12 @@
     proTrialThenY: "{0} zadarmo, potom {1} ročne",
     proTrialTerms: "Skúšobná doba je zadarmo. Po jej skončení sa predplatné automaticky obnoví za uvedenú cenu, ak ho najmenej 24 hodín pred koncom nezrušíte.",
     billSetupFail: "Nákup sa nepodarilo pripraviť.",
-    billModuleMissing: "Nákupný modul sa nenačítal. Skúste aplikáciu zavrieť a znova otvoriť."
+    billModuleMissing: "Nákupný modul sa nenačítal. Skúste aplikáciu zavrieť a znova otvoriť.",
+    obFiscal: "Tapkasa nie je registračná pokladnica (eKasa a podobne) a nespracúva platby.",
+    toastRemovedOne: "{0}: o kus menej",
+    shortAsk: "Uložiť aj s nedoplatkom {0}",
+    shortAskHint: "Zákazník dal menej, než je suma účtu. Naozaj uložiť?",
+    rateRow: "Ohodnotiť Tapkasu"
   };
 
   I18N.de = {
@@ -2005,7 +2021,7 @@
     receiptsHead: "Belege",
     delReceiptAria: "Beleg löschen",
     sellerHead: "Angaben zum Verkäufer",
-    sellerHint: "Tragen Sie ein, was Ihr Land verlangt. Leere Felder erscheinen nicht auf dem Beleg.",
+    sellerHint: "Tragen Sie ein, was auf dem Umsatzbericht stehen soll. Leere Felder erscheinen nicht.",
     sellerSet: "Angaben zum Verkäufer · ausgefüllt",
     sellerEmpty: "Angaben zum Verkäufer · ergänzen",
     sfName: "Firmen- oder Personenname",
@@ -2018,7 +2034,7 @@
     sfEmail: "E-Mail",
     sfPhone: "Telefon",
     sfNote: "Weitere Angaben",
-    sfNotePh: "Alles Weitere, was auf den Beleg gehört",
+    sfNotePh: "Alles Weitere, was auf den Bericht gehört",
     closedHead: "Abgeschlossene Events",
     archReopen: "Zurück in die Kasse",
     archReopenAria: "Event {0} zurück in die Kasse holen",
@@ -2033,16 +2049,16 @@
     closeEvent: "Event abschließen",
     emptyStats: "Noch nichts verkauft.<br>Sobald Sie den ersten Verkauf speichern, taucht hier die Statistik auf.",
     tourS1: "Tippen Sie auf eine Produktkarte, der Artikel springt auf den Bon.",
-    tourS1b: "Halten Sie die Karte nun gedrückt, bis der Balken voll ist, der Artikel verschwindet vom Bon.",
+    tourS1b: "Halten Sie die Karte nun gedrückt, bis der Balken voll ist: ein Artikel verschwindet vom Bon.",
     tourS1c: "Tippen Sie die Karte erneut an, damit es etwas zu kassieren gibt.",
     tourS2: "Tippen Sie auf Kassieren.",
     tourS3: "Wählen Sie Bar.",
     tourS4: "Tippen Sie auf Passend, dann auf Fertig.",
     tourS5: "Öffnen Sie Bestellungen, der bezahlte Bon wartet in der Reihe.",
     tourS6: "Öffnen Sie den Bon und tippen Sie auf Ausgegeben.",
-    tourS7: "Die Übersicht zeigt den Umsatz; hier entsteht auch der Beleg.",
+    tourS7: "Die Übersicht zeigt den Umsatz; hier entsteht auch der Umsatzbericht als PDF.",
     tourS8: "Öffnen Sie das Menü.",
-    tourS9: "Tragen Sie hier die Verkäuferdaten ein, sie stehen auf dem Beleg.",
+    tourS9: "Tragen Sie hier die Verkäuferdaten ein, sie stehen auf dem Umsatzbericht.",
     tourSkip: "Überspringen",
     tourNeedsItems: "Die Tour führt Sie durch einen Verkauf, fügen Sie also zuerst mindestens einen Artikel zum Menü hinzu.",
     tourDoneToast: "Fertig! Sie können alles Wichtige.",
@@ -2231,7 +2247,7 @@
     obLang: "Sprache",
     obCurrency: "Währung",
     obNext: "Weiter",
-    obHow1: "Tippen Sie auf eine farbige Kachel und der Artikel ist auf der Bestellung. Gedrückt halten löscht ihn wieder.",
+    obHow1: "Tippen Sie auf eine farbige Kachel und der Artikel ist auf der Bestellung. Gedrückt halten nimmt einen wieder weg.",
     obHow2: "Bezahlte Bestellungen reihen sich in eine Warteschlange zum Abhaken ein, nichts geht verloren.",
     obHow3: "Ein zweites Gerät kann die Warteschlange empfangen und abarbeiten. Das ist dann Tapkasa Pro.",
     obDemo: "Mit Beispielmenü starten",
@@ -2278,17 +2294,17 @@
     langHead: "Sprache",
     currencyHead: "Währung",
     currencyHint: "Betrifft nur die Anzeige und die Schnelltasten für Scheine. Gespeicherte Preise werden nicht umgerechnet.",
-    docBtn: "Steuerbeleg",
-    docHead: "Sammelbeleg",
-    docHint: "Erstellt einen zusammenfassenden Verkaufsbeleg für den gewählten Zeitraum. Belege zählen nach ihrem Verkaufsdatum.",
+    docBtn: "Umsatzbericht (PDF)",
+    docHead: "Umsatzbericht",
+    docHint: "Erstellt einen Umsatzbericht für den gewählten Zeitraum als PDF, etwa für die Buchhaltung. Er ist kein Steuerbeleg und kein Kassenbon für Kunden. Belege zählen nach ihrem Verkaufsdatum.",
     docFrom: "Von",
     docTo: "Bis",
     bizHead: "Angaben zum Verkäufer",
-    bizHint: "Einmal ausfüllen, danach werden sie auf jedem Beleg vorausgefüllt. Verwenden Sie die in Ihrem Land verlangten Angaben, eine pro Zeile.",
+    bizHint: "Einmal ausfüllen, danach werden sie auf jedem Umsatzbericht vorausgefüllt. Verwenden Sie die gewünschten Angaben, eine pro Zeile.",
     vatHead: "Umsatzsteuer",
     vatOn: "Ich bin umsatzsteuerpflichtig",
     vatOff: "Nicht umsatzsteuerpflichtig",
-    vatHint: "Wenn aktiviert, können Sie je Artikel einen Satz in Prozent angeben. Preise geben Sie inklusive Steuer ein, der Beleg rechnet Netto und Steuer selbst aus.",
+    vatHint: "Wenn aktiviert, können Sie je Artikel einen Satz in Prozent angeben. Preise geben Sie inklusive Steuer ein, der Umsatzbericht rechnet Netto und Steuer selbst aus.",
     vatAria: "Umsatzsteuersatz in Prozent",
     docVatHead: "Umsatzsteuer-Aufstellung",
     docVatBase: "Netto",
@@ -2297,11 +2313,11 @@
     docVatNone: "ohne USt",
     docVatTotalBase: "Netto gesamt:",
     docVatTotalTax: "USt gesamt:",
-    docMake: "Beleg erstellen",
-    docTitle: "ZUSAMMENFASSENDER VERKAUFSBELEG",
-    docNo: "Belegnummer:",
+    docMake: "Bericht erstellen",
+    docTitle: "UMSATZBERICHT",
+    docNo: "Berichtsnummer:",
     docPeriod: "Zeitraum:",
-    docIssued: "Ausgestellt:",
+    docIssued: "Erstellt:",
     docEvents: "Enthaltene Events:",
     docItemsHead: "Verkaufte Artikel",
     docReceipts: "Belege:",
@@ -2315,13 +2331,13 @@
     docColUnit: "Preis",
     docColSum: "Summe",
     docPageOf: "Seite {0} von {1}",
-    docFile: "beleg",
-    docMailBody: "Anbei der zusammenfassende Verkaufsbeleg.",
-    pdfFail: "Der Beleg konnte nicht erstellt werden.",
-    pdfSaved: "Beleg als PDF gespeichert.",
-    pdfSavedMail: "Beleg als PDF gespeichert, hängen Sie ihn an die Nachricht an.",
+    docFile: "umsatzbericht",
+    docMailBody: "Anbei der Umsatzbericht.",
+    pdfFail: "Der Bericht konnte nicht erstellt werden.",
+    pdfSaved: "Bericht als PDF gespeichert.",
+    pdfSavedMail: "Bericht als PDF gespeichert, hängen Sie ihn an die Nachricht an.",
     docEmpty: "Im gewählten Zeitraum gibt es keine Verkäufe.",
-    docFooter: "Erstellt mit der Tapkasa App.",
+    docFooter: "Umsatzbericht, erstellt mit der Tapkasa App. Kein Steuerbeleg.",
     supportRow: "Support kontaktieren",
     toastModeKasaHeld: "Dieses Gerät ist jetzt die Kasse. Bestellungen der anderen Kasse ({0}) zählen nicht zu seinem Umsatz.",
     pairNowActive: "Die Geräte sind jetzt verbunden.",
@@ -2347,7 +2363,12 @@
     proTrialThenY: "{0} gratis, danach {1} pro Jahr",
     proTrialTerms: "Der Testzeitraum ist kostenlos. Danach verlängert sich das Abo automatisch zum angezeigten Preis, wenn Sie es nicht mindestens 24 Stunden vor Ablauf kündigen.",
     billSetupFail: "Der Kauf konnte nicht vorbereitet werden.",
-    billModuleMissing: "Das Kaufmodul wurde nicht geladen. Bitte die App schließen und neu öffnen."
+    billModuleMissing: "Das Kaufmodul wurde nicht geladen. Bitte die App schließen und neu öffnen.",
+    obFiscal: "Tapkasa ist keine zertifizierte Registrierkasse (TSE, RKSV und Ähnliches) und wickelt keine Zahlungen ab.",
+    toastRemovedOne: "{0}: eins weniger",
+    shortAsk: "Trotz {0} Fehlbetrag speichern",
+    shortAskHint: "Der Kunde hat weniger als den Betrag gezahlt. Trotzdem speichern?",
+    rateRow: "Tapkasa bewerten"
   };
 
   I18N.fr = {
@@ -2390,7 +2411,7 @@
     receiptsHead: "Tickets",
     delReceiptAria: "Supprimer le ticket",
     sellerHead: "Coordonnées du vendeur",
-    sellerHint: "Renseignez ce que votre pays exige. Les champs vides n'apparaissent pas sur le document.",
+    sellerHint: "Renseignez ce qui doit figurer sur le récapitulatif. Les champs vides n'y apparaissent pas.",
     sellerSet: "Coordonnées du vendeur · renseignées",
     sellerEmpty: "Coordonnées du vendeur · à compléter",
     sfName: "Raison sociale ou nom",
@@ -2403,7 +2424,7 @@
     sfEmail: "E-mail",
     sfPhone: "Téléphone",
     sfNote: "Autres mentions",
-    sfNotePh: "Tout ce qui doit encore figurer sur le document",
+    sfNotePh: "Tout ce qui doit encore figurer sur le récapitulatif",
     closedHead: "Événements clôturés",
     archReopen: "Remettre en caisse",
     archReopenAria: "Remettre l'événement {0} en caisse",
@@ -2418,16 +2439,16 @@
     closeEvent: "Clôturer l’événement",
     emptyStats: "Rien de vendu pour l’instant.<br>Encaissez une première vente et les statistiques apparaîtront ici.",
     tourS1: "Touchez une carte produit, l'article saute sur l'addition.",
-    tourS1b: "Maintenant, maintenez la carte jusqu'à ce que la barre se remplisse, l'article quitte l'addition.",
+    tourS1b: "Maintenant, maintenez la carte jusqu'à ce que la barre se remplisse : un article quitte l'addition.",
     tourS1c: "Touchez à nouveau la carte pour avoir quelque chose à encaisser.",
     tourS2: "Touchez Encaisser.",
     tourS3: "Choisissez Espèces.",
     tourS4: "Touchez Appoint, puis Terminé.",
     tourS5: "Ouvrez Commandes, l'addition payée attend dans la file.",
     tourS6: "Ouvrez le ticket et touchez Servie.",
-    tourS7: "Le Bilan montre la recette ; le document fiscal se fait ici.",
+    tourS7: "Le Bilan montre la recette ; le récapitulatif des ventes en PDF se fait ici.",
     tourS8: "Ouvrez le Menu.",
-    tourS9: "Renseignez ici les coordonnées du vendeur, elles figurent sur le document.",
+    tourS9: "Renseignez ici les coordonnées du vendeur, elles figurent sur le récapitulatif.",
     tourSkip: "Passer",
     tourNeedsItems: "Le guide vous accompagne pour une vente, ajoutez donc d’abord au moins un article au menu.",
     tourDoneToast: "Terminé ! Vous maîtrisez l'essentiel.",
@@ -2616,7 +2637,7 @@
     obLang: "Langue",
     obCurrency: "Devise",
     obNext: "Continuer",
-    obHow1: "Touchez une carte colorée : l’article s’ajoute à la commande. Un appui long le retire.",
+    obHow1: "Touchez une carte colorée : l’article s’ajoute à la commande. Un appui long en retire un.",
     obHow2: "Les commandes payées rejoignent une file où l’on coche chaque article : rien ne se perd.",
     obHow3: "Un deuxième appareil peut recevoir la file et servir les commandes. Cette fonctionnalité fait partie de Tapkasa Pro.",
     obDemo: "Démarrer avec un menu d’exemple",
@@ -2663,17 +2684,17 @@
     langHead: "Langue",
     currencyHead: "Devise",
     currencyHint: "Ne change que l’affichage et les boutons de billets. Les prix enregistrés ne sont pas convertis.",
-    docBtn: "Justificatif fiscal",
-    docHead: "Document récapitulatif",
-    docHint: "Établit un récapitulatif des ventes pour la période choisie. Les tickets comptent à leur date de vente.",
+    docBtn: "Récapitulatif des ventes (PDF)",
+    docHead: "Récapitulatif des ventes",
+    docHint: "Établit un récapitulatif des ventes de la période choisie en PDF, par exemple pour votre comptable. Ce n'est ni une facture ni un ticket de caisse pour le client. Les tickets comptent à leur date de vente.",
     docFrom: "Du",
     docTo: "Au",
     bizHead: "Coordonnées du vendeur",
-    bizHint: "Renseignez-les une fois, elles seront pré-remplies sur chaque document. Utilisez les mentions exigées par votre pays, une par ligne.",
+    bizHint: "Renseignez-les une fois, elles seront pré-remplies sur chaque récapitulatif. Indiquez ce que vous voulez y voir, une mention par ligne.",
     vatHead: "TVA",
     vatOn: "Je suis assujetti à la TVA",
     vatOff: "Non assujetti à la TVA",
-    vatHint: "Une fois activé, vous pouvez saisir un taux en pourcentage pour chaque article. Vous saisissez les prix TTC, le document calcule seul le HT et la taxe.",
+    vatHint: "Une fois activé, vous pouvez saisir un taux en pourcentage pour chaque article. Vous saisissez les prix TTC, le récapitulatif calcule seul le HT et la taxe.",
     vatAria: "Taux de TVA en pourcentage",
     docVatHead: "Détail de la TVA",
     docVatBase: "HT",
@@ -2682,11 +2703,11 @@
     docVatNone: "hors TVA",
     docVatTotalBase: "Total HT :",
     docVatTotalTax: "Total TVA :",
-    docMake: "Établir le document",
+    docMake: "Établir le récapitulatif",
     docTitle: "RÉCAPITULATIF DES VENTES",
-    docNo: "N° du document :",
+    docNo: "N° du récapitulatif :",
     docPeriod: "Période :",
-    docIssued: "Émis le :",
+    docIssued: "Établi le :",
     docEvents: "Événements inclus :",
     docItemsHead: "Articles vendus",
     docReceipts: "Tickets :",
@@ -2700,13 +2721,13 @@
     docColUnit: "Prix",
     docColSum: "Total",
     docPageOf: "Page {0} sur {1}",
-    docFile: "document",
-    docMailBody: "Veuillez trouver ci-joint le document récapitulatif des ventes.",
-    pdfFail: "Le document n'a pas pu être créé.",
-    pdfSaved: "Document enregistré en PDF.",
-    pdfSavedMail: "Document enregistré en PDF, joignez-le à votre message.",
+    docFile: "recapitulatif-ventes",
+    docMailBody: "Veuillez trouver ci-joint le récapitulatif des ventes.",
+    pdfFail: "Le récapitulatif n'a pas pu être créé.",
+    pdfSaved: "Récapitulatif enregistré en PDF.",
+    pdfSavedMail: "Récapitulatif enregistré en PDF, joignez-le à votre message.",
     docEmpty: "Aucune vente sur la période choisie.",
-    docFooter: "Émis avec l’application Tapkasa.",
+    docFooter: "Récapitulatif établi avec l’application Tapkasa. Ce n’est pas une facture.",
     supportRow: "Contacter l’assistance",
     toastModeKasaHeld: "Cet appareil est maintenant la caisse. Les commandes de l'autre caisse ({0}) ne comptent pas dans son chiffre.",
     pairNowActive: "Les appareils sont maintenant reliés.",
@@ -2732,7 +2753,12 @@
     proTrialThenY: "Gratuit pendant {0}, puis {1} par an",
     proTrialTerms: "L'essai est gratuit. À sa fin, l'abonnement se renouvelle automatiquement au prix indiqué, sauf résiliation au moins 24 heures avant la fin de l'essai.",
     billSetupFail: "L'achat n'a pas pu être préparé.",
-    billModuleMissing: "Le module d'achat ne s'est pas chargé. Fermez puis rouvrez l'application."
+    billModuleMissing: "Le module d'achat ne s'est pas chargé. Fermez puis rouvrez l'application.",
+    obFiscal: "Tapkasa n’est pas une caisse certifiée (NF525 ou équivalent) et ne traite pas les paiements.",
+    toastRemovedOne: "{0} : un de moins",
+    shortAsk: "Enregistrer malgré {0} manquant",
+    shortAskHint: "Le client a donné moins que le total. Enregistrer quand même ?",
+    rateRow: "Noter Tapkasa"
   };
 
   I18N.es = {
@@ -2775,7 +2801,7 @@
     receiptsHead: "Recibos",
     delReceiptAria: "Eliminar recibo",
     sellerHead: "Datos del vendedor",
-    sellerHint: "Rellene lo que exija su país. Los campos vacíos no salen en el documento.",
+    sellerHint: "Rellene lo que deba figurar en el resumen de ventas. Los campos vacíos no aparecen.",
     sellerSet: "Datos del vendedor · rellenados",
     sellerEmpty: "Datos del vendedor · completar",
     sfName: "Razón social o nombre",
@@ -2788,7 +2814,7 @@
     sfEmail: "Correo",
     sfPhone: "Teléfono",
     sfNote: "Otros datos",
-    sfNotePh: "Cualquier otra cosa que deba figurar en el documento",
+    sfNotePh: "Cualquier otra cosa que deba figurar en el resumen",
     closedHead: "Eventos cerrados",
     archReopen: "Devolver a la caja",
     archReopenAria: "Devolver el evento {0} a la caja",
@@ -2803,16 +2829,16 @@
     closeEvent: "Cerrar evento",
     emptyStats: "Aún no se ha vendido nada.<br>Guarde la primera venta y aquí aparecerán las estadísticas.",
     tourS1: "Toque una tarjeta de producto, el artículo salta a la cuenta.",
-    tourS1b: "Ahora mantenga pulsada la tarjeta hasta que se llene la barra, el artículo sale de la cuenta.",
+    tourS1b: "Ahora mantenga pulsada la tarjeta hasta que se llene la barra: un artículo sale de la cuenta.",
     tourS1c: "Toque la tarjeta otra vez para tener algo que cobrar.",
     tourS2: "Toque Cobrar.",
     tourS3: "Elija Efectivo.",
     tourS4: "Toque Exacto y luego Listo.",
     tourS5: "Abra Pedidos, la cuenta pagada espera en la cola.",
     tourS6: "Abra el ticket y toque Entregado.",
-    tourS7: "El Resumen muestra los ingresos; aquí se hace el documento fiscal.",
+    tourS7: "El Resumen muestra los ingresos; aquí se hace también el resumen de ventas en PDF.",
     tourS8: "Abra el Menú.",
-    tourS9: "Rellene aquí los datos del vendedor, salen en el documento.",
+    tourS9: "Rellene aquí los datos del vendedor, salen en el resumen de ventas.",
     tourSkip: "Omitir",
     tourNeedsItems: "La guía le acompaña en una venta, así que añada primero al menos un artículo al menú.",
     tourDoneToast: "¡Listo! Ya domina lo esencial.",
@@ -3001,7 +3027,7 @@
     obLang: "Idioma",
     obCurrency: "Moneda",
     obNext: "Continuar",
-    obHow1: "Toque una tarjeta de color y el artículo entra en la cuenta. Manténgala pulsada para quitarlo.",
+    obHow1: "Toque una tarjeta de color y el artículo entra en la cuenta. Manténgala pulsada para quitar uno.",
     obHow2: "Las cuentas cobradas se ponen en cola para ir marcándolas: no se pierde nada.",
     obHow3: "Un segundo dispositivo puede recibir la cola e ir despachando. Eso ya es Tapkasa Pro.",
     obDemo: "Empezar con un menú de ejemplo",
@@ -3048,17 +3074,17 @@
     langHead: "Idioma",
     currencyHead: "Moneda",
     currencyHint: "Solo afecta a lo que se muestra y a los billetes rápidos. Los precios guardados no se recalculan.",
-    docBtn: "Documento fiscal",
-    docHead: "Documento resumen",
-    docHint: "Genera un documento resumen de ventas del periodo elegido. Los tickets cuentan por su fecha de venta.",
+    docBtn: "Resumen de ventas (PDF)",
+    docHead: "Resumen de ventas",
+    docHint: "Genera un resumen de ventas del periodo elegido en PDF, por ejemplo para su gestor. No es una factura ni un ticket para el cliente. Los tickets cuentan por su fecha de venta.",
     docFrom: "Desde",
     docTo: "Hasta",
     bizHead: "Datos del vendedor",
-    bizHint: "Rellénelos una vez y se pondrán solos en cada documento. Use los datos que exija su país, uno por línea.",
+    bizHint: "Rellénelos una vez y se pondrán solos en cada resumen de ventas. Use los datos que quiera ver en el resumen, uno por línea.",
     vatHead: "IVA",
     vatOn: "Estoy dado de alta en el IVA",
     vatOff: "No aplico IVA",
-    vatHint: "Al activarlo puede indicar un tipo en porcentaje para cada artículo. Los precios se introducen con IVA y el documento calcula solo la base y el impuesto.",
+    vatHint: "Al activarlo puede indicar un tipo en porcentaje para cada artículo. Los precios se introducen con IVA y el resumen de ventas calcula solo la base y el impuesto.",
     vatAria: "Tipo de IVA en porcentaje",
     docVatHead: "Desglose del IVA",
     docVatBase: "Base",
@@ -3067,11 +3093,11 @@
     docVatNone: "sin IVA",
     docVatTotalBase: "Base total:",
     docVatTotalTax: "IVA total:",
-    docMake: "Generar documento",
-    docTitle: "DOCUMENTO RESUMEN DE VENTAS",
-    docNo: "N.º de documento:",
+    docMake: "Generar resumen",
+    docTitle: "RESUMEN DE VENTAS",
+    docNo: "N.º de resumen:",
     docPeriod: "Periodo:",
-    docIssued: "Emitido:",
+    docIssued: "Creado:",
     docEvents: "Eventos incluidos:",
     docItemsHead: "Artículos vendidos",
     docReceipts: "Recibos:",
@@ -3085,13 +3111,13 @@
     docColUnit: "Precio",
     docColSum: "Total",
     docPageOf: "Página {0} de {1}",
-    docFile: "documento",
-    docMailBody: "Adjunto el documento resumen de ventas.",
-    pdfFail: "No se pudo crear el documento.",
-    pdfSaved: "Documento guardado en PDF.",
-    pdfSavedMail: "Documento guardado en PDF, adjúntelo al mensaje.",
+    docFile: "resumen-ventas",
+    docMailBody: "Adjunto el resumen de ventas.",
+    pdfFail: "No se pudo crear el resumen.",
+    pdfSaved: "Resumen guardado en PDF.",
+    pdfSavedMail: "Resumen guardado en PDF, adjúntelo al mensaje.",
     docEmpty: "No hay ventas en el periodo elegido.",
-    docFooter: "Emitido con la aplicación Tapkasa.",
+    docFooter: "Resumen creado con la aplicación Tapkasa. No es una factura.",
     supportRow: "Contactar con soporte",
     toastModeKasaHeld: "Este dispositivo es ahora la caja. Los pedidos de la otra caja ({0}) no cuentan en su recaudación.",
     pairNowActive: "Los dispositivos ya están enlazados.",
@@ -3117,7 +3143,12 @@
     proTrialThenY: "{0} gratis, después {1} al año",
     proTrialTerms: "La prueba es gratuita. Al terminar, la suscripción se renueva automáticamente al precio indicado, salvo que la cancele al menos 24 horas antes del final.",
     billSetupFail: "No se pudo preparar la compra.",
-    billModuleMissing: "El módulo de compra no se cargó. Cierre la aplicación y vuelva a abrirla."
+    billModuleMissing: "El módulo de compra no se cargó. Cierre la aplicación y vuelva a abrirla.",
+    obFiscal: "Tapkasa no es una caja registradora fiscal (TicketBAI, Verifactu y similares) y no procesa pagos.",
+    toastRemovedOne: "{0}: uno menos",
+    shortAsk: "Guardar aunque faltan {0}",
+    shortAskHint: "El cliente pagó menos que el total. ¿Guardar de todos modos?",
+    rateRow: "Valorar Tapkasa"
   };
 
   I18N.it = {
@@ -3160,7 +3191,7 @@
     receiptsHead: "Scontrini",
     delReceiptAria: "Eliminare lo scontrino",
     sellerHead: "Dati del venditore",
-    sellerHint: "Compilate quello che richiede il vostro paese. I campi vuoti non compaiono sul documento.",
+    sellerHint: "Compilate quello che deve comparire sul riepilogo. I campi vuoti non compaiono.",
     sellerSet: "Dati del venditore · compilati",
     sellerEmpty: "Dati del venditore · da compilare",
     sfName: "Ragione sociale o nome",
@@ -3173,7 +3204,7 @@
     sfEmail: "E-mail",
     sfPhone: "Telefono",
     sfNote: "Altri dati",
-    sfNotePh: "Qualsiasi altra cosa debba comparire sul documento",
+    sfNotePh: "Qualsiasi altra cosa debba comparire sul riepilogo",
     closedHead: "Eventi chiusi",
     archReopen: "Riportare in cassa",
     archReopenAria: "Riportare l'evento {0} in cassa",
@@ -3188,16 +3219,16 @@
     closeEvent: "Chiudere l’evento",
     emptyStats: "Ancora nessuna vendita.<br>Appena viene salvato il primo conto, qui compaiono le statistiche.",
     tourS1: "Toccate una scheda prodotto, l'articolo salta sul conto.",
-    tourS1b: "Ora tenete premuta la scheda finché la barra non si riempie, l’articolo sparisce dal conto.",
+    tourS1b: "Ora tenete premuta la scheda finché la barra non si riempie: un articolo sparisce dal conto.",
     tourS1c: "Toccate di nuovo la scheda, così c’è qualcosa da incassare.",
     tourS2: "Toccate Incassare.",
     tourS3: "Scegliete Contanti.",
     tourS4: "Toccate Esatto e poi Fatto.",
     tourS5: "Aprite Ordini, il conto pagato aspetta in coda.",
     tourS6: "Aprite lo scontrino e toccate Servito.",
-    tourS7: "Incassi mostra l’incasso; qui si fa anche il documento fiscale.",
+    tourS7: "Incassi mostra l’incasso; qui si fa anche il riepilogo vendite in PDF.",
     tourS8: "Aprite il Menu.",
-    tourS9: "Compilate qui i dati del venditore, finiscono sul documento.",
+    tourS9: "Compilate qui i dati del venditore, finiscono sul riepilogo.",
     tourSkip: "Salta",
     tourNeedsItems: "La guida vi accompagna in una vendita, quindi aggiungete prima almeno un articolo al menu.",
     tourDoneToast: "Fatto! Sapete tutto l’essenziale.",
@@ -3386,7 +3417,7 @@
     obLang: "Lingua",
     obCurrency: "Valuta",
     obNext: "Avanti",
-    obHow1: "Toccare un riquadro colorato per aggiungere l’articolo al conto. Tenerlo premuto per toglierlo.",
+    obHow1: "Toccare un riquadro colorato per aggiungere l’articolo al conto. Tenerlo premuto per toglierne uno.",
     obHow2: "I conti pagati si mettono in coda con le spunte: non si perde niente.",
     obHow3: "Un secondo dispositivo può ricevere la coda e servire gli ordini. Questo è Tapkasa Pro.",
     obDemo: "Iniziare con un menu di esempio",
@@ -3433,17 +3464,17 @@
     langHead: "Lingua",
     currencyHead: "Valuta",
     currencyHint: "Cambia solo la visualizzazione e i tagli rapidi delle banconote. I prezzi salvati non si riconvertono.",
-    docBtn: "Documento fiscale",
-    docHead: "Documento riepilogativo",
-    docHint: "Genera un riepilogo delle vendite per il periodo scelto. Gli scontrini contano per la data di vendita.",
+    docBtn: "Riepilogo vendite (PDF)",
+    docHead: "Riepilogo vendite",
+    docHint: "Genera un riepilogo delle vendite del periodo scelto in PDF, ad esempio per il commercialista. Non è un documento fiscale né uno scontrino per il cliente. Gli scontrini contano per la data di vendita.",
     docFrom: "Dal",
     docTo: "Al",
     bizHead: "Dati del venditore",
-    bizHint: "Compilateli una volta e verranno inseriti da soli su ogni documento. Usate i dati richiesti dal vostro paese, uno per riga.",
+    bizHint: "Compilateli una volta e verranno inseriti da soli su ogni riepilogo. Usate i dati che volete sul riepilogo, uno per riga.",
     vatHead: "IVA",
     vatOn: "Sono soggetto a IVA",
     vatOff: "Non applico IVA",
-    vatHint: "Se attivo, potete indicare un'aliquota in percentuale per ogni articolo. I prezzi si inseriscono IVA inclusa, il documento calcola da solo imponibile e imposta.",
+    vatHint: "Se attivo, potete indicare un'aliquota in percentuale per ogni articolo. I prezzi si inseriscono IVA inclusa, il riepilogo calcola da solo imponibile e imposta.",
     vatAria: "Aliquota IVA in percentuale",
     docVatHead: "Riepilogo IVA",
     docVatBase: "Imponibile",
@@ -3452,11 +3483,11 @@
     docVatNone: "senza IVA",
     docVatTotalBase: "Imponibile totale:",
     docVatTotalTax: "IVA totale:",
-    docMake: "Generare il documento",
+    docMake: "Generare il riepilogo",
     docTitle: "RIEPILOGO VENDITE",
-    docNo: "Numero documento:",
+    docNo: "Numero riepilogo:",
     docPeriod: "Periodo:",
-    docIssued: "Emesso:",
+    docIssued: "Creato:",
     docEvents: "Eventi inclusi:",
     docItemsHead: "Articoli venduti",
     docReceipts: "Scontrini:",
@@ -3470,13 +3501,13 @@
     docColUnit: "Prezzo",
     docColSum: "Totale",
     docPageOf: "Pagina {0} di {1}",
-    docFile: "documento",
-    docMailBody: "In allegato il documento riepilogativo delle vendite.",
-    pdfFail: "Non è stato possibile creare il documento.",
-    pdfSaved: "Documento salvato in PDF.",
-    pdfSavedMail: "Documento salvato in PDF, allegatelo al messaggio.",
+    docFile: "riepilogo-vendite",
+    docMailBody: "In allegato il riepilogo delle vendite.",
+    pdfFail: "Non è stato possibile creare il riepilogo.",
+    pdfSaved: "Riepilogo salvato in PDF.",
+    pdfSavedMail: "Riepilogo salvato in PDF, allegatelo al messaggio.",
     docEmpty: "Nessuna vendita nel periodo scelto.",
-    docFooter: "Emesso con l’app Tapkasa.",
+    docFooter: "Riepilogo creato con l’app Tapkasa. Non è un documento fiscale.",
     supportRow: "Contattare l’assistenza",
     toastModeKasaHeld: "Questo dispositivo ora è la cassa. Gli ordini dell'altra cassa ({0}) non rientrano nel suo incasso.",
     pairNowActive: "I dispositivi ora sono collegati.",
@@ -3502,7 +3533,12 @@
     proTrialThenY: "{0} gratis, poi {1} all'anno",
     proTrialTerms: "La prova è gratuita. Al termine l'abbonamento si rinnova automaticamente al prezzo indicato, a meno che non lo disdiciate almeno 24 ore prima della fine.",
     billSetupFail: "Non è stato possibile preparare l'acquisto.",
-    billModuleMissing: "Il modulo di acquisto non si è caricato. Chiudete e riaprite l'app."
+    billModuleMissing: "Il modulo di acquisto non si è caricato. Chiudete e riaprite l'app.",
+    obFiscal: "Tapkasa non è un registratore telematico (cassa fiscale) e non elabora pagamenti.",
+    toastRemovedOne: "{0}: uno in meno",
+    shortAsk: "Salvare anche se mancano {0}",
+    shortAskHint: "Il cliente ha pagato meno del totale. Salvare comunque?",
+    rateRow: "Valuta Tapkasa"
   };
 
   I18N.pl = {
@@ -3545,7 +3581,7 @@
     receiptsHead: "Paragony",
     delReceiptAria: "Usunąć paragon",
     sellerHead: "Dane sprzedawcy",
-    sellerHint: "Wypełnij to, czego wymaga twój kraj. Puste pola nie pojawią się na dokumencie.",
+    sellerHint: "Wypełnij to, co ma być na podsumowaniu. Puste pola się na nim nie pojawią.",
     sellerSet: "Dane sprzedawcy · wypełnione",
     sellerEmpty: "Dane sprzedawcy · uzupełnij",
     sfName: "Nazwa firmy lub imię i nazwisko",
@@ -3558,7 +3594,7 @@
     sfEmail: "E-mail",
     sfPhone: "Telefon",
     sfNote: "Dodatkowe dane",
-    sfNotePh: "Cokolwiek jeszcze ma być na dokumencie",
+    sfNotePh: "Cokolwiek jeszcze ma być na podsumowaniu",
     closedHead: "Zamknięte imprezy",
     archReopen: "Wróć do kasy",
     archReopenAria: "Przywróć imprezę {0} do kasy",
@@ -3573,16 +3609,16 @@
     closeEvent: "Zamknięcie imprezy",
     emptyStats: "Na razie nic nie sprzedano.<br>Po zapisaniu pierwszego rachunku pojawią się tu statystyki.",
     tourS1: "Stuknij kartę produktu, pozycja wskoczy na rachunek.",
-    tourS1b: "Teraz przytrzymaj kartę, aż pasek się zapełni, pozycja zniknie z rachunku.",
+    tourS1b: "Teraz przytrzymaj kartę, aż pasek się zapełni: jedna sztuka zniknie z rachunku.",
     tourS1c: "Stuknij kartę ponownie, żeby było co kasować.",
     tourS2: "Stuknij Zapłata.",
     tourS3: "Wybierz Gotówkę.",
     tourS4: "Stuknij Równo, a potem Gotowe.",
     tourS5: "Otwórz Zamówienia, opłacony rachunek czeka w kolejce.",
     tourS6: "Otwórz bon i stuknij Wydano.",
-    tourS7: "Utarg pokazuje sprzedaż; tu też robi się dokument.",
+    tourS7: "Utarg pokazuje sprzedaż; tu też robi się podsumowanie w PDF.",
     tourS8: "Otwórz Menu.",
-    tourS9: "Tu wypełnij dane sprzedawcy, trafią na dokument.",
+    tourS9: "Tu wypełnij dane sprzedawcy, trafią na podsumowanie.",
     tourSkip: "Pomiń",
     tourNeedsItems: "Przewodnik przeprowadzi Cię przez sprzedaż, najpierw dodaj do menu co najmniej jedną pozycję.",
     tourDoneToast: "Gotowe! Znasz wszystko, co ważne.",
@@ -3771,7 +3807,7 @@
     obLang: "Język",
     obCurrency: "Waluta",
     obNext: "Dalej",
-    obHow1: "Stuknięcie kolorowego kafelka dodaje pozycję do rachunku, a przytrzymanie ją usuwa.",
+    obHow1: "Stuknięcie kolorowego kafelka dodaje pozycję do rachunku, a przytrzymanie odejmuje jedną sztukę.",
     obHow2: "Opłacone rachunki ustawiają się w kolejce do odhaczania. Nic się nie zgubi.",
     obHow3: "Drugie urządzenie może odbierać kolejkę i wydawać zamówienia. To już Tapkasa Pro.",
     obDemo: "Start z przykładowym menu",
@@ -3818,17 +3854,17 @@
     langHead: "Język",
     currencyHead: "Waluta",
     currencyHint: "Wpływa tylko na wyświetlanie i szybkie banknoty. Zapisane ceny się nie przeliczają.",
-    docBtn: "Dokument podatkowy",
-    docHead: "Dokument zbiorczy",
-    docHint: "Tworzy zbiorczy dokument sprzedaży za wybrany okres. Paragony liczą się według daty sprzedaży.",
+    docBtn: "Podsumowanie sprzedaży (PDF)",
+    docHead: "Podsumowanie sprzedaży",
+    docHint: "Tworzy podsumowanie sprzedaży za wybrany okres jako PDF, na przykład dla księgowej. To nie jest dokument podatkowy ani paragon dla klienta. Paragony liczą się według daty sprzedaży.",
     docFrom: "Od",
     docTo: "Do",
     bizHead: "Dane sprzedawcy",
-    bizHint: "Wypełnij raz, a będą się uzupełniać na każdym dokumencie. Podaj dane wymagane w twoim kraju, po jednym w wierszu.",
+    bizHint: "Wypełnij raz, a będą się uzupełniać na każdym podsumowaniu. Podaj dane, które chcesz na nim mieć, po jednym w wierszu.",
     vatHead: "VAT",
     vatOn: "Jestem podatnikiem VAT",
     vatOff: "Nie jestem podatnikiem VAT",
-    vatHint: "Po włączeniu możesz podać stawkę w procentach przy każdej pozycji. Ceny wpisujesz z VAT, dokument sam wyliczy kwotę netto i podatek.",
+    vatHint: "Po włączeniu możesz podać stawkę w procentach przy każdej pozycji. Ceny wpisujesz z VAT, podsumowanie samo wyliczy kwotę netto i podatek.",
     vatAria: "Stawka VAT w procentach",
     docVatHead: "Rozliczenie VAT",
     docVatBase: "Netto",
@@ -3837,11 +3873,11 @@
     docVatNone: "bez VAT",
     docVatTotalBase: "Netto razem:",
     docVatTotalTax: "VAT razem:",
-    docMake: "Utworzyć dokument",
-    docTitle: "ZBIORCZY DOKUMENT SPRZEDAŻY",
-    docNo: "Numer dokumentu:",
+    docMake: "Utwórz podsumowanie",
+    docTitle: "PODSUMOWANIE SPRZEDAŻY",
+    docNo: "Numer podsumowania:",
     docPeriod: "Okres:",
-    docIssued: "Wystawiono:",
+    docIssued: "Utworzono:",
     docEvents: "Uwzględnione imprezy:",
     docItemsHead: "Sprzedane pozycje",
     docReceipts: "Paragony:",
@@ -3855,13 +3891,13 @@
     docColUnit: "Cena",
     docColSum: "Razem",
     docPageOf: "Strona {0} z {1}",
-    docFile: "dokument",
-    docMailBody: "W załączeniu zbiorczy dokument sprzedaży.",
-    pdfFail: "Nie udało się utworzyć dokumentu.",
-    pdfSaved: "Dokument zapisany jako PDF.",
-    pdfSavedMail: "Dokument zapisany jako PDF, dołącz go do wiadomości.",
+    docFile: "podsumowanie-sprzedazy",
+    docMailBody: "W załączniku podsumowanie sprzedaży.",
+    pdfFail: "Nie udało się utworzyć podsumowania.",
+    pdfSaved: "Podsumowanie zapisane jako PDF.",
+    pdfSavedMail: "Podsumowanie zapisane jako PDF, dołącz je do wiadomości.",
     docEmpty: "Brak sprzedaży w wybranym okresie.",
-    docFooter: "Wystawiono w aplikacji Tapkasa.",
+    docFooter: "Podsumowanie utworzone w aplikacji Tapkasa. To nie jest dokument podatkowy.",
     supportRow: "Kontakt z pomocą",
     toastModeKasaHeld: "To urządzenie jest teraz kasą. Zamówienia z drugiej kasy ({0}) nie liczą się do jego utargu.",
     pairNowActive: "Urządzenia są teraz połączone.",
@@ -3887,7 +3923,12 @@
     proTrialThenY: "{0} za darmo, potem {1} rocznie",
     proTrialTerms: "Okres próbny jest bezpłatny. Po jego zakończeniu subskrypcja odnowi się automatycznie w podanej cenie, chyba że anulujesz ją co najmniej 24 godziny przed końcem.",
     billSetupFail: "Nie udało się przygotować zakupu.",
-    billModuleMissing: "Moduł zakupów się nie załadował. Zamknij aplikację i otwórz ją ponownie."
+    billModuleMissing: "Moduł zakupów się nie załadował. Zamknij aplikację i otwórz ją ponownie.",
+    obFiscal: "Tapkasa nie jest kasą fiskalną i nie obsługuje płatności.",
+    toastRemovedOne: "{0}: o jeden mniej",
+    shortAsk: "Zapisz mimo brakujących {0}",
+    shortAskHint: "Klient zapłacił mniej, niż wynosi rachunek. Zapisać mimo to?",
+    rateRow: "Oceń Tapkasę"
   };
 
   I18N.pt = {
@@ -3930,7 +3971,7 @@
     receiptsHead: "Recibos",
     delReceiptAria: "Apagar recibo",
     sellerHead: "Dados do vendedor",
-    sellerHint: "Preencha o que o seu país exigir. Os campos vazios não aparecem no documento.",
+    sellerHint: "Preencha o que deve constar do resumo de vendas. Os campos vazios não aparecem.",
     sellerSet: "Dados do vendedor · preenchidos",
     sellerEmpty: "Dados do vendedor · preencher",
     sfName: "Nome da empresa ou pessoal",
@@ -3943,7 +3984,7 @@
     sfEmail: "E-mail",
     sfPhone: "Telefone",
     sfNote: "Outros dados",
-    sfNotePh: "Tudo o mais que deva constar do documento",
+    sfNotePh: "Tudo o mais que deva constar do resumo",
     closedHead: "Eventos fechados",
     archReopen: "Devolver à caixa",
     archReopenAria: "Devolver o evento {0} à caixa",
@@ -3958,16 +3999,16 @@
     closeEvent: "Fechar evento",
     emptyStats: "Ainda não vendeu nada.<br>Assim que guardar a primeira conta, aparecem aqui as estatísticas.",
     tourS1: "Toque num cartão de produto, o artigo salta para a conta.",
-    tourS1b: "Agora mantenha o cartão premido até a barra encher, o artigo sai da conta.",
+    tourS1b: "Agora mantenha o cartão premido até a barra encher: um artigo sai da conta.",
     tourS1c: "Toque no cartão outra vez para haver algo a cobrar.",
     tourS2: "Toque em Cobrar.",
     tourS3: "Escolha Dinheiro.",
     tourS4: "Toque em Certo e depois em Feito.",
     tourS5: "Abra Pedidos, a conta paga espera na fila.",
     tourS6: "Abra o talão e toque em Entregue.",
-    tourS7: "O Resumo mostra a receita; o documento fiscal faz-se aqui.",
+    tourS7: "O Resumo mostra a receita; o resumo de vendas em PDF faz-se aqui.",
     tourS8: "Abra o Menu.",
-    tourS9: "Preencha aqui os dados do vendedor, saem no documento.",
+    tourS9: "Preencha aqui os dados do vendedor, saem no resumo de vendas.",
     tourSkip: "Saltar",
     tourNeedsItems: "O guia acompanha-o numa venda, por isso adicione primeiro pelo menos um artigo ao menu.",
     tourDoneToast: "Pronto! Já domina o essencial.",
@@ -4156,7 +4197,7 @@
     obLang: "Idioma",
     obCurrency: "Moeda",
     obNext: "Continuar",
-    obHow1: "Toque num cartão colorido e o artigo entra na conta. Mantenha premido para o tirar.",
+    obHow1: "Toque num cartão colorido e o artigo entra na conta. Mantenha premido para tirar um.",
     obHow2: "As contas pagas entram numa fila onde vai dando baixa. Não se perde nada.",
     obHow3: "Um segundo dispositivo pode receber a fila e despachar os pedidos. Isso já é Tapkasa Pro.",
     obDemo: "Começar com o menu de exemplo",
@@ -4203,17 +4244,17 @@
     langHead: "Idioma",
     currencyHead: "Moeda",
     currencyHint: "Só afeta o que aparece no ecrã e os botões das notas. Os preços guardados não são convertidos.",
-    docBtn: "Documento fiscal",
-    docHead: "Documento resumo",
-    docHint: "Gera um documento resumo das vendas do período escolhido. Os talões contam pela data de venda.",
+    docBtn: "Resumo de vendas (PDF)",
+    docHead: "Resumo de vendas",
+    docHint: "Gera um resumo das vendas do período escolhido em PDF, por exemplo para o contabilista. Não é uma fatura nem um talão para o cliente. Os talões contam pela data de venda.",
     docFrom: "De",
     docTo: "Até",
     bizHead: "Dados do vendedor",
-    bizHint: "Preencha uma vez e ficam preenchidos em cada documento. Use os dados exigidos no seu país, um por linha.",
+    bizHint: "Preencha uma vez e ficam preenchidos em cada resumo de vendas. Use os dados que quer no resumo, um por linha.",
     vatHead: "IVA",
     vatOn: "Sou sujeito passivo de IVA",
     vatOff: "Não aplico IVA",
-    vatHint: "Quando ligado, pode indicar uma taxa em percentagem para cada artigo. Os preços são introduzidos com IVA e o documento calcula sozinho a base e o imposto.",
+    vatHint: "Quando ligado, pode indicar uma taxa em percentagem para cada artigo. Os preços são introduzidos com IVA e o resumo de vendas calcula sozinho a base e o imposto.",
     vatAria: "Taxa de IVA em percentagem",
     docVatHead: "Resumo do IVA",
     docVatBase: "Base",
@@ -4222,11 +4263,11 @@
     docVatNone: "sem IVA",
     docVatTotalBase: "Base total:",
     docVatTotalTax: "IVA total:",
-    docMake: "Gerar documento",
-    docTitle: "DOCUMENTO RESUMO DE VENDAS",
-    docNo: "N.º do documento:",
+    docMake: "Gerar resumo",
+    docTitle: "RESUMO DE VENDAS",
+    docNo: "N.º do resumo:",
     docPeriod: "Período:",
-    docIssued: "Emitido:",
+    docIssued: "Criado:",
     docEvents: "Eventos incluídos:",
     docItemsHead: "Artigos vendidos",
     docReceipts: "Recibos:",
@@ -4240,13 +4281,13 @@
     docColUnit: "Preço",
     docColSum: "Total",
     docPageOf: "Página {0} de {1}",
-    docFile: "documento",
-    docMailBody: "Em anexo segue o documento resumo de vendas.",
-    pdfFail: "Não foi possível criar o documento.",
-    pdfSaved: "Documento guardado em PDF.",
-    pdfSavedMail: "Documento guardado em PDF, anexe-o à mensagem.",
+    docFile: "resumo-vendas",
+    docMailBody: "Em anexo segue o resumo de vendas.",
+    pdfFail: "Não foi possível criar o resumo.",
+    pdfSaved: "Resumo guardado em PDF.",
+    pdfSavedMail: "Resumo guardado em PDF, anexe-o à mensagem.",
     docEmpty: "Sem vendas no período escolhido.",
-    docFooter: "Emitido com a aplicação Tapkasa.",
+    docFooter: "Resumo criado com a aplicação Tapkasa. Não é uma fatura.",
     supportRow: "Contactar o suporte",
     toastModeKasaHeld: "Este dispositivo é agora a caixa. Os pedidos da outra caixa ({0}) não contam para a sua faturação.",
     pairNowActive: "Os dispositivos estão agora ligados.",
@@ -4272,7 +4313,12 @@
     proTrialThenY: "{0} grátis, depois {1} por ano",
     proTrialTerms: "O período experimental é gratuito. Quando terminar, a subscrição renova-se automaticamente ao preço indicado, a menos que a cancele pelo menos 24 horas antes do fim.",
     billSetupFail: "Não foi possível preparar a compra.",
-    billModuleMissing: "O módulo de compras não carregou. Feche e volte a abrir a aplicação."
+    billModuleMissing: "O módulo de compras não carregou. Feche e volte a abrir a aplicação.",
+    obFiscal: "A Tapkasa não é um programa de faturação certificado (AT) e não processa pagamentos.",
+    toastRemovedOne: "{0}: menos um",
+    shortAsk: "Guardar mesmo faltando {0}",
+    shortAskHint: "O cliente pagou menos do que o total. Guardar mesmo assim?",
+    rateRow: "Avaliar a Tapkasa"
   };
   // ==== konec vkládaných překladů ====
 
@@ -4876,6 +4922,12 @@
     // dostanou započtené akce, které už v archivu mají
     d.rateN = typeof d.rateN === "number" ? d.rateN : d.archives.length;
     d.rateAsked = typeof d.rateAsked === "number" ? d.rateAsked : 0;
+    d.rateAskedAt = typeof d.rateAskedAt === "number" ? d.rateAskedAt : 0;
+    d.ratePending = typeof d.ratePending === "string" ? d.ratePending : "";
+    d.rateBusyDay = typeof d.rateBusyDay === "string" ? d.rateBusyDay : "";
+    // potvrzení od zařízení s Pro pro aktuální kód (placené párování)
+    d.pairProAt = typeof d.pairProAt === "number" ? d.pairProAt : 0;
+    d.pairProCode = typeof d.pairProCode === "string" ? d.pairProCode : "";
     // průvodce je pro nové: kdo už má prodeje nebo párování, obtěžovat nebudeme
     d.tourDone = d.tourDone === true || d.sales.length > 0 || d.archives.length > 0 || !!d.pair ||
                  d.parked.some(function (pk) { return pk.sales.length > 0; });
@@ -5236,6 +5288,7 @@
     state.order = [];
     linesOpen = false;
     sheet = null;
+    noteBusyDay();
     saveNow();
     pushOrder(sale, true);
     render();
@@ -7903,6 +7956,9 @@
       '<div class="acts" style="padding-top:0;padding-bottom:8px">' +
         '<a class="act" style="text-align:center;text-decoration:none" href="mailto:' + SUPPORT_MAIL +
           '?subject=' + encodeURIComponent("Tapkasa " + APP_VERSION) + '">' + esc(T("supportRow")) + "</a>" +
+        // hodnocení jen v aplikaci z obchodu; Capacitor odkaz otevře v obchodě
+        (nativeApp() ? '<a class="act" style="text-align:center;text-decoration:none" href="' + rateUrl() +
+          '" target="_blank" rel="noopener">' + esc(T("rateRow")) + "</a>" : "") +
         '<div class="act" style="color:var(--ink-3)">' + esc(T("aboutRow", APP_VERSION)) + "</div>" +
       "</div>";
   }
@@ -8048,8 +8104,11 @@
             ? '<div class="recv give"><span class="lbl">' + esc(T("change")) + '</span><span class="val num">' + czk(back) + "</span></div>"
             : '<div class="recv short"><span class="lbl">' + esc(T("short")) + '</span><span class="val num">' + czk(-back) + "</span></div>");
 
-      h += '<button class="btn-done" data-commit="1">' + esc(T("done")) + "</button>" +
-           '<button class="btn-ghost" data-cancel="1">' + esc(T("back")) + "</button>";
+      h += sheet.shortAsk && got && back < 0
+        ? '<p class="sub" style="color:var(--accent);font-weight:600">' + esc(T("shortAskHint")) + "</p>" +
+          '<button class="btn-done warn" data-shortok="1">' + esc(T("shortAsk", czk(-back))) + "</button>"
+        : '<button class="btn-done" data-commit="1">' + esc(T("done")) + "</button>";
+      h += '<button class="btn-ghost" data-cancel="1">' + esc(T("back")) + "</button>";
     }
 
     if (sheet.step === "card") {
@@ -8448,6 +8507,8 @@
         '<div class="ob-row"><i style="background:#2158C4">' + ICON.orders + "</i><p>" + esc(T("obHow2")) + "</p></div>" +
         '<div class="ob-row"><i style="background:#127A4E"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="12" height="16" rx="2"/><rect x="16" y="8" width="6" height="12" rx="2"/></svg></i><p>' + esc(T("obHow3")) + "</p></div>" +
       "</div>" +
+      // poctivé vymezení: nejde o fiskální pokladnu (EET, eKasa, TSE…)
+      '<p class="ob-note">' + esc(T("obFiscal")) + "</p>" +
       '<div class="ob-spacer"></div>' +
       '<button class="btn-done" data-obdemo="1">' + esc(T("obDemo")) + "</button>" +
       '<button class="btn-ghost" data-obempty="1">' + esc(T("obEmpty")) + "</button>";
@@ -8609,22 +8670,64 @@
   }
 
   // ---------- žádost o hodnocení ----------
-  // Ptáme se až lidí, kterým aplikace prokazatelně slouží: po desáté
-  // uzavřené akci, a znovu až po padesáté a stopadesáté. Okno vyvolává
-  // systém (v nativním obalu přes hook z bridge.js) a sám si hlídá,
-  // aby se neukazovalo příliš často; na webu hook není a nestane se nic.
-  var RATE_AT = [10, 50, 150];
+  // Ptáme se lidí, kterým aplikace prokazatelně slouží: po druhé uzavřené
+  // akci (pak po desáté a padesáté) a po dni s aspoň 30 účty. Rušný den se
+  // jen poznamená a zeptáme se až při příští uzávěrce nebo při dalším
+  // spuštění jiný den, ne uprostřed fronty u stánku. Okno vyvolává systém
+  // (v nativním obalu přes hook z bridge.js) a sám si hlídá, aby se
+  // neukazovalo příliš často (Apple nejvýš 3× za rok); my navíc držíme
+  // odstup 60 dní. Na webu hook není a nestane se nic.
+  var RATE_AT = [2, 10, 50];
+  var RATE_BUSY = 30;
+  var RATE_GAP_MS = 60 * 86400000;
+
+  function askReviewNow(delay) {
+    state.rateAskedAt = Date.now();
+    state.ratePending = "";
+    save();
+    // chvilku po potvrzení uzávěrky, ať okno nepřekryje oznámení
+    setTimeout(function () { try { window.__kasaAskReview(); } catch (e) {} }, delay || 1600);
+  }
+
+  function reviewTooSoon() { return Date.now() - (state.rateAskedAt || 0) < RATE_GAP_MS; }
+
   function maybeAskReview() {
     if (typeof window.__kasaAskReview !== "function") { return; }
     for (var i = 0; i < RATE_AT.length; i++) {
       if (state.rateN >= RATE_AT[i] && state.rateAsked < RATE_AT[i]) {
         state.rateAsked = state.rateN;
-        save();
-        // chvilku po potvrzení uzávěrky, ať okno nepřekryje oznámení
-        setTimeout(function () { window.__kasaAskReview(); }, 1600);
+        if (reviewTooSoon()) { save(); return; }
+        askReviewNow();
         return;
       }
     }
+    if (state.ratePending && !reviewTooSoon()) { askReviewNow(); }
+  }
+
+  // Po zaplacení: kolik vlastních účtů má dnešek. Při 30. se den poznamená.
+  function noteBusyDay() {
+    if (state.mode !== "kasa" || state.ratePending || state.rateBusyDay === todayKey()) { return; }
+    var start = new Date().setHours(0, 0, 0, 0), n = 0;
+    state.sales.forEach(function (s) { if ((s.ts || 0) >= start && s.ev === state.evId) { n += 1; } });
+    if (n < RATE_BUSY) { return; }
+    state.rateBusyDay = todayKey();
+    state.ratePending = todayKey();
+  }
+
+  // Při spuštění jiný den po rušném dni, v klidu (bez otevřeného panelu).
+  function askPendingReview() {
+    if (typeof window.__kasaAskReview !== "function") { return; }
+    if (!state.ratePending || state.ratePending === todayKey() || reviewTooSoon()) { return; }
+    if (sheet || tourActive() || state.order.length) { return; }
+    askReviewNow(800);
+  }
+
+  // Ruční hodnocení z Menu: stránka aplikace v obchodě.
+  function rateUrl() {
+    var c = window.Capacitor;
+    var android = nativeApp() && typeof c.getPlatform === "function" && c.getPlatform() === "android";
+    return android ? "https://play.google.com/store/apps/details?id=com.deriverge.tapkasa"
+                   : "https://apps.apple.com/app/id6807075649?action=write-review";
   }
 
   // Android: tlačítko Zpět (mobile/.../MainActivity). Vrací true, když
@@ -8736,7 +8839,7 @@
             "[data-tourskip],[data-tourstart],[data-offlinehelp],[data-country],[data-docmail],[data-docshare],[data-docsave],[data-sellersheet],[data-archopen],[data-archdel],[data-vatmode],[data-langsheet],[data-cursheet],[data-setlang],[data-setcur],[data-paywall],[data-buy]," +
             "[data-restorebuy],[data-oblang],[data-obcur],[data-obnext],[data-obdemo],[data-obempty]," +
             "[data-evsheet],[data-evswitch],[data-evnew],[data-evcreate],[data-evdel],[data-cvat],[data-backupfile]," +
-            "[data-diag],[data-rate],[data-shortok]";
+            "[data-diag],[data-shortok]";
 
   document.addEventListener("click", function (ev) {
     if (suppressClick) { suppressClick = false; return; }
@@ -8813,10 +8916,21 @@
     }
     if ((d.method || d.commit) && Date.now() - stepShownAt < 450) { return; }
     if (d.method) { sheet.method = d.method; sheet.step = d.method; render(); return; }
-    if (d.note) { sheet.received = mr(sheet.received + parseFloat(d.note)); render(); return; }
-    if (d.exact) { sheet.received = sheet.total; render(); return; }
-    if (d.zero) { sheet.received = 0; render(); return; }
-    if (d.commit) { commit(); return; }
+    if (d.note) { sheet.received = mr(sheet.received + parseFloat(d.note)); sheet.shortAsk = 0; render(); return; }
+    if (d.exact) { sheet.received = sheet.total; sheet.shortAsk = 0; render(); return; }
+    if (d.zero) { sheet.received = 0; sheet.shortAsk = 0; render(); return; }
+    // Hotově s nedoplatkem: první ťuknutí jen upozorní, uložit jde až
+    // druhým, výslovným potvrzením. Nic nenaťukáno (0) = bez počítání vrácení.
+    if (d.commit) {
+      if (sheet && sheet.step === "cash" && sheet.received > 0 && mr(sheet.received - sheet.total) < 0) {
+        sheet.shortAsk = Date.now(); render(); return;
+      }
+      commit(); return;
+    }
+    if (d.shortok) {
+      if (!sheet || !sheet.shortAsk || Date.now() - sheet.shortAsk < 450) { return; }
+      commit(); return;
+    }
 
     if (d.yes) {
       var fn = pending;
@@ -9330,8 +9444,11 @@
         sheet.error = T("restoreBad");
         render(); return;
       }
-      // licence a denní počítadlo zůstávají zařízení, ne záloze
+      // licence, denní počítadlo a potvrzení Pro pro párování zůstávají
+      // zařízení, ne záloze
       next.license = state.license;
+      next.pairProAt = state.pairProAt;
+      next.pairProCode = state.pairProCode;
       next.payDay = state.payDay;
       next.payN = state.payN;
       state = next;
@@ -9345,8 +9462,9 @@
     }
   });
 
-  // ---------- podržení karty = odebrání té jedné položky z účtu ----------
-  // Obsluha se ukliká, podrží prst na kartě a řádek zmizí, bez rušení celého účtu.
+  // ---------- podržení karty = o jeden kus méně ----------
+  // Obsluha se ukliká, podrží prst na kartě a ubere se jeden kus, jak to
+  // slibuje popis i průvodce. Dřív zmizel celý řádek (3× espresso naráz).
   // HOLD_MS musí sedět s délkou přechodu u .prod.is-hold .hold v CSS.
   var HOLD_MS = 1000;
   var holdTimer = null, holdCard = null, holdX = 0, holdY = 0;
@@ -9374,19 +9492,22 @@
     card.classList.add("is-hold");
 
     holdTimer = setTimeout(function () {
-      var name = "";
-      state.order = state.order.filter(function (l) {
-        if (l.ref !== id) { return true; }
-        name = l.name;
-        return false;
-      });
+      // ubírá se z posledního řádku té položky (po změně ceny jich může být víc)
+      var at = -1;
+      for (var i = state.order.length - 1; i >= 0; i--) { if (state.order[i].ref === id) { at = i; break; } }
+      if (at < 0) { endHold(); return; }
+      var line = state.order[at], name = line.name;
+      line.qty -= 1;
+      var gone = line.qty <= 0;
+      if (gone) { state.order.splice(at, 1); }
       if (!state.order.length) { linesOpen = false; }
       suppressClick = true;   // ať uvolnění prstu položku hned nepřidá zpátky
       endHold();
       save();
       render();
-      showToast(T("toastRemoved", name));
-      say(T("toastRemoved", name));
+      var msg = gone ? T("toastRemoved", name) : T("toastRemovedOne", name);
+      showToast(msg);
+      say(msg);
     }, HOLD_MS);
   });
 
@@ -9498,6 +9619,8 @@
   render();
 
   pairOpen();
+  // po rušném dni: o hodnocení požádat při dalším spuštění, v klidu
+  setTimeout(function () { try { askPendingReview(); } catch (e) {} }, 6000);
 
   // Stav spojení se mění i pouhým plynutím času (čerstvost poslední zprávy).
   // Otevřené menu se proto jednou za půl minuty překreslí; díky diffování
