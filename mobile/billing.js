@@ -16,8 +16,9 @@
  *   iOS     "appl_..."  → REVENUECAT_API_KEY_IOS níže
  *   Android "goog_..."  → REVENUECAT_API_KEY_ANDROID níže
  * Entitlement v RevenueCat se musí jmenovat "pro" a obsahovat oba produkty
- * (měsíční 4,99 USD, roční 39,99 USD). Balíčky v nabídce (offering) používají
- * standardní identifikátory $rc_monthly a $rc_annual.
+ * (měsíční a roční předplatné; ceny určuje obchod a paywall je bere odsud).
+ * Balíčky v nabídce (offering) používají standardní identifikátory
+ * $rc_monthly a $rc_annual. Zkušební doba se čte z nabídky (trialOf).
  */
 (function () {
   "use strict";
@@ -51,7 +52,11 @@
   function fail(reason) {
     window.TapkasaBilling = webFallback();
     window.__kasaBillingError = reason;
-    window.__kasaBuy = function () { alert("Nákup se nepodařilo připravit: " + reason); };
+    window.__kasaBuy = function () {
+      // přeložená hláška z aplikace (index.html), technický důvod v závorce
+      var msg = typeof window.__kasaT === "function" ? window.__kasaT("billSetupFail") : "Purchase could not be prepared.";
+      alert(msg + " (" + reason + ")");
+    };
     window.__kasaRestore = window.__kasaBuy;
   }
 
@@ -203,7 +208,8 @@
     if (typeof window.__kasaBillingFail === "function") {
       try { window.__kasaBillingFail(kind, code, raw); return; } catch (x) {}
     }
-    alert(raw + (code ? " [" + code + "]" : ""));
+    var t = typeof window.__kasaT === "function" ? window.__kasaT("billFail", code || "?") : "";
+    alert(t || (raw + (code ? " [" + code + "]" : "")));
   }
 
   // Dvojí ťuknutí na tarif dřív spustilo druhý nákup, který obchod odmítl
@@ -256,15 +262,73 @@
         var ps = function (p) {
           return p && p.product && (p.product.priceString || p.product.price_string) || "";
         };
-        var prices = { monthly: ps(monthly), yearly: ps(yearly) };
-        if (prices.monthly || prices.yearly) {
+        var prices = { monthly: ps(monthly), yearly: ps(yearly), monthlyTrial: null, yearlyTrial: null };
+        if (!prices.monthly && !prices.yearly) { return; }
+        var publish = function () {
           window.__KASA_PRICES__ = prices;
           if (typeof window.__kasaPricesChanged === "function") {
             try { window.__kasaPricesChanged(); } catch (e) {}
           }
+        };
+        // Zkušební doba zdarma se na paywallu ukáže, jen když na ni má
+        // uživatel nárok (pravidlo 3.1.2: délka zkoušky a cena po ní).
+        var mt = trialOf(monthly), yt = trialOf(yearly);
+        var isAndroid = typeof cap.getPlatform === "function" && cap.getPlatform() === "android";
+        if (isAndroid || (!mt && !yt)) {
+          // Google Play vrací jen nabídky, na které má uživatel nárok;
+          // defaultOption je ta, kterou purchasePackage koupí.
+          prices.monthlyTrial = mt;
+          prices.yearlyTrial = yt;
+          publish();
+          return;
         }
+        // iOS: nárok potvrdí StoreKit. Neznámý stav = bez zkoušky, ať
+        // paywall neslibuje něco, co obchod nakonec nedá.
+        publish();
+        var ids = [];
+        if (mt) { ids.push(mt.product); }
+        if (yt) { ids.push(yt.product); }
+        call("checkTrialOrIntroductoryPriceEligibility", { productIdentifiers: ids })
+          .then(function (res) {
+            var map = (res && res.eligibility) || res || {};
+            var ok = function (t) {
+              var e = t && map[t.product];
+              return !!(e && Number(e.status) === 2);   // INTRO_ELIGIBILITY_STATUS_ELIGIBLE
+            };
+            prices.monthlyTrial = ok(mt) ? mt : null;
+            prices.yearlyTrial = ok(yt) ? yt : null;
+            if (prices.monthlyTrial || prices.yearlyTrial) { publish(); }
+          })
+          .catch(function () {});
       })
       .catch(function () { pricesLoading = false; });
+  }
+
+  // Zkušební doba zdarma u balíčku: {n, unit: "DAY"|"MONTH", product} nebo null.
+  // Google Play: fáze zdarma ve výchozí nabídce. App Store: úvodní cena 0.
+  function trialOf(pkg) {
+    var p = pkg && pkg.product;
+    if (!p) { return null; }
+    var norm = function (unit, n) {
+      unit = String(unit || "").toUpperCase();
+      n = Number(n) || 0;
+      if (n <= 0) { return null; }
+      if (unit === "DAY") { return { n: n, unit: "DAY", product: p.identifier }; }
+      if (unit === "WEEK") { return { n: n * 7, unit: "DAY", product: p.identifier }; }
+      if (unit === "MONTH") { return { n: n, unit: "MONTH", product: p.identifier }; }
+      if (unit === "YEAR") { return { n: n * 12, unit: "MONTH", product: p.identifier }; }
+      return null;
+    };
+    var opt = p.defaultOption;
+    if (opt && opt.freePhase && opt.freePhase.billingPeriod) {
+      var bp = opt.freePhase.billingPeriod;
+      return norm(bp.unit, (bp.value || 0) * (opt.freePhase.billingCycleCount || 1));
+    }
+    var ip = p.introPrice;
+    if (ip && Number(ip.price) === 0) {
+      return norm(ip.periodUnit, (ip.periodNumberOfUnits || 0) * (ip.cycles || 1));
+    }
+    return null;
   }
   window.__kasaLoadPrices = loadPrices;
   loadPrices();

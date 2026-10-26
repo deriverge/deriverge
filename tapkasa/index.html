@@ -500,6 +500,7 @@
   .pw-plan .k{font-size:12px;font-weight:700;color:var(--ink-2);text-transform:uppercase;letter-spacing:.05em}
   .pw-plan .p{font-size:clamp(15px,5.6vw,22px);max-width:100%;text-align:center;overflow-wrap:anywhere;line-height:1.1}
   .pw-plan .s{font-size:11px;color:var(--ink-3)}
+  .pw-plan .tr{margin-top:4px;font-size:12px;font-weight:600;line-height:1.3;color:var(--cash);text-align:center}
   .pw-plan.best{border-color:var(--accent);background:var(--accent-tint)}
   .pw-plan:active{transform:scale(.98)}
   .pw-legal{padding:6px 4px 0;text-align:center;font-size:12px;color:var(--ink-3)}
@@ -1183,7 +1184,14 @@
     diagHide: "Skrýt podrobnosti",
     diagNoBridge: "most nenačten",
     diagReady: "modul připraven",
-    diagMissing: "modul chybí"
+    diagMissing: "modul chybí",
+    daysN: ["den", "dny", "dní"],
+    monthsN: ["měsíc", "měsíce", "měsíců"],
+    proTrialThenM: "{0} zdarma, pak {1} měsíčně",
+    proTrialThenY: "{0} zdarma, pak {1} ročně",
+    proTrialTerms: "Zkušební doba je zdarma. Po jejím skončení se předplatné automaticky obnoví za uvedenou cenu, pokud ho nejméně 24 hodin před koncem nezrušíte.",
+    billSetupFail: "Nákup se nepodařilo připravit.",
+    billModuleMissing: "Nákupní modul se nenačetl. Zkuste aplikaci zavřít a znovu otevřít."
   };
 
   I18N.en = {
@@ -1561,7 +1569,14 @@
     diagHide: "Hide details",
     diagNoBridge: "bridge not loaded",
     diagReady: "module ready",
-    diagMissing: "module missing"
+    diagMissing: "module missing",
+    daysN: ["day", "days", "days"],
+    monthsN: ["month", "months", "months"],
+    proTrialThenM: "{0} free, then {1} per month",
+    proTrialThenY: "{0} free, then {1} per year",
+    proTrialTerms: "The trial is free. When it ends, the subscription renews automatically at the price shown unless you cancel at least 24 hours before the trial ends.",
+    billSetupFail: "The purchase could not be prepared.",
+    billModuleMissing: "The purchase module did not load. Try closing and reopening the app."
   };
 
   // ==== strojově vkládané překlady (gen-i18n.cjs) ====
@@ -1940,7 +1955,14 @@
     diagHide: "Skryť podrobnosti",
     diagNoBridge: "most nenačítaný",
     diagReady: "modul pripravený",
-    diagMissing: "modul chýba"
+    diagMissing: "modul chýba",
+    daysN: ["deň", "dni", "dní"],
+    monthsN: ["mesiac", "mesiace", "mesiacov"],
+    proTrialThenM: "{0} zadarmo, potom {1} mesačne",
+    proTrialThenY: "{0} zadarmo, potom {1} ročne",
+    proTrialTerms: "Skúšobná doba je zadarmo. Po jej skončení sa predplatné automaticky obnoví za uvedenú cenu, ak ho najmenej 24 hodín pred koncom nezrušíte.",
+    billSetupFail: "Nákup sa nepodarilo pripraviť.",
+    billModuleMissing: "Nákupný modul sa nenačítal. Skúste aplikáciu zavrieť a znova otvoriť."
   };
 
   I18N.de = {
@@ -2318,7 +2340,14 @@
     diagHide: "Details ausblenden",
     diagNoBridge: "Bridge nicht geladen",
     diagReady: "Modul bereit",
-    diagMissing: "Modul fehlt"
+    diagMissing: "Modul fehlt",
+    daysN: ["Tag", "Tage", "Tage"],
+    monthsN: ["Monat", "Monate", "Monate"],
+    proTrialThenM: "{0} gratis, danach {1} pro Monat",
+    proTrialThenY: "{0} gratis, danach {1} pro Jahr",
+    proTrialTerms: "Der Testzeitraum ist kostenlos. Danach verlängert sich das Abo automatisch zum angezeigten Preis, wenn Sie es nicht mindestens 24 Stunden vor Ablauf kündigen.",
+    billSetupFail: "Der Kauf konnte nicht vorbereitet werden.",
+    billModuleMissing: "Das Kaufmodul wurde nicht geladen. Bitte die App schließen und neu öffnen."
   };
 
   I18N.fr = {
@@ -2696,7 +2725,14 @@
     diagHide: "Masquer les détails",
     diagNoBridge: "pont non chargé",
     diagReady: "module prêt",
-    diagMissing: "module absent"
+    diagMissing: "module absent",
+    daysN: ["jour", "jours", "jours"],
+    monthsN: ["mois", "mois", "mois"],
+    proTrialThenM: "Gratuit pendant {0}, puis {1} par mois",
+    proTrialThenY: "Gratuit pendant {0}, puis {1} par an",
+    proTrialTerms: "L'essai est gratuit. À sa fin, l'abonnement se renouvelle automatiquement au prix indiqué, sauf résiliation au moins 24 heures avant la fin de l'essai.",
+    billSetupFail: "L'achat n'a pas pu être préparé.",
+    billModuleMissing: "Le module d'achat ne s'est pas chargé. Fermez puis rouvrez l'application."
   };
 
   I18N.es = {
@@ -3074,7 +3110,14 @@
     diagHide: "Ocultar detalles",
     diagNoBridge: "puente no cargado",
     diagReady: "módulo listo",
-    diagMissing: "falta el módulo"
+    diagMissing: "falta el módulo",
+    daysN: ["día", "días", "días"],
+    monthsN: ["mes", "meses", "meses"],
+    proTrialThenM: "{0} gratis, después {1} al mes",
+    proTrialThenY: "{0} gratis, después {1} al año",
+    proTrialTerms: "La prueba es gratuita. Al terminar, la suscripción se renueva automáticamente al precio indicado, salvo que la cancele al menos 24 horas antes del final.",
+    billSetupFail: "No se pudo preparar la compra.",
+    billModuleMissing: "El módulo de compra no se cargó. Cierre la aplicación y vuelva a abrirla."
   };
 
   I18N.it = {
@@ -3452,7 +3495,14 @@
     diagHide: "Nascondi dettagli",
     diagNoBridge: "bridge non caricato",
     diagReady: "modulo pronto",
-    diagMissing: "modulo mancante"
+    diagMissing: "modulo mancante",
+    daysN: ["giorno", "giorni", "giorni"],
+    monthsN: ["mese", "mesi", "mesi"],
+    proTrialThenM: "{0} gratis, poi {1} al mese",
+    proTrialThenY: "{0} gratis, poi {1} all'anno",
+    proTrialTerms: "La prova è gratuita. Al termine l'abbonamento si rinnova automaticamente al prezzo indicato, a meno che non lo disdiciate almeno 24 ore prima della fine.",
+    billSetupFail: "Non è stato possibile preparare l'acquisto.",
+    billModuleMissing: "Il modulo di acquisto non si è caricato. Chiudete e riaprite l'app."
   };
 
   I18N.pl = {
@@ -3830,7 +3880,14 @@
     diagHide: "Ukryj szczegóły",
     diagNoBridge: "most nie załadowany",
     diagReady: "moduł gotowy",
-    diagMissing: "brak modułu"
+    diagMissing: "brak modułu",
+    daysN: ["dzień", "dni", "dni"],
+    monthsN: ["miesiąc", "miesiące", "miesięcy"],
+    proTrialThenM: "{0} za darmo, potem {1} miesięcznie",
+    proTrialThenY: "{0} za darmo, potem {1} rocznie",
+    proTrialTerms: "Okres próbny jest bezpłatny. Po jego zakończeniu subskrypcja odnowi się automatycznie w podanej cenie, chyba że anulujesz ją co najmniej 24 godziny przed końcem.",
+    billSetupFail: "Nie udało się przygotować zakupu.",
+    billModuleMissing: "Moduł zakupów się nie załadował. Zamknij aplikację i otwórz ją ponownie."
   };
 
   I18N.pt = {
@@ -4208,7 +4265,14 @@
     diagHide: "Ocultar detalhes",
     diagNoBridge: "ponte não carregada",
     diagReady: "módulo pronto",
-    diagMissing: "módulo em falta"
+    diagMissing: "módulo em falta",
+    daysN: ["dia", "dias", "dias"],
+    monthsN: ["mês", "meses", "meses"],
+    proTrialThenM: "{0} grátis, depois {1} por mês",
+    proTrialThenY: "{0} grátis, depois {1} por ano",
+    proTrialTerms: "O período experimental é gratuito. Quando terminar, a subscrição renova-se automaticamente ao preço indicado, a menos que a cancele pelo menos 24 horas antes do fim.",
+    billSetupFail: "Não foi possível preparar a compra.",
+    billModuleMissing: "O módulo de compras não carregou. Feche e volte a abrir a aplicação."
   };
   // ==== konec vkládaných překladů ====
 
@@ -4426,6 +4490,30 @@
     return plan === "yearly" ? "$39.99" : "$4.99";
   }
 
+  // Zkušební doba zdarma z obchodu (mobile/billing.js ji dodá, jen když na
+  // ni má uživatel nárok): {n, unit: "DAY"|"MONTH"} nebo null.
+  function trialOf(plan) {
+    var p = window.__KASA_PRICES__ || {};
+    var t = plan === "yearly" ? p.yearlyTrial : p.monthlyTrial;
+    return t && t.n > 0 && (t.unit === "DAY" || t.unit === "MONTH") ? t : null;
+  }
+
+  function trialText(t) {
+    return t.n + " " + tp(t.unit === "MONTH" ? "monthsN" : "daysN", t.n);
+  }
+
+  // Cena je na tlačítku největší (tu obchod účtuje); pod ní, kolik dní je
+  // zdarma a kolik se platí potom (pravidlo 3.1.2).
+  function planButton(plan) {
+    var yearly = plan === "yearly";
+    var price = priceOf(plan), tr = trialOf(plan);
+    return '<button class="pw-plan' + (yearly ? " best" : "") + '" data-buy="' + plan + '"><span class="k">' +
+           esc(T(yearly ? "proYearly" : "proMonthly")) + '</span><span class="p num">' + esc(price) + "</span>" +
+           '<span class="s">' + esc(T(yearly ? "proPerYear" : "proPerMonth", "")).replace(" / ", "/") + "</span>" +
+           (tr ? '<span class="tr">' + esc(T(yearly ? "proTrialThenY" : "proTrialThenM", trialText(tr), price)) + "</span>" : "") +
+           "</button>";
+  }
+
   var PRO_MARK = '<svg viewBox="0 0 48 48" aria-hidden="true"><rect x="4" y="4" width="19" height="19" rx="5" fill="#D6402A"/><rect x="25" y="4" width="19" height="19" rx="5" fill="#F5CE3E"/><rect x="4" y="25" width="19" height="19" rx="5" fill="#2158C4"/><rect x="25" y="25" width="19" height="19" rx="5" fill="#127A4E"/></svg>';
   var PW_CHECK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>';
 
@@ -4528,6 +4616,8 @@
     showToast(msg);
   };
   window.__kasaPricesChanged = function () { render(); };
+  // překlady pro mobile/billing.js (hlášky mimo stránku)
+  window.__kasaT = function (key, a) { return T(key, a); };
 
   var proCeleTimer = null;
   function closeCelebration() {
@@ -4579,21 +4669,27 @@
     return !!(d && d.plugin && d.supported !== false);
   }
 
+  // Hlášky jsou přeložené; technický důvod jde do závorky, ať se dá
+  // nahlásit podpoře.
+  function billAlert(key, why) {
+    alert(T(key) + (why ? " (" + why + ")" : ""));
+  }
+
   function billingBuy(plan) {
     if (window.__kasaBuy) {
       try { window.__kasaBuy(plan); return; }
-      catch (e) { alert(String(e && e.message || e)); return; }
+      catch (e) { billAlert("billSetupFail", String(e && e.message || e)); return; }
     }
-    if (nativeApp()) { alert(window.__kasaBillingError || "Nákupní modul se nenačetl."); return; }
+    if (nativeApp()) { billAlert("billModuleMissing", window.__kasaBillingError || ""); return; }
     showToast(T("proWebHint"));
   }
 
   function billingRestore() {
     if (window.__kasaRestore) {
       try { window.__kasaRestore(); return; }
-      catch (e) { alert(String(e && e.message || e)); return; }
+      catch (e) { billAlert("billSetupFail", String(e && e.message || e)); return; }
     }
-    if (nativeApp()) { alert(window.__kasaBillingError || "Nákupní modul se nenačetl."); return; }
+    if (nativeApp()) { billAlert("billModuleMissing", window.__kasaBillingError || ""); return; }
     showToast(T("proWebHint"));
   }
 
@@ -8203,13 +8299,11 @@
              '<div class="pw-b">' + PW_CHECK + esc(T("proB2")) + "</div>" +
              '<div class="pw-b">' + PW_CHECK + esc(T("proB3")) + "</div>" +
            "</div>" +
-           '<div class="pw-plans">' +
-             '<button class="pw-plan" data-buy="monthly"><span class="k">' + esc(T("proMonthly")) + '</span><span class="p num">' + esc(priceOf("monthly")) + "</span><span class=\"s\">" + esc(T("proPerMonth", "")) .replace(" / ", "/") + "</span></button>" +
-             '<button class="pw-plan best" data-buy="yearly"><span class="k">' + esc(T("proYearly")) + '</span><span class="p num">' + esc(priceOf("yearly")) + "</span><span class=\"s\">" + esc(T("proPerYear", "")).replace(" / ", "/") + "</span></button>" +
-           "</div>" +
+           '<div class="pw-plans">' + planButton("monthly") + planButton("yearly") + "</div>" +
            '<button class="btn-ghost" data-restorebuy="1">' + esc(T("proRestore")) + "</button>" +
            '<button class="btn-ghost" data-cancel="1">' + esc(T("proLater")) + "</button>" +
-           '<p class="hint" style="padding:10px 4px 0">' + esc(T("proTerms")) + "</p>" +
+           '<p class="hint" style="padding:10px 4px 0">' +
+             (trialOf("monthly") || trialOf("yearly") ? esc(T("proTrialTerms")) + " " : "") + esc(T("proTerms")) + "</p>" +
            '<p class="pw-legal"><a href="https://www.deriverge.com/tapkasa/privacy.html" target="_blank" rel="noopener">' + esc(T("proPrivacy")) + "</a>" +
            ' · <a href="https://www.deriverge.com/tapkasa/terms.html" target="_blank" rel="noopener">' + esc(T("proTermsLink")) + "</a></p>";
     }
