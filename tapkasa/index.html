@@ -4870,6 +4870,10 @@
   var loadedLegacy = false;  // stav při startu byl ve tvaru starší verze
   var archToDb = true;       // archiv do IndexedDB ještě nebyl zapsaný
   var archToNative = true;   // archiv do souboru aplikace ještě nebyl zapsaný
+  var archLsOk = true;       // archiv se vešel do localStorage
+  var archInDb = false;      // archiv je potvrzeně zapsaný v IndexedDB
+  var archReading = false;   // čte se kopie archivu z IndexedDB (jiná karta)
+  var bootSavedAt = 0;       // savedAt stavu, jak se načetl při startu
   var legacyRaw = "";        // stav ze starší verze, jak byl načtený
   var lastStoreError = "";
 
@@ -4918,6 +4922,7 @@
     d.mode = d.mode === "vydej" ? "vydej" : "kasa";
     d.voice = d.voice !== false;
     d.pair = typeof d.pair === "string" ? d.pair : "";
+    d.pairV = d.pairV === 2 ? 2 : 0;   // 2 = kód z 1.0.6+ (šifrované párování)
     d.lang = isLang(d.lang) ? d.lang : "cs";
     d.currency = typeof d.currency === "string" && d.currency ? d.currency : "CZK";
     // Kdo už má data, tomu se úvod nezobrazuje. Výslovné setup:false (úvod
@@ -5047,6 +5052,9 @@
     archMissing = still;
     if (found) {
       state.archives.sort(function (a, b) { return (a.closedAt || 0) - (b.closedAt || 0); });
+      // dřívější zápis mohl doplněné akce vynechat: zapsat všude znovu
+      archSig = null;
+      archToNative = true;
     }
     return found;
   }
@@ -5129,14 +5137,33 @@
     return null;
   }
 
+  function lsSet(key, text) {
+    try { localStorage.setItem(key, text); return true; } catch (e) { return false; }
+  }
+
+  // archStore odpovídá vždy naposledy zapsanému archivu: smazaná nebo
+  // vrácená akce se z něj nevrátí.
+  function archStoreSet(list) {
+    archStore = {};
+    list.forEach(function (a) { if (a && a.id) { archStore[a.id] = a; } });
+  }
+
+  function withArchives(mj, archJson) {
+    return mj.slice(0, -1) + ',"archives":' + (archJson !== null ? archJson : JSON.stringify(state.archives)) + "}";
+  }
+
   function flushSave() {
     if (saveTimer) { clearTimeout(saveTimer); saveTimer = null; }
     if (!state) { return; }
     state.savedAt = Date.now();
     var sig = archIdList().join(",");
+    // Chybí-li část archivu a kopie v IndexedDB se ještě čte, archiv se
+    // nikam nezapisuje: zápis bez chybějících akcí by přepsal jejich
+    // jedinou kopii. Hlavní stav jejich id nese dál.
+    var hold = archMissing.length > 0 && (!dbSettled || archReading);
     var archJson = null, mj;
     try {
-      if (sig !== archSig) { archJson = JSON.stringify(state.archives); }
+      if (!hold && sig !== archSig) { archJson = JSON.stringify(state.archives); }
       mj = mainJson();
     } catch (e) { return; }
     var hook = nativeSaveHook();
@@ -5144,22 +5171,41 @@
 
     // Archiv vždy dřív než hlavní stav, který se na něj odkazuje.
     if (archJson !== null) {
-      try { localStorage.setItem(ARCH_KEY, archJson); lastStoreError = ""; }
-      catch (e) { lastStoreError = "arch"; }
+      // Nevejde-li se (třeba při převodu, kdy místo drží ještě úplný stav
+      // ze starší verze), zůstane archiv vložený v hlavní kopii níže.
+      var ok = lsSet(ARCH_KEY, archJson);
+      if (!ok) { try { localStorage.removeItem(ARCH_KEY); } catch (e) {} }
+      archLsOk = ok;
+      lastStoreError = ok ? "" : "arch";
       archSig = sig;
       archToDb = true;
       archToNative = true;
+      archInDb = false;
+      archStoreSet(state.archives);
     }
     // most (bridge.js) se načítá až za stránkou: dokud tu není, archiv do
     // souboru počká na další uložení
-    if (archHook && archToNative) {
+    if (archHook && archToNative && !hold) {
       try {
         archHook(archJson !== null ? archJson : JSON.stringify(state.archives));
         archToNative = false;
       } catch (e) {}
     }
 
-    try { localStorage.setItem(KEY, mj); } catch (e) { lastStoreError = "main"; }
+    // Archiv se do localStorage nevešel a IndexedDB ho ještě nemá: hlavní
+    // kopie ho nese vložený jako dřív, ať v prohlížeči nezůstane jen v paměti.
+    var main = mj;
+    if (!archLsOk && !archInDb && state.archives.length && !hold) { main = withArchives(mj, archJson); }
+    if (!lsSet(KEY, main)) {
+      if (main !== mj && lsSet(KEY, mj)) {
+        // aspoň hlavní stav; archiv drží IndexedDB nebo soubor aplikace
+      } else {
+        // hlavní stav má přednost před kopií archivu v localStorage
+        try { localStorage.removeItem(ARCH_KEY); } catch (e) {}
+        archLsOk = false;
+        if (!lsSet(KEY, mj)) { lastStoreError = "main"; }
+      }
+    }
 
     if (hook) {
       try {
@@ -5168,8 +5214,7 @@
         } else {
           // Nativní obal bez souboru pro archiv: soubor dostane úplný stav,
           // vložený archiv pak při čtení platí celý.
-          var full = archJson !== null ? archJson : JSON.stringify(state.archives);
-          hook(mj.slice(0, -1) + ',"archives":' + full + "}");
+          hook(withArchives(mj, archJson));
         }
       } catch (e) {}
     }
@@ -5177,11 +5222,14 @@
     if (!dbSettled || !db) { return; }
     try {
       var tx = db.transaction(DB_STORE, "readwrite");
+      var wroteArch = false;
       tx.onerror = tx.onabort = function () { archToDb = true; };
+      tx.oncomplete = function () { if (wroteArch) { archInDb = true; } };
       var st = tx.objectStore(DB_STORE);
-      if (archToDb) {
+      if (archToDb && !hold) {
         st.put(archJson !== null ? archJson : JSON.stringify(state.archives), DB_ARCH);
         archToDb = false;
+        wroteArch = true;
       }
       st.put(mj, DB_KEY);
     } catch (e) { archToDb = true; }
@@ -5217,7 +5265,12 @@
     rq.onupgradeneeded = function () {
       try { rq.result.createObjectStore(DB_STORE); } catch (e) {}
     };
-    rq.onsuccess = function () { db = rq.result; settle(); };
+    // Databáze otevřená až po vypršení času se nepoužije: nebyla přečtená
+    // a zápis by přepsal kopii, kterou jsme neviděli.
+    rq.onsuccess = function () {
+      if (called) { try { rq.result.close(); } catch (e) {} return; }
+      db = rq.result; settle();
+    };
     rq.onerror = function () { settle(); };
     rq.onblocked = function () { settle(); };
   }
@@ -5502,7 +5555,12 @@
            codeCheck(c.slice(0, -1)) === c.slice(-1);
   }
 
-  function showCode(c) { return isNewCode(c) ? c.slice(0, 4) + "-" + c.slice(4) : c; }
+  // Uložený kód je nového tvaru, jen když vznikl nebo se zadal v 1.0.6+
+  // (pairV 2). Vlastní osmiznakový kód ze starší verze by kontrolním
+  // znakem občas prošel náhodou a přepnul by se na šifrování.
+  function pairIsV2() { return state.pairV === 2 && isNewCode(state.pair); }
+
+  function showCode(c) { return c === state.pair && pairIsV2() ? c.slice(0, 4) + "-" + c.slice(4) : c; }
 
   function canCrypt() {
     return !!(window.crypto && crypto.subtle && typeof crypto.subtle.deriveBits === "function" &&
@@ -5540,7 +5598,7 @@
     var code = state.pair || "";
     var gen = ++pairGen;
     if (!code) { pairCtx = null; if (done) { done(); } return; }
-    if (!isNewCode(code)) {
+    if (!pairIsV2()) {
       pairCtx = { code: code, enc: false, topic: "kasa-stanek-" + code, room: code, ready: true };
       if (done) { done(); }
       return;
@@ -5572,7 +5630,9 @@
   var sealChain = Promise.resolve();
   function sealed(msg, send) {
     var ctx = pairCtx;
-    if (!ctx || !ctx.enc) { send(JSON.stringify(msg)); return; }
+    // nový kód bez připraveného klíče: radši nic, než poslat čitelně
+    if (!ctx) { if (!pairIsV2()) { send(JSON.stringify(msg)); } return; }
+    if (!ctx.enc) { send(JSON.stringify(msg)); return; }
     if (!ctx.ready || !ctx.key) { return; }
     sealChain = sealChain.then(function () {
       var iv = new Uint8Array(12);
@@ -5593,13 +5653,17 @@
     if (!ctx || !ctx.enc || !ctx.ready || !ctx.key || !isSealed(o)) { return; }
     var iv, ct;
     try { iv = unb64(o.n); ct = unb64(o.c); } catch (e) { return; }
-    crypto.subtle.decrypt({ name: "AES-GCM", iv: iv }, ctx.key, ct).then(function (plain) {
-      if (ctx !== pairCtx) { return; }
-      var msg = null;
-      try { msg = JSON.parse(new TextDecoder().decode(plain)); } catch (e) { return; }
-      if (msg && typeof msg === "object") { done(msg); }
-    }, function () {});
+    // zpracovat v pořadí příchodu, stejně jako nešifrované zprávy
+    unsealChain = unsealChain.then(function () {
+      return crypto.subtle.decrypt({ name: "AES-GCM", iv: iv }, ctx.key, ct).then(function (plain) {
+        if (ctx !== pairCtx) { return; }
+        var msg = null;
+        try { msg = JSON.parse(new TextDecoder().decode(plain)); } catch (e) { return; }
+        if (msg && typeof msg === "object") { done(msg); }
+      }, function () {});
+    }).catch(function () {});
   }
+  var unsealChain = Promise.resolve();
 
   // Bez šifrování se na přeposílač vejde 3,5 kB textu, se šifrováním
   // (base64 přidá třetinu) méně; přeposílač bere nejvýš 4 kB.
@@ -5801,7 +5865,8 @@
     var at = setupAskAt;
     var q = T("setupSendAsk");
     ask(q[0], q[1], q[2], function () {
-      if (Date.now() - at > SETUP_ASK_MS) { showToast(T("setupSendLate")); return; }
+      // starší verze čeká na odpověď jen 90 s
+      if (Date.now() - at > (pairIsV2() ? SETUP_ASK_MS : 85000)) { showToast(T("setupSendLate")); return; }
       sendSetup();
       showToast(T("setupSent"));
     });
@@ -5817,7 +5882,6 @@
 
   function sendSetup() {
     var p = setupPayload();
-    nativeSend({ t: "setup", seq: 0, last: true, full: true, seller: p.seller, currency: p.currency, vat: p.vat, event: p.event, items: p.items });
     // první část nese i údaje prodejce, vejde se do ní tedy méně položek
     var chunks = [], cur = [], size = blen(JSON.stringify(p.seller)) + 300;
     p.items.forEach(function (it) {
@@ -5826,9 +5890,13 @@
       cur.push(it); size += len;
     });
     chunks.push(cur);
+    // Nativní cesta i přeposílač nesou stejné části (seq, n): příjemce
+    // duplicity zahodí podle seq. Dřív šlo nativně celé menu jednou zprávou,
+    // šifrované by u velkého menu přerostlo limit Nearby (32 kB).
     chunks.forEach(function (c, i) {
       var m = { t: "setup", seq: i, n: chunks.length, last: i === chunks.length - 1, items: c };
       if (i === 0) { m.seller = p.seller; m.currency = p.currency; m.vat = p.vat; m.event = p.event; }
+      nativeSend(JSON.parse(JSON.stringify(m)));
       relayPost(m);
     });
   }
@@ -6231,18 +6299,23 @@
   // zařízení visí na jiném kódu.
   var lastHello = 0, helloBack = 0, lastQueueSent = 0;
 
-  function helloMsg() { return { t: "hi", role: state.mode, pro: isPro() ? 1 : 0, v: APP_VERSION }; }
+  // need: zařízení se právě zapnulo a chce frontu hned (bez 20s brzdy)
+  function helloMsg(need) {
+    var m = { t: "hi", role: state.mode, pro: isPro() ? 1 : 0, v: APP_VERSION };
+    if (need) { m.need = 1; }
+    return m;
+  }
 
-  function sayHello(force) {
+  function sayHello(force, need) {
     var now = Date.now();
     if (!force && now - lastHello < 15000) { return; }
     lastHello = now;
-    relayPost(helloMsg());
+    relayPost(helloMsg(need));
   }
 
   // Nativní spojení: pozdrav hned po spojení, ať se párování bez Pro zapne
   // i bez internetu.
-  function nativeHello() { nativeSend(helloMsg()); }
+  function nativeHello(need) { nativeSend(helloMsg(need)); }
 
   function relayDeleted(ids) { relayPost({ t: "del", ids: ids }); }
   // Otevřené objednávky všech akcí jen přes přeposílač (po připojení nebo
@@ -6362,10 +6435,17 @@
     }
     var nowActive = pairActive();
     if (nowActive && !wasActive) {
-      // právě se zapnulo: kasa pošle frontu, výdej se ohlásí znovu
+      // Právě se zapnulo: pošleme své otevřené objednávky a požádáme
+      // o frontu druhé strany. Tu mohla poslat dřív, než jsme ji brali.
       pushEverything();
       showToast(T("pairNowActive"));
-    } else if (nowActive && state.mode === "kasa" && msg.role === "vydej" && Date.now() - lastQueueSent > 20000) {
+      helloBack = Date.now();
+      if (via === "native") { nativeHello(true); } else { sayHello(true, true); }
+      render();
+      return;
+    }
+    if (nowActive && state.mode === "kasa" &&
+        (msg.need || (msg.role === "vydej" && Date.now() - lastQueueSent > 20000))) {
       lastQueueSent = Date.now();
       if (via === "native") { pushEverything(); } else { relayAllOpen(); }
     }
@@ -7695,7 +7775,7 @@
       var warn = function (text) {
         return '<p class="hint" style="color:var(--accent);text-align:left;padding-top:0;padding-bottom:2px">' + esc(text) + "</p>";
       };
-      var fresh = isNewCode(state.pair);
+      var fresh = pairIsV2();
       h += '<div class="link on" style="padding-top:0"><i></i>' + esc(T("pairCode")) + " <strong>" + esc(showCode(state.pair)) + "</strong></div>" +
         (pairCtx && pairCtx.err ? warn(T("pairNoCrypto")) : "") +
         (fresh && !pairActive() ? warn(T(lastHiNoPro && Date.now() - lastHiNoPro < LINK_FRESH_MS ? "pairNoPro" : "pairWaitPro")) : "") +
@@ -9158,6 +9238,7 @@
         var rmax = normSales(rsales, rid);
         var rnext = Math.max(ao.nextNo || 0, rmax + 1);
         state.archives = state.archives.filter(function (x) { return x.id !== ao.id; });
+        delete archStore[ao.id]; delete archPool[ao.id];
         if (into && into.active) {
           state.event = ao.event;
           state.sales = rsales;
@@ -9192,6 +9273,7 @@
       var dx = T("confirmArchDel");
       ask(dx[0], dx[1].split("{0}").join(ad.event), dx[2], function () {
         state.archives = state.archives.filter(function (x) { return x.id !== ad.id; });
+        delete archStore[ad.id]; delete archPool[ad.id];
         saveNow(); render();
         showToast(T("toastArchDel"));
       });
@@ -9312,6 +9394,7 @@
       if (!canCrypt()) { showToast(T("pairNoCrypto")); return; }
       var code = newPairCode();
       state.pair = code;
+      state.pairV = 2;
       saveNow(); pairOpen(); render();
       showToast(T("toastCode", showCode(code)));
       return;
@@ -9330,6 +9413,7 @@
       }
       if (!canCrypt()) { showToast(T("pairNoCrypto")); return; }
       state.pair = code2;
+      state.pairV = 2;
       saveNow(); pairOpen(); render();
       showToast(T("toastJoining", showCode(code2)));
       return;
@@ -9352,6 +9436,7 @@
 
     if (d.pairoff) {
       state.pair = "";
+      state.pairV = 0;
       peers = 0;
       nativePeers = 0;
       lastIn = 0; lastHiNoPro = 0;
@@ -9642,6 +9727,9 @@
 
   // ---------- boot ----------
   state = load();
+  // IndexedDB se porovnává se stavem ze startu: ťuknutí před jejím
+  // přečtením posune savedAt a starší kopie by jinak přebila novější
+  bootSavedAt = state.savedAt || 0;
   try {
     if (!state.setup && localStorage.getItem("kasa.setupDone")) { state.setup = true; }
   } catch (e) {}
@@ -9688,7 +9776,16 @@
     var keepOrder = state.order, keepEv = state.evId, prevPair = state.pair;
     state = other;
     archMissing = miss;
-    if (newFormat) { archSig = archIdList().join(","); }
+    if (newFormat && !miss.length) { archSig = archIdList().join(","); }
+    if (miss.length && db) {
+      // druhá karta má archiv jen v IndexedDB (do localStorage se nevešel)
+      archReading = true;
+      dbRead(function (arch) {
+        poolArchiveText(arch);
+        archReading = false;
+        if (resolveMissing()) { render(); }
+      }, DB_ARCH);
+    }
     // Rozpracovaný účet patří této kartě; cizí by rozhodil otevřené placení.
     if (state.evId === keepEv) { state.order = keepOrder; }
     else if (sheet) { sheet = null; }
@@ -9710,7 +9807,7 @@
         // V zařízení nic není, ale záložní kopie ano, nebo je záložní kopie
         // novější (localStorage se přestal ukládat, když došlo místo) → obnovit.
         if (backup && !backupEmpty &&
-            ((isEmpty(state) && !archMissing.length) || (backup.savedAt || 0) > (state.savedAt || 0))) {
+            ((isEmpty(state) && !archMissing.length) || (backup.savedAt || 0) > bootSavedAt)) {
           state = backup;
           archMissing = bMiss;
           loadedLegacy = backupLegacy;

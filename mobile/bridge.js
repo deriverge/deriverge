@@ -55,7 +55,10 @@
   } else if (typeof cap.registerPlugin === "function") {
     try { RateApp = cap.registerPlugin("RateApp"); } catch (e) {}
   }
-  if (RateApp) {
+  // Jen iOS: na Androidu nativní modul RateApp není (registerPlugin vrátí
+  // prázdnou náhradu) a žádost by tiše propadla i se započteným pokusem.
+  var isIos = typeof cap.getPlatform === "function" && cap.getPlatform() === "ios";
+  if (RateApp && isIos) {
     window.__kasaAskReview = function () {
       // most u metod bez návratové hodnoty vrací undefined, ne příslib
       try { Promise.resolve(RateApp.request()).catch(function () {}); } catch (e) {}
