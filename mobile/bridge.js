@@ -148,6 +148,10 @@
   // do objektu WebKitu povedlo. Stránka je zkouší jako první.
   window.__kasaPeerSend = function (json) { callSafe("send", { json: String(json) }); };
   window.__kasaSave = function (json) { callSafe("save", { json: String(json) }); };
+  // Archiv uzavřených akcí má od 1.0.6 vlastní soubor (kasa-archive.json),
+  // ukládá se jen při změně; při startu ho dodá __KASA_BOOT_ARCH__ (iOS)
+  // nebo window.__kasaStore.read("archive") (Android).
+  window.__kasaSaveArchive = function (json) { callSafe("save", { json: String(json), file: "archive" }); };
 
   // ---- do webu: nativní události přeposíláme do funkcí stránky ------------
 

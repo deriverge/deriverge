@@ -27,9 +27,13 @@ import com.google.android.gms.nearby.connection.PayloadCallback;
 import com.google.android.gms.nearby.connection.PayloadTransferUpdate;
 import com.google.android.gms.nearby.connection.Strategy;
 
+import android.webkit.JavascriptInterface;
+import android.webkit.WebView;
+
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -178,20 +182,89 @@ public class PeerLinkPlugin extends Plugin {
         call.resolve();
     }
 
-    /** Záloha stavu kasy do souboru aplikace (na Androidu drží data i webview). */
+    /**
+     * Trvalé uložení stavu kasy do souboru aplikace: kasa.json (hlavní stav)
+     * a kasa-archive.json (archiv uzavřených akcí, parametr file="archive").
+     * Zápis jde přes dočasný soubor a přejmenování, takže výpadek uprostřed
+     * zápisu nenechá rozbitý soubor. Při startu stránka soubory čte přes
+     * rozhraní __kasaStore (viz load()), stejně jako na iOS.
+     */
     @PluginMethod
     public void save(PluginCall call) {
         String json = call.getString("json");
         if (json == null) { call.reject("Chybí parametr 'json'"); return; }
-        try {
-            File f = new File(getContext().getFilesDir(), "kasa.json");
-            try (OutputStreamWriter w = new OutputStreamWriter(new FileOutputStream(f), StandardCharsets.UTF_8)) {
-                w.write(json);
-            }
-        } catch (Exception e) {
-            // záloha je jen pojistka, chyba nesmí shodit ukládání ve stránce
+        String name = "archive".equals(call.getString("file", "")) ? ARCHIVE_FILE : MAIN_FILE;
+        if (!writeAtomic(name, json)) {
+            // ukládání ve stránce (localStorage, IndexedDB) běží dál
+            call.reject("Soubor se nepodařilo uložit");
+            return;
         }
         call.resolve();
+    }
+
+    private static final String MAIN_FILE = "kasa.json";
+    private static final String ARCHIVE_FILE = "kasa-archive.json";
+    private final Object fileLock = new Object();
+
+    private boolean writeAtomic(String name, String json) {
+        synchronized (fileLock) {
+            File dir = getContext().getFilesDir();
+            File tmp = new File(dir, name + ".tmp");
+            File dst = new File(dir, name);
+            try (FileOutputStream out = new FileOutputStream(tmp)) {
+                out.write(json.getBytes(StandardCharsets.UTF_8));
+                out.flush();
+                out.getFD().sync();
+            } catch (Exception e) {
+                tmp.delete();
+                return false;
+            }
+            if (!tmp.renameTo(dst)) {
+                tmp.delete();
+                return false;
+            }
+            return true;
+        }
+    }
+
+    private String readFile(String name) {
+        synchronized (fileLock) {
+            File f = new File(getContext().getFilesDir(), name);
+            if (!f.isFile()) { return ""; }
+            try (FileInputStream in = new FileInputStream(f)) {
+                ByteArrayOutputStream buf = new ByteArrayOutputStream((int) Math.max(16, f.length()));
+                byte[] chunk = new byte[65536];
+                int n;
+                while ((n = in.read(chunk)) > 0) { buf.write(chunk, 0, n); }
+                return new String(buf.toByteArray(), StandardCharsets.UTF_8);
+            } catch (Exception e) {
+                return "";
+            }
+        }
+    }
+
+    /** Synchronní čtení uložených souborů pro stránku: window.__kasaStore.read("main"|"archive"). */
+    private class StoreReader {
+        @JavascriptInterface
+        public String read(String which) {
+            return readFile("archive".equals(which) ? ARCHIVE_FILE : MAIN_FILE);
+        }
+    }
+
+    /**
+     * Rozhraní pro čtení se musí přidat dřív, než se stránka načte. Pluginy
+     * se registrují před načtením webview (Bridge: registerAllPlugins, pak
+     * loadWebView), takže load() přijde včas.
+     */
+    @Override
+    public void load() {
+        super.load();
+        try {
+            WebView web = getBridge() != null ? getBridge().getWebView() : null;
+            if (web != null) { web.addJavascriptInterface(new StoreReader(), "__kasaStore"); }
+        } catch (Exception e) {
+            // bez rozhraní stránka vystačí s localStorage a IndexedDB
+        }
     }
 
     @PluginMethod

@@ -14,6 +14,7 @@ import UIKit
 //   const PeerLink = Capacitor.registerPlugin("PeerLink");
 //   PeerLink.start(); PeerLink.stop(); PeerLink.send({ json });
 //   PeerLink.save({ json });                      // trvalé uložení stavu kasy
+//   PeerLink.save({ json, file: "archive" });     // archiv uzavřených akcí
 //   PeerLink.addListener("message",  ({ json }) => …);
 //   PeerLink.addListener("peerCount", ({ n }) => …);
 
@@ -29,13 +30,25 @@ enum KasaStore {
             .appendingPathComponent("kasa.json")
     }
 
+    /// Archiv uzavřených akcí se od 1.0.6 ukládá zvlášť, ať se při každé
+    /// změně nepřepisuje celý.
+    static var archiveUrl: URL {
+        FileManager.default
+            .urls(for: .documentDirectory, in: .userDomainMask)[0]
+            .appendingPathComponent("kasa-archive.json")
+    }
+
     static func read() -> String {
         (try? String(contentsOf: url, encoding: .utf8)) ?? ""
     }
 
-    static func write(_ json: String) {
+    static func readArchive() -> String {
+        (try? String(contentsOf: archiveUrl, encoding: .utf8)) ?? ""
+    }
+
+    static func write(_ json: String, archive: Bool = false) {
         do {
-            try json.write(to: url, atomically: true, encoding: .utf8)
+            try json.write(to: archive ? archiveUrl : url, atomically: true, encoding: .utf8)
         } catch {
             NSLog("Tapkasa: data se nepodařilo uložit — \(error.localizedDescription)")
         }
@@ -350,7 +363,7 @@ public class PeerLinkPlugin: CAPPlugin, CAPBridgedPlugin {
             call.reject("Chybí parametr 'json'")
             return
         }
-        KasaStore.write(json)
+        KasaStore.write(json, archive: call.getString("file") == "archive")
         call.resolve()
     }
 }

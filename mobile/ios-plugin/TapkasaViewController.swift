@@ -40,9 +40,11 @@ class TapkasaViewController: CAPBridgeViewController {
     override open func webViewConfiguration(for instanceConfiguration: InstanceConfiguration) -> WKWebViewConfiguration {
         let config = super.webViewConfiguration(for: instanceConfiguration)
         // Uložený stav kasy se stránce předává dřív, než se spustí její kód —
-        // window.__KASA_BOOT__ čte load() v index.html synchronně při startu.
+        // window.__KASA_BOOT__ čte load() v index.html synchronně při startu,
+        // __KASA_BOOT_ARCH__ nese archiv uzavřených akcí (od 1.0.6 zvlášť).
         config.userContentController.addUserScript(WKUserScript(
-            source: "window.__KASA_BOOT__ = \(KasaStore.jsLiteral(KasaStore.read()));",
+            source: "window.__KASA_BOOT__ = \(KasaStore.jsLiteral(KasaStore.read())); " +
+                "window.__KASA_BOOT_ARCH__ = \(KasaStore.jsLiteral(KasaStore.readArchive()));",
             injectionTime: .atDocumentStart,
             forMainFrameOnly: true))
         return config
