@@ -1276,6 +1276,7 @@ def page_job_feed():
           <li>Three files in JSON Lines and CSV: the jobs added today, the jobs closed today, so you can take them down, and all open jobs of your feed.</li>
           <li>A feed page shows today's new jobs and the download links, and <code>manifest.json</code> lists the same for your import script. Dated files stay available for 30 days.</li>
           <li>Descriptions come as plain text and as clean HTML, ready to show on your site.</li>
+          <li>For job board software, all open jobs also come as an XML feed in the Indeed format and as a JSON array. Paste the address into your platform's job import and closed jobs drop out on their own.</li>
         </ul>
       </div>''', hid='delivery'),
         section('// pricing', 'Plans', '''      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Plan</th><th>What it includes</th><th>Price</th></tr></thead><tbody>
@@ -1307,7 +1308,7 @@ def page_job_feed():
         ('How fresh is the feed?',
          '<p>The index is rebuilt every night. Boards on ten systems are read daily and the other four in rotation within one to three days, so a new posting reaches the feed within three days.</p>'),
         ('Does the feed contain personal data?',
-         '<p>No candidate data and no lists of recruiters. Descriptions are the employer\'s own text and can name a hiring manager or a contact; leave descriptions out if you do not need them.</p>'),
+         '<p>No candidate data and no lists of recruiters. Descriptions are the employer\'s own text and can name a hiring manager or a contact; leave descriptions out if you do not need them. More on <a href="/tools/job-data-feed/data-and-privacy/">data sources and privacy</a>.</p>'),
         ('Can I show the jobs on my own site?',
          '<p>You decide how you use the data and are responsible for using it lawfully and in line with the employers\' terms. Every record links to the job and apply page on the employer\'s own site. We remove any company from your feed on request.</p>'),
     ]
@@ -1320,6 +1321,46 @@ def page_job_feed():
     layout(path=path, title=title, desc=desc, tab='job-data-feed', kicker='// data feed · for job boards and HR tech', h1='Job data feed',
            lede=f'Every open job from the career sites of more than {c} companies on 14 applicant tracking systems, or just the ones your audience needs, delivered daily. For job boards, HR tech products and labour market research. Free sample and a two-week trial.',
            body=body, ld=ld, campaign=camp)
+
+
+def page_data_privacy():
+    path, camp = '/tools/job-data-feed/data-and-privacy/', 'job-data-privacy'
+    title = 'Job Data Feed: Data Sources, Privacy and Compliance'
+    desc = ('Where the jobs in our data feed come from, how they are collected, what the records hold, how personal data is '
+            'handled and how employers can have their jobs removed.')
+    blocks = [
+        section('sources', 'Where the data comes from', '''      <div class="prose">
+        <p>Every job comes from a public job board that an employer publishes on its applicant tracking system, such as Workday, Greenhouse, Lever, SmartRecruiters, Ashby or iCIMS. We find these career sites through their addresses in the public Common Crawl web archive and read each board's public job list, most of them every day and the rest within three days.</p>
+        <ul>
+          <li>No logins, no accounts and no paywalled content.</li>
+          <li>We respect <code>robots.txt</code> and leave out career sites that disallow their job feed.</li>
+          <li>We never bypass access controls, captchas or rate limits, and we stop reading a site that challenges our requests.</li>
+          <li>Requests are spread out so that no employer's site carries a noticeable load.</li>
+        </ul>
+      </div>''', hid='sources'),
+        section('records', 'What the records hold', '''      <div class="prose">
+        <p>Each record describes one job and its employer: title, employer and website, locations with country codes, work arrangement, employment type, level, job category, salary when the ad states it, posting date, the day we first saw the job and links to the job and apply pages on the employer's own site. The full description, written by the employer, is delivered only on request.</p>
+        <p>There is no candidate data, no list of recruiters or employees and no contact enrichment.</p>
+      </div>''', hid='records'),
+        section('privacy', 'Personal data and GDPR', '''      <div class="prose">
+        <p>deriverge s.r.o. is a company in the Czech Republic and follows the EU General Data Protection Regulation. The dataset is built from facts about jobs and employers, not about people.</p>
+        <p>An employer's own description can mention a hiring manager or a contact. For that reason descriptions are optional, and in every delivered feed we remove email addresses and phone numbers from them. We do not search, collect or sell information about the people named in job ads, and we do not combine the data with other sources about persons.</p>
+      </div>''', hid='privacy'),
+        section('removal', 'Removal and corrections', '''      <div class="prose">
+        <p>An employer can ask us to remove its jobs or its company from our data at <a href="mailto:info@deriverge.com">info@deriverge.com</a>. We remove it from the index and from every customer feed, usually within two working days, and keep it out of future builds. The same address takes corrections and any question about a record.</p>
+      </div>''', hid='removal'),
+        section('customers', 'What we ask of customers', '''      <div class="prose">
+        <p>Customers decide how they use the data and are responsible for using it lawfully, in line with the employers' terms and any rules that apply to job advertising in their market. Every record links back to the job on the employer's own site, and we ask customers who publish jobs to keep that link, so candidates apply with the employer directly.</p>
+      </div>''', hid='customers'),
+        section('company', 'Company', '''      <div class="prose">
+        <p>deriverge s.r.o., Czech Republic, company ID 19456361, VAT ID CZ19456361. Contact: <a href="mailto:info@deriverge.com">info@deriverge.com</a>.</p>
+        <p>See also the <a href="/tools/job-data-feed/">job data feed</a> and <a href="/tools/job-postings-data/">job postings data by country</a>.</p>
+      </div>''', hid='company'),
+    ]
+    layout(path=path, title=title, desc=desc, tab='data-and-privacy', kicker='// job data feed · compliance', h1='Data sources and privacy',
+           lede='How the jobs in our data feed are collected, what the records hold and how we handle personal data and removal requests.',
+           body='\n'.join(blocks), campaign=camp, ld=[{'@context': 'https://schema.org', '@type': 'WebPage', 'name': title, 'url': SITE + path, 'description': desc}],
+           trail=[('deriverge', '/'), ('Tools', '/tools/'), ('Job data feed', '/tools/job-data-feed/'), ('Data sources and privacy', path)])
 
 
 # ── job postings data: hub, one page per country, remote ───────────────────────────────────────────────────────────
@@ -1720,6 +1761,7 @@ def main():
         page_ats(a, by[a], stats[a], date, cn)
     total_c, total_j = page_compare(by, stats, date, cn)
     page_job_feed()
+    page_data_privacy()
     load_jobs(agg)
     page_jobs_hub(date)
     page_country('REMOTE', date)
