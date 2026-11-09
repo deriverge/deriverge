@@ -230,6 +230,14 @@ def layout(*, path, title, desc, tab, kicker, h1, lede, body, ld, campaign, scri
 '''
     doc = re.sub(r'\b14 (applicant tracking systems|systems|Systems)\b', lambda m: f'{len(ATS)} {m.group(1)}', doc)
     doc = doc.replace('and 13 other systems', f'and {len(ATS) - 1} other systems')
+    # Velikost indexu z meta.json pracovní složky (SCALE nastaví main), aby karty actoru nezastarávaly.
+    if SCALE:
+        mil = f"{SCALE['jobs'] // 100_000 / 10:.1f}"
+        sites = f"{floor_round(SCALE['companies']):,}"
+        doc = (doc.replace('more than a million open jobs', f'more than {mil} million open jobs')
+               .replace('More than a million open jobs', f'More than {mil} million open jobs')
+               .replace('40,000+ company career sites', f'{sites}+ company career sites').replace('40,000+ career sites', f'{sites}+ career sites')
+               .replace('more than 47,000 employers', f'more than {sites} employers'))
     words = {9: 'nine', 10: 'ten', 11: 'eleven', 12: 'twelve', 13: 'thirteen', 14: 'fourteen', 15: 'fifteen'}
     doc = doc.replace('and 9 more', f'and {len(ATS) - 5} more').replace('and nine more', f'and {words.get(len(ATS) - 5, len(ATS) - 5)} more')
     for ch in ('—', '–'):
@@ -1248,6 +1256,9 @@ def page_index(stats, total_c, total_j, date):
            body=body, ld=ld, trail=[('deriverge', '/'), ('Tools', '/tools/')])
 
 
+SCALE: dict = {}
+
+
 def floor_round(n):
     """Rounds a count down for 'more than' claims: 1,740,189 -> 1,700,000, 47,967 -> 47,000, 540,470 -> 540,000."""
     step = 100_000 if n >= 1_000_000 else 10_000 if n >= 100_000 else 1_000
@@ -2181,6 +2192,9 @@ def update_sitemap(date):
 def main():
     agg = sys.argv[1] if len(sys.argv) > 1 else os.path.join(os.environ.get('TMPDIR', '/tmp'), 'ats-agg.json')
     by, stats, date, cn = load_ats(agg)
+    with open(os.path.join(os.path.dirname(agg), 'meta.json')) as f:
+        m = json.load(f)
+    SCALE.update(jobs=m['jobs'], companies=m['companies'])
     # Systém, který v indexu ještě nemá žádnou firmu (právě přidaný), na webu zatím není.
     for a in [a for a in ATS if not stats[a]['companies']]:
         del ATS[a], by[a], stats[a]
