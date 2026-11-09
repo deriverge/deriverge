@@ -1235,7 +1235,7 @@ def page_job_feed():
     j, c = f'{floor_round(jobs):,}', f'{floor_round(comps):,}'
     title = 'Job Data Feed: Daily Open Jobs from Company Career Sites'
     desc = (f'A daily feed of more than {j} open jobs from the career sites of more than {c} companies on 14 applicant '
-            'tracking systems, as a file or an API. Free sample, monthly plans.')
+            'tracking systems, or a niche feed for your audience. Free sample, two-week trial, plans from $99 a month.')
     rows = ''.join(f'<tr><td class="k">{esc(ATS[a]["name"])}</td><td>more than {floor_round(n):,}</td></tr>'
                    for a, n in sorted(totals.items(), key=lambda x: -x[1]))
     fields = [
@@ -1258,19 +1258,38 @@ def page_job_feed():
       <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Fields</th><th>What they hold</th></tr></thead><tbody>{field_rows}</tbody></table></div>''', hid='fields'),
         section('// coverage', 'Open jobs per system', f'''      <div class="tbl-wrap"><table class="tbl tbl--fit"><thead><tr><th>System</th><th>Open jobs, {esc(built)}</th></tr></thead><tbody>{rows}</tbody></table></div>
       <div class="prose"><p>Boards on ten of the systems are read every day. Workday, Workable, Personio and iCIMS boards are read in rotation, each within one to three days. We read only the job boards that employers publish, without logins, and leave out career sites whose <code>robots.txt</code> disallows the job feed.</p></div>''', hid='coverage'),
+        section('// niche feeds', 'Feeds picked for your audience', '''      <div class="prose">
+        <p>A job board for one audience needs the right jobs, not all of them. We build the selection with you and check every job before it reaches your feed:</p>
+        <ul>
+          <li><strong>Remote jobs open to one country.</strong> A job qualifies when its location names the country, or says Worldwide, Global or the region without naming another country, and its description does not limit the role to other countries (&ldquo;must be based in the US&rdquo;, &ldquo;authorized to work in the UK&rdquo;). Measured in November 2026 for Indonesia: about 9 new jobs per working day pass these checks.</li>
+          <li><strong>Jobs in one country or city</strong>, by job category, level or title keywords.</li>
+          <li><strong>Jobs at the companies you name</strong>, or every job on one applicant tracking system.</li>
+        </ul>
+        <p>In every feed we leave out talent pools and general applications, cap the new jobs from one employer per day so a large company does not fill your board, and remove email addresses and phone numbers from descriptions.</p>
+      </div>''', hid='niche'),
         section('// delivery', 'How the feed is delivered', '''      <div class="prose">
         <ul>
-          <li>Every morning a gzipped JSON Lines file (CSV on request) with all open jobs of your feed, at a private download link.</li>
-          <li>Next to it, the jobs added and the jobs closed since the day before, so you can update your database without comparing files.</li>
-          <li>A filtered feed keeps only the countries, systems, job categories or title keywords you choose.</li>
+          <li>Every morning, at a time you choose, your feed is updated at a private link that stays the same.</li>
+          <li>Three files in JSON Lines and CSV: the jobs added today, the jobs closed today, so you can take them down, and all open jobs of your feed.</li>
+          <li>A feed page shows today's new jobs and the download links, and <code>manifest.json</code> lists the same for your import script. Dated files stay available for 30 days.</li>
+          <li>Descriptions come as plain text and as clean HTML, ready to show on your site.</li>
         </ul>
       </div>''', hid='delivery'),
         section('// pricing', 'Plans', '''      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Plan</th><th>What it includes</th><th>Price</th></tr></thead><tbody>
+        <tr><td class="k">Niche feed</td><td>Up to 100 new jobs a day picked for your audience, for example remote jobs open to one country, with descriptions, daily added and closed files and a feed page.</td><td>$99 per month</td></tr>
         <tr><td class="k">Filtered feed</td><td>Daily file of up to 200,000 open jobs chosen by country, system, job category or title keywords, with added and closed files.</td><td>from $299 per month</td></tr>
         <tr><td class="k">Full feed</td><td>Daily file of every open job in the index, with added and closed files and descriptions on request.</td><td>$799 per month</td></tr>
         <tr><td class="k">Custom</td><td>Other fields, a feed for named companies, or files in your own storage.</td><td>on request</td></tr>
       </tbody></table></div>
-      <div class="prose"><p>Billed monthly by invoice from deriverge s.r.o., a Czech company with an EU VAT number. You can cancel at the end of any month.</p></div>''', hid='plans'),
+      <div class="prose"><p>Every feed starts with a free two-week trial. After that we bill monthly by invoice from deriverge s.r.o., a Czech company with an EU VAT number, and you can cancel at the end of any month.</p></div>''', hid='plans'),
+        section('// how to start', 'From first email to daily delivery', '''      <div class="prose">
+        <ol>
+          <li>Write to us who your audience is and which jobs they need.</li>
+          <li>Within one or two working days you get a sample of your exact feed, the number of new jobs per day we measured for it, and an offer.</li>
+          <li>Your two-week trial starts the next morning, with daily delivery at your private link.</li>
+          <li>If the feed works for you, the first monthly invoice follows. If not, nothing to pay.</li>
+        </ol>
+      </div>''', hid='start'),
         f'''    <aside class="block cta" aria-label="Start a job data feed">
       <p class="cmt">// start</p>
       <h2>Get a sample of your feed</h2>
@@ -1296,7 +1315,7 @@ def page_job_feed():
            'distribution': [{'@type': 'DataDownload', 'encodingFormat': 'application/x-ndjson', 'contentUrl': SITE + '/tools/data/job-feed-sample.jsonl.gz', 'name': 'Free sample'}]},
           faq_ld(faq)]
     layout(path=path, title=title, desc=desc, tab='job-data-feed', kicker='// data feed · for job boards and HR tech', h1='Job data feed',
-           lede=f'Every open job from the career sites of more than {c} companies on 14 applicant tracking systems, delivered daily as one file. For job boards, HR tech products and labour market research.',
+           lede=f'Every open job from the career sites of more than {c} companies on 14 applicant tracking systems, or just the ones your audience needs, delivered daily. For job boards, HR tech products and labour market research. Free sample and a two-week trial.',
            body=body, ld=ld, campaign=camp)
 
 
