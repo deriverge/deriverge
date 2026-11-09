@@ -699,7 +699,7 @@ ATS = {
                'Job links look like <code>&lt;company&gt;.applytojob.com/apply/&lt;id&gt;/&lt;title&gt;</code>.'],
         api='https://app.jazz.co/feeds/export/jobs/&lt;company&gt;'),
     'gem': dict(name='Gem',
-        about='Gem is a recruiting platform used mostly by venture-backed technology companies in the United States. Its job boards live at jobs.gem.com/&lt;company&gt; and have a public job board API much like Greenhouse.',
+        about='Gem is a recruiting platform used by technology startups, venture capital firms and recruiting agencies, most of them in the United States. Its job boards live at jobs.gem.com/&lt;company&gt; and have a public job board API much like Greenhouse.',
         signs=['The job board is <code>jobs.gem.com/&lt;company&gt;</code>.',
                'Job links look like <code>jobs.gem.com/&lt;company&gt;/&lt;job ID&gt;</code>.'],
         api='https://api.gem.com/job_board/v0/&lt;company&gt;/job_posts'),
