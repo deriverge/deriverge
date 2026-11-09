@@ -1238,7 +1238,7 @@ def page_job_feed():
     j, c = f'{floor_round(jobs):,}', f'{floor_round(comps):,}'
     title = 'Job Data Feed: Daily Open Jobs from Company Career Sites'
     desc = (f'A daily feed of more than {j} open jobs from the career sites of more than {c} companies on 14 applicant '
-            'tracking systems, or a niche feed for your audience. Free sample, two-week trial, plans from $99 a month.')
+            'tracking systems, or a niche feed for your audience. Free sample, two-week trial, plans from $29 a month.')
     rows = ''.join(f'<tr><td class="k">{esc(ATS[a]["name"])}</td><td>more than {floor_round(n):,}</td></tr>'
                    for a, n in sorted(totals.items(), key=lambda x: -x[1]))
     fields = [
@@ -1280,9 +1280,10 @@ def page_job_feed():
         </ul>
       </div>''', hid='delivery'),
         section('// pricing', 'Plans', '''      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Plan</th><th>What it includes</th><th>Price</th></tr></thead><tbody>
-        <tr><td class="k">Niche feed</td><td>Up to 100 new jobs a day picked for your audience, for example remote jobs open to one country, with descriptions, daily added and closed files and a feed page.</td><td>$99 per month</td></tr>
-        <tr><td class="k">Filtered feed</td><td>Daily file of up to 200,000 open jobs chosen by country, system, job category or title keywords, with added and closed files.</td><td>from $299 per month</td></tr>
-        <tr><td class="k">Full feed</td><td>Daily file of every open job in the index, with added and closed files and descriptions on request.</td><td>$799 per month</td></tr>
+        <tr><td class="k">Starter</td><td>Up to 100 new jobs a day: a smaller country, remote jobs open to one country, one job category or the companies you name. Every open job on day one, then the jobs added and closed each day, with descriptions, XML for job board software and a feed page.</td><td>$29 per month</td></tr>
+        <tr><td class="k">Growth</td><td>Up to 2,000 new jobs a day, for example Germany, the United Kingdom, India or all remote jobs worldwide.</td><td>$59 per month</td></tr>
+        <tr><td class="k">Scale</td><td>Up to 20,000 new jobs a day, for example the United States or several countries together.</td><td>$99 per month</td></tr>
+        <tr><td class="k">Full index</td><td>Every open job in the index, more than 1.7 million, as a daily file with added and closed files.</td><td>$299 per month</td></tr>
         <tr><td class="k">Custom</td><td>Other fields, a feed for named companies, or files in your own storage.</td><td>on request</td></tr>
       </tbody></table></div>
       <div class="prose"><p>Feeds of one country or of all remote jobs start online in two minutes: pick the country on <a href="/tools/job-postings-data/">job postings data by country</a> and start the free trial. Every feed starts with a free two-week trial. After that you pay monthly by card through Stripe, or by invoice from deriverge s.r.o., a Czech company with an EU VAT number, and you can cancel at the end of any month. <a href="/tools/job-data-feed/terms/">Terms, cancellation and refunds</a>.</p></div>''', hid='plans'),
@@ -1443,7 +1444,7 @@ def board_cta(name, camp):
     return f'''    <aside class="block cta" aria-label="Get a feed">
       <p class="cmt">get a feed</p>
       <h2>Get a feed made for your board</h2>
-      <p>Tell us who your board is for. Within one or two working days you get a sample of your exact feed, the number of new jobs a day we measured for it, and an offer. A <strong>Niche feed</strong> of up to 100 new jobs a day costs <strong>$99 a month</strong>, a feed filtered by country, category or system starts at $299, and every feed starts with a free two-week trial.</p>
+      <p>Tell us who your board is for. Within one or two working days you get a sample of your exact feed, the number of new jobs a day we measured for it, and an offer. Plans start at <strong>$29 a month</strong> for up to 100 new jobs a day, $59 for up to 2,000 and $99 for up to 20,000, and every feed starts with a free two-week trial.</p>
       <ul><li>Jobs straight from the career sites of more than 47,000 employers on 14 applicant tracking systems</li>
       <li>One private address for <code>open.xml</code> that updates every morning; closed jobs drop out the next day</li>
       <li>Remote jobs open to one country, one country or city, job categories, named companies or the whole index</li></ul>
@@ -1466,7 +1467,7 @@ def page_board_platform(p):
     if len(title) > 62:
         title = f'Job Feed for {nm}: Daily Jobs by XML'
     desc = (f'Fill your {nm} job board with fresh jobs from 47,000+ employer career sites. A daily XML feed for {nm}\'s {p["feature"]}, '
-            'a free sample to test the import, plans from $99 a month.')
+            'a free sample to test the import, plans from $29 a month.')
     steps = ''.join(f'<li>{s}</li>' for s in p['steps'])
     maprows = ''.join(f'<tr><td class="k">{esc(a)}</td><td><code>{esc(b)}</code></td></tr>' for a, b in p['mapping'])
     tips = ''.join(f'<li>{t}</li>' for t in p['tips'])
@@ -1489,7 +1490,7 @@ def page_board_platform(p):
         ('Can I send these jobs on to Indeed or other aggregators?',
          '<p>Keep them on your own board. Indeed and some other aggregators do not accept jobs that were collected from other sites.</p>'),
         ('How much does it cost?',
-         '<p>A Niche feed of up to 100 new jobs a day is $99 a month, a feed filtered by country, category or system starts at $299 and the full index is $799. Every feed starts with a free two-week trial.</p>'),
+         '<p>Starter, up to 100 new jobs a day, is $29 a month; Growth, up to 2,000, is $59; Scale, up to 20,000, is $99; the full index is $299. Every feed starts with a free two-week trial.</p>'),
     ]
     blocks = [
         section('at a glance', f'{nm} and external job feeds', facts, hid='facts'),
@@ -1513,7 +1514,7 @@ def page_board_software():
     path, camp = '/tools/job-data-feed/job-board-software/', 'job-feed-board-software'
     title = 'Job Feed for Job Board Software: Daily XML Import'
     desc = ('A daily XML job feed for job boards on Cavuno, JBoard, SmartJobBoard, Jobboardly, JobBoard.io, Niceboard, WP Job Manager and more. '
-            'Free sample feed to test the import, plans from $99 a month.')
+            'Free sample feed to test the import, plans from $29 a month.')
     rows = ''.join(f'<tr><td><a href="/tools/job-data-feed/{p["slug"]}/">{esc(p["name"])}</a></td><td>{esc(p["formats"])}</td><td>{esc(p["freq"])}</td>'
                    f'<td>{esc(p["removes"])}</td><td>{esc(p["plan"])}</td></tr>' for p in BOARD_PLATFORMS)
     table = (f'''      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Platform</th><th>Feed formats</th><th>Refresh</th><th>Closed jobs removed</th><th>Plan needed</th></tr></thead><tbody>{rows}</tbody></table></div>
@@ -1678,12 +1679,14 @@ JOBS = {}
 # Self-serve subscriptions (billing Worker in datova_slevarna/gateway/src/billing). The buttons show only when live.
 BILLING_URL = 'https://deriverge-billing.deriverge-gateway.workers.dev'
 BILLING_LIVE = True
+# Self-serve plans by new jobs a day (Stripe lookup keys feed_<plan>_monthly). Lowered on 9 November 2026 to win customers.
+FEED_PRICES = {'starter': ('Starter', 29), 'growth': ('Growth', 59), 'scale': ('Scale', 99)}
 
 
 def feed_plan(cc):
     s = JOBS['countries'][cc]
     per_day = round(s['new7'] / 7)
-    return per_day, ('niche' if per_day <= 100 else 'filtered')
+    return per_day, ('starter' if per_day <= 100 else 'growth' if per_day <= 2000 else 'scale')
 
 
 def write_feed_plans(date):
@@ -1695,7 +1698,7 @@ def write_feed_plans(date):
         key = 'remote' if cc == 'REMOTE' else f'country:{cc}'
         feeds[key] = {
             'title': 'Remote jobs worldwide' if cc == 'REMOTE' else f'All open jobs in {in_country(cc)}',
-            'plan': plan, 'perDay': per_day, 'maxItems': 5000 if plan == 'niche' else 20000,
+            'plan': plan, 'perDay': per_day, 'maxItems': 5000 if plan == 'starter' else 20000,
             'page': f'/tools/job-postings-data/{cslug(cc)}/',
             'search': {'workArrangement': ['remote']} if cc == 'REMOTE' else {'countries': [cc]},
         }
@@ -1793,15 +1796,17 @@ def city_counts(s):
 
 
 def feed_offer(cc, s):
-    """The plan that fits one country: all its new jobs in a niche feed when they fit 100 a day, else the filtered feed."""
-    per_day = round(s['new7'] / 7)
+    """The plan that fits one country or all remote jobs, by how many new jobs a day it brings."""
+    per_day, plan = feed_plan(cc)
+    name, price = FEED_PRICES[plan]
     where = 'remote jobs' if cc == 'REMOTE' else f'jobs in {in_country(cc)}'
-    if per_day <= 100:
-        return (f'All new {where} fit the <strong>Niche feed at $99 a month</strong>: about {per_day:,} new jobs a day, '
-                'with descriptions, daily added and closed files and your own feed page.')
-    return (f'All {s["jobs"]:,} open {where} come in the <strong>Filtered feed from $299 a month</strong>, a daily file with the jobs added '
-            f'and closed that day (about {per_day:,} new a day). A narrower selection of up to 100 new jobs a day, for one city, job category '
-            'or level, is the <strong>Niche feed at $99 a month</strong>.')
+    first = min(s['jobs'], 5000 if plan == 'starter' else 20000)  # maxItems of the first run, see write_feed_plans
+    day_one = 'every open job on the first day' if first >= s['jobs'] else f'the {first:,} newest open jobs on the first day'
+    text = (f'All {s["jobs"]:,} open {where} fit the <strong>{name} plan at ${price} a month</strong>: {day_one}, '
+            f'then about {per_day:,} new jobs a day, with descriptions, added and closed files, XML for job board software and your own feed page.')
+    if plan != 'starter':
+        text += ' A narrower selection of up to 100 new jobs a day, for one city, job category or level, is the <strong>Starter plan at $29 a month</strong>.'
+    return text
 
 
 def jobs_cta(cc, s, sample, camp):
@@ -1814,7 +1819,7 @@ def jobs_cta(cc, s, sample, camp):
     if BILLING_LIVE and (cc == 'REMOTE' or cc in JOBS['pages']):
         plan = feed_plan(cc)[1]
         start = f'<a class="btn" href="{BILLING_URL}/checkout?feed={urllib.parse.quote(key)}" rel="nofollow">Start the free trial</a> '
-        trial = (f'<p class="more">Start online in two minutes: {"Niche feed, $99" if plan == "niche" else "Filtered feed, $299"} a month after a 14-day free trial. '
+        trial = (f'<p class="more">Start online in two minutes: {FEED_PRICES[plan][0]} plan, ${FEED_PRICES[plan][1]} a month after a 14-day free trial. '
                  'A card is needed to start; cancel any time before the trial ends and you pay nothing.</p>\n      ')
     return f'''    <aside class="block cta" aria-label="Get {esc(nm)} every day">
       <p class="cmt">get the data</p>
@@ -1997,7 +2002,7 @@ def page_jobs_hub(date):
         ('Can I download job postings data for free?',
          '<p>Yes, a sample: every country page has a CSV with 100 of its newest jobs, and the <a href="/tools/job-data-feed/">job data feed</a> page has a larger sample across all systems. The complete data for a country, a category or the world comes as a daily feed.</p>'),
         ('How much does the data cost?',
-         '<p>A niche feed of up to 100 new jobs a day picked for your audience is $99 a month, a feed filtered by country, system or category starts at $299 a month and the full daily file is $799 a month. Every feed starts with a free two-week trial. Pay-per-request access runs through our API on Apify and RapidAPI.</p>'),
+         '<p>Starter, up to 100 new jobs a day picked for your audience, is $29 a month; Growth, up to 2,000 new jobs a day, is $59; Scale, up to 20,000, is $99; and the full daily file of every open job is $299 a month. Every feed starts with a free two-week trial. Pay-per-request access runs through our API on Apify and RapidAPI.</p>'),
         ('Who uses job postings data?',
          '<p>Job boards and aggregators that need fresh jobs for their audience, HR tech products, recruiters looking for companies that hire, and labour market research on demand by country, skill or level.</p>'),
         ('Does the data contain personal data?',
@@ -2016,7 +2021,7 @@ def page_jobs_hub(date):
         f'''    <aside class="block cta" aria-label="Get the data">
       <p class="cmt">get the data</p>
       <h2>Get the jobs every day</h2>
-      <p>Pick the jobs your product needs: one country or city, remote jobs open to one country, a job category, named companies or the whole index. They arrive every morning at a private link, with the jobs added and closed that day. Plans start at $99 a month and every feed starts with a free two-week trial.</p>
+      <p>Pick the jobs your product needs: one country or city, remote jobs open to one country, a job category, named companies or the whole index. They arrive every morning at a private link, with the jobs added and closed that day. Plans start at $29 a month and every feed starts with a free two-week trial.</p>
       <div class="cta-row"><a class="btn" href="/tools/data/job-feed-sample.jsonl.gz" download>Download the sample (JSON Lines)</a> <a class="btn btn--ghost" href="/tools/job-data-feed/">Plans and delivery</a></div>
       <p class="more">Prefer to pay per request? Query the same index with {actor_link('career-site-jobs-search', camp, 'Career Site and ATS Jobs API on Apify', cls='')} or our <a href="https://rapidapi.com/David%C4%8Cag%C3%A1nek/api/job-search-career-sites-and-ats" target="_blank" rel="noopener">Job Search API on RapidAPI</a>.</p>
     </aside>''',
