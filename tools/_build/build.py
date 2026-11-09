@@ -1285,7 +1285,7 @@ def page_job_feed():
         <tr><td class="k">Full feed</td><td>Daily file of every open job in the index, with added and closed files and descriptions on request.</td><td>$799 per month</td></tr>
         <tr><td class="k">Custom</td><td>Other fields, a feed for named companies, or files in your own storage.</td><td>on request</td></tr>
       </tbody></table></div>
-      <div class="prose"><p>Every feed starts with a free two-week trial. After that we bill monthly by invoice from deriverge s.r.o., a Czech company with an EU VAT number, and you can cancel at the end of any month. <a href="/tools/job-data-feed/terms/">Terms, cancellation and refunds</a>.</p></div>''', hid='plans'),
+      <div class="prose"><p>Feeds of one country or of all remote jobs start online in two minutes: pick the country on <a href="/tools/job-postings-data/">job postings data by country</a> and start the free trial. Every feed starts with a free two-week trial. After that you pay monthly by card through Stripe, or by invoice from deriverge s.r.o., a Czech company with an EU VAT number, and you can cancel at the end of any month. <a href="/tools/job-data-feed/terms/">Terms, cancellation and refunds</a>.</p></div>''', hid='plans'),
         section('// how to start', 'From first email to daily delivery', '''      <div class="prose">
         <ol>
           <li>Write to us who your audience is and which jobs they need.</li>
@@ -1677,7 +1677,7 @@ def cslug(cc):
 JOBS = {}
 # Self-serve subscriptions (billing Worker in datova_slevarna/gateway/src/billing). The buttons show only when live.
 BILLING_URL = 'https://deriverge-billing.deriverge-gateway.workers.dev'
-BILLING_LIVE = False
+BILLING_LIVE = True
 
 
 def feed_plan(cc):
