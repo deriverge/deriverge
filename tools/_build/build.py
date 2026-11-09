@@ -1285,7 +1285,7 @@ def page_job_feed():
         <tr><td class="k">Full feed</td><td>Daily file of every open job in the index, with added and closed files and descriptions on request.</td><td>$799 per month</td></tr>
         <tr><td class="k">Custom</td><td>Other fields, a feed for named companies, or files in your own storage.</td><td>on request</td></tr>
       </tbody></table></div>
-      <div class="prose"><p>Every feed starts with a free two-week trial. After that we bill monthly by invoice from deriverge s.r.o., a Czech company with an EU VAT number, and you can cancel at the end of any month.</p></div>''', hid='plans'),
+      <div class="prose"><p>Every feed starts with a free two-week trial. After that we bill monthly by invoice from deriverge s.r.o., a Czech company with an EU VAT number, and you can cancel at the end of any month. <a href="/tools/job-data-feed/terms/">Terms, cancellation and refunds</a>.</p></div>''', hid='plans'),
         section('// how to start', 'From first email to daily delivery', '''      <div class="prose">
         <ol>
           <li>Write to us who your audience is and which jobs they need.</li>
@@ -1553,6 +1553,41 @@ def page_board_software():
            trail=[('deriverge', '/'), ('Tools', '/tools/'), ('Job data feed', '/tools/job-data-feed/'), ('Job board software', path)])
 
 
+def page_terms():
+    path, camp = '/tools/job-data-feed/terms/', 'job-data-terms'
+    title = 'Job Data Feed: Terms, Billing, Cancellation and Refunds'
+    desc = ('Terms of the deriverge job data feed: what you get, the free trial, monthly billing, how to cancel, refunds, '
+            'how you may use the data and who to contact.')
+    p = lambda *xs: '      <div class="prose">' + ''.join(f'<p>{x}</p>' for x in xs) + '</div>'
+    blocks = [
+        section('1', 'The service', p(
+            'deriverge s.r.o. (company ID 19456361, VAT ID CZ19456361, Czech Republic, "we") provides a job data feed: open jobs collected from public company career sites, delivered every day at a private link as files (JSON Lines, CSV, XML, JSON) and, where agreed, through an API. The jobs, filters and delivery of your feed are those described on the <a href="/tools/job-data-feed/">job data feed</a> page and in your order or offer.',
+            'The feed is for businesses. By ordering it you confirm that you act for a company or as a professional, not as a consumer.'), hid='service'),
+        section('2', 'Free trial', p(
+            'Every feed starts with a free trial of 14 days. If you cancel before the trial ends, you pay nothing. If you do not cancel, the paid subscription starts when the trial ends.'), hid='trial'),
+        section('3', 'Prices and billing', p(
+            'Prices are in US dollars per month and shown on the job data feed page or in your offer. The subscription is billed monthly in advance, by card through our payment provider Stripe or, where agreed, by invoice and bank transfer.',
+            'For business customers in the European Union outside the Czech Republic with a valid VAT number, the reverse charge applies and no Czech VAT is added. Czech customers pay Czech VAT on top of the price. Customers outside the EU pay no VAT to us. Every payment comes with an invoice by email.'), hid='billing'),
+        section('4', 'Cancellation', p(
+            'You can cancel at any time, in the customer portal linked from your receipts or by writing to <a href="mailto:info@deriverge.com">info@deriverge.com</a>. The cancellation takes effect at the end of the month you have paid for; your feed keeps running until then and stops after. There is no minimum term and no cancellation fee.',
+            'We may end the service with 30 days\' notice by email. If we do, we refund the unused part of any month already paid.'), hid='cancellation'),
+        section('5', 'Refunds', p(
+            'Because every feed starts with a free trial, payments are not refunded once a month has started, with one exception: if we fail to deliver your feed for more than two days in a row in a paid month, you get a pro rata refund or credit for those days. Write to info@deriverge.com within 30 days and we settle it within ten working days.'), hid='refunds'),
+        section('6', 'How you may use the data', p(
+            'You may use the feed in your own products and services, including showing the jobs on your own job board or website, for as long as your subscription runs. You may not resell or pass on the feed itself, or files from it, as a data product to third parties.',
+            'The jobs are published by employers, and job descriptions are the employers\' own text. You are responsible for using the data lawfully and in line with the employers\' terms. Keep the link to each job on the employer\'s site, so candidates apply with the employer directly, and remove a job or employer when we or the employer ask. Do not send the jobs on to aggregators that do not accept jobs collected from other sites, such as Indeed.'), hid='use'),
+        section('7', 'Delivery and quality', p(
+            'We update your feed every day and fix failed deliveries as soon as we notice them, usually the same day. The data comes from third-party career sites and is provided as is: jobs can be incomplete, outdated or closed before we see it, and fields such as country, category, level and salary are read automatically and can be wrong. Our liability for any claim is limited to the fees you paid in the three months before it, except where the law does not allow such a limit.'), hid='quality'),
+        section('8', 'Privacy, law and contact', p(
+            'How the data is collected and how we handle personal data is described on <a href="/tools/job-data-feed/data-and-privacy/">data sources and privacy</a>. These terms are governed by Czech law. Questions, cancellations and complaints: <a href="mailto:info@deriverge.com">info@deriverge.com</a>. We reply within two working days.',
+            'These terms apply from 9 November 2026. We announce changes by email at least 30 days before they apply to your subscription.'), hid='law'),
+    ]
+    layout(path=path, title=title, desc=desc, tab='terms', kicker='// job data feed · terms', h1='Job data feed terms',
+           lede='The terms of our job data feed: the free trial, monthly billing, how to cancel, refunds and how you may use the data.',
+           body='\n'.join(blocks), campaign=camp, ld=[{'@context': 'https://schema.org', '@type': 'WebPage', 'name': title, 'url': SITE + path, 'description': desc}],
+           trail=[('deriverge', '/'), ('Tools', '/tools/'), ('Job data feed', '/tools/job-data-feed/'), ('Terms', path)])
+
+
 def page_data_privacy():
     path, camp = '/tools/job-data-feed/data-and-privacy/', 'job-data-privacy'
     title = 'Job Data Feed: Data Sources, Privacy and Compliance'
@@ -1584,7 +1619,7 @@ def page_data_privacy():
       </div>''', hid='customers'),
         section('company', 'Company', '''      <div class="prose">
         <p>deriverge s.r.o., Czech Republic, company ID 19456361, VAT ID CZ19456361. Contact: <a href="mailto:info@deriverge.com">info@deriverge.com</a>.</p>
-        <p>See also the <a href="/tools/job-data-feed/">job data feed</a> and <a href="/tools/job-postings-data/">job postings data by country</a>.</p>
+        <p>See also the <a href="/tools/job-data-feed/">job data feed</a>, its <a href="/tools/job-data-feed/terms/">terms</a> and <a href="/tools/job-postings-data/">job postings data by country</a>.</p>
       </div>''', hid='company'),
     ]
     layout(path=path, title=title, desc=desc, tab='data-and-privacy', kicker='// job data feed · compliance', h1='Data sources and privacy',
@@ -1992,6 +2027,7 @@ def main():
     total_c, total_j = page_compare(by, stats, date, cn)
     page_job_feed()
     page_data_privacy()
+    page_terms()
     page_board_software()
     for bp in BOARD_PLATFORMS:
         page_board_platform(bp)
