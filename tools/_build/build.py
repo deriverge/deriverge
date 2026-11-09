@@ -1276,7 +1276,7 @@ def page_job_feed():
           <li>Three files in JSON Lines and CSV: the jobs added today, the jobs closed today, so you can take them down, and all open jobs of your feed.</li>
           <li>A feed page shows today's new jobs and the download links, and <code>manifest.json</code> lists the same for your import script. Dated files stay available for 30 days.</li>
           <li>Descriptions come as plain text and as clean HTML, ready to show on your site.</li>
-          <li>For job board software, all open jobs also come as an XML feed in the Indeed format and as a JSON array. Paste the address into your platform's job import and closed jobs drop out on their own.</li>
+          <li>For job board software, all open jobs also come as an XML feed in the Indeed format and as a JSON array. Paste the address into your platform's job import and closed jobs drop out on their own. <a href="/tools/job-data-feed/job-board-software/">See which platforms read it</a>.</li>
         </ul>
       </div>''', hid='delivery'),
         section('// pricing', 'Plans', '''      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Plan</th><th>What it includes</th><th>Price</th></tr></thead><tbody>
@@ -1321,6 +1321,236 @@ def page_job_feed():
     layout(path=path, title=title, desc=desc, tab='job-data-feed', kicker='// data feed · for job boards and HR tech', h1='Job data feed',
            lede=f'Every open job from the career sites of more than {c} companies on 14 applicant tracking systems, or just the ones your audience needs, delivered daily. For job boards, HR tech products and labour market research. Free sample and a two-week trial.',
            body=body, ld=ld, campaign=camp)
+
+
+# ── job feed for job board software: one page per platform ─────────────────────────────────────────────────────────
+# Checked against each platform's own documentation on 9 November 2026 (sources listed per platform). Only what the
+# platform documents goes on its page; anything undocumented is said to be undocumented.
+SAMPLE_XML = '/tools/data/job-feed-sample.xml'  # 40 remote software and data jobs with descriptions, from a sample feed run on 9 November 2026
+BOARD_PLATFORMS = [
+    {'slug': 'cavuno', 'name': 'Cavuno', 'feature': 'recurring XML feeds', 'formats': 'XML, also gzipped', 'freq': 'every 1, 3, 6, 12 or 24 hours',
+     'removes': 'Yes, optional: "Expire missing jobs" after two missed runs', 'plan': 'backfill is part of the paid plans',
+     'steps': ['Open <strong>Backfill</strong>, then <strong>Feeds</strong>, and click <strong>Add feed</strong>.',
+               'Paste the address of your <code>open.xml</code> file.',
+               'Set <strong>Check every</strong> (6 hours is the default; our file changes once a day, so 12 or 24 hours is enough).',
+               'Turn on <strong>Expire missing jobs</strong>, so jobs that close at the employer leave your board.',
+               'Review the field mapping Cavuno proposes on the first run and save.'],
+     'mapping': [('Title', 'title'), ('Company', 'company'), ('Apply URL', 'applyurl'), ('External ID', 'referencenumber'), ('Description', 'description'),
+                 ('Location', 'city, country or location'), ('Remote', 'remotetype'), ('Salary', 'salarymin, salarymax, salarycurrency, salaryperiod')],
+     'tips': ['Cavuno requires a title, a company and an apply URL or email; every job in our feed has all three.',
+              'A board can hold up to 10 feeds, and the plan\'s active-job limit applies (500 jobs on the smallest plan). Ask us to size your feed to fit.',
+              'If more than about 40% of the jobs vanish in one run, Cavuno pauses the feed for review instead of expiring them. A feed that changes once a day by a few percent never triggers it.'],
+     'sources': [('Recurring XML feeds', 'https://cavuno.com/docs/import-export/recurring-xml-feeds'), ('Plans and pricing', 'https://cavuno.com/docs/billing/plans-and-pricing')]},
+    {'slug': 'jboard', 'name': 'JBoard', 'feature': 'XML Feed Importer', 'formats': 'XML, also gzipped', 'freq': 'daily (every 4 hours on Scale)',
+     'removes': 'Not documented; the Auto-delete tool removes expired imported jobs', 'plan': 'Advanced or Scale plan',
+     'steps': ['Open <strong>Jobs Aggregation</strong> and click <strong>Add Aggregator</strong>.',
+               'Choose <strong>XML Feed Importer</strong>, paste the address of your <code>open.xml</code> file and click <strong>Start configuring XML importer</strong>.',
+               'Pick the XML element for each field from the dropdowns, using the mapping below. Set <strong>External identifier</strong> to <code>referencenumber</code>.',
+               'Save. The first run imports 1,000 jobs and the rest follow within 24 hours.',
+               'Under <strong>Job Board Settings</strong>, <strong>Jobs</strong>, <strong>General</strong>, turn on Auto-delete for expired jobs.'],
+     'mapping': [('Title', 'title'), ('Company', 'company'), ('Description', 'description'), ('Apply link', 'applyurl'), ('External identifier', 'referencenumber'),
+                 ('Location', 'location or city and country'), ('Remote', 'remotetype'), ('Salary', 'salarymin, salarymax, salarycurrency, salaryperiod'),
+                 ('Job type', 'jobtype'), ('Category', 'category')],
+     'tips': ['JBoard requires a description, so ask for a feed with descriptions (they are included by default).',
+              'Your plan\'s job count applies: 10,000 jobs on Advanced and 30,000 on Scale. Trial importers stop at 1,000.',
+              'The feed address must not need a login. Ours is a private link that works without one.'],
+     'sources': [('How to set up the XML importer', 'https://help.jboard.io/en/article/how-to-set-up-xml-importer-bybid/'), ('Clean up inactive jobs', 'https://help.jboard.io/en/article/how-to-clean-up-inactive-jobs-on-your-job-board-f4drp5/'), ('Pricing', 'https://www.jboard.io/pricing')]},
+    {'slug': 'smartjobboard', 'name': 'SmartJobBoard', 'feature': 'Job Auto Import', 'formats': 'XML, JSON, zip or gzip', 'freq': 'daily, at a random time',
+     'removes': 'Yes, a setting of the import', 'plan': 'plans with Job Auto Import (filters and category mapping need Enterprise)',
+     'steps': ['Open <strong>Settings</strong>, then <strong>Job Auto Import</strong>, and click <strong>Create New Auto import</strong>.',
+               'Paste the address of your <code>open.xml</code> file, or of <code>open.json</code> if you prefer JSON.',
+               'Check the fields SmartJobBoard matched automatically and correct any with the mapping below.',
+               'Turn on the setting that deletes jobs no longer in the feed, and save.'],
+     'mapping': [('Title', 'title'), ('Company', 'company'), ('Description', 'description'), ('Apply URL', 'applyurl'), ('Location', 'city, country or location'),
+                 ('Job type', 'jobtype'), ('Category', 'category'), ('Salary', 'salarymin, salarymax, salarycurrency')],
+     'tips': ['A manual run imports only the first 1,000 jobs; the daily run brings in the rest.',
+              'SmartJobBoard is the one platform here that also reads a JSON feed, so either file works.'],
+     'sources': [('Job auto import', 'https://help.smartjobboard.com/en/articles/1269697-job-auto-import'), ('Auto import filters', 'https://help.smartjobboard.com/en/articles/5985814-job-auto-import-filters')]},
+    {'slug': 'jobboardly', 'name': 'Jobboardly', 'feature': 'XML import', 'formats': 'XML (CSV by manual upload)', 'freq': 'your choice, for example daily',
+     'removes': 'Yes, optional: "Automatically remove jobs when they disappear from the feed"', 'plan': 'Pro plan',
+     'steps': ['Create a new XML import and paste the address of your <code>open.xml</code> file.',
+               'Map the fields using the table below. Jobboardly maps salary as minimum, maximum, currency and schedule, which our feed provides as separate elements.',
+               'Set the refresh frequency to daily and the job limit per import.',
+               'Turn on <strong>Automatically remove jobs when they disappear from the feed</strong>, and choose whether new jobs go live or stay as drafts.'],
+     'mapping': [('Title', 'title'), ('Company', 'company'), ('Description', 'description'), ('Apply link', 'applyurl'), ('Publish date', 'date'),
+                 ('Job type', 'jobtype'), ('Category', 'category'), ('Location type', 'workarrangement'), ('Country', 'country'), ('City', 'city'),
+                 ('Salary minimum, maximum, currency, schedule', 'salarymin, salarymax, salarycurrency, salaryperiod')],
+     'tips': ['Jobboardly\'s guide does not say where the import sits in the admin menu or whether XML imports use monthly import credits; check with Jobboardly if you are near a limit.',
+              '<strong>Mirror the feed</strong> keeps your board exactly in step with the file, which suits a feed made for your board.'],
+     'sources': [('XML import full guide', 'https://help.jobboardly.com/en/articles/13715416-xml-import-full-guide'), ('Pricing', 'https://www.jobboardly.com/pricing')]},
+    {'slug': 'jobboard-io', 'name': 'JobBoard.io', 'feature': 'Auto Import', 'formats': 'XML', 'freq': 'daily, weekly or monthly',
+     'removes': 'Yes, with "Auto Expire Jobs"', 'plan': 'Professional plan (five feeds)',
+     'steps': ['Open <strong>Job Settings</strong>, then <strong>Auto Import</strong>, and click <strong>Create New Feed</strong>.',
+               'Paste the address of your <code>open.xml</code> file and set the schedule to daily.',
+               'JobBoard.io\'s default tags follow the same Indeed-style format as our file, so most fields match as they are. Leave the posting date unmapped (see the tip below).',
+               'Turn on <strong>Auto Expire Jobs</strong> so closed jobs leave your board.'],
+     'mapping': [('title', 'title'), ('company', 'company'), ('city, state, country', 'city, state, country'), ('description', 'description'), ('url', 'url or applyurl'),
+                 ('reference', 'referencenumber'), ('salary', 'salary'), ('jobtype', 'jobtype'), ('category', 'category')],
+     'tips': ['JobBoard.io expects a mapped posting date as MM/DD/YYYY, while our <code>date</code> uses the standard feed format. Leave the date unmapped and JobBoard.io uses the import date.'],
+     'sources': [('Setting up 3rd party XML job imports', 'https://support.jobboard.io/docs/setting-up-3rd-party-xml-job-imports'), ('Pricing', 'https://jobboard.io/pricing/')]},
+    {'slug': 'kardow', 'name': 'Kardow', 'feature': 'Job backfiller', 'formats': 'XML', 'freq': 'daily, weekly or monthly',
+     'removes': 'Not documented', 'plan': 'any plan with credits (each imported job uses one)',
+     'steps': ['Open the <strong>Job backfiller</strong> and add an XML feed.',
+               'Paste the address of your <code>open.xml</code> file and set the schedule to daily.',
+               'Map the fields; our element names are listed below.'],
+     'mapping': [('Title', 'title'), ('Company', 'company'), ('Description', 'description'), ('Apply URL', 'applyurl'), ('Location', 'location'), ('Job type', 'jobtype')],
+     'tips': ['Every imported job uses one Kardow credit (2,000, 8,000 or 25,000 a month by plan), so ask us for a feed sized to your credits.',
+              'Kardow\'s public pages do not document the field mapping or what happens to jobs that leave the feed; check with Kardow before you rely on it.'],
+     'sources': [('XML feed import', 'https://kardow.com/changelog/xml-feed-import-for-job-listings'), ('Backfiller', 'https://kardow.com/backfiller'), ('Pricing', 'https://kardow.com/pricing')]},
+    {'slug': 'jobiqo', 'name': 'Jobiqo', 'feature': 'Job Importers', 'formats': 'XML', 'freq': 'every few hours',
+     'removes': 'Yes, with an unpublish threshold as a safety stop', 'plan': 'Enterprise',
+     'steps': ['Open <strong>Jobs</strong>, then <strong>Job Importers</strong>, and click <strong>Add Feed</strong>.',
+               'Paste the address of your <code>open.xml</code> file. Our link needs no authorization header.',
+               'Map the fields and set the unpublish threshold, then save.'],
+     'mapping': [('Title', 'title'), ('Organization', 'company'), ('Description', 'description'), ('Application link', 'applyurl'), ('Reference', 'referencenumber'), ('Location', 'location')],
+     'tips': ['The unpublish threshold stops a broken feed from taking every job offline at once; our file changes by a few percent a day.'],
+     'sources': [('How to set up an importer', 'https://help.jobiqo.com/hc/en-gb/articles/7605147646097-How-to-set-up-an-importer')]},
+    {'slug': 'niceboard', 'name': 'Niceboard', 'feature': 'XML import', 'formats': 'XML', 'freq': 'up to 120 import runs a month',
+     'removes': 'Not documented', 'plan': 'Custom plan',
+     'steps': ['Niceboard\'s changelog places the import under <strong>Automations</strong>, <strong>Web / XML import</strong>.',
+               'Paste the address of your <code>open.xml</code> file and map the fields.',
+               'Niceboard\'s help center has no article on XML import yet, so confirm the mapping and how closed jobs are removed with Niceboard support.'],
+     'mapping': [('Title', 'title'), ('Company', 'company'), ('Description', 'description'), ('Apply URL', 'applyurl'), ('Location', 'location'), ('Job type', 'jobtype')],
+     'tips': ['Niceboard\'s pricing lists XML import with 120 import runs a month, enough for one daily feed.',
+              'Its built-in backfill uses partner networks; our feed is a separate import with jobs straight from employers\' career sites.'],
+     'sources': [('Pricing', 'https://niceboard.co/pricing'), ('Changelog', 'https://niceboard.co/changelog'), ('What is backfill', 'https://help.niceboard.co/article/23-what-is-backfill-how-it-works')]},
+    {'slug': 'wp-job-manager', 'name': 'WP Job Manager', 'feature': 'WP All Import', 'formats': 'XML or CSV', 'freq': 'on a schedule (cron or WP All Import\'s scheduling)',
+     'removes': 'Yes: "remove posts not present in this import file"', 'plan': 'WP All Import Pro and the free WP Job Manager add-on',
+     'steps': ['Install WP All Import Pro and WP Job Manager\'s free <strong>WP All Import Integration</strong> add-on. The free WP All Import cannot import from an address on a schedule.',
+               'Start a new import, choose to download the file from a URL and paste the address of your <code>open.xml</code> file.',
+               'Import into <strong>Job Listings</strong> and drag our elements onto the WP Job Manager fields, using the mapping below.',
+               'Use <code>referencenumber</code> as the unique identifier, so each daily run updates jobs instead of duplicating them.',
+               'Turn on removing posts that are no longer in the import file, and schedule the import once a day.'],
+     'mapping': [('Job title', 'title'), ('Company name', 'company'), ('Company website', 'companywebsite'), ('Description', 'description'),
+                 ('Application email or URL', 'applyurl'), ('Location', 'location'), ('Job type', 'jobtype'), ('Remote position', 'remotetype'), ('Salary', 'salary')],
+     'tips': ['Go Fetch Jobs, another WP Job Manager add-on, reads plain RSS for free but needs its premium plan for XML feeds and schedules.'],
+     'sources': [('WP All Import Integration add-on', 'https://wpjobmanager.com/add-ons/wp-all-import-integration/'), ('Remove data missing from the import file', 'https://www.wpallimport.com/documentation/remove-data-missing-from-the-import-file/'), ('WP All Import pricing', 'https://www.wpallimport.com/pricing/')]},
+]
+XML_ELEMENTS = [
+    ('title', 'Job title as the employer wrote it'), ('date', 'Posting date, or the day we first saw the job'), ('referencenumber', 'Stable unique job id, for matching jobs between runs'),
+    ('url', 'Job page on the employer\'s career site'), ('applyurl', 'Apply link on the employer\'s site'), ('company', 'Employer name'), ('companywebsite', 'Employer website when known'),
+    ('city, state, country, postalcode', 'City from the location and the ISO country code'), ('location', 'Location as listed, all locations of the job'),
+    ('description', 'Full description as clean HTML; email addresses and phone numbers removed'), ('salary', 'Pay as text, for example "EUR 70,000-90,000 per year"'),
+    ('salarymin, salarymax, salarycurrency, salaryperiod', 'Pay as separate values when the ad states it'), ('jobtype', 'fulltime, parttime, contract, temporary or internship'),
+    ('category', 'One of 21 job categories'), ('experience', 'Level, from intern to executive'), ('remotetype', '"Fully remote" or "Hybrid remote"'),
+    ('workarrangement', 'remote, hybrid or onsite'),
+]
+
+
+def board_cta(name, camp):
+    mail = ('mailto:info@deriverge.com?subject=' + urllib.parse.quote(f'Job feed for {name}' if name else 'Job feed for job board software') + '&body=' + urllib.parse.quote(
+        f'Job board address:\nPlatform: {name or ""}\nAudience and the jobs it needs (countries, remote, categories):\nRoughly how many jobs your plan can hold:\n'))
+    return f'''    <aside class="block cta" aria-label="Get a feed">
+      <p class="cmt">get a feed</p>
+      <h2>Get a feed made for your board</h2>
+      <p>Tell us who your board is for. Within one or two working days you get a sample of your exact feed, the number of new jobs a day we measured for it, and an offer. A <strong>Niche feed</strong> of up to 100 new jobs a day costs <strong>$99 a month</strong>, a feed filtered by country, category or system starts at $299, and every feed starts with a free two-week trial.</p>
+      <ul><li>Jobs straight from the career sites of more than 47,000 employers on 14 applicant tracking systems</li>
+      <li>One private address for <code>open.xml</code> that updates every morning; closed jobs drop out the next day</li>
+      <li>Remote jobs open to one country, one country or city, job categories, named companies or the whole index</li></ul>
+      <div class="cta-row"><a class="btn" href="{esc(mail)}">Ask for a feed</a> <a class="btn btn--ghost" href="/tools/job-data-feed/">Plans and delivery</a></div>
+    </aside>'''
+
+
+def xml_test_block():
+    return f'''      <div class="prose">
+        <p>Point your importer at our public sample first: 40 remote software and data jobs with full descriptions, in exactly the format your own feed will have.</p>
+        <p><code>{SITE}{SAMPLE_XML}</code></p>
+        <p>The sample is a fixed file from 9 November 2026, so it does not change between runs. Your own feed is rebuilt every morning.</p>
+      </div>'''
+
+
+def page_board_platform(p):
+    path, camp = f'/tools/job-data-feed/{p["slug"]}/', f'job-feed-{p["slug"]}'
+    nm = p['name']
+    title = f'Job Feed for {nm}: Import Fresh Jobs by XML Every Day'
+    if len(title) > 62:
+        title = f'Job Feed for {nm}: Daily Jobs by XML'
+    desc = (f'Fill your {nm} job board with fresh jobs from 47,000+ employer career sites. A daily XML feed for {nm}\'s {p["feature"]}, '
+            'a free sample to test the import, plans from $99 a month.')
+    steps = ''.join(f'<li>{s}</li>' for s in p['steps'])
+    maprows = ''.join(f'<tr><td class="k">{esc(a)}</td><td><code>{esc(b)}</code></td></tr>' for a, b in p['mapping'])
+    tips = ''.join(f'<li>{t}</li>' for t in p['tips'])
+    src = ', '.join(f'<a href="{esc(u)}" target="_blank" rel="nofollow noopener">{esc(t)}</a>' for t, u in p['sources'])
+    facts = (f'<div class="tbl-wrap"><table class="tbl tbl--fit"><tbody>'
+             f'<tr><td class="k">Import from a feed address</td><td>Yes, with {esc(p["feature"])}</td></tr>'
+             f'<tr><td class="k">Formats</td><td>{esc(p["formats"])}</td></tr><tr><td class="k">Refresh</td><td>{esc(p["freq"])}</td></tr>'
+             f'<tr><td class="k">Closed jobs removed</td><td>{esc(p["removes"])}</td></tr><tr><td class="k">{esc(nm)} plan</td><td>{esc(p["plan"])}</td></tr>'
+             f'</tbody></table></div><p class="note">From {esc(nm)}\'s own documentation, checked on 9 November 2026: {src}. Plans and menus change; {esc(nm)}\'s help center has the current details. deriverge is not affiliated with {esc(nm)}.</p>')
+    others = ''.join(f'<li><a href="/tools/job-data-feed/{q["slug"]}/">Job feed for {esc(q["name"])}</a></li>' for q in BOARD_PLATFORMS if q['slug'] != p['slug'])
+    faq = [
+        (f'Can {nm} import jobs from an XML feed?',
+         f'<p>Yes. {esc(nm)}\'s {esc(p["feature"])} reads a feed from its address ({esc(p["formats"])}), {esc(p["freq"])}. It needs the {esc(p["plan"])}.</p>'),
+        (f'Where do the jobs in the feed come from?',
+         '<p>From the public career sites of more than 47,000 employers on Workday, Greenhouse, Lever, SmartRecruiters, Ashby and nine more applicant tracking systems. Every job links to the apply page on the employer\'s own site. More on <a href="/tools/job-data-feed/data-and-privacy/">data sources and privacy</a>.</p>'),
+        ('Can I choose which jobs I get?',
+         '<p>Yes. A feed can hold remote jobs open to one country, the jobs in a country or city, chosen job categories or levels, jobs at the companies you name, or every job in the index. We cap the new jobs per employer per day, so one large company does not fill your board.</p>'),
+        (f'Do closed jobs leave my {nm} board?',
+         f'<p>A job that closes at the employer drops out of <code>open.xml</code> the next morning. {esc(nm)}: {esc(p["removes"])}.</p>'),
+        ('Can I send these jobs on to Indeed or other aggregators?',
+         '<p>Keep them on your own board. Indeed and some other aggregators do not accept jobs that were collected from other sites.</p>'),
+        ('How much does it cost?',
+         '<p>A Niche feed of up to 100 new jobs a day is $99 a month, a feed filtered by country, category or system starts at $299 and the full index is $799. Every feed starts with a free two-week trial.</p>'),
+    ]
+    blocks = [
+        section('at a glance', f'{nm} and external job feeds', facts, hid='facts'),
+        section('connect', f'Connect the feed to {nm}', f'      <div class="prose"><ol>{steps}</ol></div>', hid='connect'),
+        section('mapping', 'Field mapping', f'''      <div class="tbl-wrap"><table class="tbl tbl--fit"><thead><tr><th>{esc(nm)} field</th><th>Element in our XML</th></tr></thead><tbody>{maprows}</tbody></table></div>
+      <p class="note">Our file follows the Indeed XML job feed format, with a few extra elements. <a href="/tools/job-data-feed/job-board-software/#elements">All elements</a>.</p>''', hid='mapping'),
+        section('tips', 'Limits and tips', f'      <div class="prose"><ul>{tips}</ul></div>', hid='tips'),
+        section('test', 'Test the import before you buy', xml_test_block(), hid='test'),
+        board_cta(nm, camp),
+        section('questions', 'Frequently asked questions', faq_block(faq), hid='faq'),
+        section('other platforms', 'Job feeds for other platforms', f'      <ul class="linklist">{others}<li><a href="/tools/job-data-feed/job-board-software/">All platforms compared</a></li></ul>', hid='others'),
+    ]
+    layout(path=path, title=title, desc=desc, tab=p['slug'], kicker=f'// job feed · {nm}', h1=f'Job feed for {nm}',
+           lede=(f'Fill your {esc(nm)} job board with fresh jobs from the career sites of more than 47,000 employers. Your feed is a standard XML file at a private '
+                 f'address that updates every morning; {esc(nm)}\'s {esc(p["feature"])} imports it on a schedule. Test the import with our free sample first.'),
+           body='\n'.join(blocks), campaign=camp, ld=[faq_ld(faq)],
+           trail=[('deriverge', '/'), ('Tools', '/tools/'), ('Job data feed', '/tools/job-data-feed/'), (f'Job feed for {nm}', path)])
+
+
+def page_board_software():
+    path, camp = '/tools/job-data-feed/job-board-software/', 'job-feed-board-software'
+    title = 'Job Feed for Job Board Software: Daily XML Import'
+    desc = ('A daily XML job feed for job boards on Cavuno, JBoard, SmartJobBoard, Jobboardly, JobBoard.io, Niceboard, WP Job Manager and more. '
+            'Free sample feed to test the import, plans from $99 a month.')
+    rows = ''.join(f'<tr><td><a href="/tools/job-data-feed/{p["slug"]}/">{esc(p["name"])}</a></td><td>{esc(p["formats"])}</td><td>{esc(p["freq"])}</td>'
+                   f'<td>{esc(p["removes"])}</td><td>{esc(p["plan"])}</td></tr>' for p in BOARD_PLATFORMS)
+    table = (f'''      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Platform</th><th>Feed formats</th><th>Refresh</th><th>Closed jobs removed</th><th>Plan needed</th></tr></thead><tbody>{rows}</tbody></table></div>
+      <p class="note">From each platform\'s own documentation, checked on 9 November 2026. Webflow can only upload a CSV file by hand (4 MB at most), so use our <code>open.csv</code> there. Job Board Fire documents only its built-in job aggregation, not an import from a feed address. deriverge is not affiliated with any of these platforms.</p>''')
+    elements = ''.join(f'<tr><td class="k"><code>{esc(a)}</code></td><td>{esc(b)}</td></tr>' for a, b in XML_ELEMENTS)
+    files = '''      <div class="prose">
+        <p>Your feed lives at one private address that never changes. Every morning it holds:</p>
+        <ul>
+          <li><code>open.xml</code>: all open jobs of your feed in the Indeed XML job feed format, the format most job board importers read.</li>
+          <li><code>open.json</code> and <code>open.csv</code>: the same jobs as a JSON array and a spreadsheet.</li>
+          <li><code>added</code> and <code>closed</code> files for the day, in JSON Lines and CSV, if you prefer your own import script.</li>
+        </ul>
+        <p>A job that closes at the employer drops out of <code>open.xml</code> the next morning, so a platform that removes missing jobs keeps your board clean on its own.</p>
+      </div>'''
+    faq = [
+        ('Which job board software can import the feed?',
+         '<p>Any platform that imports jobs from an XML feed address: Cavuno, JBoard, SmartJobBoard, Jobboardly, JobBoard.io, Kardow, Jobiqo, Niceboard and WordPress sites with WP Job Manager and WP All Import Pro. The table above shows the plan each one needs.</p>'),
+        ('What format is the feed?',
+         '<p>XML in the Indeed job feed format, with extra elements for apply links, salary as separate values and remote or hybrid work. The same jobs come as JSON and CSV.</p>'),
+        ('Can I test it without paying?',
+         f'<p>Yes. Point your importer at <code>{SITE}{SAMPLE_XML}</code>, a public sample of 40 jobs with descriptions. When you ask for a feed, the two-week trial uses your real feed.</p>'),
+        ('Can I send these jobs on to Indeed?',
+         '<p>Keep them on your own board. Indeed and some other aggregators do not accept jobs that were collected from other sites.</p>'),
+    ]
+    blocks = [
+        section('platforms', 'Job board platforms that import a feed', table, hid='platforms'),
+        section('files', 'What your feed contains', files, hid='files'),
+        section('test', 'Test the import before you buy', xml_test_block(), hid='test'),
+        section('elements', 'Elements in the XML', f'      <div class="tbl-wrap"><table class="tbl tbl--fit"><thead><tr><th>Element</th><th>What it holds</th></tr></thead><tbody>{elements}</tbody></table></div>', hid='elements'),
+        board_cta('', camp),
+        section('questions', 'Frequently asked questions', faq_block(faq), hid='faq'),
+    ]
+    layout(path=path, title=title, desc=desc, tab='job-board-software', kicker='// job feed · for job board software', h1='Job feed for job board software',
+           lede=('Fresh jobs from the career sites of more than 47,000 employers, as an XML feed that your job board platform imports every day. '
+                 'See which platforms read it, test the import with our free sample, and get a feed made for your audience.'),
+           body='\n'.join(blocks), campaign=camp, ld=[faq_ld(faq)],
+           trail=[('deriverge', '/'), ('Tools', '/tools/'), ('Job data feed', '/tools/job-data-feed/'), ('Job board software', path)])
 
 
 def page_data_privacy():
@@ -1762,6 +1992,9 @@ def main():
     total_c, total_j = page_compare(by, stats, date, cn)
     page_job_feed()
     page_data_privacy()
+    page_board_software()
+    for bp in BOARD_PLATFORMS:
+        page_board_platform(bp)
     load_jobs(agg)
     page_jobs_hub(date)
     page_country('REMOTE', date)

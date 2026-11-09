@@ -90,6 +90,46 @@
    "Job Data Feed: Data Sources, Privacy and Compliance"
   ],
   [
+   "/tools/job-data-feed/job-board-software/",
+   "Job Feed for Job Board Software: Daily XML Import"
+  ],
+  [
+   "/tools/job-data-feed/cavuno/",
+   "Job Feed for Cavuno: Import Fresh Jobs by XML Every Day"
+  ],
+  [
+   "/tools/job-data-feed/jboard/",
+   "Job Feed for JBoard: Import Fresh Jobs by XML Every Day"
+  ],
+  [
+   "/tools/job-data-feed/smartjobboard/",
+   "Job Feed for SmartJobBoard: Import Fresh Jobs by XML Every Day"
+  ],
+  [
+   "/tools/job-data-feed/jobboardly/",
+   "Job Feed for Jobboardly: Import Fresh Jobs by XML Every Day"
+  ],
+  [
+   "/tools/job-data-feed/jobboard-io/",
+   "Job Feed for JobBoard.io: Import Fresh Jobs by XML Every Day"
+  ],
+  [
+   "/tools/job-data-feed/kardow/",
+   "Job Feed for Kardow: Import Fresh Jobs by XML Every Day"
+  ],
+  [
+   "/tools/job-data-feed/jobiqo/",
+   "Job Feed for Jobiqo: Import Fresh Jobs by XML Every Day"
+  ],
+  [
+   "/tools/job-data-feed/niceboard/",
+   "Job Feed for Niceboard: Import Fresh Jobs by XML Every Day"
+  ],
+  [
+   "/tools/job-data-feed/wp-job-manager/",
+   "Job Feed for WP Job Manager: Daily Jobs by XML"
+  ],
+  [
    "/tools/job-postings-data/",
    "Job Postings Data: 1,723,571 Open Jobs by Country"
   ],
