@@ -1675,6 +1675,33 @@ def cslug(cc):
 
 
 JOBS = {}
+# Self-serve subscriptions (billing Worker in datova_slevarna/gateway/src/billing). The buttons show only when live.
+BILLING_URL = 'https://deriverge-billing.deriverge-gateway.workers.dev'
+BILLING_LIVE = False
+
+
+def feed_plan(cc):
+    s = JOBS['countries'][cc]
+    per_day = round(s['new7'] / 7)
+    return per_day, ('niche' if per_day <= 100 else 'filtered')
+
+
+def write_feed_plans(date):
+    """feed-plans.json: the feeds a customer can start online and the plan each fits. The billing Worker reads it and
+    never trusts a plan from a link."""
+    feeds = {}
+    for cc in ['REMOTE'] + JOBS['pages']:
+        per_day, plan = feed_plan(cc)
+        key = 'remote' if cc == 'REMOTE' else f'country:{cc}'
+        feeds[key] = {
+            'title': 'Remote jobs worldwide' if cc == 'REMOTE' else f'All open jobs in {in_country(cc)}',
+            'plan': plan, 'perDay': per_day, 'maxItems': 5000 if plan == 'niche' else 20000,
+            'page': f'/tools/job-postings-data/{cslug(cc)}/',
+            'search': {'workArrangement': ['remote']} if cc == 'REMOTE' else {'countries': [cc]},
+        }
+    out = os.path.join(TOOLS, 'data', 'feed-plans.json')
+    with open(out, 'w', encoding='utf-8') as f:
+        json.dump({'updated': date, 'feeds': feeds}, f, ensure_ascii=False, separators=(',', ':'))
 
 
 def load_jobs(agg_path):
@@ -1782,6 +1809,13 @@ def jobs_cta(cc, s, sample, camp):
     mail = ('mailto:info@deriverge.com?subject=' + urllib.parse.quote(f'Job data feed: {nm}') + '&body=' + urllib.parse.quote(
         f'Company:\nWhat the data is for:\nWhich {nm} you need (all, or by city, category or level):\nDelivery (daily file or API) and format (JSON Lines or CSV):\n'))
     api = actor_link('career-site-jobs-search', camp, 'Career Site and ATS Jobs API on Apify', cls='') if actor('career-site-jobs-search')['public'] else 'our Apify actor'
+    key = 'remote' if cc == 'REMOTE' else f'country:{cc}'
+    start, trial = '', ''
+    if BILLING_LIVE and (cc == 'REMOTE' or cc in JOBS['pages']):
+        plan = feed_plan(cc)[1]
+        start = f'<a class="btn" href="{BILLING_URL}/checkout?feed={urllib.parse.quote(key)}" rel="nofollow">Start the free trial</a> '
+        trial = (f'<p class="more">Start online in two minutes: {"Niche feed, $99" if plan == "niche" else "Filtered feed, $299"} a month after a 14-day free trial. '
+                 'A card is needed to start; cancel any time before the trial ends and you pay nothing.</p>\n      ')
     return f'''    <aside class="block cta" aria-label="Get {esc(nm)} every day">
       <p class="cmt">get the data</p>
       <h2>Get {esc(nm)} every day</h2>
@@ -1789,7 +1823,7 @@ def jobs_cta(cc, s, sample, camp):
       <ul><li>A private link updated every morning: jobs added today, jobs closed today and all open jobs, in JSON Lines and CSV</li>
       <li>Title, employer, location with ISO country code, remote or onsite, category, level, salary when stated, dates and the apply link on the employer\'s site</li>
       <li>No candidate data; emails and phone numbers removed from descriptions</li></ul>
-      <div class="cta-row"><a class="btn" href="{esc(sample)}" download>Download 100 jobs (CSV)</a> <a class="btn btn--ghost" href="{esc(mail)}">Ask for a feed</a></div>
+      {trial}<div class="cta-row">{start}<a class="btn{' btn--ghost' if BILLING_LIVE else ''}" href="{esc(sample)}" download>Download 100 jobs (CSV)</a> <a class="btn btn--ghost" href="{esc(mail)}">Ask for a feed</a></div>
       <p class="more">Plans and delivery are on the <a href="/tools/job-data-feed/">job data feed</a> page. Prefer to pay per request? Query the same index with {api} or our <a href="https://rapidapi.com/David%C4%8Cag%C3%A1nek/api/job-search-career-sites-and-ats" target="_blank" rel="noopener">Job Search API on RapidAPI</a>.</p>
     </aside>'''
 
@@ -2032,6 +2066,7 @@ def main():
     for bp in BOARD_PLATFORMS:
         page_board_platform(bp)
     load_jobs(agg)
+    write_feed_plans(date)
     page_jobs_hub(date)
     page_country('REMOTE', date)
     for cc in JOBS['pages']:
