@@ -228,6 +228,10 @@ def layout(*, path, title, desc, tab, kicker, h1, lede, body, ld, campaign, scri
 </body>
 </html>
 '''
+    doc = re.sub(r'\b14 (applicant tracking systems|systems|Systems)\b', lambda m: f'{len(ATS)} {m.group(1)}', doc)
+    doc = doc.replace('and 13 other systems', f'and {len(ATS) - 1} other systems')
+    words = {9: 'nine', 10: 'ten', 11: 'eleven', 12: 'twelve', 13: 'thirteen', 14: 'fourteen', 15: 'fifteen'}
+    doc = doc.replace('and 9 more', f'and {len(ATS) - 5} more').replace('and nine more', f'and {words.get(len(ATS) - 5, len(ATS) - 5)} more')
     for ch in ('—', '–'):
         if ch in doc:
             i = doc.index(ch)
@@ -689,6 +693,11 @@ ATS = {
         signs=['The portal is <code>&lt;portal&gt;.icims.com</code>, often <code>careers-&lt;company&gt;.icims.com</code>.',
                'Job links look like <code>/jobs/&lt;id&gt;/&lt;title&gt;/job</code>.'],
         api=None),
+    'jazzhr': dict(name='JazzHR',
+        about='JazzHR is applicant tracking software for small and mid-sized businesses, most of them in the United States. Each company\'s career site lives at &lt;company&gt;.applytojob.com.',
+        signs=['The career site is <code>&lt;company&gt;.applytojob.com/apply</code>.',
+               'Job links look like <code>&lt;company&gt;.applytojob.com/apply/&lt;id&gt;/&lt;title&gt;</code>.'],
+        api='https://app.jazz.co/feeds/export/jobs/&lt;company&gt;'),
     'oracle': dict(name='Oracle Recruiting Cloud',
         about='Oracle Recruiting Cloud is part of Oracle Fusion Cloud HCM, used by large enterprises, banks and public institutions. Career sites live on Oracle Cloud hosts such as &lt;pod&gt;.fa.&lt;region&gt;.oraclecloud.com.',
         signs=['The career site is <code>&lt;pod&gt;.fa.&lt;region&gt;.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1</code>.',
@@ -715,6 +724,7 @@ def careers_url(a, k):
         'teamtailor': lambda: f'https://{k}.teamtailor.com/jobs',
         'personio': lambda: f'https://{k}.jobs.personio.de/',
         'breezy': lambda: f'https://{k}.breezy.hr/',
+        'jazzhr': lambda: f'https://{k}.applytojob.com/apply',
         'rippling': lambda: f'https://ats.rippling.com/{q(k)}/jobs',
         'icims': lambda: f'https://{k}/jobs',
         'oracle': lambda: (f'https://{k.split("/sites/")[0]}/hcmUI/CandidateExperience/en/sites/{k.split("/sites/")[1]}' if '/sites/' in k else f'https://{k}'),
@@ -2153,6 +2163,9 @@ def update_sitemap(date):
 def main():
     agg = sys.argv[1] if len(sys.argv) > 1 else os.path.join(os.environ.get('TMPDIR', '/tmp'), 'ats-agg.json')
     by, stats, date, cn = load_ats(agg)
+    # Systém, který v indexu ještě nemá žádnou firmu (právě přidaný), na webu zatím není.
+    for a in [a for a in ATS if not stats[a]['companies']]:
+        del ATS[a], by[a], stats[a]
     ORDER.extend(sorted(ATS, key=lambda a: -stats[a]['companies']))
     sizes = write_ats_json(by, date)
     page_dns()
