@@ -1264,7 +1264,7 @@ def page_job_feed():
         section('// niche feeds', 'Feeds picked for your audience', '''      <div class="prose">
         <p>A job board for one audience needs the right jobs, not all of them. We build the selection with you and check every job before it reaches your feed:</p>
         <ul>
-          <li><strong>Remote jobs open to one country.</strong> A job qualifies when its location names the country, or says Worldwide, Global or the region without naming another country, and its description does not limit the role to other countries (&ldquo;must be based in the US&rdquo;, &ldquo;authorized to work in the UK&rdquo;). Measured in November 2026 for Indonesia: about 9 new jobs per working day pass these checks.</li>
+          <li><strong>Remote jobs open to one country.</strong> A job qualifies when its location names the country, or says Worldwide, Global or the region without naming another country, and its description does not limit the role to other countries (&ldquo;must be based in the US&rdquo;, &ldquo;authorized to work in the UK&rdquo;). Measured over 7 days in November 2026: from about 5 new jobs a day for Indonesia to 121 for the United States. <a href="/tools/job-postings-data/remote/#h-remote-to">25 countries start online</a>.</li>
           <li><strong>Jobs in one country or city</strong>, by job category, level or title keywords.</li>
           <li><strong>Jobs at the companies you name</strong>, or every job on one applicant tracking system.</li>
         </ul>
@@ -1565,6 +1565,7 @@ ALT_ROWS = [
     ('Closed jobs', ['Daily closed file, included', 'Separate expired-jobs product', 'closed_at field and webhook', 'Not documented', 'Active and expired status', 'Not stated']),
     ('XML for job board software', ['Included (Indeed format)', 'Through an Apify export', 'No', 'Yes', 'No', 'Yes']),
     ('Company logo and website', ['From the career site, where known', 'Yes, with company data', 'Yes, with company data', 'Not documented', 'Yes, with company data', 'Not documented']),
+    ('Remote jobs open to one country', ['25 countries, started online, with checks of location and description', 'Not documented', 'Not documented', 'Not documented', 'Not documented', 'Not documented']),
     ('Recruiter or hiring manager contacts', ['None, by design', 'Yes', 'Yes', 'Not documented', 'Not documented', 'Not documented']),
     ('History', ['Since September 2026', '6 months', 'Since 2021', 'Since 2020', 'Since 2020', 'Since 2019']),
     ('Free start', ['14-day trial', '14 days or 500 jobs', '200 credits', '1,000 jobs a month', '7 days', '7 days']),
