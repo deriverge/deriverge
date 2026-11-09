@@ -1242,7 +1242,7 @@ def page_job_feed():
     rows = ''.join(f'<tr><td class="k">{esc(ATS[a]["name"])}</td><td>more than {floor_round(n):,}</td></tr>'
                    for a, n in sorted(totals.items(), key=lambda x: -x[1]))
     fields = [
-        ('title, company, companyWebsite', 'The job title as the employer wrote it, the employer and its website when the system shows it.'),
+        ('title, company, companyWebsite, companyLogo', 'The job title as the employer wrote it, the employer, its website and its logo, read from the employer\'s career site.'),
         ('ats, careerSiteUrl, url, applyUrl', 'The applicant tracking system, the career site, the job page and the apply link on the employer\'s own site.'),
         ('locations, countries, workArrangement', 'Locations as listed, ISO country codes, and <code>remote</code>, <code>hybrid</code> or <code>onsite</code>.'),
         ('employmentType, seniority, jobCategory, department', 'Full time, part time, contract, temporary, internship and more; level from intern to executive; one of 21 job categories; the department when listed.'),
@@ -1286,7 +1286,7 @@ def page_job_feed():
         <tr><td class="k">Full index</td><td>Every open job in the index, more than 1.7 million, as a daily file with added and closed files.</td><td>$299 per month</td></tr>
         <tr><td class="k">Custom</td><td>Other fields, a feed for named companies, or files in your own storage.</td><td>on request</td></tr>
       </tbody></table></div>
-      <div class="prose"><p>Feeds of one country or of all remote jobs start online in two minutes: pick the country on <a href="/tools/job-postings-data/">job postings data by country</a> and start the free trial. Every feed starts with a free two-week trial. After that you pay monthly by card through Stripe, or by invoice from deriverge s.r.o., a Czech company with an EU VAT number, and you can cancel at the end of any month. <a href="/tools/job-data-feed/terms/">Terms, cancellation and refunds</a>.</p></div>''', hid='plans'),
+      <div class="prose"><p>Feeds of one country or of all remote jobs start online in two minutes: pick the country on <a href="/tools/job-postings-data/">job postings data by country</a> and start the free trial. Every feed starts with a free two-week trial. After that you pay monthly by card through Stripe, or by invoice from deriverge s.r.o., a Czech company with an EU VAT number, and you can cancel at the end of any month. <a href="/tools/job-data-feed/terms/">Terms, cancellation and refunds</a>. <a href="/tools/job-data-feed/alternatives/">How we compare with other providers</a>.</p></div>''', hid='plans'),
         section('// how to start', 'From first email to daily delivery', '''      <div class="prose">
         <ol>
           <li>Write to us who your audience is and which jobs they need.</li>
@@ -1430,6 +1430,7 @@ BOARD_PLATFORMS = [
 XML_ELEMENTS = [
     ('title', 'Job title as the employer wrote it'), ('date', 'Posting date, or the day we first saw the job'), ('referencenumber', 'Stable unique job id, for matching jobs between runs'),
     ('url', 'Job page on the employer\'s career site'), ('applyurl', 'Apply link on the employer\'s site'), ('company', 'Employer name'), ('companywebsite', 'Employer website when known'),
+    ('logo', 'Employer logo from its career site, when known'),
     ('city, state, country, postalcode', 'City from the location and the ISO country code'), ('location', 'Location as listed, all locations of the job'),
     ('description', 'Full description as clean HTML; email addresses and phone numbers removed'), ('salary', 'Pay as text, for example "EUR 70,000-90,000 per year"'),
     ('salarymin, salarymax, salarycurrency, salaryperiod', 'Pay as separate values when the ad states it'), ('jobtype', 'fulltime, parttime, contract, temporary or internship'),
@@ -1552,6 +1553,57 @@ def page_board_software():
                  'See which platforms read it, test the import with our free sample, and get a feed made for your audience.'),
            body='\n'.join(blocks), campaign=camp, ld=[faq_ld(faq)],
            trail=[('deriverge', '/'), ('Tools', '/tools/'), ('Job data feed', '/tools/job-data-feed/'), ('Job board software', path)])
+
+
+# Competitors as each publishes it, checked on 9 November 2026 (vendor pages and docs; figures change, the page says so).
+ALT_COLS = ['deriverge', 'Fantastic.jobs', 'TheirStack', 'Techmap', 'Coresignal', 'JobsPikr']
+ALT_ROWS = [
+    ('Where jobs come from', ['Employers\' own career sites on 14 applicant tracking systems', 'Career sites on 58 systems, plus LinkedIn and others', 'Mostly Indeed and LinkedIn, 368,000 sources', 'More than 270 job portals', 'Several sources, deduplicated', 'More than 70,000 sources']),
+    ('Open jobs', ['1.7 million from 47,000 employers', '2 to 3.5 million from career sites', 'About 333,000 new a day', 'About 8 million new a month', '52 million active', 'Not published']),
+    ('Updated', ['Daily', 'Hourly', 'Continuously', 'Daily', 'Every 24 hours', 'Daily']),
+    ('Closed jobs', ['Daily closed file, included', 'Separate expired-jobs product', 'closed_at field and webhook', 'Not documented', 'Active and expired status', 'Not stated']),
+    ('XML for job board software', ['Included (Indeed format)', 'Through an Apify export', 'No', 'Yes', 'No', 'Yes']),
+    ('Company logo and website', ['From the career site, where known', 'Yes, with company data', 'Yes, with company data', 'Not documented', 'Yes, with company data', 'Not documented']),
+    ('Recruiter or hiring manager contacts', ['None, by design', 'Yes', 'Yes', 'Not documented', 'Not documented', 'Not documented']),
+    ('History', ['Since September 2026', '6 months', 'Since 2021', 'Since 2020', 'Since 2020', 'Since 2019']),
+    ('Free start', ['14-day trial', '14 days or 500 jobs', '200 credits', '1,000 jobs a month', '7 days', '7 days']),
+    ('Entry price', ['$29 a month, up to 100 new jobs a day', '$45 a month, 5,000 jobs', '$49 a month, 1,500 jobs', '$29 a month, 30,000 jobs (API)', '$49 a month, 2,500 jobs', '$72 a month (billed yearly)']),
+]
+ALT_SOURCES = [('Fantastic.jobs', 'https://fantastic.jobs/api'), ('TheirStack pricing', 'https://theirstack.com/en/pricing'), ('Techmap pricing', 'https://jobdatafeeds.com/pricing'),
+               ('Coresignal pricing', 'https://coresignal.com/pricing'), ('JobsPikr pricing', 'https://www.jobspikr.com/pricing/')]
+
+
+def page_alternatives():
+    path, camp = '/tools/job-data-feed/alternatives/', 'job-data-alternatives'
+    title = 'Fantastic.jobs and TheirStack Alternatives: Job Data Compared'
+    desc = ('An honest comparison of job postings data providers: deriverge, Fantastic.jobs, TheirStack, Techmap, Coresignal and JobsPikr. '
+            'Sources, freshness, closed jobs, XML, contacts, history and entry prices.')
+    head = ''.join(f'<th>{esc(c)}</th>' for c in ALT_COLS)
+    body_rows = ''.join(f'<tr><td class="k">{esc(r)}</td>' + ''.join(f'<td>{esc(v)}</td>' for v in vals) + '</tr>' for r, vals in ALT_ROWS)
+    src = ', '.join(f'<a href="{esc(u)}" target="_blank" rel="nofollow noopener">{esc(t)}</a>' for t, u in ALT_SOURCES)
+    table = (f'<div class="tbl-wrap"><table class="tbl"><thead><tr><th></th>{head}</tr></thead><tbody>{body_rows}</tbody></table></div>'
+             f'<p class="note">From each provider\'s own pages, checked on 9 November 2026: {src}. Plans and figures change; check the provider before you decide. deriverge is not affiliated with any of them.</p>')
+    blocks = [
+        section('compare', 'Job data providers compared', table, hid='compare'),
+        section('when us', 'When deriverge is the better choice', '''      <div class="prose"><ul>
+        <li><strong>You run a job board and want jobs straight from employers.</strong> Every job links to the apply page on the employer\'s own site, with no aggregator in between, and the feed comes as XML that job board software imports as it is.</li>
+        <li><strong>You need to take closed jobs down.</strong> The daily closed file is part of every plan, not a separate product.</li>
+        <li><strong>You want a niche.</strong> Remote jobs open to one country, one country or city, one category: we build and check the selection, and cap the jobs per employer so one company does not fill your board.</li>
+        <li><strong>You care about privacy.</strong> No recruiter or hiring manager contacts, and email addresses and phone numbers are removed from descriptions. deriverge is an EU company.</li>
+        <li><strong>Price per job matters.</strong> $59 a month covers up to 2,000 new jobs a day.</li>
+      </ul></div>''', hid='when-us'),
+        section('when them', 'When another provider fits better', '''      <div class="prose"><ul>
+        <li><strong>You need several years of history</strong> for analytics: TheirStack, Techmap, Coresignal and JobsPikr keep data from 2019 to 2021.</li>
+        <li><strong>You need jobs from job boards and LinkedIn</strong>, not only from employers\' career sites: TheirStack and Coresignal collect those.</li>
+        <li><strong>You need updates within the hour</strong>: Fantastic.jobs refreshes hourly and TheirStack continuously; our feed is daily.</li>
+        <li><strong>You sell to recruiters</strong> and need company data such as size and funding with each job: TheirStack and Coresignal attach it.</li>
+      </ul></div>''', hid='when-them'),
+        board_cta('', camp),
+    ]
+    layout(path=path, title=title, desc=desc, tab='alternatives', kicker='// job data feed · comparison', h1='Job data feed alternatives',
+           lede='How deriverge compares with Fantastic.jobs, TheirStack, Techmap, Coresignal and JobsPikr, from each provider\'s own pages. Where we are the better choice, and where another provider fits better.',
+           body='\n'.join(blocks), campaign=camp, ld=[{'@context': 'https://schema.org', '@type': 'WebPage', 'name': title, 'url': SITE + path, 'description': desc}],
+           trail=[('deriverge', '/'), ('Tools', '/tools/'), ('Job data feed', '/tools/job-data-feed/'), ('Alternatives', path)])
 
 
 def page_terms():
@@ -2067,6 +2119,7 @@ def main():
     page_job_feed()
     page_data_privacy()
     page_terms()
+    page_alternatives()
     page_board_software()
     for bp in BOARD_PLATFORMS:
         page_board_platform(bp)
