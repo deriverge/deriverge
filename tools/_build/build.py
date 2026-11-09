@@ -1277,6 +1277,7 @@ def page_job_feed():
           <li>A feed page shows today's new jobs and the download links, and <code>manifest.json</code> lists the same for your import script. Dated files stay available for 30 days.</li>
           <li>Descriptions come as plain text and as clean HTML, ready to show on your site.</li>
           <li>For job board software, all open jobs also come as an XML feed in the Indeed format and as a JSON array. Paste the address into your platform's job import and closed jobs drop out on their own. <a href="/tools/job-data-feed/job-board-software/">See which platforms read it</a>.</li>
+          <li>On request, a signed webhook after every delivery: a POST with the counts and file links, so your import starts on its own.</li>
         </ul>
       </div>''', hid='delivery'),
         section('// pricing', 'Plans', '''      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Plan</th><th>What it includes</th><th>Price</th></tr></thead><tbody>
@@ -1735,10 +1736,29 @@ BILLING_LIVE = True
 FEED_PRICES = {'starter': ('Starter', 29), 'growth': ('Growth', 59), 'scale': ('Scale', 99)}
 
 
+REMOTE_TO = {k: v for k, v in json.load(open(os.path.join(HERE, 'remote_to.json'), encoding='utf-8')).items() if not k.startswith('_')}
+_measured = os.path.join(HERE, 'remote_to_measured.json')
+# Remote jobs open to one country, new a day: from 7-day sample runs of the feed actor (scratchpad measure_remote_to.py).
+REMOTE_TO_PER_DAY = {k: v['perDay'] for k, v in (json.load(open(_measured, encoding='utf-8')) if os.path.exists(_measured) else {}).items()
+                     if not k.startswith('_') and isinstance(v, dict) and v.get('perDay') is not None and k in REMOTE_TO}
+
+
+def plan_for(per_day):
+    return 'starter' if per_day <= 100 else 'growth' if per_day <= 2000 else 'scale'
+
+
+def remote_to_searches(cc):
+    d = REMOTE_TO[cc]
+    loc = [n for n in d['names'] if len(n) > 2] + d['regions'] + ['Worldwide', 'Global', 'Anywhere']
+    return [{'workArrangement': ['remote'], 'locations': loc, 'maxItems': 1000, 'strictIndex': True},
+            {'workArrangement': ['remote'], 'locations': ['Remote'], 'maxItems': 1000,
+             'descriptionKeywords': ['anywhere in the world', 'from any country', 'in any country', 'any time zone', 'any timezone', d['names'][0], 'hire globally', 'hire worldwide']}]
+
+
 def feed_plan(cc):
     s = JOBS['countries'][cc]
     per_day = round(s['new7'] / 7)
-    return per_day, ('starter' if per_day <= 100 else 'growth' if per_day <= 2000 else 'scale')
+    return per_day, plan_for(per_day)
 
 
 def write_feed_plans(date):
@@ -1753,6 +1773,13 @@ def write_feed_plans(date):
             'plan': plan, 'perDay': per_day, 'maxItems': 5000 if plan == 'starter' else 20000,
             'page': f'/tools/job-postings-data/{cslug(cc)}/',
             'search': {'workArrangement': ['remote']} if cc == 'REMOTE' else {'countries': [cc]},
+        }
+    for cc, per_day in REMOTE_TO_PER_DAY.items():
+        d = REMOTE_TO[cc]
+        feeds[f'remote-to:{cc}'] = {
+            'title': f'Remote jobs open to candidates in {in_country(cc)}', 'plan': plan_for(per_day), 'perDay': round(per_day), 'maxItems': 1000,
+            'page': f'/tools/job-postings-data/{cslug(cc)}/' if cc in JOBS['pages'] else '/tools/job-postings-data/remote/',
+            'searches': remote_to_searches(cc), 'remoteOpenTo': {'country': cc, 'names': d['names'], 'regions': d['regions']}, 'maxPerCompanyPerDay': 3,
         }
     out = os.path.join(TOOLS, 'data', 'feed-plans.json')
     with open(out, 'w', encoding='utf-8') as f:
@@ -1873,6 +1900,11 @@ def jobs_cta(cc, s, sample, camp):
         start = f'<a class="btn" href="{BILLING_URL}/checkout?feed={urllib.parse.quote(key)}" rel="nofollow">Start the free trial</a> '
         trial = (f'<p class="more">Start online in two minutes: {FEED_PRICES[plan][0]} plan, ${FEED_PRICES[plan][1]} a month after a 14-day free trial. '
                  'A card is needed to start; cancel any time before the trial ends and you pay nothing.</p>\n      ')
+    if BILLING_LIVE and cc in REMOTE_TO_PER_DAY:
+        rp = REMOTE_TO_PER_DAY[cc]
+        rname, rprice = FEED_PRICES[plan_for(rp)]
+        trial += (f'<p class="more">Run a remote job board for people in {esc(in_country(cc))}? <a href="{BILLING_URL}/checkout?feed=remote-to%3A{cc}" rel="nofollow">'
+                  f'Remote jobs open to candidates in {esc(in_country(cc))}</a>: about {max(1, round(rp)):,} new a day after our checks, {rname} plan, ${rprice} a month after a 14-day free trial.</p>\n      ')
     return f'''    <aside class="block cta" aria-label="Get {esc(nm)} every day">
       <p class="cmt">get the data</p>
       <h2>Get {esc(nm)} every day</h2>
@@ -1908,6 +1940,19 @@ def other_countries(current):
     items += f'<li><a href="/tools/job-postings-data/remote/">Remote jobs</a><span>{JOBS["countries"]["REMOTE"]["jobs"]:,}</span></li>' if current != 'REMOTE' else ''
     return section('more countries', 'Job postings data for other countries',
                    f'      <ul class="linklist">{items}<li><a href="/tools/job-postings-data/">All {len(JOBS["pages"])} countries</a></li></ul>', hid='countries')
+
+
+def remote_to_section():
+    """Remote jobs open to candidates in one country: the self-serve feeds for remote job boards of one country."""
+    rows = ''
+    for cc, per_day in sorted(REMOTE_TO_PER_DAY.items(), key=lambda x: -x[1]):
+        name, price = FEED_PRICES[plan_for(per_day)]
+        rows += (f'<tr><td>{esc(cname(cc))}</td><td class="num">{max(1, round(per_day)):,}</td><td>{name}, ${price} a month</td>'
+                 f'<td><a href="{BILLING_URL}/checkout?feed=remote-to%3A{cc}" rel="nofollow">Start the free trial</a></td></tr>')
+    inner = (f'''      <div class="prose"><p>A remote job board for people in one country needs jobs they can actually take. These feeds keep a remote job only when its location names the country, its region or says worldwide, and its description does not limit it to other countries (&ldquo;must be based in the US&rdquo;, &ldquo;authorized to work in the UK&rdquo;). At most three new jobs a day come from one employer.</p></div>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Open to candidates in</th><th class="num">New jobs a day</th><th>Plan</th><th></th></tr></thead><tbody>{rows}</tbody></table></div>
+      <p class="note">New jobs a day after these checks, measured over the 7 days before {fmt_date(JOBS["generatedAt"][:10])}. Every feed starts with a free two-week trial.</p>''')
+    return section('remote by country', 'Remote jobs open to one country', inner, hid='remote-to')
 
 
 def page_country(cc, date):
@@ -1995,6 +2040,7 @@ def page_country(cc, date):
       </div>
     </section>''',
         jobs_cta(cc, s, sample, camp),
+        *([remote_to_section()] if remote and BILLING_LIVE and REMOTE_TO_PER_DAY else []),
         section('who hires', 'Employers with the most open jobs', employers_table(emps) + emp_note, hid='employers'),
         f'''    <section class="block" aria-label="Level and systems">
       <div class="two">

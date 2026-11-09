@@ -1,0 +1,178 @@
+{
+ "VN": {
+  "status": "SUCCEEDED",
+  "added7": 34,
+  "perDay": 4.9,
+  "usd": 0.051,
+  "store": "https://api.apify.com/v2/key-value-stores/h0Br45r4nYWzzZ7ni/records/index.html"
+ },
+ "PK": {
+  "status": "SUCCEEDED",
+  "added7": 40,
+  "perDay": 5.7,
+  "usd": 0.053,
+  "store": "https://api.apify.com/v2/key-value-stores/UvKrQq9YbBblEJWJf/records/index.html"
+ },
+ "AR": {
+  "status": "SUCCEEDED",
+  "added7": 99,
+  "perDay": 14.1,
+  "usd": 0.051,
+  "store": "https://api.apify.com/v2/key-value-stores/p8RgOlmZTg1XOPjvA/records/index.html"
+ },
+ "CO": {
+  "status": "SUCCEEDED",
+  "added7": 100,
+  "perDay": 14.3,
+  "usd": 0.051,
+  "store": "https://api.apify.com/v2/key-value-stores/Ldf1Wxbahq8qUMxfo/records/index.html"
+ },
+ "NG": {
+  "status": "SUCCEEDED",
+  "added7": 48,
+  "perDay": 6.9,
+  "usd": 0.05,
+  "store": "https://api.apify.com/v2/key-value-stores/mMaH9fSyu27oVc5Ws/records/index.html"
+ },
+ "KE": {
+  "status": "SUCCEEDED",
+  "added7": 51,
+  "perDay": 7.3,
+  "usd": 0.049,
+  "store": "https://api.apify.com/v2/key-value-stores/2ahXbxuxM0rRcq5so/records/index.html"
+ },
+ "ID": {
+  "status": "SUCCEEDED",
+  "added7": 35,
+  "perDay": 5.0,
+  "usd": 0.057,
+  "store": "https://api.apify.com/v2/key-value-stores/SCuU0MsLxrdareYT3/records/index.html"
+ },
+ "PH": {
+  "status": "SUCCEEDED",
+  "added7": 123,
+  "perDay": 17.6,
+  "usd": 0.061,
+  "store": "https://api.apify.com/v2/key-value-stores/wxORXqY8f2r7CBPt5/records/index.html"
+ },
+ "IN": {
+  "status": "SUCCEEDED",
+  "added7": 131,
+  "perDay": 18.7,
+  "usd": 0.064,
+  "store": "https://api.apify.com/v2/key-value-stores/ygeTpdStLZ0J9oeLc/records/index.html"
+ },
+ "BR": {
+  "status": "SUCCEEDED",
+  "added7": 142,
+  "perDay": 20.3,
+  "usd": 0.062,
+  "store": "https://api.apify.com/v2/key-value-stores/QL4NV4tCggjGJm2CE/records/index.html"
+ },
+ "MX": {
+  "status": "SUCCEEDED",
+  "added7": 149,
+  "perDay": 21.3,
+  "usd": 0.06,
+  "store": "https://api.apify.com/v2/key-value-stores/jJXwgIcdczrWf42td/records/index.html"
+ },
+ "ZA": {
+  "status": "SUCCEEDED",
+  "added7": 76,
+  "perDay": 10.9,
+  "usd": 0.057,
+  "store": "https://api.apify.com/v2/key-value-stores/YhdhYcrAMdBUbWwVd/records/index.html"
+ },
+ "EG": {
+  "status": "SUCCEEDED",
+  "added7": 54,
+  "perDay": 7.7,
+  "usd": 0.059,
+  "store": "https://api.apify.com/v2/key-value-stores/GFQmhjnpcqqI8a69L/records/index.html"
+ },
+ "_measured": "2026-11-09",
+ "TR": {
+  "status": "SUCCEEDED",
+  "added7": 76,
+  "perDay": 10.9,
+  "usd": 0.049,
+  "store": "https://api.apify.com/v2/key-value-stores/MhwT9iSpeiuDSyAxO/records/index.html"
+ },
+ "UA": {
+  "status": "SUCCEEDED",
+  "added7": 90,
+  "perDay": 12.9,
+  "usd": 0.057,
+  "store": "https://api.apify.com/v2/key-value-stores/zuFuteDZhlUNkpyCw/records/index.html"
+ },
+ "ES": {
+  "status": "SUCCEEDED",
+  "added7": 122,
+  "perDay": 17.4,
+  "usd": 0.058,
+  "store": "https://api.apify.com/v2/key-value-stores/AIAiNg3O1L3CFMBY9/records/index.html"
+ },
+ "AU": {
+  "status": "SUCCEEDED",
+  "added7": 62,
+  "perDay": 8.9,
+  "usd": 0.055,
+  "store": "https://api.apify.com/v2/key-value-stores/dBKa5EhIi0BdXOTE6/records/index.html"
+ },
+ "PL": {
+  "status": "SUCCEEDED",
+  "added7": 131,
+  "perDay": 18.7,
+  "usd": 0.062,
+  "store": "https://api.apify.com/v2/key-value-stores/L8OcTP1sqdHAHxMKL/records/index.html"
+ },
+ "RO": {
+  "status": "SUCCEEDED",
+  "added7": 92,
+  "perDay": 13.1,
+  "usd": 0.061,
+  "store": "https://api.apify.com/v2/key-value-stores/Sjx4x2c1ghSjO7Xno/records/index.html"
+ },
+ "PT": {
+  "status": "SUCCEEDED",
+  "added7": 108,
+  "perDay": 15.4,
+  "usd": 0.062,
+  "store": "https://api.apify.com/v2/key-value-stores/MAU8IoKUqExwdN97B/records/index.html"
+ },
+ "DE": {
+  "status": "SUCCEEDED",
+  "added7": 203,
+  "perDay": 29.0,
+  "usd": 0.06,
+  "store": "https://api.apify.com/v2/key-value-stores/g3ZmozoPrmQ7t3cLI/records/index.html"
+ },
+ "GB": {
+  "status": "SUCCEEDED",
+  "added7": 242,
+  "perDay": 34.6,
+  "usd": 0.064,
+  "store": "https://api.apify.com/v2/key-value-stores/MeSLsqd7Sj5v6lG2J/records/index.html"
+ },
+ "CZ": {
+  "status": "SUCCEEDED",
+  "added7": 83,
+  "perDay": 11.9,
+  "usd": 0.062,
+  "store": "https://api.apify.com/v2/key-value-stores/9SeAdb8i0l9WQ9OlM/records/index.html"
+ },
+ "CA": {
+  "status": "SUCCEEDED",
+  "added7": 299,
+  "perDay": 42.7,
+  "usd": 0.064,
+  "store": "https://api.apify.com/v2/key-value-stores/AP0gSgN19TP2cRFLy/records/index.html"
+ },
+ "US": {
+  "status": "SUCCEEDED",
+  "added7": 845,
+  "perDay": 120.7,
+  "usd": 0.071,
+  "store": "https://api.apify.com/v2/key-value-stores/FVdetQq8qVQaEslq9/records/index.html"
+ }
+}
