@@ -13,6 +13,7 @@ Actor prices and visibility are read live from https://api.apify.com/v2/acts/der
 Actors that are not public yet use PRICE_FALLBACK below and are still linked from the tool pages; the ATS pages link
 only to public actors, so re-running the build after a publication adds the new links.
 """
+import csv
 import datetime as dt
 import html
 import json
@@ -21,6 +22,7 @@ import re
 import statistics
 import sys
 import time
+import unicodedata
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -280,6 +282,7 @@ TOOL_LINKS = [
     ('/tools/wayback-machine-snapshots/', 'Wayback Machine snapshot finder', 'first, latest and closest capture'),
     ('/tools/phone-number-validator/', 'Phone number validator', '50 numbers, E.164 and type'),
     ('/tools/companies-using-ats/', 'Which ATS do companies use?', '14 systems compared'),
+    ('/tools/job-postings-data/', 'Job postings data by country', 'open jobs, employers and free samples'),
 ]
 
 
@@ -1203,7 +1206,7 @@ def page_index(stats, total_c, total_j, date):
         section('// tools', 'Tools', f'      <ul class="cards">{cards}</ul>', hid='tools'),
         section('// data', 'Companies by applicant tracking system', f'''      <div class="prose"><p>Lists of employers per ATS, built from {total_j:,} open jobs on public career sites. Search, sort and download each list.</p></div>
       <ul class="linklist">{ats_list}</ul>
-      <div class="prose"><p>Need every job, every day? The <a href="/tools/job-data-feed/">job data feed</a> delivers the whole index as a daily file.</p></div>''', hid='data'),
+      <div class="prose"><p>See the jobs themselves by country in <a href="/tools/job-postings-data/">job postings data</a>, with free CSV samples. Need every job, every day? The <a href="/tools/job-data-feed/">job data feed</a> delivers the whole index as a daily file.</p></div>''', hid='data'),
         section('// why free', 'How these tools work', '''      <div class="prose">
         <p>Every tool runs in your browser and talks directly to the public source: DNS resolvers, domain registries, the Internet Archive. There is no server of ours in between, no signup and no tracking of what you look up.</p>
         <p>Each tool does one small job well. When you need thousands of rows, a schedule, an API or an export into your own systems, the same job runs as an actor in <a data-actor="" data-campaign="tools-index" href="''' + esc(actor_href('', 'tools-index')) + '''" target="_blank" rel="''' + REL + '''">our Apify Store profile</a>, where you pay only for the results you get.</p>
@@ -1293,7 +1296,7 @@ def page_job_feed():
         f'''    <aside class="block cta" aria-label="Start a job data feed">
       <p class="cmt">// start</p>
       <h2>Get a sample of your feed</h2>
-      <p>Download the free sample: 1,050 real jobs added to the index in the three days before {esc(built)}, 75 from each system, without descriptions. Then write to us with what you need, and we reply with a sample of your exact feed and an offer, usually within one or two working days.</p>
+      <p>Download the free sample: 1,050 real jobs added to the index in the three days before {esc(built)}, 75 from each system, without descriptions, or a sample for one country from <a href="/tools/job-postings-data/">job postings data by country</a>. Then write to us with what you need, and we reply with a sample of your exact feed and an offer, usually within one or two working days.</p>
       <div class="cta-row"><a class="btn" href="/tools/data/job-feed-sample.jsonl.gz" download>Download the sample (JSON Lines, gzip)</a> <a class="btn btn--ghost" href="{esc(mail)}">Ask for a feed</a></div>
       <p class="more">Prefer to pay per request? The same index is behind {actor_link('career-site-jobs-search', camp, 'Career Site and ATS Jobs API on Apify', cls='')} and our <a href="https://rapidapi.com/David%C4%8Cag%C3%A1nek/api/job-search-career-sites-and-ats" target="_blank" rel="noopener">Job Search API on RapidAPI</a>.</p>
     </aside>''',
@@ -1317,6 +1320,376 @@ def page_job_feed():
     layout(path=path, title=title, desc=desc, tab='job-data-feed', kicker='// data feed · for job boards and HR tech', h1='Job data feed',
            lede=f'Every open job from the career sites of more than {c} companies on 14 applicant tracking systems, or just the ones your audience needs, delivered daily. For job boards, HR tech products and labour market research. Free sample and a two-week trial.',
            body=body, ld=ld, campaign=camp)
+
+
+# ── job postings data: hub, one page per country, remote ───────────────────────────────────────────────────────────
+JOBS_MIN = 1000  # countries with fewer open jobs get no page of their own
+CAT_LABEL = {
+    'software': 'Software engineering', 'data': 'Data, analytics and AI', 'it-security': 'IT and security', 'engineering': 'Engineering (non-software)',
+    'product': 'Product management', 'design': 'Design and UX', 'sales': 'Sales and business development', 'marketing': 'Marketing and communications',
+    'customer-support': 'Customer success and support', 'operations': 'Operations and project management', 'finance': 'Finance and accounting',
+    'hr': 'HR and recruiting', 'legal': 'Legal and compliance', 'healthcare': 'Healthcare and medical', 'education': 'Education and training',
+    'science': 'Science and research', 'trades-manufacturing': 'Skilled trades and manufacturing', 'logistics': 'Logistics and transportation',
+    'hospitality': 'Hospitality and food service', 'retail': 'Retail', 'administrative': 'Administrative and office', 'other': 'Other or not classified',
+}
+SEN_LABEL = {'intern': 'Intern and working student', 'entry': 'Entry level', 'mid': 'Mid level', 'senior': 'Senior', 'lead': 'Lead',
+             'director': 'Director', 'executive': 'Executive'}
+COUNTRY_NAME = {'US': 'United States', 'GB': 'United Kingdom', 'HK': 'Hong Kong', 'TR': 'Turkey', 'CZ': 'Czech Republic', 'KR': 'South Korea',
+                'MO': 'Macao', 'AE': 'United Arab Emirates', 'CI': "Cote d'Ivoire"}
+THE = {'US', 'GB', 'NL', 'AE', 'PH', 'CZ', 'DO'}  # 'in the United States'
+# One city, several spellings in job locations: counts are added up under the English name.
+CITY_ALIAS = {'münchen': 'Munich', 'praha': 'Prague', 'bangalore': 'Bengaluru', 'new york city': 'New York', 'nyc': 'New York', 'gurgaon': 'Gurugram',
+              'frankfurt am main': 'Frankfurt', 'köln': 'Cologne', 'wien': 'Vienna', 'warszawa': 'Warsaw', 'kraków': 'Krakow', 'krakow': 'Krakow',
+              'lisboa': 'Lisbon', 'milano': 'Milan', 'roma': 'Rome', 'zürich': 'Zurich', 'zurich': 'Zurich', 'bruxelles': 'Brussels', 'brussel': 'Brussels',
+              'den haag': 'The Hague', 'göteborg': 'Gothenburg', 'københavn': 'Copenhagen', 'genève': 'Geneva', 'geneve': 'Geneva', 'nürnberg': 'Nuremberg',
+              'düsseldorf': 'Dusseldorf', 'bombay': 'Mumbai', 'madras': 'Chennai', 'calcutta': 'Kolkata', 'saigon': 'Ho Chi Minh City',
+              'ho chi minh': 'Ho Chi Minh City', 'sao paulo': 'São Paulo', 'bogota': 'Bogotá', 'ciudad de méxico': 'Mexico City', 'cdmx': 'Mexico City',
+              'méxico city': 'Mexico City', 'bucuresti': 'Bucharest', 'bucurești': 'Bucharest', 'athina': 'Athens', 'αθήνα': 'Athens'}
+GENERIC_EMPLOYER = re.compile(r'^(candidate experience( site| page)?|careers?( site| page| portal)?|jobs?|external( career site)?|.*\btalent acquisition team|.{0,3})$', re.I)
+
+
+def nd(s):
+    """Job titles and names may carry long dashes; the site never shows them."""
+    return re.sub(r'\s*[–—]\s*', ' - ', s or '').strip()
+
+
+def cname(cc):
+    return COUNTRY_NAME.get(cc) or JOBS['names'].get(cc) or cc
+
+
+def in_country(cc):
+    return ('the ' if cc in THE else '') + cname(cc)
+
+
+def cslug(cc):
+    if cc == 'REMOTE':
+        return 'remote'
+    s = unicodedata.normalize('NFKD', cname(cc)).encode('ascii', 'ignore').decode().lower()
+    return re.sub(r'[^a-z0-9]+', '-', s).strip('-')
+
+
+JOBS = {}
+
+
+def load_jobs(agg_path):
+    p = os.path.join(os.path.dirname(os.path.abspath(agg_path)), 'jobs-agg.json')
+    d = json.load(open(p, encoding='utf-8'))
+    JOBS.update(d)
+    JOBS['names'] = d['countryNames']
+    JOBS['pages'] = [cc for cc, s in sorted(d['countries'].items(), key=lambda x: -x[1]['jobs']) if cc != 'REMOTE' and s['jobs'] >= JOBS_MIN]
+    return d
+
+
+def job_company(j):
+    return nd(clean_name(j['a'], j['c'], j['b']))[:70]
+
+
+def pick_jobs(latest, n, per_company):
+    out, seen = [], {}
+    for j in latest:
+        c = job_company(j).lower()
+        if seen.get(c, 0) >= per_company:
+            continue
+        seen[c] = seen.get(c, 0) + 1
+        out.append(j)
+        if len(out) == n:
+            break
+    return out
+
+
+def short_loc(l):
+    parts = [nd(x) for x in (l or '').split(' | ') if x.strip()]
+    if len(parts) > 2:
+        return f'{parts[0]} | {parts[1]} and {len(parts) - 2} more'
+    return ' | '.join(parts)
+
+
+SAMPLE_COLS = ['title', 'company', 'location', 'workArrangement', 'jobCategory', 'seniority', 'postedAt', 'firstSeenAt', 'ats', 'url']
+
+
+def write_sample(cc, s):
+    rows = pick_jobs(s['latest'], 100, 3)
+    out_dir = os.path.join(TOOLS, 'data', 'jobs')
+    os.makedirs(out_dir, exist_ok=True)
+    path = os.path.join(out_dir, f'{cslug(cc)}.csv')
+    with open(path, 'w', encoding='utf-8-sig', newline='') as f:
+        w = csv.writer(f)
+        w.writerow(SAMPLE_COLS)
+        for j in rows:
+            w.writerow([nd(j['t']), job_company(j), j['l'] or '', j['wa'] or '', j['cat'] if j['cat'] != 'other' else '', j['sen'] or '',
+                        j['p'] or '', j['f'] or '', j['a'], j['u']])
+    return f'/tools/data/jobs/{cslug(cc)}.csv', len(rows)
+
+
+def top_employers(s, n=12):
+    merged = {}
+    for name, a, k, jobs in s['top']:
+        nm = nd(clean_name(a, name, k))
+        if not nm or JUNK_NAME.match(nm) or GENERIC_EMPLOYER.match(nm):
+            continue
+        key = re.sub(r'[^a-z0-9]', '', nm.lower())
+        e = merged.setdefault(key, {'name': nm, 'jobs': 0, 'a': a, 'k': k, 'best': 0})
+        e['jobs'] += jobs
+        if jobs > e['best']:
+            e.update(a=a, k=k, best=jobs)
+    return sorted(merged.values(), key=lambda e: -e['jobs'])[:n]
+
+
+def share_bars(counts, labels, total, n=10, links=None):
+    items = sorted(((k, v) for k, v in counts.items() if v), key=lambda x: -x[1])[:n]
+    if not items:
+        return '<p class="note">No data.</p>'
+    mx = items[0][1]
+    li = ''
+    for k, v in items:
+        lab = esc(labels.get(k, k))
+        if links and links.get(k):
+            lab = f'<a href="{links[k]}">{lab}</a>'
+        li += (f'<li><span>{lab}</span><span class="bar"><i style="width:{max(2, round(100 * v / mx))}%"></i></span>'
+               f'<span class="n">{v:,}<small>{round(100 * v / total) if total else 0}%</small></span></li>')
+    return f'<ul class="bars">{li}</ul>'
+
+
+def city_counts(s):
+    out = {}
+    for name, n in s['cities']:
+        k = CITY_ALIAS.get(name.lower(), name)
+        k = k[0].upper() + k[1:] if k.islower() else k
+        out[k] = out.get(k, 0) + n
+    return out
+
+
+def feed_offer(cc, s):
+    """The plan that fits one country: all its new jobs in a niche feed when they fit 100 a day, else the filtered feed."""
+    per_day = round(s['new7'] / 7)
+    where = 'remote jobs' if cc == 'REMOTE' else f'jobs in {in_country(cc)}'
+    if per_day <= 100:
+        return (f'All new {where} fit the <strong>Niche feed at $99 a month</strong>: about {per_day:,} new jobs a day, '
+                'with descriptions, daily added and closed files and your own feed page.')
+    return (f'All {s["jobs"]:,} open {where} come in the <strong>Filtered feed from $299 a month</strong>, a daily file with the jobs added '
+            f'and closed that day (about {per_day:,} new a day). A narrower selection of up to 100 new jobs a day, for one city, job category '
+            'or level, is the <strong>Niche feed at $99 a month</strong>.')
+
+
+def jobs_cta(cc, s, sample, camp):
+    nm = 'remote jobs' if cc == 'REMOTE' else f'{cname(cc)} jobs'
+    mail = ('mailto:info@deriverge.com?subject=' + urllib.parse.quote(f'Job data feed: {nm}') + '&body=' + urllib.parse.quote(
+        f'Company:\nWhat the data is for:\nWhich {nm} you need (all, or by city, category or level):\nDelivery (daily file or API) and format (JSON Lines or CSV):\n'))
+    api = actor_link('career-site-jobs-search', camp, 'Career Site and ATS Jobs API on Apify', cls='') if actor('career-site-jobs-search')['public'] else 'our Apify actor'
+    return f'''    <aside class="block cta" aria-label="Get {esc(nm)} every day">
+      <p class="cmt">get the data</p>
+      <h2>Get {esc(nm)} every day</h2>
+      <p>{feed_offer(cc, s)} Every feed starts with a free two-week trial.</p>
+      <ul><li>A private link updated every morning: jobs added today, jobs closed today and all open jobs, in JSON Lines and CSV</li>
+      <li>Title, employer, location with ISO country code, remote or onsite, category, level, salary when stated, dates and the apply link on the employer\'s site</li>
+      <li>No candidate data; emails and phone numbers removed from descriptions</li></ul>
+      <div class="cta-row"><a class="btn" href="{esc(sample)}" download>Download 100 jobs (CSV)</a> <a class="btn btn--ghost" href="{esc(mail)}">Ask for a feed</a></div>
+      <p class="more">Plans and delivery are on the <a href="/tools/job-data-feed/">job data feed</a> page. Prefer to pay per request? Query the same index with {api} or our <a href="https://rapidapi.com/David%C4%8Cag%C3%A1nek/api/job-search-career-sites-and-ats" target="_blank" rel="noopener">Job Search API on RapidAPI</a>.</p>
+    </aside>'''
+
+
+def jobs_table(rows):
+    tr = ''.join(
+        f'<tr><td><a href="{esc(j["u"])}" target="_blank" rel="nofollow noopener">{esc(nd(j["t"])[:110])}</a></td><td>{esc(job_company(j))}</td>'
+        f'<td>{esc(short_loc(j["l"]))}</td><td class="nowrap">{esc(j["f"] or "")}</td></tr>' for j in rows)
+    return (f'<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Job</th><th>Employer</th><th>Location</th><th>First seen</th></tr></thead>'
+            f'<tbody>{tr}</tbody></table></div>')
+
+
+def employers_table(emps):
+    tr = ''.join(
+        f'<tr><td class="num">{i + 1}</td><td>{esc(e["name"])}</td><td><a href="/tools/companies-using-{e["a"]}/">{esc(ATS[e["a"]]["name"])}</a></td>'
+        f'<td><a href="{esc(careers_url(e["a"], e["k"]))}" target="_blank" rel="nofollow noopener">careers page</a></td><td class="num">{e["jobs"]:,}</td></tr>'
+        for i, e in enumerate(emps))
+    return (f'<div class="tbl-wrap"><table class="tbl"><thead><tr><th class="num">#</th><th>Employer</th><th>System</th><th>Jobs</th><th class="num">Open jobs</th></tr></thead>'
+            f'<tbody>{tr}</tbody></table></div>')
+
+
+def other_countries(current):
+    items = ''.join(f'<li><a href="/tools/job-postings-data/{cslug(c)}/">{esc(cname(c))}</a><span>{JOBS["countries"][c]["jobs"]:,}</span></li>'
+                    for c in JOBS['pages'][:24] if c != current)
+    items += f'<li><a href="/tools/job-postings-data/remote/">Remote jobs</a><span>{JOBS["countries"]["REMOTE"]["jobs"]:,}</span></li>' if current != 'REMOTE' else ''
+    return section('more countries', 'Job postings data for other countries',
+                   f'      <ul class="linklist">{items}<li><a href="/tools/job-postings-data/">All {len(JOBS["pages"])} countries</a></li></ul>', hid='countries')
+
+
+def page_country(cc, date):
+    s = JOBS['countries'][cc]
+    remote = cc == 'REMOTE'
+    slug = cslug(cc)
+    path, camp = f'/tools/job-postings-data/{slug}/', f'job-postings-data-{slug}'
+    nice = fmt_date(date)
+    sample, n_sample = write_sample(cc, s)
+    nm, inn = (('remote jobs', 'remote') if remote else (cname(cc), in_country(cc)))
+    per_day = round(s['new7'] / 7)
+    rpct = round(100 * s['remote'] / s['jobs'])
+    emps = top_employers(s)
+    cats = {k: v for k, v in s['cat'].items() if k != 'other'}
+    other_pct = round(100 * s['cat'].get('other', 0) / s['jobs'])
+    if remote:
+        title = f'Remote Job Postings Data: {s["jobs"]:,} Remote Jobs, Updated Daily'
+        h1 = 'Remote job postings data'
+        desc = (f'{s["jobs"]:,} remote jobs from {s["employers"]:,} employers\' career sites, {s["new7"]:,} new in the last 7 days. '
+                'Countries, employers and job categories, a free CSV sample and a daily feed.')
+        lede = (f'On {nice} our index held <strong>{s["jobs"]:,}</strong> remote jobs from the career sites of <strong>{s["employers"]:,}</strong> employers, '
+                f'and <strong>{s["new7"]:,}</strong> of them were first seen in the last 7 days. Here is what the data holds, with a free sample to download.')
+    else:
+        title = f'Job Postings Data for {in_country(cc)}: {s["jobs"]:,} Open Jobs'
+        if len(title) > 62:
+            title = f'{cname(cc)} Job Postings Data: {s["jobs"]:,} Open Jobs'
+        h1 = f'Job postings data for {in_country(cc)}'
+        desc = (f'{s["jobs"]:,} open jobs from {s["employers"]:,} employers in {in_country(cc)}, {s["new7"]:,} new in the last 7 days. '
+                'Top employers, cities and job categories, a free CSV sample and a daily feed.')
+        lede = (f'On {nice} our index held <strong>{s["jobs"]:,}</strong> open jobs in {esc(in_country(cc))} from the career sites of <strong>{s["employers"]:,}</strong> employers, '
+                f'and <strong>{s["new7"]:,}</strong> of them were first seen in the last 7 days. Here is what the data holds, with a free sample to download.')
+    cities = city_counts(s) if not remote else {}
+    top_city = max(cities.items(), key=lambda x: x[1])[0] if cities else None
+    stats = [(f'{s["jobs"]:,}', 'open jobs'), (f'{s["new7"]:,}', f'new in 7 days, about {per_day:,} a day'), (f'{s["employers"]:,}', 'employers')]
+    if remote:
+        stats.append((f'{round(100 * s["cc"].get("US", 0) / s["jobs"])}%', 'name the United States'))
+        stats.append((f'{len(s["cc"])}', 'countries named'))
+    else:
+        stats.append((f'{rpct}%', 'remote'))
+        if top_city:
+            stats.append((esc(top_city), 'city with most jobs'))
+    stats_html = '      <ul class="stats">' + ''.join(f'<li class="stat"><b>{v}</b><span>{esc(t)}</span></li>' for v, t in stats) + '</ul>'
+    newest = pick_jobs(s['latest'], 10, 1)
+    newest_html = jobs_table(newest) + (f'<p class="note">The newest of {s["new7"]:,} jobs first seen in the last 7 days, one per employer. Links open the job on the employer\'s own career site. '
+                                        f'<a href="{esc(sample)}" download>Download {n_sample} of the newest jobs as CSV</a>.</p>')
+    cat_html = share_bars(cats, CAT_LABEL, s['jobs'])
+    if remote:
+        where_html = share_bars(s['cc'], {k: cname(k) for k in s['cc']}, s['jobs'],
+                                links={k: f'/tools/job-postings-data/{cslug(k)}/' for k in s['cc'] if k in JOBS['pages']})
+        where_note = '<p class="note">Countries named in the location of remote jobs. A job open in two countries counts in both; a job that names no country (&ldquo;Remote&rdquo;, &ldquo;Worldwide&rdquo;) counts in none.</p>'
+        where_title, where_kick = 'Countries named in remote jobs', 'where'
+    else:
+        where_html = share_bars(cities, {}, s['jobs'])
+        where_note = '<p class="note">Jobs per city, read from job locations. A job in two cities counts in both, and jobs that name only the country count in none.</p>'
+        where_title, where_kick = 'Cities with most jobs', 'where'
+    sen_html = share_bars(s['sen'], SEN_LABEL, s['jobs'], n=7)
+    ats_html = share_bars(s['ats'], {a: ATS[a]['name'] for a in ATS}, s['jobs'], n=8, links={a: f'/tools/companies-using-{a}/' for a in ATS})
+    emp_note = ('<p class="note">Open jobs per employer career site in this data. An employer with several career sites can appear once per site. '
+                'Staffing agencies and job boards that post on their own career site are listed like any other employer.</p>')
+    the_jobs = 'remote jobs' if remote else f'job postings in {in_country(cc)}'
+    big = ', '.join(esc(e['name']) for e in emps[:3])
+    faq = [
+        (f'How many {"remote jobs are" if remote else "job postings are there"} in {"our data" if remote else in_country(cc)}?',
+         f'<p>Our index of {nice} held {s["jobs"]:,} open {"remote jobs" if remote else "jobs in " + esc(in_country(cc))} from {s["employers"]:,} employer career sites, with {s["new7"]:,} first seen in the last 7 days. '
+         'It covers employers that publish jobs on 14 applicant tracking systems, so it is a large sample of the market, not all of it: jobs posted only on job boards or social networks are not included.</p>'),
+        (f'Which employers have the most open {"remote jobs" if remote else "jobs in " + in_country(cc)}?',
+         f'<p>By open jobs on {nice}: {big}. The table above lists the top {len(emps)}.</p>'),
+        (f'How can I get all {the_jobs} as a dataset?',
+         f'<p>{strip_tags(feed_offer(cc, s))} The data comes as JSON Lines and CSV files at a private link that updates every morning, or through an API. Write to info@deriverge.com for a sample of your exact feed.</p>'),
+        ('Is there a free sample?',
+         f'<p>Yes. <a href="{esc(sample)}" download>This CSV</a> holds {n_sample} of the newest {"remote jobs" if remote else "jobs in " + esc(in_country(cc))} with title, employer, location, work arrangement, category, level, dates, system and job link. '
+         'The <a href="/tools/job-data-feed/">job data feed</a> page has a larger sample across all systems.</p>'),
+        ('How fresh is the data?',
+         '<p>The index is rebuilt every night. Boards on ten systems are read daily and the other four within one to three days, so a new job reaches the data within three days. This page shows the index of ' + nice + '.</p>'),
+        ('Does the data contain personal data?',
+         '<p>No. The records describe jobs and employers: there is no candidate data and no list of recruiters. Descriptions, delivered only on request, are the employer\'s own text; in feeds we remove email addresses and phone numbers from them.</p>'),
+    ]
+    blocks = [
+        section('at a glance', f'{"Remote jobs" if remote else cname(cc)} in numbers', stats_html, hid='numbers'),
+        section('newest jobs', 'Newest jobs in the data', newest_html, hid='newest'),
+        f'''    <section class="block" aria-label="Where and what">
+      <div class="two">
+        <div><p class="cmt">{where_kick}</p><h2 class="h2">{esc(where_title)}</h2>{where_html}{where_note}</div>
+        <div><p class="cmt">what</p><h2 class="h2">Job categories</h2>{cat_html}<p class="note">Category from the job title, or the department when the title says nothing. {other_pct}% of the jobs fit none of the 21 categories and are left out of this chart.</p></div>
+      </div>
+    </section>''',
+        jobs_cta(cc, s, sample, camp),
+        section('who hires', 'Employers with the most open jobs', employers_table(emps) + emp_note, hid='employers'),
+        f'''    <section class="block" aria-label="Level and systems">
+      <div class="two">
+        <div><p class="cmt">level</p><h2 class="h2">Jobs by level</h2>{sen_html}<p class="note">Level read from the job title; titles without a level count as mid level.</p></div>
+        <div><p class="cmt">source</p><h2 class="h2">Applicant tracking systems</h2>{ats_html}<p class="note">The system each employer uses for its career site. Every job links back to it.</p></div>
+      </div>
+    </section>''',
+        section('questions', 'Frequently asked questions', faq_block(faq), hid='faq'),
+        other_countries(cc),
+    ]
+    dataset = {'@context': 'https://schema.org', '@type': 'Dataset', 'name': f'{"Remote job postings" if remote else "Job postings in " + cname(cc)}',
+               'description': desc, 'url': SITE + path, 'dateModified': date, 'temporalCoverage': f'{JOBS["since7"]}/{date}',
+               'creator': {'@type': 'Organization', 'name': 'deriverge s.r.o.', 'url': SITE + '/'}, 'isAccessibleForFree': False,
+               'keywords': [f'{nm} data', f'{nm} dataset', 'job postings data', 'job listings API'],
+               **({} if remote else {'spatialCoverage': {'@type': 'Place', 'name': cname(cc)}}),
+               'distribution': [{'@type': 'DataDownload', 'encodingFormat': 'text/csv', 'contentUrl': SITE + sample, 'name': 'Free sample'}]}
+    layout(path=path, title=title, desc=desc, tab=slug, kicker=f'// job postings data · updated {nice}', h1=h1, lede=lede,
+           body='\n'.join(blocks), campaign=camp, ld=[dataset, faq_ld(faq)],
+           trail=[('deriverge', '/'), ('Tools', '/tools/'), ('Job postings data', '/tools/job-postings-data/'), ('Remote jobs' if remote else cname(cc), path)])
+
+
+def page_jobs_hub(date):
+    g = JOBS['global']
+    path, camp = '/tools/job-postings-data/', 'job-postings-data'
+    nice = fmt_date(date)
+    pages = JOBS['pages']
+    total_countries = g['countries']
+    title = f'Job Postings Data: {g["jobs"]:,} Open Jobs by Country'
+    desc = (f'{g["jobs"]:,} open jobs from {g["employers"]:,} employer career sites in {total_countries} countries, updated daily. '
+            'Numbers and free CSV samples for every country, a daily feed and an API.')
+    lede = (f'<strong>{g["jobs"]:,}</strong> open jobs from the career sites of <strong>{g["employers"]:,}</strong> employers in {total_countries} countries, '
+            f'read every day from 14 applicant tracking systems. <strong>{g["new7"]:,}</strong> were first seen in the last 7 days. '
+            'See what the data holds for each country, download free samples and get it as a daily feed or an API.')
+    stats = [(f'{g["jobs"]:,}', 'open jobs'), (f'{g["new7"]:,}', f'new in 7 days, about {round(g["new7"] / 7):,} a day'), (f'{g["employers"]:,}', 'employer career sites'),
+             (f'{total_countries}', 'countries'), (f'{g["remote"]:,}', 'remote jobs')]
+    stats_html = '      <ul class="stats">' + ''.join(f'<li class="stat"><b>{v}</b><span>{esc(t)}</span></li>' for v, t in stats) + '</ul>'
+    rows = ''
+    for cc in pages:
+        s = JOBS['countries'][cc]
+        rows += (f'<tr><td><a href="/tools/job-postings-data/{cslug(cc)}/">{esc(cname(cc))}</a></td><td class="num">{s["jobs"]:,}</td>'
+                 f'<td class="num">{s["new7"]:,}</td><td class="num">{s["employers"]:,}</td><td class="num">{round(100 * s["remote"] / s["jobs"])}%</td>'
+                 f'<td><a href="/tools/data/jobs/{cslug(cc)}.csv" download>CSV</a></td></tr>')
+    r = JOBS['countries']['REMOTE']
+    remote_row = (f'<tr><td><a href="/tools/job-postings-data/remote/"><strong>Remote jobs</strong></a></td><td class="num">{r["jobs"]:,}</td>'
+                  f'<td class="num">{r["new7"]:,}</td><td class="num">{r["employers"]:,}</td><td class="num">100%</td><td><a href="/tools/data/jobs/remote.csv" download>CSV</a></td></tr>')
+    table = (f'''      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Country</th><th class="num">Open jobs</th><th class="num">New in 7 days</th><th class="num">Employers</th><th class="num">Remote</th><th>Sample</th></tr></thead><tbody>{remote_row}{rows}</tbody></table></div>
+      <p class="note">Countries with at least {JOBS_MIN:,} open jobs on {nice}. A job open in two countries counts in both. Each sample holds 100 of the newest jobs, at most three per employer.</p>''')
+    fields = '''      <div class="prose">
+        <p>Each job is one record: title, employer and its website, career site and apply link, locations with ISO country codes, remote, hybrid or onsite, employment type, level, one of 21 job categories, department, salary as numbers when the ad states it, posting date and the day our index first saw the job. The full description comes on request, as plain text and clean HTML. Daily files list the jobs added and the jobs closed, so a job board can take closed jobs down the same day.</p>
+        <p>The jobs come from the public job boards that employers run on Workday, Greenhouse, Lever, SmartRecruiters, Ashby, iCIMS, Oracle Recruiting Cloud and seven more systems. <a href="/tools/companies-using-ats/">See the systems and the employers on each</a>. There is no candidate data and no list of recruiters.</p>
+      </div>'''
+    faq = [
+        ('What is in this job postings dataset?',
+         f'<p>Every open job our index finds on the public career sites of {g["employers"]:,} employers on 14 applicant tracking systems: {g["jobs"]:,} jobs on {nice}, in {total_countries} countries. Each job has its title, employer, location and country, work arrangement, category, level, salary when stated, dates and the apply link on the employer\'s site.</p>'),
+        ('How often is the data updated?',
+         '<p>Every night. Boards on ten systems are read daily and the other four within one to three days. Each daily file lists the jobs added and closed since the day before.</p>'),
+        ('Can I download job postings data for free?',
+         '<p>Yes, a sample: every country page has a CSV with 100 of its newest jobs, and the <a href="/tools/job-data-feed/">job data feed</a> page has a larger sample across all systems. The complete data for a country, a category or the world comes as a daily feed.</p>'),
+        ('How much does the data cost?',
+         '<p>A niche feed of up to 100 new jobs a day picked for your audience is $99 a month, a feed filtered by country, system or category starts at $299 a month and the full daily file is $799 a month. Every feed starts with a free two-week trial. Pay-per-request access runs through our API on Apify and RapidAPI.</p>'),
+        ('Who uses job postings data?',
+         '<p>Job boards and aggregators that need fresh jobs for their audience, HR tech products, recruiters looking for companies that hire, and labour market research on demand by country, skill or level.</p>'),
+        ('Does the data contain personal data?',
+         '<p>No. The records describe jobs and employers only. Descriptions are the employer\'s own text; in feeds we remove email addresses and phone numbers from them.</p>'),
+    ]
+    blocks = [
+        section('at a glance', 'The data in numbers', stats_html, hid='numbers'),
+        section('by country', 'Job postings data by country', table, hid='by-country'),
+        f'''    <section class="block" aria-label="Categories and levels">
+      <div class="two">
+        <div><p class="cmt">what</p><h2 class="h2">Job categories</h2>{share_bars({k: v for k, v in g['cat'].items() if k != 'other'}, CAT_LABEL, g['jobs'], n=12)}<p class="note">{round(100 * g['cat'].get('other', 0) / g['jobs'])}% of the jobs fit none of the 21 categories and are left out of this chart.</p></div>
+        <div><p class="cmt">level</p><h2 class="h2">Jobs by level</h2>{share_bars(g['sen'], SEN_LABEL, g['jobs'], n=7)}</div>
+      </div>
+    </section>''',
+        section('fields', 'What each job record holds', fields, hid='fields'),
+        f'''    <aside class="block cta" aria-label="Get the data">
+      <p class="cmt">get the data</p>
+      <h2>Get the jobs every day</h2>
+      <p>Pick the jobs your product needs: one country or city, remote jobs open to one country, a job category, named companies or the whole index. They arrive every morning at a private link, with the jobs added and closed that day. Plans start at $99 a month and every feed starts with a free two-week trial.</p>
+      <div class="cta-row"><a class="btn" href="/tools/data/job-feed-sample.jsonl.gz" download>Download the sample (JSON Lines)</a> <a class="btn btn--ghost" href="/tools/job-data-feed/">Plans and delivery</a></div>
+      <p class="more">Prefer to pay per request? Query the same index with {actor_link('career-site-jobs-search', camp, 'Career Site and ATS Jobs API on Apify', cls='')} or our <a href="https://rapidapi.com/David%C4%8Cag%C3%A1nek/api/job-search-career-sites-and-ats" target="_blank" rel="noopener">Job Search API on RapidAPI</a>.</p>
+    </aside>''',
+        section('questions', 'Frequently asked questions', faq_block(faq), hid='faq'),
+    ]
+    dataset = {'@context': 'https://schema.org', '@type': 'Dataset', 'name': 'Job postings from company career sites',
+               'description': desc, 'url': SITE + path, 'dateModified': date, 'isAccessibleForFree': False,
+               'creator': {'@type': 'Organization', 'name': 'deriverge s.r.o.', 'url': SITE + '/'},
+               'keywords': ['job postings data', 'job postings dataset', 'job listings API', 'job data feed', 'labour market data'],
+               'distribution': [{'@type': 'DataDownload', 'encodingFormat': 'text/csv', 'contentUrl': f'{SITE}/tools/data/jobs/{cslug(c)}.csv', 'name': f'Sample: {cname(c)}'} for c in pages[:20]]}
+    layout(path=path, title=title, desc=desc, tab='job-postings-data', kicker=f'// job postings data · updated {nice}', h1='Job postings data',
+           lede=lede, body='\n'.join(blocks), campaign=camp, ld=[dataset, faq_ld(faq)],
+           trail=[('deriverge', '/'), ('Tools', '/tools/'), ('Job postings data', path)])
 
 
 def update_sitemap(date):
@@ -1347,6 +1720,11 @@ def main():
         page_ats(a, by[a], stats[a], date, cn)
     total_c, total_j = page_compare(by, stats, date, cn)
     page_job_feed()
+    load_jobs(agg)
+    page_jobs_hub(date)
+    page_country('REMOTE', date)
+    for cc in JOBS['pages']:
+        page_country(cc, date)
     page_index(stats, total_c, total_j, date)
     print('JSON sizes (KB):', {a: round(s / 1024) for a, s in sizes.items()}, 'total', round(sum(sizes.values()) / 1024), 'KB')
     update_sitemap(dt.date.today().isoformat())
