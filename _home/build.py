@@ -68,7 +68,7 @@ def live_data():
                 groups[k].append(a['title'])
                 break
     return {'jobs': meta['jobs'], 'companies': meta['companies'], 'built': meta['generatedAt'], 'actors': len(items),
-            'groups': groups}
+            'systems': sum(1 for v in meta['byAts'].values() if v), 'groups': groups}
 
 
 def fmt(n, sep):
@@ -77,6 +77,13 @@ def fmt(n, sep):
 
 def page(lang, data, tr, en, langs_present):
     code, hreflang, og_locale, direction, sep = lang
+    # Velikost indexu v textech překladů ({{mil}} milionů, {{wan}} × 10 000, {{lakh}} × 100 000, {{sites}}, {{systems}}).
+    mil = f"{data['jobs'] // 100_000 / 10:.1f}"
+    nums = {'mil': mil if code in ('en', 'ja', 'ko', 'zh', 'ar', 'hi') else mil.replace('.', ','),
+            'wan': str(data['jobs'] // 100_000 * 10), 'lakh': str(data['jobs'] // 100_000),
+            'sites': fmt(data['companies'] // 1000 * 1000, ' ' if sep == ' ' else sep), 'systems': str(data['systems'])}
+    fill = lambda s: re.sub(r'\{\{(mil|wan|lakh|sites|systems)\}\}', lambda m: nums[m.group(1)], s)  # noqa: E731
+    tr, en = {k: fill(v) if isinstance(v, str) else v for k, v in tr.items()}, {k: fill(v) if isinstance(v, str) else v for k, v in en.items()}
     t = lambda k: html.escape(tr.get(k) or en[k], quote=True)  # noqa: E731
     path = '/' if code == 'en' else f'/{code}/'
     canonical = SITE + path

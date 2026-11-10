@@ -237,7 +237,9 @@ def layout(*, path, title, desc, tab, kicker, h1, lede, body, ld, campaign, scri
         doc = (doc.replace('more than a million open jobs', f'more than {mil} million open jobs')
                .replace('More than a million open jobs', f'More than {mil} million open jobs')
                .replace('40,000+ company career sites', f'{sites}+ company career sites').replace('40,000+ career sites', f'{sites}+ career sites')
-               .replace('more than 47,000 employers', f'more than {sites} employers'))
+               .replace('more than 47,000 employers', f'more than {sites} employers')
+               .replace('47,000+ employer', f'{sites}+ employer').replace('more than 1.7 million', f'more than {mil} million')
+               .replace('1.7 million from 47,000 employers', f'{mil} million from {sites} employers'))
     words = {9: 'nine', 10: 'ten', 11: 'eleven', 12: 'twelve', 13: 'thirteen', 14: 'fourteen', 15: 'fifteen'}
     doc = doc.replace('and 9 more', f'and {len(ATS) - 5} more').replace('and nine more', f'and {words.get(len(ATS) - 5, len(ATS) - 5)} more')
     for ch in ('—', '–'):
