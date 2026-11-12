@@ -45,20 +45,21 @@
   } else if (typeof cap.registerPlugin === "function") {
     try { PeerLink = cap.registerPlugin("PeerLink"); } catch (e) {}
   }
-  // Žádost o hodnocení v App Store: okno vyvolává systém, my jen předáme
-  // podnět. Kdy o ně požádat, rozhoduje aplikace (index.html) přes hook
-  // window.__kasaAskReview; bez nativního modulu hook nevznikne a web
-  // se chová jako dřív.
+  // Žádost o hodnocení v App Store a Google Play: okno vyvolává systém,
+  // my jen předáme podnět. Kdy o ně požádat, rozhoduje aplikace (index.html)
+  // přes hook window.__kasaAskReview; bez nativního modulu hook nevznikne
+  // a web se chová jako dřív. iOS: RateAppPlugin.swift (SKStoreReviewController),
+  // Android: RateAppPlugin.java (Play In-App Review), stejné rozhraní request().
   var RateApp = null;
   if (cap.Plugins && cap.Plugins.RateApp) {
     RateApp = cap.Plugins.RateApp;
   } else if (typeof cap.registerPlugin === "function") {
     try { RateApp = cap.registerPlugin("RateApp"); } catch (e) {}
   }
-  // Jen iOS: na Androidu nativní modul RateApp není (registerPlugin vrátí
-  // prázdnou náhradu) a žádost by tiše propadla i se započteným pokusem.
-  var isIos = typeof cap.getPlatform === "function" && cap.getPlatform() === "ios";
-  if (RateApp && isIos) {
+  // Jen platformy s nativním modulem: jinde by registerPlugin vrátil prázdnou
+  // náhradu a žádost by tiše propadla i se započteným pokusem.
+  var platform = typeof cap.getPlatform === "function" ? cap.getPlatform() : "";
+  if (RateApp && (platform === "ios" || platform === "android")) {
     window.__kasaAskReview = function () {
       // most u metod bez návratové hodnoty vrací undefined, ne příslib
       try { Promise.resolve(RateApp.request()).catch(function () {}); } catch (e) {}

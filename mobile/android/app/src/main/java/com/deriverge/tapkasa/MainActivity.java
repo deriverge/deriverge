@@ -15,6 +15,7 @@ public class MainActivity extends BridgeActivity {
         registerPlugin(PeerLinkPlugin.class);
         registerPlugin(SpeakPlugin.class);
         registerPlugin(DocSharePlugin.class);
+        registerPlugin(RateAppPlugin.class);
         super.onCreate(savedInstanceState);
 
         // Tlačítko či gesto Zpět nejdřív zavře otevřený panel, dialog nebo

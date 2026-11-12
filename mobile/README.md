@@ -25,7 +25,8 @@ mobile/
         ├── MainActivity.java       registrace pluginů, tlačítko Zpět
         ├── PeerLinkPlugin.java     Nearby Connections + úložiště kasa.json a kasa-archive.json
         ├── SpeakPlugin.java        čtení nahlas přes systémové TextToSpeech
-        └── DocSharePlugin.java     PDF e-mailem, sdílením a do souborů
+        ├── DocSharePlugin.java     PDF e-mailem, sdílením a do souborů
+        └── RateAppPlugin.java      žádost o hodnocení přes Play In-App Review
 ```
 
 Pozor: **starý adresář `ios/` v kořeni repa je původní SwiftUI aplikace**

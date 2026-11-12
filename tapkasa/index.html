@@ -514,6 +514,19 @@
   .pw-plan:active{transform:scale(.98)}
   .pw-legal{padding:6px 4px 0;text-align:center;font-size:12px;color:var(--ink-3)}
   .pw-legal a{color:var(--ink-3);text-decoration:underline;text-underline-offset:2px}
+  /* webová verze: Pro se kupuje v aplikaci, odkazy do obchodů a QR kódy */
+  .ga{margin-top:16px;padding:14px;border:1px solid var(--rule);border-radius:var(--r-tile);background:var(--surface)}
+  .ga-t{margin:0;font-size:14px;line-height:1.45;color:var(--ink-2);text-align:center}
+  .ga-stores{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:14px;margin-top:14px}
+  .ga-store{display:flex;flex-direction:column;align-items:center;gap:10px;min-width:0}
+  .ga-btn{display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;min-height:54px;padding:8px 12px;border-radius:var(--r-btn);background:var(--ink);color:var(--paper);text-decoration:none;line-height:1.15}
+  .ga-btn .c{font-size:11px;font-weight:600;opacity:.78}
+  .ga-btn .n{font-size:18px;font-weight:700}
+  .ga-btn:active{transform:scale(.98)}
+  .ga .qr{display:block;width:136px;height:136px;max-width:100%;border:1px solid var(--rule);border-radius:6px}
+  .ga-scan{margin:10px 0 0;font-size:12px;color:var(--ink-3);text-align:center}
+  .ga-alt{display:block;margin-top:10px;text-align:center;font-size:13px;color:var(--ink-2);text-decoration:underline;text-underline-offset:2px}
+  .ga-move{margin:12px 0 0;font-size:12px;color:var(--ink-3);text-align:center;line-height:1.45}
 
   /* ---------- potvrzení nákupu Pro ---------- */
   .procele{position:fixed;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;background:var(--paper);animation:pc-fade .3s ease both}
@@ -1124,7 +1137,14 @@
     proTerms: "Předplatné se obnovuje automaticky, účtuje se přes váš účet v obchodě s aplikacemi a lze ho kdykoliv zrušit v nastavení účtu.",
     proPrivacy: "Zásady soukromí",
     proTermsLink: "Podmínky použití",
-    proWebHint: "Nákup funguje v mobilní aplikaci Tapkasa.",
+    getAppHead: "Pro se kupuje v aplikaci Tapkasa",
+    getAppText: "Předplatné se platí přes App Store nebo Google Play, ve webové verzi ho proto koupit nejde. Stáhněte si Tapkasu do telefonu nebo tabletu a Pro zapněte tam.",
+    getAppIos: "iPhone a iPad",
+    getAppAndroid: "Android",
+    getAppScan: "Naskenujte kód fotoaparátem telefonu.",
+    getAppOther: "Jiný telefon? {0}",
+    getAppQrAria: "QR kód s odkazem do obchodu {0}",
+    getAppMove: "Položky a prodeje do aplikace přenesete zálohou ({0} › {1}).",
     proWall: "Denní limit {0} plateb zdarma je vyčerpaný. S Tapkasa Pro účtujete bez omezení.",
     proPairWall: "Propojení více zařízení je součást Tapkasa Pro.",
     proJoinFree: "Připojit se ke kódu jde i zdarma. Pro potřebuje jen zařízení, které kód vytváří.",
@@ -1512,7 +1532,14 @@
     proTerms: "The subscription renews automatically, is billed to your app store account and can be cancelled any time in your account settings.",
     proPrivacy: "Privacy policy",
     proTermsLink: "Terms of use",
-    proWebHint: "Purchasing works in the Tapkasa mobile app.",
+    getAppHead: "Pro is bought in the Tapkasa app",
+    getAppText: "The subscription is paid through the App Store or Google Play, so it can’t be bought in the web version. Get Tapkasa on your phone or tablet and turn on Pro there.",
+    getAppIos: "iPhone and iPad",
+    getAppAndroid: "Android",
+    getAppScan: "Scan the code with your phone’s camera.",
+    getAppOther: "Different phone? {0}",
+    getAppQrAria: "QR code linking to {0}",
+    getAppMove: "Move your items and sales to the app with a backup ({0} › {1}).",
     proWall: "Today’s limit of {0} free payments is used up. With Tapkasa Pro you charge without limits.",
     proPairWall: "Connecting more devices is part of Tapkasa Pro.",
     proJoinFree: "Joining with a code is free. Only the device that creates the code needs Pro.",
@@ -1905,7 +1932,14 @@
     proTerms: "Predplatné sa obnovuje automaticky, účtuje sa cez váš účet v obchode s aplikáciami a kedykoľvek ho môžete zrušiť v nastaveniach účtu.",
     proPrivacy: "Zásady súkromia",
     proTermsLink: "Podmienky používania",
-    proWebHint: "Nákup funguje v mobilnej aplikácii Tapkasa.",
+    getAppHead: "Pro sa kupuje v aplikácii Tapkasa",
+    getAppText: "Predplatné sa platí cez App Store alebo Google Play, vo webovej verzii ho preto kúpiť nejde. Stiahnite si Tapkasu do telefónu alebo tabletu a Pro zapnite tam.",
+    getAppIos: "iPhone a iPad",
+    getAppAndroid: "Android",
+    getAppScan: "Naskenujte kód fotoaparátom telefónu.",
+    getAppOther: "Iný telefón? {0}",
+    getAppQrAria: "QR kód s odkazom do obchodu {0}",
+    getAppMove: "Položky a predaje prenesiete do aplikácie zálohou ({0} › {1}).",
     proWall: "Denný limit {0} platieb zadarmo je vyčerpaný. S Tapkasa Pro účtujete bez obmedzení.",
     proPairWall: "Prepojenie viacerých zariadení je súčasťou Tapkasa Pro.",
     proJoinFree: "Pripojiť sa ku kódu môžete aj zadarmo. Pro potrebuje len zariadenie, ktoré kód vytvára.",
@@ -2295,7 +2329,14 @@
     proTerms: "Das Abo verlängert sich automatisch, wird über Ihr Konto im App-Shop abgerechnet und lässt sich jederzeit in den Kontoeinstellungen kündigen.",
     proPrivacy: "Datenschutz",
     proTermsLink: "Nutzungsbedingungen",
-    proWebHint: "Der Kauf funktioniert in der mobilen Tapkasa-App.",
+    getAppHead: "Pro kaufen Sie in der Tapkasa-App",
+    getAppText: "Das Abo wird über den App Store oder Google Play bezahlt, deshalb lässt es sich in der Webversion nicht kaufen. Laden Sie Tapkasa auf Ihr Smartphone oder Tablet und aktivieren Sie Pro dort.",
+    getAppIos: "iPhone und iPad",
+    getAppAndroid: "Android",
+    getAppScan: "Scannen Sie den Code mit der Handykamera.",
+    getAppOther: "Anderes Smartphone? {0}",
+    getAppQrAria: "QR-Code mit Link zu {0}",
+    getAppMove: "Artikel und Verkäufe übertragen Sie per Backup in die App ({0} › {1}).",
     proWall: "Das Tageslimit von {0} kostenlosen Zahlungen ist aufgebraucht. Mit Tapkasa Pro kassieren Sie ohne Limit.",
     proPairWall: "Mehrere Geräte zu koppeln ist Teil von Tapkasa Pro.",
     proJoinFree: "Einem Code beitreten ist auch gratis. Pro braucht nur das Gerät, das den Code erstellt.",
@@ -2685,7 +2726,14 @@
     proTerms: "L’abonnement se renouvelle automatiquement, est facturé via votre compte de la boutique d’applications et peut être résilié à tout moment dans les réglages du compte.",
     proPrivacy: "Confidentialité",
     proTermsLink: "Conditions d’utilisation",
-    proWebHint: "L’achat se fait dans l’application mobile Tapkasa.",
+    getAppHead: "Pro s’achète dans l’application Tapkasa",
+    getAppText: "L’abonnement se paie via l’App Store ou Google Play, il ne peut donc pas être acheté dans la version web. Installez Tapkasa sur votre téléphone ou votre tablette et activez Pro dans l’application.",
+    getAppIos: "iPhone et iPad",
+    getAppAndroid: "Android",
+    getAppScan: "Scannez le code avec l’appareil photo de votre téléphone.",
+    getAppOther: "Autre téléphone ? {0}",
+    getAppQrAria: "QR code vers {0}",
+    getAppMove: "Transférez vos articles et vos ventes dans l’application avec une sauvegarde ({0} › {1}).",
     proWall: "La limite de {0} paiements gratuits par jour est atteinte. Avec Tapkasa Pro, vous encaissez sans limite.",
     proPairWall: "La connexion de plusieurs appareils fait partie de Tapkasa Pro.",
     proJoinFree: "Rejoindre avec un code est gratuit : seul l’appareil qui crée le code a besoin de Pro.",
@@ -3075,7 +3123,14 @@
     proTerms: "La suscripción se renueva automáticamente, se cobra a través de su cuenta de la tienda de aplicaciones y puede cancelarla cuando quiera en los ajustes de su cuenta.",
     proPrivacy: "Privacidad",
     proTermsLink: "Condiciones de uso",
-    proWebHint: "La compra funciona en la aplicación móvil de Tapkasa.",
+    getAppHead: "Pro se compra en la aplicación Tapkasa",
+    getAppText: "La suscripción se paga a través de App Store o Google Play, por eso no se puede comprar en la versión web. Descargue Tapkasa en su teléfono o tableta y active Pro allí.",
+    getAppIos: "iPhone y iPad",
+    getAppAndroid: "Android",
+    getAppScan: "Escanee el código con la cámara del teléfono.",
+    getAppOther: "¿Otro teléfono? {0}",
+    getAppQrAria: "Código QR con enlace a {0}",
+    getAppMove: "Pase sus artículos y ventas a la aplicación con una copia de seguridad ({0} › {1}).",
     proWall: "El límite diario de {0} pagos gratis está agotado. Con Tapkasa Pro cobra sin límites.",
     proPairWall: "Conectar varios dispositivos es parte de Tapkasa Pro.",
     proJoinFree: "Conectarse con un código es gratis: Pro solo lo necesita el dispositivo que crea el código.",
@@ -3465,7 +3520,14 @@
     proTerms: "L’abbonamento si rinnova automaticamente, viene addebitato tramite il conto dello store di applicazioni e può essere disdetto in qualsiasi momento dalle impostazioni dell’account.",
     proPrivacy: "Privacy",
     proTermsLink: "Termini di utilizzo",
-    proWebHint: "L’acquisto funziona nell’app mobile Tapkasa.",
+    getAppHead: "Pro si acquista nell’app Tapkasa",
+    getAppText: "L’abbonamento si paga tramite App Store o Google Play, quindi non si può acquistare nella versione web. Scaricare Tapkasa sul telefono o sul tablet e attivare Pro nell’app.",
+    getAppIos: "iPhone e iPad",
+    getAppAndroid: "Android",
+    getAppScan: "Inquadrare il codice con la fotocamera del telefono.",
+    getAppOther: "Altro telefono? {0}",
+    getAppQrAria: "Codice QR con link a {0}",
+    getAppMove: "Articoli e vendite si trasferiscono nell’app con un backup ({0} › {1}).",
     proWall: "Il limite giornaliero di {0} pagamenti gratis è esaurito. Con Tapkasa Pro si incassa senza limiti.",
     proPairWall: "Il collegamento di più dispositivi fa parte di Tapkasa Pro.",
     proJoinFree: "Collegarsi con un codice è gratis: il Pro serve solo al dispositivo che crea il codice.",
@@ -3855,7 +3917,14 @@
     proTerms: "Subskrypcja odnawia się automatycznie, jest rozliczana przez konto w sklepie z aplikacjami i można ją w każdej chwili anulować w ustawieniach konta.",
     proPrivacy: "Prywatność",
     proTermsLink: "Warunki korzystania",
-    proWebHint: "Zakup działa w aplikacji mobilnej Tapkasa.",
+    getAppHead: "Pro kupuje się w aplikacji Tapkasa",
+    getAppText: "Subskrypcja jest opłacana przez App Store lub Google Play, dlatego nie można jej kupić w wersji internetowej. Pobierz Tapkasę na telefon lub tablet i włącz Pro w aplikacji.",
+    getAppIos: "iPhone i iPad",
+    getAppAndroid: "Android",
+    getAppScan: "Zeskanuj kod aparatem telefonu.",
+    getAppOther: "Inny telefon? {0}",
+    getAppQrAria: "Kod QR z linkiem do {0}",
+    getAppMove: "Pozycje i sprzedaż przeniesiesz do aplikacji kopią zapasową ({0} › {1}).",
     proWall: "Dzienny limit {0} darmowych płatności wyczerpany. Z Tapkasa Pro można przyjmować płatności bez limitu.",
     proPairWall: "Łączenie kilku urządzeń to część Tapkasa Pro.",
     proJoinFree: "Dołączenie przez kod jest darmowe. Pro potrzebuje tylko urządzenie, które tworzy kod.",
@@ -4245,7 +4314,14 @@
     proTerms: "A subscrição renova-se automaticamente, é cobrada através da sua conta da loja de aplicações e pode ser cancelada a qualquer momento nas definições da conta.",
     proPrivacy: "Privacidade",
     proTermsLink: "Termos de utilização",
-    proWebHint: "A compra funciona na aplicação móvel Tapkasa.",
+    getAppHead: "O Pro compra-se na aplicação Tapkasa",
+    getAppText: "A subscrição é paga através da App Store ou do Google Play, por isso não pode ser comprada na versão web. Instale a Tapkasa no telemóvel ou tablet e ative o Pro na aplicação.",
+    getAppIos: "iPhone e iPad",
+    getAppAndroid: "Android",
+    getAppScan: "Leia o código com a câmara do telemóvel.",
+    getAppOther: "Outro telemóvel? {0}",
+    getAppQrAria: "Código QR com ligação para {0}",
+    getAppMove: "Passe os artigos e as vendas para a aplicação com uma cópia de segurança ({0} › {1}).",
     proWall: "O limite diário de {0} pagamentos grátis esgotou. Com o Tapkasa Pro cobra sem limites.",
     proPairWall: "Ligar vários dispositivos faz parte do Tapkasa Pro.",
     proJoinFree: "Ligar por código é grátis: só o dispositivo que cria o código precisa do Pro.",
@@ -4730,13 +4806,22 @@
     alert(T(key) + (why ? " (" + why + ")" : ""));
   }
 
+  // Webová verze (deriverge.com/tapkasa) nákup neumí: předplatné jde jen
+  // přes App Store a Google Play. Místo plánu se otevře panel s tlačítky
+  // do obchodů, na počítači i s QR kódy pro telefon. Panel se zavře zpět
+  // do paywallu.
+  function showGetApp() {
+    sheet = { step: "getapp", back: sheet && sheet.step === "paywall" ? sheet : null };
+    render();
+  }
+
   function billingBuy(plan) {
     if (window.__kasaBuy) {
       try { window.__kasaBuy(plan); return; }
       catch (e) { billAlert("billSetupFail", String(e && e.message || e)); return; }
     }
     if (nativeApp()) { billAlert("billModuleMissing", window.__kasaBillingError || ""); return; }
-    showToast(T("proWebHint"));
+    showGetApp();
   }
 
   function billingRestore() {
@@ -4745,7 +4830,228 @@
       catch (e) { billAlert("billSetupFail", String(e && e.message || e)); return; }
     }
     if (nativeApp()) { billAlert("billModuleMissing", window.__kasaBillingError || ""); return; }
-    showToast(T("proWebHint"));
+    showGetApp();
+  }
+
+  var STORE_IOS = "https://apps.apple.com/app/id6807075649";
+  var STORE_PLAY = "https://play.google.com/store/apps/details?id=com.deriverge.tapkasa";
+
+  // Na čem web běží: iPhone a iPad (iPadOS se hlásí jako Mac s dotykem),
+  // Android, jinak počítač. Telefon dostane rovnou svůj obchod, počítač
+  // oba obchody a QR kódy.
+  function webDevice() {
+    var ua = "", plat = "", touch = 0;
+    try { ua = navigator.userAgent || ""; plat = navigator.platform || ""; touch = navigator.maxTouchPoints || 0; } catch (e) {}
+    if (/android/i.test(ua)) { return "android"; }
+    if (/iPhone|iPad|iPod/.test(ua) || (plat === "MacIntel" && touch > 1)) { return "ios"; }
+    return "desktop";
+  }
+
+  function storeBlock() {
+    var dev = webDevice();
+    var ios = { url: STORE_IOS, name: "App Store", cap: T("getAppIos") };
+    var play = { url: STORE_PLAY, name: "Google Play", cap: T("getAppAndroid") };
+    function btn(s) {
+      return '<a class="ga-btn" href="' + s.url + '" target="_blank" rel="noopener"><span class="c">' +
+             esc(s.cap) + '</span><span class="n">' + s.name + "</span></a>";
+    }
+    var h = '<div class="ga"><p class="ga-t">' + esc(T("getAppText")) + "</p>";
+    if (dev === "desktop") {
+      h += '<div class="ga-stores">' + [ios, play].map(function (s) {
+             return '<div class="ga-store">' + btn(s) + qrSvg(s.url, T("getAppQrAria", s.name)) + "</div>";
+           }).join("") + "</div>" +
+           '<p class="ga-scan">' + esc(T("getAppScan")) + "</p>";
+    } else {
+      var main = dev === "ios" ? ios : play, other = dev === "ios" ? play : ios;
+      h += '<div class="ga-stores"><div class="ga-store">' + btn(main) + "</div></div>" +
+           '<a class="ga-alt" href="' + other.url + '" target="_blank" rel="noopener">' + esc(T("getAppOther", other.name)) + "</a>";
+    }
+    return h + '<p class="ga-move">' + esc(T("getAppMove", T("tabMenu"), T("backupHead"))) + "</p></div>";
+  }
+
+  // QR kód bez knihovny a bez sítě (bajtový režim, oprava chyb M, verze 1
+  // až 6, tedy do 106 bajtů; odkazy do obchodů mají do 70). Postup podle
+  // ISO 18004 ve stejné struktuře jako implementace Project Nayuki; výstup
+  // je modul po modulu shodný s generátorem Kazuhiko Arase. Vrací matici
+  // [y][x] s true pro tmavý modul, pro delší text null.
+  function qrMatrix(text) {
+    var bytes = [], s = unescape(encodeURIComponent(String(text)));
+    for (var i = 0; i < s.length; i++) { bytes.push(s.charCodeAt(i)); }
+    // [EC kódová slova na blok, počet bloků, datová slova v bloku], úroveň M
+    var EC = [null, [10, 1, 16], [16, 1, 28], [26, 1, 44], [18, 2, 32], [24, 2, 43], [16, 4, 27]];
+    var ALIGN = [null, [], [6, 18], [6, 22], [6, 26], [6, 30], [6, 34]];
+    var ver = 1;
+    while (ver <= 6 && EC[ver][1] * EC[ver][2] < bytes.length + 2) { ver++; }
+    if (ver > 6) { return null; }
+    var ecLen = EC[ver][0], nb = EC[ver][1], dLen = EC[ver][2], cap = nb * dLen;
+    var size = ver * 4 + 17;
+
+    // data: režim 0100, délka 8 bitů, bajty, ukončení, výplň 0xEC 0x11
+    var bits = [];
+    function put(v, n) { for (var k = n - 1; k >= 0; k--) { bits.push((v >>> k) & 1); } }
+    put(4, 4); put(bytes.length, 8);
+    bytes.forEach(function (b) { put(b, 8); });
+    put(0, Math.min(4, cap * 8 - bits.length));
+    while (bits.length % 8) { bits.push(0); }
+    var data = [];
+    for (i = 0; i < bits.length; i += 8) {
+      var v = 0;
+      for (var k = 0; k < 8; k++) { v = (v << 1) | bits[i + k]; }
+      data.push(v);
+    }
+    for (var pad = 0xEC; data.length < cap; pad ^= 0xEC ^ 0x11) { data.push(pad); }
+
+    // Reed-Solomon nad GF(256), polynom 0x11D
+    function mul(x, y) {
+      var z = 0;
+      for (var j = 7; j >= 0; j--) { z = (z << 1) ^ ((z >>> 7) * 0x11D); z ^= ((y >>> j) & 1) * x; }
+      return z;
+    }
+    var div = [];
+    for (i = 0; i < ecLen - 1; i++) { div.push(0); }
+    div.push(1);
+    var root = 1;
+    for (i = 0; i < ecLen; i++) {
+      for (var j = 0; j < div.length; j++) {
+        div[j] = mul(div[j], root);
+        if (j + 1 < div.length) { div[j] ^= div[j + 1]; }
+      }
+      root = mul(root, 2);
+    }
+    var blocks = [], ecs = [];
+    for (i = 0; i < nb; i++) {
+      var blk = data.slice(i * dLen, (i + 1) * dLen), rem = div.map(function () { return 0; });
+      blk.forEach(function (b) {
+        var f = b ^ rem.shift();
+        rem.push(0);
+        for (var q = 0; q < div.length; q++) { rem[q] ^= mul(div[q], f); }
+      });
+      blocks.push(blk); ecs.push(rem);
+    }
+    var code = [];
+    for (i = 0; i < dLen; i++) { for (j = 0; j < nb; j++) { code.push(blocks[j][i]); } }
+    for (i = 0; i < ecLen; i++) { for (j = 0; j < nb; j++) { code.push(ecs[j][i]); } }
+
+    // matice a příznak funkčních modulů (hledáčky, časování, zarovnání, formát)
+    var m = [], fn = [];
+    for (i = 0; i < size; i++) { m.push([]); fn.push([]); for (j = 0; j < size; j++) { m[i].push(false); fn[i].push(false); } }
+    function setF(x, y, dark) { m[y][x] = dark; fn[y][x] = true; }
+    for (i = 0; i < size; i++) { setF(6, i, i % 2 === 0); setF(i, 6, i % 2 === 0); }
+    [[3, 3], [size - 4, 3], [3, size - 4]].forEach(function (c) {
+      for (var dy = -4; dy <= 4; dy++) {
+        for (var dx = -4; dx <= 4; dx++) {
+          var x = c[0] + dx, y = c[1] + dy, d = Math.max(Math.abs(dx), Math.abs(dy));
+          if (x >= 0 && x < size && y >= 0 && y < size) { setF(x, y, d !== 2 && d !== 4); }
+        }
+      }
+    });
+    var al = ALIGN[ver];
+    for (i = 0; i < al.length; i++) {
+      for (j = 0; j < al.length; j++) {
+        if ((i === 0 && j === 0) || (i === 0 && j === al.length - 1) || (i === al.length - 1 && j === 0)) { continue; }
+        for (var ay = -2; ay <= 2; ay++) {
+          for (var ax = -2; ax <= 2; ax++) { setF(al[i] + ax, al[j] + ay, Math.max(Math.abs(ax), Math.abs(ay)) !== 1); }
+        }
+      }
+    }
+    function drawFormat(mask) {
+      var d = mask, r = d;   // úroveň M má bity 00
+      for (var q = 0; q < 10; q++) { r = (r << 1) ^ ((r >>> 9) * 0x537); }
+      var f = ((d << 10) | r) ^ 0x5412;
+      function b(n) { return ((f >>> n) & 1) !== 0; }
+      for (var q2 = 0; q2 <= 5; q2++) { setF(8, q2, b(q2)); }
+      setF(8, 7, b(6)); setF(8, 8, b(7)); setF(7, 8, b(8));
+      for (q2 = 9; q2 < 15; q2++) { setF(14 - q2, 8, b(q2)); }
+      for (q2 = 0; q2 < 8; q2++) { setF(size - 1 - q2, 8, b(q2)); }
+      for (q2 = 8; q2 < 15; q2++) { setF(8, size - 15 + q2, b(q2)); }
+      setF(8, size - 8, true);
+    }
+    drawFormat(0);   // zatím jen vyhradí místo
+
+    var n = 0;
+    for (var right = size - 1; right >= 1; right -= 2) {
+      if (right === 6) { right = 5; }
+      for (var vert = 0; vert < size; vert++) {
+        for (j = 0; j < 2; j++) {
+          var x = right - j, up = ((right + 1) & 2) === 0, y = up ? size - 1 - vert : vert;
+          if (!fn[y][x] && n < code.length * 8) {
+            m[y][x] = ((code[n >>> 3] >>> (7 - (n & 7))) & 1) !== 0;
+            n++;
+          }
+        }
+      }
+    }
+
+    function flip(mask) {
+      for (var y = 0; y < size; y++) {
+        for (var x = 0; x < size; x++) {
+          if (fn[y][x]) { continue; }
+          var inv = mask === 0 ? (x + y) % 2 === 0
+                  : mask === 1 ? y % 2 === 0
+                  : mask === 2 ? x % 3 === 0
+                  : mask === 3 ? (x + y) % 3 === 0
+                  : mask === 4 ? (Math.floor(x / 3) + Math.floor(y / 2)) % 2 === 0
+                  : mask === 5 ? x * y % 2 + x * y % 3 === 0
+                  : mask === 6 ? (x * y % 2 + x * y % 3) % 2 === 0
+                  : ((x + y) % 2 + x * y % 3) % 2 === 0;
+          if (inv) { m[y][x] = !m[y][x]; }
+        }
+      }
+    }
+    // penalizace podle normy: dlouhé řady, bloky 2×2, vzor hledáčku, poměr tmavých
+    function penalty() {
+      var p = 0, dark = 0, a, b2;
+      for (a = 0; a < size; a++) {
+        for (var dir = 0; dir < 2; dir++) {
+          var run = 1, line = [];
+          for (b2 = 0; b2 < size; b2++) { line.push(dir ? m[b2][a] : m[a][b2]); }
+          for (b2 = 1; b2 <= size; b2++) {
+            if (b2 < size && line[b2] === line[b2 - 1]) { run++; continue; }
+            if (run >= 5) { p += run - 2; }
+            run = 1;
+          }
+          var str = line.map(function (c) { return c ? "1" : "0"; }).join("");
+          var pat = /(?=(10111010000|00001011101))/g;
+          while (pat.exec(str)) { p += 40; pat.lastIndex++; }
+        }
+      }
+      for (a = 0; a < size - 1; a++) {
+        for (b2 = 0; b2 < size - 1; b2++) {
+          var c = m[a][b2];
+          if (c === m[a][b2 + 1] && c === m[a + 1][b2] && c === m[a + 1][b2 + 1]) { p += 3; }
+        }
+      }
+      for (a = 0; a < size; a++) { for (b2 = 0; b2 < size; b2++) { if (m[a][b2]) { dark++; } } }
+      var total = size * size;
+      return p + Math.floor(Math.abs(dark * 20 - total * 10) / total) * 10;
+    }
+    var best = 0, bestP = Infinity;
+    for (var mk = 0; mk < 8; mk++) {
+      flip(mk); drawFormat(mk);
+      var pp = penalty();
+      if (pp < bestP) { bestP = pp; best = mk; }
+      flip(mk);
+    }
+    flip(best); drawFormat(best);
+    return m;
+  }
+
+  // QR jako SVG: tmavé moduly jednou cestou, tichá zóna 4 moduly, vždy
+  // černá na bílé (obrácený kontrast řada čteček nepřečte).
+  var qrCache = {};
+  function qrSvg(text, label) {
+    var key = text + "\n" + (label || "");
+    if (qrCache[key]) { return qrCache[key]; }
+    var m = qrMatrix(text);
+    if (!m) { return ""; }
+    var n = m.length, q = 4, path = "";
+    for (var y = 0; y < n; y++) {
+      for (var x = 0; x < n; x++) { if (m[y][x]) { path += "M" + (x + q) + " " + (y + q) + "h1v1h-1z"; } }
+    }
+    var w = n + 2 * q;
+    qrCache[key] = '<svg class="qr" viewBox="0 0 ' + w + " " + w + '" role="img" aria-label="' + esc(label || "") +
+      '" shape-rendering="crispEdges"><rect width="' + w + '" height="' + w + '" fill="#fff"/><path fill="#000" d="' + path + '"/></svg>';
+    return qrCache[key];
   }
 
   // ukázkové menu: názvy podle jazyka, ceny hrubě přepočtené na zvolenou měnu
@@ -8470,12 +8776,22 @@
              '<div class="pw-b">' + PW_CHECK + esc(T("proB3")) + "</div>" +
            "</div>" +
            '<div class="pw-plans">' + planButton("monthly") + planButton("yearly") + "</div>" +
-           '<button class="btn-ghost" data-restorebuy="1">' + esc(T("proRestore")) + "</button>" +
+           // na webu se nekupuje ani neobnovuje: rovnou cesta do obchodů
+           (nativeApp() ? '<button class="btn-ghost" data-restorebuy="1">' + esc(T("proRestore")) + "</button>" : storeBlock()) +
            '<button class="btn-ghost" data-cancel="1">' + esc(T("proLater")) + "</button>" +
            '<p class="hint" style="padding:10px 4px 0">' +
              (trialOf("monthly") || trialOf("yearly") ? esc(T("proTrialTerms")) + " " : "") + esc(T("proTerms")) + "</p>" +
            '<p class="pw-legal"><a href="https://www.deriverge.com/tapkasa/privacy.html" target="_blank" rel="noopener">' + esc(T("proPrivacy")) + "</a>" +
            ' · <a href="https://www.deriverge.com/tapkasa/terms.html" target="_blank" rel="noopener">' + esc(T("proTermsLink")) + "</a></p>";
+    }
+
+    // jen web: ťuknutí na tarif nebo obnovu nákupu (showGetApp)
+    if (sheet.step === "getapp") {
+      h += '<div class="pw-mark">' + PRO_MARK + "</div>" +
+           '<h2 style="text-align:center">' + esc(T("proHead")) + "</h2>" +
+           '<p class="sub" style="text-align:center;font-size:15px;font-weight:600;color:var(--ink)">' + esc(T("getAppHead")) + "</p>" +
+           storeBlock() +
+           '<button class="btn-ghost" data-cancel="1">' + esc(T("back")) + "</button>";
     }
 
     return h;
