@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Výpočet odskoku potrubia, rozvinutie kolena, prietok vzduchu | VZT Montér</title>
+<meta name="description" content="Výpočet odskoku potrubia, prietok a rýchlosť vzduchu v potrubí, kruh na štvorhran a segmentové koleno online. Aplikácia VZT Montér pridá rozvinutie plechu so šablónou 1:1.">
+<link rel="canonical" href="https://deriverge.com/vzt-monter/sk/">
+<link rel="alternate" hreflang="cs" href="https://deriverge.com/vzt-monter/">
+<link rel="alternate" hreflang="sk" href="https://deriverge.com/vzt-monter/sk/">
+<link rel="alternate" hreflang="de" href="https://deriverge.com/vzt-monter/de/">
+<link rel="alternate" hreflang="pl" href="https://deriverge.com/vzt-monter/pl/">
+<link rel="alternate" hreflang="en" href="https://deriverge.com/vzt-monter/en/">
+<link rel="alternate" hreflang="x-default" href="https://deriverge.com/vzt-monter/en/">
+<link rel="icon" type="image/png" sizes="192x192" href="../icon-192.png">
+<link rel="apple-touch-icon" href="../icon-192.png">
+<meta name="theme-color" content="#F1F2F4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0E0F11" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VZT Montér">
+<meta property="og:title" content="VZT Montér: kalkulačka pre montérov vzduchotechniky">
+<meta property="og:description" content="Odskoky, rozvinutie plechu so šablónou 1:1, prietok, tlakové straty, zákazky a denník. Offline, bez účtu, PRO jednorazovo.">
+<meta property="og:url" content="https://deriverge.com/vzt-monter/sk/">
+<meta property="og:image" content="https://deriverge.com/vzt-monter/img/og-sk.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="sk_SK">
+<meta property="og:locale:alternate" content="cs_CZ">
+<meta property="og:locale:alternate" content="de_DE">
+<meta property="og:locale:alternate" content="pl_PL">
+<meta property="og:locale:alternate" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../vzt.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "VZT Montér",
+  "operatingSystem": "iOS, Android",
+  "applicationCategory": "UtilitiesApplication",
+  "applicationSubCategory": "HVAC ductwork calculator",
+  "description": "Odskoky, rozvinutie plechu so šablónou 1:1, prietok, tlakové straty, zákazky a denník. Offline, bez účtu, PRO jednorazovo.",
+  "inLanguage": "sk",
+  "url": "https://deriverge.com/vzt-monter/sk/",
+  "image": "https://deriverge.com/vzt-monter/icon-512.png",
+  "screenshot": [
+    "https://deriverge.com/vzt-monter/img/sk-01-odskok.jpg",
+    "https://deriverge.com/vzt-monter/img/sk-03-sablona.jpg",
+    "https://deriverge.com/vzt-monter/img/sk-04-trasa.jpg",
+    "https://deriverge.com/vzt-monter/img/sk-07-denik.jpg"
+  ],
+  "featureList": [
+    "Odskoky",
+    "Zarezanie a rozvinutie",
+    "Prepočty",
+    "Návrh trasy a straty",
+    "Rýchla kontrola úseku",
+    "Zákazky, ponuka a denník",
+    "Tabuľky"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "EUR"
+  },
+  "sameAs": [
+    "https://apps.apple.com/app/id6806400438",
+    "https://play.google.com/store/apps/details?id=cz.vztmonter.app"
+  ],
+  "publisher": {
+    "@type": "Organization",
+    "name": "deriverge s.r.o.",
+    "url": "https://deriverge.com/"
+  }
+}
+</script>
+</head>
+<body>
+<div class="page">
+  <header class="top">
+    <a class="brand" href="../sk/"><span class="logo"><svg viewBox="0 0 100 100" fill="none" stroke="#15120E" aria-hidden="true"><path d="M17 32H40L64 60H83" stroke-width="13"/><path d="M17 22v20M83 50v20" stroke-width="6"/></svg></span><span><b>VZT Montér</b><small>Kalkulačka pre vzduchotechniku</small></span></a>
+    <nav class="langs" aria-label="Jazyk"><a href="../" lang="cs" hreflang="cs">Čeština</a> <strong aria-current="page">Slovenčina</strong> <a href="../de/" lang="de" hreflang="de">Deutsch</a> <a href="../pl/" lang="pl" hreflang="pl">Polski</a> <a href="../en/" lang="en" hreflang="en">English</a></nav>
+  </header>
+
+  <main>
+  <section class="hero">
+    <div>
+      <p class="eyebrow">Aplikácia pre iPhone a Android</p>
+      <h1>Odskok, rozvinutie kolena a prietok vzduchu spočítate priamo na stavbe</h1>
+      <p class="lede">VZT Montér je kalkulačka pre montérov vzduchotechniky. Zadáte, čo nameriate metrom, a dostanete dĺžku medzikusu, šablónu rozvinutia plechu 1:1 alebo tlakovú stratu trasy. Funguje offline a bez účtu.</p>
+      <div class="badges">
+        <a href="https://apps.apple.com/app/id6806400438"><img class="as" src="../badge-appstore.svg" alt="Stiahnuť v App Store" width="144" height="48"></a>
+        <a href="https://play.google.com/store/apps/details?id=cz.vztmonter.app"><img class="gp" src="../badge-googleplay-en.png" alt="Teraz na Google Play" width="184" height="71"></a>
+      </div>
+      <p class="note">Stiahnutie zadarmo. PRO je jednorazový nákup, žiadne predplatné.</p>
+    </div>
+    <img class="shot" src="../img/sk-01-odskok.jpg" alt="Aplikácia VZT Montér: rovinný odskok Ø200, odskok 500 mm, kolená 45°, dĺžka medzikusu 541 mm" width="540" height="960" fetchpriority="high">
+  </section>
+
+  <nav class="jump" aria-label="Kalkulačky online:"><span>Kalkulačky online:</span> <a href="#odskok-potrubia">Odskok potrubia</a> <a href="#prietok-vzduchu">Prietok a rýchlosť</a> <a href="#kruh-na-stvorhran">Kruh na štvorhran</a> <a href="#segmentove-koleno">Segmentové koleno</a></nav>
+
+  <section aria-labelledby="calc-h">
+    <h2 id="calc-h">Kalkulačky pre vzduchotechniku online</h2>
+    <p class="sub">Štyri výpočty z aplikácie VZT Montér, zadarmo v prehliadači. Počítajú rovnakými vzorcami ako aplikácia. Desatinné čísla môžete písať s čiarkou.</p>
+    <form class="calc" id="odskok-potrubia" data-calc="offset" novalidate>
+      <h3>Výpočet odskoku potrubia</h3>
+      <p class="intro">Dĺžka medzikusu medzi dvoma kolenami pre odskok kruhového potrubia (Spiro) v jednej rovine. Zadajte priemer, veľkosť odskoku ako vzdialenosť osí a uhol kolien.</p>
+      <div class="calc-body">
+        <div>
+          <svg class="diagram" viewBox="0 0 420 166" role="img" aria-label="Schéma odskoku: dve rovnobežné osi potrubia vo vzdialenosti O, šikmý medzikus L medzi kolenami pod uhlom α a osová vzdialenosť A">
+          <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10 120H150L270 30H410" stroke-width="18" opacity=".13"/>
+            <path d="M10 120H150L270 30H410" stroke-width="2"/>
+            <path d="M171.6 93.8l9.6 12.8M238.8 43.4l9.6 12.8" stroke-width="2"/>
+            <path d="M192 120A42 42 0 0 0 183.6 94.8" stroke-width="1.5"/>
+            <path d="M394 30V120M388 30h12M388 120h12" stroke-width="1.2"/>
+            <path d="M150 148H270M150 142v12M270 142v12" stroke-width="1.2"/>
+          </g>
+          <g fill="currentColor" font-size="16" font-weight="700" font-family="inherit">
+            <text x="402" y="81">O</text>
+            <text x="196" y="66">L</text>
+            <text x="196" y="113">α</text>
+            <text x="205" y="164">A</text>
+          </g>
+        </svg>
+          <div class="fields">
+            <div class="field"><label for="off-D">Priemer D (mm)</label><input id="off-D" name="D" type="text" inputmode="numeric" autocomplete="off" value="200"></div>
+            <div class="field"><label for="off-O">Veľkosť odskoku O (mm)</label><input id="off-O" name="O" type="text" inputmode="numeric" autocomplete="off" value="500"></div>
+            <div class="field"><label for="off-a">Uhol kolien α</label><select id="off-a" name="alpha"><option value="15">15°</option><option value="22.5">22,5°</option><option value="30">30°</option><option value="45" selected>45°</option><option value="60">60°</option><option value="90">90°</option></select></div>
+            <div class="field"><label for="off-rk">Prevedenie kolena</label><select id="off-rk" name="rk"><option value="0.6">Krátke 0,6×D</option><option value="1" selected>Štandardné 1,0×D</option><option value="1.5">Dlhé 1,5×D</option><option value="2">Dlhé 2,0×D</option></select></div>
+          </div>
+        </div>
+        <div>
+          <ul class="results" aria-live="polite">
+            <li class="main"><span>Dĺžka medzikusu L</span><output data-out="L">541 mm</output></li>
+            <li><span>Dĺžka diagonály C</span><output data-out="C">707 mm</output></li>
+            <li><span>Osová vzdialenosť A</span><output data-out="A">500 mm</output></li>
+            <li><span>Rameno kolena</span><output data-out="arm">83 mm</output></li>
+            <li><span>Polomer kolena R</span><output data-out="R">200 mm</output></li>
+          </ul>
+          <p class="calc-msg" hidden></p>
+          <details class="how"><summary>Ako sa to počíta</summary><p><code>C = O / sin α</code>, <code>A = O / tan α</code>, rameno kolena <code>R · tan(α/2)</code> a medzikus <code>L = C - 2 · R · tan(α/2)</code>. Polomer kolena R je násobok priemeru podľa prevedenia. Katalógové kolená mávajú za oblúkom rovný nadstavec, preto rameno overte na kolene, ktoré máte v ruke. Keď L vyjde záporne, kolená by sa prekrývali: pomôže menší uhol.</p></details>
+        </div>
+      </div>
+      <div class="app-cta"><p><b>Priestorový odskok aj odskok okolo prekážky</b>Aplikácia spočíta aj odskok mimo roviny, odskok okolo prekážky a odskok štvorhranného kanála a výsledok uloží k zákazke.</p><span class="links"><a href="https://apps.apple.com/app/id6806400438">App Store</a><a href="https://play.google.com/store/apps/details?id=cz.vztmonter.app">Google Play</a></span></div>
+    </form>
+    <form class="calc" id="prietok-vzduchu" data-calc="velocity" novalidate>
+      <h3>Prietok vzduchu potrubím: výpočet rýchlosti</h3>
+      <p class="intro">Rýchlosť prúdenia z prietoku a rozmeru potrubia, plocha prierezu a tlaková strata trením na meter dĺžky. Pre kruhové potrubie Spiro aj štvorhranný kanál.</p>
+      <div class="calc-body">
+        <div class="fields">
+          <div class="field"><label for="vel-Q">Prietok Q (m³/h)</label><input id="vel-Q" name="Q" type="text" inputmode="decimal" autocomplete="off" value="1000"></div>
+          <div class="field wide"><span class="lbl" id="vel-shape">Tvar potrubia</span>
+            <div class="seg" role="radiogroup" aria-labelledby="vel-shape">
+              <label><input type="radio" name="shape" value="round" checked><span>Kruhové</span></label>
+              <label><input type="radio" name="shape" value="rect"><span>Štvorhranné a × b</span></label>
+            </div>
+          </div>
+          <div class="field" data-shape="round"><label for="vel-D">Priemer D (mm)</label><input id="vel-D" name="D" type="text" inputmode="numeric" autocomplete="off" value="315"></div>
+          <div class="field" data-shape="rect" hidden><label for="vel-a">Šírka a (mm)</label><input id="vel-a" name="a" type="text" inputmode="numeric" autocomplete="off" value="400"></div>
+          <div class="field" data-shape="rect" hidden><label for="vel-b">Výška b (mm)</label><input id="vel-b" name="b" type="text" inputmode="numeric" autocomplete="off" value="200"></div>
+        </div>
+        <div>
+          <ul class="results" aria-live="polite">
+            <li class="main"><span>Rýchlosť v</span><output data-out="v">3,56 m/s</output></li>
+            <li><span>Plocha prierezu S</span><output data-out="S">0,0779 m²</output></li>
+            <li><span>Tlaková strata trením</span><output data-out="dp">0,49 Pa/m</output></li>
+            <li data-shape="rect" hidden><span>Ekvivalentný priemer</span><output data-out="De"></output></li>
+          </ul>
+          <p class="calc-msg" hidden></p>
+          <details class="how"><summary>Ako sa to počíta</summary><p><code>v = Q / (3600 · S)</code>. Strata trením podľa Darcyho a Weisbacha so súčiniteľom trenia podľa Swameeho a Jaina, hustota vzduchu 1,2 kg/m³, viskozita 15,11 · 10⁻⁶ m²/s, drsnosť 0,09 mm pre Spiro a 0,15 mm pre štvorhranný pozinkovaný kanál. Pri štvorhrannom kanáli sa počíta s hydraulickým priemerom <code>2ab / (a + b)</code> a skutočnou rýchlosťou.</p></details>
+        </div>
+      </div>
+      <div class="app-cta"><p><b>Celá trasa aj s tvarovkami</b>Aplikácia nadimenzuje úseky trasy s odbočkami, spočíta tlakovú stratu s tvarovkami, nájde kritickú cestu a navrhne ventilátor.</p><span class="links"><a href="https://apps.apple.com/app/id6806400438">App Store</a><a href="https://play.google.com/store/apps/details?id=cz.vztmonter.app">Google Play</a></span></div>
+    </form>
+    <form class="calc" id="kruh-na-stvorhran" data-calc="rect" novalidate>
+      <h3>Prepočet kruh na štvorhran</h3>
+      <p class="intro">Aký kruhový priemer má pri rovnakom prietoku rovnakú tlakovú stratu ako štvorhranný kanál a × b, a najbližšie rozmery Spiro.</p>
+      <div class="calc-body">
+        <div class="fields">
+          <div class="field"><label for="rect-a">Šírka a (mm)</label><input id="rect-a" name="a" type="text" inputmode="numeric" autocomplete="off" value="400"></div>
+          <div class="field"><label for="rect-b">Výška b (mm)</label><input id="rect-b" name="b" type="text" inputmode="numeric" autocomplete="off" value="200"></div>
+        </div>
+        <div>
+          <ul class="results" aria-live="polite">
+            <li class="main"><span>Ekvivalentný priemer</span><output data-out="De">304,7 mm</output></li>
+            <li><span>Najbližšie Spiro</span><output data-out="spiro">Ø300 / Ø315 mm</output></li>
+            <li><span>Priemer s rovnakou plochou</span><output data-out="Darea">319,2 mm</output></li>
+            <li><span>Plocha kanála</span><output data-out="S">0,0800 m²</output></li>
+          </ul>
+          <p class="calc-msg" hidden></p>
+          <details class="how"><summary>Ako sa to počíta</summary><p>Huebscherova rovnica: <code>D = 1,30 · (a · b)^0,625 / (a + b)^0,25</code>. Priemer s rovnakou plochou je len na porovnanie, pre tlakovú stratu rozhoduje ekvivalentný priemer. Rad Spiro: 63 až 1250 mm vrátane 180, 224 a 280 mm.</p></details>
+        </div>
+      </div>
+      <div class="app-cta"><p><b>Aj opačne a s normovým radom</b>V aplikácii prepočítate aj priemer na rozmery kanála pre zvolený pomer strán, nájdete najbližší rozmer podľa EN 1505 a porovnáte náhradu prierezu.</p><span class="links"><a href="https://apps.apple.com/app/id6806400438">App Store</a><a href="https://play.google.com/store/apps/details?id=cz.vztmonter.app">Google Play</a></span></div>
+    </form>
+    <form class="calc" id="segmentove-koleno" data-calc="elbow" novalidate>
+      <h3>Rozvinutie kolena: uhol rezu a dĺžky plátkov</h3>
+      <p class="intro">Segmentové koleno zo Spiro rúry: na koľko stupňov nastaviť pílu a aké dlhé sú celé plátky a polplátky. Počet segmentov zahŕňa oba krajné polplátky.</p>
+      <div class="calc-body">
+        <div class="fields">
+          <div class="field"><label for="elb-D">Priemer D (mm)</label><input id="elb-D" name="D" type="text" inputmode="numeric" autocomplete="off" value="200"></div>
+          <div class="field"><label for="elb-R">Polomer osi R (mm)</label><input id="elb-R" name="R" type="text" inputmode="numeric" autocomplete="off" value="300"></div>
+          <div class="field"><label for="elb-t">Celkový uhol (°)</label><input id="elb-t" name="theta" type="text" inputmode="decimal" autocomplete="off" value="90"></div>
+          <div class="field"><label for="elb-n">Počet segmentov (všetky diely)</label><select id="elb-n" name="n"><option value="2">2</option><option value="3">3</option><option value="4" selected>4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option></select></div>
+        </div>
+        <div>
+          <ul class="results" aria-live="polite">
+            <li class="main"><span>Uhol rezu na píle</span><output data-out="alpha">15,00°</output></li>
+            <li><span>Lom v spoji</span><output data-out="joint">30,00°</output></li>
+            <li><span>Skladba kolena</span><output data-out="make">2 celé + 2 polplátky</output></li>
+            <li><span>Celý plátok v osi</span><output data-out="axis">161 mm</output></li>
+            <li><span>Celý plátok vnútri oblúka</span><output data-out="inner">107 mm</output></li>
+            <li><span>Celý plátok mimo oblúka</span><output data-out="outer">214 mm</output></li>
+            <li><span>Polplátok v osi</span><output data-out="hAxis">80 mm</output></li>
+            <li><span>Polplátok vnútri oblúka</span><output data-out="hInner">54 mm</output></li>
+            <li><span>Polplátok mimo oblúka</span><output data-out="hOuter">107 mm</output></li>
+          </ul>
+          <p class="calc-msg" hidden></p>
+          <details class="how"><summary>Ako sa to počíta</summary><p>Uhol rezu od kolmice <code>α = Θ / (2 · (n - 1))</code>, kde n je počet všetkých dielov. Celý plátok v osi <code>2 · R · tan α</code>, vnútri oblúka <code>2 · (R - D/2) · tan α</code>, mimo oblúka <code>2 · (R + D/2) · tan α</code>. Polplátok má polovičné dĺžky a jeden koniec kolmo. Lom v spoji (2α) nie je uhol pre pílu.</p></details>
+        </div>
+      </div>
+      <div class="app-cta"><p><b>PDF šablóna rozvinutia 1:1</b>Rozvinutie plátku vytlačí aplikácia ako šablónu 1:1 na listy A4 s kontrolnou úsečkou 100 mm. Rovnako šikmý rez, odbočku, prechod kruh na štvorhran a kužeľovú redukciu.</p><span class="links"><a href="https://apps.apple.com/app/id6806400438">App Store</a><a href="https://play.google.com/store/apps/details?id=cz.vztmonter.app">Google Play</a></span></div>
+    </form>
+  </section>
+
+  <h2>Čo VZT Montér vie</h2>
+  <p class="sub">Všetko beží v telefóne, bez internetu a bez účtu. Výpočty sa dajú uložiť do histórie alebo k zákazke.</p>
+  <div class="grid">
+    <div class="card"><h3>Odskoky <span class="tag">Zadarmo</span> <span class="tag pro">PRO</span></h3><p>Rovinný odskok na Spiro a odskok štvorhranného kanála pre rádiusové, lomené aj lomené kolená s lopatkami sú zadarmo. Priestorový odskok, odskok okolo prekážky a vlastný uhol kolien v PRO.</p></div>
+    <div class="card"><h3>Zarezanie a rozvinutie <span class="tag pro">PRO</span></h3><p>Šikmý rez, segmentové koleno, odbočka (sedlo), prechod kruh na štvorhran a kužeľová redukcia. Body rezu v tabuľke na celé mm a PDF šablóna 1:1 na listy A4 s kontrolnou úsečkou 100 mm.</p></div>
+    <div class="card"><h3>Prepočty <span class="tag">Zadarmo</span></h3><p>Kruh na štvorhran, prietok, rýchlosť a priemer, najbližší rozmer Spiro a EN 1505, potrebný prietok vzduchu pre miestnosť a náhrada prierezu.</p></div>
+    <div class="card"><h3>Návrh trasy a straty <span class="tag pro">PRO</span></h3><p>Úseky s odbočkami, dimenzovanie, tlaková strata, kritická cesta, priškrtenie pri každej vyústke, ventilátor a výkaz materiálu.</p></div>
+    <div class="card"><h3>Rýchla kontrola úseku <span class="tag pro">PRO</span></h3><p>Jeden úsek, hneď výsledok: strata trením a tvarovkami, ventilátor, rosný bod a riziko kondenzácie.</p></div>
+    <div class="card"><h3>Zákazky, ponuka a denník <span class="tag">Zadarmo</span> <span class="tag pro">PRO</span></h3><p>Výpočty k zákazke a PDF protokol, denník hodín so zárobkom za mesiac. Zadarmo 3 zákazky a 14 dní denníka. V PRO bez obmedzenia, s fotkami zo stavby, PDF výkazom hodín a ponukou z cenníka.</p></div>
+    <div class="card"><h3>Tabuľky <span class="tag">Zadarmo</span></h3><p>Rady Spiro a štvorhranných kanálov, súčinitele miestnych odporov, drsnosti, polomery kolien a odporúčané rýchlosti.</p></div>
+    <div class="card"><h3>Do terénu</h3><p>Denný režim je čiernobiely, aby bol vidieť na slnku, nočný režim do strojovne. Veľké tlačidlá do rukavíc. Po slovensky, česky, nemecky, poľsky a anglicky.</p></div>
+  </div>
+
+  <h2>Ako aplikácia vyzerá</h2>
+  <ul class="shots">
+    <li><figure><img src="../img/sk-03-sablona.jpg" alt="Šablóna 1:1 a body rezu v mm" width="540" height="960" loading="lazy"><figcaption>Šablóna 1:1 a body rezu v mm</figcaption></figure></li>
+    <li><figure><img src="../img/sk-04-trasa.jpg" alt="Trasa, straty aj ventilátor" width="540" height="960" loading="lazy"><figcaption>Trasa, straty aj ventilátor</figcaption></figure></li>
+    <li><figure><img src="../img/sk-07-denik.jpg" alt="Hodiny a zárobok za mesiac" width="540" height="960" loading="lazy"><figcaption>Hodiny a zárobok za mesiac</figcaption></figure></li>
+  </ul>
+
+  <h2>Zadarmo a PRO</h2>
+  <div class="plans">
+    <div class="plan"><p class="k">Zadarmo</p><h3>Základ pre každú zákazku</h3><ul><li>Rovinný odskok a odskok štvorhranného kanála</li><li>Prepočty a tabuľky</li><li>História výpočtov</li><li>3 zákazky</li><li>Denník hodín na 14 dní</li><li>Záloha dát do súboru</li></ul></div>
+    <div class="plan pro"><p class="k">VZT Montér PRO</p><h3>Jednorazový nákup</h3><ul><li>Priestorový odskok, odskok okolo prekážky, vlastný uhol</li><li>Zarezanie a rozvinutie so šablónou 1:1</li><li>Návrh trasy, tlakové straty a ventilátor</li><li>Neobmedzené zákazky, ponuka a PDF bez vodoznaku</li><li>Denník bez obmedzenia, fotky a PDF výkaz hodín</li></ul><p>Zaplatíte raz, nič sa neobnovuje. Cenu vo vašej mene ukáže obchod.</p></div>
+  </div>
+
+  <h2>Časté otázky</h2>
+  <div class="faq">
+    <h3>Ako sa počíta dĺžka medzikusu pri odskoku?</h3>
+    <p>Z odskoku O a uhla kolien α sa spočíta diagonála C = O / sin α a od nej sa odpočítajú dve ramená kolien R · tan(α/2). Napríklad Ø200 mm, odskok 500 mm a kolená 45° so štandardným polomerom 1,0×D dajú medzikus 541 mm.</p>
+    <h3>Funguje aplikácia bez internetu?</h3>
+    <p>Áno. Výpočty, zákazky aj denník bežia priamo v telefóne. Internet je potrebný len pri nákupe a obnovení PRO.</p>
+    <h3>Je PRO predplatné?</h3>
+    <p>Nie. PRO je jednorazový nákup, ktorý platí navždy. Na novom telefóne ho obnovíte v Nastaveniach.</p>
+    <h3>Kde sú moje dáta?</h3>
+    <p>Len vo vašom telefóne, účet nepotrebujete. Zálohu uložíte do súboru a prenesiete, kam chcete. Podrobnosti sú v <a href="../soukromi.html#sk">zásadách ochrany súkromia</a>.</p>
+    <h3>Na akých telefónoch a v akých jazykoch?</h3>
+    <p>iPhone a telefóny s Androidom. Aplikácia je po slovensky, česky, nemecky, poľsky a anglicky.</p>
+    <h3>Výsledok nesedí s praxou. Čo s tým?</h3>
+    <p>Napíšte na <a href="mailto:info@deriverge.com">info@deriverge.com</a> zadané hodnoty a čo vám vyšlo. Výpočet preveríme. Ďalšie odpovede nájdete v <a href="../podpora.html#sk">podpore</a>.</p>
+  </div>
+
+  <div class="cta">
+    <img class="appicon" src="../icon-512.png" alt="" width="96" height="96" loading="lazy">
+    <h2>Stiahnite si VZT Montér</h2>
+    <p class="sub">Zadarmo na stiahnutie pre iPhone a Android. PRO jednorazovo, bez predplatného.</p>
+    <div class="badges">
+        <a href="https://apps.apple.com/app/id6806400438"><img class="as" src="../badge-appstore.svg" alt="Stiahnuť v App Store" width="144" height="48"></a>
+        <a href="https://play.google.com/store/apps/details?id=cz.vztmonter.app"><img class="gp" src="../badge-googleplay-en.png" alt="Teraz na Google Play" width="184" height="71"></a>
+      </div>
+  </div>
+  </main>
+
+  <footer><a href="../podpora.html#sk">Podpora</a> &middot; <a href="../soukromi.html#sk">Ochrana súkromia</a> &middot; <a href="../" lang="cs" hreflang="cs">Čeština</a> <strong aria-current="page">Slovenčina</strong> <a href="../de/" lang="de" hreflang="de">Deutsch</a> <a href="../pl/" lang="pl" hreflang="pl">Polski</a> <a href="../en/" lang="en" hreflang="en">English</a><br>Prevádzkovateľ: <a href="/">deriverge s.r.o.</a> &middot; <a href="mailto:info@deriverge.com">info@deriverge.com</a></footer>
+</div>
+<script>window.VZT_L10N = {"invalid": "Zadajte kladné čísla v rozsahu výpočtu.", "offsetSuggest": "Pri {a}° by sa kolená prekrývali a medzikus vychádza záporne. S rovnakým odskokom vyjde uhol {s}°.", "offsetNone": "Pri {a}° by sa kolená prekrývali a s týmto odskokom nevyjde žiadny uhol z radu 15 až 90°. Zvoľte kratšie koleno alebo väčší odskok.", "elbowMake": "{full} celé + 2 polplátky", "elbowRadius": "Polomer osi musí byť väčší ako polovica priemeru, teda viac ako {min} mm."};</script>
+<script src="../vzt.js" defer></script>
+</body>
+</html>

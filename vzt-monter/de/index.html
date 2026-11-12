@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lüftungsrechner: Etage berechnen, Kanalrechner, Segmentbogen | VZT Montér</title>
+<meta name="description" content="Lüftungsrechner online: Etage am Wickelfalzrohr berechnen, Luftgeschwindigkeit im Kanal, rund auf eckig und Segmentbogen. Die App VZT Montér liefert dazu Abwicklungen als Schablone 1:1.">
+<link rel="canonical" href="https://deriverge.com/vzt-monter/de/">
+<link rel="alternate" hreflang="cs" href="https://deriverge.com/vzt-monter/">
+<link rel="alternate" hreflang="sk" href="https://deriverge.com/vzt-monter/sk/">
+<link rel="alternate" hreflang="de" href="https://deriverge.com/vzt-monter/de/">
+<link rel="alternate" hreflang="pl" href="https://deriverge.com/vzt-monter/pl/">
+<link rel="alternate" hreflang="en" href="https://deriverge.com/vzt-monter/en/">
+<link rel="alternate" hreflang="x-default" href="https://deriverge.com/vzt-monter/en/">
+<link rel="icon" type="image/png" sizes="192x192" href="../icon-192.png">
+<link rel="apple-touch-icon" href="../icon-192.png">
+<meta name="theme-color" content="#F1F2F4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0E0F11" media="(prefers-color-scheme: dark)">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VZT Montér">
+<meta property="og:title" content="VZT Montér: Lüftung Rechner für Monteure">
+<meta property="og:description" content="Etagen, Blechabwicklung als Schablone 1:1, Volumenstrom, Druckverlust, Aufträge und Stundenzettel. Offline, ohne Konto, PRO als Einmalkauf.">
+<meta property="og:url" content="https://deriverge.com/vzt-monter/de/">
+<meta property="og:image" content="https://deriverge.com/vzt-monter/img/og-de.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="de_DE">
+<meta property="og:locale:alternate" content="cs_CZ">
+<meta property="og:locale:alternate" content="sk_SK">
+<meta property="og:locale:alternate" content="pl_PL">
+<meta property="og:locale:alternate" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="../vzt.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "VZT Montér",
+  "operatingSystem": "iOS, Android",
+  "applicationCategory": "UtilitiesApplication",
+  "applicationSubCategory": "HVAC ductwork calculator",
+  "description": "Etagen, Blechabwicklung als Schablone 1:1, Volumenstrom, Druckverlust, Aufträge und Stundenzettel. Offline, ohne Konto, PRO als Einmalkauf.",
+  "inLanguage": "de",
+  "url": "https://deriverge.com/vzt-monter/de/",
+  "image": "https://deriverge.com/vzt-monter/icon-512.png",
+  "screenshot": [
+    "https://deriverge.com/vzt-monter/img/de-01-odskok.jpg",
+    "https://deriverge.com/vzt-monter/img/de-03-sablona.jpg",
+    "https://deriverge.com/vzt-monter/img/de-04-trasa.jpg",
+    "https://deriverge.com/vzt-monter/img/de-07-denik.jpg"
+  ],
+  "featureList": [
+    "Etagen",
+    "Schrägschnitt und Abwicklung",
+    "Umrechnungen",
+    "Trassenplanung und Druckverlust",
+    "Schnelle Prüfung einer Teilstrecke",
+    "Aufträge, Angebot und Stundenzettel",
+    "Tabellen"
+  ],
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "EUR"
+  },
+  "sameAs": [
+    "https://apps.apple.com/app/id6806400438",
+    "https://play.google.com/store/apps/details?id=cz.vztmonter.app"
+  ],
+  "publisher": {
+    "@type": "Organization",
+    "name": "deriverge s.r.o.",
+    "url": "https://deriverge.com/"
+  }
+}
+</script>
+</head>
+<body>
+<div class="page">
+  <header class="top">
+    <a class="brand" href="../de/"><span class="logo"><svg viewBox="0 0 100 100" fill="none" stroke="#15120E" aria-hidden="true"><path d="M17 32H40L64 60H83" stroke-width="13"/><path d="M17 22v20M83 50v20" stroke-width="6"/></svg></span><span><b>VZT Montér</b><small>Lüftungsrechner für Monteure</small></span></a>
+    <nav class="langs" aria-label="Sprache"><a href="../" lang="cs" hreflang="cs">Čeština</a> <a href="../sk/" lang="sk" hreflang="sk">Slovenčina</a> <strong aria-current="page">Deutsch</strong> <a href="../pl/" lang="pl" hreflang="pl">Polski</a> <a href="../en/" lang="en" hreflang="en">English</a></nav>
+  </header>
+
+  <main>
+  <section class="hero">
+    <div>
+      <p class="eyebrow">App für iPhone und Android</p>
+      <h1>Etage, Bogenabwicklung und Luftmenge direkt auf der Baustelle berechnen</h1>
+      <p class="lede">VZT Montér ist ein Lüftungsrechner für Monteure. Sie geben ein, was Sie mit dem Meterstab gemessen haben, und bekommen die Länge des Passstücks, eine Blechabwicklung als Schablone 1:1 oder den Druckverlust der Trasse. Offline und ohne Konto.</p>
+      <div class="badges">
+        <a href="https://apps.apple.com/app/id6806400438"><img class="as" src="../badge-appstore.svg" alt="Laden im App Store" width="144" height="48"></a>
+        <a href="https://play.google.com/store/apps/details?id=cz.vztmonter.app"><img class="gp" src="../badge-googleplay-en.png" alt="Jetzt bei Google Play" width="184" height="71"></a>
+      </div>
+      <p class="note">Kostenlos laden. PRO ist ein Einmalkauf, kein Abo.</p>
+    </div>
+    <img class="shot" src="../img/de-01-odskok.jpg" alt="App VZT Montér: Etage Ø200, Versatz 500 mm, Bögen 45°, Passstück 541 mm" width="540" height="960" fetchpriority="high">
+  </section>
+
+  <nav class="jump" aria-label="Rechner online:"><span>Rechner online:</span> <a href="#etage-berechnen">Etage berechnen</a> <a href="#luftgeschwindigkeit">Luftgeschwindigkeit</a> <a href="#rund-auf-eckig">Rund auf eckig</a> <a href="#segmentbogen">Segmentbogen</a></nav>
+
+  <section aria-labelledby="calc-h">
+    <h2 id="calc-h">Lüftungsrechner online</h2>
+    <p class="sub">Vier Berechnungen aus der App VZT Montér, kostenlos im Browser und mit denselben Formeln wie in der App. Dezimalzahlen dürfen Sie mit Komma eingeben.</p>
+    <form class="calc" id="etage-berechnen" data-calc="offset" novalidate>
+      <h3>Etage berechnen: Passstück am Wickelfalzrohr</h3>
+      <p class="intro">Länge des Passstücks zwischen zwei Bögen für eine Etage am Rundrohr in einer Ebene. Geben Sie Durchmesser, Versatz als Abstand der Rohrachsen und den Bogenwinkel ein.</p>
+      <div class="calc-body">
+        <div>
+          <svg class="diagram" viewBox="0 0 420 166" role="img" aria-label="Skizze der Etage: zwei parallele Rohrachsen im Abstand O, schräges Passstück L zwischen den Bögen unter dem Winkel α und Baulänge A">
+          <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10 120H150L270 30H410" stroke-width="18" opacity=".13"/>
+            <path d="M10 120H150L270 30H410" stroke-width="2"/>
+            <path d="M171.6 93.8l9.6 12.8M238.8 43.4l9.6 12.8" stroke-width="2"/>
+            <path d="M192 120A42 42 0 0 0 183.6 94.8" stroke-width="1.5"/>
+            <path d="M394 30V120M388 30h12M388 120h12" stroke-width="1.2"/>
+            <path d="M150 148H270M150 142v12M270 142v12" stroke-width="1.2"/>
+          </g>
+          <g fill="currentColor" font-size="16" font-weight="700" font-family="inherit">
+            <text x="402" y="81">O</text>
+            <text x="196" y="66">L</text>
+            <text x="196" y="113">α</text>
+            <text x="205" y="164">A</text>
+          </g>
+        </svg>
+          <div class="fields">
+            <div class="field"><label for="off-D">Durchmesser D (mm)</label><input id="off-D" name="D" type="text" inputmode="numeric" autocomplete="off" value="200"></div>
+            <div class="field"><label for="off-O">Versatz O (mm)</label><input id="off-O" name="O" type="text" inputmode="numeric" autocomplete="off" value="500"></div>
+            <div class="field"><label for="off-a">Bogenwinkel α</label><select id="off-a" name="alpha"><option value="15">15°</option><option value="22.5">22,5°</option><option value="30">30°</option><option value="45" selected>45°</option><option value="60">60°</option><option value="90">90°</option></select></div>
+            <div class="field"><label for="off-rk">Radiusausführung</label><select id="off-rk" name="rk"><option value="0.6">Kurz 0,6×D</option><option value="1" selected>Standard 1,0×D</option><option value="1.5">Lang 1,5×D</option><option value="2">Lang 2,0×D</option></select></div>
+          </div>
+        </div>
+        <div>
+          <ul class="results" aria-live="polite">
+            <li class="main"><span>Passstück L</span><output data-out="L">541 mm</output></li>
+            <li><span>Diagonale C</span><output data-out="C">707 mm</output></li>
+            <li><span>Baulänge A</span><output data-out="A">500 mm</output></li>
+            <li><span>Z-Maß</span><output data-out="arm">83 mm</output></li>
+            <li><span>Bogenradius R</span><output data-out="R">200 mm</output></li>
+          </ul>
+          <p class="calc-msg" hidden></p>
+          <details class="how"><summary>So wird gerechnet</summary><p><code>C = O / sin α</code>, <code>A = O / tan α</code>, Z-Maß des Bogens <code>R · tan(α/2)</code> und Passstück <code>L = C - 2 · R · tan(α/2)</code>. Der Bogenradius R ist ein Vielfaches des Durchmessers je nach Ausführung. Katalogbögen haben hinter dem Bogen oft einen geraden Stutzen, prüfen Sie das Z-Maß deshalb am Bogen, den Sie in der Hand haben. Wird L negativ, würden sich die Bögen überlappen: Ein kleinerer Winkel hilft.</p></details>
+        </div>
+      </div>
+      <div class="app-cta"><p><b>Räumliche Etage und Etage über Hindernis</b>Die App berechnet auch Etagen außerhalb der Ebene, Etagen über ein Hindernis und Etagen am Rechteckkanal und speichert das Ergebnis im Auftrag.</p><span class="links"><a href="https://apps.apple.com/app/id6806400438">App Store</a><a href="https://play.google.com/store/apps/details?id=cz.vztmonter.app">Google Play</a></span></div>
+    </form>
+    <form class="calc" id="luftgeschwindigkeit" data-calc="velocity" novalidate>
+      <h3>Kanalrechner: Luftgeschwindigkeit aus dem Volumenstrom</h3>
+      <p class="intro">Strömungsgeschwindigkeit aus Volumenstrom und Kanalmaß, Querschnittsfläche und Druckverlust durch Reibung pro Meter. Für Wickelfalzrohr und Rechteckkanal.</p>
+      <div class="calc-body">
+        <div class="fields">
+          <div class="field"><label for="vel-Q">Volumenstrom Q (m³/h)</label><input id="vel-Q" name="Q" type="text" inputmode="decimal" autocomplete="off" value="1000"></div>
+          <div class="field wide"><span class="lbl" id="vel-shape">Querschnitt</span>
+            <div class="seg" role="radiogroup" aria-labelledby="vel-shape">
+              <label><input type="radio" name="shape" value="round" checked><span>Rund</span></label>
+              <label><input type="radio" name="shape" value="rect"><span>Eckig a × b</span></label>
+            </div>
+          </div>
+          <div class="field" data-shape="round"><label for="vel-D">Durchmesser D (mm)</label><input id="vel-D" name="D" type="text" inputmode="numeric" autocomplete="off" value="315"></div>
+          <div class="field" data-shape="rect" hidden><label for="vel-a">Breite a (mm)</label><input id="vel-a" name="a" type="text" inputmode="numeric" autocomplete="off" value="400"></div>
+          <div class="field" data-shape="rect" hidden><label for="vel-b">Höhe b (mm)</label><input id="vel-b" name="b" type="text" inputmode="numeric" autocomplete="off" value="200"></div>
+        </div>
+        <div>
+          <ul class="results" aria-live="polite">
+            <li class="main"><span>Geschwindigkeit v</span><output data-out="v">3,56 m/s</output></li>
+            <li><span>Querschnitt S</span><output data-out="S">0,0779 m²</output></li>
+            <li><span>Reibungsdruckverlust</span><output data-out="dp">0,49 Pa/m</output></li>
+            <li data-shape="rect" hidden><span>Gleichwertiger Durchmesser</span><output data-out="De"></output></li>
+          </ul>
+          <p class="calc-msg" hidden></p>
+          <details class="how"><summary>So wird gerechnet</summary><p><code>v = Q / (3600 · S)</code>. Reibungsverlust nach Darcy-Weisbach mit der Rohrreibungszahl nach Swamee-Jain, Luftdichte 1,2 kg/m³, Viskosität 15,11 · 10⁻⁶ m²/s, Rauheit 0,09 mm für Wickelfalzrohr und 0,15 mm für verzinkten Rechteckkanal. Beim Rechteckkanal mit dem hydraulischen Durchmesser <code>2ab / (a + b)</code> und der tatsächlichen Geschwindigkeit.</p></details>
+        </div>
+      </div>
+      <div class="app-cta"><p><b>Die ganze Trasse mit Formteilen</b>Die App dimensioniert die Teilstrecken mit Abzweigen, summiert den Druckverlust mit Formteilen, findet den ungünstigsten Strang und legt den Ventilator aus.</p><span class="links"><a href="https://apps.apple.com/app/id6806400438">App Store</a><a href="https://play.google.com/store/apps/details?id=cz.vztmonter.app">Google Play</a></span></div>
+    </form>
+    <form class="calc" id="rund-auf-eckig" data-calc="rect" novalidate>
+      <h3>Rund auf eckig: gleichwertiger Durchmesser</h3>
+      <p class="intro">Welcher runde Durchmesser hat bei gleichem Volumenstrom denselben Druckverlust wie ein Rechteckkanal a × b, und die nächsten Spiro-Maße.</p>
+      <div class="calc-body">
+        <div class="fields">
+          <div class="field"><label for="rect-a">Breite a (mm)</label><input id="rect-a" name="a" type="text" inputmode="numeric" autocomplete="off" value="400"></div>
+          <div class="field"><label for="rect-b">Höhe b (mm)</label><input id="rect-b" name="b" type="text" inputmode="numeric" autocomplete="off" value="200"></div>
+        </div>
+        <div>
+          <ul class="results" aria-live="polite">
+            <li class="main"><span>Gleichwertiger Durchmesser</span><output data-out="De">304,7 mm</output></li>
+            <li><span>Nächstes Spiro-Maß</span><output data-out="spiro">Ø300 / Ø315 mm</output></li>
+            <li><span>Durchmesser gleicher Fläche</span><output data-out="Darea">319,2 mm</output></li>
+            <li><span>Kanalquerschnitt</span><output data-out="S">0,0800 m²</output></li>
+          </ul>
+          <p class="calc-msg" hidden></p>
+          <details class="how"><summary>So wird gerechnet</summary><p>Huebscher-Formel: <code>D = 1,30 · (a · b)^0,625 / (a + b)^0,25</code>. Der Durchmesser gleicher Fläche dient nur zum Vergleich, für den Druckverlust zählt der gleichwertige Durchmesser. Spiro-Reihe: 63 bis 1250 mm einschließlich 180, 224 und 280 mm.</p></details>
+        </div>
+      </div>
+      <div class="app-cta"><p><b>Auch umgekehrt und mit Normreihe</b>In der App rechnen Sie auch vom Durchmesser auf Kanalmaße für ein gewähltes Seitenverhältnis, finden das nächste Maß nach EN 1505 und vergleichen einen Ersatzquerschnitt.</p><span class="links"><a href="https://apps.apple.com/app/id6806400438">App Store</a><a href="https://play.google.com/store/apps/details?id=cz.vztmonter.app">Google Play</a></span></div>
+    </form>
+    <form class="calc" id="segmentbogen" data-calc="elbow" novalidate>
+      <h3>Segmentbogen abwickeln: Schnittwinkel und Segmentlängen</h3>
+      <p class="intro">Segmentbogen aus Wickelfalzrohr: welchen Winkel Sie an der Säge einstellen und wie lang die ganzen und halben Segmente sind. Die Anzahl enthält beide halben Endsegmente.</p>
+      <div class="calc-body">
+        <div class="fields">
+          <div class="field"><label for="elb-D">Durchmesser D (mm)</label><input id="elb-D" name="D" type="text" inputmode="numeric" autocomplete="off" value="200"></div>
+          <div class="field"><label for="elb-R">Achsradius R (mm)</label><input id="elb-R" name="R" type="text" inputmode="numeric" autocomplete="off" value="300"></div>
+          <div class="field"><label for="elb-t">Gesamtwinkel (°)</label><input id="elb-t" name="theta" type="text" inputmode="decimal" autocomplete="off" value="90"></div>
+          <div class="field"><label for="elb-n">Anzahl Segmente (alle Teile)</label><select id="elb-n" name="n"><option value="2">2</option><option value="3">3</option><option value="4" selected>4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option></select></div>
+        </div>
+        <div>
+          <ul class="results" aria-live="polite">
+            <li class="main"><span>Sägewinkel</span><output data-out="alpha">15,00°</output></li>
+            <li><span>Knick in der Fuge</span><output data-out="joint">30,00°</output></li>
+            <li><span>Aufbau des Bogens</span><output data-out="make">2 ganze + 2 halbe</output></li>
+            <li><span>Ganzes Segment in der Achse</span><output data-out="axis">161 mm</output></li>
+            <li><span>Ganzes Segment innen</span><output data-out="inner">107 mm</output></li>
+            <li><span>Ganzes Segment außen</span><output data-out="outer">214 mm</output></li>
+            <li><span>Halbes Segment in der Achse</span><output data-out="hAxis">80 mm</output></li>
+            <li><span>Halbes Segment innen</span><output data-out="hInner">54 mm</output></li>
+            <li><span>Halbes Segment außen</span><output data-out="hOuter">107 mm</output></li>
+          </ul>
+          <p class="calc-msg" hidden></p>
+          <details class="how"><summary>So wird gerechnet</summary><p>Schnittwinkel von der Senkrechten <code>α = Θ / (2 · (n - 1))</code>, n ist die Anzahl aller Teile. Ganzes Segment in der Achse <code>2 · R · tan α</code>, innen <code>2 · (R - D/2) · tan α</code>, außen <code>2 · (R + D/2) · tan α</code>. Halbe Segmente haben die halben Längen und ein gerades Ende. Der Knick in der Fuge (2α) ist kein Sägewinkel.</p></details>
+        </div>
+      </div>
+      <div class="app-cta"><p><b>PDF-Schablone 1:1</b>Die Abwicklung des Segments druckt die App als Schablone 1:1 auf A4-Blätter mit 100-mm-Kontrollstrecke. Ebenso Schrägschnitt, Abzweig, Übergang rund auf eckig und kegelige Reduzierung.</p><span class="links"><a href="https://apps.apple.com/app/id6806400438">App Store</a><a href="https://play.google.com/store/apps/details?id=cz.vztmonter.app">Google Play</a></span></div>
+    </form>
+  </section>
+
+  <h2>Was VZT Montér kann</h2>
+  <p class="sub">Alles läuft auf dem Handy, ohne Internet und ohne Konto. Berechnungen lassen sich im Verlauf oder im Auftrag speichern.</p>
+  <div class="grid">
+    <div class="card"><h3>Etagen <span class="tag">Kostenlos</span> <span class="tag pro">PRO</span></h3><p>Etage am Wickelfalzrohr und am Rechteckkanal für Radiusbögen, Kniestücke und Kniestücke mit Leitblechen sind kostenlos. Räumliche Etage, Etage über Hindernis und eigener Bogenwinkel mit PRO.</p></div>
+    <div class="card"><h3>Schrägschnitt und Abwicklung <span class="tag pro">PRO</span></h3><p>Schrägschnitt, Segmentbogen, Abzweig (Sattel), Übergang rund auf eckig und kegelige Reduzierung. Schnittpunkte als Tabelle in ganzen mm und PDF-Schablone 1:1 auf A4-Blättern mit 100-mm-Kontrollstrecke.</p></div>
+    <div class="card"><h3>Umrechnungen <span class="tag">Kostenlos</span></h3><p>Rund auf eckig, Volumenstrom, Geschwindigkeit und Durchmesser, nächstes Maß nach Spiro-Reihe und EN 1505, Raumluftmenge und Ersatzquerschnitt.</p></div>
+    <div class="card"><h3>Trassenplanung und Druckverlust <span class="tag pro">PRO</span></h3><p>Teilstrecken mit Abzweigen, Dimensionierung, Druckverlust, ungünstigster Strang, Drosselung an jedem Luftauslass, Ventilator und Materialliste.</p></div>
+    <div class="card"><h3>Schnelle Prüfung einer Teilstrecke <span class="tag pro">PRO</span></h3><p>Eine Teilstrecke, sofort das Ergebnis: Reibung und Formteile, Ventilator, Taupunkt und Kondensationsrisiko.</p></div>
+    <div class="card"><h3>Aufträge, Angebot und Stundenzettel <span class="tag">Kostenlos</span> <span class="tag pro">PRO</span></h3><p>Berechnungen im Auftrag und PDF-Protokoll, Stundenzettel mit Verdienst im Monat. Kostenlos 3 Aufträge und 14 Tage Stundenzettel. Mit PRO unbegrenzt, mit Baustellenfotos, PDF-Stundennachweis und Angebot aus der Preisliste.</p></div>
+    <div class="card"><h3>Tabellen <span class="tag">Kostenlos</span></h3><p>Spiro- und Rechteckkanal-Reihen, Verlustbeiwerte, Rauheiten, Bogenradien und empfohlene Geschwindigkeiten.</p></div>
+    <div class="card"><h3>Für die Baustelle</h3><p>Der Tagmodus ist schwarzweiß, damit man ihn in der Sonne lesen kann, der Nachtmodus ist für den Technikraum. Große Tasten für Handschuhe. Deutsch, Tschechisch, Slowakisch, Polnisch und Englisch.</p></div>
+  </div>
+
+  <h2>So sieht die App aus</h2>
+  <ul class="shots">
+    <li><figure><img src="../img/de-03-sablona.jpg" alt="Schablone 1:1, Punkte in mm" width="540" height="960" loading="lazy"><figcaption>Schablone 1:1, Punkte in mm</figcaption></figure></li>
+    <li><figure><img src="../img/de-04-trasa.jpg" alt="Trasse, Druckverlust, Ventilator" width="540" height="960" loading="lazy"><figcaption>Trasse, Druckverlust, Ventilator</figcaption></figure></li>
+    <li><figure><img src="../img/de-07-denik.jpg" alt="Stunden und Verdienst im Monat" width="540" height="960" loading="lazy"><figcaption>Stunden und Verdienst im Monat</figcaption></figure></li>
+  </ul>
+
+  <h2>Kostenlos und PRO</h2>
+  <div class="plans">
+    <div class="plan"><p class="k">Kostenlos</p><h3>Die Grundlage für jeden Auftrag</h3><ul><li>Etage am Rundrohr und am Rechteckkanal</li><li>Umrechnungen und Tabellen</li><li>Verlauf der Berechnungen</li><li>3 Aufträge</li><li>Stundenzettel für 14 Tage</li><li>Datensicherung in eine Datei</li></ul></div>
+    <div class="plan pro"><p class="k">VZT Montér PRO</p><h3>Einmalkauf</h3><ul><li>Räumliche Etage, Etage über Hindernis, eigener Winkel</li><li>Schrägschnitt und Abwicklung mit Schablone 1:1</li><li>Trassenplanung, Druckverluste und Ventilator</li><li>Unbegrenzte Aufträge, Angebot und PDF ohne Wasserzeichen</li><li>Unbegrenzter Stundenzettel, Fotos und PDF-Stundennachweis</li></ul><p>Einmal bezahlen, nichts verlängert sich. Den Preis in Ihrer Währung zeigt der Store.</p></div>
+  </div>
+
+  <h2>Häufige Fragen</h2>
+  <div class="faq">
+    <h3>Wie wird das Passstück einer Etage berechnet?</h3>
+    <p>Aus dem Versatz O und dem Bogenwinkel α ergibt sich die Diagonale C = O / sin α. Davon werden zwei Z-Maße der Bögen R · tan(α/2) abgezogen. Beispiel: Ø200 mm, Versatz 500 mm und Bögen 45° mit Standardradius 1,0×D ergeben ein Passstück von 541 mm.</p>
+    <h3>Funktioniert die App ohne Internet?</h3>
+    <p>Ja. Berechnungen, Aufträge und Stundenzettel laufen direkt auf dem Handy. Internet brauchen Sie nur zum Kauf und zum Wiederherstellen von PRO.</p>
+    <h3>Ist PRO ein Abo?</h3>
+    <p>Nein. PRO ist ein Einmalkauf und gilt dauerhaft. Auf einem neuen Handy stellen Sie den Kauf in den Einstellungen wieder her.</p>
+    <h3>Wo sind meine Daten?</h3>
+    <p>Nur auf Ihrem Handy, ein Konto brauchen Sie nicht. Eine Sicherung speichern Sie als Datei, wohin Sie wollen. Details in der <a href="../soukromi.html#de">Datenschutzerklärung</a>.</p>
+    <h3>Welche Handys und Sprachen?</h3>
+    <p>iPhone und Android-Handys. Die App gibt es auf Deutsch, Tschechisch, Slowakisch, Polnisch und Englisch.</p>
+    <h3>Das Ergebnis passt nicht zur Praxis. Was tun?</h3>
+    <p>Schreiben Sie an <a href="mailto:info@deriverge.com">info@deriverge.com</a> Ihre Eingaben und das Ergebnis. Wir prüfen die Berechnung. Weitere Antworten finden Sie in der <a href="../podpora.html#de">Hilfe</a>.</p>
+  </div>
+
+  <div class="cta">
+    <img class="appicon" src="../icon-512.png" alt="" width="96" height="96" loading="lazy">
+    <h2>VZT Montér laden</h2>
+    <p class="sub">Kostenlos für iPhone und Android. PRO als Einmalkauf, kein Abo.</p>
+    <div class="badges">
+        <a href="https://apps.apple.com/app/id6806400438"><img class="as" src="../badge-appstore.svg" alt="Laden im App Store" width="144" height="48"></a>
+        <a href="https://play.google.com/store/apps/details?id=cz.vztmonter.app"><img class="gp" src="../badge-googleplay-en.png" alt="Jetzt bei Google Play" width="184" height="71"></a>
+      </div>
+  </div>
+  </main>
+
+  <footer><a href="../podpora.html#de">Hilfe</a> &middot; <a href="../soukromi.html#de">Datenschutz</a> &middot; <a href="../" lang="cs" hreflang="cs">Čeština</a> <a href="../sk/" lang="sk" hreflang="sk">Slovenčina</a> <strong aria-current="page">Deutsch</strong> <a href="../pl/" lang="pl" hreflang="pl">Polski</a> <a href="../en/" lang="en" hreflang="en">English</a><br>Betreiber: <a href="/">deriverge s.r.o.</a> &middot; <a href="mailto:info@deriverge.com">info@deriverge.com</a></footer>
+</div>
+<script>window.VZT_L10N = {"invalid": "Bitte positive Zahlen im Rechenbereich eingeben.", "offsetSuggest": "Bei {a}° würden sich die Bögen überlappen, das Passstück wird negativ. Mit demselben Versatz passt {s}°.", "offsetNone": "Bei {a}° würden sich die Bögen überlappen, und mit diesem Versatz passt kein Winkel der Reihe 15 bis 90°. Wählen Sie einen kürzeren Bogen oder einen größeren Versatz.", "elbowMake": "{full} ganze + 2 halbe", "elbowRadius": "Der Achsradius muss größer als der halbe Durchmesser sein, also mehr als {min} mm."};</script>
+<script src="../vzt.js" defer></script>
+</body>
+</html>

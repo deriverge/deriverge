@@ -34,6 +34,7 @@
   "inLanguage": ["en", "cs", "de"],
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
   "url": "https://deriverge.com/korunky/",
+  "downloadUrl": "https://play.google.com/store/apps/details?id=com.deriverge.korunky",
   "image": "https://deriverge.com/korunky/icon-512.png",
   "publisher": { "@type": "Organization", "name": "deriverge s.r.o.", "url": "https://deriverge.com/" }
 }
@@ -73,6 +74,12 @@
   .soon{display:inline-flex;align-items:center;gap:10px;margin:0 0 14px;padding:10px 16px;border:1px solid var(--line);border-radius:999px;background:var(--card);font-size:14.5px;font-weight:600;color:var(--ink)}
   .soon::before{content:"";flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 4px var(--gold-soft)}
   .note{margin:0;font-size:14.5px;color:var(--ink-2)}
+  .badges{display:flex;flex-wrap:wrap;align-items:center;gap:12px 22px;margin:0 0 14px}
+  .badges a{display:block;border-radius:10px}
+  .badges a:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+  /* The Google Play artwork has transparent padding; the negative margin trims it so the visible badge sits flush. */
+  .badges .gp{display:block;width:auto;height:71.4px;margin:-11.7px}
+  .ios{font-size:14px;color:var(--ink-2)}
 
   .hero-art{position:relative;isolation:isolate;width:100%;max-width:380px;justify-self:center;padding-bottom:26px}
   .hero-art::before{content:"";position:absolute;z-index:-1;top:-30px;right:-36px;width:78%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(245,196,81,.22) 0%,rgba(245,196,81,0) 70%)}
@@ -111,7 +118,8 @@
   .appicon{display:block;width:96px;height:96px;margin:0 auto 16px;border-radius:22px;box-shadow:0 14px 34px -12px rgba(245,196,81,.45)}
   .cta h2{margin:0 0 8px}
   .cta .sub{margin:0 auto 20px}
-  .cta .soon{margin:0}
+  .cta .badges{justify-content:center;margin:0}
+  .cta .ios-note{margin:14px 0 0}
   footer{margin-top:48px;padding-top:20px;border-top:1px solid var(--line);font-size:14px;color:var(--ink-2)}
   footer a{color:var(--ink-2)}
 
@@ -181,7 +189,7 @@
       <p class="eyebrow">Logická hra pro iPhone a Android</p>
       <h1>Rozmístěte korunky. <em>V klidu.</em></h1>
       <p class="lede">Korunky jsou poklidná logická hra. Do každého řádku, sloupce a barevné oblasti patří jedna korunka a žádné dvě se nesmí dotýkat. Každá hádanka má právě jedno řešení, ke kterému dojdete úvahou, nikdy hádáním.</p>
-      <p class="soon">Již brzy na Google Play a v App Store</p>
+      <div class="badges"><a href="https://play.google.com/store/apps/details?id=com.deriverge.korunky"><img class="gp" src="badge-googleplay-cs.png" alt="Nyní na Google Play" width="184" height="71"></a><span class="ios">Verze pro iPhone a iPad se připravuje.</span></div>
       <p class="note">Hrajete zdarma. Bez účtu, bez životů, bez odpočtů.</p>
     </div>
     <div class="hero-art" role="img" aria-label="Vyřešená hádanka 5×5: pět barevných oblastí a v každém řádku, sloupci i oblasti jedna zlatá korunka. Žádné dvě korunky se nedotýkají.">
@@ -230,9 +238,10 @@
 
   <div class="cta">
     <img class="appicon" src="icon-512.png" alt="" width="96" height="96">
-    <h2>Korunky už brzy</h2>
+    <h2>Stáhněte si Korunky</h2>
     <p class="sub">Máte dotaz? Napište na <a href="mailto:info@deriverge.com">info@deriverge.com</a>.</p>
-    <p class="soon">Již brzy na Google Play a v App Store</p>
+    <div class="badges"><a href="https://play.google.com/store/apps/details?id=com.deriverge.korunky"><img class="gp" src="badge-googleplay-cs.png" alt="Nyní na Google Play" width="184" height="71"></a></div>
+    <p class="note ios-note">Verze pro iPhone a iPad se připravuje.</p>
   </div>
 
   <footer><a href="support.html#cs">Podpora</a> &middot; <a href="privacy.html#cs">Soukromí</a> &middot; <a href="terms.html#cs">Podmínky použití</a> &middot; <a href="#en" lang="en" hreflang="en">English</a> &middot; <a href="#de" lang="de" hreflang="de">Deutsch</a><br>Provozovatel: <a href="/">deriverge s.r.o.</a> &middot; <a href="mailto:info@deriverge.com">info@deriverge.com</a></footer>
@@ -249,7 +258,7 @@
       <p class="eyebrow">Logikrätsel für iPhone und Android</p>
       <h1>Kronen setzen. <em>In aller Ruhe.</em></h1>
       <p class="lede">Kronen ist ein ruhiges Logikrätsel. In jede Zeile, jede Spalte und jede farbige Region gehört eine Krone, und keine zwei Kronen dürfen sich berühren. Jedes Rätsel hat genau eine Lösung, die Sie durch Nachdenken finden, nie durch Raten.</p>
-      <p class="soon">Demnächst bei Google Play und im App Store</p>
+      <div class="badges"><a href="https://play.google.com/store/apps/details?id=com.deriverge.korunky"><img class="gp" src="badge-googleplay-en.png" alt="Jetzt bei Google Play" width="184" height="71"></a><span class="ios">Die Version für iPhone und iPad ist in Vorbereitung.</span></div>
       <p class="note">Kostenlos spielen. Kein Konto, keine Leben, kein Countdown.</p>
     </div>
     <div class="hero-art" role="img" aria-label="Ein gelöstes 5×5-Rätsel: fünf farbige Regionen und in jeder Zeile, Spalte und Region eine goldene Krone. Keine zwei Kronen berühren sich.">
@@ -298,9 +307,10 @@
 
   <div class="cta">
     <img class="appicon" src="icon-512.png" alt="" width="96" height="96">
-    <h2>Kronen kommt bald</h2>
+    <h2>Kronen laden</h2>
     <p class="sub">Fragen? Schreiben Sie an <a href="mailto:info@deriverge.com">info@deriverge.com</a>.</p>
-    <p class="soon">Demnächst bei Google Play und im App Store</p>
+    <div class="badges"><a href="https://play.google.com/store/apps/details?id=com.deriverge.korunky"><img class="gp" src="badge-googleplay-en.png" alt="Jetzt bei Google Play" width="184" height="71"></a></div>
+    <p class="note ios-note">Die Version für iPhone und iPad ist in Vorbereitung.</p>
   </div>
 
   <footer><a href="support.html#de">Hilfe</a> &middot; <a href="privacy.html#de">Datenschutz</a> &middot; <a href="terms.html#de">Nutzungsbedingungen</a> &middot; <a href="#en" lang="en" hreflang="en">English</a> &middot; <a href="#cs" lang="cs" hreflang="cs">Čeština</a><br>Betreiber: <a href="/">deriverge s.r.o.</a> &middot; <a href="mailto:info@deriverge.com">info@deriverge.com</a></footer>
@@ -317,7 +327,7 @@
       <p class="eyebrow">Logic puzzle for iPhone and Android</p>
       <h1>Place the crowns. <em>Take your time.</em></h1>
       <p class="lede">Crowns is a calm logic puzzle. Every row, column and colored region gets one crown, and no two crowns may touch. Each puzzle has exactly one solution, and you reach it by thinking, never by guessing.</p>
-      <p class="soon">Coming soon to Google Play and the App Store</p>
+      <div class="badges"><a href="https://play.google.com/store/apps/details?id=com.deriverge.korunky"><img class="gp" src="badge-googleplay-en.png" alt="Get it on Google Play" width="184" height="71"></a><span class="ios">The iPhone and iPad version is on its way.</span></div>
       <p class="note">Free to play. No account, no lives, no countdowns.</p>
     </div>
     <div class="hero-art" role="img" aria-label="A solved 5×5 puzzle: five colored regions with one gold crown in every row, column and region. No two crowns touch.">
@@ -366,9 +376,10 @@
 
   <div class="cta">
     <img class="appicon" src="icon-512.png" alt="" width="96" height="96">
-    <h2>Crowns is coming soon</h2>
+    <h2>Get Crowns</h2>
     <p class="sub">Questions? Write to <a href="mailto:info@deriverge.com">info@deriverge.com</a>.</p>
-    <p class="soon">Coming soon to Google Play and the App Store</p>
+    <div class="badges"><a href="https://play.google.com/store/apps/details?id=com.deriverge.korunky"><img class="gp" src="badge-googleplay-en.png" alt="Get it on Google Play" width="184" height="71"></a></div>
+    <p class="note ios-note">The iPhone and iPad version is on its way.</p>
   </div>
 
   <footer><a href="support.html">Support</a> &middot; <a href="privacy.html">Privacy</a> &middot; <a href="terms.html">Terms of use</a> &middot; <a href="#cs" lang="cs" hreflang="cs">Čeština</a> &middot; <a href="#de" lang="de" hreflang="de">Deutsch</a><br>Operator: <a href="/">deriverge s.r.o.</a> &middot; <a href="mailto:info@deriverge.com">info@deriverge.com</a></footer>

@@ -33,6 +33,8 @@
   "description": "Quotes and invoices on your phone for tradespeople and small businesses: PDF documents, payment QR codes and links, client signatures, job photos, clients and price list, payment tracking and reminders. Data stays on the device.",
   "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
   "url": "https://deriverge.com/fixbill/",
+  "downloadUrl": "https://apps.apple.com/app/id6819481858",
+  "sameAs": ["https://apps.apple.com/app/id6819481858", "https://play.google.com/store/apps/details?id=com.deriverge.fixbill"],
   "image": "https://deriverge.com/fixbill/icon-512.png",
   "publisher": { "@type": "Organization", "name": "deriverge s.r.o.", "url": "https://deriverge.com/" }
 }
@@ -70,10 +72,13 @@
   h1 em{font-style:normal;color:var(--blue)}
   .lede{margin:0 0 26px;max-width:33em;font-size:18px;color:var(--body)}
   .badges{display:flex;flex-wrap:wrap;gap:12px;margin:0 0 14px}
-  .store{display:inline-flex;flex-direction:column;justify-content:center;min-width:168px;height:54px;padding:0 18px;border-radius:12px;background:var(--ink);color:#fff;line-height:1.2}
-  .store small{font-size:11.5px;color:#C9D2E3}
-  .store small::before{content:"";display:inline-block;width:7px;height:7px;margin-right:6px;border-radius:50%;background:var(--amber);vertical-align:1px}
-  .store b{font-size:18px;font-weight:600;letter-spacing:-.01em}
+  .badges{align-items:center}
+  .badges a{display:block;border-radius:10px}
+  .badges a:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+  .badges img{display:block;width:auto}
+  .badges .as{height:48px}
+  /* The Google Play artwork has transparent padding; the negative margin lines its visible badge up with the App Store one. */
+  .badges .gp{height:71.4px;margin:-11.7px}
   .note{margin:0;font-size:14.5px;color:var(--ink-2)}
 
   .hero-art{position:relative;isolation:isolate;width:100%;max-width:400px;justify-self:center;padding-bottom:34px}
@@ -146,7 +151,6 @@
     .top{margin-bottom:32px}
     h1{font-size:33px}
     .lede{font-size:17px}
-    .store{flex:1 1 150px;min-width:0}
     .hero-art::before{top:-24px;right:-12px}
     .mock{padding:16px 14px 14px}
     .m-sign{right:6px}
@@ -179,8 +183,8 @@
       <h1>Nabídka i faktura za <em>dvě minuty</em></h1>
       <p class="lede">Pro řemeslníky, živnostníky a malé firmy. Nabídku napíšete přímo na místě, pošlete ji ještě před odchodem a peníze máte dřív. Vše z telefonu.</p>
       <div class="badges">
-        <span class="store"><small>Již brzy v</small> <b>App Store</b></span>
-        <span class="store"><small>Již brzy na</small> <b>Google Play</b></span>
+        <a href="https://apps.apple.com/app/id6819481858"><img class="as" src="badge-appstore.svg" alt="Stáhnout v App Store" width="144" height="48"></a>
+        <a href="https://play.google.com/store/apps/details?id=com.deriverge.fixbill"><img class="gp" src="badge-googleplay-cs.png" alt="Nyní na Google Play" width="184" height="71"></a>
       </div>
       <p class="note">Zdarma 5 dokladů měsíčně. Bez registrace.</p>
     </div>
@@ -234,11 +238,11 @@
 
   <div class="cta">
     <img class="appicon" src="icon-512.png" alt="" width="96" height="96">
-    <h2>Fixbill už brzy</h2>
+    <h2>Stáhněte si Fixbill</h2>
     <p class="sub">Máte dotaz? Napište na <a href="mailto:info@deriverge.com">info@deriverge.com</a>.</p>
     <div class="badges">
-      <span class="store"><small>Již brzy v</small> <b>App Store</b></span>
-      <span class="store"><small>Již brzy na</small> <b>Google Play</b></span>
+      <a href="https://apps.apple.com/app/id6819481858"><img class="as" src="badge-appstore.svg" alt="Stáhnout v App Store" width="144" height="48"></a>
+        <a href="https://play.google.com/store/apps/details?id=com.deriverge.fixbill"><img class="gp" src="badge-googleplay-cs.png" alt="Nyní na Google Play" width="184" height="71"></a>
     </div>
   </div>
 
@@ -257,8 +261,8 @@
       <h1>Angebote und Rechnungen in <em>zwei Minuten</em></h1>
       <p class="lede">Für Handwerker und kleine Betriebe. Erstellen Sie das Angebot vor Ort, senden Sie es noch vor der Abfahrt und kommen Sie schneller an Ihr Geld. Alles vom Handy aus.</p>
       <div class="badges">
-        <span class="store"><small>Demnächst im</small> <b>App Store</b></span>
-        <span class="store"><small>Demnächst bei</small> <b>Google Play</b></span>
+        <a href="https://apps.apple.com/app/id6819481858"><img class="as" src="badge-appstore.svg" alt="Laden im App Store" width="144" height="48"></a>
+        <a href="https://play.google.com/store/apps/details?id=com.deriverge.fixbill"><img class="gp" src="badge-googleplay-en.png" alt="Jetzt bei Google Play" width="184" height="71"></a>
       </div>
       <p class="note">Kostenlos für 5 Dokumente pro Monat. Kein Konto nötig.</p>
     </div>
@@ -312,11 +316,11 @@
 
   <div class="cta">
     <img class="appicon" src="icon-512.png" alt="" width="96" height="96">
-    <h2>Fixbill kommt bald</h2>
+    <h2>Fixbill laden</h2>
     <p class="sub">Fragen? Schreiben Sie an <a href="mailto:info@deriverge.com">info@deriverge.com</a>.</p>
     <div class="badges">
-      <span class="store"><small>Demnächst im</small> <b>App Store</b></span>
-      <span class="store"><small>Demnächst bei</small> <b>Google Play</b></span>
+      <a href="https://apps.apple.com/app/id6819481858"><img class="as" src="badge-appstore.svg" alt="Laden im App Store" width="144" height="48"></a>
+        <a href="https://play.google.com/store/apps/details?id=com.deriverge.fixbill"><img class="gp" src="badge-googleplay-en.png" alt="Jetzt bei Google Play" width="184" height="71"></a>
     </div>
   </div>
 
@@ -335,8 +339,8 @@
       <h1>Devis et factures en <em>deux minutes</em></h1>
       <p class="lede">Pour les artisans et les petites entreprises. Rédigez le devis sur le chantier, envoyez-le avant de partir et soyez payé plus vite, directement depuis votre téléphone.</p>
       <div class="badges">
-        <span class="store"><small>Bientôt disponible</small> <b>App Store</b></span>
-        <span class="store"><small>Bientôt disponible</small> <b>Google Play</b></span>
+        <a href="https://apps.apple.com/app/id6819481858"><img class="as" src="badge-appstore.svg" alt="Télécharger dans l'App Store" width="144" height="48"></a>
+        <a href="https://play.google.com/store/apps/details?id=com.deriverge.fixbill"><img class="gp" src="badge-googleplay-en.png" alt="Disponible sur Google Play" width="184" height="71"></a>
       </div>
       <p class="note">Gratuit pour 5 documents par mois. Sans compte.</p>
     </div>
@@ -390,11 +394,11 @@
 
   <div class="cta">
     <img class="appicon" src="icon-512.png" alt="" width="96" height="96">
-    <h2>Fixbill arrive bientôt</h2>
+    <h2>Télécharger Fixbill</h2>
     <p class="sub">Une question&nbsp;? Écrivez à <a href="mailto:info@deriverge.com">info@deriverge.com</a>.</p>
     <div class="badges">
-      <span class="store"><small>Bientôt disponible</small> <b>App Store</b></span>
-      <span class="store"><small>Bientôt disponible</small> <b>Google Play</b></span>
+      <a href="https://apps.apple.com/app/id6819481858"><img class="as" src="badge-appstore.svg" alt="Télécharger dans l'App Store" width="144" height="48"></a>
+        <a href="https://play.google.com/store/apps/details?id=com.deriverge.fixbill"><img class="gp" src="badge-googleplay-en.png" alt="Disponible sur Google Play" width="184" height="71"></a>
     </div>
   </div>
 
@@ -413,8 +417,8 @@
       <h1>Quotes and invoices in <em>two minutes</em></h1>
       <p class="lede">Made for tradespeople and small businesses. Write the quote on site, send it before you leave and get paid faster, right from your phone.</p>
       <div class="badges">
-        <span class="store"><small>Coming soon to the</small> <b>App Store</b></span>
-        <span class="store"><small>Coming soon to</small> <b>Google Play</b></span>
+        <a href="https://apps.apple.com/app/id6819481858"><img class="as" src="badge-appstore.svg" alt="Download on the App Store" width="144" height="48"></a>
+        <a href="https://play.google.com/store/apps/details?id=com.deriverge.fixbill"><img class="gp" src="badge-googleplay-en.png" alt="Get it on Google Play" width="184" height="71"></a>
       </div>
       <p class="note">Free for 5 documents a month. No account needed.</p>
     </div>
@@ -468,11 +472,11 @@
 
   <div class="cta">
     <img class="appicon" src="icon-512.png" alt="" width="96" height="96">
-    <h2>Fixbill is coming soon</h2>
+    <h2>Get Fixbill</h2>
     <p class="sub">Questions? Write to <a href="mailto:info@deriverge.com">info@deriverge.com</a>.</p>
     <div class="badges">
-      <span class="store"><small>Coming soon to the</small> <b>App Store</b></span>
-      <span class="store"><small>Coming soon to</small> <b>Google Play</b></span>
+      <a href="https://apps.apple.com/app/id6819481858"><img class="as" src="badge-appstore.svg" alt="Download on the App Store" width="144" height="48"></a>
+        <a href="https://play.google.com/store/apps/details?id=com.deriverge.fixbill"><img class="gp" src="badge-googleplay-en.png" alt="Get it on Google Play" width="184" height="71"></a>
     </div>
   </div>
 
