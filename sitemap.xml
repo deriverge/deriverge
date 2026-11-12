@@ -636,7 +636,174 @@
   <url><loc>https://deriverge.com/sealslim/</loc><lastmod>2026-10-05</lastmod><priority>0.8</priority></url>
   <url><loc>https://deriverge.com/sealslim/support.html</loc><lastmod>2026-10-05</lastmod><priority>0.5</priority></url>
   <url><loc>https://deriverge.com/sealslim/privacy.html</loc><lastmod>2026-10-05</lastmod><priority>0.3</priority></url>
-  <url><loc>https://deriverge.com/fixbill/</loc><lastmod>2026-11-13</lastmod><priority>0.8</priority></url>
+  <url>
+    <loc>https://deriverge.com/fixbill/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://deriverge.com/fixbill/"/>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://deriverge.com/fixbill/en-gb/"/>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://deriverge.com/fixbill/cs/"/>
+    <xhtml:link rel="alternate" hreflang="sk" href="https://deriverge.com/fixbill/sk/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://deriverge.com/fixbill/de/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://deriverge.com/fixbill/fr/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://deriverge.com/fixbill/es/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://deriverge.com/fixbill/it/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://deriverge.com/fixbill/pl/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://deriverge.com/fixbill/pt/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://deriverge.com/fixbill/"/>
+  </url>
+  <url>
+    <loc>https://deriverge.com/fixbill/en-gb/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://deriverge.com/fixbill/"/>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://deriverge.com/fixbill/en-gb/"/>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://deriverge.com/fixbill/cs/"/>
+    <xhtml:link rel="alternate" hreflang="sk" href="https://deriverge.com/fixbill/sk/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://deriverge.com/fixbill/de/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://deriverge.com/fixbill/fr/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://deriverge.com/fixbill/es/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://deriverge.com/fixbill/it/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://deriverge.com/fixbill/pl/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://deriverge.com/fixbill/pt/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://deriverge.com/fixbill/"/>
+  </url>
+  <url>
+    <loc>https://deriverge.com/fixbill/cs/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://deriverge.com/fixbill/"/>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://deriverge.com/fixbill/en-gb/"/>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://deriverge.com/fixbill/cs/"/>
+    <xhtml:link rel="alternate" hreflang="sk" href="https://deriverge.com/fixbill/sk/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://deriverge.com/fixbill/de/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://deriverge.com/fixbill/fr/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://deriverge.com/fixbill/es/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://deriverge.com/fixbill/it/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://deriverge.com/fixbill/pl/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://deriverge.com/fixbill/pt/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://deriverge.com/fixbill/"/>
+  </url>
+  <url>
+    <loc>https://deriverge.com/fixbill/sk/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://deriverge.com/fixbill/"/>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://deriverge.com/fixbill/en-gb/"/>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://deriverge.com/fixbill/cs/"/>
+    <xhtml:link rel="alternate" hreflang="sk" href="https://deriverge.com/fixbill/sk/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://deriverge.com/fixbill/de/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://deriverge.com/fixbill/fr/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://deriverge.com/fixbill/es/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://deriverge.com/fixbill/it/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://deriverge.com/fixbill/pl/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://deriverge.com/fixbill/pt/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://deriverge.com/fixbill/"/>
+  </url>
+  <url>
+    <loc>https://deriverge.com/fixbill/de/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://deriverge.com/fixbill/"/>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://deriverge.com/fixbill/en-gb/"/>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://deriverge.com/fixbill/cs/"/>
+    <xhtml:link rel="alternate" hreflang="sk" href="https://deriverge.com/fixbill/sk/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://deriverge.com/fixbill/de/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://deriverge.com/fixbill/fr/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://deriverge.com/fixbill/es/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://deriverge.com/fixbill/it/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://deriverge.com/fixbill/pl/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://deriverge.com/fixbill/pt/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://deriverge.com/fixbill/"/>
+  </url>
+  <url>
+    <loc>https://deriverge.com/fixbill/fr/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://deriverge.com/fixbill/"/>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://deriverge.com/fixbill/en-gb/"/>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://deriverge.com/fixbill/cs/"/>
+    <xhtml:link rel="alternate" hreflang="sk" href="https://deriverge.com/fixbill/sk/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://deriverge.com/fixbill/de/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://deriverge.com/fixbill/fr/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://deriverge.com/fixbill/es/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://deriverge.com/fixbill/it/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://deriverge.com/fixbill/pl/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://deriverge.com/fixbill/pt/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://deriverge.com/fixbill/"/>
+  </url>
+  <url>
+    <loc>https://deriverge.com/fixbill/es/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://deriverge.com/fixbill/"/>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://deriverge.com/fixbill/en-gb/"/>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://deriverge.com/fixbill/cs/"/>
+    <xhtml:link rel="alternate" hreflang="sk" href="https://deriverge.com/fixbill/sk/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://deriverge.com/fixbill/de/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://deriverge.com/fixbill/fr/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://deriverge.com/fixbill/es/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://deriverge.com/fixbill/it/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://deriverge.com/fixbill/pl/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://deriverge.com/fixbill/pt/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://deriverge.com/fixbill/"/>
+  </url>
+  <url>
+    <loc>https://deriverge.com/fixbill/it/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://deriverge.com/fixbill/"/>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://deriverge.com/fixbill/en-gb/"/>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://deriverge.com/fixbill/cs/"/>
+    <xhtml:link rel="alternate" hreflang="sk" href="https://deriverge.com/fixbill/sk/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://deriverge.com/fixbill/de/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://deriverge.com/fixbill/fr/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://deriverge.com/fixbill/es/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://deriverge.com/fixbill/it/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://deriverge.com/fixbill/pl/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://deriverge.com/fixbill/pt/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://deriverge.com/fixbill/"/>
+  </url>
+  <url>
+    <loc>https://deriverge.com/fixbill/pl/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://deriverge.com/fixbill/"/>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://deriverge.com/fixbill/en-gb/"/>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://deriverge.com/fixbill/cs/"/>
+    <xhtml:link rel="alternate" hreflang="sk" href="https://deriverge.com/fixbill/sk/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://deriverge.com/fixbill/de/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://deriverge.com/fixbill/fr/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://deriverge.com/fixbill/es/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://deriverge.com/fixbill/it/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://deriverge.com/fixbill/pl/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://deriverge.com/fixbill/pt/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://deriverge.com/fixbill/"/>
+  </url>
+  <url>
+    <loc>https://deriverge.com/fixbill/pt/</loc>
+    <lastmod>2026-11-13</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://deriverge.com/fixbill/"/>
+    <xhtml:link rel="alternate" hreflang="en-GB" href="https://deriverge.com/fixbill/en-gb/"/>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://deriverge.com/fixbill/cs/"/>
+    <xhtml:link rel="alternate" hreflang="sk" href="https://deriverge.com/fixbill/sk/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://deriverge.com/fixbill/de/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://deriverge.com/fixbill/fr/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://deriverge.com/fixbill/es/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://deriverge.com/fixbill/it/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://deriverge.com/fixbill/pl/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://deriverge.com/fixbill/pt/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://deriverge.com/fixbill/"/>
+  </url>
+  <url><loc>https://deriverge.com/fixbill/estimate-template/</loc><lastmod>2026-11-13</lastmod><priority>0.7</priority></url>
+  <url><loc>https://deriverge.com/fixbill/en-gb/tradesman-invoice-template/</loc><lastmod>2026-11-13</lastmod><priority>0.7</priority></url>
+  <url><loc>https://deriverge.com/fixbill/cs/faktura-vzor/</loc><lastmod>2026-11-13</lastmod><priority>0.7</priority></url>
+  <url><loc>https://deriverge.com/fixbill/de/kostenvoranschlag-vorlage/</loc><lastmod>2026-11-13</lastmod><priority>0.7</priority></url>
+  <url><loc>https://deriverge.com/fixbill/fr/modele-devis-artisan/</loc><lastmod>2026-11-13</lastmod><priority>0.7</priority></url>
+  <url><loc>https://deriverge.com/fixbill/es/modelo-presupuesto-obra/</loc><lastmod>2026-11-13</lastmod><priority>0.7</priority></url>
+  <url><loc>https://deriverge.com/fixbill/it/modello-preventivo-edile/</loc><lastmod>2026-11-13</lastmod><priority>0.7</priority></url>
+  <url><loc>https://deriverge.com/fixbill/pl/kosztorys-wzor/</loc><lastmod>2026-11-13</lastmod><priority>0.7</priority></url>
   <url><loc>https://deriverge.com/fixbill/support.html</loc><lastmod>2026-10-06</lastmod><priority>0.5</priority></url>
   <url><loc>https://deriverge.com/fixbill/privacy.html</loc><lastmod>2026-10-06</lastmod><priority>0.3</priority></url>
   <url><loc>https://deriverge.com/fixbill/terms.html</loc><lastmod>2026-10-06</lastmod><priority>0.3</priority></url>
