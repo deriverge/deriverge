@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Personio XML Job Feed: Address, Fields, Examples</title>
+<meta name="description" content="How to read any company&#x27;s Personio jobs from the public XML job feed: address, languages, fields, descriptions and working curl and Python examples.">
+<link rel="canonical" href="https://deriverge.com/tools/job-board-api/personio/">
+<meta name="robots" content="index, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/tools/tools.css">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="deriverge">
+<meta property="og:title" content="Personio XML Job Feed: Address, Fields, Examples">
+<meta property="og:description" content="How to read any company&#x27;s Personio jobs from the public XML job feed: address, languages, fields, descriptions and working curl and Python examples.">
+<meta property="og:url" content="https://deriverge.com/tools/job-board-api/personio/">
+<meta property="og:image" content="https://raw.githubusercontent.com/deriverge/deriverge/main/pictures/deriverge_logo-long.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "TechArticle",
+ "headline": "Personio XML Job Feed: Address, Fields, Examples",
+ "url": "https://deriverge.com/tools/job-board-api/personio/",
+ "description": "How to read any company's Personio jobs from the public XML job feed: address, languages, fields, descriptions and working curl and Python examples.",
+ "dateModified": "2026-11-18",
+ "proficiencyLevel": "Beginner",
+ "author": {
+  "@type": "Organization",
+  "name": "deriverge s.r.o.",
+  "url": "https://deriverge.com/"
+ },
+ "publisher": {
+  "@type": "Organization",
+  "name": "deriverge s.r.o.",
+  "url": "https://deriverge.com/"
+ }
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "Does the Personio job board API need an API key?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "No. The XML feed is public for every company that publishes jobs on a Personio career page. Personio's REST API, for the company's own HR data, needs credentials."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Is there a rate limit?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Personio documents no number. Its FAQ suggests job boards sync the feed at least once an hour; in practice it answers very fast readers with HTTP 429 and its robots.txt sets the rules for automated access. Back off when asked to."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Can I get all Personio jobs, from every company, at once?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "No. The API answers for one company per request, and Personio publishes no list of its customers. Our index reads 2,146 Personio boards with open jobs every day (21,340 jobs on 18 November 2026); you can search all of them through our Apify actor or get them as a daily job data feed."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Is it allowed to use the Personio job board API?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "The API exists so that companies can show their jobs on their own sites and so that job boards can list them. It returns only what the employer has published. Read Personio's documentation and terms for your use, keep request rates modest and link back to the original job for applications."
+   }
+  }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "deriverge",
+   "item": "https://deriverge.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Tools",
+   "item": "https://deriverge.com/tools/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 3,
+   "name": "Job board APIs",
+   "item": "https://deriverge.com/tools/job-board-api/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 4,
+   "name": "Personio XML Job Feed",
+   "item": "https://deriverge.com/tools/job-board-api/personio/"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head site-head--page">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="deriverge home"><span class="br">&lt;/</span>deriverge<span class="br">&gt;</span></a>
+    <div class="crumb"><a href="/tools/">tools</a><span class="sep">/</span><a href="/tools/job-board-api/">job board apis</a></div>
+    <nav class="nav" aria-label="Main"><a class="nav-link" href="/tools/">Tools</a><a class="nav-link" href="/tools/job-data-feed/">Job data feed</a><a class="nav-link" href="/#contact">Contact</a></nav>
+  </div>
+</header>
+<main id="main" class="page">
+  <div class="wrap">
+    <header class="hero hero--tool">
+      <p class="cmt">developer guide · checked 19 November 2026</p>
+      <h1 class="h1-tool">Personio XML Job Feed</h1>
+      <p class="lede">Personio publishes each company's open positions as a public XML feed at &lt;company&gt;.jobs.personio.de/xml, made for job boards and career pages. Our index calls it for <strong>2,146</strong> companies a day and holds <strong>21,340</strong> open Personio jobs (18 November 2026).</p>
+    </header>
+    <section class="block" aria-labelledby="h-endpoint">
+      <p class="cmt">the endpoint</p>
+      <h2 id="h-endpoint" class="h2">The Personio job board endpoint</h2>
+      <div class="prose">
+        <p><code>GET https://{company}.jobs.personio.de/xml</code></p>
+        <ul>
+          <li><strong>Authentication:</strong> none; Personio's FAQ says the feed needs no credentials. The company has to switch the feed on (Settings, Recruiting, Career Page, Activations).</li>
+          <li><strong>Format:</strong> XML: a <code>&lt;workzag-jobs&gt;</code> root with one <code>&lt;position&gt;</code> per job.</li>
+          <li><strong>Pagination:</strong> none. The feed lists every published position.</li>
+        </ul>
+      </div>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Parameter</th><th>What it does</th></tr></thead><tbody><tr><td><code>language</code></td><td><code>de</code>, <code>en</code>, <code>fr</code>, <code>es</code>, <code>nl</code>, <code>it</code> or <code>pt</code>: positions in this language of the career page. Jobs not translated into it can come back without descriptions</td></tr></tbody></table></div>
+      <div class="prose" style="margin-top:22px"><p>Other endpoints of the same API:</p><ul><li><code>https://{company}.jobs.personio.com/xml</code>: the same feed for accounts on the .com domain</li></ul></div>
+      <p class="note">Source: <a href="https://developer.personio.de/v1.0/reference/get_xml" target="_blank" rel="noopener">Personio developer hub: XML job feed</a>. Checked 19 November 2026.</p>
+    </section>
+    <section class="block" aria-labelledby="h-example">
+      <p class="cmt">try it</p>
+      <h2 id="h-example" class="h2">Request and response</h2>
+      <div class="prose"><p>The board of <strong>1KOMMA5°</strong>, a Personio board from our index, as an example. Replace <code>1komma5grad</code> with the board you need.</p></div>
+      <p class="code-label">curl</p>
+      <pre class="code" data-lang="shell"><code>curl &quot;https://1komma5grad.jobs.personio.de/xml&quot;</code></pre>
+      <p class="code-label">Python</p>
+      <pre class="code" data-lang="python"><code>import requests
+import xml.etree.ElementTree as ET
+
+r = requests.get(&quot;https://1komma5grad.jobs.personio.de/xml&quot;, timeout=60)
+r.raise_for_status()
+for pos in ET.fromstring(r.content).iter(&quot;position&quot;):
+    sections = [d.findtext(&quot;value&quot;) or &quot;&quot; for d in pos.iter(&quot;jobDescription&quot;)]  # HTML per section
+    print(pos.findtext(&quot;id&quot;), pos.findtext(&quot;name&quot;), pos.findtext(&quot;office&quot;), pos.findtext(&quot;createdAt&quot;))</code></pre>
+      <p class="code-label">Response (shortened)</p>
+      <pre class="code" data-lang="xml"><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;workzag-jobs&gt;
+  &lt;position&gt;
+    &lt;id&gt;2625533&lt;/id&gt;
+    &lt;subcompany&gt;1KOMMA5° Riederich GmbH&lt;/subcompany&gt;
+    &lt;office&gt;Riederich&lt;/office&gt;
+    &lt;department&gt;Projektkoordination&lt;/department&gt;
+    &lt;recruitingCategory&gt;1K5° Riederich&lt;/recruitingCategory&gt;
+    &lt;name&gt;(Junior) Technisches Auftragsmanagement / Projektkoordination (m/w/d)&lt;/name&gt;
+    &lt;jobDescriptions&gt;
+      &lt;jobDescription&gt;
+        &lt;name&gt;Deine Aufgaben&lt;/name&gt;
+        &lt;value&gt;&lt;![CDATA[&lt;ul&gt;&lt;li&gt;...&lt;/li&gt;&lt;/ul&gt;]]&gt;&lt;/value&gt;
+      &lt;/jobDescription&gt;
+    &lt;/jobDescriptions&gt;
+    &lt;employmentType&gt;permanent&lt;/employmentType&gt;
+    &lt;seniority&gt;entry-level&lt;/seniority&gt;
+    &lt;schedule&gt;full-time&lt;/schedule&gt;
+    &lt;yearsOfExperience&gt;1-2&lt;/yearsOfExperience&gt;
+    &lt;keywords&gt;Auftragsmanagement,Customer Support,Organisation&lt;/keywords&gt;
+    &lt;occupation&gt;general_and_other_project_and_program_management&lt;/occupation&gt;
+    &lt;occupationCategory&gt;project_and_program_management&lt;/occupationCategory&gt;
+    &lt;createdAt&gt;2026-05-06T09:48:17+00:00&lt;/createdAt&gt;
+  &lt;/position&gt;
+&lt;/workzag-jobs&gt;</code></pre>
+    </section>
+    <section class="block" aria-labelledby="h-fields">
+      <p class="cmt">the data</p>
+      <h2 id="h-fields" class="h2">Fields of a job</h2>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Field</th><th>Meaning</th></tr></thead><tbody><tr><td><code>id</code></td><td>position ID; the job page is <code>/job/&lt;id&gt;</code></td></tr><tr><td><code>name</code></td><td>job title</td></tr><tr><td><code>subcompany</code></td><td>the legal entity, for groups with several companies</td></tr><tr><td><code>office / additionalOffices</code></td><td>main and further locations</td></tr><tr><td><code>department, recruitingCategory</code></td><td>department and the company's own grouping</td></tr><tr><td><code>jobDescriptions</code></td><td>the job text in titled sections, HTML in CDATA</td></tr><tr><td><code>employmentType, schedule, seniority, yearsOfExperience</code></td><td>contract type, full or part time, level and experience</td></tr><tr><td><code>keywords, occupation, occupationCategory</code></td><td>tags and Personio's occupation codes</td></tr><tr><td><code>createdAt</code></td><td>when the position was created</td></tr></tbody></table></div>
+    </section>
+    <section class="block" aria-labelledby="h-find">
+      <p class="cmt">which board</p>
+      <h2 id="h-find" class="h2">Finding a company&#x27;s company subdomain</h2>
+      <div class="prose">
+        <p>The company subdomain is the first part of the job page address: <code>1komma5grad.jobs.personio.de</code> means <code>1komma5grad</code>. Job links look like <code>&lt;company&gt;.jobs.personio.de/job/&lt;id&gt;</code>.</p>
+        <p>Our <a href="/tools/companies-using-personio/">list of 2,245 companies using Personio</a> shows the careers address of each one, and the address contains the identifier. The list is free to search and download as CSV.</p>
+      </div>
+    </section>
+    <section class="block" aria-labelledby="h-tips">
+      <p class="cmt">in practice</p>
+      <h2 id="h-tips" class="h2">What we learned reading it every day</h2>
+<div class="prose"><ul><li>Without <code>language</code> the feed uses the company's default language and every position has its description. With <code>language=en</code>, positions written only in German came back with empty <code>&lt;jobDescriptions&gt;</code> in 36 of 37 cases we tested.</li><li>A company with no open positions returns an empty <code>&lt;workzag-jobs&gt;&lt;/workzag-jobs&gt;</code>, not an error.</li><li>A closed account redirects to personio.com. Treat a redirect away from <code>*.jobs.personio.de</code> as "no such company".</li><li>Personio's robots.txt applies to the feed. Read it first and respect HTTP 429: Personio rate limits automated readers.</li><li>There is no posting date apart from <code>createdAt</code>, the date the position was created in Personio.</li></ul></div>
+    </section>
+    <aside class="block cta" aria-label="Career Site and ATS Jobs API on Apify">
+      <p class="cmt">skip the plumbing</p>
+      <h2>Career Site and ATS Jobs API on Apify</h2>
+      <p>The API answers one company at a time. <strong>Career Site and ATS Jobs API</strong> reads any Personio board for you, or searches every Personio job we know of.</p>
+      <ul><li>Every open job of any Personio board, or a search across all 21,340 Personio jobs in our daily index without knowing a single board</li><li>One schema for all 20 systems: title, company, locations, remote, department, pay where published, full description, apply link</li><li>Filters for country, seniority, remote, salary and skills; new-only runs for daily schedules</li><li>API, webhooks and CSV, Excel or JSON export</li></ul>
+      <p class="price">From <b>$1.50</b> per 1,000 jobs, pay only for results. Apify's free plan includes $5 of monthly credit.</p>
+      <div class="cta-row"><a class="btn" data-actor="career-site-jobs-search" data-campaign="job-board-api-personio" href="https://apify.com/deriverge/career-site-jobs-search?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=job-board-api-personio&amp;fpr=b6jtb8" target="_blank" rel="noopener sponsored">Open Career Site and ATS Jobs API on Apify &rarr;</a></div>
+      
+    </aside>
+    <section class="block" aria-labelledby="h-faq">
+      <p class="cmt">questions</p>
+      <h2 id="h-faq" class="h2">Frequently asked questions</h2>
+<div class="faq">
+<details><summary>Does the Personio job board API need an API key?</summary><div class="a"><p>No. The XML feed is public for every company that publishes jobs on a Personio career page. Personio's REST API, for the company's own HR data, needs credentials.</p></div></details>
+<details><summary>Is there a rate limit?</summary><div class="a"><p>Personio documents no number. Its FAQ suggests job boards sync the feed at least once an hour; in practice it answers very fast readers with HTTP 429 and its robots.txt sets the rules for automated access. Back off when asked to.</p></div></details>
+<details><summary>Can I get all Personio jobs, from every company, at once?</summary><div class="a"><p>No. The API answers for one company per request, and Personio publishes no list of its customers. Our index reads 2,146 Personio boards with open jobs every day (21,340 jobs on 18 November 2026); you can search all of them through our Apify actor or get them as a daily <a href="/tools/job-data-feed/">job data feed</a>.</p></div></details>
+<details><summary>Is it allowed to use the Personio job board API?</summary><div class="a"><p>The API exists so that companies can show their jobs on their own sites and so that job boards can list them. It returns only what the employer has published. Read Personio's documentation and terms for your use, keep request rates modest and link back to the original job for applications.</p></div></details>
+</div>
+    </section>
+    <section class="block" aria-labelledby="h-other">
+      <p class="cmt">other systems</p>
+      <h2 id="h-other" class="h2">Public job APIs of other applicant tracking systems</h2>
+      <ul class="linklist"><li><a href="/tools/job-board-api/greenhouse/">Greenhouse Job Board API</a></li><li><a href="/tools/job-board-api/lever/">Lever Postings API</a></li><li><a href="/tools/job-board-api/ashby/">Ashby Job Posting API</a></li><li><a href="/tools/job-board-api/smartrecruiters/">SmartRecruiters Posting API</a></li><li><a href="/tools/job-board-api/recruitee/">Recruitee Careers Site API</a></li><li><a href="/tools/job-board-api/teamtailor/">Teamtailor Jobs RSS Feed</a></li><li><a href="/tools/job-board-api/gem/">Gem Job Board API</a></li><li><a href="/tools/job-board-api/">All 20 systems compared</a></li></ul>
+    </section>
+  </div>
+</main>
+<footer class="site-foot site-foot--tools">
+  <div class="wrap">
+<div class="foot-brand"><a class="brand" href="/"><span class="br">&lt;/</span>deriverge<span class="br">&gt;</span></a></div>
+<div class="foot-text">  <p>Free tools by <a href="/">deriverge s.r.o.</a>, a software studio in the Czech Republic. Our data actors are in <a data-actor="" data-campaign="job-board-api-personio" href="https://apify.com/deriverge?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=job-board-api-personio&amp;fpr=b6jtb8" target="_blank" rel="noopener sponsored">Apify Store</a>. Links to Apify carry our affiliate code: if you become a paying Apify customer, Apify pays us a commission at no extra cost to you.</p>
+  <p>Questions or a company listed by mistake: <a href="mailto:info@deriverge.com">info@deriverge.com</a>. The tools are provided as is, without warranty.</p>
+</div>
+  </div>
+</footer>
+<script src="/tools/config.js"></script>
+<script src="/tools/common.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Recruitee Careers Site API: Endpoint, Fields, Examples</title>
+<meta name="description" content="How to read any company&#x27;s Recruitee jobs with the public Careers Site API: the offers endpoint, fields, pay and working curl and Python examples.">
+<link rel="canonical" href="https://deriverge.com/tools/job-board-api/recruitee/">
+<meta name="robots" content="index, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/tools/tools.css">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="deriverge">
+<meta property="og:title" content="Recruitee Careers Site API: Endpoint, Fields, Examples">
+<meta property="og:description" content="How to read any company&#x27;s Recruitee jobs with the public Careers Site API: the offers endpoint, fields, pay and working curl and Python examples.">
+<meta property="og:url" content="https://deriverge.com/tools/job-board-api/recruitee/">
+<meta property="og:image" content="https://raw.githubusercontent.com/deriverge/deriverge/main/pictures/deriverge_logo-long.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "TechArticle",
+ "headline": "Recruitee Careers Site API: Endpoint, Fields, Examples",
+ "url": "https://deriverge.com/tools/job-board-api/recruitee/",
+ "description": "How to read any company's Recruitee jobs with the public Careers Site API: the offers endpoint, fields, pay and working curl and Python examples.",
+ "dateModified": "2026-11-18",
+ "proficiencyLevel": "Beginner",
+ "author": {
+  "@type": "Organization",
+  "name": "deriverge s.r.o.",
+  "url": "https://deriverge.com/"
+ },
+ "publisher": {
+  "@type": "Organization",
+  "name": "deriverge s.r.o.",
+  "url": "https://deriverge.com/"
+ }
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "Does the Recruitee job board API need an API key?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Not until 10 February 2027. From that date Recruitee requires an X-Careers-Sites-Token header, created by the company in its Recruitee settings, and answers HTTP 401 without it."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Is there a rate limit?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Recruitee documents no limit for the Careers Site API. One request returns all offers, so a daily read is one call per company. Keep your request rate modest."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Can I get all Recruitee jobs, from every company, at once?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "No. The API answers for one company per request, and Recruitee publishes no list of its customers. Our index reads 1,106 Recruitee boards with open jobs every day (20,312 jobs on 18 November 2026); you can search all of them through our Apify actor or get them as a daily job data feed."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Is it allowed to use the Recruitee job board API?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "The API exists so that companies can show their jobs on their own sites and so that job boards can list them. It returns only what the employer has published. Read Recruitee's documentation and terms for your use, keep request rates modest and link back to the original job for applications."
+   }
+  }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "deriverge",
+   "item": "https://deriverge.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Tools",
+   "item": "https://deriverge.com/tools/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 3,
+   "name": "Job board APIs",
+   "item": "https://deriverge.com/tools/job-board-api/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 4,
+   "name": "Recruitee Careers Site API",
+   "item": "https://deriverge.com/tools/job-board-api/recruitee/"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head site-head--page">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="deriverge home"><span class="br">&lt;/</span>deriverge<span class="br">&gt;</span></a>
+    <div class="crumb"><a href="/tools/">tools</a><span class="sep">/</span><a href="/tools/job-board-api/">job board apis</a></div>
+    <nav class="nav" aria-label="Main"><a class="nav-link" href="/tools/">Tools</a><a class="nav-link" href="/tools/job-data-feed/">Job data feed</a><a class="nav-link" href="/#contact">Contact</a></nav>
+  </div>
+</header>
+<main id="main" class="page">
+  <div class="wrap">
+    <header class="hero hero--tool">
+      <p class="cmt">developer guide · checked 19 November 2026</p>
+      <h1 class="h1-tool">Recruitee Careers Site API</h1>
+      <p class="lede">Recruitee publishes each company's job offers through the Careers Site API at &lt;company&gt;.recruitee.com/api/offers/. Until 10 February 2027 it answers without a key; after that date every call needs a token that the company creates. Our index calls it for <strong>1,106</strong> companies a day and holds <strong>20,312</strong> open Recruitee jobs (18 November 2026).</p>
+    </header>
+    <section class="block" aria-labelledby="h-endpoint">
+      <p class="cmt">the endpoint</p>
+      <h2 id="h-endpoint" class="h2">The Recruitee job board endpoint</h2>
+      <div class="prose">
+        <p><code>GET https://{company}.recruitee.com/api/offers/</code></p>
+        <ul>
+          <li><strong>Authentication:</strong> none until 10 February 2027. From then on every call needs the header <code>X-Careers-Sites-Token</code> with a token the company creates in Recruitee (Settings, Apps and plugins, Careers API tokens); calls without it get HTTP 401.</li>
+          <li><strong>Format:</strong> JSON, an object with <code>offers</code>.</li>
+          <li><strong>Pagination:</strong> none. One request returns every published offer.</li>
+        </ul>
+      </div>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Parameter</th><th>What it does</th></tr></thead><tbody><tr><td><code>department</code></td><td>only offers of this department, by name</td></tr><tr><td><code>tag</code></td><td>only offers with this tag, by name</td></tr></tbody></table></div>
+      <div class="prose" style="margin-top:22px"><p>Other endpoints of the same API:</p><ul><li><code>GET https://{company}.recruitee.com/api/offers/{id or slug}</code>: one offer</li></ul></div>
+      <p class="note">Source: <a href="https://docs.recruitee.com/reference/intro-to-careers-site-api" target="_blank" rel="noopener">Recruitee Careers Site API documentation</a>. Checked 19 November 2026.</p>
+    </section>
+    <section class="block" aria-labelledby="h-example">
+      <p class="cmt">try it</p>
+      <h2 id="h-example" class="h2">Request and response</h2>
+      <div class="prose"><p>The board of <strong>TransPerfect</strong>, a Recruitee board from our index, as an example. Replace <code>transperfect</code> with the board you need.</p></div>
+      <p class="code-label">curl</p>
+      <pre class="code" data-lang="shell"><code>curl &quot;https://transperfect.recruitee.com/api/offers/&quot;</code></pre>
+      <p class="code-label">Python</p>
+      <pre class="code" data-lang="python"><code>import requests
+
+r = requests.get(&quot;https://transperfect.recruitee.com/api/offers/&quot;, timeout=60)
+r.raise_for_status()
+for o in r.json()[&quot;offers&quot;]:
+    text = (o.get(&quot;description&quot;) or &quot;&quot;) + (o.get(&quot;requirements&quot;) or &quot;&quot;)  # both HTML
+    print(o[&quot;id&quot;], o[&quot;title&quot;], o[&quot;location&quot;], o[&quot;remote&quot;], o[&quot;careers_url&quot;])</code></pre>
+      <p class="code-label">Response (shortened)</p>
+      <pre class="code" data-lang="json"><code>{
+  &quot;offers&quot;: [
+    {
+      &quot;id&quot;: 2833977,
+      &quot;guid&quot;: &quot;k391n&quot;,
+      &quot;slug&quot;: &quot;pharmacovigilance-case-management-specialist&quot;,
+      &quot;title&quot;: &quot;Pharmacovigilance Case Management Specialist&quot;,
+      &quot;status&quot;: &quot;published&quot;,
+      &quot;department&quot;: &quot;Translation&quot;,
+      &quot;location&quot;: &quot;Remote job&quot;,
+      &quot;city&quot;: &quot;Remote&quot;,
+      &quot;country&quot;: &quot;Indonesia&quot;,
+      &quot;country_code&quot;: &quot;ID&quot;,
+      &quot;remote&quot;: true,
+      &quot;hybrid&quot;: false,
+      &quot;on_site&quot;: false,
+      &quot;employment_type_code&quot;: &quot;contract&quot;,
+      &quot;experience_code&quot;: &quot;mid_level&quot;,
+      &quot;education_code&quot;: &quot;bachelor_degree&quot;,
+      &quot;category_code&quot;: &quot;healthcare&quot;,
+      &quot;salary&quot;: { &quot;min&quot;: null, &quot;max&quot;: null, &quot;period&quot;: null, &quot;currency&quot;: null },
+      &quot;created_at&quot;: &quot;2026-11-19 14:00:16 UTC&quot;,
+      &quot;published_at&quot;: &quot;2026-11-19 14:08:06 UTC&quot;,
+      &quot;description&quot;: &quot;&lt;p&gt;&lt;strong&gt;PV Case Management Specialist&lt;/strong&gt;...&quot;,
+      &quot;requirements&quot;: null,
+      &quot;careers_url&quot;: &quot;https://transperfect.com/o/pharmacovigilance-case-management-specialist&quot;,
+      &quot;careers_apply_url&quot;: &quot;https://transperfect.com/o/pharmacovigilance-case-management-specialist/c/new&quot;
+    }
+  ]
+}</code></pre>
+    </section>
+    <section class="block" aria-labelledby="h-fields">
+      <p class="cmt">the data</p>
+      <h2 id="h-fields" class="h2">Fields of a job</h2>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Field</th><th>Meaning</th></tr></thead><tbody><tr><td><code>id / guid / slug</code></td><td>offer ID, short ID and the slug in its address</td></tr><tr><td><code>title, department</code></td><td>job title and department</td></tr><tr><td><code>location, city, country, country_code</code></td><td>location as text and in parts</td></tr><tr><td><code>remote / hybrid / on_site</code></td><td>where the work happens</td></tr><tr><td><code>employment_type_code, experience_code, education_code, category_code</code></td><td>Recruitee's codes for type, seniority, education and field</td></tr><tr><td><code>salary</code></td><td><code>min</code>, <code>max</code>, <code>period</code> and <code>currency</code>, when published</td></tr><tr><td><code>created_at / published_at</code></td><td>creation and publication time (UTC, with a space instead of the ISO "T")</td></tr><tr><td><code>description / requirements</code></td><td>two HTML parts of the job text</td></tr><tr><td><code>careers_url / careers_apply_url</code></td><td>job page and application form, on the company's own domain when it has one</td></tr><tr><td><code>translations</code></td><td>the offer in other languages of the career site</td></tr></tbody></table></div>
+    </section>
+    <section class="block" aria-labelledby="h-find">
+      <p class="cmt">which board</p>
+      <h2 id="h-find" class="h2">Finding a company&#x27;s company subdomain</h2>
+      <div class="prose">
+        <p>The company subdomain is the first part of <code>&lt;company&gt;.recruitee.com</code>. Many companies show the career site under their own domain; the job links then look like <code>&lt;domain&gt;/o/&lt;job-slug&gt;</code>, and the <code>recruitee.com</code> address still answers.</p>
+        <p>Our <a href="/tools/companies-using-recruitee/">list of 1,171 companies using Recruitee</a> shows the careers address of each one, and the address contains the identifier. The list is free to search and download as CSV.</p>
+      </div>
+    </section>
+    <section class="block" aria-labelledby="h-tips">
+      <p class="cmt">in practice</p>
+      <h2 id="h-tips" class="h2">What we learned reading it every day</h2>
+<div class="prose"><ul><li>Plan for 10 February 2027: from that date the API needs a token from each company. If you read career sites of companies that are not your customers, you will need another way to their jobs.</li><li>The job text is split into <code>description</code> and <code>requirements</code>; join them for the full text.</li><li>Dates are UTC but written as <code>2026-11-19 14:08:06 UTC</code>, not ISO 8601. Parse them with that format.</li><li>Every offer also carries its application form settings and a mailbox address for applications. If you republish jobs, do not copy that address; link to <code>careers_apply_url</code>.</li><li>A big career site is large: TransPerfect's 770 offers are about 11 MB, mostly translations. Read it once a day.</li></ul></div>
+    </section>
+    <aside class="block cta" aria-label="Career Site and ATS Jobs API on Apify">
+      <p class="cmt">skip the plumbing</p>
+      <h2>Career Site and ATS Jobs API on Apify</h2>
+      <p>The API answers one company at a time. <strong>Career Site and ATS Jobs API</strong> reads any Recruitee board for you, or searches every Recruitee job we know of.</p>
+      <ul><li>Every open job of any Recruitee board, or a search across all 20,312 Recruitee jobs in our daily index without knowing a single board</li><li>One schema for all 20 systems: title, company, locations, remote, department, pay where published, full description, apply link</li><li>Filters for country, seniority, remote, salary and skills; new-only runs for daily schedules</li><li>API, webhooks and CSV, Excel or JSON export</li></ul>
+      <p class="price">From <b>$1.50</b> per 1,000 jobs, pay only for results. Apify's free plan includes $5 of monthly credit.</p>
+      <div class="cta-row"><a class="btn" data-actor="career-site-jobs-search" data-campaign="job-board-api-recruitee" href="https://apify.com/deriverge/career-site-jobs-search?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=job-board-api-recruitee&amp;fpr=b6jtb8" target="_blank" rel="noopener sponsored">Open Career Site and ATS Jobs API on Apify &rarr;</a></div>
+      
+    </aside>
+    <section class="block" aria-labelledby="h-faq">
+      <p class="cmt">questions</p>
+      <h2 id="h-faq" class="h2">Frequently asked questions</h2>
+<div class="faq">
+<details><summary>Does the Recruitee job board API need an API key?</summary><div class="a"><p>Not until 10 February 2027. From that date Recruitee requires an <code>X-Careers-Sites-Token</code> header, created by the company in its Recruitee settings, and answers HTTP 401 without it.</p></div></details>
+<details><summary>Is there a rate limit?</summary><div class="a"><p>Recruitee documents no limit for the Careers Site API. One request returns all offers, so a daily read is one call per company. Keep your request rate modest.</p></div></details>
+<details><summary>Can I get all Recruitee jobs, from every company, at once?</summary><div class="a"><p>No. The API answers for one company per request, and Recruitee publishes no list of its customers. Our index reads 1,106 Recruitee boards with open jobs every day (20,312 jobs on 18 November 2026); you can search all of them through our Apify actor or get them as a daily <a href="/tools/job-data-feed/">job data feed</a>.</p></div></details>
+<details><summary>Is it allowed to use the Recruitee job board API?</summary><div class="a"><p>The API exists so that companies can show their jobs on their own sites and so that job boards can list them. It returns only what the employer has published. Read Recruitee's documentation and terms for your use, keep request rates modest and link back to the original job for applications.</p></div></details>
+</div>
+    </section>
+    <section class="block" aria-labelledby="h-other">
+      <p class="cmt">other systems</p>
+      <h2 id="h-other" class="h2">Public job APIs of other applicant tracking systems</h2>
+      <ul class="linklist"><li><a href="/tools/job-board-api/greenhouse/">Greenhouse Job Board API</a></li><li><a href="/tools/job-board-api/lever/">Lever Postings API</a></li><li><a href="/tools/job-board-api/ashby/">Ashby Job Posting API</a></li><li><a href="/tools/job-board-api/smartrecruiters/">SmartRecruiters Posting API</a></li><li><a href="/tools/job-board-api/personio/">Personio XML Job Feed</a></li><li><a href="/tools/job-board-api/teamtailor/">Teamtailor Jobs RSS Feed</a></li><li><a href="/tools/job-board-api/gem/">Gem Job Board API</a></li><li><a href="/tools/job-board-api/">All 20 systems compared</a></li></ul>
+    </section>
+  </div>
+</main>
+<footer class="site-foot site-foot--tools">
+  <div class="wrap">
+<div class="foot-brand"><a class="brand" href="/"><span class="br">&lt;/</span>deriverge<span class="br">&gt;</span></a></div>
+<div class="foot-text">  <p>Free tools by <a href="/">deriverge s.r.o.</a>, a software studio in the Czech Republic. Our data actors are in <a data-actor="" data-campaign="job-board-api-recruitee" href="https://apify.com/deriverge?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=job-board-api-recruitee&amp;fpr=b6jtb8" target="_blank" rel="noopener sponsored">Apify Store</a>. Links to Apify carry our affiliate code: if you become a paying Apify customer, Apify pays us a commission at no extra cost to you.</p>
+  <p>Questions or a company listed by mistake: <a href="mailto:info@deriverge.com">info@deriverge.com</a>. The tools are provided as is, without warranty.</p>
+</div>
+  </div>
+</footer>
+<script src="/tools/config.js"></script>
+<script src="/tools/common.js"></script>
+
+</body>
+</html>

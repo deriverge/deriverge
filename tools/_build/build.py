@@ -297,6 +297,7 @@ TOOL_LINKS = [
     ('/tools/phone-number-validator/', 'Phone number validator', '50 numbers, E.164 and type'),
     ('/tools/companies-using-ats/', 'Which ATS do companies use?', '14 systems compared'),
     ('/tools/job-postings-data/', 'Job postings data by country', 'open jobs, employers and free samples'),
+    ('/tools/job-board-api/', 'Job board APIs', 'Greenhouse, Lever, Ashby and more'),
 ]
 
 
@@ -987,6 +988,7 @@ def ats_links(current):
 
 
 ORDER = []
+from api_guides_data import GUIDES as API_GUIDES  # noqa: E402
 
 
 def page_ats(a, rows, st, date, cn):
@@ -1042,10 +1044,12 @@ def page_ats(a, rows, st, date, cn):
       </div>'''
     signs = ''.join(f'<li>{s}</li>' for s in ATS[a]['signs'])
     api = ATS[a]['api']
+    guide_link = (f' The <a href="/tools/job-board-api/{a}/">{esc(name)} job board API guide</a> shows its parameters, fields and working requests.'
+                  if a in API_GUIDES else '')
     howto = f'''      <div class="prose">
         <p>Open any job on the company\'s careers page and look where the <strong>Apply</strong> button leads. A company uses {esc(name)} when:</p>
         <ul>{signs}</ul>
-        {f'<p>The public job feed of a {esc(name)} board is at <code>{api}</code>. It needs no key and is what our index reads every day.</p>' if api else f'<p>{esc(name)} has no public job feed, so our index reads the job list pages of each portal.</p>'}
+        {f'<p>The public job feed of a {esc(name)} board is at <code>{api}</code>. It needs no key and is what our index reads every day.{guide_link}</p>' if api else f'<p>{esc(name)} has no public job feed, so our index reads the job list pages of each portal.</p>'}
         <p>Not sure which system a link belongs to? Paste it into the <a href="/tools/companies-using-ats/#detect">ATS detector</a>, or search the company by name on the <a href="/tools/companies-using-ats/#find">ATS overview</a>.</p>
       </div>'''
     about = f'''      <div class="prose">
@@ -1245,6 +1249,7 @@ def page_index(stats, total_c, total_j, date):
         ('/tools/wayback-machine-snapshots/', 'Wayback Machine snapshot finder', 'First, latest and closest-to-date captures of up to 20 URLs, with links to every archived copy.', None),  # bez placeného actoru, viz page_wayback
         ('/tools/phone-number-validator/', 'Phone number validator', 'Up to 50 numbers: valid or not, E.164, national format, line type and country, offline.', 'phone-number-validator'),
         ('/tools/companies-using-ats/', 'Which ATS do companies use?', f'{total_c:,} companies on 14 applicant tracking systems, a company lookup and an ATS detector.', 'career-site-jobs-search'),
+        ('/tools/job-board-api/', 'Job board APIs', f'Public job posting APIs of {len(API_GUIDES)} applicant tracking systems: endpoints, fields and working requests.', 'career-site-jobs-search'),
     ]
     cards = ''
     for i, (p, n, d, s) in enumerate(tools):
@@ -2224,6 +2229,11 @@ def main():
     for a in ORDER:
         page_ats(a, by[a], stats[a], date, cn)
     total_c, total_j = page_compare(by, stats, date, cn)
+    # Návody k veřejným rozhraním tabulí (api_pages.py, fakta v api_guides_data.py ověřená z dokumentace výrobců).
+    import types
+    import api_pages
+    api_pages.build(types.SimpleNamespace(layout=layout, section=section, faq_block=faq_block, faq_ld=faq_ld, fmt_date=fmt_date,
+                                          ATS=ATS, cta=cta, actor=actor, SITE=SITE), by, stats, date, cn)
     page_job_feed()
     page_data_privacy()
     page_terms()

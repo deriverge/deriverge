@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lever Postings API: Endpoints, Fields, Examples</title>
+<meta name="description" content="How to read any company&#x27;s Lever jobs with the public Postings API: endpoint, EU host, filters, pagination, fields and working curl and Python examples.">
+<link rel="canonical" href="https://deriverge.com/tools/job-board-api/lever/">
+<meta name="robots" content="index, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/tools/tools.css">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="deriverge">
+<meta property="og:title" content="Lever Postings API: Endpoints, Fields, Examples">
+<meta property="og:description" content="How to read any company&#x27;s Lever jobs with the public Postings API: endpoint, EU host, filters, pagination, fields and working curl and Python examples.">
+<meta property="og:url" content="https://deriverge.com/tools/job-board-api/lever/">
+<meta property="og:image" content="https://raw.githubusercontent.com/deriverge/deriverge/main/pictures/deriverge_logo-long.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "TechArticle",
+ "headline": "Lever Postings API: Endpoints, Fields, Examples",
+ "url": "https://deriverge.com/tools/job-board-api/lever/",
+ "description": "How to read any company's Lever jobs with the public Postings API: endpoint, EU host, filters, pagination, fields and working curl and Python examples.",
+ "dateModified": "2026-11-18",
+ "proficiencyLevel": "Beginner",
+ "author": {
+  "@type": "Organization",
+  "name": "deriverge s.r.o.",
+  "url": "https://deriverge.com/"
+ },
+ "publisher": {
+  "@type": "Organization",
+  "name": "deriverge s.r.o.",
+  "url": "https://deriverge.com/"
+ }
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "Does the Lever job board API need an API key?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "No. Reading published postings needs no key. The apply endpoint of the Postings API needs a key that the company itself issues."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Is there a rate limit?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Lever documents a limit only for applications (2 per second, then HTTP 429), none for reading postings. One request returns all postings of a site, so a daily read is one call per company. Keep your request rate modest."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Can I get all Lever jobs, from every company, at once?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "No. The API answers for one company per request, and Lever publishes no list of its customers. Our index reads 1,626 Lever boards with open jobs every day (56,374 jobs on 18 November 2026); you can search all of them through our Apify actor or get them as a daily job data feed."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Is it allowed to use the Lever job board API?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "The API exists so that companies can show their jobs on their own sites and so that job boards can list them. It returns only what the employer has published. Read Lever's documentation and terms for your use, keep request rates modest and link back to the original job for applications."
+   }
+  }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "deriverge",
+   "item": "https://deriverge.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Tools",
+   "item": "https://deriverge.com/tools/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 3,
+   "name": "Job board APIs",
+   "item": "https://deriverge.com/tools/job-board-api/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 4,
+   "name": "Lever Postings API",
+   "item": "https://deriverge.com/tools/job-board-api/lever/"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head site-head--page">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="deriverge home"><span class="br">&lt;/</span>deriverge<span class="br">&gt;</span></a>
+    <div class="crumb"><a href="/tools/">tools</a><span class="sep">/</span><a href="/tools/job-board-api/">job board apis</a></div>
+    <nav class="nav" aria-label="Main"><a class="nav-link" href="/tools/">Tools</a><a class="nav-link" href="/tools/job-data-feed/">Job data feed</a><a class="nav-link" href="/#contact">Contact</a></nav>
+  </div>
+</header>
+<main id="main" class="page">
+  <div class="wrap">
+    <header class="hero hero--tool">
+      <p class="cmt">developer guide · checked 19 November 2026</p>
+      <h1 class="h1-tool">Lever Postings API</h1>
+      <p class="lede">Lever publishes every company's job site through the read-only Postings API at api.lever.co, with a separate host for accounts in the European Union. Our index calls it for <strong>1,626</strong> companies a day and holds <strong>56,374</strong> open Lever jobs (18 November 2026).</p>
+    </header>
+    <section class="block" aria-labelledby="h-endpoint">
+      <p class="cmt">the endpoint</p>
+      <h2 id="h-endpoint" class="h2">The Lever job board endpoint</h2>
+      <div class="prose">
+        <p><code>GET https://api.lever.co/v0/postings/{site}?mode=json</code></p>
+        <ul>
+          <li><strong>Authentication:</strong> none for reading published postings. Applying through the API needs a key from the company.</li>
+          <li><strong>Format:</strong> JSON with <code>mode=json</code>: a list of postings. Without it the API answers with HTML for embedding.</li>
+          <li><strong>Pagination:</strong> optional, with <code>skip</code> and <code>limit</code>. Without them one request returns every posting.</li>
+        </ul>
+      </div>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Parameter</th><th>What it does</th></tr></thead><tbody><tr><td><code>mode=json</code></td><td>answer as JSON (other modes return HTML or an iframe)</td></tr><tr><td><code>skip, limit</code></td><td>page through the list</td></tr><tr><td><code>location, commitment, team, department, level</code></td><td>filter by these categories; repeat a parameter to match any of several values (then case-sensitive)</td></tr><tr><td><code>group=team</code></td><td>group postings by <code>location</code>, <code>commitment</code> or <code>team</code></td></tr></tbody></table></div>
+      <div class="prose" style="margin-top:22px"><p>Other endpoints of the same API:</p><ul><li><code>GET /v0/postings/{site}/{posting_id}</code>: one posting</li><li><code>https://api.eu.lever.co/v0/postings/{site}</code>: the same API for accounts hosted in the EU</li></ul></div>
+      <p class="note">Source: <a href="https://github.com/lever/postings-api" target="_blank" rel="noopener">Lever Postings API on GitHub</a>. Checked 19 November 2026.</p>
+    </section>
+    <section class="block" aria-labelledby="h-example">
+      <p class="cmt">try it</p>
+      <h2 id="h-example" class="h2">Request and response</h2>
+      <div class="prose"><p>The board of <strong>Palantir Technologies</strong>, a Lever board from our index, as an example. Replace <code>palantir</code> with the board you need.</p></div>
+      <p class="code-label">curl</p>
+      <pre class="code" data-lang="shell"><code>curl &quot;https://api.lever.co/v0/postings/palantir?mode=json&amp;limit=10&quot;</code></pre>
+      <p class="code-label">Python</p>
+      <pre class="code" data-lang="python"><code>import requests
+
+def lever_postings(site):
+    # EU accounts live only on api.eu.lever.co; the US host answers 404 for them.
+    for host in (&quot;https://api.lever.co&quot;, &quot;https://api.eu.lever.co&quot;):
+        r = requests.get(f&quot;{host}/v0/postings/{site}&quot;, params={&quot;mode&quot;: &quot;json&quot;}, timeout=60)
+        if r.status_code != 404:
+            r.raise_for_status()
+            return r.json()
+    return []
+
+for p in lever_postings(&quot;palantir&quot;):
+    print(p[&quot;id&quot;], p[&quot;text&quot;], p[&quot;categories&quot;].get(&quot;location&quot;), p[&quot;hostedUrl&quot;])</code></pre>
+      <p class="code-label">Response (shortened)</p>
+      <pre class="code" data-lang="json"><code>[
+  {
+    &quot;id&quot;: &quot;6ed76ce8-4156-4b60-b120-403538bd66cd&quot;,
+    &quot;text&quot;: &quot;Administrative Business Partner&quot;,
+    &quot;categories&quot;: {
+      &quot;commitment&quot;: &quot;Full-time&quot;,
+      &quot;location&quot;: &quot;Singapore, Singapore&quot;,
+      &quot;team&quot;: &quot;Administrative&quot;,
+      &quot;allLocations&quot;: [&quot;Singapore, Singapore&quot;]
+    },
+    &quot;country&quot;: &quot;SG&quot;,
+    &quot;workplaceType&quot;: &quot;hybrid&quot;,
+    &quot;createdAt&quot;: 1786469891368,
+    &quot;descriptionPlain&quot;: &quot;A World-Changing Company...&quot;,
+    &quot;lists&quot;: [{ &quot;text&quot;: &quot;Administrative Business Partner (Foundry)&quot;, &quot;content&quot;: &quot;&lt;li&gt;Provide administrative support...&lt;/li&gt;&quot; }],
+    &quot;additionalPlain&quot;: &quot;Palantir is particularly interested in...&quot;,
+    &quot;hostedUrl&quot;: &quot;https://jobs.lever.co/palantir/6ed76ce8-...&quot;,
+    &quot;applyUrl&quot;: &quot;https://jobs.lever.co/palantir/6ed76ce8-.../apply&quot;
+  }
+]</code></pre>
+    </section>
+    <section class="block" aria-labelledby="h-fields">
+      <p class="cmt">the data</p>
+      <h2 id="h-fields" class="h2">Fields of a job</h2>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Field</th><th>Meaning</th></tr></thead><tbody><tr><td><code>id</code></td><td>posting ID (UUID)</td></tr><tr><td><code>text</code></td><td>job title</td></tr><tr><td><code>categories.location / allLocations</code></td><td>main location and all locations of the posting</td></tr><tr><td><code>categories.team, department, commitment</code></td><td>team, department and type of employment, as the company names them</td></tr><tr><td><code>workplaceType</code></td><td><code>on-site</code>, <code>hybrid</code>, <code>remote</code> or <code>unspecified</code></td></tr><tr><td><code>country</code></td><td>country code of the posting</td></tr><tr><td><code>createdAt</code></td><td>creation time in milliseconds since 1970; not in the documentation, but present in every response we have read</td></tr><tr><td><code>description / descriptionPlain</code></td><td>opening part of the description, HTML and plain text</td></tr><tr><td><code>lists[]</code></td><td>titled sections such as requirements, each with HTML list items in <code>content</code></td></tr><tr><td><code>additional / additionalPlain</code></td><td>closing part of the description</td></tr><tr><td><code>salaryRange / salaryDescription</code></td><td>pay: <code>min</code>, <code>max</code>, <code>currency</code> and <code>interval</code>, plus a free-text note, when the company publishes pay</td></tr><tr><td><code>hostedUrl / applyUrl</code></td><td>job page and application form</td></tr></tbody></table></div>
+    </section>
+    <section class="block" aria-labelledby="h-find">
+      <p class="cmt">which board</p>
+      <h2 id="h-find" class="h2">Finding a company&#x27;s site name</h2>
+      <div class="prose">
+        <p>Lever describes the site name as usually the company name with no spaces. It is the first part of the path on the company's Lever job site: <code>jobs.lever.co/palantir</code> means <code>palantir</code>. A job site at <code>jobs.eu.lever.co/&lt;site&gt;</code> belongs to an EU account, and its postings are only on <code>api.eu.lever.co</code>.</p>
+        <p>Our <a href="/tools/companies-using-lever/">list of 1,721 companies using Lever</a> shows the careers address of each one, and the address contains the identifier. The list is free to search and download as CSV.</p>
+      </div>
+    </section>
+    <section class="block" aria-labelledby="h-tips">
+      <p class="cmt">in practice</p>
+      <h2 id="h-tips" class="h2">What we learned reading it every day</h2>
+<div class="prose"><ul><li>The full description is in three parts: <code>description</code> (opening), <code>lists</code> (sections such as requirements, each with a title) and <code>additional</code>. Read only the first and you lose the requirements; join all three.</li><li>EU accounts answer 404 on api.lever.co. Try the EU host when the US one says 404, or start with the EU host for job sites at jobs.eu.lever.co.</li><li>The company name is not in the response. It is in the title of the job site page, <code>jobs.lever.co/&lt;site&gt;</code>.</li><li><code>createdAt</code> is in milliseconds, not seconds.</li><li>Pay (<code>salaryRange</code>) appears only when the company enters it, mostly for jobs in US states with pay transparency laws.</li></ul></div>
+    </section>
+    <aside class="block cta" aria-label="Lever Jobs Scraper on Apify">
+      <p class="cmt">skip the plumbing</p>
+      <h2>Lever Jobs Scraper on Apify</h2>
+      <p>The API answers one company at a time. <strong>Lever Jobs Scraper</strong> reads any Lever board for you, or searches every Lever job we know of.</p>
+      <ul><li>Every open job of any Lever board, or a search across all 56,374 Lever jobs in our daily index without knowing a single board</li><li>One schema for all 20 systems: title, company, locations, remote, department, pay where published, full description, apply link</li><li>Filters for country, seniority, remote, salary and skills; new-only runs for daily schedules</li><li>API, webhooks and CSV, Excel or JSON export</li></ul>
+      <p class="price">From <b>$1.50</b> per 1,000 jobs, pay only for results. Apify's free plan includes $5 of monthly credit.</p>
+      <div class="cta-row"><a class="btn" data-actor="lever-jobs-scraper" data-campaign="job-board-api-lever" href="https://apify.com/deriverge/lever-jobs-scraper?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=job-board-api-lever&amp;fpr=b6jtb8" target="_blank" rel="noopener sponsored">Open Lever Jobs Scraper on Apify &rarr;</a></div>
+      <p class="more">Also: <a class="" data-actor="career-site-jobs-search" data-campaign="job-board-api-lever" href="https://apify.com/deriverge/career-site-jobs-search?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=job-board-api-lever&amp;fpr=b6jtb8" target="_blank" rel="noopener sponsored">Career Site and ATS Jobs API</a> (from $1.50 per 1,000 jobs)</p>
+    </aside>
+    <section class="block" aria-labelledby="h-faq">
+      <p class="cmt">questions</p>
+      <h2 id="h-faq" class="h2">Frequently asked questions</h2>
+<div class="faq">
+<details><summary>Does the Lever job board API need an API key?</summary><div class="a"><p>No. Reading published postings needs no key. The apply endpoint of the Postings API needs a key that the company itself issues.</p></div></details>
+<details><summary>Is there a rate limit?</summary><div class="a"><p>Lever documents a limit only for applications (2 per second, then HTTP 429), none for reading postings. One request returns all postings of a site, so a daily read is one call per company. Keep your request rate modest.</p></div></details>
+<details><summary>Can I get all Lever jobs, from every company, at once?</summary><div class="a"><p>No. The API answers for one company per request, and Lever publishes no list of its customers. Our index reads 1,626 Lever boards with open jobs every day (56,374 jobs on 18 November 2026); you can search all of them through our Apify actor or get them as a daily <a href="/tools/job-data-feed/">job data feed</a>.</p></div></details>
+<details><summary>Is it allowed to use the Lever job board API?</summary><div class="a"><p>The API exists so that companies can show their jobs on their own sites and so that job boards can list them. It returns only what the employer has published. Read Lever's documentation and terms for your use, keep request rates modest and link back to the original job for applications.</p></div></details>
+</div>
+    </section>
+    <section class="block" aria-labelledby="h-other">
+      <p class="cmt">other systems</p>
+      <h2 id="h-other" class="h2">Public job APIs of other applicant tracking systems</h2>
+      <ul class="linklist"><li><a href="/tools/job-board-api/greenhouse/">Greenhouse Job Board API</a></li><li><a href="/tools/job-board-api/ashby/">Ashby Job Posting API</a></li><li><a href="/tools/job-board-api/smartrecruiters/">SmartRecruiters Posting API</a></li><li><a href="/tools/job-board-api/recruitee/">Recruitee Careers Site API</a></li><li><a href="/tools/job-board-api/personio/">Personio XML Job Feed</a></li><li><a href="/tools/job-board-api/teamtailor/">Teamtailor Jobs RSS Feed</a></li><li><a href="/tools/job-board-api/gem/">Gem Job Board API</a></li><li><a href="/tools/job-board-api/">All 20 systems compared</a></li></ul>
+    </section>
+  </div>
+</main>
+<footer class="site-foot site-foot--tools">
+  <div class="wrap">
+<div class="foot-brand"><a class="brand" href="/"><span class="br">&lt;/</span>deriverge<span class="br">&gt;</span></a></div>
+<div class="foot-text">  <p>Free tools by <a href="/">deriverge s.r.o.</a>, a software studio in the Czech Republic. Our data actors are in <a data-actor="" data-campaign="job-board-api-lever" href="https://apify.com/deriverge?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=job-board-api-lever&amp;fpr=b6jtb8" target="_blank" rel="noopener sponsored">Apify Store</a>. Links to Apify carry our affiliate code: if you become a paying Apify customer, Apify pays us a commission at no extra cost to you.</p>
+  <p>Questions or a company listed by mistake: <a href="mailto:info@deriverge.com">info@deriverge.com</a>. The tools are provided as is, without warranty.</p>
+</div>
+  </div>
+</footer>
+<script src="/tools/config.js"></script>
+<script src="/tools/common.js"></script>
+
+</body>
+</html>

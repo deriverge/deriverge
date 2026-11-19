@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gem Job Board API: Endpoint, Fields, Examples</title>
+<meta name="description" content="How to read any company&#x27;s Gem jobs with the public job board API: endpoint, fields, locations, workplace type and working curl and Python examples.">
+<link rel="canonical" href="https://deriverge.com/tools/job-board-api/gem/">
+<meta name="robots" content="index, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/tools/tools.css">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="deriverge">
+<meta property="og:title" content="Gem Job Board API: Endpoint, Fields, Examples">
+<meta property="og:description" content="How to read any company&#x27;s Gem jobs with the public job board API: endpoint, fields, locations, workplace type and working curl and Python examples.">
+<meta property="og:url" content="https://deriverge.com/tools/job-board-api/gem/">
+<meta property="og:image" content="https://raw.githubusercontent.com/deriverge/deriverge/main/pictures/deriverge_logo-long.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "TechArticle",
+ "headline": "Gem Job Board API: Endpoint, Fields, Examples",
+ "url": "https://deriverge.com/tools/job-board-api/gem/",
+ "description": "How to read any company's Gem jobs with the public job board API: endpoint, fields, locations, workplace type and working curl and Python examples.",
+ "dateModified": "2026-11-18",
+ "proficiencyLevel": "Beginner",
+ "author": {
+  "@type": "Organization",
+  "name": "deriverge s.r.o.",
+  "url": "https://deriverge.com/"
+ },
+ "publisher": {
+  "@type": "Organization",
+  "name": "deriverge s.r.o.",
+  "url": "https://deriverge.com/"
+ }
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "Does the Gem job board API need an API key?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "No. The job board API returns published job posts without a key; only submitting applications through it needs one."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Is there a rate limit?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Gem documents 20 requests per second with bursts of 500 per API key, and does not say what applies to reads without a key. It does answer fast readers with HTTP 429. One request returns all job posts of a board, so a daily read is one call per company."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Can I get all Gem jobs, from every company, at once?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "No. The API answers for one company per request, and Gem publishes no list of its customers. Our index reads 605 Gem boards with open jobs every day (4,801 jobs on 18 November 2026); you can search all of them through our Apify actor or get them as a daily job data feed."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Is it allowed to use the Gem job board API?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "The API exists so that companies can show their jobs on their own sites and so that job boards can list them. It returns only what the employer has published. Read Gem's documentation and terms for your use, keep request rates modest and link back to the original job for applications."
+   }
+  }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "deriverge",
+   "item": "https://deriverge.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Tools",
+   "item": "https://deriverge.com/tools/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 3,
+   "name": "Job board APIs",
+   "item": "https://deriverge.com/tools/job-board-api/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 4,
+   "name": "Gem Job Board API",
+   "item": "https://deriverge.com/tools/job-board-api/gem/"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head site-head--page">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="deriverge home"><span class="br">&lt;/</span>deriverge<span class="br">&gt;</span></a>
+    <div class="crumb"><a href="/tools/">tools</a><span class="sep">/</span><a href="/tools/job-board-api/">job board apis</a></div>
+    <nav class="nav" aria-label="Main"><a class="nav-link" href="/tools/">Tools</a><a class="nav-link" href="/tools/job-data-feed/">Job data feed</a><a class="nav-link" href="/#contact">Contact</a></nav>
+  </div>
+</header>
+<main id="main" class="page">
+  <div class="wrap">
+    <header class="hero hero--tool">
+      <p class="cmt">developer guide · checked 19 November 2026</p>
+      <h1 class="h1-tool">Gem Job Board API</h1>
+      <p class="lede">Gem publishes each company's job board through a public API at api.gem.com, shaped much like Greenhouse's. Our index calls it for <strong>605</strong> companies a day and holds <strong>4,801</strong> open Gem jobs (18 November 2026).</p>
+    </header>
+    <section class="block" aria-labelledby="h-endpoint">
+      <p class="cmt">the endpoint</p>
+      <h2 id="h-endpoint" class="h2">The Gem job board endpoint</h2>
+      <div class="prose">
+        <p><code>GET https://api.gem.com/job_board/v0/{vanity_url_path}/job_posts/</code></p>
+        <ul>
+          <li><strong>Authentication:</strong> none for published job posts.</li>
+          <li><strong>Format:</strong> JSON: a list of job posts.</li>
+          <li><strong>Pagination:</strong> none; Gem says the API does not use pagination. One request returns every published post.</li>
+        </ul>
+      </div>
+      <p>The feed takes no query parameters.</p>
+      <div class="prose" style="margin-top:22px"><p>Other endpoints of the same API:</p><ul><li><code>GET /job_board/v0/{vanity_url_path}/job_posts/{id}</code>: one job post; <code>questions=true</code> adds the application questions</li><li><code>GET /job_board/v0/{vanity_url_path}/departments/</code>: departments</li><li><code>GET /job_board/v0/{vanity_url_path}/offices/</code>: offices</li></ul></div>
+      <p class="note">Source: <a href="https://help.gem.com/databases/gem-help-center/the-job-board-api" target="_blank" rel="noopener">Gem help: the job board API</a>. Checked 19 November 2026.</p>
+    </section>
+    <section class="block" aria-labelledby="h-example">
+      <p class="cmt">try it</p>
+      <h2 id="h-example" class="h2">Request and response</h2>
+      <div class="prose"><p>The board of <strong>Coupa Software</strong>, a Gem board from our index, as an example. Replace <code>coupa-software-inc-ats-1</code> with the board you need.</p></div>
+      <p class="code-label">curl</p>
+      <pre class="code" data-lang="shell"><code>curl &quot;https://api.gem.com/job_board/v0/coupa-software-inc-ats-1/job_posts/&quot;</code></pre>
+      <p class="code-label">Python</p>
+      <pre class="code" data-lang="python"><code>import requests
+
+r = requests.get(&quot;https://api.gem.com/job_board/v0/coupa-software-inc-ats-1/job_posts/&quot;, timeout=60)
+r.raise_for_status()
+for p in r.json():
+    print(p[&quot;id&quot;], p[&quot;title&quot;], p[&quot;location&quot;][&quot;name&quot;], p.get(&quot;location_type&quot;), p[&quot;absolute_url&quot;])</code></pre>
+      <p class="code-label">Response (shortened)</p>
+      <pre class="code" data-lang="json"><code>[
+  {
+    &quot;id&quot;: &quot;8a292102-f0b7-4e88-8fa5-a2fdfb027eca&quot;,
+    &quot;title&quot;: &quot;Sr. Associate Sourcing Consultant&quot;,
+    &quot;absolute_url&quot;: &quot;https://jobs.gem.com/coupa-software-inc-ats-1/8a292102-...&quot;,
+    &quot;location&quot;: { &quot;name&quot;: &quot;Pune City, India&quot; },
+    &quot;location_type&quot;: &quot;remote&quot;,
+    &quot;employment_type&quot;: &quot;full_time&quot;,
+    &quot;departments&quot;: [{ &quot;id&quot;: &quot;992a0f0542384f1ee5ef51b7cf4ae6c4&quot;, &quot;name&quot;: &quot;Services&quot; }],
+    &quot;offices&quot;: [{ &quot;name&quot;: &quot;Pune, India&quot;, &quot;location&quot;: { &quot;name&quot;: &quot;Pune City, India&quot; } }],
+    &quot;created_at&quot;: &quot;2024-11-19T07:53:57.000Z&quot;,
+    &quot;first_published_at&quot;: &quot;2025-07-24T22:41:13.194Z&quot;,
+    &quot;updated_at&quot;: &quot;2025-07-24T22:41:13.194Z&quot;,
+    &quot;content&quot;: &quot;&lt;div&gt;Coupa makes margins multiply...&quot;,
+    &quot;content_plain&quot;: &quot;Coupa makes margins multiply...&quot;
+  }
+]</code></pre>
+    </section>
+    <section class="block" aria-labelledby="h-fields">
+      <p class="cmt">the data</p>
+      <h2 id="h-fields" class="h2">Fields of a job</h2>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Field</th><th>Meaning</th></tr></thead><tbody><tr><td><code>id</code></td><td>job post ID</td></tr><tr><td><code>title</code></td><td>job title</td></tr><tr><td><code>absolute_url</code></td><td>job page with the application form</td></tr><tr><td><code>location.name / offices[]</code></td><td>main location and offices</td></tr><tr><td><code>location_type</code></td><td>workplace: <code>in_office</code>, <code>hybrid</code> or <code>remote</code></td></tr><tr><td><code>employment_type</code></td><td>for example <code>full_time</code>, <code>part_time</code>, <code>contract</code>, <code>intern</code></td></tr><tr><td><code>departments[]</code></td><td>department tree</td></tr><tr><td><code>first_published_at / updated_at / created_at</code></td><td>publication, last change and creation time</td></tr><tr><td><code>content / content_plain</code></td><td>the description in HTML and as plain text</td></tr></tbody></table></div>
+    </section>
+    <section class="block" aria-labelledby="h-find">
+      <p class="cmt">which board</p>
+      <h2 id="h-find" class="h2">Finding a company&#x27;s job board path</h2>
+      <div class="prose">
+        <p>Gem calls it the vanity URL path. It is the first part of the path on <code>jobs.gem.com</code>: <code>jobs.gem.com/coupa-software-inc-ats-1</code> means <code>coupa-software-inc-ats-1</code>. Some IDs are a readable company name, others a generated one like this.</p>
+        <p>Our <a href="/tools/companies-using-gem/">list of 610 companies using Gem</a> shows the careers address of each one, and the address contains the identifier. The list is free to search and download as CSV.</p>
+      </div>
+    </section>
+    <section class="block" aria-labelledby="h-tips">
+      <p class="cmt">in practice</p>
+      <h2 id="h-tips" class="h2">What we learned reading it every day</h2>
+<div class="prose"><ul><li>The company name is not a field. Use the board's page title, or the company named in the description.</li><li><code>location_type</code> is the clean remote signal; offices tell you where an on-site or hybrid job is.</li><li>Posts stay published for a long time on some boards (the example above was first published in 2025). Use <code>updated_at</code> and your own first-seen date to judge freshness.</li><li>Gem answers HTTP 429 when read too fast. Read each board once a day and back off when asked.</li></ul></div>
+    </section>
+    <aside class="block cta" aria-label="Career Site and ATS Jobs API on Apify">
+      <p class="cmt">skip the plumbing</p>
+      <h2>Career Site and ATS Jobs API on Apify</h2>
+      <p>The API answers one company at a time. <strong>Career Site and ATS Jobs API</strong> reads any Gem board for you, or searches every Gem job we know of.</p>
+      <ul><li>Every open job of any Gem board, or a search across all 4,801 Gem jobs in our daily index without knowing a single board</li><li>One schema for all 20 systems: title, company, locations, remote, department, pay where published, full description, apply link</li><li>Filters for country, seniority, remote, salary and skills; new-only runs for daily schedules</li><li>API, webhooks and CSV, Excel or JSON export</li></ul>
+      <p class="price">From <b>$1.50</b> per 1,000 jobs, pay only for results. Apify's free plan includes $5 of monthly credit.</p>
+      <div class="cta-row"><a class="btn" data-actor="career-site-jobs-search" data-campaign="job-board-api-gem" href="https://apify.com/deriverge/career-site-jobs-search?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=job-board-api-gem&amp;fpr=b6jtb8" target="_blank" rel="noopener sponsored">Open Career Site and ATS Jobs API on Apify &rarr;</a></div>
+      
+    </aside>
+    <section class="block" aria-labelledby="h-faq">
+      <p class="cmt">questions</p>
+      <h2 id="h-faq" class="h2">Frequently asked questions</h2>
+<div class="faq">
+<details><summary>Does the Gem job board API need an API key?</summary><div class="a"><p>No. The job board API returns published job posts without a key; only submitting applications through it needs one.</p></div></details>
+<details><summary>Is there a rate limit?</summary><div class="a"><p>Gem documents 20 requests per second with bursts of 500 per API key, and does not say what applies to reads without a key. It does answer fast readers with HTTP 429. One request returns all job posts of a board, so a daily read is one call per company.</p></div></details>
+<details><summary>Can I get all Gem jobs, from every company, at once?</summary><div class="a"><p>No. The API answers for one company per request, and Gem publishes no list of its customers. Our index reads 605 Gem boards with open jobs every day (4,801 jobs on 18 November 2026); you can search all of them through our Apify actor or get them as a daily <a href="/tools/job-data-feed/">job data feed</a>.</p></div></details>
+<details><summary>Is it allowed to use the Gem job board API?</summary><div class="a"><p>The API exists so that companies can show their jobs on their own sites and so that job boards can list them. It returns only what the employer has published. Read Gem's documentation and terms for your use, keep request rates modest and link back to the original job for applications.</p></div></details>
+</div>
+    </section>
+    <section class="block" aria-labelledby="h-other">
+      <p class="cmt">other systems</p>
+      <h2 id="h-other" class="h2">Public job APIs of other applicant tracking systems</h2>
+      <ul class="linklist"><li><a href="/tools/job-board-api/greenhouse/">Greenhouse Job Board API</a></li><li><a href="/tools/job-board-api/lever/">Lever Postings API</a></li><li><a href="/tools/job-board-api/ashby/">Ashby Job Posting API</a></li><li><a href="/tools/job-board-api/smartrecruiters/">SmartRecruiters Posting API</a></li><li><a href="/tools/job-board-api/recruitee/">Recruitee Careers Site API</a></li><li><a href="/tools/job-board-api/personio/">Personio XML Job Feed</a></li><li><a href="/tools/job-board-api/teamtailor/">Teamtailor Jobs RSS Feed</a></li><li><a href="/tools/job-board-api/">All 20 systems compared</a></li></ul>
+    </section>
+  </div>
+</main>
+<footer class="site-foot site-foot--tools">
+  <div class="wrap">
+<div class="foot-brand"><a class="brand" href="/"><span class="br">&lt;/</span>deriverge<span class="br">&gt;</span></a></div>
+<div class="foot-text">  <p>Free tools by <a href="/">deriverge s.r.o.</a>, a software studio in the Czech Republic. Our data actors are in <a data-actor="" data-campaign="job-board-api-gem" href="https://apify.com/deriverge?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=job-board-api-gem&amp;fpr=b6jtb8" target="_blank" rel="noopener sponsored">Apify Store</a>. Links to Apify carry our affiliate code: if you become a paying Apify customer, Apify pays us a commission at no extra cost to you.</p>
+  <p>Questions or a company listed by mistake: <a href="mailto:info@deriverge.com">info@deriverge.com</a>. The tools are provided as is, without warranty.</p>
+</div>
+  </div>
+</footer>
+<script src="/tools/config.js"></script>
+<script src="/tools/common.js"></script>
+
+</body>
+</html>

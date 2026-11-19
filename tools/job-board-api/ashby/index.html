@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ashby Job Posting API: Endpoint, Fields, Examples</title>
+<meta name="description" content="How to read any company&#x27;s Ashby jobs with the public Job Posting API: endpoint, compensation, fields and working curl and Python examples.">
+<link rel="canonical" href="https://deriverge.com/tools/job-board-api/ashby/">
+<meta name="robots" content="index, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/tools/tools.css">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="deriverge">
+<meta property="og:title" content="Ashby Job Posting API: Endpoint, Fields, Examples">
+<meta property="og:description" content="How to read any company&#x27;s Ashby jobs with the public Job Posting API: endpoint, compensation, fields and working curl and Python examples.">
+<meta property="og:url" content="https://deriverge.com/tools/job-board-api/ashby/">
+<meta property="og:image" content="https://raw.githubusercontent.com/deriverge/deriverge/main/pictures/deriverge_logo-long.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "TechArticle",
+ "headline": "Ashby Job Posting API: Endpoint, Fields, Examples",
+ "url": "https://deriverge.com/tools/job-board-api/ashby/",
+ "description": "How to read any company's Ashby jobs with the public Job Posting API: endpoint, compensation, fields and working curl and Python examples.",
+ "dateModified": "2026-11-18",
+ "proficiencyLevel": "Beginner",
+ "author": {
+  "@type": "Organization",
+  "name": "deriverge s.r.o.",
+  "url": "https://deriverge.com/"
+ },
+ "publisher": {
+  "@type": "Organization",
+  "name": "deriverge s.r.o.",
+  "url": "https://deriverge.com/"
+ }
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "Does the Ashby job board API need an API key?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "No. Ashby's Job Posting API is public and takes no key."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Is there a rate limit?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Ashby documents no rate limit for this API. One request returns the whole board, so a daily read is one call per company. Keep your request rate modest."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Can I get all Ashby jobs, from every company, at once?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "No. The API answers for one company per request, and Ashby publishes no list of its customers. Our index reads 3,362 Ashby boards with open jobs every day (63,176 jobs on 18 November 2026); you can search all of them through our Apify actor or get them as a daily job data feed."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Is it allowed to use the Ashby job board API?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "The API exists so that companies can show their jobs on their own sites and so that job boards can list them. It returns only what the employer has published. Read Ashby's documentation and terms for your use, keep request rates modest and link back to the original job for applications."
+   }
+  }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "deriverge",
+   "item": "https://deriverge.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Tools",
+   "item": "https://deriverge.com/tools/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 3,
+   "name": "Job board APIs",
+   "item": "https://deriverge.com/tools/job-board-api/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 4,
+   "name": "Ashby Job Posting API",
+   "item": "https://deriverge.com/tools/job-board-api/ashby/"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head site-head--page">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="deriverge home"><span class="br">&lt;/</span>deriverge<span class="br">&gt;</span></a>
+    <div class="crumb"><a href="/tools/">tools</a><span class="sep">/</span><a href="/tools/job-board-api/">job board apis</a></div>
+    <nav class="nav" aria-label="Main"><a class="nav-link" href="/tools/">Tools</a><a class="nav-link" href="/tools/job-data-feed/">Job data feed</a><a class="nav-link" href="/#contact">Contact</a></nav>
+  </div>
+</header>
+<main id="main" class="page">
+  <div class="wrap">
+    <header class="hero hero--tool">
+      <p class="cmt">developer guide · checked 19 November 2026</p>
+      <h1 class="h1-tool">Ashby Job Posting API</h1>
+      <p class="lede">Ashby publishes each company's job board through a public Job Posting API at api.ashbyhq.com. Our index calls it for <strong>3,362</strong> companies a day and holds <strong>63,176</strong> open Ashby jobs (18 November 2026).</p>
+    </header>
+    <section class="block" aria-labelledby="h-endpoint">
+      <p class="cmt">the endpoint</p>
+      <h2 id="h-endpoint" class="h2">The Ashby job board endpoint</h2>
+      <div class="prose">
+        <p><code>GET https://api.ashbyhq.com/posting-api/job-board/{JOB_BOARD_NAME}</code></p>
+        <ul>
+          <li><strong>Authentication:</strong> none. The job board API is public.</li>
+          <li><strong>Format:</strong> JSON, an object with <code>jobs</code> and <code>apiVersion</code>.</li>
+          <li><strong>Pagination:</strong> none. One request returns every listed job.</li>
+        </ul>
+      </div>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Parameter</th><th>What it does</th></tr></thead><tbody><tr><td><code>includeCompensation=true</code></td><td>adds <code>compensation</code> to each job: a summary, the tiers and their components</td></tr></tbody></table></div>
+      
+      <p class="note">Source: <a href="https://developers.ashbyhq.com/docs/public-job-posting-api" target="_blank" rel="noopener">Ashby Public Job Posting API documentation</a>. Checked 19 November 2026.</p>
+    </section>
+    <section class="block" aria-labelledby="h-example">
+      <p class="cmt">try it</p>
+      <h2 id="h-example" class="h2">Request and response</h2>
+      <div class="prose"><p>The board of <strong>OpenAI</strong>, a Ashby board from our index, as an example. Replace <code>openai</code> with the board you need.</p></div>
+      <p class="code-label">curl</p>
+      <pre class="code" data-lang="shell"><code>curl &quot;https://api.ashbyhq.com/posting-api/job-board/openai?includeCompensation=true&quot;</code></pre>
+      <p class="code-label">Python</p>
+      <pre class="code" data-lang="python"><code>import requests
+
+r = requests.get(
+    &quot;https://api.ashbyhq.com/posting-api/job-board/openai&quot;,
+    params={&quot;includeCompensation&quot;: &quot;true&quot;},
+    timeout=60,
+)
+r.raise_for_status()
+for job in r.json()[&quot;jobs&quot;]:
+    pay = (job.get(&quot;compensation&quot;) or {}).get(&quot;scrapeableCompensationSalarySummary&quot;)
+    print(job[&quot;id&quot;], job[&quot;title&quot;], job[&quot;location&quot;], job[&quot;isRemote&quot;], pay, job[&quot;jobUrl&quot;])</code></pre>
+      <p class="code-label">Response (shortened)</p>
+      <pre class="code" data-lang="json"><code>{
+  &quot;apiVersion&quot;: &quot;1&quot;,
+  &quot;jobs&quot;: [
+    {
+      &quot;id&quot;: &quot;8fb1615c-34bf-47c4-a1d1-b7b2f836bbd3&quot;,
+      &quot;title&quot;: &quot;Technical Program Manager, Compute Infrastructure&quot;,
+      &quot;department&quot;: &quot;Technical Program Management&quot;,
+      &quot;team&quot;: &quot;Technical Program Management&quot;,
+      &quot;employmentType&quot;: &quot;FullTime&quot;,
+      &quot;location&quot;: &quot;San Francisco&quot;,
+      &quot;secondaryLocations&quot;: [],
+      &quot;isRemote&quot;: true,
+      &quot;workplaceType&quot;: &quot;Hybrid&quot;,
+      &quot;isListed&quot;: true,
+      &quot;publishedAt&quot;: &quot;2026-11-05T02:20:02.702+00:00&quot;,
+      &quot;jobUrl&quot;: &quot;https://jobs.ashbyhq.com/openai/8fb1615c-...&quot;,
+      &quot;applyUrl&quot;: &quot;https://jobs.ashbyhq.com/openai/8fb1615c-.../application&quot;,
+      &quot;descriptionHtml&quot;: &quot;&lt;h3&gt;&lt;strong&gt;About the Team&lt;/strong&gt;&lt;/h3&gt;...&quot;,
+      &quot;descriptionPlain&quot;: &quot;ABOUT THE TEAM...&quot;,
+      &quot;compensation&quot;: {
+        &quot;compensationTierSummary&quot;: &quot;$207K - $285K • Offers Equity&quot;,
+        &quot;scrapeableCompensationSalarySummary&quot;: &quot;$207K - $285K&quot;,
+        &quot;compensationTiers&quot;: [],
+        &quot;summaryComponents&quot;: []
+      }
+    }
+  ]
+}</code></pre>
+    </section>
+    <section class="block" aria-labelledby="h-fields">
+      <p class="cmt">the data</p>
+      <h2 id="h-fields" class="h2">Fields of a job</h2>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Field</th><th>Meaning</th></tr></thead><tbody><tr><td><code>id</code></td><td>job ID (UUID); not in the field table of the documentation, but present in responses</td></tr><tr><td><code>title, department, team</code></td><td>title and where the job sits in the company</td></tr><tr><td><code>employmentType</code></td><td><code>FullTime</code>, <code>PartTime</code>, <code>Intern</code>, <code>Contract</code> or <code>Temporary</code></td></tr><tr><td><code>location / secondaryLocations[]</code></td><td>main location and further locations</td></tr><tr><td><code>isRemote / workplaceType</code></td><td>remote flag and <code>OnSite</code>, <code>Remote</code> or <code>Hybrid</code></td></tr><tr><td><code>address.postalAddress</code></td><td>structured address: locality, region, country</td></tr><tr><td><code>publishedAt</code></td><td>when the job was last published</td></tr><tr><td><code>isListed</code></td><td><code>false</code> for unlisted jobs, which Ashby says should be reachable only by direct link</td></tr><tr><td><code>descriptionHtml / descriptionPlain</code></td><td>the full description in HTML and as plain text</td></tr><tr><td><code>jobUrl / applyUrl</code></td><td>job page and application form</td></tr><tr><td><code>compensation</code></td><td>summary and tiers of pay and equity (only with <code>includeCompensation=true</code>, and only when the company shows it)</td></tr></tbody></table></div>
+    </section>
+    <section class="block" aria-labelledby="h-find">
+      <p class="cmt">which board</p>
+      <h2 id="h-find" class="h2">Finding a company&#x27;s job board name</h2>
+      <div class="prose">
+        <p>The job board name is the first part of the path on <code>jobs.ashbyhq.com</code>: <code>jobs.ashbyhq.com/openai</code> means <code>openai</code>. Job links on the company's own site carry <code>?ashby_jid=&lt;id&gt;</code>.</p>
+        <p>Our <a href="/tools/companies-using-ashby/">list of 3,508 companies using Ashby</a> shows the careers address of each one, and the address contains the identifier. The list is free to search and download as CSV.</p>
+      </div>
+    </section>
+    <section class="block" aria-labelledby="h-tips">
+      <p class="cmt">in practice</p>
+      <h2 id="h-tips" class="h2">What we learned reading it every day</h2>
+<div class="prose"><ul><li>Ask for <code>includeCompensation=true</code>: <code>scrapeableCompensationSalarySummary</code> is a short pay range, and <code>compensationTierSummary</code> adds equity and bonus.</li><li>A board answers HTTP 404 when the name does not exist. Names are case-sensitive in some boards; use the exact path from the job board address.</li><li>The organisation name is not in the API response. It is on the job board page, which titles itself "&lt;Company&gt; Jobs".</li><li>Big boards are large: OpenAI's 840 jobs with descriptions are about 15 MB. Cache the response and read each board once a day.</li></ul></div>
+    </section>
+    <aside class="block cta" aria-label="Ashby Jobs Scraper on Apify">
+      <p class="cmt">skip the plumbing</p>
+      <h2>Ashby Jobs Scraper on Apify</h2>
+      <p>The API answers one company at a time. <strong>Ashby Jobs Scraper</strong> reads any Ashby board for you, or searches every Ashby job we know of.</p>
+      <ul><li>Every open job of any Ashby board, or a search across all 63,176 Ashby jobs in our daily index without knowing a single board</li><li>One schema for all 20 systems: title, company, locations, remote, department, pay where published, full description, apply link</li><li>Filters for country, seniority, remote, salary and skills; new-only runs for daily schedules</li><li>API, webhooks and CSV, Excel or JSON export</li></ul>
+      <p class="price">From <b>$1.50</b> per 1,000 jobs, pay only for results. Apify's free plan includes $5 of monthly credit.</p>
+      <div class="cta-row"><a class="btn" data-actor="ashby-jobs-scraper" data-campaign="job-board-api-ashby" href="https://apify.com/deriverge/ashby-jobs-scraper?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=job-board-api-ashby&amp;fpr=b6jtb8" target="_blank" rel="noopener sponsored">Open Ashby Jobs Scraper on Apify &rarr;</a></div>
+      <p class="more">Also: <a class="" data-actor="career-site-jobs-search" data-campaign="job-board-api-ashby" href="https://apify.com/deriverge/career-site-jobs-search?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=job-board-api-ashby&amp;fpr=b6jtb8" target="_blank" rel="noopener sponsored">Career Site and ATS Jobs API</a> (from $1.50 per 1,000 jobs)</p>
+    </aside>
+    <section class="block" aria-labelledby="h-faq">
+      <p class="cmt">questions</p>
+      <h2 id="h-faq" class="h2">Frequently asked questions</h2>
+<div class="faq">
+<details><summary>Does the Ashby job board API need an API key?</summary><div class="a"><p>No. Ashby's Job Posting API is public and takes no key.</p></div></details>
+<details><summary>Is there a rate limit?</summary><div class="a"><p>Ashby documents no rate limit for this API. One request returns the whole board, so a daily read is one call per company. Keep your request rate modest.</p></div></details>
+<details><summary>Can I get all Ashby jobs, from every company, at once?</summary><div class="a"><p>No. The API answers for one company per request, and Ashby publishes no list of its customers. Our index reads 3,362 Ashby boards with open jobs every day (63,176 jobs on 18 November 2026); you can search all of them through our Apify actor or get them as a daily <a href="/tools/job-data-feed/">job data feed</a>.</p></div></details>
+<details><summary>Is it allowed to use the Ashby job board API?</summary><div class="a"><p>The API exists so that companies can show their jobs on their own sites and so that job boards can list them. It returns only what the employer has published. Read Ashby's documentation and terms for your use, keep request rates modest and link back to the original job for applications.</p></div></details>
+</div>
+    </section>
+    <section class="block" aria-labelledby="h-other">
+      <p class="cmt">other systems</p>
+      <h2 id="h-other" class="h2">Public job APIs of other applicant tracking systems</h2>
+      <ul class="linklist"><li><a href="/tools/job-board-api/greenhouse/">Greenhouse Job Board API</a></li><li><a href="/tools/job-board-api/lever/">Lever Postings API</a></li><li><a href="/tools/job-board-api/smartrecruiters/">SmartRecruiters Posting API</a></li><li><a href="/tools/job-board-api/recruitee/">Recruitee Careers Site API</a></li><li><a href="/tools/job-board-api/personio/">Personio XML Job Feed</a></li><li><a href="/tools/job-board-api/teamtailor/">Teamtailor Jobs RSS Feed</a></li><li><a href="/tools/job-board-api/gem/">Gem Job Board API</a></li><li><a href="/tools/job-board-api/">All 20 systems compared</a></li></ul>
+    </section>
+  </div>
+</main>
+<footer class="site-foot site-foot--tools">
+  <div class="wrap">
+<div class="foot-brand"><a class="brand" href="/"><span class="br">&lt;/</span>deriverge<span class="br">&gt;</span></a></div>
+<div class="foot-text">  <p>Free tools by <a href="/">deriverge s.r.o.</a>, a software studio in the Czech Republic. Our data actors are in <a data-actor="" data-campaign="job-board-api-ashby" href="https://apify.com/deriverge?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=job-board-api-ashby&amp;fpr=b6jtb8" target="_blank" rel="noopener sponsored">Apify Store</a>. Links to Apify carry our affiliate code: if you become a paying Apify customer, Apify pays us a commission at no extra cost to you.</p>
+  <p>Questions or a company listed by mistake: <a href="mailto:info@deriverge.com">info@deriverge.com</a>. The tools are provided as is, without warranty.</p>
+</div>
+  </div>
+</footer>
+<script src="/tools/config.js"></script>
+<script src="/tools/common.js"></script>
+
+</body>
+</html>

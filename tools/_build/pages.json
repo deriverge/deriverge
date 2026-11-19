@@ -106,6 +106,42 @@
    "Which Companies Use Which ATS: 64,839 Employers, 14 Systems"
   ],
   [
+   "/tools/job-board-api/greenhouse/",
+   "Greenhouse Job Board API: Endpoints, Fields, Examples"
+  ],
+  [
+   "/tools/job-board-api/lever/",
+   "Lever Postings API: Endpoints, Fields, Examples"
+  ],
+  [
+   "/tools/job-board-api/ashby/",
+   "Ashby Job Posting API: Endpoint, Fields, Examples"
+  ],
+  [
+   "/tools/job-board-api/smartrecruiters/",
+   "SmartRecruiters Posting API: Endpoints, Fields, Examples"
+  ],
+  [
+   "/tools/job-board-api/recruitee/",
+   "Recruitee Careers Site API: Endpoint, Fields, Examples"
+  ],
+  [
+   "/tools/job-board-api/personio/",
+   "Personio XML Job Feed: Address, Fields, Examples"
+  ],
+  [
+   "/tools/job-board-api/teamtailor/",
+   "Teamtailor Jobs RSS Feed: Address, Fields, Examples"
+  ],
+  [
+   "/tools/job-board-api/gem/",
+   "Gem Job Board API: Endpoint, Fields, Examples"
+  ],
+  [
+   "/tools/job-board-api/",
+   "Job Posting APIs of 20 ATS: Greenhouse, Lever, Ashby and More"
+  ],
+  [
    "/tools/job-data-feed/",
    "Job Data Feed: Daily Open Jobs from Company Career Sites"
   ],

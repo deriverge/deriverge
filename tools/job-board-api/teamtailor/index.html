@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Teamtailor Jobs RSS Feed: Address, Fields, Examples</title>
+<meta name="description" content="How to read any company&#x27;s Teamtailor jobs without an API key from the public RSS feed: address, fields, locations, remote status and working examples.">
+<link rel="canonical" href="https://deriverge.com/tools/job-board-api/teamtailor/">
+<meta name="robots" content="index, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Geist:wght@300..700&family=Geist+Mono:wght@400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/tools/tools.css">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="deriverge">
+<meta property="og:title" content="Teamtailor Jobs RSS Feed: Address, Fields, Examples">
+<meta property="og:description" content="How to read any company&#x27;s Teamtailor jobs without an API key from the public RSS feed: address, fields, locations, remote status and working examples.">
+<meta property="og:url" content="https://deriverge.com/tools/job-board-api/teamtailor/">
+<meta property="og:image" content="https://raw.githubusercontent.com/deriverge/deriverge/main/pictures/deriverge_logo-long.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "TechArticle",
+ "headline": "Teamtailor Jobs RSS Feed: Address, Fields, Examples",
+ "url": "https://deriverge.com/tools/job-board-api/teamtailor/",
+ "description": "How to read any company's Teamtailor jobs without an API key from the public RSS feed: address, fields, locations, remote status and working examples.",
+ "dateModified": "2026-11-18",
+ "proficiencyLevel": "Beginner",
+ "author": {
+  "@type": "Organization",
+  "name": "deriverge s.r.o.",
+  "url": "https://deriverge.com/"
+ },
+ "publisher": {
+  "@type": "Organization",
+  "name": "deriverge s.r.o.",
+  "url": "https://deriverge.com/"
+ }
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "Does the Teamtailor job board API need an API key?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Not for the RSS feed: it is public. The Teamtailor REST API does need a key, which only the company can create."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Is there a rate limit?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Teamtailor documents no limit for the RSS feed (its REST API allows 50 requests per 10 seconds). A company with up to 100 jobs is one call, bigger ones one call per 100 jobs. Keep your request rate modest."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Can I get all Teamtailor jobs, from every company, at once?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "No. The API answers for one company per request, and Teamtailor publishes no list of its customers. Our index reads 1,116 Teamtailor boards with open jobs every day (16,846 jobs on 18 November 2026); you can search all of them through our Apify actor or get them as a daily job data feed."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Is it allowed to use the Teamtailor job board API?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "The API exists so that companies can show their jobs on their own sites and so that job boards can list them. It returns only what the employer has published. Read Teamtailor's documentation and terms for your use, keep request rates modest and link back to the original job for applications."
+   }
+  }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "deriverge",
+   "item": "https://deriverge.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Tools",
+   "item": "https://deriverge.com/tools/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 3,
+   "name": "Job board APIs",
+   "item": "https://deriverge.com/tools/job-board-api/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 4,
+   "name": "Teamtailor Jobs RSS Feed",
+   "item": "https://deriverge.com/tools/job-board-api/teamtailor/"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-head site-head--page">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="deriverge home"><span class="br">&lt;/</span>deriverge<span class="br">&gt;</span></a>
+    <div class="crumb"><a href="/tools/">tools</a><span class="sep">/</span><a href="/tools/job-board-api/">job board apis</a></div>
+    <nav class="nav" aria-label="Main"><a class="nav-link" href="/tools/">Tools</a><a class="nav-link" href="/tools/job-data-feed/">Job data feed</a><a class="nav-link" href="/#contact">Contact</a></nav>
+  </div>
+</header>
+<main id="main" class="page">
+  <div class="wrap">
+    <header class="hero hero--tool">
+      <p class="cmt">developer guide · checked 19 November 2026</p>
+      <h1 class="h1-tool">Teamtailor Jobs RSS Feed</h1>
+      <p class="lede">Teamtailor publishes each company's open jobs as an RSS feed at &lt;company&gt;.teamtailor.com/jobs.rss. The Teamtailor API needs a key from the company; the feed does not. Our index calls it for <strong>1,116</strong> companies a day and holds <strong>16,846</strong> open Teamtailor jobs (18 November 2026).</p>
+    </header>
+    <section class="block" aria-labelledby="h-endpoint">
+      <p class="cmt">the endpoint</p>
+      <h2 id="h-endpoint" class="h2">The Teamtailor job board endpoint</h2>
+      <div class="prose">
+        <p><code>GET https://{company}.teamtailor.com/jobs.rss</code></p>
+        <ul>
+          <li><strong>Authentication:</strong> none for the RSS feed. The Teamtailor REST API needs a key that the company creates.</li>
+          <li><strong>Format:</strong> RSS 2.0 with Teamtailor's own <code>tt:</code> elements for locations and department.</li>
+          <li><strong>Pagination:</strong> the first 100 jobs by default. <code>offset</code> skips jobs and <code>per_page</code> sets how many come back.</li>
+        </ul>
+      </div>
+      <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Parameter</th><th>What it does</th></tr></thead><tbody><tr><td><code>offset</code></td><td>skip this many jobs, for example <code>offset=100</code> for jobs 101 and on</td></tr><tr><td><code>per_page</code></td><td>jobs per response, for example <code>per_page=200</code></td></tr></tbody></table></div>
+      <div class="prose" style="margin-top:22px"><p>Other endpoints of the same API:</p><ul><li><code>https://api.teamtailor.com/v1/jobs</code>: the REST API: a key from the company, an <code>X-Api-Version</code> header, 30 jobs per page at most and 50 requests per 10 seconds</li></ul></div>
+      <p class="note">Source: <a href="https://support.teamtailor.com/en/articles/11171756" target="_blank" rel="noopener">Teamtailor help: RSS feed</a>. Checked 19 November 2026.</p>
+    </section>
+    <section class="block" aria-labelledby="h-example">
+      <p class="cmt">try it</p>
+      <h2 id="h-example" class="h2">Request and response</h2>
+      <div class="prose"><p>The board of <strong>Polestar</strong>, a Teamtailor board from our index, as an example. Replace <code>polestar</code> with the board you need.</p></div>
+      <p class="code-label">curl</p>
+      <pre class="code" data-lang="shell"><code>curl &quot;https://polestar.teamtailor.com/jobs.rss&quot;</code></pre>
+      <p class="code-label">Python</p>
+      <pre class="code" data-lang="python"><code>import requests
+import xml.etree.ElementTree as ET
+
+TT = &quot;{https://teamtailor.com/locations}&quot;
+offset, items = 0, []
+while True:  # the feed sends the first 100 jobs unless asked for more
+    r = requests.get(&quot;https://polestar.teamtailor.com/jobs.rss&quot;, params={&quot;offset&quot;: offset, &quot;per_page&quot;: 100}, timeout=60)
+    r.raise_for_status()
+    page = list(ET.fromstring(r.content).iter(&quot;item&quot;))
+    items += page
+    if len(page) &lt; 100:
+        break
+    offset += 100
+
+for item in items:
+    places = [loc.findtext(TT + &quot;name&quot;) for loc in item.iter(TT + &quot;location&quot;)]
+    print(item.findtext(&quot;title&quot;), places, item.findtext(&quot;remoteStatus&quot;), item.findtext(&quot;link&quot;))</code></pre>
+      <p class="code-label">Response (shortened)</p>
+      <pre class="code" data-lang="xml"><code>&lt;rss version=&quot;2.0&quot; xmlns:tt=&quot;https://teamtailor.com/locations&quot;&gt;
+  &lt;channel&gt;
+    &lt;title&gt;Polestar&lt;/title&gt;
+    &lt;link&gt;https://polestar.teamtailor.com/jobs&lt;/link&gt;
+    &lt;item&gt;
+      &lt;title&gt;Regional HR Business Partner | BeNeLux&lt;/title&gt;
+      &lt;description&gt;&amp;lt;p&amp;gt;&amp;lt;strong&amp;gt;The opportunity&amp;lt;/strong&amp;gt;...&lt;/description&gt;
+      &lt;pubDate&gt;Thu, 12 Nov 2026 13:57:12 +0100&lt;/pubDate&gt;
+      &lt;link&gt;https://polestar.teamtailor.com/jobs/8710722-regional-hr-business-partner-benelux&lt;/link&gt;
+      &lt;remoteStatus&gt;none&lt;/remoteStatus&gt;
+      &lt;guid&gt;14093550-daa8-41e6-8a60-0b9722d1d4db&lt;/guid&gt;
+      &lt;company_name&gt;Polestar&lt;/company_name&gt;
+      &lt;tt:locations&gt;
+        &lt;tt:location&gt;
+          &lt;tt:name&gt;Brussels, Belgium&lt;/tt:name&gt;
+          &lt;tt:city&gt;Brussels&lt;/tt:city&gt;
+          &lt;tt:country&gt;Belgium&lt;/tt:country&gt;
+        &lt;/tt:location&gt;
+      &lt;/tt:locations&gt;
+      &lt;tt:department&gt;Human Resources&lt;/tt:department&gt;
+    &lt;/item&gt;
+  &lt;/channel&gt;
+&lt;/rss&gt;</code></pre>
+    </section>
+    <section class="block" aria-labelledby="h-fields">
+      <p class="cmt">the data</p>
+      <h2 id="h-fields" class="h2">Fields of a job</h2>
+<div class="tbl-wrap"><table class="tbl"><thead><tr><th>Field</th><th>Meaning</th></tr></thead><tbody><tr><td><code>title</code></td><td>job title</td></tr><tr><td><code>description</code></td><td>full description, HTML escaped inside the XML</td></tr><tr><td><code>pubDate</code></td><td>publication date in RSS format</td></tr><tr><td><code>link</code></td><td>job page; the number at its start is the job ID</td></tr><tr><td><code>guid</code></td><td>a stable unique ID of the job</td></tr><tr><td><code>remoteStatus</code></td><td>remote status, for example <code>none</code>, <code>onsite</code> or <code>hybrid</code></td></tr><tr><td><code>company_name</code></td><td>company name (also the channel title)</td></tr><tr><td><code>tt:locations / tt:location</code></td><td>each location with name, city, zip and country</td></tr><tr><td><code>tt:department, tt:role</code></td><td>department and role</td></tr></tbody></table></div>
+    </section>
+    <section class="block" aria-labelledby="h-find">
+      <p class="cmt">which board</p>
+      <h2 id="h-find" class="h2">Finding a company&#x27;s company subdomain</h2>
+      <div class="prose">
+        <p>The company subdomain is the first part of <code>&lt;company&gt;.teamtailor.com</code>. Many companies run the career site on their own domain; the <code>teamtailor.com</code> address still works, and the page source loads assets from <code>teamtailor-cdn.com</code>.</p>
+        <p>Our <a href="/tools/companies-using-teamtailor/">list of 1,368 companies using Teamtailor</a> shows the careers address of each one, and the address contains the identifier. The list is free to search and download as CSV.</p>
+      </div>
+    </section>
+    <section class="block" aria-labelledby="h-tips">
+      <p class="cmt">in practice</p>
+      <h2 id="h-tips" class="h2">What we learned reading it every day</h2>
+<div class="prose"><ul><li>The feed stops at 100 jobs unless you page with <code>offset</code> and <code>per_page</code>. Big employers have more; read until a response comes back short.</li><li>Teamtailor documents what the feed contains but not the element names; the names above are what the feeds send today.</li><li>Locations are inside <code>tt:locations</code>, one <code>tt:location</code> each. Read all of them; jobs in several cities list several.</li><li><code>remoteStatus</code> is the most reliable remote signal in the feed. Do not guess remote work from the title.</li><li>The feed has no pay field. Pay, when published, is in the description.</li><li>Every Teamtailor career site has the feed, also those on a custom domain: <code>&lt;custom domain&gt;/jobs.rss</code> answers too.</li></ul></div>
+    </section>
+    <aside class="block cta" aria-label="Career Site and ATS Jobs API on Apify">
+      <p class="cmt">skip the plumbing</p>
+      <h2>Career Site and ATS Jobs API on Apify</h2>
+      <p>The API answers one company at a time. <strong>Career Site and ATS Jobs API</strong> reads any Teamtailor board for you, or searches every Teamtailor job we know of.</p>
+      <ul><li>Every open job of any Teamtailor board, or a search across all 16,846 Teamtailor jobs in our daily index without knowing a single board</li><li>One schema for all 20 systems: title, company, locations, remote, department, pay where published, full description, apply link</li><li>Filters for country, seniority, remote, salary and skills; new-only runs for daily schedules</li><li>API, webhooks and CSV, Excel or JSON export</li></ul>
+      <p class="price">From <b>$1.50</b> per 1,000 jobs, pay only for results. Apify's free plan includes $5 of monthly credit.</p>
+      <div class="cta-row"><a class="btn" data-actor="career-site-jobs-search" data-campaign="job-board-api-teamtailor" href="https://apify.com/deriverge/career-site-jobs-search?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=job-board-api-teamtailor&amp;fpr=b6jtb8" target="_blank" rel="noopener sponsored">Open Career Site and ATS Jobs API on Apify &rarr;</a></div>
+      
+    </aside>
+    <section class="block" aria-labelledby="h-faq">
+      <p class="cmt">questions</p>
+      <h2 id="h-faq" class="h2">Frequently asked questions</h2>
+<div class="faq">
+<details><summary>Does the Teamtailor job board API need an API key?</summary><div class="a"><p>Not for the RSS feed: it is public. The Teamtailor REST API does need a key, which only the company can create.</p></div></details>
+<details><summary>Is there a rate limit?</summary><div class="a"><p>Teamtailor documents no limit for the RSS feed (its REST API allows 50 requests per 10 seconds). A company with up to 100 jobs is one call, bigger ones one call per 100 jobs. Keep your request rate modest.</p></div></details>
+<details><summary>Can I get all Teamtailor jobs, from every company, at once?</summary><div class="a"><p>No. The API answers for one company per request, and Teamtailor publishes no list of its customers. Our index reads 1,116 Teamtailor boards with open jobs every day (16,846 jobs on 18 November 2026); you can search all of them through our Apify actor or get them as a daily <a href="/tools/job-data-feed/">job data feed</a>.</p></div></details>
+<details><summary>Is it allowed to use the Teamtailor job board API?</summary><div class="a"><p>The API exists so that companies can show their jobs on their own sites and so that job boards can list them. It returns only what the employer has published. Read Teamtailor's documentation and terms for your use, keep request rates modest and link back to the original job for applications.</p></div></details>
+</div>
+    </section>
+    <section class="block" aria-labelledby="h-other">
+      <p class="cmt">other systems</p>
+      <h2 id="h-other" class="h2">Public job APIs of other applicant tracking systems</h2>
+      <ul class="linklist"><li><a href="/tools/job-board-api/greenhouse/">Greenhouse Job Board API</a></li><li><a href="/tools/job-board-api/lever/">Lever Postings API</a></li><li><a href="/tools/job-board-api/ashby/">Ashby Job Posting API</a></li><li><a href="/tools/job-board-api/smartrecruiters/">SmartRecruiters Posting API</a></li><li><a href="/tools/job-board-api/recruitee/">Recruitee Careers Site API</a></li><li><a href="/tools/job-board-api/personio/">Personio XML Job Feed</a></li><li><a href="/tools/job-board-api/gem/">Gem Job Board API</a></li><li><a href="/tools/job-board-api/">All 20 systems compared</a></li></ul>
+    </section>
+  </div>
+</main>
+<footer class="site-foot site-foot--tools">
+  <div class="wrap">
+<div class="foot-brand"><a class="brand" href="/"><span class="br">&lt;/</span>deriverge<span class="br">&gt;</span></a></div>
+<div class="foot-text">  <p>Free tools by <a href="/">deriverge s.r.o.</a>, a software studio in the Czech Republic. Our data actors are in <a data-actor="" data-campaign="job-board-api-teamtailor" href="https://apify.com/deriverge?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=job-board-api-teamtailor&amp;fpr=b6jtb8" target="_blank" rel="noopener sponsored">Apify Store</a>. Links to Apify carry our affiliate code: if you become a paying Apify customer, Apify pays us a commission at no extra cost to you.</p>
+  <p>Questions or a company listed by mistake: <a href="mailto:info@deriverge.com">info@deriverge.com</a>. The tools are provided as is, without warranty.</p>
+</div>
+  </div>
+</footer>
+<script src="/tools/config.js"></script>
+<script src="/tools/common.js"></script>
+
+</body>
+</html>
