@@ -186,6 +186,8 @@
     .edit.vat{flex-wrap:wrap}
     .edit.vat .e-nm{flex:1 1 calc(100% - 44px)}
     .edit.vat .e-pr{margin-left:36px}
+    .edit.vat .sg{margin-left:36px}
+    .edit.vat .sg + .e-pr{margin-left:0}
   }
   .line{display:flex;align-items:center;gap:10px;padding:8px 12px;border-bottom:1px solid var(--rule)}
   .line:last-child{border-bottom:0}
@@ -512,6 +514,25 @@
   .pw-plan .tr{margin-top:4px;font-size:12px;font-weight:600;line-height:1.3;color:var(--cash);text-align:center}
   .pw-plan.best{border-color:var(--accent);background:var(--accent-tint)}
   .pw-plan:active{transform:scale(.98)}
+  /* limit vyčerpaný a koupit nejde: dokončení účtu, bez strašení */
+  .pw-rescue{margin-top:14px;padding:12px;border:1px dashed var(--rule);border-radius:var(--r-tile);background:var(--paper)}
+  .pw-rescue p{margin:0;font-size:13px;line-height:1.45;color:var(--ink-2);text-align:center}
+  .pw-rescue .btn-ghost.strong{margin-top:10px;color:var(--ink);border-color:var(--ink-3);background:var(--surface)}
+  .pw-rescue .pw-rnote{margin-top:8px;font-size:12px;color:var(--ink-3)}
+  .sheet .sub.pnote{margin-top:10px;padding:8px 10px;border-radius:8px;background:var(--sunk);color:var(--ink);font-weight:600}
+  /* proužek s nabídkou zkušební doby nad lištou účtu */
+  .nudge{display:flex;align-items:center;gap:8px;padding:8px 8px 8px 12px;border-bottom:1px solid var(--rule);background:var(--accent-tint);font-size:13px;line-height:1.35;color:var(--ink-2)}
+  .nudge .t{flex:1;min-width:0}
+  .nudge strong{color:var(--ink)}
+  .nudge .go{flex:0 0 auto;padding:7px 11px;border:1px solid var(--accent);border-radius:999px;background:var(--surface);color:var(--accent);font-size:13px;font-weight:700}
+  .nudge .x{flex:0 0 auto;width:30px;height:30px;display:grid;place-items:center;border:0;border-radius:8px;background:none;color:var(--ink-3)}
+  .nudge .x svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round}
+  /* záporná cena v menu: znaménko jako tlačítko vedle pole */
+  .edit .sg{width:26px;height:34px;flex:0 0 auto;display:grid;place-items:center;border:1px solid var(--rule);border-radius:8px;background:var(--sunk);color:var(--accent)}
+  .edit .sg svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.6;stroke-linecap:round}
+  .edit .e-pr.neg{color:var(--accent)}
+  .hero .meta.dep{color:var(--ink-2)}
+  .ob-note.ob-free{color:var(--ink-2);font-weight:600}
   .pw-legal{padding:6px 4px 0;text-align:center;font-size:12px;color:var(--ink-3)}
   .pw-legal a{color:var(--ink-3);text-decoration:underline;text-underline-offset:2px}
   /* webová verze: Pro se kupuje v aplikaci, odkazy do obchodů a QR kódy */
@@ -1223,6 +1244,29 @@
     billSetupFail: "Nákup se nepodařilo připravit.",
     billModuleMissing: "Nákupní modul se nenačetl. Zkuste aplikaci zavřít a znovu otevřít.",
     obFiscal: "Tapkasa není fiskální pokladna (EET, eKasa a podobně) a nezpracovává platby.",
+    obFree: "Zdarma {0} plateb denně. Na celý trh si Tapkasu Pro vyzkoušíte {1} zdarma.",
+    nudgeTrial: "Na celý trh si Pro vyzkoušejte {0} zdarma.",
+    nudgePro: "S Tapkasa Pro vás limit uprostřed prodeje nezastaví.",
+    nudgeTry: "Vyzkoušet",
+    nudgeHide: "Dnes už nezobrazovat",
+    rescueHint: "Pro teď nejde koupit? Rozpracovaný účet dokončíte i tak.",
+    rescueResBtn: "Dokončit účet a použít rezervu (+{0} plateb)",
+    rescueResNote: "Rezervu dostanete jen jednou na tomto zařízení. Pro si pak kupte, až budete mít signál.",
+    rescueOneBtn: "Dokončit tento účet",
+    rescueOneNote: "Rezerva už je vyčerpaná. Tento účet dokončíte, další platby dnes až s Tapkasa Pro.",
+    toastReserve: "Rezerva zapnutá: dnes ještě {0} plateb navíc. Pro si kupte, až budete mít signál.",
+    addDeposit: "+ Přidat zálohu",
+    depItem: "Záloha",
+    depReturn: "Vrácení zálohy",
+    negHint: "Záporná cena se od účtu odečte, třeba vrácení zálohy za hrnek. Vrácení se ve frontě nepřipravuje a účet jen s vrácením se do denního limitu nepočítá.",
+    signAria: "Záporná cena, ťuknutím změníte na kladnou",
+    toReturn: "Vrátit zákazníkovi",
+    returnCashHint: "Vyplaťte zákazníkovi tuto částku z kasy a potvrďte.",
+    returnCardHint: "Vraťte částku na kartu přes terminál a potvrďte.",
+    toTerminalBack: "Vrátit {0} na kartu",
+    toastReturned: "Vráceno · {0} {1}",
+    depIn: "Zálohy vybrané",
+    depOut: "Vráceno zákazníkům",
     toastRemovedOne: "{0}: o kus méně",
     shortAsk: "Uložit i s nedoplatkem {0}",
     shortAskHint: "Zákazník dal méně, než je částka účtu. Opravdu uložit?",
@@ -1620,6 +1664,29 @@
     billSetupFail: "The purchase could not be prepared.",
     billModuleMissing: "The purchase module did not load. Try closing and reopening the app.",
     obFiscal: "Tapkasa is not a certified fiscal cash register and does not process payments.",
+    obFree: "Free: {0} payments a day. Try Tapkasa Pro free for {1}, enough for a whole market.",
+    nudgeTrial: "Try Pro free for {0} and get through the whole market.",
+    nudgePro: "With Tapkasa Pro the limit won’t stop you mid-sale.",
+    nudgeTry: "Try it",
+    nudgeHide: "Don’t show again today",
+    rescueHint: "Can’t buy Pro right now? You can still finish the current bill.",
+    rescueResBtn: "Finish the bill and use the reserve (+{0} payments)",
+    rescueResNote: "The reserve is a one-off on this device. Buy Pro once you have signal again.",
+    rescueOneBtn: "Finish this bill",
+    rescueOneNote: "The reserve is used up. You can finish this bill; further payments today need Tapkasa Pro.",
+    toastReserve: "Reserve on: {0} extra payments today. Buy Pro once you have signal.",
+    addDeposit: "+ Add deposit",
+    depItem: "Deposit",
+    depReturn: "Deposit return",
+    negHint: "A negative price is taken off the bill, e.g. a mug deposit return. Returns don’t go to the order queue, and a bill with only returns doesn’t count towards the daily limit.",
+    signAria: "Negative price, tap to make it positive",
+    toReturn: "Pay back to customer",
+    returnCashHint: "Pay this amount back from the till and confirm.",
+    returnCardHint: "Refund the amount to the card on your terminal and confirm.",
+    toTerminalBack: "Refund {0} to the card",
+    toastReturned: "Paid back · {0} {1}",
+    depIn: "Deposits taken",
+    depOut: "Paid back",
     toastRemovedOne: "{0}: one less",
     shortAsk: "Save with {0} still owed",
     shortAskHint: "The customer paid less than the total. Save anyway?",
@@ -2018,6 +2085,29 @@
     billSetupFail: "Nákup sa nepodarilo pripraviť.",
     billModuleMissing: "Nákupný modul sa nenačítal. Skúste aplikáciu zavrieť a znova otvoriť.",
     obFiscal: "Tapkasa nie je registračná pokladnica (eKasa a podobne) a nespracúva platby.",
+    obFree: "Zadarmo {0} platieb denne. Na celý trh si Tapkasu Pro vyskúšate {1} zadarmo.",
+    nudgeTrial: "Na celý trh si Pro vyskúšajte {0} zadarmo.",
+    nudgePro: "S Tapkasa Pro vás limit uprostred predaja nezastaví.",
+    nudgeTry: "Vyskúšať",
+    nudgeHide: "Dnes už nezobrazovať",
+    rescueHint: "Pro sa teraz nedá kúpiť? Rozpracovaný účet aj tak dokončíte.",
+    rescueResBtn: "Dokončiť účet a použiť rezervu (+{0} platieb)",
+    rescueResNote: "Rezervu dostanete len raz na tomto zariadení. Pro si potom kúpte, keď budete mať signál.",
+    rescueOneBtn: "Dokončiť tento účet",
+    rescueOneNote: "Rezerva je už vyčerpaná. Tento účet dokončíte, ďalšie platby dnes až s Tapkasa Pro.",
+    toastReserve: "Rezerva zapnutá: dnes ešte {0} platieb navyše. Pro si kúpte, keď budete mať signál.",
+    addDeposit: "+ Pridať zálohu",
+    depItem: "Záloha",
+    depReturn: "Vrátenie zálohy",
+    negHint: "Záporná cena sa od účtu odpočíta, napríklad vrátenie zálohy za hrnček. Vrátenie sa v rade nepripravuje a účet len s vrátením sa do denného limitu nepočíta.",
+    signAria: "Záporná cena, ťuknutím zmeníte na kladnú",
+    toReturn: "Vrátiť zákazníkovi",
+    returnCashHint: "Vyplaťte zákazníkovi túto sumu z kasy a potvrďte.",
+    returnCardHint: "Vráťte sumu na kartu cez terminál a potvrďte.",
+    toTerminalBack: "Vrátiť {0} na kartu",
+    toastReturned: "Vrátené · {0} {1}",
+    depIn: "Zálohy vybrané",
+    depOut: "Vrátené zákazníkom",
     toastRemovedOne: "{0}: o kus menej",
     shortAsk: "Uložiť aj s nedoplatkom {0}",
     shortAskHint: "Zákazník dal menej, než je suma účtu. Naozaj uložiť?",
@@ -2415,6 +2505,29 @@
     billSetupFail: "Der Kauf konnte nicht vorbereitet werden.",
     billModuleMissing: "Das Kaufmodul wurde nicht geladen. Bitte die App schließen und neu öffnen.",
     obFiscal: "Tapkasa ist keine zertifizierte Registrierkasse (TSE, RKSV und Ähnliches) und wickelt keine Zahlungen ab.",
+    obFree: "Kostenlos: {0} Zahlungen pro Tag. Tapkasa Pro können Sie {1} gratis testen, genug für den ganzen Markt.",
+    nudgeTrial: "Testen Sie Pro {0} gratis, für den ganzen Markt.",
+    nudgePro: "Mit Tapkasa Pro stoppt Sie das Limit nicht mitten im Verkauf.",
+    nudgeTry: "Testen",
+    nudgeHide: "Heute nicht mehr anzeigen",
+    rescueHint: "Pro lässt sich gerade nicht kaufen? Die angefangene Rechnung schließen Sie trotzdem ab.",
+    rescueResBtn: "Rechnung abschließen, Reserve nutzen (+{0} Zahlungen)",
+    rescueResNote: "Die Reserve gibt es nur einmal auf diesem Gerät. Kaufen Sie Pro, sobald Sie wieder Empfang haben.",
+    rescueOneBtn: "Diese Rechnung abschließen",
+    rescueOneNote: "Die Reserve ist aufgebraucht. Diese Rechnung schließen Sie ab, weitere Zahlungen heute nur mit Tapkasa Pro.",
+    toastReserve: "Reserve aktiv: heute {0} Zahlungen zusätzlich. Kaufen Sie Pro, sobald Sie Empfang haben.",
+    addDeposit: "+ Pfand hinzufügen",
+    depItem: "Pfand",
+    depReturn: "Pfandrückgabe",
+    negHint: "Ein negativer Preis wird von der Rechnung abgezogen, etwa die Pfandrückgabe für eine Tasse. Rückgaben landen nicht in der Warteschlange, und eine reine Rückgabe zählt nicht zum Tageslimit.",
+    signAria: "Negativer Preis, tippen für positiven Preis",
+    toReturn: "An Kunden auszahlen",
+    returnCashHint: "Zahlen Sie diesen Betrag aus der Kasse aus und bestätigen Sie.",
+    returnCardHint: "Erstatten Sie den Betrag am Terminal auf die Karte und bestätigen Sie.",
+    toTerminalBack: "{0} auf die Karte erstatten",
+    toastReturned: "Ausgezahlt · {0} {1}",
+    depIn: "Pfand eingenommen",
+    depOut: "Ausgezahlt",
     toastRemovedOne: "{0}: eins weniger",
     shortAsk: "Trotz {0} Fehlbetrag speichern",
     shortAskHint: "Der Kunde hat weniger als den Betrag gezahlt. Trotzdem speichern?",
@@ -2812,6 +2925,29 @@
     billSetupFail: "L'achat n'a pas pu être préparé.",
     billModuleMissing: "Le module d'achat ne s'est pas chargé. Fermez puis rouvrez l'application.",
     obFiscal: "Tapkasa n’est pas une caisse certifiée (NF525 ou équivalent) et ne traite pas les paiements.",
+    obFree: "Gratuit : {0} paiements par jour. Essayez Tapkasa Pro gratuitement pendant {1}, de quoi couvrir tout un marché.",
+    nudgeTrial: "Essayez Pro gratuitement pendant {0}, pour tout le marché.",
+    nudgePro: "Avec Tapkasa Pro, la limite ne vous arrêtera pas en pleine vente.",
+    nudgeTry: "Essayer",
+    nudgeHide: "Ne plus afficher aujourd’hui",
+    rescueHint: "Impossible d’acheter Pro pour l’instant ? Vous pouvez quand même terminer la note en cours.",
+    rescueResBtn: "Terminer la note avec la réserve (+{0} paiements)",
+    rescueResNote: "La réserve n’est accordée qu’une fois sur cet appareil. Achetez Pro dès que vous aurez du réseau.",
+    rescueOneBtn: "Terminer cette note",
+    rescueOneNote: "La réserve est épuisée. Vous pouvez terminer cette note ; les paiements suivants aujourd’hui nécessitent Tapkasa Pro.",
+    toastReserve: "Réserve activée : {0} paiements de plus aujourd’hui. Achetez Pro dès que vous aurez du réseau.",
+    addDeposit: "+ Ajouter une consigne",
+    depItem: "Consigne",
+    depReturn: "Retour consigne",
+    negHint: "Un prix négatif est déduit de la note, par exemple le retour de la consigne d’une tasse. Les retours ne vont pas dans la file et une note composée uniquement de retours ne compte pas dans la limite du jour.",
+    signAria: "Prix négatif, touchez pour le rendre positif",
+    toReturn: "À rendre au client",
+    returnCashHint: "Rendez ce montant au client depuis la caisse, puis confirmez.",
+    returnCardHint: "Remboursez le montant sur la carte via le terminal, puis confirmez.",
+    toTerminalBack: "Rembourser {0} sur la carte",
+    toastReturned: "Rendu · {0} {1}",
+    depIn: "Consignes encaissées",
+    depOut: "Rendu aux clients",
     toastRemovedOne: "{0} : un de moins",
     shortAsk: "Enregistrer malgré {0} manquant",
     shortAskHint: "Le client a donné moins que le total. Enregistrer quand même ?",
@@ -3209,6 +3345,29 @@
     billSetupFail: "No se pudo preparar la compra.",
     billModuleMissing: "El módulo de compra no se cargó. Cierre la aplicación y vuelva a abrirla.",
     obFiscal: "Tapkasa no es una caja registradora fiscal (TicketBAI, Verifactu y similares) y no procesa pagos.",
+    obFree: "Gratis: {0} pagos al día. Pruebe Tapkasa Pro gratis durante {1}, suficiente para todo un mercado.",
+    nudgeTrial: "Pruebe Pro gratis durante {0}, para todo el mercado.",
+    nudgePro: "Con Tapkasa Pro el límite no le detendrá en plena venta.",
+    nudgeTry: "Probar",
+    nudgeHide: "No mostrar más hoy",
+    rescueHint: "¿No puede comprar Pro ahora? Puede terminar igualmente la cuenta en curso.",
+    rescueResBtn: "Terminar la cuenta con la reserva (+{0} pagos)",
+    rescueResNote: "La reserva solo se concede una vez en este dispositivo. Compre Pro cuando vuelva a tener cobertura.",
+    rescueOneBtn: "Terminar esta cuenta",
+    rescueOneNote: "La reserva ya está agotada. Puede terminar esta cuenta; los siguientes pagos de hoy requieren Tapkasa Pro.",
+    toastReserve: "Reserva activada: hoy {0} pagos más. Compre Pro cuando tenga cobertura.",
+    addDeposit: "+ Añadir depósito",
+    depItem: "Depósito",
+    depReturn: "Devolución depósito",
+    negHint: "Un precio negativo se resta de la cuenta, por ejemplo la devolución del depósito de una taza. Las devoluciones no pasan a la cola y una cuenta solo con devoluciones no cuenta para el límite diario.",
+    signAria: "Precio negativo, toque para hacerlo positivo",
+    toReturn: "A devolver al cliente",
+    returnCashHint: "Devuelva este importe de la caja y confirme.",
+    returnCardHint: "Devuelva el importe a la tarjeta en el datáfono y confirme.",
+    toTerminalBack: "Devolver {0} a la tarjeta",
+    toastReturned: "Devuelto · {0} {1}",
+    depIn: "Depósitos cobrados",
+    depOut: "Devuelto a clientes",
     toastRemovedOne: "{0}: uno menos",
     shortAsk: "Guardar aunque faltan {0}",
     shortAskHint: "El cliente pagó menos que el total. ¿Guardar de todos modos?",
@@ -3606,6 +3765,29 @@
     billSetupFail: "Non è stato possibile preparare l'acquisto.",
     billModuleMissing: "Il modulo di acquisto non si è caricato. Chiudete e riaprite l'app.",
     obFiscal: "Tapkasa non è un registratore telematico (cassa fiscale) e non elabora pagamenti.",
+    obFree: "Gratis: {0} pagamenti al giorno. Tapkasa Pro si può provare gratis per {1}, abbastanza per un intero mercatino.",
+    nudgeTrial: "Provare Pro gratis per {0}, per tutto il mercatino.",
+    nudgePro: "Con Tapkasa Pro il limite non blocca le vendite a metà giornata.",
+    nudgeTry: "Provare",
+    nudgeHide: "Non mostrare più oggi",
+    rescueHint: "Non si riesce ad acquistare Pro adesso? Il conto in corso si può comunque chiudere.",
+    rescueResBtn: "Chiudere il conto con la riserva (+{0} pagamenti)",
+    rescueResNote: "La riserva vale una sola volta su questo dispositivo. Pro si può acquistare appena torna il segnale.",
+    rescueOneBtn: "Chiudere questo conto",
+    rescueOneNote: "La riserva è esaurita. Questo conto si può chiudere, i pagamenti successivi di oggi richiedono Tapkasa Pro.",
+    toastReserve: "Riserva attiva: oggi {0} pagamenti in più. Pro si può acquistare appena c’è segnale.",
+    addDeposit: "+ Aggiungere cauzione",
+    depItem: "Cauzione",
+    depReturn: "Reso cauzione",
+    negHint: "Un prezzo negativo viene sottratto dal conto, ad esempio il reso della cauzione di una tazza. I resi non finiscono in coda e un conto con soli resi non conta nel limite giornaliero.",
+    signAria: "Prezzo negativo, toccare per renderlo positivo",
+    toReturn: "Da restituire al cliente",
+    returnCashHint: "Restituire questo importo dalla cassa e confermare.",
+    returnCardHint: "Rimborsare l’importo sulla carta dal POS e confermare.",
+    toTerminalBack: "Rimborsare {0} sulla carta",
+    toastReturned: "Restituito · {0} {1}",
+    depIn: "Cauzioni incassate",
+    depOut: "Restituito ai clienti",
     toastRemovedOne: "{0}: uno in meno",
     shortAsk: "Salvare anche se mancano {0}",
     shortAskHint: "Il cliente ha pagato meno del totale. Salvare comunque?",
@@ -4003,6 +4185,29 @@
     billSetupFail: "Nie udało się przygotować zakupu.",
     billModuleMissing: "Moduł zakupów się nie załadował. Zamknij aplikację i otwórz ją ponownie.",
     obFiscal: "Tapkasa nie jest kasą fiskalną i nie obsługuje płatności.",
+    obFree: "Za darmo: {0} płatności dziennie. Tapkasa Pro można wypróbować za darmo przez {1}, na cały jarmark.",
+    nudgeTrial: "Pro można wypróbować za darmo przez {0}, na cały jarmark.",
+    nudgePro: "Z Tapkasa Pro limit nie przerwie sprzedaży w połowie dnia.",
+    nudgeTry: "Wypróbuj",
+    nudgeHide: "Nie pokazuj dziś więcej",
+    rescueHint: "Nie da się teraz kupić Pro? Rozpoczęty rachunek można i tak dokończyć.",
+    rescueResBtn: "Dokończ rachunek z rezerwą (+{0} płatności)",
+    rescueResNote: "Rezerwa przysługuje tylko raz na tym urządzeniu. Pro można kupić, gdy wróci zasięg.",
+    rescueOneBtn: "Dokończ ten rachunek",
+    rescueOneNote: "Rezerwa jest wyczerpana. Ten rachunek można dokończyć, kolejne płatności dziś wymagają Tapkasa Pro.",
+    toastReserve: "Rezerwa włączona: dziś {0} płatności więcej. Pro można kupić, gdy będzie zasięg.",
+    addDeposit: "+ Dodaj kaucję",
+    depItem: "Kaucja",
+    depReturn: "Zwrot kaucji",
+    negHint: "Ujemna cena odejmuje się od rachunku, np. zwrot kaucji za kubek. Zwroty nie trafiają do kolejki, a rachunek z samymi zwrotami nie liczy się do dziennego limitu.",
+    signAria: "Cena ujemna, dotknij, aby zmienić na dodatnią",
+    toReturn: "Do zwrotu klientowi",
+    returnCashHint: "Proszę wypłacić tę kwotę z kasy i potwierdzić.",
+    returnCardHint: "Proszę zwrócić kwotę na kartę przez terminal i potwierdzić.",
+    toTerminalBack: "Zwrot {0} na kartę",
+    toastReturned: "Zwrócono · {0} {1}",
+    depIn: "Kaucje pobrane",
+    depOut: "Zwrócono klientom",
     toastRemovedOne: "{0}: o jeden mniej",
     shortAsk: "Zapisz mimo brakujących {0}",
     shortAskHint: "Klient zapłacił mniej, niż wynosi rachunek. Zapisać mimo to?",
@@ -4400,6 +4605,29 @@
     billSetupFail: "Não foi possível preparar a compra.",
     billModuleMissing: "O módulo de compras não carregou. Feche e volte a abrir a aplicação.",
     obFiscal: "A Tapkasa não é um programa de faturação certificado (AT) e não processa pagamentos.",
+    obFree: "Grátis: {0} pagamentos por dia. Experimente o Tapkasa Pro grátis durante {1}, o suficiente para uma feira inteira.",
+    nudgeTrial: "Experimente o Pro grátis durante {0}, para a feira inteira.",
+    nudgePro: "Com o Tapkasa Pro o limite não o trava a meio da venda.",
+    nudgeTry: "Experimentar",
+    nudgeHide: "Não mostrar mais hoje",
+    rescueHint: "Não consegue comprar o Pro agora? Pode terminar a conta em curso na mesma.",
+    rescueResBtn: "Terminar a conta com a reserva (+{0} pagamentos)",
+    rescueResNote: "A reserva só é dada uma vez neste dispositivo. Compre o Pro quando voltar a ter rede.",
+    rescueOneBtn: "Terminar esta conta",
+    rescueOneNote: "A reserva já se esgotou. Pode terminar esta conta; os pagamentos seguintes de hoje precisam do Tapkasa Pro.",
+    toastReserve: "Reserva ativada: hoje mais {0} pagamentos. Compre o Pro quando tiver rede.",
+    addDeposit: "+ Adicionar caução",
+    depItem: "Caução",
+    depReturn: "Devolução caução",
+    negHint: "Um preço negativo é descontado da conta, por exemplo a devolução da caução de uma caneca. As devoluções não vão para a fila e uma conta só com devoluções não conta para o limite diário.",
+    signAria: "Preço negativo, toque para o tornar positivo",
+    toReturn: "A devolver ao cliente",
+    returnCashHint: "Devolva este valor da caixa e confirme.",
+    returnCardHint: "Reembolse o valor no cartão pelo terminal e confirme.",
+    toTerminalBack: "Devolver {0} ao cartão",
+    toastReturned: "Devolvido · {0} {1}",
+    depIn: "Cauções cobradas",
+    depOut: "Devolvido a clientes",
     toastRemovedOne: "{0}: menos um",
     shortAsk: "Guardar mesmo faltando {0}",
     shortAskHint: "O cliente pagou menos do que o total. Guardar mesmo assim?",
@@ -4689,7 +4917,13 @@
   // jen ten, kdo kód vytváří, takže stánku stačí jedno předplatné.
 
   var FREE_LIMIT = 10;
-  var APP_VERSION = "1.0.6";
+  // Limit nesmí být past uprostřed trhu: od NUDGE_AT plateb se nenásilně
+  // nabídne zkušební doba, a když limit padne a Pro koupit nejde (bez
+  // signálu, nákup selhal, web), rozpracovaný účet se dokončí a jednou za
+  // instalaci se pustí rezerva RESERVE plateb navíc na ten den.
+  var NUDGE_AT = 7;
+  var RESERVE = 10;
+  var APP_VERSION = "1.0.8";
   var SUPPORT_MAIL = "info@deriverge.com";
 
   // Pro se získá jedině nákupem v obchodě. Výjimkou jsou instalace z doby
@@ -4710,7 +4944,45 @@
     return state.payN || 0;
   }
 
-  function freeLeft() { return Math.max(0, FREE_LIMIT - paymentsToday()); }
+  // Dnešní strop: základ, k tomu rezerva (jednou za instalaci) a jeden
+  // dokončený účet navíc, když rezerva už padla a koupit nejde.
+  function dailyLimit() {
+    var t = todayKey();
+    return FREE_LIMIT + (state.resDay === t ? RESERVE : 0) + (state.graceDay === t ? 1 : 0);
+  }
+
+  function freeLeft() { return Math.max(0, dailyLimit() - paymentsToday()); }
+
+  function limitHit() { return !isPro() && paymentsToday() >= dailyLimit(); }
+
+  // Pro teď koupit nejde: web (kupuje se v aplikaci), bez signálu, nebo
+  // nákup na tomhle paywallu selhal. Jen tehdy se nabízí dokončení účtu.
+  function cantBuyNow() {
+    var off = false;
+    try { off = navigator.onLine === false; } catch (e) {}
+    return !nativeApp() || off || !!(sheet && sheet.buyFailed);
+  }
+
+  function canRescue() {
+    if (isPro() || !state.order.length || !cantBuyNow()) { return false; }
+    return !state.resUsed || state.graceDay !== todayKey();
+  }
+
+  // Dokončit rozpracovaný účet: poprvé rezerva +RESERVE na dnešek, potom
+  // nanejvýš jeden účet navíc denně. Rovnou se otevře placení.
+  function rescueBill() {
+    var t = todayKey(), note;
+    if (!state.resUsed) {
+      state.resUsed = true; state.resDay = t;
+      note = T("toastReserve", RESERVE);
+    } else {
+      state.graceDay = t;
+      note = T("rescueOneNote");
+    }
+    saveNow();
+    sheet = { step: "method", total: mr(orderTotal()), method: null, received: 0, note: note };
+    render();
+  }
 
   function countPayment() {
     var t = todayKey();
@@ -4744,6 +5016,8 @@
             : code === "20" ? T("billPending")
             : kind === "offering" || code === "2" || code === "3" || code === "5" || code === "23" ? T("billStore")
             : T("billFail", code || "?");
+    // na paywallu u limitu se po neúspěchu nabídne dokončení účtu
+    if (sheet && sheet.step === "paywall") { sheet.buyFailed = true; }
     showToast(msg);
   };
   window.__kasaPricesChanged = function () { render(); };
@@ -4803,7 +5077,9 @@
   // Hlášky jsou přeložené; technický důvod jde do závorky, ať se dá
   // nahlásit podpoře.
   function billAlert(key, why) {
+    if (sheet && sheet.step === "paywall") { sheet.buyFailed = true; }
     alert(T(key) + (why ? " (" + why + ")" : ""));
+    render();
   }
 
   // Webová verze (deriverge.com/tapkasa) nákup neumí: předplatné jde jen
@@ -5105,6 +5381,7 @@
       v: 3, event: "", evId: uid(), gone: [], mode: "kasa", nextNo: 1, voice: true, pair: "",
       lang: detectLang(), currency: detectCurrency(),
       setup: false, license: "", payDay: "", payN: 0, biz: "", vat: false, tourDone: false,
+      resUsed: false, resDay: "", graceDay: "", nudgeDay: "",
       rateN: 0, rateAsked: 0,
       seller: {},
       items: [], order: [], sales: [], archives: [], held: [],
@@ -5237,6 +5514,12 @@
     d.setup = d.setup !== false || d.items.length > 0 || d.sales.length > 0 || d.archives.length > 0 || !!d.pair;
     d.payDay = typeof d.payDay === "string" ? d.payDay : "";
     d.payN = typeof d.payN === "number" ? d.payN : 0;
+    // rezerva plateb (jednou za instalaci), účet navíc a skrytý proužek
+    // s nabídkou; jako počítadlo patří zařízení, ne záloze
+    d.resUsed = d.resUsed === true;
+    d.resDay = typeof d.resDay === "string" ? d.resDay : "";
+    d.graceDay = typeof d.graceDay === "string" ? d.graceDay : "";
+    d.nudgeDay = typeof d.nudgeDay === "string" ? d.nudgeDay : "";
     d.biz = typeof d.biz === "string" ? d.biz : "";
     d.vat = d.vat === true;   // starší instalace DPH neřešily, zůstanou vypnuté
     d.customVat = typeof d.customVat === "string" ? d.customVat : "";
@@ -5601,6 +5884,15 @@
   function orderCount() {
     return state.order.reduce(function (s, l) { return s + l.qty; }, 0);
   }
+  // Vratná záloha a vrácení (záporná cena, třeba hrnek na svařák). Řádek
+  // se připravuje jen tehdy, když jde o skutečné zboží: kladná cena a ne
+  // záloha. Účet složený jen z vrácení se nepočítá do denního limitu
+  // a zákazníka s hrnkem nezastaví ani vyčerpaný limit.
+  function needsPrep(l) { return l.price > 0 && !l.dep; }
+  function returnOnly(lines) {
+    return lines.length > 0 && lines.every(function (l) { return l.price < 0; });
+  }
+
   function salesTotal() {
     return state.sales.reduce(function (s, t) { return s + t.total; }, 0);
   }
@@ -5635,8 +5927,10 @@
     else {
       // sazbu si řádek nese s sebou, ať pozdější úprava položky nepřepíše
       // už rozúčtovaný doklad
-      state.order.push({ ref: item.id, name: item.name, price: item.price, qty: 1,
-                         color: item.color, vat: vatStr(item.vat) });
+      var nl = { ref: item.id, name: item.name, price: item.price, qty: 1,
+                 color: item.color, vat: vatStr(item.vat) };
+      if (item.dep) { nl.dep = 1; }
+      state.order.push(nl);
     }
     save();
     render();
@@ -5656,24 +5950,35 @@
   // ---------- sale ----------
 
   function commit() {
-    if (!isPro() && paymentsToday() >= FREE_LIMIT) {
+    var refund = returnOnly(state.order);
+    if (limitHit() && !refund) {
       sheet = { step: "paywall", reason: "limit" };
       render(); return;
     }
-    countPayment();
+    if (!refund) { countPayment(); }
+    var now = Date.now();
     var sale = {
       id: uid(),
       no: state.nextNo++,
-      ts: Date.now(),
-      updatedAt: Date.now(),
+      ts: now,
+      updatedAt: now,
       method: sheet.method,
       total: sheet.total,
       status: "open",
       ev: state.evId,
       lines: state.order.map(function (l) {
-        return { name: l.name, price: l.price, qty: l.qty, color: l.color || "", vat: vatStr(l.vat), ready: 0 };
+        var ln = { name: l.name, price: l.price, qty: l.qty, color: l.color || "", vat: vatStr(l.vat), ready: 0 };
+        if (l.dep) { ln.dep = 1; }
+        return ln;
       })
     };
+    // Účet bez ničeho k přípravě (jen vrácení nebo záloha) do fronty
+    // výdeje nepatří, rovnou je vydaný.
+    if (!sale.lines.some(needsPrep)) {
+      sale.status = "served";
+      sale.servedAt = now;
+      sale.lines.forEach(function (l) { l.ready = l.qty; });
+    }
     state.sales.push(sale);
     state.order = [];
     linesOpen = false;
@@ -5683,8 +5988,10 @@
     pushOrder(sale, true);
     render();
     if (state.mode === "kasa" && state.voice) { sayThanks(); }
-    showToast(T("toastSaved", czk(sale.total), sale.method === "cash" ? T("cashLower") : T("cardLower")), sale.id);
-    say(T("toastSaved", czk(sale.total), ""));
+    var how = sale.method === "cash" ? T("cashLower") : T("cardLower");
+    var msg = sale.total < 0 ? T("toastReturned", czk(-sale.total), how) : T("toastSaved", czk(sale.total), how);
+    showToast(msg, sale.id);
+    say(msg);
   }
 
   function undoSale(id) {
@@ -5696,11 +6003,15 @@
     if (i < 0) { return; }
     var sale = state.sales.splice(i, 1)[0];
     state.order = sale.lines.map(function (l) {
-      return { ref: refFor(l.name, l.price), name: l.name, price: l.price, qty: l.qty,
-               color: l.color || "", vat: vatStr(l.vat) };
+      var ol = { ref: refFor(l.name, l.price), name: l.name, price: l.price, qty: l.qty,
+                 color: l.color || "", vat: vatStr(l.vat) };
+      if (l.dep) { ol.dep = 1; }
+      return ol;
     });
-    // opravený prodej nesmí spotřebovat druhou z bezplatných plateb dne
-    if (state.payDay === todayKey() && state.payN > 0 && sale.ts >= new Date().setHours(0, 0, 0, 0)) { state.payN -= 1; }
+    // opravený prodej nesmí spotřebovat druhou z bezplatných plateb dne;
+    // samotné vrácení se do limitu nepočítalo, nic se tedy nevrací
+    if (!returnOnly(sale.lines) && state.payDay === todayKey() && state.payN > 0 &&
+        sale.ts >= new Date().setHours(0, 0, 0, 0)) { state.payN -= 1; }
     if (sale.no === state.nextNo - 1) { state.nextNo = sale.no; }
     hideToast();
     saveNow();
@@ -5751,7 +6062,7 @@
   }
 
   function servedOrders() {
-    return state.sales.filter(function (s) { return s.status !== "open"; })
+    return state.sales.filter(function (s) { return s.status !== "open" && s.lines.some(needsPrep); })
       .sort(function (a, b) { return b.no - a.no; });
   }
 
@@ -5760,12 +6071,13 @@
     return at ? at.sale : null;
   }
 
+  // kusy k přípravě: vrácení a zálohy se neodškrtávají
   function pieces(s) {
-    return s.lines.reduce(function (n, l) { return n + l.qty; }, 0);
+    return s.lines.reduce(function (n, l) { return n + (needsPrep(l) ? l.qty : 0); }, 0);
   }
 
   function ready(s) {
-    return s.lines.reduce(function (n, l) { return n + Math.min(l.ready || 0, l.qty); }, 0);
+    return s.lines.reduce(function (n, l) { return n + (needsPrep(l) ? Math.min(l.ready || 0, l.qty) : 0); }, 0);
   }
 
   function allReady(s) { return ready(s) >= pieces(s); }
@@ -5812,6 +6124,7 @@
   function saySale(s) {
     var parts = [T("speakNewOrder", s.no)];
     s.lines.forEach(function (l) {
+      if (!needsPrep(l)) { return; }
       parts.push(l.qty > 1 ? T("speakTimes", l.qty, l.name) : l.name + ".");
     });
     speak(parts.join(" "));
@@ -6147,6 +6460,7 @@
       items: state.items.map(function (it) {
         var o = { id: it.id, name: it.name, price: it.price, color: it.color || "" };
         if (it.vat !== undefined) { o.vat = it.vat; }
+        if (it.dep) { o.dep = true; }
         return o;
       }),
       seller: state.seller || {}, currency: state.currency, vat: state.vat === true, event: state.event || ""
@@ -6228,6 +6542,7 @@
       setupParts.ids[id] = true;
       var o = { id: id, name: it.name, price: it.price, color: typeof it.color === "string" ? it.color : "" };
       if (it.vat !== undefined) { o.vat = it.vat; }
+      if (it.dep) { o.dep = true; }
       setupParts.items.push(o);
     });
     // Použít až úplné menu: části přes přeposílač chodí v libovolném
@@ -6516,6 +6831,7 @@
       lines: s.lines.map(function (l) {
         var ln = { name: l.name, price: l.price, qty: l.qty, ready: l.ready || 0, color: l.color || "" };
         if (l.vat) { ln.vat = l.vat; }
+        if (l.dep) { ln.dep = 1; }
         return ln;
       })
     };
@@ -6869,12 +7185,14 @@
       if (!isObj(l) || typeof l.name !== "string") { return null; }
       var price = Number(l.price), qty = Number(l.qty), rd = Number(l.ready);
       if (!isFinite(price) || !isFinite(qty) || qty <= 0) { return null; }
-      lines.push({
+      var cl = {
         name: l.name.slice(0, 120), price: price, qty: qty,
         ready: isFinite(rd) ? Math.max(0, Math.min(qty, rd)) : 0,
         color: typeof l.color === "string" ? l.color.slice(0, 40) : "",
         vat: typeof l.vat === "string" || typeof l.vat === "number" ? vatStr(l.vat) : ""
-      });
+      };
+      if (l.dep) { cl.dep = 1; }
+      lines.push(cl);
     }
     var total = Number(inc.total);
     var o = {
@@ -6964,6 +7282,7 @@
         var il = incLines[i] || {};
         if (typeof il.ready === "number") { l.ready = il.ready; }
         if (il.vat && !l.vat) { l.vat = il.vat; }
+        if (il.dep && !l.dep) { l.dep = 1; }
       });
       return;
     }
@@ -6971,6 +7290,7 @@
     have.lines = incLines.map(function (il) {
       var o = { name: il.name, price: il.price, qty: il.qty, ready: il.ready || 0,
                 color: il.color || "", vat: il.vat || "" };
+      if (il.dep) { o.dep = 1; }
       if (!o.vat) {
         old.forEach(function (ol) {
           if (!o.vat && ol.name === o.name && ol.price === o.price && ol.vat) { o.vat = ol.vat; }
@@ -7026,6 +7346,7 @@
     var items = copyMenu ? state.items.map(function (it) {
       var o = { id: uid(), name: it.name, price: it.price, color: it.color || "" };
       if (it.vat !== undefined) { o.vat = it.vat; }
+      if (it.dep) { o.dep = true; }
       return o;
     }) : [];
     swapInEvent({ id: uid(), event: name, items: items, sales: [], nextNo: 1, createdAt: Date.now() });
@@ -7073,7 +7394,9 @@
   // ---------- stats ----------
 
   function stats() {
-    var s = { total: 0, cash: 0, card: 0, count: state.sales.length, pieces: 0, items: [] };
+    // depIn = vybrané zálohy, depOut = vráceno zákazníkům (záporné řádky);
+    // kusy počítají jen skutečné zboží
+    var s = { total: 0, cash: 0, card: 0, count: state.sales.length, pieces: 0, items: [], depIn: 0, depOut: 0 };
     var map = {};
     state.sales.forEach(function (t) {
       s.total += t.total;
@@ -7084,11 +7407,15 @@
         var lv = resolveVat(l.name, l.vat);
         var k = l.name + "|" + l.price + "|" + lv;
         if (!map[k]) { map[k] = { name: l.name, price: l.price, vat: lv, qty: 0, sum: 0 }; }
+        if (l.dep) { map[k].dep = 1; }
         map[k].qty += l.qty;
         map[k].sum += l.qty * l.price;
-        s.pieces += l.qty;
+        if (l.price < 0) { s.depOut -= l.qty * l.price; }
+        else if (l.dep) { s.depIn += l.qty * l.price; }
+        else { s.pieces += l.qty; }
       });
     });
+    s.depIn = mr(s.depIn); s.depOut = mr(s.depOut);
     Object.keys(map).forEach(function (k) { s.items.push(map[k]); });
     s.items.sort(function (a, b) { return b.sum - a.sum || b.qty - a.qty; });
     return s;
@@ -7104,11 +7431,20 @@
     out.push("  " + T("cashLower") + ": " + czk(s.cash));
     out.push("  " + T("cardLower") + ": " + czk(s.card));
     out.push(T("sumBills") + " " + s.count + " · " + T("sumPieces") + " " + s.pieces);
+    depLines(s.depIn, s.depOut).forEach(function (ln) { out.push("  " + ln); });
     out.push("");
     s.items.forEach(function (i) {
       out.push(i.qty + "× " + i.name + " (" + czk(i.price) + ") = " + czk(i.sum));
     });
     return out.join("\n");
+  }
+
+  // Zálohy a vrácení zvlášť, jen když nějaké byly.
+  function depLines(depIn, depOut) {
+    var out = [];
+    if (depIn) { out.push(T("depIn") + ": " + czk(depIn)); }
+    if (depOut) { out.push(T("depOut") + ": " + czk(depOut)); }
+    return out;
   }
 
   // ---------- views ----------
@@ -7132,9 +7468,22 @@
     return h;
   }
 
+  // Nenásilný proužek od NUDGE_AT plateb: kolik dnes zbývá a nabídka
+  // zkušební doby. Zavřený zůstane zavřený do konce dne.
+  function renderNudge() {
+    if (isPro() || state.mode !== "kasa" || state.nudgeDay === todayKey()) { return ""; }
+    var used = paymentsToday(), left = freeLeft();
+    if (used < NUDGE_AT || left <= 0) { return ""; }
+    var tr = trialOf("monthly") || trialOf("yearly") || (nativeApp() ? null : { n: 14, unit: "DAY" });
+    return '<div class="nudge" role="status"><span class="t"><strong>' + esc(proLeftText(left)) + ".</strong> " +
+             esc(tr ? T("nudgeTrial", trialText(tr)) : T("nudgePro")) + "</span>" +
+             '<button class="go" data-paywall="nudge">' + esc(tr ? T("nudgeTry") : T("proRow")) + "</button>" +
+             '<button class="x" data-nudgehide="1" aria-label="' + esc(T("nudgeHide")) + '">' + SVG.close + "</button></div>";
+  }
+
   function renderBar() {
     var n = orderCount();
-    var h = '<div class="bar">';
+    var h = '<div class="bar">' + renderNudge();
 
     if (linesOpen && state.order.length) {
       h += '<div class="bar-lines">';
@@ -7185,6 +7534,7 @@
                '<span class="no">' + s.no + "</span>" +
                '<span class="mid"><span class="chips">';
         s.lines.forEach(function (l) {
+          if (!needsPrep(l)) { return; }
           h += '<span class="chip' + ((l.ready || 0) >= l.qty ? " done" : "") + '"' + tint(l.color) + ">" +
                (l.qty > 1 ? '<span class="q">' + l.qty + "×</span>" : "") + esc(l.name) + "</span>";
         });
@@ -7199,7 +7549,7 @@
     if (done.length) {
       h += '<section class="sec"><h2>' + esc(T("servedHead")) + "</h2>";
       done.forEach(function (s) {
-        var what = s.lines.map(function (l) { return l.qty + "× " + l.name; }).join(", ");
+        var what = s.lines.filter(needsPrep).map(function (l) { return l.qty + "× " + l.name; }).join(", ");
         h += '<div class="served">' +
              '<button class="row" data-reopen="' + s.id + '" aria-label="' + esc(T("reopenAria", s.no)) + '">' +
                '<span class="no">#' + s.no + "</span>" +
@@ -7220,28 +7570,34 @@
             s.pieces + " " + tp("piecesN", s.pieces) + "</p>";
 
     if (s.total > 0) {
-      var pc = Math.round((s.cash / s.total) * 100);
+      // vrácení hotově může hotovost stáhnout pod nulu, pruh to nesmí rozbít
+      var cashPos = Math.max(0, s.cash), cardPos = Math.max(0, s.card);
+      var pc = Math.round((cashPos / ((cashPos + cardPos) || 1)) * 100);
       h += '<div class="split" role="img" aria-label="' + esc(T("splitAria", czk(s.cash), czk(s.card))) + '">';
-      if (s.cash > 0) { h += '<i class="sp-cash" style="width:' + pc + '%"></i>'; }
-      if (s.card > 0) { h += '<i class="sp-card" style="flex:1"></i>'; }
+      if (cashPos > 0) { h += '<i class="sp-cash" style="width:' + pc + '%"></i>'; }
+      if (cardPos > 0) { h += '<i class="sp-card" style="flex:1"></i>'; }
       h += "</div>";
     }
     h += '<div class="legend">' +
            '<span class="lg"><i class="sp-cash"></i><span class="k">' + esc(T("cash")) + '</span><span class="v">' + czk(s.cash) + "</span></span>" +
            '<span class="lg"><i class="sp-card"></i><span class="k">' + esc(T("card")) + '</span><span class="v">' + czk(s.card) + "</span></span>" +
-         "</div></section>";
+         "</div>" +
+         (s.depIn || s.depOut ? '<p class="meta dep">' + esc(depLines(s.depIn, s.depOut).join(" · ")) + "</p>" : "") +
+         "</section>";
 
-    if (s.items.length) {
-      var max = s.items[0].sum || 1;
+    // v Co se prodalo jen zboží; zálohy a vrácení mají vlastní řádek nahoře
+    var goods = s.items.filter(function (i) { return i.price > 0 && !i.dep; });
+    if (goods.length) {
+      var max = goods[0].sum || 1;
       h += '<section class="sec"><h2>' + esc(T("soldHead")) + '</h2><div class="items">';
-      s.items.forEach(function (i) {
+      goods.forEach(function (i) {
         h += '<div class="it"><div class="r"><span class="nm">' + esc(i.name) + "</span>" +
              '<span class="q">' + i.qty + "×</span>" +
              '<span class="a">' + czk(i.sum) + "</span></div>" +
              '<div class="track"><div class="fill" style="width:' + Math.max(2, (i.sum / max) * 100) + '%"></div></div></div>';
       });
       h += "</div></section>";
-    } else {
+    } else if (!state.sales.length) {
       h += '<p class="hint" style="padding-top:28px">' + T("emptyStats") + "</p>";
     }
 
@@ -7322,14 +7678,16 @@
     var to = new Date(toS + "T23:59:59.999").getTime();
     if (isNaN(from) || isNaN(to)) { return null; }
 
-    var total = 0, cashSum = 0, cardSum = 0, bills = 0;
+    var total = 0, cashSum = 0, cardSum = 0, bills = 0, depIn = 0, depOut = 0;
     var items = {}, events = {};
-    var addItem = function (name, price, qty, sum, vat) {
+    var addItem = function (name, price, qty, sum, vat, dep) {
       var v = vatStr(vat);
       var k = name + "|" + price + "|" + v;
       if (!items[k]) { items[k] = { name: name, price: price, vat: v, qty: 0, sum: 0 }; }
+      if (dep) { items[k].dep = 1; }
       items[k].qty += qty;
       items[k].sum += sum;
+      if (price < 0) { depOut -= sum; } else if (dep) { depIn += sum; }
     };
 
     // otevřené akce: účtenky podle data prodeje
@@ -7343,7 +7701,7 @@
         if (s.method === "cash") { cashSum += s.total; } else { cardSum += s.total; }
         events[evName] = true;
         s.lines.forEach(function (l) {
-          addItem(l.name, l.price, l.qty, l.qty * l.price, resolveVat(l.name, l.vat, ev.items));
+          addItem(l.name, l.price, l.qty, l.qty * l.price, resolveVat(l.name, l.vat, ev.items), l.dep);
         });
       });
     });
@@ -7366,7 +7724,7 @@
           // ne dnešní menu
           var aItems = Array.isArray(a.items) && a.items.length ? a.items : undefined;
           s.lines.forEach(function (l) {
-            addItem(l.name, l.price, l.qty, l.qty * l.price, resolveVat(l.name, l.vat, aItems));
+            addItem(l.name, l.price, l.qty, l.qty * l.price, resolveVat(l.name, l.vat, aItems), l.dep);
           });
         });
         return;
@@ -7378,11 +7736,12 @@
       cardSum += a.card || 0;
       events[aName] = true;
       (a.items || []).forEach(function (i) {
-        addItem(i.name, i.price, i.qty, i.sum, resolveVat(i.name, i.vat));
+        addItem(i.name, i.price, i.qty, i.sum, resolveVat(i.name, i.vat), i.dep);
       });
     });
 
     if (!bills) { return ""; }
+    depIn = mr(depIn); depOut = mr(depOut);
 
     var list = Object.keys(items).map(function (k) { return items[k]; });
     list.sort(function (a, b) { return b.sum - a.sum || b.qty - a.qty; });
@@ -7457,6 +7816,7 @@
     out.push(T("docReceipts") + " " + bills);
     out.push(T("cash") + ": " + czk(cashSum));
     out.push(T("card") + ": " + czk(cardSum));
+    depLines(depIn, depOut).forEach(function (ln) { out.push(ln); });
     out.push(T("docTotal") + ": " + czk(total));
     out.push("");
     out.push(T("docFooter"));
@@ -7470,7 +7830,7 @@
       events: Object.keys(events),
       items: list,
       vatRows: vatRows, vatBase: vatBase, vatTax: vatTax,
-      bills: bills, cash: cashSum, card: cardSum, total: total
+      bills: bills, cash: cashSum, card: cardSum, total: total, depIn: depIn, depOut: depOut
     };
   }
 
@@ -7749,6 +8109,9 @@
       var yb = boxTop + 20;
       font(10, 400); ink(INK2);
       g.fillText(T("docReceipts") + " " + doc.bills, M + 4, yb);
+      // zálohy a vrácení vlevo pod počtem účtů, panel se tím nezvětší
+      var dl = depLines(doc.depIn || 0, doc.depOut || 0);
+      if (dl.length) { g.fillText(clip(dl.join(" · "), halfW), M + 4, yb + 15); }
       right(T("cash") + ": " + czk(doc.cash), xSum - 4, yb); yb += 15;
       right(T("card") + ": " + czk(doc.card), xSum - 4, yb); yb += 12;
 
@@ -8028,7 +8391,13 @@
              '<button class="sw' + (c ? "" : " none") + '"' + (c ? ' style="background:' + c.bg + '"' : "") +
                ' data-col="' + it.id + '" aria-label="' + esc(T("colorAria")) + '"></button>' +
              '<input class="e-nm" data-nm="' + it.id + '" value="' + esc(it.name) + '">' +
-             '<input class="e-pr" data-pr="' + it.id + '" inputmode="decimal" value="' + priceStr(it.price) + '" aria-label="' + esc(T("priceAria")) + '">' +
+             // Záporná cena (vrácení zálohy): znaménko je samostatné tlačítko,
+             // číselná klávesnice v iPhonu minus nemá. Pole drží jen velikost.
+             (it.price < 0
+               ? '<button class="sg" data-sign="' + it.id + '" aria-label="' + esc(T("signAria")) + '">' + SVG.minus + "</button>"
+               : "") +
+             '<input class="e-pr' + (it.price < 0 ? " neg" : "") + '" data-pr="' + it.id + '"' + (it.price < 0 ? ' data-neg="1"' : "") +
+               ' inputmode="decimal" value="' + priceStr(Math.abs(it.price)) + '" aria-label="' + esc(T("priceAria")) + '">' +
              // sazba se ukazuje jen plátcům DPH, ostatním by řádek jen zabírala
              (state.vat
                ? '<input class="e-vat" data-vat="' + it.id + '" inputmode="decimal" placeholder="%" value="' +
@@ -8039,8 +8408,9 @@
     });
 
     return h + '<div class="acts"><button class="act" data-new="1">' + esc(T("addItem")) + "</button>" +
+           '<button class="act" data-adddep="1">' + esc(T("addDeposit")) + "</button>" +
            '<button class="act danger" data-reset="1">' + esc(T("resetMenu")) + "</button></div>" +
-           '<p class="hint">' + esc(T("pricesHint")) + "</p>" +
+           '<p class="hint">' + esc(T("pricesHint")) + " " + esc(T("negHint")) + "</p>" +
            settingsBlock() + renderBackupBlock();
   }
 
@@ -8132,7 +8502,7 @@
   // drobný ukazatel zbývajících plateb zdarma v prodejní liště
   function freeCounter() {
     if (isPro()) { return ""; }
-    return ' <span class="fcnt">' + esc(T("freeBadge", paymentsToday(), FREE_LIMIT)) + "</span>";
+    return ' <span class="fcnt">' + esc(T("freeBadge", paymentsToday(), dailyLimit())) + "</span>";
   }
 
   // cena do editačního pole: bez zbytečných nul, s tečkou
@@ -8183,9 +8553,15 @@
     }
   }
 
+  // Minus (i typografické „−“) na začátku dává zápornou cenu, třeba vrácení
+  // zálohy. Dřív se znaménko zahazovalo.
   function parsePrice(raw) {
-    var t = String(raw === undefined || raw === null ? "" : raw)
-      .replace(/[\s\u00a0\u202f']/g, "").replace(/[^0-9.,]/g, "");
+    var src = String(raw === undefined || raw === null ? "" : raw).trim();
+    if (/^[-\u2212]/.test(src)) {
+      var abs = parsePrice(src.replace(/^[-\u2212]+/, ""));
+      return isNaN(abs) ? NaN : -abs;
+    }
+    var t = src.replace(/[\s\u00a0\u202f']/g, "").replace(/[^0-9.,]/g, "");
     if (!t) { return NaN; }
     var last = Math.max(t.lastIndexOf(","), t.lastIndexOf("."));
     if (last < 0) { return parseFloat(t); }
@@ -8490,17 +8866,39 @@
     if (!sheet) { return ""; }
     var h = "";
 
+    // Záporný součet (jen vrácení zálohy, nebo vrácení převáží nákup):
+    // zákazník nic neplatí, vyplácí se mu. Bez bankovek a počítání vrácení.
+    var payBack = (sheet.step === "method" || sheet.step === "cash" || sheet.step === "card") && sheet.total < 0;
+
     if (sheet.step === "method") {
       var n = orderCount();
-      h += "<h2>" + esc(T("toPay")) + "</h2><div class=\"big num\">" + czk(sheet.total) + "</div>" +
+      h += "<h2>" + esc(T(payBack ? "toReturn" : "toPay")) + "</h2><div class=\"big num\">" + czk(payBack ? -sheet.total : sheet.total) + "</div>" +
            '<p class="sub">' + n + " " + tp("itemsN", n) + "</p>" +
+           (sheet.note ? '<p class="sub pnote">' + esc(sheet.note) + "</p>" : "") +
            '<div class="pay2">' +
              '<button class="btn-m m-cash" data-method="cash"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="3"/></svg>' + esc(T("cash")) + "</button>" +
              '<button class="btn-m m-card" data-method="card"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>' + esc(T("card")) + "</button>" +
            "</div><button class=\"btn-ghost\" data-cancel=\"1\">" + esc(T("backToOrder")) + "</button>";
     }
 
-    if (sheet.step === "cash") {
+    if (sheet.step === "cash" && payBack) {
+      h += "<h2>" + esc(T("toReturn")) + "</h2><div class=\"big num\">" + czk(-sheet.total) + "</div>" +
+           '<p class="sub">' + esc(T("returnCashHint")) + "</p>" +
+           '<div class="recv give"><span class="lbl">' + esc(T("cash")) + '</span><span class="val num">' + czk(-sheet.total) + "</span></div>" +
+           '<button class="btn-done" data-commit="1">' + esc(T("done")) + "</button>" +
+           '<button class="btn-ghost" data-cancel="1">' + esc(T("back")) + "</button>";
+    }
+
+    if (sheet.step === "card" && payBack) {
+      h += "<h2>" + esc(T("toReturn")) + "</h2><div class=\"big num\">" + czk(-sheet.total) + "</div>" +
+           '<p class="sub">' + esc(T("returnCardHint")) + "</p>" +
+           '<div class="paid m-card"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>' +
+           esc(T("toTerminalBack", czk(-sheet.total))) + "</div>" +
+           '<button class="btn-done" data-commit="1">' + esc(T("done")) + "</button>" +
+           '<button class="btn-ghost" data-cancel="1">' + esc(T("back")) + "</button>";
+    }
+
+    if (sheet.step === "cash" && !payBack) {
       var back = mr(sheet.received - sheet.total);
       var got = sheet.received > 0;
       h += "<h2>" + esc(T("cash")) + "</h2><div class=\"big num\">" + czk(sheet.total) + "</div>" +
@@ -8528,7 +8926,7 @@
       h += '<button class="btn-ghost" data-cancel="1">' + esc(T("back")) + "</button>";
     }
 
-    if (sheet.step === "card") {
+    if (sheet.step === "card" && !payBack) {
       h += "<h2>" + esc(T("card")) + "</h2><div class=\"big num\">" + czk(sheet.total) + "</div>" +
            '<p class="sub">' + esc(T("cardHint")) + "</p>" +
            '<div class="paid m-card"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>' +
@@ -8696,6 +9094,7 @@
                esc(s.method === "cash" ? T("cashLower") : T("cardLower")) + "</p>" +
              '<div class="steps">';
         s.lines.forEach(function (l, i) {
+          if (!needsPrep(l)) { return; }   // index zůstává původní, kvůli data-line
           var isDone = (l.ready || 0) >= l.qty;
           h += '<button class="st' + (isDone ? " done" : "") + '"' +
                  tint(l.color, ' style="background:var(--surface)"') + ' data-line="' + i + '">' +
@@ -8776,6 +9175,14 @@
              '<div class="pw-b">' + PW_CHECK + esc(T("proB3")) + "</div>" +
            "</div>" +
            '<div class="pw-plans">' + planButton("monthly") + planButton("yearly") + "</div>" +
+           // Limit padl a koupit teď nejde: rozpracovaný účet se dokončí.
+           // Poprvé s rezervou na zbytek dne, potom už jen tento jeden účet.
+           (sheet.reason === "limit" && canRescue()
+             ? '<div class="pw-rescue"><p>' + esc(T("rescueHint")) + "</p>" +
+               '<button class="btn-ghost strong" data-rescue="1">' +
+                 esc(state.resUsed ? T("rescueOneBtn") : T("rescueResBtn", RESERVE)) + "</button>" +
+               '<p class="pw-rnote">' + esc(state.resUsed ? T("rescueOneNote") : T("rescueResNote")) + "</p></div>"
+             : "") +
            // na webu se nekupuje ani neobnovuje: rovnou cesta do obchodů
            (nativeApp() ? '<button class="btn-ghost" data-restorebuy="1">' + esc(T("proRestore")) + "</button>" : storeBlock()) +
            '<button class="btn-ghost" data-cancel="1">' + esc(T("proLater")) + "</button>" +
@@ -8934,6 +9341,8 @@
         '<div class="ob-row"><i style="background:#2158C4">' + ICON.orders + "</i><p>" + esc(T("obHow2")) + "</p></div>" +
         '<div class="ob-row"><i style="background:#127A4E"><svg viewBox="0 0 24 24"><rect x="2" y="4" width="12" height="16" rx="2"/><rect x="16" y="8" width="6" height="12" rx="2"/></svg></i><p>' + esc(T("obHow3")) + "</p></div>" +
       "</div>" +
+      // limit hned na začátku, ať nikoho nepřekvapí až u jedenáctého zákazníka
+      '<p class="ob-note ob-free">' + esc(T("obFree", FREE_LIMIT, trialText({ n: 14, unit: "DAY" }))) + "</p>" +
       // poctivé vymezení: nejde o fiskální pokladnu (EET, eKasa, TSE…)
       '<p class="ob-note">' + esc(T("obFiscal")) + "</p>" +
       '<div class="ob-spacer"></div>' +
@@ -9266,7 +9675,7 @@
             "[data-tourskip],[data-tourstart],[data-offlinehelp],[data-country],[data-docmail],[data-docshare],[data-docsave],[data-sellersheet],[data-archopen],[data-archdel],[data-vatmode],[data-langsheet],[data-cursheet],[data-setlang],[data-setcur],[data-paywall],[data-buy]," +
             "[data-restorebuy],[data-oblang],[data-obcur],[data-obnext],[data-obdemo],[data-obempty]," +
             "[data-evsheet],[data-evswitch],[data-evnew],[data-evcreate],[data-evdel],[data-cvat],[data-backupfile]," +
-            "[data-diag],[data-shortok]";
+            "[data-diag],[data-shortok],[data-rescue],[data-nudgehide],[data-sign],[data-adddep]";
 
   document.addEventListener("click", function (ev) {
     if (suppressClick) { suppressClick = false; return; }
@@ -9334,7 +9743,8 @@
     }
 
     if (d.pay) {
-      if (!isPro() && paymentsToday() >= FREE_LIMIT) {
+      // samotné vrácení zálohy limit nezastaví
+      if (limitHit() && !returnOnly(state.order)) {
         sheet = { step: "paywall", reason: "limit" };
         render(); return;
       }
@@ -9570,6 +9980,7 @@
           var ritems = src.map(function (it) {
             var o = { id: uid(), name: it.name, price: it.price, color: it.color || "" };
             if (it.vat !== undefined) { o.vat = it.vat; }
+            if (it.dep) { o.dep = true; }
             return o;
           });
           swapInEvent({ id: rid, event: ao.event, items: ritems, sales: rsales, nextNo: rnext, createdAt: Date.now() });
@@ -9593,6 +10004,21 @@
         saveNow(); render();
         showToast(T("toastArchDel"));
       });
+      return;
+    }
+
+    // Záloha jako dvojice karet: vybrání (kladná) a vrácení (záporná cena).
+    if (d.adddep) {
+      var dp = demoPrice(50);
+      state.items.push({ id: uid(), name: T("depItem"), price: dp, color: "hneda", dep: true });
+      state.items.push({ id: uid(), name: T("depReturn"), price: -dp, color: "grafit", dep: true });
+      save(); render();
+      return;
+    }
+
+    if (d.sign) {
+      var si = findItem(d.sign);
+      if (si) { si.price = mr(-si.price); save(); render(); }
       return;
     }
 
@@ -9847,6 +10273,11 @@
     }
 
     if (d.paywall) { sheet = { step: "paywall", reason: d.paywall }; render(); return; }
+    if (d.rescue) {
+      if (sheet && sheet.step === "paywall" && canRescue()) { rescueBill(); }
+      return;
+    }
+    if (d.nudgehide) { state.nudgeDay = todayKey(); save(); render(); return; }
     if (d.buy) { billingBuy(d.buy); return; }
     if (d.restorebuy) { billingRestore(); return; }
 
@@ -9883,6 +10314,10 @@
       next.pairProCode = state.pairProCode;
       next.payDay = state.payDay;
       next.payN = state.payN;
+      next.resUsed = state.resUsed;
+      next.resDay = state.resDay;
+      next.graceDay = state.graceDay;
+      next.nudgeDay = state.nudgeDay;
       state = next;
       archMissing = [];   // záloha nese archiv celý
       sheet = null;
@@ -10016,8 +10451,11 @@
       item.vat = String(el.value).trim() === "" ? "" : vatNum(el.value);
       if (item.vat === null) { item.vat = ""; }
     } else {
+      // pole záporné položky ukazuje jen velikost, znaménko drží data-neg;
+      // napsaný minus udělá zápornou cenu i z kladné
       var num = parsePrice(el.value);
-      item.price = isNaN(num) ? 0 : mr(num);
+      var neg = (!isNaN(num) && num < 0) || el.dataset.neg === "1";
+      item.price = isNaN(num) ? 0 : mr(neg ? -Math.abs(num) : num);
     }
     save();
   });
@@ -10078,6 +10516,10 @@
   // převezmeme, jinak by si karty navzájem přepisovaly tržby a čísla.
   // otočení telefonu nebo změna velikosti okna: velká čísla znovu přizpůsobit
   window.addEventListener("resize", function () { try { fitNumbers(); } catch (e) {} });
+  // paywall u limitu: bez signálu se nabídne dokončení účtu, se signálem zmizí
+  ["online", "offline"].forEach(function (t) {
+    window.addEventListener(t, function () { if (sheet && sheet.step === "paywall") { render(); } });
+  });
 
   window.addEventListener("storage", function (ev) {
     if (ev.key !== KEY || !ev.newValue) { return; }
