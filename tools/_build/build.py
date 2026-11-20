@@ -1078,7 +1078,12 @@ def page_ats(a, rows, st, date, cn):
         ('How fresh is this data?',
          f'<p>The job index behind this page is rebuilt every day. This page shows the index of {nice_date}.</p>'),
     ]
-    body = '\n'.join([
+    ac = sorted((AC.get(a) or {}).items(), key=lambda x: -len(x[1]))
+    by_country = section('// by country', f'{name} companies by country',
+                         '      <ul class="linklist">' + ''.join(
+                             f'<li><a href="{path}{ac_slug(c, cn)}/">{esc(ac_name(c, cn))}</a><span>{len(l):,} companies</span></li>' for c, l in ac) + '</ul>',
+                         hid='by-country') if ac else ''
+    body = [
         section('// at a glance', f'{name} in numbers', stats_html, hid='numbers'),
         section('// biggest employers', f'Biggest {name} employers by open jobs', top_block, hid='top'),
         f'''    <section class="block" aria-label="Countries">
@@ -1087,6 +1092,7 @@ def page_ats(a, rows, st, date, cn):
         <div><p class="cmt">// where the jobs are</p><h2 class="h2">Top countries by open jobs</h2>{cj_block}</div>
       </div>
     </section>''',
+        by_country,
         section('// the full list', f'All companies using {name}', table, hid='list'),
         ats_cta(a, camp),
         section('// check it yourself', f'How to tell if a company uses {name}', howto, hid='howto'),
@@ -1094,7 +1100,8 @@ def page_ats(a, rows, st, date, cn):
         section('// questions', 'Frequently asked questions', faq_block(faq), hid='faq'),
         section('// other systems', 'Companies using other applicant tracking systems',
                 f'      <ul class="linklist">{ats_links(a)}<li><a href="/tools/companies-using-ats/">Compare all 14 systems</a></li></ul>', hid='other'),
-    ])
+    ]
+    body = '\n'.join(b for b in body if b)
     dataset = {'@context': 'https://schema.org', '@type': 'Dataset', 'name': f'Companies using {name}',
                'description': f'{st["companies"]:,} companies with a public {name} career site, with careers page URL, main hiring country and number of open jobs, built from public career sites by deriverge.',
                'url': SITE + path, 'dateModified': date, 'creator': {'@type': 'Organization', 'name': 'deriverge s.r.o.', 'url': SITE + '/'},
@@ -1106,6 +1113,139 @@ def page_ats(a, rows, st, date, cn):
            ld=[dataset, faq_ld(faq)],
            trail=[('deriverge', '/'), ('Tools', '/tools/'), ('ATS', '/tools/companies-using-ats/'), (f'Companies using {name}', path)],
            scripts=['<script src="/tools/js/ats-common.js" defer></script>', '<script src="/tools/js/ats-table.js" defer></script>'])
+
+
+AC_MIN = 30    # an ATS and country pair gets its own page from this many employers with open jobs
+AC_ROWS = 300  # rows printed in the page itself; the full list stays in the parent page's table and CSV
+AC = {}        # {ats: {country code: [employer, ...]}}, filled in main()
+
+
+def ac_name(cc, cn):
+    return COUNTRY_NAME.get(cc) or cn.get(cc) or cc
+
+
+def ac_in(cc, cn):
+    return ('the ' if cc in THE else '') + ac_name(cc, cn)
+
+
+def ac_slug(cc, cn):
+    s = unicodedata.normalize('NFKD', ac_name(cc, cn)).encode('ascii', 'ignore').decode().lower()
+    return re.sub(r'[^a-z0-9]+', '-', s).strip('-')
+
+
+def ats_countries(a, rows, st):
+    """Employers with open jobs grouped by their main country; only countries with at least AC_MIN employers."""
+    emp = {}
+    for r in rows:  # sorted by open jobs, so the first row of an employer is its biggest site
+        k = employer_key(a, r)
+        cc = st['emp_cc'].get(k)
+        if not cc:
+            continue
+        e = emp.get(k)
+        if e is None:
+            emp[k] = {'name': r['name'], 'k': r['k'], 'jobs': r['jobs'], 'site': r['site'], 'cc': cc}
+        else:
+            e['jobs'] += r['jobs']
+            e['site'] = e['site'] or r['site']
+    out = {}
+    for e in emp.values():
+        out.setdefault(e['cc'], []).append(e)
+    for l in out.values():
+        l.sort(key=lambda e: (-e['jobs'], e['name'].lower()))
+    return {cc: l for cc, l in out.items() if len(l) >= AC_MIN}
+
+
+def page_ats_country(a, cc, emps, st, date, cn):
+    name = ATS[a]['name']
+    country, in_c, slug = ac_name(cc, cn), ac_in(cc, cn), ac_slug(cc, cn)
+    parent = f'/tools/companies-using-{a}/'
+    path, camp = f'{parent}{slug}/', f'companies-using-{a}-{cc.lower()}'
+    nice_date = fmt_date(date)
+    n = len(emps)
+    title = f'Companies Using {name} in {in_c}: {n:,} Employers'
+    if len(title) > 62:
+        title = f'Companies Using {name} in {in_c} ({n:,})'
+    if len(title) > 62:
+        title = f'{name} Companies in {in_c} ({n:,})'
+    desc = (f'{n:,} companies in {in_c} that use {name} for hiring, with careers pages'
+            f'{", websites" if any(e["site"] for e in emps) else ""} and open jobs on {nice_date}. Free list, sorted by open jobs.')
+    cj = dict(st['country_jobs']).get(cc, 0)
+    share = 100 * n / st['known_cc'] if st['known_cc'] else 0
+    share_txt = f'{share:.0f}%' if share >= 1 else 'under 1%'
+    rank = [c for c, _ in st['top_cc']].index(cc) + 1
+    med = statistics.median([e['jobs'] for e in emps])
+    lede = (f'<strong>{n:,}</strong> companies that hire on {esc(name)} have most of their open jobs in {esc(in_c)}. '
+            f'{esc(name)} boards list <strong>{cj:,}</strong> open jobs located in {esc(in_c)} in our index of {nice_date}. '
+            f'The list is sorted by open jobs and links to every careers page.')
+    stats_html = f'''      <ul class="stats">
+        <li class="stat"><b>{n:,}</b><span>{esc(name)} companies in {esc(in_c)}</span></li>
+        <li class="stat"><b>{share_txt}</b><span>of {esc(name)} companies with a known country</span></li>
+        <li class="stat"><b>{cj:,}</b><span>open {esc(name)} jobs in {esc(in_c)}</span></li>
+        <li class="stat"><b>{round(med):,}</b><span>median open jobs per company</span></li>
+        <li class="stat"><b>#{rank}</b><span>country for {esc(name)} by companies</span></li>
+      </ul>'''
+    has_site = any(e['site'] for e in emps[:AC_ROWS])
+    def site_cell(e):
+        if not has_site:
+            return ''
+        if not e['site']:
+            return '<td></td>'
+        return f'<td><a href="{esc(e["site"])}" target="_blank" rel="nofollow noopener">{esc(short_url(e["site"]))}</a></td>'
+    rows_html = ''.join(
+        f'<tr><td class="num">{i + 1}</td><td>{esc(e["name"])}</td><td><a href="{esc(careers_url(a, e["k"]))}" target="_blank" rel="nofollow noopener">'
+        f'{esc(short_url(careers_url(a, e["k"])))}</a></td>{site_cell(e)}<td class="num">{jobs_txt(e["jobs"], st["cap"])}</td></tr>'
+        for i, e in enumerate(emps[:AC_ROWS]))
+    full = f'<a href="{parent}?country={cc}#list">full {esc(name)} list</a>'
+    shown_note = (f'Showing the {AC_ROWS} companies with most open jobs out of {n:,}. ' if n > AC_ROWS else '')
+    table = f'''      <div class="tbl-wrap"><table class="tbl"><thead><tr><th class="num">#</th><th>Company</th><th>Careers page</th>{"<th>Website</th>" if has_site else ""}<th class="num">Open jobs</th></tr></thead><tbody>{rows_html}</tbody></table></div>
+      <p class="note">{shown_note}The {full} filters by country, searches by name and downloads as CSV. Open jobs counts every job on the company\'s {esc(name)} board, in any country.</p>'''
+    others = sorted(((c, l) for c, l in AC[a].items() if c != cc), key=lambda x: -len(x[1]))
+    other_cc = ''.join(f'<li><a href="{parent}{ac_slug(c, cn)}/">{esc(ac_name(c, cn))}</a><span>{len(l):,} companies</span></li>' for c, l in others)
+    same = sorted(((b, AC[b][cc]) for b in ORDER if b != a and cc in AC[b]), key=lambda x: -len(x[1]))
+    same_cc = ''.join(f'<li><a href="/tools/companies-using-{b}/{slug}/">{esc(ATS[b]["name"])}</a><span>{len(l):,} companies</span></li>' for b, l in same)
+    jobs_link = (f' For the jobs themselves, across all {len(ATS)} systems, see <a href="/tools/job-postings-data/{cslug(cc)}/">job postings data for {esc(in_c)}</a>.'
+                 if cc in JOBS.get('pages', ()) else '')
+    about = f'''      <div class="prose">
+        <p>{ATS[a]["about"]}</p>
+        <p><strong>How this list is made.</strong> We find {esc(name)} career sites in the public Common Crawl web archive and read each board\'s public job list every day for our job index. A company\'s country is the one where most of its open jobs are located, so a company that hires in several countries appears once, under its main one. Companies with no openings today have no known country and are left out here; they are in the {full}. This is a sample of employers we could find, not {esc(name)}\'s full customer list in {esc(in_c)}.{jobs_link}</p>
+        <p>The list holds company names and public career pages only, no personal data. If your company should not be here, write to <a href="mailto:info@deriverge.com">info@deriverge.com</a>.</p>
+      </div>'''
+    big = ', '.join(esc(e['name']) for e in emps[:5])
+    faq = [
+        (f'How many companies in {in_c} use {name}?',
+         f'<p>We know of {n:,} companies on {esc(name)} that hire mainly in {esc(in_c)} and had open jobs on {nice_date}. The real number is higher: companies with no openings today, an unlisted board or most of their jobs in another country are not counted here.</p>'),
+        (f'Which companies in {in_c} use {name}?',
+         f'<p>By open jobs on {nice_date}, the largest are {big}. The table above lists {"all " + f"{n:,}" if n <= AC_ROWS else "the top " + str(AC_ROWS)} with a link to each careers page.</p>'),
+        ('How is the country of a company decided?',
+         '<p>We read the locations of all open jobs on the company\'s board and take the country that appears most often. A company that hires in several countries is listed once, under its main one.</p>'),
+        ('Can I download this list?',
+         f'<p>Yes. Open the {full}, where {esc(country)} is already selected, and press <strong>Download CSV</strong>. You get company, careers page, website where known, main country and open jobs. '
+         'You may reuse the list under the <a href="https://creativecommons.org/licenses/by/4.0/" rel="license noopener" target="_blank">Creative Commons Attribution 4.0</a> licence with a link to this page.</p>'),
+        (f'How do I get the open jobs of these companies?',
+         f'<p>Run a job scraper on Apify with the country filter set to {esc(country)}: it searches all {esc(name)} jobs in our daily index and returns titles, locations, descriptions and apply links.</p>'),
+    ]
+    parts = [
+        section('// at a glance', f'{name} in {in_c} in numbers', stats_html, hid='numbers'),
+        section('// the list', f'{name} companies in {in_c}', table, hid='list'),
+        ats_cta(a, camp),
+    ]
+    if other_cc:
+        parts.append(section('// other countries', f'Companies using {name} in other countries',
+                             f'      <ul class="linklist"><li><a href="{parent}">All countries</a><span>{st["companies"]:,} companies</span></li>{other_cc}</ul>', hid='countries'))
+    if same_cc:
+        parts.append(section('// other systems', f'Other applicant tracking systems in {in_c}', f'      <ul class="linklist">{same_cc}</ul>', hid='systems'))
+    parts += [section('// about the data', f'About {name} and this list', about, hid='about'),
+              section('// questions', 'Frequently asked questions', faq_block(faq), hid='faq')]
+    dataset = {'@context': 'https://schema.org', '@type': 'Dataset', 'name': f'Companies using {name} in {country}',
+               'description': f'{n:,} companies that hire on {name} mainly in {in_c}, with careers page URL and number of open jobs, built from public career sites by deriverge.',
+               'url': SITE + path, 'dateModified': date, 'creator': {'@type': 'Organization', 'name': 'deriverge s.r.o.', 'url': SITE + '/'},
+               'isAccessibleForFree': True, 'license': 'https://creativecommons.org/licenses/by/4.0/', 'spatialCoverage': country,
+               'keywords': [f'companies using {name} in {country}', f'{name} customers {country}', 'applicant tracking system', 'ATS'],
+               'isPartOf': SITE + parent}
+    layout(path=path, title=title, desc=desc, tab=f'companies-using-{a}-{cc.lower()}.json', kicker=f'// free data · updated {nice_date}',
+           h1=f'Companies using {name} in {in_c}', lede=lede, body='\n'.join(p for p in parts if p), campaign=camp,
+           ld=[dataset, faq_ld(faq)],
+           trail=[('deriverge', '/'), ('Tools', '/tools/'), (f'Companies using {name}', parent), (country, path)])
 
 
 EUROPE = {'GB', 'DE', 'FR', 'NL', 'SE', 'ES', 'IT', 'IE', 'BE', 'CH', 'AT', 'DK', 'NO', 'FI', 'PL', 'PT', 'CZ', 'GR', 'RO', 'HU'}
@@ -2233,6 +2373,8 @@ def main():
     page_wayback()
     page_phone()
     for a in ORDER:
+        AC[a] = ats_countries(a, by[a], stats[a])
+    for a in ORDER:
         page_ats(a, by[a], stats[a], date, cn)
     total_c, total_j = page_compare(by, stats, date, cn)
     # Návody k veřejným rozhraním tabulí (api_pages.py, fakta v api_guides_data.py ověřená z dokumentace výrobců).
@@ -2253,6 +2395,9 @@ def main():
     page_country('REMOTE', date)
     for cc in JOBS['pages']:
         page_country(cc, date)
+    for a in ORDER:
+        for cc, emps in sorted(AC[a].items(), key=lambda x: -len(x[1])):
+            page_ats_country(a, cc, emps, stats[a], date, cn)
     page_index(stats, total_c, total_j, date)
     print('JSON sizes (KB):', {a: round(s / 1024) for a, s in sizes.items()}, 'total', round(sum(sizes.values()) / 1024), 'KB')
     update_sitemap(dt.date.today().isoformat())

@@ -78,6 +78,9 @@
     var opts = Object.keys(counts).map(function (c) { return { c: c, n: DV.countryName(c), k: counts[c] }; });
     opts.sort(function (a, b) { return b.k - a.k || a.n.localeCompare(b.n); });
     sel.innerHTML = '<option value="">All countries</option>' + opts.map(function (o) { return '<option value="' + o.c + '">' + DV.esc(o.n) + ' (' + DV.fmtInt(o.k) + ')</option>'; }).join('');
+    // ?country=GB (links from the country pages) opens the list with that country selected.
+    var want = (/[?&]country=([A-Za-z]{2})(?:&|$)/.exec(location.search) || [])[1];
+    if (want && counts[want.toUpperCase()]) sel.value = want.toUpperCase();
     apply();
     app.classList.remove('is-loading');
   }
