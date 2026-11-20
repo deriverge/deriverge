@@ -126,7 +126,14 @@ def page(lang, data, tr, en, langs_present):
              'url': SITE + '/tools/job-data-feed/', 'description': tr.get('data.feed_text') or en['data.feed_text'], 'creator': {'@id': SITE + '/#org'}}},
         ]},
     ]
+    # Stránky aplikací v jazyce návštěvníka (jinak anglická verze): bez odkazu z úvodní stránky je Google nenajde.
+    app_urls = {
+        'vzt_url': {'cs': '/vzt-monter/', 'sk': '/vzt-monter/sk/', 'de': '/vzt-monter/de/', 'pl': '/vzt-monter/pl/'}.get(code, '/vzt-monter/en/'),
+        'fixbill_url': f'/fixbill/{code}/' if code in ('cs', 'sk', 'de', 'es', 'fr', 'it', 'pl', 'pt') else '/fixbill/',
+        'tapkasa_url': '/tapkasa/pokladna.html' if code in ('cs', 'sk') else '/tapkasa/pos.html',
+    }
     values = {
+        **app_urls,
         'lang': hreflang, 'dir': direction, 'canonical': canonical, 'hreflang': hreflang_links, 'og_locale': og_locale,
         'og_alternates': og_alt, 'ld': json.dumps(ld, ensure_ascii=False).replace('</', '<\\/'), 'is_root': '1' if code == 'en' else '0',
         'lang_codes': ','.join(l[0] for l in alts), 'home': path, 'lang_label': code.upper(), 'langmenu': menu, 'groups': groups,
