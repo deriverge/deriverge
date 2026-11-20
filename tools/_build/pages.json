@@ -1,5 +1,5 @@
 {
- "date": "2026-11-18",
+ "date": "2026-11-20",
  "pages": [
   [
    "/tools/bulk-dns-lookup/",
@@ -23,7 +23,7 @@
   ],
   [
    "/tools/companies-using-hireology/",
-   "Companies Using Hireology: List of 9,332 Employers"
+   "Companies Using Hireology: List of 9,334 Employers"
   ],
   [
    "/tools/companies-using-jazzhr/",
@@ -31,27 +31,27 @@
   ],
   [
    "/tools/companies-using-paylocity/",
-   "Companies Using Paylocity: List of 6,587 Employers"
+   "Companies Using Paylocity: List of 6,741 Employers"
   ],
   [
    "/tools/companies-using-bamboohr/",
-   "Companies Using BambooHR: List of 6,502 Employers"
+   "Companies Using BambooHR: List of 6,514 Employers"
   ],
   [
    "/tools/companies-using-greenhouse/",
-   "Companies Using Greenhouse: List of 5,601 Employers"
+   "Companies Using Greenhouse: List of 5,597 Employers"
   ],
   [
    "/tools/companies-using-workable/",
-   "Companies Using Workable: List of 5,387 Employers"
+   "Companies Using Workable: List of 5,385 Employers"
   ],
   [
    "/tools/companies-using-ashby/",
-   "Companies Using Ashby: List of 3,508 Employers"
+   "Companies Using Ashby: List of 3,507 Employers"
   ],
   [
    "/tools/companies-using-smartrecruiters/",
-   "Companies Using SmartRecruiters: List of 3,188 Employers"
+   "Companies Using SmartRecruiters: List of 3,189 Employers"
   ],
   [
    "/tools/companies-using-workday/",
@@ -59,19 +59,23 @@
   ],
   [
    "/tools/companies-using-personio/",
-   "Companies Using Personio: List of 2,245 Employers"
+   "Companies Using Personio: List of 2,251 Employers"
   ],
   [
    "/tools/companies-using-breezy/",
-   "Companies Using Breezy HR: List of 2,087 Employers"
+   "Companies Using Breezy HR: List of 2,091 Employers"
   ],
   [
    "/tools/companies-using-icims/",
-   "Companies Using iCIMS: List of 1,979 Employers"
+   "Companies Using iCIMS: List of 1,976 Employers"
   ],
   [
    "/tools/companies-using-lever/",
-   "Companies Using Lever: List of 1,721 Employers"
+   "Companies Using Lever: List of 1,718 Employers"
+  ],
+  [
+   "/tools/companies-using-applicantpro/",
+   "Companies Using ApplicantPro: List of 1,477 Employers"
   ],
   [
    "/tools/companies-using-rippling/",
@@ -79,11 +83,11 @@
   ],
   [
    "/tools/companies-using-teamtailor/",
-   "Companies Using Teamtailor: List of 1,368 Employers"
+   "Companies Using Teamtailor: List of 1,367 Employers"
   ],
   [
    "/tools/companies-using-softgarden/",
-   "Companies Using Softgarden: List of 1,362 Employers"
+   "Companies Using Softgarden: List of 1,361 Employers"
   ],
   [
    "/tools/companies-using-recruitee/",
@@ -103,7 +107,7 @@
   ],
   [
    "/tools/companies-using-ats/",
-   "Which Companies Use Which ATS: 64,839 Employers, 14 Systems"
+   "Which Companies Use Which ATS: 66,480 Employers, 14 Systems"
   ],
   [
    "/tools/job-board-api/greenhouse/",
@@ -139,7 +143,7 @@
   ],
   [
    "/tools/job-board-api/",
-   "Job Posting APIs of 20 ATS: Greenhouse, Lever, Ashby and More"
+   "Job Posting APIs of 21 ATS: Greenhouse, Lever, Ashby and More"
   ],
   [
    "/tools/job-data-feed/",
@@ -199,127 +203,127 @@
   ],
   [
    "/tools/job-postings-data/",
-   "Job Postings Data: 2,022,942 Open Jobs by Country"
+   "Job Postings Data: 2,042,473 Open Jobs by Country"
   ],
   [
    "/tools/job-postings-data/remote/",
-   "Remote Job Postings Data: 138,536 Remote Jobs, Updated Daily"
+   "Remote Job Postings Data: 140,581 Remote Jobs, Updated Daily"
   ],
   [
    "/tools/job-postings-data/united-states/",
-   "Job Postings Data for the United States: 1,033,630 Open Jobs"
+   "Job Postings Data for the United States: 1,049,148 Open Jobs"
   ],
   [
    "/tools/job-postings-data/germany/",
-   "Job Postings Data for Germany: 95,641 Open Jobs"
+   "Job Postings Data for Germany: 96,005 Open Jobs"
   ],
   [
    "/tools/job-postings-data/india/",
-   "Job Postings Data for India: 86,395 Open Jobs"
+   "Job Postings Data for India: 86,339 Open Jobs"
   ],
   [
    "/tools/job-postings-data/united-kingdom/",
-   "Job Postings Data for the United Kingdom: 73,843 Open Jobs"
+   "Job Postings Data for the United Kingdom: 74,324 Open Jobs"
   ],
   [
    "/tools/job-postings-data/canada/",
-   "Job Postings Data for Canada: 63,678 Open Jobs"
+   "Job Postings Data for Canada: 63,561 Open Jobs"
   ],
   [
    "/tools/job-postings-data/france/",
-   "Job Postings Data for France: 44,640 Open Jobs"
-  ],
-  [
-   "/tools/job-postings-data/australia/",
-   "Job Postings Data for Australia: 19,830 Open Jobs"
+   "Job Postings Data for France: 45,901 Open Jobs"
   ],
   [
    "/tools/job-postings-data/netherlands/",
-   "Job Postings Data for the Netherlands: 19,825 Open Jobs"
+   "Job Postings Data for the Netherlands: 19,930 Open Jobs"
+  ],
+  [
+   "/tools/job-postings-data/australia/",
+   "Job Postings Data for Australia: 19,726 Open Jobs"
   ],
   [
    "/tools/job-postings-data/singapore/",
-   "Job Postings Data for Singapore: 15,143 Open Jobs"
-  ],
-  [
-   "/tools/job-postings-data/mexico/",
-   "Job Postings Data for Mexico: 14,140 Open Jobs"
+   "Job Postings Data for Singapore: 15,230 Open Jobs"
   ],
   [
    "/tools/job-postings-data/spain/",
-   "Job Postings Data for Spain: 13,457 Open Jobs"
+   "Job Postings Data for Spain: 14,247 Open Jobs"
+  ],
+  [
+   "/tools/job-postings-data/mexico/",
+   "Job Postings Data for Mexico: 14,216 Open Jobs"
   ],
   [
    "/tools/job-postings-data/china/",
-   "Job Postings Data for China: 13,107 Open Jobs"
+   "Job Postings Data for China: 13,023 Open Jobs"
   ],
   [
    "/tools/job-postings-data/philippines/",
-   "Job Postings Data for the Philippines: 12,383 Open Jobs"
+   "Job Postings Data for the Philippines: 12,427 Open Jobs"
   ],
   [
    "/tools/job-postings-data/brazil/",
-   "Job Postings Data for Brazil: 11,231 Open Jobs"
+   "Job Postings Data for Brazil: 11,256 Open Jobs"
   ],
   [
    "/tools/job-postings-data/malaysia/",
-   "Job Postings Data for Malaysia: 11,131 Open Jobs"
+   "Job Postings Data for Malaysia: 11,107 Open Jobs"
   ],
   [
    "/tools/job-postings-data/poland/",
-   "Job Postings Data for Poland: 10,417 Open Jobs"
+   "Job Postings Data for Poland: 10,467 Open Jobs"
   ],
   [
    "/tools/job-postings-data/united-arab-emirates/",
-   "United Arab Emirates Job Postings Data: 9,964 Open Jobs"
-  ],
-  [
-   "/tools/job-postings-data/japan/",
-   "Job Postings Data for Japan: 8,551 Open Jobs"
+   "United Arab Emirates Job Postings Data: 9,925 Open Jobs"
   ],
   [
    "/tools/job-postings-data/italy/",
-   "Job Postings Data for Italy: 8,550 Open Jobs"
+   "Job Postings Data for Italy: 9,312 Open Jobs"
   ],
   [
-   "/tools/job-postings-data/indonesia/",
-   "Job Postings Data for Indonesia: 7,393 Open Jobs"
+   "/tools/job-postings-data/japan/",
+   "Job Postings Data for Japan: 8,549 Open Jobs"
   ],
   [
    "/tools/job-postings-data/sweden/",
-   "Job Postings Data for Sweden: 7,271 Open Jobs"
+   "Job Postings Data for Sweden: 7,910 Open Jobs"
+  ],
+  [
+   "/tools/job-postings-data/indonesia/",
+   "Job Postings Data for Indonesia: 7,391 Open Jobs"
   ],
   [
    "/tools/job-postings-data/ireland/",
-   "Job Postings Data for Ireland: 7,162 Open Jobs"
+   "Job Postings Data for Ireland: 7,182 Open Jobs"
   ],
   [
    "/tools/job-postings-data/portugal/",
-   "Job Postings Data for Portugal: 5,857 Open Jobs"
+   "Job Postings Data for Portugal: 6,139 Open Jobs"
   ],
   [
    "/tools/job-postings-data/austria/",
-   "Job Postings Data for Austria: 5,830 Open Jobs"
+   "Job Postings Data for Austria: 5,917 Open Jobs"
   ],
   [
    "/tools/job-postings-data/greece/",
-   "Job Postings Data for Greece: 5,688 Open Jobs"
+   "Job Postings Data for Greece: 5,754 Open Jobs"
   ],
   [
    "/tools/job-postings-data/switzerland/",
-   "Job Postings Data for Switzerland: 5,485 Open Jobs"
+   "Job Postings Data for Switzerland: 5,546 Open Jobs"
   ],
   [
    "/tools/job-postings-data/saudi-arabia/",
-   "Job Postings Data for Saudi Arabia: 5,401 Open Jobs"
+   "Job Postings Data for Saudi Arabia: 5,396 Open Jobs"
   ],
   [
    "/tools/job-postings-data/belgium/",
-   "Job Postings Data for Belgium: 5,306 Open Jobs"
+   "Job Postings Data for Belgium: 5,370 Open Jobs"
   ],
   [
    "/tools/job-postings-data/south-africa/",
-   "Job Postings Data for South Africa: 5,206 Open Jobs"
+   "Job Postings Data for South Africa: 5,167 Open Jobs"
   ],
   [
    "/tools/job-postings-data/colombia/",
@@ -327,127 +331,127 @@
   ],
   [
    "/tools/job-postings-data/taiwan/",
-   "Job Postings Data for Taiwan: 4,889 Open Jobs"
+   "Job Postings Data for Taiwan: 4,871 Open Jobs"
   ],
   [
    "/tools/job-postings-data/nigeria/",
-   "Job Postings Data for Nigeria: 4,572 Open Jobs"
+   "Job Postings Data for Nigeria: 4,616 Open Jobs"
   ],
   [
    "/tools/job-postings-data/hong-kong/",
-   "Job Postings Data for Hong Kong: 4,164 Open Jobs"
+   "Job Postings Data for Hong Kong: 4,181 Open Jobs"
   ],
   [
    "/tools/job-postings-data/thailand/",
-   "Job Postings Data for Thailand: 3,960 Open Jobs"
+   "Job Postings Data for Thailand: 3,964 Open Jobs"
   ],
   [
    "/tools/job-postings-data/romania/",
-   "Job Postings Data for Romania: 3,782 Open Jobs"
+   "Job Postings Data for Romania: 3,784 Open Jobs"
   ],
   [
    "/tools/job-postings-data/south-korea/",
-   "Job Postings Data for South Korea: 3,526 Open Jobs"
+   "Job Postings Data for South Korea: 3,546 Open Jobs"
   ],
   [
    "/tools/job-postings-data/vietnam/",
-   "Job Postings Data for Vietnam: 3,379 Open Jobs"
+   "Job Postings Data for Vietnam: 3,410 Open Jobs"
   ],
   [
    "/tools/job-postings-data/argentina/",
-   "Job Postings Data for Argentina: 3,370 Open Jobs"
+   "Job Postings Data for Argentina: 3,390 Open Jobs"
   ],
   [
    "/tools/job-postings-data/peru/",
-   "Job Postings Data for Peru: 3,288 Open Jobs"
+   "Job Postings Data for Peru: 3,324 Open Jobs"
   ],
   [
    "/tools/job-postings-data/egypt/",
-   "Job Postings Data for Egypt: 3,128 Open Jobs"
+   "Job Postings Data for Egypt: 3,151 Open Jobs"
   ],
   [
    "/tools/job-postings-data/new-zealand/",
-   "Job Postings Data for New Zealand: 2,956 Open Jobs"
+   "Job Postings Data for New Zealand: 2,943 Open Jobs"
   ],
   [
    "/tools/job-postings-data/hungary/",
-   "Job Postings Data for Hungary: 2,886 Open Jobs"
+   "Job Postings Data for Hungary: 2,857 Open Jobs"
   ],
   [
    "/tools/job-postings-data/israel/",
-   "Job Postings Data for Israel: 2,596 Open Jobs"
+   "Job Postings Data for Israel: 2,605 Open Jobs"
   ],
   [
    "/tools/job-postings-data/czech-republic/",
-   "Job Postings Data for the Czech Republic: 2,561 Open Jobs"
+   "Job Postings Data for the Czech Republic: 2,564 Open Jobs"
   ],
   [
    "/tools/job-postings-data/denmark/",
-   "Job Postings Data for Denmark: 2,502 Open Jobs"
+   "Job Postings Data for Denmark: 2,559 Open Jobs"
   ],
   [
    "/tools/job-postings-data/chile/",
-   "Job Postings Data for Chile: 2,473 Open Jobs"
-  ],
-  [
-   "/tools/job-postings-data/ukraine/",
-   "Job Postings Data for Ukraine: 2,337 Open Jobs"
+   "Job Postings Data for Chile: 2,444 Open Jobs"
   ],
   [
    "/tools/job-postings-data/norway/",
-   "Job Postings Data for Norway: 2,295 Open Jobs"
+   "Job Postings Data for Norway: 2,432 Open Jobs"
+  ],
+  [
+   "/tools/job-postings-data/ukraine/",
+   "Job Postings Data for Ukraine: 2,335 Open Jobs"
   ],
   [
    "/tools/job-postings-data/bulgaria/",
-   "Job Postings Data for Bulgaria: 2,139 Open Jobs"
+   "Job Postings Data for Bulgaria: 2,138 Open Jobs"
   ],
   [
    "/tools/job-postings-data/morocco/",
-   "Job Postings Data for Morocco: 1,749 Open Jobs"
+   "Job Postings Data for Morocco: 1,764 Open Jobs"
   ],
   [
    "/tools/job-postings-data/pakistan/",
-   "Job Postings Data for Pakistan: 1,686 Open Jobs"
-  ],
-  [
-   "/tools/job-postings-data/turkey/",
-   "Job Postings Data for Turkey: 1,664 Open Jobs"
+   "Job Postings Data for Pakistan: 1,675 Open Jobs"
   ],
   [
    "/tools/job-postings-data/finland/",
-   "Job Postings Data for Finland: 1,616 Open Jobs"
+   "Job Postings Data for Finland: 1,641 Open Jobs"
+  ],
+  [
+   "/tools/job-postings-data/turkey/",
+   "Job Postings Data for Turkey: 1,637 Open Jobs"
   ],
   [
    "/tools/job-postings-data/costa-rica/",
-   "Job Postings Data for Costa Rica: 1,443 Open Jobs"
+   "Job Postings Data for Costa Rica: 1,438 Open Jobs"
   ],
   [
    "/tools/job-postings-data/lithuania/",
-   "Job Postings Data for Lithuania: 1,422 Open Jobs"
+   "Job Postings Data for Lithuania: 1,428 Open Jobs"
   ],
   [
    "/tools/job-postings-data/qatar/",
-   "Job Postings Data for Qatar: 1,353 Open Jobs"
+   "Job Postings Data for Qatar: 1,349 Open Jobs"
   ],
   [
    "/tools/job-postings-data/serbia/",
-   "Job Postings Data for Serbia: 1,281 Open Jobs"
+   "Job Postings Data for Serbia: 1,283 Open Jobs"
   ],
   [
    "/tools/job-postings-data/puerto-rico/",
-   "Job Postings Data for Puerto Rico: 1,196 Open Jobs"
+   "Job Postings Data for Puerto Rico: 1,210 Open Jobs"
   ],
   [
    "/tools/job-postings-data/lebanon/",
-   "Job Postings Data for Lebanon: 1,110 Open Jobs"
-  ],
-  [
-   "/tools/job-postings-data/slovakia/",
-   "Job Postings Data for Slovakia: 1,082 Open Jobs"
+   "Job Postings Data for Lebanon: 1,135 Open Jobs"
   ],
   [
    "/tools/job-postings-data/cyprus/",
-   "Job Postings Data for Cyprus: 1,079 Open Jobs"
+   "Job Postings Data for Cyprus: 1,120 Open Jobs"
+  ],
+  [
+   "/tools/job-postings-data/slovakia/",
+   "Job Postings Data for Slovakia: 1,092 Open Jobs"
   ],
   [
    "/tools/",

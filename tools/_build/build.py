@@ -739,6 +739,11 @@ ATS = {
         signs=['The career site is <code>&lt;pod&gt;.fa.&lt;region&gt;.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1</code>.',
                'Job links contain <code>/job/&lt;number&gt;</code>.'],
         api='https://&lt;pod&gt;.fa.&lt;region&gt;.oraclecloud.com/hcmRestApi/resources/latest/recruitingCEJobRequisitions'),
+    'applicantpro': dict(name='ApplicantPro',
+        about='ApplicantPro, also sold as isolved Hire, is applicant tracking software for small and mid-sized employers in the United States: towns, counties, school districts, clinics, care providers and service companies. Each employer\'s career site lives at &lt;company&gt;.applicantpro.com/jobs/, and many of its jobs state the pay.',
+        signs=['The career site is <code>&lt;company&gt;.applicantpro.com/jobs/</code>.',
+               'Job links look like <code>&lt;company&gt;.applicantpro.com/jobs/&lt;number&gt;</code>.'],
+        api=None),
 }
 # Per-site limits of the job index: a board at the limit has at least that many jobs.
 CAPS = {'workday': 1000, 'oracle': 1600, 'smartrecruiters': 4000, 'icims': 1500, 'greenhouse': 5000}
@@ -769,6 +774,7 @@ def careers_url(a, k):
         'rippling': lambda: f'https://ats.rippling.com/{q(k)}/jobs',
         'icims': lambda: f'https://{k}/jobs',
         'oracle': lambda: (f'https://{k.split("/sites/")[0]}/hcmUI/CandidateExperience/en/sites/{k.split("/sites/")[1]}' if '/sites/' in k else f'https://{k}'),
+        'applicantpro': lambda: f'https://{k}.applicantpro.com/jobs/',
     }[a]()
 
 

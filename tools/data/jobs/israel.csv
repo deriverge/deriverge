@@ -1,38 +1,85 @@
 ﻿title,company,location,workArrangement,jobCategory,seniority,postedAt,firstSeenAt,ats,url
+Staff Developer (Apono),1Password,"Tel Aviv, Israel",hybrid,software,lead,2026-11-19,2026-11-20,ashby,https://jobs.ashbyhq.com/1password/334119cb-274f-4b74-931f-f04aa2475e2d
+Technical Product Manager (Apono),1Password,"Tel Aviv, Israel",hybrid,product,mid,2026-11-19,2026-11-20,ashby,https://jobs.ashbyhq.com/1password/3aad3321-a5fc-48bd-9634-d4c03aa7f173
+Sr Product Designer (Apono),1Password,"Tel Aviv, Israel",hybrid,design,senior,2026-11-19,2026-11-20,ashby,https://jobs.ashbyhq.com/1password/420396fb-c0d2-40bf-8f31-729a27a815f1
+"Senior Product Manager, Cyber Intelligence",Chainalysis,Tel Aviv Office,onsite,it-security,senior,2026-11-19,2026-11-20,ashby,https://jobs.ashbyhq.com/chainalysis-careers/fba29854-3f01-43de-8f50-441d213acf54
+Bot Detection Researcher,HUMAN,"Tel Aviv, Israel",hybrid,science,mid,2026-11-19,2026-11-20,ashby,https://jobs.ashbyhq.com/HUMAN/c8eb7622-cfe6-4c77-ba72-a7c8cc4f17e3
+DevOps Engineer,Cato Networks,"Tel Aviv District, Israel",,software,mid,2026-11-19,2026-11-20,greenhouse,https://www.catonetworks.com/careers/careers-post/5041536101?gh_jid=5041536101
+CISO,QuantHealth,Tel Aviv,,it-security,executive,2026-11-19,2026-11-20,greenhouse,https://job-boards.eu.greenhouse.io/quanthealth/jobs/5042516101
+Senior Product Manager-Identity Resilience,Rubrik Job Board,Israel,,it-security,senior,2026-11-19,2026-11-20,greenhouse,https://www.rubrik.com/company/careers/departments/job.8398158?gh_jid=8398158
+Senior Cyber Security Engineer,Tipalti,"Tel Aviv District, Israel",,it-security,senior,2026-11-19,2026-11-20,greenhouse,https://tipalti.com/jobs/?gh_jid=6252492004
+Workplace Operations Coordinator,Navan,"Tel-Aviv, Israel",,operations,mid,2026-11-19,2026-11-20,greenhouse,https://navan.com/careers/openings?gh_jid=8386989
+Recruiter,Unframe,"Tel Aviv-Yafo, Tel Aviv District, Israel",,hr,mid,2026-11-19,2026-11-20,greenhouse,https://job-boards.eu.greenhouse.io/unframe/jobs/5042725101
+"Executive Assistant, CTO & Product","Wiz, Inc.",Tel Aviv,,administrative,executive,2026-11-19,2026-11-20,greenhouse,https://www.wiz.io/careers/job/4721409006/:title?gh_jid=4721409006
+Brand Creative Specialist,Wolt - English,"Ramat Gan, Israel",,marketing,mid,2026-11-19,2026-11-20,greenhouse,https://job-boards.greenhouse.io/wolt/jobs/8400441
+Algorithm Data Analyst - Objects Modeling,Mobileye,"Jerusalem, Israel",hybrid,data,mid,2026-11-19,2026-11-20,lever,https://jobs.eu.lever.co/mobileye/a9dc5853-1894-40c8-ae40-0297a99f352e
+Principal Deep ISP AI/ML Engineer: Sensors,Mythic,Israel,hybrid,data,lead,2026-11-19,2026-11-20,lever,https://jobs.lever.co/mythic-ai.com/07a9017f-3261-41bc-b183-88ef2cfadec5
+Systems Engineer - Israel,Candidate Experience site,"Herzliya, Tel Aviv, Israel",,engineering,mid,2026-11-19,2026-11-20,oracle,https://edel.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX/job/23588
+"Growth Customer Success Manager, Exposure Management- EMEA",Check Point Software Technologies,"Tel Aviv-Yafo, Tel Aviv District, il",,marketing,mid,2026-11-19,2026-11-20,smartrecruiters,https://jobs.smartrecruiters.com/checkpointsoftwaretechnologies2/744000162530248
+Senior Data Engineer,NielsenIQ,"Yokneam Illit, il",,data,senior,2026-11-19,2026-11-20,smartrecruiters,https://jobs.smartrecruiters.com/nielseniq/744000162511019
+Sr Staff Software Engineer - infrastructure team (Veza/Armis),ServiceNow,"Tel Aviv-Yafo, Tel Aviv District, il",,software,lead,2026-11-19,2026-11-20,smartrecruiters,https://jobs.smartrecruiters.com/servicenow/744000162555394
+Full Stack Team Lead (Armis/Veza),ServiceNow,"Tel Aviv, il",,software,lead,2026-11-19,2026-11-20,smartrecruiters,https://jobs.smartrecruiters.com/servicenow/744000162561430
+System Integration Engineer - Temporary Position,Mobileye,"Jerusalem, Israel",hybrid,engineering,mid,2026-11-18,2026-11-20,lever,https://jobs.eu.lever.co/mobileye/a1fbc8e5-2ec7-4a30-b699-dc940e22e259
+Full Stack Team Leader,Nuvei,"Tel Aviv-Yafo, Tel Aviv District, Israel",,software,lead,2026-11-18,2026-11-20,workable,https://apply.workable.com/nuvei/j/1F3AFFEE45/
+FinOps Engineer,Nuvei,"Tel Aviv-Yafo, Tel Aviv District, Israel",,engineering,mid,2026-11-18,2026-11-20,workable,https://apply.workable.com/nuvei/j/BC7095D37E/
+Validation Engineer & Embedded System Integration,Mobileye,"Jerusalem, Israel",onsite,software,mid,2026-11-17,2026-11-20,lever,https://jobs.eu.lever.co/mobileye/1eac824a-39bf-40a8-90d5-dc120f004302
+Warehouse operator,Orbia,"Yiftah, Israel",,logistics,mid,2026-09-01,2026-11-20,teamtailor,https://careers.netafim.com/jobs/8297694-warehouse-operator
+טכנאי.ת תבניות- יפתח,Orbia,"Yiftah, Israel",,,mid,2026-09-01,2026-11-20,teamtailor,https://careers.netafim.com/jobs/8297632-
+Quality Assurance-Extrusion,Orbia,"Yiftah, Israel",,,mid,2026-08-25,2026-11-20,teamtailor,https://careers.netafim.com/jobs/8263339-quality-assurance-extrusion
+Strategic Designer,Wonderful,"Tel Aviv, HQ",onsite,design,mid,2026-08-06,2026-11-20,ashby,https://jobs.ashbyhq.com/wonderful/3f22ba3a-36fd-41fc-b8c3-a13217edff22
+מלקטים- וולט מרקט- קריית אונו,Wolt - Hebrew,"Kiryat Ono, Israel",,,mid,2025-04-21,2026-11-20,greenhouse,https://job-boards.greenhouse.io/woltisrael/jobs/6700779
+מלקטים- וולט מרקט- פתח תקווה,Wolt - Hebrew,"Petah Tikva, Israel",,,mid,2025-03-10,2026-11-20,greenhouse,https://job-boards.greenhouse.io/woltisrael/jobs/6693884
+IT System Security Specialist,Cato Networks,"Tel Aviv District, Israel",,it-security,mid,2024-12-11,2026-11-20,greenhouse,https://www.catonetworks.com/careers/careers-post/4490328101?gh_jid=4490328101
+Affiliate Manager (LATAM),David Kennedy Recruitment,"Herzliya, Israel",onsite,operations,mid,2024-10-04,2026-11-20,teamtailor,https://davidkennedyrecruitment.teamtailor.com/jobs/5050661-affiliate-manager-latam
+Senior Software Engineer - Go SDK - Language Clients,ClickHouse,Germany | Poland | Portugal | France | United Kingdom | Spain | Italy | Israel | The Netherlands | Switzerland,remote,software,senior,2026-11-18,2026-11-19,ashby,https://jobs.ashbyhq.com/clickhouse/5bf525ff-b7dc-4c28-a521-8999bb190d8c
+"AI Context & Data Engineering Manager, BigBrain",monday.com,Tel Aviv,hybrid,data,mid,2026-11-18,2026-11-19,ashby,https://jobs.ashbyhq.com/monday.com/07fdf8f9-6bf4-4718-a6ec-b728364210b6
+Staff Security Engineer,Aidoc,"Tel Aviv-Yafo, Tel Aviv District, Israel",,it-security,lead,2026-11-18,2026-11-19,greenhouse,https://job-boards.eu.greenhouse.io/aidocmedical/jobs/5041243101
+Web Marketing Manager - Contract,Cato Networks,"Tel Aviv District, Israel",,software,mid,2026-11-18,2026-11-19,greenhouse,https://www.catonetworks.com/careers/careers-post/5035117101?gh_jid=5035117101
+"Director of Security Research, Cribl Detect",Cribl,Remote - Israel,remote,it-security,director,2026-11-18,2026-11-19,greenhouse,https://cribl.io/job-detail/?gh_jid=6256099004
+"Account Executive - Attribute™, Israel & APAC",DoiT,"On-Site Israel. Attribute Office: Carlibach St 29, Tel Aviv",onsite,sales,mid,2026-11-18,2026-11-19,greenhouse,https://job-boards.greenhouse.io/doitintl/jobs/8043890003
+Senior Fullstack Engineer (Cards),Ebury,Tel Aviv,,software,senior,2026-11-18,2026-11-19,greenhouse,https://job-boards.eu.greenhouse.io/ebury/jobs/5040925101
+Staff Fullstack Engineer (Business Cards),Ebury,Tel Aviv,,software,lead,2026-11-18,2026-11-19,greenhouse,https://job-boards.eu.greenhouse.io/ebury/jobs/5040939101
+"Brand Designer - Figma Weave (Tel Aviv, Israel)",Figma,"Tel Aviv, Israel",,design,mid,2026-11-18,2026-11-19,greenhouse,https://boards.greenhouse.io/figma/jobs/6263971004?gh_jid=6263971004
+B2C Sales,MyHeritage,"Tel Aviv, Israel",,sales,mid,2026-11-18,2026-11-19,greenhouse,https://careers.myheritage.com/jobs/8399105?gh_jid=8399105
+"Director of Product Management, Agentic Security - Prompt Security",SentinelOne,Israel,,it-security,director,2026-11-18,2026-11-19,greenhouse,https://www.sentinelone.com/jobs/?gh_jid=8196402003
+"Senior Engineering Manager, Security Graph & Agentic AI",SentinelOne,Israel,,data,senior,2026-11-18,2026-11-19,greenhouse,https://www.sentinelone.com/jobs/?gh_jid=8204537003
+Staff Data Scientist,SentinelOne,Israel,,data,lead,2026-11-18,2026-11-19,greenhouse,https://www.sentinelone.com/jobs/?gh_jid=8206876003
+Data Engineering Tech Lead,Torq,"Tel Aviv-Yafo, Tel Aviv District, Israel",,data,lead,2026-11-18,2026-11-19,greenhouse,https://job-boards.greenhouse.io/torq/jobs/6264880004
+CTO Data Analyst,"Wiz, Inc.",Tel Aviv,,data,executive,2026-11-18,2026-11-19,greenhouse,https://www.wiz.io/careers/job/4720879006/:title?gh_jid=4720879006
+Supply Chain Planner,Wolt - Hebrew,"Ramat Gan, Israel",,logistics,mid,2026-11-18,2026-11-19,greenhouse,https://job-boards.greenhouse.io/woltisrael/jobs/8398673
+Client Partner - Pinterest,Aleph,"Hertzelia, Israel | Tel Aviv, Israel",hybrid,sales,mid,2026-11-18,2026-11-19,lever,https://jobs.lever.co/aleph/a1be7267-28db-4555-8a06-9b56b9fad487
+Sr. Buyer - Global Procurement,Parallel Wireless,Kfar Saba,onsite,operations,senior,2026-11-18,2026-11-19,lever,https://jobs.lever.co/parallelwireless/0b640fc3-bad7-4ca9-986a-a76f9ab4f8f1
+Product Manager,WalkMe,Tel Aviv,hybrid,product,mid,2026-11-18,2026-11-19,lever,https://jobs.lever.co/walkme/1cb0a985-858d-4b2c-8eed-832b0e22e315
+SW QA Engineer (Continuous Integration team),Harmonic Inc.,"Caesarea, Israel",hybrid,software,mid,2026-11-18,2026-11-19,oracle,https://egmn.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/Harmonic/job/260201
+Sous Chef,Marriott,"Herzliya, Israel",,hospitality,mid,2026-11-18,2026-11-19,oracle,https://ejwl.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/jobsearch/job/26139580
+Technician-HVAC-Senior,Marriott,"Herzliya, Israel",,trades-manufacturing,senior,2026-11-18,2026-11-19,oracle,https://ejwl.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/jobsearch/job/26151202
+Maintenance,Marriott,"Herzliya, Israel",,trades-manufacturing,mid,2026-11-18,2026-11-19,oracle,https://ejwl.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/jobsearch/job/26151211
+VP Finance - IL (Part-Time),Ibex Medical Analytics,"Tel aviv, HaMerkaz, Israel",,finance,executive,2026-11-18,2026-11-19,recruitee,https://ib1.recruitee.com/o/vp-finance-il-part-time
+ThreatCloud AI web security group manager,Check Point Software Technologies,"Tel Aviv-Yafo, Tel Aviv District, il",,data,mid,2026-11-18,2026-11-19,smartrecruiters,https://jobs.smartrecruiters.com/checkpointsoftwaretechnologies2/744000162285619
+DevOps Team Leader - CI & Developer Experience,Check Point Software Technologies,"Tel Aviv-Yafo, Tel Aviv District, il",,software,lead,2026-11-18,2026-11-19,smartrecruiters,https://jobs.smartrecruiters.com/checkpointsoftwaretechnologies2/744000162287619
+Senior Staff Software Engineer (Armis/Veza),ServiceNow,"Tel Aviv-Yafo, Tel Aviv District, il",,software,lead,2026-11-18,2026-11-19,smartrecruiters,https://jobs.smartrecruiters.com/servicenow/744000162279409
+AI Analyst,Wix,"Tel Aviv, il",,data,mid,2026-11-18,2026-11-19,smartrecruiters,https://jobs.smartrecruiters.com/wix2/744000162246079
+Social Media Manager,Wix,"Tel Aviv, il",,marketing,mid,2026-11-18,2026-11-19,smartrecruiters,https://jobs.smartrecruiters.com/wix2/744000162304759
 Senior DevOps Engineer - Production Engineering,monday.com,Tel Aviv,hybrid,software,senior,2026-11-17,2026-11-18,ashby,https://jobs.ashbyhq.com/monday.com/7216eb5a-5ac3-44aa-bae1-1f61bbdba554
 Social Media Manager,Wonderful,"Tel Aviv, HQ",onsite,marketing,mid,2026-11-17,2026-11-18,ashby,https://jobs.ashbyhq.com/wonderful/46dfc8a1-5f15-4236-851f-b28ca7d4341d
 Global Communications Manager,Wonderful,"Tel Aviv, HQ",onsite,marketing,mid,2026-11-17,2026-11-18,ashby,https://jobs.ashbyhq.com/wonderful/ad00df9a-b2b9-4bb7-b3d7-3220fa0731a3
 Lead Technical Success Manager,"Black Duck Software, Inc.",Israel,,operations,lead,2026-11-17,2026-11-18,greenhouse,https://job-boards.greenhouse.io/blackduck/jobs/5476600008
-Software Engineer,Cato Networks,"Tel Aviv District, Israel",,software,mid,2026-11-17,2026-11-18,greenhouse,https://www.catonetworks.com/careers/careers-post/5036503101?gh_jid=5036503101
 DevOps Team Leader,Fireblocks,"Tel Aviv-Yafo, Tel Aviv District, Israel",,software,lead,2026-11-17,2026-11-18,greenhouse,https://www.fireblocks.com/careers/position?gh_jid=4721467006
 Senior Site Reliability Engineer (Data Platform),Nebius,"Amsterdam, Netherlands; Berlin, Germany; Israel; London, United Kingdom; Prague, Czech Republic; Remote",remote,data,senior,2026-11-17,2026-11-18,greenhouse,https://careers.nebius.com/?gh_jid=5040676101
 "Director, AI Governance & Responsible AI",Payoneer,"Herzliya, Tel Aviv District, Israel",,data,director,2026-11-17,2026-11-18,greenhouse,https://www.payoneer.com/careers/position/8364230/?gh_jid=8364230
 Mid-Market Sales Specialist,Payoneer,"Herzliya, Tel Aviv District, Israel",,sales,mid,2026-11-17,2026-11-18,greenhouse,https://www.payoneer.com/careers/position/8392384/?gh_jid=8392384
 "Staff Software Engineer, Applied AI (Tel Aviv Office)",Sayari,"Tel Aviv, Israel",,data,lead,2026-11-17,2026-11-18,greenhouse,https://job-boards.greenhouse.io/sayari/jobs/4486367009
-Senior Data Scientist,SentinelOne,Israel,,data,senior,2026-11-17,2026-11-18,greenhouse,https://www.sentinelone.com/jobs/?gh_jid=8204536003
 "AI Silicon, Design Verification","Unconventional, Inc.",Tel Aviv; Caesarea Israel,,data,mid,2026-11-17,2026-11-18,greenhouse,https://unconv.ai/careers/?gh_jid=4508721009
 Platform Firmware & Drivers,"Unconventional, Inc.",Tel Aviv; Caesarea Israel,,software,mid,2026-11-17,2026-11-18,greenhouse,https://unconv.ai/careers/?gh_jid=4510120009
 "AI Silicon, DFT Engineer - Israel","Unconventional, Inc.",Tel Aviv; Caesarea Israel,,data,mid,2026-11-17,2026-11-18,greenhouse,https://unconv.ai/careers/?gh_jid=4510122009
-Retail same-day delivery S&O,Wolt - English,"Ramat Gan, Israel",,logistics,mid,2026-11-17,2026-11-18,greenhouse,https://job-boards.greenhouse.io/wolt/jobs/8395847
+"Strategy & Operations Manager, New Verticals",Wolt - English,"Ramat Gan, Israel",,operations,mid,2026-11-17,2026-11-18,greenhouse,https://job-boards.greenhouse.io/wolt/jobs/8395847
 Media Buyer,Advantage HQ,"Tel Aviv, Israel",,marketing,mid,2026-11-17,2026-11-18,jazzhr,https://advantagehq.applytojob.com/apply/ntioQpPcbZ/Media-Buyer
-NPI Logistic and Operations Student - Radar,Mobileye,"Petah Tikva, Israel",hybrid,operations,mid,2026-11-17,2026-11-18,lever,https://jobs.eu.lever.co/mobileye/2aa6daf7-93a0-4053-ae47-6d4d5f6bcebc
-Experienced Validation Engineer,Mobileye,"Jerusalem, Israel",onsite,engineering,senior,2026-11-17,2026-11-18,lever,https://jobs.eu.lever.co/mobileye/628faaf0-a7df-4043-b720-e2fd3acb89b4
-IC Package Layout Engineer,Mobileye,"Petah Tikva, Israel",onsite,engineering,mid,2026-11-17,2026-11-18,lever,https://jobs.eu.lever.co/mobileye/913ec43a-f4de-4470-ac27-907240164fea
 PHY System Engineer,Parallel Wireless,Kfar Saba,hybrid,engineering,mid,2026-11-17,2026-11-18,lever,https://jobs.lever.co/parallelwireless/2d33d99a-3c67-4ac9-bdaa-5d738624a439
-Room Attendant,Marriott,"Tel Aviv - Jaffa, Israel",,hospitality,mid,2026-11-17,2026-11-18,oracle,https://ejwl.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/MI_CS_1/job/26150461
-HR Partner - Maternity Leave Replacement,Check Point Software Technologies,"Tel Aviv-Yafo, Tel Aviv District, il",,hr,mid,2026-11-17,2026-11-18,smartrecruiters,https://jobs.smartrecruiters.com/checkpointsoftwaretechnologies2/744000162010919
-Credit & Collection Team Lead,Check Point Software Technologies,"Tel Aviv-Yafo, Tel Aviv District, il",,finance,lead,2026-11-17,2026-11-18,smartrecruiters,https://jobs.smartrecruiters.com/checkpointsoftwaretechnologies2/744000162055909
-Administrative Assistant,Check Point Software Technologies,"Tel Aviv-Yafo, il",,administrative,mid,2026-11-17,2026-11-18,smartrecruiters,https://jobs.smartrecruiters.com/checkpointsoftwaretechnologies2/744000162126741
 Duty Supervisor - TLV,Etihad Airways,"Tel Aviv, il",,,lead,2026-11-17,2026-11-18,smartrecruiters,https://jobs.smartrecruiters.com/etihadairways5/744000162033289
 Quality Control Inspector (Part time / Freelance),QIMA,"Karmiel, North District, il",,trades-manufacturing,mid,2026-11-17,2026-11-18,smartrecruiters,https://jobs.smartrecruiters.com/qima/744000162107884
 Quality Control Inspector (Part time / Freelance),QIMA,"Haifa, Haifa District, il",,trades-manufacturing,mid,2026-11-17,2026-11-18,smartrecruiters,https://jobs.smartrecruiters.com/qima/744000162108737
 Quality Control Inspector (Part time / Freelance),QIMA,"Ashdod, South District, il",,trades-manufacturing,mid,2026-11-17,2026-11-18,smartrecruiters,https://jobs.smartrecruiters.com/qima/744000162108949
-Solution Sales Executive - Moveworks,ServiceNow,"Petah Tikva, il",,sales,mid,2026-11-17,2026-11-18,smartrecruiters,https://jobs.smartrecruiters.com/servicenow/744000162018269
-Applications Dev Engineer,ServiceNow,"Petah Tikva, il",,engineering,mid,2026-11-17,2026-11-18,smartrecruiters,https://jobs.smartrecruiters.com/servicenow/744000162053449
-Senior Staff Technical Program Manager (Armis/Veza),ServiceNow,"Tel Aviv-Yafo, Tel Aviv District, il",,operations,lead,2026-11-17,2026-11-18,smartrecruiters,https://jobs.smartrecruiters.com/servicenow/744000162063079
-UX/UI Designer - Editor Platform,Wix,"Tel Aviv, il",,design,mid,2026-11-17,2026-11-18,smartrecruiters,https://jobs.smartrecruiters.com/wix2/744000162013160
 Full stack organic growth marketer,Wix,"Tel Aviv, il",,software,mid,2026-11-17,2026-11-18,smartrecruiters,https://jobs.smartrecruiters.com/wix2/744000162017310
-Senior Visual Designer - Brand & Motion,Wix,"Tel Aviv, il",,design,senior,2026-11-17,2026-11-18,smartrecruiters,https://jobs.smartrecruiters.com/wix2/744000162020159
 Cloud Architect,Semperis,Tel Aviv,hybrid,software,mid,2026-11-13,2026-11-18,ashby,https://jobs.ashbyhq.com/semperis/3f94a301-ea11-457f-b98c-db36c6eb995e
 Senior Backend Engineer,Comply365,Tel Aviv,hybrid,software,senior,,2026-11-18,bamboohr,https://vistairhr.bamboohr.com/careers/243
 Senior Product Manager,Comply365,Tel Aviv,hybrid,product,senior,,2026-11-18,bamboohr,https://vistairhr.bamboohr.com/careers/245
@@ -41,61 +88,14 @@ Office Admin & Operations Manager (part time),Chamelio,Tel Aviv,onsite,administr
 Senior DevOps Engineer,Finout,Tel Aviv,hybrid,software,senior,2026-11-16,2026-11-17,ashby,https://jobs.ashbyhq.com/finout/7cd7cd82-37f3-4220-b26c-9edc48c9659b
 "AI Senior Software Engineer - Platform Engineering, Foundations",monday.com,Tel Aviv,hybrid,data,senior,2026-11-16,2026-11-17,ashby,https://jobs.ashbyhq.com/monday.com/6f3c83a1-31c2-4ad8-938a-64b7ebfbd92f
 Senior DevOps Platform Engineer,AppsFlyer,Herzliya,,software,senior,2026-11-16,2026-11-17,greenhouse,https://careers.appsflyer.com/jobs/position/8944334002?gh_jid=8944334002
-Business Applications System Analyst,AppsFlyer,Herzliya,,operations,mid,2026-11-16,2026-11-17,greenhouse,https://careers.appsflyer.com/jobs/position/8944605002?gh_jid=8944605002
+Business Applications System Analyst- Maternity Leave Cover,AppsFlyer,Herzliya,,operations,mid,2026-11-16,2026-11-17,greenhouse,https://careers.appsflyer.com/jobs/position/8944605002?gh_jid=8944605002
 Senior Fullstack Engineer,Nebius,"Amsterdam, Netherlands; Germany; Israel; Prague, Czech Republic; Remote - Europe; United Kingdom",remote,software,senior,2026-11-16,2026-11-17,greenhouse,https://careers.nebius.com/?gh_jid=4811809101
 Senior Product Manager (Security) - Temporary,Payoneer,"Herzliya, Tel Aviv District, Israel",,it-security,senior,2026-11-16,2026-11-17,greenhouse,https://www.payoneer.com/careers/position/8382958/?gh_jid=8382958
 Staff Data Scientist- Foundation Models,Riskified,Tel Aviv,,data,lead,2026-11-16,2026-11-17,greenhouse,https://www.riskified.com/careers/job-description/?gh_jid=8944628002
 Senior Application Security Engineer,Tipalti,"Tel Aviv District, Israel",,it-security,senior,2026-11-16,2026-11-17,greenhouse,https://tipalti.com/jobs/?gh_jid=6262319004
-SW Engineer- Frontend Infra,Yotpo,Tel Aviv,,software,mid,2026-11-16,2026-11-17,greenhouse,https://www.yotpo.com/careers/gid-8392400?gh_jid=8392400
 QA Automation Engineer,Questar Auto Technologies,"Herzliya, Israel",,software,mid,2026-11-16,2026-11-17,jazzhr,https://questar.applytojob.com/apply/58oit97APj/QA-Automation-Engineer
-Supervisor-Restaurant,Marriott,"Herzliya, Israel",,hospitality,lead,2026-11-16,2026-11-17,oracle,https://ejwl.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/MI_CS_1/job/26149820
 Senior Product Manager - Platform Security,Akamai,Israel,remote,it-security,senior,2026-11-16,2026-11-17,oracle,https://fa-extu-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX/job/3790
 Senior Software Engineer C++,Akamai,Israel,remote,software,senior,2026-11-16,2026-11-17,oracle,https://fa-extu-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX/job/4510
-Consumer AI Co-Founder / CFO (100 % remote) (m/f/d),EWOR GmbH,"Jerusalem, Yerushalayim, Israel",remote,data,executive,2026-11-16,2026-11-17,recruitee,https://ewor.com/o/consumer-ai-co-founder-cfo-100-remote-mfd-1
-Aerospace Co-Founder / CRO (100 % remote) (m/f/d),EWOR GmbH,"Jerusalem, Yerushalayim, Israel",remote,,executive,2026-11-16,2026-11-17,recruitee,https://ewor.com/o/aerospace-co-founder-cro-100-remote-mfd-6
 Site Management Associate (Clinical Trials),PSI CRO,"Ra'anana, Center District, il",,healthcare,entry,2026-11-16,2026-11-17,smartrecruiters,https://jobs.smartrecruiters.com/psicro/744000161834499
 Solution Advisor Senior Specialist AI Expertise,SAP IT Business Systeme,"Ra'anana, Center District, il",,data,senior,2026-11-16,2026-11-17,smartrecruiters,https://jobs.smartrecruiters.com/sapitbusinesssysteme/744000161906159
 Senior Solution Sales Executive AI Expertise,SAP IT Business Systeme,"Ra'anana, Center District, il",,data,senior,2026-11-16,2026-11-17,smartrecruiters,https://jobs.smartrecruiters.com/sapitbusinesssysteme/744000161906729
-Industrial Tech Co-Founder / CPO (100 % remote) (m/f/d),EWOR GmbH,"Jerusalem, Israel",remote,,executive,2026-11-16,2026-11-17,teamtailor,https://eworgmbh.teamtailor.com/jobs/8750784-industrial-tech-co-founder-cpo-100-remote-m-f-d
-מנהל/ת מרכזי לוגיסטיקה ישראל,Orbia,"Hatserim, Israel",,operations,mid,2026-11-16,2026-11-17,teamtailor,https://careers.netafim.com/jobs/8745743-
-Supervisor-Front Desk,Marriott,"Herzliya, Israel",,hospitality,lead,2026-11-15,2026-11-17,oracle,https://ejwl.fa.us2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/MI_CS_1/job/26149639
-Senior Product Manager - Secure Browsing,Akamai,Israel,remote,product,senior,2026-11-15,2026-11-17,oracle,https://fa-extu-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX/job/3796
-Senior Product Designer,Daylight Security,Tel Aviv,,design,senior,2026-11-12,2026-11-17,greenhouse,https://job-boards.greenhouse.io/daylightsecurity/jobs/4504644009
-Senior Software Engineer,Aidoc,"Tel Aviv-Yafo, Tel Aviv District, Israel",,software,senior,2026-06-01,2026-11-17,greenhouse,https://job-boards.eu.greenhouse.io/aidocmedical/jobs/4864308101
-Engineering Manager - Windows Endpoint,SentinelOne,"Tel Aviv-Yafo, Tel Aviv District, Israel",,software,mid,2026-04-27,2026-11-17,greenhouse,https://www.sentinelone.com/jobs/?gh_jid=7712720003
-Senior Bookkeeper,GlassesUSA,Tel Aviv,hybrid,finance,senior,,2026-11-17,bamboohr,https://glassesusa.bamboohr.com/careers/249
-Software Engineering Technical Leader,"Cisco Systems, Inc.","Tel Aviv-Yafo, Israel",,software,lead,2026-11-16,2026-11-16,workday,https://cisco.wd5.myworkdayjobs.com/Cisco_Careers/job/Tel-Aviv-Yafo-Israel/Software-Engineering-Technical-Leader_2030297
-Senior Software Engineer,"Cisco Systems, Inc.","Tel Aviv-Yafo, Israel",,software,senior,2026-11-16,2026-11-16,workday,https://cisco.wd5.myworkdayjobs.com/Cisco_Careers/job/Tel-Aviv-Yafo-Israel/Senior-Software-Engineer_2030421
-MATERIAL PLANNING ANALIST,"FLEXTRONICS MANUFACTURING MEX, SA DE CV.","Israel, Modiin",,,mid,2026-11-16,2026-11-16,workday,https://flextronics.wd1.myworkdayjobs.com/Careers/job/Israel-Modiin/MATERIAL-PLANNING-ANALIST_WD234324
-Senior DevSecOps Engineer,Chamelio,Tel Aviv,hybrid,engineering,senior,2026-11-15,2026-11-16,ashby,https://jobs.ashbyhq.com/chamelio/33a00ca8-5cff-4c29-b675-d9b725244ed2
-Senior Security Operations Engineer,Chamelio,Tel Aviv,hybrid,it-security,senior,2026-11-15,2026-11-16,ashby,https://jobs.ashbyhq.com/chamelio/bffcf439-e56b-4c4e-b35e-5508f3cf5a38
-Cyber Security Data Analyst,HUMAN,"Tel Aviv, Israel",hybrid,data,mid,2026-11-15,2026-11-16,ashby,https://jobs.ashbyhq.com/HUMAN/8154cbb4-9a88-4d87-bde1-ca4c03a1f6ef
-Software Engineer (Harmony),monday.com,Tel Aviv,hybrid,software,mid,2026-11-15,2026-11-16,ashby,https://jobs.ashbyhq.com/monday.com/87b62362-41f4-4db6-8578-f5b8ac8a2a64
-Senior AI Platform Product Manager,Aidoc,"Tel Aviv-Yafo, Tel Aviv District, Israel",,data,senior,2026-11-15,2026-11-16,greenhouse,https://job-boards.eu.greenhouse.io/aidocmedical/jobs/5034843101
-"Customer Success Engineer, EMEA",GitLab,"Remote, Israel",remote,customer-support,mid,2026-11-15,2026-11-16,greenhouse,https://job-boards.greenhouse.io/gitlab/jobs/8937825002
-Product Data Analyst,Riskified,Tel Aviv,,data,mid,2026-11-15,2026-11-16,greenhouse,https://www.riskified.com/careers/job-description/?gh_jid=8934820002
-Senior Bookkeeper,Tipalti,"Tel Aviv District, Israel",,finance,senior,2026-11-15,2026-11-16,greenhouse,https://tipalti.com/jobs/?gh_jid=6253969004
-Senior Cloud/Backend Engineer,Triple Whale,"Jerusalem, Israel (Hybrid)",hybrid,software,senior,2026-11-15,2026-11-16,greenhouse,https://job-boards.greenhouse.io/triplewhale/jobs/5482801008
-AI Engineer,Unframe,"Tel Aviv-Yafo, Tel Aviv District, Israel",,data,mid,2026-11-15,2026-11-16,greenhouse,https://job-boards.eu.greenhouse.io/unframe/jobs/5036369101
-Forward Deployed Engineer,Unframe,"Tel Aviv-Yafo, Tel Aviv District, Israel",,engineering,mid,2026-11-15,2026-11-16,greenhouse,https://job-boards.eu.greenhouse.io/unframe/jobs/5036373101
-Backend Team Leader,Questar Auto Technologies,"Herzliya, Israel",,software,lead,2026-11-15,2026-11-16,jazzhr,https://questar.applytojob.com/apply/FKim442oHk/Backend-Team-Leader
-Bookkeeper (Maternity cover) - IL,Ibex Medical Analytics,"Tel aviv, HaMerkaz, Israel",,finance,mid,2026-11-15,2026-11-16,recruitee,https://ib1.recruitee.com/o/bookkeeper-maternity-cover-il
-Shift Manager,Orbia,"Yiftah, Israel",,operations,mid,2026-11-15,2026-11-16,teamtailor,https://careers.netafim.com/jobs/8744297-shift-manager
-"Sr. Software Engineer - Cloud, Identity Protection (Hybrid, ISR)","CrowdStrike, Inc.",Israel - Tel Aviv,hybrid,it-security,senior,2026-11-12,2026-11-16,workday,https://crowdstrike.wd5.myworkdayjobs.com/crowdstrikecareers/job/Israel---Tel-Aviv/Sr-Software-Engineer---Cloud--Identity-Protection--Hybrid--ISR-_R29783
-"Sr. MacOS Sensor Engineer, Data Security (Hybrid, ISR)","CrowdStrike, Inc.",Israel - Tel Aviv,hybrid,data,senior,2026-11-12,2026-11-16,workday,https://crowdstrike.wd5.myworkdayjobs.com/crowdstrikecareers/job/Israel---Tel-Aviv/Sr-MacOS-Sensor-Engineer--Data-Security--Hybrid--ISR-_R30424
-CNC Quality Control,"Envista (Nobel Biocare Procera, LLC)","Israel, Central District, Modi'in-Macabim-Re'ut",,trades-manufacturing,mid,2026-11-12,2026-11-16,workday,https://envista.wd1.myworkdayjobs.com/envistacareers/job/Israel-Central-District-Modiin-Macabim-Reut/CNC-Quality-Control_R5027837
-Procurement Specialist - Temporary position,Cato Networks,"Tel Aviv District, Israel",,operations,mid,2026-02-16,2026-11-16,greenhouse,https://www.catonetworks.com/careers/careers-post/4781098101?gh_jid=4781098101
-Supply Chain & Logistics Coordinator,GlassesUSA,Tel Aviv,hybrid,logistics,mid,,2026-11-16,bamboohr,https://glassesusa.bamboohr.com/careers/248
-"Senior AI Engineer, Forward Deployed - Palantir Foundry and AIP",NVIDIA USA,"Israel, Yokneam",,data,senior,2026-11-15,2026-11-15,workday,https://nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite/job/Israel-Yokneam/Senior-AI-Engineer--Forward-Deployed---Palantir-Foundry-and-AIP_JR2029049
-"Senior Test Platform Technical Leader, CPO",NVIDIA USA,"Israel, Yokneam",,,executive,2026-11-14,2026-11-15,workday,https://nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite/job/Israel-Yokneam/Senior-Test-Platform-Technical-Leader--CPO_JR2027946
-Senior PCB Design Layout Engineer,NVIDIA USA,"Israel, Yokneam",,engineering,senior,2026-11-14,2026-11-15,workday,https://nvidia.wd5.myworkdayjobs.com/NVIDIAExternalCareerSite/job/Israel-Yokneam/Senior-PCB-Design-Layout-Engineer_JR2028981
-Manufacturing Instructor (FaST),ORBK LTD Israel,"Migdal Ha'emek, Israel",,education,mid,2026-11-13,2026-11-15,workday,https://kla.wd1.myworkdayjobs.com/Israel/job/Migdal-Haemek-Israel/Manufacturing-Instructor--FaST-_2643297-1
-Software Test Engineer - Student Position,Medtronic (CVS Covidien Sales LLC),"Caesarea, Haifa, Israel",,software,mid,2026-11-13,2026-11-15,workday,https://medtronic.wd1.myworkdayjobs.com/MedtronicCareers/job/Caesarea-Haifa-Israel/Software-Test-Engineer---Student-Position_R81302
-Global calibration engineer / מהנדס/ת כיול גלובלי,MKS (Ophir Optics S.R.L),Israel Jerusalem,,engineering,mid,2026-11-13,2026-11-15,workday,https://mksinst.wd1.myworkdayjobs.com/MKSCareersEMEA/job/Israel-Jerusalem/Global-calibration-engineer------_R23644
-Finance Analyst,Merck Sharp & Dohme (Malaysia) Sdn. Bhd.,ISR - Central District of Israel - Hod Hasharon,,finance,mid,2026-11-13,2026-11-15,workday,https://msd.wd5.myworkdayjobs.com/SearchJobs/job/ISR---Central-District-of-Israel---Hod-Hasharon/Finance-Analyst_R426983-1
-Business Development Representative- Italian Speaker,Semperis,Tel Aviv,hybrid,sales,mid,2026-11-13,2026-11-14,ashby,https://jobs.ashbyhq.com/semperis/f0715857-a2ca-4d1e-954e-37df89c1756b
-"Manager, Customer Success",MongoDB,Tel Aviv,,customer-support,mid,2026-11-13,2026-11-14,greenhouse,https://www.mongodb.com/careers/job/?gh_jid=8383022
-Product Manager,WalkMe,Tel Aviv,hybrid,product,mid,2026-11-13,2026-11-14,lever,https://jobs.lever.co/walkme/c810c5c9-e9c7-4b01-a361-e9034997de7d
-Senior Software Engineer,Clarivate (CPA Global d.o.o.),ISR- Jerusalem (PQ),,software,senior,2026-11-13,2026-11-14,workday,https://clarivate.wd3.myworkdayjobs.com/Clarivate_Careers/job/ISR--Jerusalem-PQ/Senior-Software-Engineer_JREQ137186
-Product Director 3,Genpact LLC,"2201-G DS Israel: Beit Shoham, Netanya, Israel",,product,director,2026-11-13,2026-11-14,workday,https://genpact.wd108.myworkdayjobs.com/External_Careers/job/2201-G-DS-Israel-Beit-Shoham-Netanya-Israel/Product-Director-3_JR10035467
-Clinical Research Associate (Israel),Allucent,"Tel Aviv-Yafo, Tel Aviv District, Israel",,healthcare,entry,2026-11-12,2026-11-14,workable,https://apply.workable.com/allucent/j/0033BE8C31/
