@@ -965,28 +965,32 @@ def ats_job_actors(a):
 
 
 def ats_cta(a, camp):
+    """The cross-ATS job API leads on every ATS page (one product collects the usage); the system's own scraper follows."""
     name = ATS[a]['name']
     acts = ats_job_actors(a)
     if not acts:
         return ''
-    main = acts[0]
+    flag = 'career-site-jobs-search'
+    main = flag if flag in acts else acts[0]
     title = actor(main)['title'] or main
-    if main == f'{a}-jobs-scraper':
+    short = title.split(':')[0].strip()
+    if main == flag:
+        jobs = f"{SCALE['jobs'] // 100_000 / 10:.1f} million" if SCALE else 'two million'
+        sites = f"{floor_round(SCALE['companies']):,}+" if SCALE else '75,000+'
+        points = [f'Search {jobs} open jobs from {sites} company career sites on {len(ATS)} systems, {esc(name)} included',
+                  'Filter by title, country, company, seniority, remote, salary, skills and visa sponsorship',
+                  'Each job comes with company, locations, pay when published, the full description and the apply link',
+                  'Schedules with new jobs only, API and CSV, Excel or JSON export']
+        lead = (f'Need the jobs behind these companies? <strong>{esc(short)}</strong> searches every {esc(name)} board in this list '
+                f'and {len(ATS) - 1} other systems in one call.')
+    else:
         points = [f'Every open job from any {esc(name)} board, read live: title, department, locations, pay range when published, full description',
                   f'Give it board links, tokens or company domains, or leave it empty to search all {esc(name)} jobs in our daily index',
                   'Filters for country, seniority, remote, salary, skills and visa sponsorship; new-only mode for daily runs',
                   'API, webhooks and CSV, Excel or JSON export']
-        unit = 'jobs'
-        lead = f'Need the jobs behind these companies? <strong>{esc(title)}</strong> reads them straight from {esc(name)}.'
-    else:
-        points = [f'Search more than a million open jobs from 40,000+ company career sites on 14 systems, {esc(name)} included',
-                  'Filter by title, country, seniority, remote, salary, skills and visa sponsorship',
-                  'Each match is re-read on its board, with the full description and apply link',
-                  'Schedules with new jobs only, API and CSV, Excel or JSON export']
-        unit = 'jobs'
-        lead = f'Need the jobs behind these companies? <strong>{esc(title)}</strong> searches every {esc(name)} board in this list, and 13 other systems.'
-    also = [(s, actor(s)['title'] or s, 'jobs') for s in acts[1:]]
-    return cta(campaign=camp, slug=main, name=title, unit=unit, points=points, also=also, kicker='// get the jobs', lead=lead)
+        lead = f'Need the jobs behind these companies? <strong>{esc(short)}</strong> reads them straight from {esc(name)}.'
+    also = [(x, (actor(x)['title'] or x).split(':')[0].strip(), 'jobs') for x in acts if x != main]
+    return cta(campaign=camp, slug=main, name=short, unit='jobs', points=points, also=also, kicker='// get the jobs', lead=lead)
 
 
 def ats_links(current):
@@ -1093,8 +1097,8 @@ def page_ats(a, rows, st, date, cn):
       </div>
     </section>''',
         by_country,
-        section('// the full list', f'All companies using {name}', table, hid='list'),
         ats_cta(a, camp),
+        section('// the full list', f'All companies using {name}', table, hid='list'),
         section('// check it yourself', f'How to tell if a company uses {name}', howto, hid='howto'),
         section('// about the data', f'About {name} and this list', about, hid='about'),
         section('// questions', 'Frequently asked questions', faq_block(faq), hid='faq'),
@@ -1336,7 +1340,7 @@ def page_compare(by, stats, date, cn):
         ('How do I find out which ATS a company uses?',
          '<p>Search the company above, or paste one of its job links into the detector. By hand: open a job and check where the Apply button leads, such as boards.greenhouse.io, jobs.lever.co or myworkdayjobs.com.</p>'),
         ('Can I get the jobs from all these companies?',
-         '<p>Yes. Career Site and ATS Jobs API on Apify searches the daily index behind these pages, more than a million open jobs from all 14 systems, and re-reads each match live with its full description.</p>'),
+         '<p>Yes. ATS Jobs API on Apify searches the daily index behind these pages, more than a million open jobs from all 14 systems, and re-reads each match live with its full description.</p>'),
     ]
     stats_html = f'''      <ul class="stats">
         <li class="stat"><b>{total_c:,}</b><span>companies</span></li>
@@ -1356,7 +1360,7 @@ def page_compare(by, stats, date, cn):
     </section>''',
         section('// by country', 'Most used ATS by country', cc_table, hid='countries'),
         cta(campaign=camp, slug='career-site-jobs-search', name=actor('career-site-jobs-search')['title'] or 'Career Site Jobs Search', unit='jobs', kicker='// get the jobs',
-            lead='Every company on these pages feeds one daily job index. <strong>Career Site and ATS Jobs API</strong> lets you query it, and the <a href="/tools/job-data-feed/">job data feed</a> delivers all of it daily.',
+            lead='Every company on these pages feeds one daily job index. <strong>ATS Jobs API</strong> lets you query it, and the <a href="/tools/job-data-feed/">job data feed</a> delivers all of it daily.',
             points=['More than a million open jobs from 40,000+ career sites on all 14 systems',
                     'Filter by title, country, seniority, remote, salary, skills and visa sponsorship',
                     'Each match re-read on its board with the full description and apply link',
@@ -1506,7 +1510,7 @@ def page_job_feed():
       <h2>Get a sample of your feed</h2>
       <p>Download the free sample: 1,050 real jobs added to the index in the three days before {esc(built)}, 75 from each system, without descriptions, or a sample for one country from <a href="/tools/job-postings-data/">job postings data by country</a>. Then write to us with what you need, and we reply with a sample of your exact feed and an offer, usually within one or two working days.</p>
       <div class="cta-row"><a class="btn" href="/tools/data/job-feed-sample.jsonl.gz" download>Download the sample (JSON Lines, gzip)</a> <a class="btn btn--ghost" href="{esc(mail)}">Ask for a feed</a></div>
-      <p class="more">Prefer to pay per request? The same index is behind {actor_link('career-site-jobs-search', camp, 'Career Site and ATS Jobs API on Apify', cls='')} and our <a href="https://rapidapi.com/David%C4%8Cag%C3%A1nek/api/job-search-career-sites-and-ats" target="_blank" rel="noopener">Job Search API on RapidAPI</a>.</p>
+      <p class="more">Prefer to pay per request? The same index is behind {actor_link('career-site-jobs-search', camp, 'ATS Jobs API on Apify', cls='')} and our <a href="https://rapidapi.com/David%C4%8Cag%C3%A1nek/api/job-search-career-sites-and-ats" target="_blank" rel="noopener">Job Search API on RapidAPI</a>.</p>
     </aside>''',
     ])
     faq = [
@@ -2099,7 +2103,7 @@ def jobs_cta(cc, s, sample, camp):
     nm = 'remote jobs' if cc == 'REMOTE' else f'{cname(cc)} jobs'
     mail = ('mailto:info@deriverge.com?subject=' + urllib.parse.quote(f'Job data feed: {nm}') + '&body=' + urllib.parse.quote(
         f'Company:\nWhat the data is for:\nWhich {nm} you need (all, or by city, category or level):\nDelivery (daily file or API) and format (JSON Lines or CSV):\n'))
-    api = actor_link('career-site-jobs-search', camp, 'Career Site and ATS Jobs API on Apify', cls='') if actor('career-site-jobs-search')['public'] else 'our Apify actor'
+    api = actor_link('career-site-jobs-search', camp, 'ATS Jobs API on Apify', cls='') if actor('career-site-jobs-search')['public'] else 'our Apify actor'
     key = 'remote' if cc == 'REMOTE' else f'country:{cc}'
     start, trial = '', ''
     if BILLING_LIVE and (cc == 'REMOTE' or cc in JOBS['pages']):
@@ -2328,7 +2332,7 @@ def page_jobs_hub(date):
       <h2>Get the jobs every day</h2>
       <p>Pick the jobs your product needs: one country or city, remote jobs open to one country, a job category, named companies or the whole index. They arrive every morning at a private link, with the jobs added and closed that day. Plans start at $29 a month and every feed starts with a free two-week trial.</p>
       <div class="cta-row"><a class="btn" href="/tools/data/job-feed-sample.jsonl.gz" download>Download the sample (JSON Lines)</a> <a class="btn btn--ghost" href="/tools/job-data-feed/">Plans and delivery</a></div>
-      <p class="more">Prefer to pay per request? Query the same index with {actor_link('career-site-jobs-search', camp, 'Career Site and ATS Jobs API on Apify', cls='')} or our <a href="https://rapidapi.com/David%C4%8Cag%C3%A1nek/api/job-search-career-sites-and-ats" target="_blank" rel="noopener">Job Search API on RapidAPI</a>.</p>
+      <p class="more">Prefer to pay per request? Query the same index with {actor_link('career-site-jobs-search', camp, 'ATS Jobs API on Apify', cls='')} or our <a href="https://rapidapi.com/David%C4%8Cag%C3%A1nek/api/job-search-career-sites-and-ats" target="_blank" rel="noopener">Job Search API on RapidAPI</a>.</p>
     </aside>''',
         section('questions', 'Frequently asked questions', faq_block(faq), hid='faq'),
     ]
