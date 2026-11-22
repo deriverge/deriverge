@@ -1537,7 +1537,11 @@ def page_job_feed():
 # ── job feed for job board software: one page per platform ─────────────────────────────────────────────────────────
 # Checked against each platform's own documentation on 9 November 2026 (sources listed per platform). Only what the
 # platform documents goes on its page; anything undocumented is said to be undocumented.
-SAMPLE_XML = '/tools/data/job-feed-sample.xml'  # 40 remote software and data jobs with descriptions, from a sample feed run on 9 November 2026
+SAMPLE_XML = '/tools/data/job-feed-sample.xml'  # remote software and data jobs with descriptions; refreshed by datova_slevarna/tools/refresh-sample-feed.sh
+_SAMPLE_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'data', 'job-feed-sample.xml')
+SAMPLE_N = open(_SAMPLE_PATH, encoding='utf-8').read().count('<job>')
+SAMPLE_DAY = dt.date.fromtimestamp(os.path.getmtime(_SAMPLE_PATH))
+PLUGIN_ZIP = '/tools/downloads/deriverge-job-feed-importer.zip'  # built from datova_slevarna/wordpress/
 BOARD_PLATFORMS = [
     {'slug': 'cavuno', 'name': 'Cavuno', 'feature': 'recurring XML feeds', 'formats': 'XML, also gzipped', 'freq': 'every 1, 3, 6, 12 or 24 hours',
      'removes': 'Yes, optional: "Expire missing jobs" after two missed runs', 'plan': 'backfill is part of the paid plans',
@@ -1625,8 +1629,8 @@ BOARD_PLATFORMS = [
      'tips': ['Niceboard\'s pricing lists XML import with 120 import runs a month, enough for one daily feed.',
               'Its built-in backfill uses partner networks; our feed is a separate import with jobs straight from employers\' career sites.'],
      'sources': [('Pricing', 'https://niceboard.co/pricing'), ('Changelog', 'https://niceboard.co/changelog'), ('What is backfill', 'https://help.niceboard.co/article/23-what-is-backfill-how-it-works')]},
-    {'slug': 'wp-job-manager', 'name': 'WP Job Manager', 'feature': 'WP All Import', 'formats': 'XML or CSV', 'freq': 'on a schedule (cron or WP All Import\'s scheduling)',
-     'removes': 'Yes: "remove posts not present in this import file"', 'plan': 'WP All Import Pro and the free WP Job Manager add-on',
+    {'slug': 'wp-job-manager', 'name': 'WP Job Manager', 'feature': 'our free importer plugin or WP All Import Pro', 'formats': 'XML or CSV', 'freq': 'on a schedule (cron or WP All Import\'s scheduling)',
+     'removes': 'Yes: our plugin expires them; WP All Import can "remove posts not present in this import file"', 'plan': 'None with our free plugin; or WP All Import Pro', 'plugin': True,
      'steps': ['Install WP All Import Pro and WP Job Manager\'s free <strong>WP All Import Integration</strong> add-on. The free WP All Import cannot import from an address on a schedule.',
                'Start a new import, choose to download the file from a URL and paste the address of your <code>open.xml</code> file.',
                'Import into <strong>Job Listings</strong> and drag our elements onto the WP Job Manager fields, using the mapping below.',
@@ -1666,9 +1670,9 @@ def board_cta(name, camp):
 
 def xml_test_block():
     return f'''      <div class="prose">
-        <p>Point your importer at our public sample first: 40 remote software and data jobs with full descriptions, in exactly the format your own feed will have.</p>
+        <p>Point your importer at our public sample first: {SAMPLE_N} remote software and data jobs with full descriptions, in exactly the format your own feed will have.</p>
         <p><code>{SITE}{SAMPLE_XML}</code></p>
-        <p>The sample is a fixed file from 9 November 2026, so it does not change between runs. Your own feed is rebuilt every morning.</p>
+        <p>The sample was last refreshed on {SAMPLE_DAY.day} {SAMPLE_DAY.strftime('%B %Y')} and changes about once a week. Your own feed is rebuilt every morning.</p>
       </div>'''
 
 
@@ -1706,7 +1710,16 @@ def page_board_platform(p):
     ]
     blocks = [
         section('at a glance', f'{nm} and external job feeds', facts, hid='facts'),
-        section('connect', f'Connect the feed to {nm}', f'      <div class="prose"><ol>{steps}</ol></div>', hid='connect'),
+        *([section('free plugin', 'Our free importer plugin', f'''      <div class="prose">
+        <p>Deriverge Job Feed Importer is a free WordPress plugin that reads the feed straight into {esc(nm)}: no WP All Import Pro and no mapping by hand. It imports on a schedule in small batches, updates the jobs that changed and expires the ones that left the feed. It is GPL, has no paid version and works with any XML, JSON or JSON Lines job feed, not only ours.</p>
+        <ol><li>Download the plugin and install it under <strong>Plugins, Add New, Upload Plugin</strong>. {esc(nm)} has to be active.</li>
+        <li>Open <strong>Job Listings, Feed Import</strong> and paste the address of your <code>open.xml</code> file, or choose the free sample feed.</li>
+        <li>Choose whether new jobs are published right away or wait for your approval, and what happens to a job that leaves the feed.</li>
+        <li>Press <strong>Run now</strong>. After the first import the feed is imported once a day.</li></ol>
+      </div>
+      <div class="cta-row"><a class="btn" href="{PLUGIN_ZIP}" download>Download the plugin (zip)</a></div>
+      <p class="note">Version 1.0.0, tested with WordPress 7.1 and PHP 8.3; needs WordPress 6.2 and PHP 7.4 or newer. If you already use WP All Import Pro, the steps below work too.</p>''', hid='plugin')] if p.get('plugin') else []),
+        section('connect', f'Connect the feed to {nm}' + (' with WP All Import' if p.get('plugin') else ''), f'      <div class="prose"><ol>{steps}</ol></div>', hid='connect'),
         section('mapping', 'Field mapping', f'''      <div class="tbl-wrap"><table class="tbl tbl--fit"><thead><tr><th>{esc(nm)} field</th><th>Element in our XML</th></tr></thead><tbody>{maprows}</tbody></table></div>
       <p class="note">Our file follows the Indeed XML job feed format, with a few extra elements. <a href="/tools/job-data-feed/job-board-software/#elements">All elements</a>.</p>''', hid='mapping'),
         section('tips', 'Limits and tips', f'      <div class="prose"><ul>{tips}</ul></div>', hid='tips'),
@@ -1717,7 +1730,7 @@ def page_board_platform(p):
     ]
     layout(path=path, title=title, desc=desc, tab=p['slug'], kicker=f'// job feed · {nm}', h1=f'Job feed for {nm}',
            lede=(f'Fill your {esc(nm)} job board with fresh jobs from the career sites of more than 47,000 employers. Your feed is a standard XML file at a private '
-                 f'address that updates every morning; {esc(nm)}\'s {esc(p["feature"])} imports it on a schedule. Test the import with our free sample first.'),
+                 f'address that updates every morning; ' + ('our free importer plugin reads it into your job listings on a schedule' if p.get('plugin') else f'{esc(nm)}\'s {esc(p["feature"])} imports it on a schedule') + '. Test the import with our free sample first.'),
            body='\n'.join(blocks), campaign=camp, ld=[faq_ld(faq)],
            trail=[('deriverge', '/'), ('Tools', '/tools/'), ('Job data feed', '/tools/job-data-feed/'), (f'Job feed for {nm}', path)])
 
@@ -1747,7 +1760,7 @@ def page_board_software():
         ('What format is the feed?',
          '<p>XML in the Indeed job feed format, with extra elements for apply links, salary as separate values and remote or hybrid work. The same jobs come as JSON and CSV.</p>'),
         ('Can I test it without paying?',
-         f'<p>Yes. Point your importer at <code>{SITE}{SAMPLE_XML}</code>, a public sample of 40 jobs with descriptions. When you ask for a feed, the two-week trial uses your real feed.</p>'),
+         f'<p>Yes. Point your importer at <code>{SITE}{SAMPLE_XML}</code>, a public sample of {SAMPLE_N} jobs with descriptions. When you ask for a feed, the two-week trial uses your real feed.</p>'),
         ('Can I send these jobs on to Indeed?',
          '<p>Keep them on your own board. Indeed and some other aggregators do not accept jobs that were collected from other sites.</p>'),
     ]
