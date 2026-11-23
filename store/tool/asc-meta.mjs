@@ -3,7 +3,9 @@
 //   node store/tool/asc-meta.mjs                         nanečisto: jen čte (GET) a vypíše, co by se změnilo
 //   node store/tool/asc-meta.mjs --go                    zapíše texty i snímky
 //   … --create 1.0.9        když upravitelná verze není, založí ji (jen s --go)
-//   … --whats-new 1.0.8     text „Co je nového“ pro 1.0.8 (výchozí 1.0.9)
+//   … --whats-new 1.0.8     text „Co je nového“ pro 1.0.8 (výchozí 1.0.9). Když existuje store/vydani/whats_new_<verze>.json
+//                           (konkrétní body od vydání), bere se z něj; texty ze store/meta jsou jen obecná záloha.
+//   … --keep-whats-new      „Co je nového“ vůbec neměnit
 //   … --season xmas|year    propagační text vánoční, nebo celoroční (výchozí podle data: 15. 11. až 26. 12. vánoční)
 //   … --locales de,cs       jen některá locale (de bere de-DE, en obě anglická)
 //   … --no-shots            jen texty      … --shots <složka>   jiná složka se snímky
@@ -28,6 +30,14 @@ const want = (opt('--locales') || '').split(',').filter(Boolean);
 const wanted = (loc) => !want.length || want.some((w) => loc === w || loc.startsWith(w + '-'));
 if (!['xmas', 'year'].includes(season)) throw new Error('--season xmas|year');
 const T = appstore({ season, version: wnVersion });
+const KEEP_WN = args.includes('--keep-whats-new');
+// „Co je nového“ s konkrétními body píše vydání (store/vydani/whats_new_<verze>.json, klíč = jazyk); má přednost před obecným textem.
+const wnFile = new URL(`../vydani/whats_new_${wnVersion}.json`, import.meta.url);
+const wnNotes = fs.existsSync(wnFile) ? JSON.parse(fs.readFileSync(wnFile, 'utf8')) : null;
+for (const [loc, t] of Object.entries(T)) {
+  if (wnNotes) t.whatsNew = wnNotes[loc.slice(0, 2)] || wnNotes.en;
+  if (len(t.whatsNew) > 4000) throw new Error(`${loc}: Co je nového má ${len(t.whatsNew)} znaků`);
+}
 const EDITABLE = ['PREPARE_FOR_SUBMISSION', 'DEVELOPER_REJECTED', 'REJECTED', 'METADATA_REJECTED', 'INVALID_BINARY'];
 const api = await asc();
 // Pojistka: bez --go projde jen GET.
@@ -48,30 +58,43 @@ function diff(loc, field, was, now, max) {
   return true;
 }
 
-log(`Tapkasa → App Store Connect | ${GO ? 'ZÁPIS (--go)' : 'nanečisto (jen čtení)'} | sezóna ${season} | Co je nového ${wnVersion}${PROMO_ONLY ? ' | jen propagační text' : ''}`);
+log(`Tapkasa → App Store Connect | ${GO ? 'ZÁPIS (--go)' : 'nanečisto (jen čtení)'} | sezóna ${season} | Co je nového ${KEEP_WN ? 'beze změny' : wnVersion + (wnNotes ? ' ze store/vydani' : ' obecné ze store/meta')}${PROMO_ONLY ? ' | jen propagační text' : ''}`);
 const versions = (await call('GET', `/v1/apps/${ASC_APP}/appStoreVersions?limit=20`)).data;
 const live = versions.find((v) => v.attributes.appStoreState === 'READY_FOR_SALE');
 let ver = versions.find((v) => EDITABLE.includes(v.attributes.appStoreState));
-log('Verze v prodeji:', live ? live.attributes.versionString : 'žádná', '| upravitelná:', ver ? `${ver.attributes.versionString} (${ver.attributes.appStoreState})` : 'žádná');
+// Verze, která je na cestě do obchodu (čeká na kontrolu, je v kontrole, čeká na vydání): texty u ní měnit nejde a novou verzi vedle ní založit taky ne.
+const INFLIGHT = ['WAITING_FOR_REVIEW', 'IN_REVIEW', 'READY_FOR_REVIEW', 'PENDING_DEVELOPER_RELEASE', 'PENDING_APPLE_RELEASE', 'PROCESSING_FOR_APP_STORE', 'ACCEPTED'];
+const pending = versions.find((v) => INFLIGHT.includes(v.attributes.appStoreState));
+log('Verze v prodeji:', live ? live.attributes.versionString : 'žádná', '| upravitelná:', ver ? `${ver.attributes.versionString} (${ver.attributes.appStoreState})` : 'žádná',
+  pending ? `| na cestě: ${pending.attributes.versionString} (${pending.attributes.appStoreState})` : '');
 
 if (PROMO_ONLY) {
-  // Propagační text slibuje vratné zálohy, ty jsou až od 1.0.8.
-  if (!live) throw new Error('žádná verze v prodeji');
-  if (cmpVer(live.attributes.versionString, '1.0.8') < 0) {
-    log(`STOP: v prodeji je ${live.attributes.versionString}, propagační text ale slibuje vratné zálohy (od 1.0.8). Nejdřív vydat 1.0.8 nebo novější.`);
+  // Propagační text slibuje vratné zálohy, ty jsou až od 1.0.8. Zapisuje se proto jen k verzím 1.0.8 a novějším:
+  // k verzi v prodeji (projeví se hned) a k verzi na cestě nebo rozpracované (projeví se s jejím vydáním).
+  const targets = [live, pending, ver].filter((v) => v && cmpVer(v.attributes.versionString, '1.0.8') >= 0);
+  if (!targets.length) {
+    log(`STOP: v prodeji je ${live ? live.attributes.versionString : 'nic'} a žádná verze 1.0.8 nebo novější není založená. Propagační text slibuje vratné zálohy (od 1.0.8).`);
     process.exit(GO ? 1 : 0);
   }
-  const locs = (await call('GET', `/v1/appStoreVersions/${live.id}/appStoreVersionLocalizations?limit=50`)).data;
-  for (const l of locs) {
-    const t = T[l.attributes.locale]; if (!t || !wanted(l.attributes.locale)) continue;
-    if (diff(l.attributes.locale, 'propagační text', l.attributes.promotionalText, t.promotionalText, 170) && GO)
-      await call('PATCH', `/v1/appStoreVersionLocalizations/${l.id}`, { data: { type: 'appStoreVersionLocalizations', id: l.id, attributes: { promotionalText: t.promotionalText } } });
+  if (live && !targets.includes(live)) log(`Verze v prodeji ${live.attributes.versionString} zůstane beze změny (zálohy ještě neumí).`);
+  for (const v of targets) {
+    log(`\nVerze ${v.attributes.versionString} (${v.attributes.appStoreState})`);
+    const locs = (await call('GET', `/v1/appStoreVersions/${v.id}/appStoreVersionLocalizations?limit=50`)).data;
+    for (const l of locs) {
+      const t = T[l.attributes.locale]; if (!t || !wanted(l.attributes.locale)) continue;
+      if (diff(l.attributes.locale, 'propagační text', l.attributes.promotionalText, t.promotionalText, 170) && GO)
+        await call('PATCH', `/v1/appStoreVersionLocalizations/${l.id}`, { data: { type: 'appStoreVersionLocalizations', id: l.id, attributes: { promotionalText: t.promotionalText } } });
+    }
   }
-  log(GO ? `Hotovo, změn: ${changes}.` : `Nanečisto: ${changes} změn. Zápis: přidat --go.`);
+  log(GO ? `\nHotovo, změn: ${changes}.` : `\nNanečisto: ${changes} změn. Zápis: přidat --go.`);
   process.exit(0);
 }
 
-if (!ver) {
+if (!ver && pending && !PROMO_ONLY) {
+  log(`Verze ${pending.attributes.versionString} je ve stavu ${pending.attributes.appStoreState}: její texty teď měnit nejde a další verzi lze založit až po jejím vydání.`);
+  if (GO) { log('STOP: počkat, až bude v prodeji, pak spustit znovu s --create <další verze>.'); process.exit(1); }
+  log('Nanečisto porovnávám s texty této verze.');
+} else if (!ver) {
   if (!create) log('Upravitelná verze není. Porovnávám s verzí v prodeji; pro zápis přidat --create <verze> (např. --create 1.0.9).');
   else if (GO) {
     ver = (await call('POST', '/v1/appStoreVersions', { data: { type: 'appStoreVersions', attributes: { platform: 'IOS', versionString: create },
@@ -80,7 +103,7 @@ if (!ver) {
   } else log(`Nanečisto: založila by se verze ${create}; porovnávám s verzí v prodeji.`);
 }
 if (GO && !ver) { log('STOP: není co upravovat.'); process.exit(1); }
-const target = ver || live;
+const target = ver || pending || live;
 const targetVersion = ver ? ver.attributes.versionString : create || '(nová)';
 if (ver && cmpVer(ver.attributes.versionString, '1.0.8') < 0) throw new Error('texty slibují vratné zálohy, verze musí být 1.0.8 nebo novější');
 if (ver && ver.attributes.versionString !== wnVersion) log(`POZOR: upravitelná verze je ${ver.attributes.versionString}, ale „Co je nového“ se bere pro ${wnVersion} (přepínač --whats-new).`);
@@ -133,6 +156,7 @@ for (const [locale, t] of Object.entries(T)) {
   }
   const va = vl?.attributes || {};
   const verAttrs = { description: t.description, keywords: t.keywords, promotionalText: t.promotionalText, whatsNew: t.whatsNew, supportUrl: URLS.support, marketingUrl: URLS.marketing };
+  if (KEEP_WN) delete verAttrs.whatsNew;
   const lim = { description: 4000, keywords: 100, promotionalText: 170, whatsNew: 4000 };
   const names = { description: 'popis', keywords: 'klíčová slova', promotionalText: 'propagační text', whatsNew: 'co je nového', supportUrl: 'podpora', marketingUrl: 'web' };
   let dirty = false;
@@ -162,4 +186,4 @@ for (const [locale, t] of Object.entries(T)) {
     for (const f of files) await uploadShot(set.id, f);
   }
 }
-log(GO ? `\nHotovo: verze ${targetVersion}, změn ${changes}. Ke kontrole se nic neodeslalo.` : `\nNanečisto: ${changes} změn proti ${ver ? 'rozpracované verzi ' + targetVersion : 'verzi v prodeji ' + (live ? live.attributes.versionString : '')}. Nic se nezapsalo. Zápis: přidat --go${ver ? '' : ' --create <verze>'}.`);
+log(GO ? `\nHotovo: verze ${targetVersion}, změn ${changes}. Ke kontrole se nic neodeslalo.` : `\nNanečisto: ${changes} změn proti ${ver ? 'rozpracované verzi ' + targetVersion : pending ? 'verzi na cestě ' + pending.attributes.versionString : 'verzi v prodeji ' + (live ? live.attributes.versionString : '')}. Nic se nezapsalo. Zápis: přidat --go${ver ? '' : ' --create <verze>'}.`);

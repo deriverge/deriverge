@@ -24,15 +24,16 @@ export const us = {
   play: {
     locale: 'en-US',
     title: 'Tapkasa: Booth Cash Register',
-    shortXmas: 'Cash register for holiday markets and craft fairs. Cup deposits, works offline.',
-    shortYear: 'Cash register for craft fairs, booths and bake sales. Order queue, works offline',
+    shortXmas: 'Cash register for holiday bazaars and craft fairs. No card processing, offline.',
+    shortYear: 'Cash register for bake sales and craft fairs. No card processing, works offline.',
   },
-  promoXmas: 'Holiday market, craft fair or bake sale? Type in your menu and ring up sales with no sign-up and no internet. Cup deposits in one tap, numbered orders on a second phone.',
-  promoYear: 'Craft fair, farmers market or bake sale? Type in your menu and ring up sales with no sign-up and no internet. Cup deposits in one tap, numbered orders on a second phone.',
+  // Propagační text je první, co člověk na stránce čte: hned řekne, co aplikace neumí (karty, daň navíc), ať si ji nestahují lidé, kteří čekají platební terminál s výpočtem daně.
+  promoXmas: 'Holiday bazaar, bake sale or craft fair? Tap items, get the change, see your totals. No card processing (cash or your own reader), prices include tax. Works offline.',
+  promoYear: 'Bake sale, fundraiser or craft fair? Tap items, get the change, see your totals. No card processing (cash or your own reader), prices include tax. Works offline.',
   ...wn('cup or mug'),
-  desc: (store) => `A simple cash register for craft fairs, vendor booths, bake sales and school events. Type in your menu and start ringing up sales in two minutes: no sign-up, no account, no internet.
+  desc: (store) => `A simple cash register for bake sales, school fundraisers, concession stands and craft fairs. It adds up each sale, works out the change and keeps your totals. It does not process cards and does not add sales tax: take cash, run cards on your own reader and enter prices with tax included.
 
-Tapkasa adds up each sale, works out the change and keeps your totals. It does not take card payments: cash goes in your cash box and cards go through your own card reader. No money passes through the app, so there is nothing to verify, nothing that can be frozen and no transaction fees.
+Type in your menu and start ringing up sales in two minutes: no sign-up, no account, no internet. No money passes through the app, so there is nothing to verify, nothing that can be frozen and no transaction fees.
 
 A second phone shows numbered orders and reads them aloud. Cup and mug deposits take one tap. Free for 10 sales a day; try Tapkasa Pro free for 14 days to cover a whole event.
 
@@ -86,16 +87,17 @@ export const gb = {
     locale: 'en-GB',
     name: 'Tapkasa: Market Stall Till',
     subtitle: 'Christmas markets, craft fairs',
-    keywords: 'cash,register,pos,fete,bake,sale,car,boot,school,vereinskasse,schulfest,bonkasse,ausschank,kassieren',
+    // Druhá polovina jsou německá slova: en-GB se indexuje i v Německu a Rakousku. Jen výrazy, které obchod našeptává (měření 23. 11.).
+    keywords: 'cash,register,pos,fete,bake,sale,car,boot,school,vereinskasse,wechselgeld,rückgeldrechner,kassieren',
   },
   // Google Play: en-GB si bere texty en-US (obchod je dosadí sám), vlastní listing zatím nezakládáme.
   play: null,
   promoXmas: 'Christmas market, craft fair or school fete? Type in your menu and sell with no sign-up and no internet. Mug deposits in one tap, numbered orders on a second phone.',
   promoYear: 'Market stall, craft fair or school fete? Type in your menu and start selling with no sign-up and no internet. Cup deposits in one tap, numbered orders on a second phone.',
   ...wn('mug or cup'),
-  desc: (store) => `A simple till for market stalls, Christmas markets, craft fairs and school fetes. Type in your menu and start selling in two minutes: no sign-up, no account, no internet.
+  desc: (store) => `A simple till for market stalls, Christmas markets, craft fairs and school fetes. It adds up each sale, works out the change and keeps your takings. It does not process card payments: cash goes in your cash box and cards go through your own card reader.
 
-Tapkasa adds up each sale, works out the change and keeps your takings. It does not take card payments: cash goes in your cash box and cards go through your own card reader. No money passes through the app, so there is nothing to verify, nothing that can be frozen and no transaction fees.
+Type in your menu and start selling in two minutes: no sign-up, no account, no internet. No money passes through the app, so there is nothing to verify, nothing that can be frozen and no transaction fees.
 
 A second phone shows numbered orders and reads them aloud. Mug and cup deposits take one tap. Free for 10 sales a day; try Tapkasa Pro free for 14 days to cover a whole market.
 

@@ -28,7 +28,7 @@ Neu seit 1.0.8:
 • Kein Netz am Stand? Den offenen Bon schließen Sie trotzdem ab und erhalten einmalig eine Reserve von 10 Zahlungen.`,
   desc: (store) => `Die Kasse für Stand, Weihnachtsmarkt, Vereinsfest und Basar. Menü eintippen und in zwei Minuten kassieren: ohne Registrierung, ohne Konto, ohne Internet.
 
-Tapkasa rechnet und erfasst Ihre Verkäufe, wickelt aber keine Zahlungen ab. Deshalb wird nichts eingefroren, nichts geprüft und es fallen keine Transaktionsgebühren an. Bargeld kommt in Ihre Geldkassette, Karten laufen über Ihr eigenes Terminal.
+Tapkasa rechnet und erfasst Ihre Verkäufe, wickelt aber keine Zahlungen ab. Deshalb wird nichts eingefroren, nichts geprüft und es fallen keine Transaktionsgebühren an. Bargeld kommt in Ihre Geldkassette, Karten laufen über Ihr eigenes Terminal. Eine zertifizierte Kasse mit TSE ersetzt Tapkasa nicht.
 
 Ein zweites Handy zeigt die Bestellungen mit Nummer und liest sie vor. Tassen- und Becherpfand buchen Sie mit einem Tipp. Kostenlos sind 10 Zahlungen pro Tag, für den ganzen Markt testen Sie Tapkasa Pro 14 Tage gratis.
 
