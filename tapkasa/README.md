@@ -6,7 +6,7 @@ hotově či kartou, fronta objednávek, přehled tržby. Jeden soubor, žádný 
 a Google Play (nativní obal je v `../mobile/`, podklady pro obchody v `../store/`).
 
 Webová verze běží na `https://www.deriverge.com/tapkasa/`. Aktuální verze
-aplikace: **1.1.0**.
+aplikace: **1.2.0**.
 
 ## První spuštění
 
@@ -120,6 +120,48 @@ nese `taxAdd`, `taxRate`, `tips` a `tx` u položek. Starší verze je ignorují
 a `total` (zboží s daní, bez spropitného) jim sedí; když účtenku po
 odškrtnutí vrátí, kasa o daň ani spropitné nepřijde, a od starší verze
 převzaté menu nechá vlastní nastavení daně a spropitného.
+
+## EET 2.0 (Česko, od 1.2.0)
+
+Evidence tržeb podle zákona č. 180/2026 Sb. Jen u měny CZK a jen na kase;
+jinde se nic nezobrazuje a bez zapnutí se nic neposílá. V Menu jde EET
+zapnout, nebo zvolit „EET se mě netýká“ (krátký přehled výjimek a odkaz na
+eet.gov.cz). Průvodce vede přes DIS+ (MOJE daně): evidenční jednotka,
+pokladní certifikát `.p12` s heslem, označení pokladny (výchozí `TK-xxxx`,
+každé účtující zařízení jiné), mezní doba odezvy 2, 5 nebo 10 s.
+Testovací certifikát (vydavatel „playground“) posílá do testovacího
+prostředí, ostrý do produkčního.
+
+- **Podpis v telefonu, bez serveru.** Formát podle „Popisu datového
+  rozhraní“ v1.2 a XSD 4.1: SOAP 1.1, WS-Security, exc-c14n, SHA-256,
+  RSA-SHA256 (WebCrypto). `.p12` od CA EET je ve starém tvaru (klíč
+  3DES, certifikáty RC2-40, MAC HMAC-SHA1); čte ho vlastní kód v `EETX`
+  (DER, SHA-1, PKCS#12 KDF, DES, RC2, PBES2 přes WebCrypto). Služba EET
+  povoluje CORS, posílá se přímo z WebView.
+- **Klíč** je v IndexedDB `tapkasa-eet` jako neexportovatelný CryptoKey,
+  vedle něj zašifrovaný `.p12` (i v localStorage `tapkasa.eet.p12`) pro
+  odemčení heslem, kdyby klíč zmizel. Heslo se neukládá; stav ani záloha
+  dat klíč nenesou (jen veřejný certifikát).
+- **Fronta** `state.eet.q`: každý zaplacený účet dostane záznam s vlastním
+  pořadovým číslem zařízení, časem a částkou (zboží, připočtená daň
+  i spropitné; vratná záloha je v tržbě, její vrácení je záporná tržba;
+  účet za nulu jde jako dvě zprávy). Data se už nemění, opakované zaslání
+  má novou hlavičku (`prvni_zaslani=false`). Odesílá se hned, pak
+  s prodlevou 15 s až 5 min, hned po startu, po návratu do popředí
+  a po návratu signálu. Potvrzené (POK) jdou do `state.eet.log` (posledních
+  400). Hlavička ukazuje počet neodeslaných, Přehled odeslané a čekající,
+  účtenka svůj stav a POK. Upozornění po 36 a 48 hodinách.
+- **Storno**: vrácení účtu k úpravě, smazání účtenky nebo objednávky
+  a smazání účtu z druhého zařízení pošle zápornou tržbu s časem vrácení.
+  Účet nese značku `eet` (pořadové číslo); párovací zprávy ji nenesou.
+- **Dvě zařízení**: výdej nic neodesílá, nastavení EET se nekopíruje.
+  Obnova zálohy na telefonu s EET nechá jeho nastavení a převezme
+  neodeslané tržby; na telefonu bez EET převezme nastavení a chce znovu
+  nahrát `.p12`.
+- **Certifikát** platí 366 dní; 30 dní předem upozornění, od 14 dní
+  v liště. Obnova přes rozhraní CA EET (`caeetapi_jwt.yml`, JWT RS256)
+  s potvrzením převzetí až po uložení nového klíče; když nevyjde
+  (CORS, síť), návod na ruční vydání v DIS+.
 
 ## Data
 

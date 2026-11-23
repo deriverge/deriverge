@@ -799,6 +799,35 @@
   @media (min-width:1000px){
     .grid{grid-template-columns:repeat(5,1fr)}
   }
+  /* ---------- EET 2.0 ---------- */
+  .eetp{display:inline-block;position:relative;margin-left:8px;padding:1px 7px;border:1px solid #E3B866;border-radius:999px;background:#FFF6E2;color:#6E4500;
+    font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:0;text-transform:none;line-height:16px;vertical-align:1px}
+  .eetp::after{content:"";position:absolute;inset:-12px -6px}
+  .eetp.red{border-color:#F0C7BF;background:var(--accent-tint);color:var(--accent-dk)}
+  .eetm{position:relative;border:0;background:none;padding:0;font:inherit;font-weight:600;color:var(--cash);
+    text-decoration:underline;text-decoration-color:var(--rule);text-underline-offset:2px}
+  .eetm::after{content:"";position:absolute;inset:-12px -4px}
+  .eetm.wait{color:#7A4E00}
+  .eetm.bad{color:var(--accent)}
+  .eet-info{margin:0 16px;padding:12px 14px;border:1px solid var(--rule);border-radius:var(--r-tile);background:var(--surface);
+    font-size:13px;line-height:1.55;color:var(--ink-2);overflow-wrap:anywhere}
+  .eet-info .w{color:var(--accent);font-weight:600}
+  .eet-info .nw{white-space:nowrap}
+  .eet-steps{margin:10px 0 0;padding:0 0 0 20px;text-align:left;font-size:14px;line-height:1.45;color:var(--ink-2)}
+  .eet-steps li{margin:6px 0}
+  a.eet-a{color:var(--card);font-weight:600}
+  .eet-f{margin-top:14px}
+  .sheet .sub.eet-err{color:var(--accent);font-weight:600}
+  .sheet .sub.eet-ok{color:var(--cash);font-weight:600}
+  .eet-file{display:block;text-align:center;cursor:pointer}
+  .seg.eet-seg{margin:0;grid-template-columns:1fr 1fr 1fr}
+  .eetl{margin-top:16px}
+  .eetr{display:flex;gap:10px;align-items:baseline;padding:9px 0;border-bottom:1px solid var(--rule);font-size:13px}
+  .eetr .n{flex:0 0 auto;min-width:2.6em;font-family:var(--mono);font-weight:700}
+  .eetr .m{flex:1;min-width:0;color:var(--ink-2)}
+  .eetr .a{flex:0 0 auto;font-family:var(--mono);font-weight:700;font-variant-numeric:tabular-nums}
+  .eetr .k{display:block;margin-top:2px;font-family:var(--mono);font-size:11px;color:var(--ink-3);overflow-wrap:anywhere;user-select:all;-webkit-user-select:all}
+  .eetr .e{display:block;margin-top:2px;color:var(--accent);font-size:12px;font-weight:600}
 </style>
 
 <div class="shell">
@@ -1389,7 +1418,119 @@
     x_choco: "Horká čokoláda",
     x_sausage: "Klobása",
     x_dep: "Záloha na hrnek",
-    x_ret: "Vrácení hrnku"
+    x_ret: "Vrácení hrnku",
+    eetHead: "EET 2.0",
+    eetIntro: "Od 1. 1. 2027 se v Česku znovu evidují tržby (leden je pilotní měsíc). Tapkasa umí každý zaplacený účet poslat do EET sama, bez příplatku. Když není signál, tržby počkají v telefonu a odešlou se, jakmile se spojení vrátí.",
+    eetSetupBtn: "Nastavit EET",
+    eetNotMe: "EET se mě netýká",
+    eetWhoBtn: "Koho se EET netýká?",
+    eetOffState: "EET se mě netýká, tržby se neposílají",
+    eetChange: "Změnit",
+    eetWhoHead: "Koho se EET netýká",
+    eetWhoIntro: "Evidují se platby hotově, kartou nebo QR kódem přijaté na místě, které jsou příjmem z podnikání. Netýká se mimo jiné:",
+    eetWho1: "paušalistů v 1. pásmu s příjmy z podnikání za předchozí rok do 1 milionu Kč, kteří se přihlásí k režimu EET OFF (přihláška do 10. ledna);",
+    eetWho2: "spolků a dalších veřejně prospěšných poplatníků u akcí, které nejsou podnikáním (třeba ples nebo spolková zábava), a u drobné vedlejší činnosti;",
+    eetWho3: "veřejných škol a školských zařízení a stravování žáků;",
+    eetWho4: "plateb, které nejsou příjmem z podnikání, a ojedinělých tržeb.",
+    eetWhoNote: "Je to zjednodušený přehled, ne právní rada. Rozhoduje zákon č. 180/2026 Sb. a výklad finanční správy:",
+    eetOnState: "EET zapnuté",
+    eetEnvProd: "ostré prostředí",
+    eetEnvTest: "testovací prostředí (Playground)",
+    eetTestNote: "Testovací certifikát: tržby jdou do testovacího prostředí a naostro se neevidují.",
+    eetIdsLine: "EIČ {0} · provozovna {1} · pokladna {2}",
+    eetCertTo: "Certifikát platí do {0}.",
+    eetCertSoon: "Vyprší za {0}.",
+    eetDaysN: ["{0} den", "{0} dny", "{0} dní"],
+    eetCounts: "Odesláno {0} · čeká {1}",
+    eetOldest: "Nejstarší neodeslaná tržba: {0}.",
+    eetOnHint: "Každý zaplacený účet se do EET odešle hned. Bez signálu počká v telefonu a odešle se, jakmile se spojení vrátí; zákon na to dává 48 hodin. Vrácený nebo smazaný účet jde do EET jako storno.",
+    eetSendNow: "Odeslat čekající",
+    eetSending: "Odesílám čekající tržby…",
+    eetTest: "Vyzkoušet spojení",
+    eetWorking: "Pracuji…",
+    eetTestOk: "Spojení s EET funguje (zkušební zpráva, nic se neevidovalo).",
+    eetTestFail: "Spojení s EET nefunguje: {0}",
+    eetWarnN: "varování {0}",
+    eetLogBtn: "Odeslané tržby",
+    eetSettings: "Nastavení EET",
+    eetDisable: "Vypnout EET",
+    confirmEetOff: ["Vypnout EET", "Další účty se do EET posílat nebudou. Co čeká, se ještě odešle. Certifikát zůstane v telefonu.", "Vypnout"],
+    eetRemoveCert: "Odebrat certifikát z telefonu",
+    confirmEetRemove: ["Odebrat certifikát", "Klíč i soubor certifikátu se z telefonu smažou. Bez certifikátu nejde do EET nic poslat.", "Odebrat"],
+    eetWizHead: "Nastavení EET",
+    eetWizIntro: "Číslo provozovny a certifikát získáte zdarma v Daňové informační schránce (DIS+) na portálu MOJE daně:",
+    eetStep1: "Přihlaste se do DIS+ (třeba bankovní identitou) a aktivujte evidenci tržeb.",
+    eetDisLink: "Otevřít MOJE daně",
+    eetStep2: "V části Správa evidenčních jednotek založte provozovnu. Stánek bez pevného základu je Mobilní provozovna. Číslo, které dostane, opište níže.",
+    eetStep3: "V části Pokladní certifikáty vytvořte certifikát, stáhněte soubor .p12 do tohoto telefonu a poznamenejte si heslo.",
+    eetStep4: "Tady vyplňte číslo provozovny a nahrajte certifikát s heslem.",
+    eetUnitLbl: "Číslo evidenční jednotky (provozovny)",
+    eetUnitHint: "Jen číslice, jak je přidělila DIS+.",
+    eetUnitBad: "Vyplňte číslo z DIS+: jen číslice, nejvýš devět, nezačíná nulou.",
+    eetPoklLbl: "Označení pokladny",
+    eetPoklHint: "Každý telefon, který v jedné provozovně účtuje, potřebuje jiné označení.",
+    eetPoklBad: "Nejvýš 20 znaků: písmena bez diakritiky, číslice, mezera a . , : ; / # - _",
+    eetCertLbl: "Pokladní certifikát",
+    eetPickFile: "Vybrat soubor .p12",
+    eetPickOther: "Nahrát jiný certifikát",
+    eetPwLbl: "Heslo k certifikátu",
+    eetLoadCert: "Nahrát certifikát",
+    eetCertOk: "Certifikát pro {0} je nahraný, platí do {1}.",
+    eetKeepNote: "Soubor .p12 a soukromý klíč zůstávají jen v tomto telefonu, nikam se neposílají a nejsou v záloze dat. Heslo se neukládá.",
+    eetTmoLbl: "Mezní doba odezvy",
+    eetTmoHint: "Jak dlouho čekat na potvrzení z EET. Když nepřijde, účet se uloží a odešle se znovu později.",
+    eetNeed: "Nejdřív nahrajte certifikát a vyplňte číslo provozovny.",
+    eetEnable: "Zapnout EET",
+    eetSave: "Uložit",
+    eetOnToast: "EET je zapnuté, zaplacené účty se budou odesílat.",
+    eetSaved: "Nastavení EET uloženo.",
+    eetErrPw: "Heslo nesedí. Zkontrolujte velká a malá písmena.",
+    eetErrFile: "Soubor se nepodařilo přečíst. Vyberte soubor .p12 stažený z DIS+.",
+    eetErrNoFile: "Nejdřív vyberte soubor .p12.",
+    eetErrNoPw: "Zadejte heslo k certifikátu.",
+    eetErrNoKey: "V souboru chybí soukromý klíč.",
+    eetErrCn: "Tohle není pokladní certifikát EET (chybí v něm EIČ).",
+    eetErrExpired: "Tento certifikát už neplatí. Vytvořte v DIS+ nový.",
+    eetErrAlg: "Soubor je zašifrovaný způsobem, který Tapkasa nezná. Použijte soubor .p12 přímo z DIS+.",
+    eetErrCrypto: "Tento prohlížeč neumí podepisovat. Použijte aplikaci Tapkasa nebo aktuální prohlížeč.",
+    eetErrStore: "Certifikát funguje, ale telefon ho nedovolil uložit natrvalo. Po restartu aplikace bude potřeba zadat heslo znovu.",
+    eetLocked: "Zadejte heslo k certifikátu EET, do té doby tržby čekají v telefonu.",
+    eetUnlock: "Zadat heslo",
+    eetUnlocked: "Certifikát EET je připravený.",
+    eetPwHead: "Heslo k certifikátu EET",
+    eetMissing: "Certifikát EET v telefonu chybí (třeba po obnovení zálohy). Nahrajte soubor .p12 znovu, tržby zatím čekají. Když zálohu obnovujete z jiného telefonu, který dál účtuje, změňte označení pokladny.",
+    eetCertGone: "Certifikát vypršel. Tržby čekají, dokud v DIS+ nevytvoříte a nenahrajete nový.",
+    eetLate: "Některé tržby čekají déle než 48 hodin. Připojte telefon k internetu a odešlete je co nejdřív, povinnost odeslat trvá.",
+    eetWaitN: ["{0} tržba čeká na odeslání.", "{0} tržby čekají na odeslání.", "{0} tržeb čeká na odeslání."],
+    eetBadNote: "EET některou tržbu odmítlo. Podívejte se do Odeslaných tržeb.",
+    eetStatHead: "Evidence tržeb (EET)",
+    eetQHead: "Čeká na odeslání",
+    eetLogHead: "Odesláno",
+    eetStatEmpty: "Zatím nic neodesláno.",
+    eetStorno: "storno",
+    eetRcOk: "EET ✓",
+    eetRcWait: "EET čeká",
+    eetRcBad: "EET chyba",
+    eetRcHead: "Účet v EET",
+    eetRcGone: "K tomuto účtu tu záznam EET už není.",
+    eetRcHint: "POK je potvrzovací kód z EET. Tržby s ním najdete i v DIS+.",
+    eetToastOk: "EET ✓",
+    eetToastLater: "EET odešle později",
+    eetToastStorno: "Účet je zpátky k úpravě, do EET jde storno.",
+    eetToastRemote: "Druhé zařízení smazalo zaplacený účet, do EET jde storno.",
+    eetDelNote: "Do EET se pošle storno (záporná tržba).",
+    eetPillAria: "EET: čeká {0}",
+    eetHist: "EET: odesláno {0} · čeká {1}",
+    eetVydejNote: "Výdej do EET nic neposílá, tržby eviduje kasa.",
+    eetRenewBtn: "Obnovit certifikát",
+    eetRenewing: "Obnovuji certifikát…",
+    eetRenewOk: "Nový certifikát je nahraný, platí do {0}.",
+    eetRenewFail: "Automatická obnova se nepovedla ({0}). Vytvořte nový certifikát v DIS+ v části Pokladní certifikáty a nahrajte ho v Nastavení EET.",
+    eetRenewManual: "Nový certifikát vytvoříte v DIS+ v části Pokladní certifikáty a nahrajete ho v Nastavení EET stejně jako první.",
+    eetE_tmo: "nepřišla odpověď včas",
+    eetE_net: "bez spojení",
+    eetE_odd: "nečekaná odpověď",
+    eetE_kod: "chyba {0}: {1}"
 
   };
 
@@ -1863,7 +2004,119 @@
     x_choco: "Hot chocolate",
     x_sausage: "Bratwurst",
     x_dep: "Mug deposit",
-    x_ret: "Mug return"
+    x_ret: "Mug return",
+    eetHead: "EET 2.0 (Czech Republic)",
+    eetIntro: "From 1 January 2027, sales must be reported in the Czech Republic again (January is a pilot month). Tapkasa can send every paid order to EET by itself, at no extra cost. Without signal, sales wait on the phone and go out as soon as the connection is back.",
+    eetSetupBtn: "Set up EET",
+    eetNotMe: "EET doesn’t apply to me",
+    eetWhoBtn: "Who is exempt from EET?",
+    eetOffState: "EET doesn’t apply to me, nothing is sent",
+    eetChange: "Change",
+    eetWhoHead: "Who is exempt from EET",
+    eetWhoIntro: "In-person payments in cash, by card or by QR code that are business income are reported. Among others, it does not apply to:",
+    eetWho1: "flat-tax payers in band 1 with prior-year business income up to CZK 1 million who sign up for EET OFF (by 10 January);",
+    eetWho2: "associations and other public-benefit taxpayers for events that are not a business (such as a ball or a club party) and for minor side activities;",
+    eetWho3: "public schools and school facilities, and pupils’ meals;",
+    eetWho4: "payments that are not business income, and one-off receipts.",
+    eetWhoNote: "This is a simplified overview, not legal advice. Czech Act No. 180/2026 Coll. and the tax administration’s guidance decide:",
+    eetOnState: "EET on",
+    eetEnvProd: "live environment",
+    eetEnvTest: "test environment (Playground)",
+    eetTestNote: "Test certificate: sales go to the test environment and are not officially recorded.",
+    eetIdsLine: "EIČ {0} · premises {1} · till {2}",
+    eetCertTo: "Certificate valid until {0}.",
+    eetCertSoon: "Expires in {0}.",
+    eetDaysN: ["{0} day", "{0} days", "{0} days"],
+    eetCounts: "Sent {0} · waiting {1}",
+    eetOldest: "Oldest unsent sale: {0}.",
+    eetOnHint: "Every paid order goes to EET right away. Without signal it waits on the phone and goes out once the connection is back; the law allows 48 hours. A returned or deleted order goes to EET as a cancellation.",
+    eetSendNow: "Send waiting",
+    eetSending: "Sending waiting sales…",
+    eetTest: "Test connection",
+    eetWorking: "Working…",
+    eetTestOk: "The connection to EET works (test message, nothing was recorded).",
+    eetTestFail: "The connection to EET doesn’t work: {0}",
+    eetWarnN: "warning {0}",
+    eetLogBtn: "Sent sales",
+    eetSettings: "EET settings",
+    eetDisable: "Turn off EET",
+    confirmEetOff: ["Turn off EET", "New orders will no longer be sent to EET. Anything waiting will still go out. The certificate stays on the phone.", "Turn off"],
+    eetRemoveCert: "Remove certificate from this phone",
+    confirmEetRemove: ["Remove certificate", "The key and the certificate file are deleted from this phone. Without a certificate nothing can be sent to EET.", "Remove"],
+    eetWizHead: "EET settings",
+    eetWizIntro: "You get the premises number and the certificate free of charge in the tax information box (DIS+) on the MOJE daně portal:",
+    eetStep1: "Sign in to DIS+ (for example with your bank identity) and activate sales reporting.",
+    eetDisLink: "Open MOJE daně",
+    eetStep2: "Under Správa evidenčních jednotek, create your premises. A stall without a fixed base is a Mobilní provozovna. Copy the number it gets below.",
+    eetStep3: "Under Pokladní certifikáty, create a certificate, download the .p12 file to this phone and note the password.",
+    eetStep4: "Enter the premises number here and load the certificate with its password.",
+    eetUnitLbl: "Registration unit (premises) number",
+    eetUnitHint: "Digits only, as assigned in DIS+.",
+    eetUnitBad: "Enter the number from DIS+: digits only, at most nine, not starting with zero.",
+    eetPoklLbl: "Till ID",
+    eetPoklHint: "Each phone that charges at the same premises needs a different ID.",
+    eetPoklBad: "Up to 20 characters: letters without accents, digits, space and . , : ; / # - _",
+    eetCertLbl: "Till certificate",
+    eetPickFile: "Choose .p12 file",
+    eetPickOther: "Load another certificate",
+    eetPwLbl: "Certificate password",
+    eetLoadCert: "Load certificate",
+    eetCertOk: "Certificate for {0} loaded, valid until {1}.",
+    eetKeepNote: "The .p12 file and the private key stay on this phone only. They are never sent anywhere and are not part of the data backup. The password is not stored.",
+    eetTmoLbl: "Response time limit",
+    eetTmoHint: "How long to wait for EET to confirm. If no answer comes, the order is saved and sent again later.",
+    eetNeed: "First load the certificate and enter the premises number.",
+    eetEnable: "Turn on EET",
+    eetSave: "Save",
+    eetOnToast: "EET is on, paid orders will be sent.",
+    eetSaved: "EET settings saved.",
+    eetErrPw: "Wrong password. Check upper and lower case.",
+    eetErrFile: "The file could not be read. Choose the .p12 file downloaded from DIS+.",
+    eetErrNoFile: "Choose a .p12 file first.",
+    eetErrNoPw: "Enter the certificate password.",
+    eetErrNoKey: "The file has no private key.",
+    eetErrCn: "This is not an EET till certificate (it has no EIČ).",
+    eetErrExpired: "This certificate is no longer valid. Create a new one in DIS+.",
+    eetErrAlg: "The file uses encryption Tapkasa doesn’t know. Use the .p12 file straight from DIS+.",
+    eetErrCrypto: "This browser can’t sign. Use the Tapkasa app or an up-to-date browser.",
+    eetErrStore: "The certificate works, but the phone didn’t allow storing it permanently. After restarting the app you will need to enter the password again.",
+    eetLocked: "Enter the EET certificate password; until then, sales wait on the phone.",
+    eetUnlock: "Enter password",
+    eetUnlocked: "The EET certificate is ready.",
+    eetPwHead: "EET certificate password",
+    eetMissing: "The EET certificate is missing on this phone (for example after restoring a backup). Load the .p12 file again; sales wait meanwhile. If the backup comes from another phone that keeps charging, change the till ID.",
+    eetCertGone: "The certificate has expired. Sales wait until you create a new one in DIS+ and load it.",
+    eetLate: "Some sales have been waiting for more than 48 hours. Connect the phone to the internet and send them as soon as possible; the duty to send remains.",
+    eetWaitN: ["{0} sale is waiting to be sent.", "{0} sales are waiting to be sent.", "{0} sales are waiting to be sent."],
+    eetBadNote: "EET rejected a sale. See Sent sales.",
+    eetStatHead: "Sales reporting (EET)",
+    eetQHead: "Waiting to be sent",
+    eetLogHead: "Sent",
+    eetStatEmpty: "Nothing sent yet.",
+    eetStorno: "cancellation",
+    eetRcOk: "EET ✓",
+    eetRcWait: "EET waiting",
+    eetRcBad: "EET error",
+    eetRcHead: "Order in EET",
+    eetRcGone: "There is no EET record for this order any more.",
+    eetRcHint: "POK is the confirmation code from EET. You can also find the sales with it in DIS+.",
+    eetToastOk: "EET ✓",
+    eetToastLater: "EET will send later",
+    eetToastStorno: "The order is back for editing, a cancellation goes to EET.",
+    eetToastRemote: "The other device deleted a paid order, a cancellation goes to EET.",
+    eetDelNote: "A cancellation (negative sale) is sent to EET.",
+    eetPillAria: "EET: {0} waiting",
+    eetHist: "EET: sent {0} · waiting {1}",
+    eetVydejNote: "The counter sends nothing to EET; the till reports the sales.",
+    eetRenewBtn: "Renew certificate",
+    eetRenewing: "Renewing certificate…",
+    eetRenewOk: "The new certificate is loaded, valid until {0}.",
+    eetRenewFail: "Automatic renewal failed ({0}). Create a new certificate in DIS+ under Pokladní certifikáty and load it in EET settings.",
+    eetRenewManual: "Create a new certificate in DIS+ under Pokladní certifikáty and load it in EET settings, just like the first one.",
+    eetE_tmo: "no answer in time",
+    eetE_net: "no connection",
+    eetE_odd: "unexpected answer",
+    eetE_kod: "error {0}: {1}"
 
   };
 
@@ -2338,7 +2591,119 @@
     x_choco: "Horúca čokoláda",
     x_sausage: "Klobása",
     x_dep: "Záloha za hrnček",
-    x_ret: "Vrátenie hrnčeka"
+    x_ret: "Vrátenie hrnčeka",
+    eetHead: "EET 2.0 (Česko)",
+    eetIntro: "Od 1. 1. 2027 sa v Česku znovu evidujú tržby (január je pilotný mesiac). Tapkasa vie každý zaplatený účet poslať do EET sama, bez príplatku. Keď nie je signál, tržby počkajú v telefóne a odošlú sa, len čo sa spojenie vráti.",
+    eetSetupBtn: "Nastaviť EET",
+    eetNotMe: "EET sa ma netýka",
+    eetWhoBtn: "Koho sa EET netýka?",
+    eetOffState: "EET sa ma netýka, tržby sa neposielajú",
+    eetChange: "Zmeniť",
+    eetWhoHead: "Koho sa EET netýka",
+    eetWhoIntro: "Evidujú sa platby v hotovosti, kartou alebo QR kódom prijaté na mieste, ktoré sú príjmom z podnikania. Netýka sa okrem iného:",
+    eetWho1: "paušalistov v 1. pásme s príjmami z podnikania za predchádzajúci rok do 1 milióna Kč, ktorí sa prihlásia k režimu EET OFF (prihláška do 10. januára);",
+    eetWho2: "spolkov a ďalších verejnoprospešných poplatníkov pri akciách, ktoré nie sú podnikaním (napríklad ples alebo spolková zábava), a pri drobnej vedľajšej činnosti;",
+    eetWho3: "verejných škôl a školských zariadení a stravovania žiakov;",
+    eetWho4: "platieb, ktoré nie sú príjmom z podnikania, a ojedinelých tržieb.",
+    eetWhoNote: "Je to zjednodušený prehľad, nie právna rada. Rozhoduje český zákon č. 180/2026 Sb. a výklad finančnej správy:",
+    eetOnState: "EET zapnuté",
+    eetEnvProd: "ostré prostredie",
+    eetEnvTest: "testovacie prostredie (Playground)",
+    eetTestNote: "Testovací certifikát: tržby idú do testovacieho prostredia a naostro sa neevidujú.",
+    eetIdsLine: "EIČ {0} · prevádzka {1} · pokladnica {2}",
+    eetCertTo: "Certifikát platí do {0}.",
+    eetCertSoon: "Vyprší o {0}.",
+    eetDaysN: ["{0} deň", "{0} dni", "{0} dní"],
+    eetCounts: "Odoslané {0} · čaká {1}",
+    eetOldest: "Najstaršia neodoslaná tržba: {0}.",
+    eetOnHint: "Každý zaplatený účet sa do EET odošle hneď. Bez signálu počká v telefóne a odošle sa, len čo sa spojenie vráti; zákon na to dáva 48 hodín. Vrátený alebo zmazaný účet ide do EET ako storno.",
+    eetSendNow: "Odoslať čakajúce",
+    eetSending: "Odosielam čakajúce tržby…",
+    eetTest: "Vyskúšať spojenie",
+    eetWorking: "Pracujem…",
+    eetTestOk: "Spojenie s EET funguje (skúšobná správa, nič sa neevidovalo).",
+    eetTestFail: "Spojenie s EET nefunguje: {0}",
+    eetWarnN: "varovanie {0}",
+    eetLogBtn: "Odoslané tržby",
+    eetSettings: "Nastavenie EET",
+    eetDisable: "Vypnúť EET",
+    confirmEetOff: ["Vypnúť EET", "Ďalšie účty sa do EET posielať nebudú. Čo čaká, sa ešte odošle. Certifikát zostane v telefóne.", "Vypnúť"],
+    eetRemoveCert: "Odstrániť certifikát z telefónu",
+    confirmEetRemove: ["Odstrániť certifikát", "Kľúč aj súbor certifikátu sa z telefónu zmažú. Bez certifikátu nejde do EET nič poslať.", "Odstrániť"],
+    eetWizHead: "Nastavenie EET",
+    eetWizIntro: "Číslo prevádzky a certifikát získate zadarmo v Daňovej informačnej schránke (DIS+) na portáli MOJE daně:",
+    eetStep1: "Prihláste sa do DIS+ (napríklad bankovou identitou) a aktivujte evidenciu tržieb.",
+    eetDisLink: "Otvoriť MOJE daně",
+    eetStep2: "V časti Správa evidenčních jednotek založte prevádzku. Stánok bez pevného základu je Mobilní provozovna. Číslo, ktoré dostane, odpíšte nižšie.",
+    eetStep3: "V časti Pokladní certifikáty vytvorte certifikát, stiahnite súbor .p12 do tohto telefónu a poznačte si heslo.",
+    eetStep4: "Tu vyplňte číslo prevádzky a nahrajte certifikát s heslom.",
+    eetUnitLbl: "Číslo evidenčnej jednotky (prevádzky)",
+    eetUnitHint: "Iba číslice, ako ich pridelila DIS+.",
+    eetUnitBad: "Vyplňte číslo z DIS+: iba číslice, najviac deväť, nezačína nulou.",
+    eetPoklLbl: "Označenie pokladnice",
+    eetPoklHint: "Každý telefón, ktorý v jednej prevádzke účtuje, potrebuje iné označenie.",
+    eetPoklBad: "Najviac 20 znakov: písmená bez diakritiky, číslice, medzera a . , : ; / # - _",
+    eetCertLbl: "Pokladničný certifikát",
+    eetPickFile: "Vybrať súbor .p12",
+    eetPickOther: "Nahrať iný certifikát",
+    eetPwLbl: "Heslo k certifikátu",
+    eetLoadCert: "Nahrať certifikát",
+    eetCertOk: "Certifikát pre {0} je nahraný, platí do {1}.",
+    eetKeepNote: "Súbor .p12 a súkromný kľúč zostávajú iba v tomto telefóne, nikam sa neposielajú a nie sú v zálohe dát. Heslo sa neukladá.",
+    eetTmoLbl: "Medzná doba odozvy",
+    eetTmoHint: "Ako dlho čakať na potvrdenie z EET. Keď nepríde, účet sa uloží a odošle sa znovu neskôr.",
+    eetNeed: "Najprv nahrajte certifikát a vyplňte číslo prevádzky.",
+    eetEnable: "Zapnúť EET",
+    eetSave: "Uložiť",
+    eetOnToast: "EET je zapnuté, zaplatené účty sa budú odosielať.",
+    eetSaved: "Nastavenie EET uložené.",
+    eetErrPw: "Heslo nesedí. Skontrolujte veľké a malé písmená.",
+    eetErrFile: "Súbor sa nepodarilo prečítať. Vyberte súbor .p12 stiahnutý z DIS+.",
+    eetErrNoFile: "Najprv vyberte súbor .p12.",
+    eetErrNoPw: "Zadajte heslo k certifikátu.",
+    eetErrNoKey: "V súbore chýba súkromný kľúč.",
+    eetErrCn: "Toto nie je pokladničný certifikát EET (chýba v ňom EIČ).",
+    eetErrExpired: "Tento certifikát už neplatí. Vytvorte v DIS+ nový.",
+    eetErrAlg: "Súbor je zašifrovaný spôsobom, ktorý Tapkasa nepozná. Použite súbor .p12 priamo z DIS+.",
+    eetErrCrypto: "Tento prehliadač nevie podpisovať. Použite aplikáciu Tapkasa alebo aktuálny prehliadač.",
+    eetErrStore: "Certifikát funguje, ale telefón ho nedovolil uložiť natrvalo. Po reštarte aplikácie bude treba zadať heslo znovu.",
+    eetLocked: "Zadajte heslo k certifikátu EET, dovtedy tržby čakajú v telefóne.",
+    eetUnlock: "Zadať heslo",
+    eetUnlocked: "Certifikát EET je pripravený.",
+    eetPwHead: "Heslo k certifikátu EET",
+    eetMissing: "Certifikát EET v telefóne chýba (napríklad po obnovení zálohy). Nahrajte súbor .p12 znovu, tržby zatiaľ čakajú. Keď zálohu obnovujete z iného telefónu, ktorý ďalej účtuje, zmeňte označenie pokladnice.",
+    eetCertGone: "Certifikát vypršal. Tržby čakajú, kým v DIS+ nevytvoríte a nenahráte nový.",
+    eetLate: "Niektoré tržby čakajú dlhšie ako 48 hodín. Pripojte telefón na internet a odošlite ich čo najskôr, povinnosť odoslať trvá.",
+    eetWaitN: ["{0} tržba čaká na odoslanie.", "{0} tržby čakajú na odoslanie.", "{0} tržieb čaká na odoslanie."],
+    eetBadNote: "EET niektorú tržbu odmietlo. Pozrite sa do Odoslaných tržieb.",
+    eetStatHead: "Evidencia tržieb (EET)",
+    eetQHead: "Čaká na odoslanie",
+    eetLogHead: "Odoslané",
+    eetStatEmpty: "Zatiaľ nič neodoslané.",
+    eetStorno: "storno",
+    eetRcOk: "EET ✓",
+    eetRcWait: "EET čaká",
+    eetRcBad: "EET chyba",
+    eetRcHead: "Účet v EET",
+    eetRcGone: "K tomuto účtu tu záznam EET už nie je.",
+    eetRcHint: "POK je potvrdzovací kód z EET. Tržby s ním nájdete aj v DIS+.",
+    eetToastOk: "EET ✓",
+    eetToastLater: "EET odošle neskôr",
+    eetToastStorno: "Účet je späť na úpravu, do EET ide storno.",
+    eetToastRemote: "Druhé zariadenie zmazalo zaplatený účet, do EET ide storno.",
+    eetDelNote: "Do EET sa pošle storno (záporná tržba).",
+    eetPillAria: "EET: čaká {0}",
+    eetHist: "EET: odoslané {0} · čaká {1}",
+    eetVydejNote: "Výdaj do EET nič neposiela, tržby eviduje pokladnica.",
+    eetRenewBtn: "Obnoviť certifikát",
+    eetRenewing: "Obnovujem certifikát…",
+    eetRenewOk: "Nový certifikát je nahraný, platí do {0}.",
+    eetRenewFail: "Automatická obnova sa nepodarila ({0}). Vytvorte nový certifikát v DIS+ v časti Pokladní certifikáty a nahrajte ho v Nastavení EET.",
+    eetRenewManual: "Nový certifikát vytvoríte v DIS+ v časti Pokladní certifikáty a nahráte ho v Nastavení EET rovnako ako prvý.",
+    eetE_tmo: "odpoveď neprišla včas",
+    eetE_net: "bez spojenia",
+    eetE_odd: "nečakaná odpoveď",
+    eetE_kod: "chyba {0}: {1}"
 
   };
 
@@ -2812,7 +3177,119 @@
     x_choco: "Heiße Schokolade",
     x_sausage: "Bratwurst",
     x_dep: "Tassenpfand",
-    x_ret: "Pfand zurück"
+    x_ret: "Pfand zurück",
+    eetHead: "EET 2.0 (Tschechien)",
+    eetIntro: "Ab dem 1. 1. 2027 müssen Umsätze in Tschechien wieder gemeldet werden (Januar ist ein Pilotmonat). Tapkasa sendet jeden bezahlten Bon selbst an EET, ohne Aufpreis. Ohne Netz warten die Umsätze auf dem Handy und gehen raus, sobald die Verbindung wieder da ist.",
+    eetSetupBtn: "EET einrichten",
+    eetNotMe: "EET betrifft mich nicht",
+    eetWhoBtn: "Wen betrifft EET nicht?",
+    eetOffState: "EET betrifft mich nicht, es wird nichts gesendet",
+    eetChange: "Ändern",
+    eetWhoHead: "Wen EET nicht betrifft",
+    eetWhoIntro: "Gemeldet werden Zahlungen bar, mit Karte oder per QR-Code vor Ort, die Einkünfte aus Unternehmen sind. Nicht betroffen sind unter anderem:",
+    eetWho1: "Pauschalbesteuerte im 1. Band mit Einkünften aus Unternehmen bis 1 Mio. CZK im Vorjahr, die sich für EET OFF anmelden (bis 10. Januar);",
+    eetWho2: "Vereine und andere gemeinnützige Steuerpflichtige bei Veranstaltungen, die kein Unternehmen sind (etwa ein Ball oder ein Vereinsfest), und bei geringfügiger Nebentätigkeit;",
+    eetWho3: "öffentliche Schulen und Schuleinrichtungen sowie die Verpflegung von Schülern;",
+    eetWho4: "Zahlungen, die keine Einkünfte aus Unternehmen sind, und einmalige Einnahmen.",
+    eetWhoNote: "Das ist eine vereinfachte Übersicht, keine Rechtsberatung. Maßgeblich sind das tschechische Gesetz Nr. 180/2026 Sb. und die Auslegung der Finanzverwaltung:",
+    eetOnState: "EET ein",
+    eetEnvProd: "Produktivumgebung",
+    eetEnvTest: "Testumgebung (Playground)",
+    eetTestNote: "Testzertifikat: Umsätze gehen in die Testumgebung und werden nicht amtlich erfasst.",
+    eetIdsLine: "EIČ {0} · Betriebsstätte {1} · Kasse {2}",
+    eetCertTo: "Zertifikat gültig bis {0}.",
+    eetCertSoon: "Läuft in {0} ab.",
+    eetDaysN: ["{0} Tag", "{0} Tagen", "{0} Tagen"],
+    eetCounts: "Gesendet {0} · wartet {1}",
+    eetOldest: "Ältester ungesendeter Umsatz: {0}.",
+    eetOnHint: "Jeder bezahlte Bon geht sofort an EET. Ohne Netz wartet er auf dem Handy und wird gesendet, sobald die Verbindung zurück ist; das Gesetz lässt dafür 48 Stunden. Ein zurückgenommener oder gelöschter Bon geht als Storno an EET.",
+    eetSendNow: "Wartende senden",
+    eetSending: "Wartende Umsätze werden gesendet…",
+    eetTest: "Verbindung testen",
+    eetWorking: "Bitte warten…",
+    eetTestOk: "Die Verbindung zu EET funktioniert (Testnachricht, nichts wurde erfasst).",
+    eetTestFail: "Die Verbindung zu EET funktioniert nicht: {0}",
+    eetWarnN: "Warnung {0}",
+    eetLogBtn: "Gesendete Umsätze",
+    eetSettings: "EET-Einstellungen",
+    eetDisable: "EET ausschalten",
+    confirmEetOff: ["EET ausschalten", "Weitere Bons werden nicht mehr an EET gesendet. Was wartet, geht noch raus. Das Zertifikat bleibt auf dem Handy.", "Ausschalten"],
+    eetRemoveCert: "Zertifikat vom Handy entfernen",
+    confirmEetRemove: ["Zertifikat entfernen", "Schlüssel und Zertifikatsdatei werden vom Handy gelöscht. Ohne Zertifikat kann nichts an EET gesendet werden.", "Entfernen"],
+    eetWizHead: "EET-Einstellungen",
+    eetWizIntro: "Die Nummer der Betriebsstätte und das Zertifikat erhalten Sie kostenlos im Steuerinformationspostfach (DIS+) im Portal MOJE daně:",
+    eetStep1: "Melden Sie sich bei DIS+ an (zum Beispiel mit Ihrer Bankidentität) und aktivieren Sie die Umsatzmeldung.",
+    eetDisLink: "MOJE daně öffnen",
+    eetStep2: "Legen Sie unter Správa evidenčních jednotek Ihre Betriebsstätte an. Ein Stand ohne feste Grundlage ist eine Mobilní provozovna. Übertragen Sie die vergebene Nummer unten.",
+    eetStep3: "Erstellen Sie unter Pokladní certifikáty ein Zertifikat, laden Sie die .p12-Datei auf dieses Handy und notieren Sie das Passwort.",
+    eetStep4: "Tragen Sie hier die Nummer der Betriebsstätte ein und laden Sie das Zertifikat mit Passwort.",
+    eetUnitLbl: "Nummer der Meldeeinheit (Betriebsstätte)",
+    eetUnitHint: "Nur Ziffern, wie in DIS+ vergeben.",
+    eetUnitBad: "Bitte die Nummer aus DIS+ eingeben: nur Ziffern, höchstens neun, nicht mit Null beginnend.",
+    eetPoklLbl: "Kassenkennung",
+    eetPoklHint: "Jedes Handy, das in derselben Betriebsstätte kassiert, braucht eine andere Kennung.",
+    eetPoklBad: "Höchstens 20 Zeichen: Buchstaben ohne Umlaute, Ziffern, Leerzeichen und . , : ; / # - _",
+    eetCertLbl: "Kassenzertifikat",
+    eetPickFile: ".p12-Datei wählen",
+    eetPickOther: "Anderes Zertifikat laden",
+    eetPwLbl: "Zertifikatspasswort",
+    eetLoadCert: "Zertifikat laden",
+    eetCertOk: "Zertifikat für {0} geladen, gültig bis {1}.",
+    eetKeepNote: "Die .p12-Datei und der private Schlüssel bleiben nur auf diesem Handy. Sie werden nirgendwohin gesendet und sind nicht im Daten-Backup. Das Passwort wird nicht gespeichert.",
+    eetTmoLbl: "Antwortfrist",
+    eetTmoHint: "Wie lange auf die Bestätigung von EET gewartet wird. Kommt keine, wird der Bon gespeichert und später erneut gesendet.",
+    eetNeed: "Laden Sie zuerst das Zertifikat und tragen Sie die Nummer der Betriebsstätte ein.",
+    eetEnable: "EET einschalten",
+    eetSave: "Speichern",
+    eetOnToast: "EET ist eingeschaltet, bezahlte Bons werden gesendet.",
+    eetSaved: "EET-Einstellungen gespeichert.",
+    eetErrPw: "Das Passwort stimmt nicht. Bitte Groß- und Kleinschreibung prüfen.",
+    eetErrFile: "Die Datei konnte nicht gelesen werden. Wählen Sie die aus DIS+ heruntergeladene .p12-Datei.",
+    eetErrNoFile: "Wählen Sie zuerst eine .p12-Datei.",
+    eetErrNoPw: "Geben Sie das Zertifikatspasswort ein.",
+    eetErrNoKey: "In der Datei fehlt der private Schlüssel.",
+    eetErrCn: "Das ist kein EET-Kassenzertifikat (es enthält keine EIČ).",
+    eetErrExpired: "Dieses Zertifikat ist nicht mehr gültig. Erstellen Sie in DIS+ ein neues.",
+    eetErrAlg: "Die Datei ist auf eine Weise verschlüsselt, die Tapkasa nicht kennt. Verwenden Sie die .p12-Datei direkt aus DIS+.",
+    eetErrCrypto: "Dieser Browser kann nicht signieren. Verwenden Sie die Tapkasa-App oder einen aktuellen Browser.",
+    eetErrStore: "Das Zertifikat funktioniert, aber das Handy hat das dauerhafte Speichern nicht erlaubt. Nach einem Neustart der App muss das Passwort erneut eingegeben werden.",
+    eetLocked: "Geben Sie das Passwort des EET-Zertifikats ein, bis dahin warten die Umsätze auf dem Handy.",
+    eetUnlock: "Passwort eingeben",
+    eetUnlocked: "Das EET-Zertifikat ist bereit.",
+    eetPwHead: "Passwort des EET-Zertifikats",
+    eetMissing: "Das EET-Zertifikat fehlt auf dem Handy (etwa nach dem Wiederherstellen eines Backups). Laden Sie die .p12-Datei erneut; die Umsätze warten so lange. Stammt das Backup von einem anderen Handy, das weiter kassiert, ändern Sie die Kassenkennung.",
+    eetCertGone: "Das Zertifikat ist abgelaufen. Die Umsätze warten, bis Sie in DIS+ ein neues erstellen und laden.",
+    eetLate: "Einige Umsätze warten seit mehr als 48 Stunden. Verbinden Sie das Handy mit dem Internet und senden Sie sie so bald wie möglich; die Pflicht zum Senden bleibt.",
+    eetWaitN: ["{0} Umsatz wartet auf das Senden.", "{0} Umsätze warten auf das Senden.", "{0} Umsätze warten auf das Senden."],
+    eetBadNote: "EET hat einen Umsatz abgelehnt. Siehe Gesendete Umsätze.",
+    eetStatHead: "Umsatzmeldung (EET)",
+    eetQHead: "Wartet auf das Senden",
+    eetLogHead: "Gesendet",
+    eetStatEmpty: "Noch nichts gesendet.",
+    eetStorno: "Storno",
+    eetRcOk: "EET ✓",
+    eetRcWait: "EET wartet",
+    eetRcBad: "EET-Fehler",
+    eetRcHead: "Bon in EET",
+    eetRcGone: "Zu diesem Bon gibt es hier keinen EET-Eintrag mehr.",
+    eetRcHint: "POK ist der Bestätigungscode von EET. Damit finden Sie die Umsätze auch in DIS+.",
+    eetToastOk: "EET ✓",
+    eetToastLater: "EET sendet später",
+    eetToastStorno: "Der Bon ist zurück zur Bearbeitung, an EET geht ein Storno.",
+    eetToastRemote: "Das andere Gerät hat einen bezahlten Bon gelöscht, an EET geht ein Storno.",
+    eetDelNote: "An EET wird ein Storno (negativer Umsatz) gesendet.",
+    eetPillAria: "EET: {0} wartend",
+    eetHist: "EET: gesendet {0} · wartet {1}",
+    eetVydejNote: "Die Ausgabe sendet nichts an EET, die Kasse meldet die Umsätze.",
+    eetRenewBtn: "Zertifikat erneuern",
+    eetRenewing: "Zertifikat wird erneuert…",
+    eetRenewOk: "Das neue Zertifikat ist geladen, gültig bis {0}.",
+    eetRenewFail: "Die automatische Erneuerung hat nicht geklappt ({0}). Erstellen Sie in DIS+ unter Pokladní certifikáty ein neues Zertifikat und laden Sie es in den EET-Einstellungen.",
+    eetRenewManual: "Ein neues Zertifikat erstellen Sie in DIS+ unter Pokladní certifikáty und laden es in den EET-Einstellungen wie das erste.",
+    eetE_tmo: "keine Antwort innerhalb der Frist",
+    eetE_net: "keine Verbindung",
+    eetE_odd: "unerwartete Antwort",
+    eetE_kod: "Fehler {0}: {1}"
 
   };
 
@@ -3286,7 +3763,119 @@
     x_choco: "Chocolat chaud",
     x_sausage: "Saucisse grillée",
     x_dep: "Consigne gobelet",
-    x_ret: "Retour gobelet"
+    x_ret: "Retour gobelet",
+    eetHead: "EET 2.0 (Tchéquie)",
+    eetIntro: "À partir du 1er janvier 2027, les ventes doivent de nouveau être déclarées en Tchéquie (janvier est un mois pilote). Tapkasa envoie elle-même chaque ticket payé à l’EET, sans supplément. Sans réseau, les ventes attendent dans le téléphone et partent dès que la connexion revient.",
+    eetSetupBtn: "Configurer l’EET",
+    eetNotMe: "L’EET ne me concerne pas",
+    eetWhoBtn: "Qui n’est pas concerné ?",
+    eetOffState: "L’EET ne me concerne pas, rien n’est envoyé",
+    eetChange: "Modifier",
+    eetWhoHead: "Qui n’est pas concerné par l’EET",
+    eetWhoIntro: "Sont déclarés les paiements en espèces, par carte ou par code QR reçus sur place qui sont des revenus d’entreprise. Ne sont notamment pas concernés :",
+    eetWho1: "les contribuables au forfait de la 1re tranche dont les revenus d’entreprise de l’année précédente ne dépassent pas 1 million de CZK et qui s’inscrivent à EET OFF (avant le 10 janvier) ;",
+    eetWho2: "les associations et autres contribuables d’utilité publique pour les manifestations qui ne sont pas une activité commerciale (un bal, une fête d’association) et pour une petite activité accessoire ;",
+    eetWho3: "les écoles et établissements scolaires publics, ainsi que la restauration des élèves ;",
+    eetWho4: "les paiements qui ne sont pas des revenus d’entreprise, et les recettes ponctuelles.",
+    eetWhoNote: "Ceci est un aperçu simplifié, pas un conseil juridique. Font foi la loi tchèque n° 180/2026 Sb. et l’interprétation de l’administration fiscale :",
+    eetOnState: "EET activée",
+    eetEnvProd: "environnement réel",
+    eetEnvTest: "environnement de test (Playground)",
+    eetTestNote: "Certificat de test : les ventes vont dans l’environnement de test et ne sont pas déclarées pour de vrai.",
+    eetIdsLine: "EIČ {0} · établissement {1} · caisse {2}",
+    eetCertTo: "Certificat valable jusqu’au {0}.",
+    eetCertSoon: "Expire dans {0}.",
+    eetDaysN: ["{0} jour", "{0} jours", "{0} jours"],
+    eetCounts: "Envoyés {0} · en attente {1}",
+    eetOldest: "Plus ancienne vente non envoyée : {0}.",
+    eetOnHint: "Chaque ticket payé part tout de suite à l’EET. Sans réseau, il attend dans le téléphone et part dès que la connexion revient ; la loi laisse 48 heures. Un ticket repris ou supprimé part à l’EET comme annulation.",
+    eetSendNow: "Envoyer les ventes en attente",
+    eetSending: "Envoi des ventes en attente…",
+    eetTest: "Tester la connexion",
+    eetWorking: "En cours…",
+    eetTestOk: "La connexion à l’EET fonctionne (message de test, rien n’a été déclaré).",
+    eetTestFail: "La connexion à l’EET ne fonctionne pas : {0}",
+    eetWarnN: "avertissement {0}",
+    eetLogBtn: "Ventes envoyées",
+    eetSettings: "Réglages EET",
+    eetDisable: "Désactiver l’EET",
+    confirmEetOff: ["Désactiver l’EET", "Les prochains tickets ne seront plus envoyés à l’EET. Ce qui attend partira quand même. Le certificat reste dans le téléphone.", "Désactiver"],
+    eetRemoveCert: "Retirer le certificat du téléphone",
+    confirmEetRemove: ["Retirer le certificat", "La clé et le fichier du certificat sont supprimés du téléphone. Sans certificat, rien ne peut être envoyé à l’EET.", "Retirer"],
+    eetWizHead: "Réglages EET",
+    eetWizIntro: "Le numéro d’établissement et le certificat s’obtiennent gratuitement dans la boîte d’information fiscale (DIS+) du portail MOJE daně :",
+    eetStep1: "Connectez-vous à DIS+ (par exemple avec votre identité bancaire) et activez la déclaration des ventes.",
+    eetDisLink: "Ouvrir MOJE daně",
+    eetStep2: "Dans Správa evidenčních jednotek, créez votre établissement. Un stand sans base fixe est une Mobilní provozovna. Recopiez ci-dessous le numéro attribué.",
+    eetStep3: "Dans Pokladní certifikáty, créez un certificat, téléchargez le fichier .p12 sur ce téléphone et notez le mot de passe.",
+    eetStep4: "Saisissez ici le numéro d’établissement et chargez le certificat avec son mot de passe.",
+    eetUnitLbl: "Numéro d’unité (établissement)",
+    eetUnitHint: "Chiffres uniquement, tels qu’attribués dans DIS+.",
+    eetUnitBad: "Saisissez le numéro de DIS+ : chiffres uniquement, neuf au plus, sans zéro au début.",
+    eetPoklLbl: "Identifiant de caisse",
+    eetPoklHint: "Chaque téléphone qui encaisse dans le même établissement a besoin d’un identifiant différent.",
+    eetPoklBad: "20 caractères au plus : lettres sans accents, chiffres, espace et . , : ; / # - _",
+    eetCertLbl: "Certificat de caisse",
+    eetPickFile: "Choisir le fichier .p12",
+    eetPickOther: "Charger un autre certificat",
+    eetPwLbl: "Mot de passe du certificat",
+    eetLoadCert: "Charger le certificat",
+    eetCertOk: "Certificat pour {0} chargé, valable jusqu’au {1}.",
+    eetKeepNote: "Le fichier .p12 et la clé privée restent uniquement dans ce téléphone, ne sont envoyés nulle part et ne figurent pas dans la sauvegarde. Le mot de passe n’est pas enregistré.",
+    eetTmoLbl: "Délai de réponse",
+    eetTmoHint: "Combien de temps attendre la confirmation de l’EET. Sans réponse, le ticket est enregistré et renvoyé plus tard.",
+    eetNeed: "Chargez d’abord le certificat et saisissez le numéro d’établissement.",
+    eetEnable: "Activer l’EET",
+    eetSave: "Enregistrer",
+    eetOnToast: "L’EET est activée, les tickets payés seront envoyés.",
+    eetSaved: "Réglages EET enregistrés.",
+    eetErrPw: "Mot de passe incorrect. Vérifiez les majuscules et minuscules.",
+    eetErrFile: "Le fichier n’a pas pu être lu. Choisissez le fichier .p12 téléchargé depuis DIS+.",
+    eetErrNoFile: "Choisissez d’abord un fichier .p12.",
+    eetErrNoPw: "Saisissez le mot de passe du certificat.",
+    eetErrNoKey: "Le fichier ne contient pas de clé privée.",
+    eetErrCn: "Ce n’est pas un certificat de caisse EET (il n’a pas d’EIČ).",
+    eetErrExpired: "Ce certificat n’est plus valable. Créez-en un nouveau dans DIS+.",
+    eetErrAlg: "Le fichier est chiffré d’une façon que Tapkasa ne connaît pas. Utilisez le fichier .p12 directement issu de DIS+.",
+    eetErrCrypto: "Ce navigateur ne sait pas signer. Utilisez l’application Tapkasa ou un navigateur à jour.",
+    eetErrStore: "Le certificat fonctionne, mais le téléphone n’a pas permis de l’enregistrer durablement. Après un redémarrage de l’application, il faudra ressaisir le mot de passe.",
+    eetLocked: "Saisissez le mot de passe du certificat EET ; d’ici là, les ventes attendent dans le téléphone.",
+    eetUnlock: "Saisir le mot de passe",
+    eetUnlocked: "Le certificat EET est prêt.",
+    eetPwHead: "Mot de passe du certificat EET",
+    eetMissing: "Le certificat EET manque dans ce téléphone (par exemple après une restauration). Rechargez le fichier .p12 ; les ventes attendent en attendant. Si la sauvegarde vient d’un autre téléphone qui continue d’encaisser, changez l’identifiant de caisse.",
+    eetCertGone: "Le certificat a expiré. Les ventes attendent que vous en créiez un nouveau dans DIS+ et le chargiez.",
+    eetLate: "Certaines ventes attendent depuis plus de 48 heures. Connectez le téléphone à Internet et envoyez-les au plus vite ; l’obligation d’envoi demeure.",
+    eetWaitN: ["{0} vente attend d’être envoyée.", "{0} ventes attendent d’être envoyées.", "{0} ventes attendent d’être envoyées."],
+    eetBadNote: "L’EET a refusé une vente. Voir Ventes envoyées.",
+    eetStatHead: "Déclaration des ventes (EET)",
+    eetQHead: "En attente d’envoi",
+    eetLogHead: "Envoyées",
+    eetStatEmpty: "Rien d’envoyé pour l’instant.",
+    eetStorno: "annulation",
+    eetRcOk: "EET ✓",
+    eetRcWait: "EET en attente",
+    eetRcBad: "erreur EET",
+    eetRcHead: "Ticket dans l’EET",
+    eetRcGone: "Il n’y a plus d’enregistrement EET pour ce ticket.",
+    eetRcHint: "Le POK est le code de confirmation de l’EET. Il permet aussi de retrouver les ventes dans DIS+.",
+    eetToastOk: "EET ✓",
+    eetToastLater: "l’EET enverra plus tard",
+    eetToastStorno: "Le ticket est repris pour modification, une annulation part à l’EET.",
+    eetToastRemote: "L’autre appareil a supprimé un ticket payé, une annulation part à l’EET.",
+    eetDelNote: "Une annulation (vente négative) est envoyée à l’EET.",
+    eetPillAria: "EET : {0} en attente",
+    eetHist: "EET : envoyées {0} · en attente {1}",
+    eetVydejNote: "Le comptoir n’envoie rien à l’EET, c’est la caisse qui déclare les ventes.",
+    eetRenewBtn: "Renouveler le certificat",
+    eetRenewing: "Renouvellement du certificat…",
+    eetRenewOk: "Le nouveau certificat est chargé, valable jusqu’au {0}.",
+    eetRenewFail: "Le renouvellement automatique a échoué ({0}). Créez un nouveau certificat dans DIS+ sous Pokladní certifikáty et chargez-le dans les réglages EET.",
+    eetRenewManual: "Créez un nouveau certificat dans DIS+ sous Pokladní certifikáty et chargez-le dans les réglages EET, comme le premier.",
+    eetE_tmo: "pas de réponse à temps",
+    eetE_net: "pas de connexion",
+    eetE_odd: "réponse inattendue",
+    eetE_kod: "erreur {0} : {1}"
 
   };
 
@@ -3760,7 +4349,119 @@
     x_choco: "Chocolate caliente",
     x_sausage: "Salchicha",
     x_dep: "Depósito de la taza",
-    x_ret: "Devolución de la taza"
+    x_ret: "Devolución de la taza",
+    eetHead: "EET 2.0 (Chequia)",
+    eetIntro: "Desde el 1 de enero de 2027, en Chequia hay que volver a registrar las ventas (enero es un mes piloto). Tapkasa envía por sí sola cada ticket pagado a EET, sin coste adicional. Sin señal, las ventas esperan en el teléfono y se envían en cuanto vuelve la conexión.",
+    eetSetupBtn: "Configurar EET",
+    eetNotMe: "EET no me afecta",
+    eetWhoBtn: "¿A quién no afecta EET?",
+    eetOffState: "EET no me afecta, no se envía nada",
+    eetChange: "Cambiar",
+    eetWhoHead: "A quién no afecta EET",
+    eetWhoIntro: "Se registran los pagos en efectivo, con tarjeta o con código QR recibidos en persona que son ingresos empresariales. Entre otros, no afecta a:",
+    eetWho1: "contribuyentes en régimen de tarifa plana de la 1.ª banda con ingresos empresariales del año anterior de hasta 1 millón de CZK que se acojan a EET OFF (antes del 10 de enero);",
+    eetWho2: "asociaciones y otros contribuyentes de utilidad pública en eventos que no son actividad empresarial (un baile, una fiesta de la asociación) y en una pequeña actividad secundaria;",
+    eetWho3: "escuelas y centros escolares públicos, y comedores de alumnos;",
+    eetWho4: "pagos que no son ingresos empresariales, e ingresos puntuales.",
+    eetWhoNote: "Es un resumen simplificado, no asesoramiento jurídico. Rigen la ley checa n.º 180/2026 Sb. y la interpretación de la administración tributaria:",
+    eetOnState: "EET activado",
+    eetEnvProd: "entorno real",
+    eetEnvTest: "entorno de pruebas (Playground)",
+    eetTestNote: "Certificado de prueba: las ventas van al entorno de pruebas y no se registran de verdad.",
+    eetIdsLine: "EIČ {0} · establecimiento {1} · caja {2}",
+    eetCertTo: "Certificado válido hasta el {0}.",
+    eetCertSoon: "Caduca en {0}.",
+    eetDaysN: ["{0} día", "{0} días", "{0} días"],
+    eetCounts: "Enviadas {0} · en espera {1}",
+    eetOldest: "Venta sin enviar más antigua: {0}.",
+    eetOnHint: "Cada ticket pagado se envía a EET al momento. Sin señal, espera en el teléfono y se envía en cuanto vuelve la conexión; la ley da 48 horas. Un ticket devuelto o borrado va a EET como anulación.",
+    eetSendNow: "Enviar pendientes",
+    eetSending: "Enviando ventas pendientes…",
+    eetTest: "Probar conexión",
+    eetWorking: "Un momento…",
+    eetTestOk: "La conexión con EET funciona (mensaje de prueba, no se registró nada).",
+    eetTestFail: "La conexión con EET no funciona: {0}",
+    eetWarnN: "aviso {0}",
+    eetLogBtn: "Ventas enviadas",
+    eetSettings: "Ajustes de EET",
+    eetDisable: "Desactivar EET",
+    confirmEetOff: ["Desactivar EET", "Los próximos tickets ya no se enviarán a EET. Lo pendiente se enviará igualmente. El certificado se queda en el teléfono.", "Desactivar"],
+    eetRemoveCert: "Quitar el certificado del teléfono",
+    confirmEetRemove: ["Quitar el certificado", "La clave y el archivo del certificado se borran del teléfono. Sin certificado no se puede enviar nada a EET.", "Quitar"],
+    eetWizHead: "Ajustes de EET",
+    eetWizIntro: "El número de establecimiento y el certificado se obtienen gratis en el buzón de información tributaria (DIS+) del portal MOJE daně:",
+    eetStep1: "Inicie sesión en DIS+ (por ejemplo, con su identidad bancaria) y active el registro de ventas.",
+    eetDisLink: "Abrir MOJE daně",
+    eetStep2: "En Správa evidenčních jednotek, cree su establecimiento. Un puesto sin base fija es una Mobilní provozovna. Copie abajo el número que le asignen.",
+    eetStep3: "En Pokladní certifikáty, cree un certificado, descargue el archivo .p12 en este teléfono y anote la contraseña.",
+    eetStep4: "Escriba aquí el número de establecimiento y cargue el certificado con su contraseña.",
+    eetUnitLbl: "Número de unidad (establecimiento)",
+    eetUnitHint: "Solo cifras, tal como lo asignó DIS+.",
+    eetUnitBad: "Escriba el número de DIS+: solo cifras, nueve como máximo, sin cero inicial.",
+    eetPoklLbl: "Identificador de caja",
+    eetPoklHint: "Cada teléfono que cobra en el mismo establecimiento necesita un identificador distinto.",
+    eetPoklBad: "Hasta 20 caracteres: letras sin tildes, cifras, espacio y . , : ; / # - _",
+    eetCertLbl: "Certificado de caja",
+    eetPickFile: "Elegir archivo .p12",
+    eetPickOther: "Cargar otro certificado",
+    eetPwLbl: "Contraseña del certificado",
+    eetLoadCert: "Cargar certificado",
+    eetCertOk: "Certificado de {0} cargado, válido hasta el {1}.",
+    eetKeepNote: "El archivo .p12 y la clave privada se quedan solo en este teléfono, no se envían a ningún sitio y no están en la copia de seguridad. La contraseña no se guarda.",
+    eetTmoLbl: "Tiempo máximo de respuesta",
+    eetTmoHint: "Cuánto esperar la confirmación de EET. Si no llega, el ticket se guarda y se vuelve a enviar más tarde.",
+    eetNeed: "Primero cargue el certificado y escriba el número de establecimiento.",
+    eetEnable: "Activar EET",
+    eetSave: "Guardar",
+    eetOnToast: "EET está activado, los tickets pagados se enviarán.",
+    eetSaved: "Ajustes de EET guardados.",
+    eetErrPw: "La contraseña no coincide. Revise mayúsculas y minúsculas.",
+    eetErrFile: "No se pudo leer el archivo. Elija el archivo .p12 descargado de DIS+.",
+    eetErrNoFile: "Primero elija un archivo .p12.",
+    eetErrNoPw: "Escriba la contraseña del certificado.",
+    eetErrNoKey: "Al archivo le falta la clave privada.",
+    eetErrCn: "No es un certificado de caja de EET (no tiene EIČ).",
+    eetErrExpired: "Este certificado ya no es válido. Cree uno nuevo en DIS+.",
+    eetErrAlg: "El archivo está cifrado de una forma que Tapkasa no conoce. Use el archivo .p12 tal como sale de DIS+.",
+    eetErrCrypto: "Este navegador no puede firmar. Use la app Tapkasa o un navegador actualizado.",
+    eetErrStore: "El certificado funciona, pero el teléfono no permitió guardarlo de forma permanente. Al reiniciar la app habrá que volver a escribir la contraseña.",
+    eetLocked: "Escriba la contraseña del certificado de EET; mientras tanto, las ventas esperan en el teléfono.",
+    eetUnlock: "Escribir contraseña",
+    eetUnlocked: "El certificado de EET está listo.",
+    eetPwHead: "Contraseña del certificado de EET",
+    eetMissing: "Falta el certificado de EET en este teléfono (por ejemplo, tras restaurar una copia). Vuelva a cargar el archivo .p12; mientras, las ventas esperan. Si la copia es de otro teléfono que sigue cobrando, cambie el identificador de caja.",
+    eetCertGone: "El certificado ha caducado. Las ventas esperan hasta que cree uno nuevo en DIS+ y lo cargue.",
+    eetLate: "Algunas ventas llevan más de 48 horas esperando. Conecte el teléfono a internet y envíelas cuanto antes; la obligación de enviarlas sigue.",
+    eetWaitN: ["{0} venta espera a enviarse.", "{0} ventas esperan a enviarse.", "{0} ventas esperan a enviarse."],
+    eetBadNote: "EET rechazó una venta. Vea Ventas enviadas.",
+    eetStatHead: "Registro de ventas (EET)",
+    eetQHead: "Pendiente de envío",
+    eetLogHead: "Enviadas",
+    eetStatEmpty: "Todavía no se ha enviado nada.",
+    eetStorno: "anulación",
+    eetRcOk: "EET ✓",
+    eetRcWait: "EET pendiente",
+    eetRcBad: "error EET",
+    eetRcHead: "Ticket en EET",
+    eetRcGone: "Ya no hay registro de EET para este ticket.",
+    eetRcHint: "El POK es el código de confirmación de EET. Con él también encontrará las ventas en DIS+.",
+    eetToastOk: "EET ✓",
+    eetToastLater: "EET lo enviará más tarde",
+    eetToastStorno: "El ticket vuelve para editarlo, a EET va una anulación.",
+    eetToastRemote: "El otro dispositivo borró un ticket pagado, a EET va una anulación.",
+    eetDelNote: "Se envía a EET una anulación (venta negativa).",
+    eetPillAria: "EET: {0} pendientes",
+    eetHist: "EET: enviadas {0} · pendientes {1}",
+    eetVydejNote: "El mostrador no envía nada a EET; las ventas las registra la caja.",
+    eetRenewBtn: "Renovar certificado",
+    eetRenewing: "Renovando el certificado…",
+    eetRenewOk: "El nuevo certificado está cargado, válido hasta el {0}.",
+    eetRenewFail: "La renovación automática no funcionó ({0}). Cree un certificado nuevo en DIS+, en Pokladní certifikáty, y cárguelo en los ajustes de EET.",
+    eetRenewManual: "Cree un certificado nuevo en DIS+, en Pokladní certifikáty, y cárguelo en los ajustes de EET igual que el primero.",
+    eetE_tmo: "no hubo respuesta a tiempo",
+    eetE_net: "sin conexión",
+    eetE_odd: "respuesta inesperada",
+    eetE_kod: "error {0}: {1}"
 
   };
 
@@ -4234,7 +4935,119 @@
     x_choco: "Cioccolata calda",
     x_sausage: "Würstel",
     x_dep: "Cauzione tazza",
-    x_ret: "Reso tazza"
+    x_ret: "Reso tazza",
+    eetHead: "EET 2.0 (Cechia)",
+    eetIntro: "Dal 1° gennaio 2027 in Cechia le vendite vanno di nuovo registrate (gennaio è un mese pilota). Tapkasa invia da sola ogni scontrino pagato all’EET, senza sovrapprezzo. Senza segnale, le vendite aspettano nel telefono e partono appena torna la connessione.",
+    eetSetupBtn: "Impostare l’EET",
+    eetNotMe: "L’EET non mi riguarda",
+    eetWhoBtn: "Chi è escluso dall’EET?",
+    eetOffState: "L’EET non mi riguarda, non si invia nulla",
+    eetChange: "Cambiare",
+    eetWhoHead: "Chi è escluso dall’EET",
+    eetWhoIntro: "Si registrano i pagamenti in contanti, con carta o con codice QR ricevuti di persona che sono redditi d’impresa. Tra l’altro non riguarda:",
+    eetWho1: "i forfettari della 1a fascia con redditi d’impresa dell’anno precedente fino a 1 milione di CZK che aderiscono a EET OFF (entro il 10 gennaio);",
+    eetWho2: "le associazioni e gli altri contribuenti di pubblica utilità per eventi che non sono attività d’impresa (un ballo, una festa dell’associazione) e per una piccola attività accessoria;",
+    eetWho3: "le scuole e gli istituti scolastici pubblici e la mensa degli alunni;",
+    eetWho4: "i pagamenti che non sono redditi d’impresa e gli incassi occasionali.",
+    eetWhoNote: "È una panoramica semplificata, non una consulenza legale. Valgono la legge ceca n. 180/2026 Sb. e l’interpretazione dell’amministrazione finanziaria:",
+    eetOnState: "EET attiva",
+    eetEnvProd: "ambiente reale",
+    eetEnvTest: "ambiente di prova (Playground)",
+    eetTestNote: "Certificato di prova: le vendite vanno nell’ambiente di prova e non vengono registrate davvero.",
+    eetIdsLine: "EIČ {0} · esercizio {1} · cassa {2}",
+    eetCertTo: "Certificato valido fino al {0}.",
+    eetCertSoon: "Scade tra {0}.",
+    eetDaysN: ["{0} giorno", "{0} giorni", "{0} giorni"],
+    eetCounts: "Inviate {0} · in attesa {1}",
+    eetOldest: "Vendita non inviata più vecchia: {0}.",
+    eetOnHint: "Ogni scontrino pagato parte subito verso l’EET. Senza segnale aspetta nel telefono e parte appena torna la connessione; la legge concede 48 ore. Uno scontrino annullato o cancellato va all’EET come storno.",
+    eetSendNow: "Inviare quelle in attesa",
+    eetSending: "Invio delle vendite in attesa…",
+    eetTest: "Provare la connessione",
+    eetWorking: "Un momento…",
+    eetTestOk: "La connessione con l’EET funziona (messaggio di prova, non è stato registrato nulla).",
+    eetTestFail: "La connessione con l’EET non funziona: {0}",
+    eetWarnN: "avviso {0}",
+    eetLogBtn: "Vendite inviate",
+    eetSettings: "Impostazioni EET",
+    eetDisable: "Disattivare l’EET",
+    confirmEetOff: ["Disattivare l’EET", "I prossimi scontrini non verranno più inviati all’EET. Quelli in attesa partiranno comunque. Il certificato resta nel telefono.", "Disattivare"],
+    eetRemoveCert: "Togliere il certificato dal telefono",
+    confirmEetRemove: ["Togliere il certificato", "La chiave e il file del certificato vengono cancellati dal telefono. Senza certificato non si può inviare nulla all’EET.", "Togliere"],
+    eetWizHead: "Impostazioni EET",
+    eetWizIntro: "Il numero dell’esercizio e il certificato si ottengono gratis nella casella informativa fiscale (DIS+) del portale MOJE daně:",
+    eetStep1: "Accedete a DIS+ (ad esempio con l’identità bancaria) e attivate la registrazione delle vendite.",
+    eetDisLink: "Aprire MOJE daně",
+    eetStep2: "In Správa evidenčních jednotek create il vostro esercizio. Un banco senza base fissa è una Mobilní provozovna. Ricopiate qui sotto il numero assegnato.",
+    eetStep3: "In Pokladní certifikáty create un certificato, scaricate il file .p12 su questo telefono e annotate la password.",
+    eetStep4: "Inserite qui il numero dell’esercizio e caricate il certificato con la password.",
+    eetUnitLbl: "Numero dell’unità (esercizio)",
+    eetUnitHint: "Solo cifre, come assegnato da DIS+.",
+    eetUnitBad: "Inserite il numero di DIS+: solo cifre, al massimo nove, senza zero iniziale.",
+    eetPoklLbl: "Identificativo cassa",
+    eetPoklHint: "Ogni telefono che incassa nello stesso esercizio deve avere un identificativo diverso.",
+    eetPoklBad: "Al massimo 20 caratteri: lettere senza accenti, cifre, spazio e . , : ; / # - _",
+    eetCertLbl: "Certificato di cassa",
+    eetPickFile: "Scegliere il file .p12",
+    eetPickOther: "Caricare un altro certificato",
+    eetPwLbl: "Password del certificato",
+    eetLoadCert: "Caricare il certificato",
+    eetCertOk: "Certificato per {0} caricato, valido fino al {1}.",
+    eetKeepNote: "Il file .p12 e la chiave privata restano solo in questo telefono, non vengono inviati da nessuna parte e non sono nel backup dei dati. La password non viene salvata.",
+    eetTmoLbl: "Tempo massimo di risposta",
+    eetTmoHint: "Quanto aspettare la conferma dell’EET. Se non arriva, lo scontrino viene salvato e inviato di nuovo più tardi.",
+    eetNeed: "Prima caricate il certificato e inserite il numero dell’esercizio.",
+    eetEnable: "Attivare l’EET",
+    eetSave: "Salvare",
+    eetOnToast: "L’EET è attiva, gli scontrini pagati verranno inviati.",
+    eetSaved: "Impostazioni EET salvate.",
+    eetErrPw: "La password non è corretta. Controllate maiuscole e minuscole.",
+    eetErrFile: "Non è stato possibile leggere il file. Scegliete il file .p12 scaricato da DIS+.",
+    eetErrNoFile: "Prima scegliete un file .p12.",
+    eetErrNoPw: "Inserite la password del certificato.",
+    eetErrNoKey: "Nel file manca la chiave privata.",
+    eetErrCn: "Questo non è un certificato di cassa EET (manca l’EIČ).",
+    eetErrExpired: "Questo certificato non è più valido. Createne uno nuovo in DIS+.",
+    eetErrAlg: "Il file è cifrato in un modo che Tapkasa non conosce. Usate il file .p12 così come arriva da DIS+.",
+    eetErrCrypto: "Questo browser non sa firmare. Usate l’app Tapkasa o un browser aggiornato.",
+    eetErrStore: "Il certificato funziona, ma il telefono non ha permesso di salvarlo in modo permanente. Dopo il riavvio dell’app bisognerà reinserire la password.",
+    eetLocked: "Inserite la password del certificato EET; fino ad allora le vendite aspettano nel telefono.",
+    eetUnlock: "Inserire la password",
+    eetUnlocked: "Il certificato EET è pronto.",
+    eetPwHead: "Password del certificato EET",
+    eetMissing: "Nel telefono manca il certificato EET (ad esempio dopo il ripristino di un backup). Caricate di nuovo il file .p12; nel frattempo le vendite aspettano. Se il backup viene da un altro telefono che continua a incassare, cambiate l’identificativo cassa.",
+    eetCertGone: "Il certificato è scaduto. Le vendite aspettano finché non ne create e caricate uno nuovo in DIS+.",
+    eetLate: "Alcune vendite aspettano da più di 48 ore. Collegate il telefono a internet e inviatele al più presto; l’obbligo di invio resta.",
+    eetWaitN: ["{0} vendita in attesa di invio.", "{0} vendite in attesa di invio.", "{0} vendite in attesa di invio."],
+    eetBadNote: "L’EET ha rifiutato una vendita. Vedete Vendite inviate.",
+    eetStatHead: "Registrazione vendite (EET)",
+    eetQHead: "In attesa di invio",
+    eetLogHead: "Inviate",
+    eetStatEmpty: "Ancora nulla di inviato.",
+    eetStorno: "storno",
+    eetRcOk: "EET ✓",
+    eetRcWait: "EET in attesa",
+    eetRcBad: "errore EET",
+    eetRcHead: "Scontrino nell’EET",
+    eetRcGone: "Per questo scontrino non c’è più un record EET.",
+    eetRcHint: "Il POK è il codice di conferma dell’EET. Con esso trovate le vendite anche in DIS+.",
+    eetToastOk: "EET ✓",
+    eetToastLater: "l’EET invierà più tardi",
+    eetToastStorno: "Lo scontrino torna da modificare, all’EET va uno storno.",
+    eetToastRemote: "L’altro dispositivo ha cancellato uno scontrino pagato, all’EET va uno storno.",
+    eetDelNote: "All’EET viene inviato uno storno (vendita negativa).",
+    eetPillAria: "EET: {0} in attesa",
+    eetHist: "EET: inviate {0} · in attesa {1}",
+    eetVydejNote: "Il bancone non invia nulla all’EET, le vendite le registra la cassa.",
+    eetRenewBtn: "Rinnovare il certificato",
+    eetRenewing: "Rinnovo del certificato…",
+    eetRenewOk: "Il nuovo certificato è caricato, valido fino al {0}.",
+    eetRenewFail: "Il rinnovo automatico non è riuscito ({0}). Create un nuovo certificato in DIS+ in Pokladní certifikáty e caricatelo nelle impostazioni EET.",
+    eetRenewManual: "Create un nuovo certificato in DIS+ in Pokladní certifikáty e caricatelo nelle impostazioni EET come il primo.",
+    eetE_tmo: "nessuna risposta in tempo",
+    eetE_net: "nessuna connessione",
+    eetE_odd: "risposta inattesa",
+    eetE_kod: "errore {0}: {1}"
 
   };
 
@@ -4708,7 +5521,119 @@
     x_choco: "Gorąca czekolada",
     x_sausage: "Kiełbasa z grilla",
     x_dep: "Kaucja za kubek",
-    x_ret: "Zwrot kubka"
+    x_ret: "Zwrot kubka",
+    eetHead: "EET 2.0 (Czechy)",
+    eetIntro: "Od 1 stycznia 2027 w Czechach znów trzeba ewidencjonować sprzedaż (styczeń to miesiąc pilotażowy). Tapkasa sama wysyła każdy opłacony rachunek do EET, bez dopłaty. Bez zasięgu sprzedaż czeka w telefonie i zostanie wysłana, gdy połączenie wróci.",
+    eetSetupBtn: "Ustawienie EET",
+    eetNotMe: "EET mnie nie dotyczy",
+    eetWhoBtn: "Kogo EET nie dotyczy?",
+    eetOffState: "EET mnie nie dotyczy, nic nie jest wysyłane",
+    eetChange: "Zmienić",
+    eetWhoHead: "Kogo EET nie dotyczy",
+    eetWhoIntro: "Ewidencjonuje się płatności gotówką, kartą lub kodem QR przyjęte na miejscu, które są przychodem z działalności gospodarczej. Nie dotyczy to m.in.:",
+    eetWho1: "ryczałtowców z 1. przedziału z przychodem z działalności za poprzedni rok do 1 mln CZK, którzy zgłoszą się do trybu EET OFF (do 10 stycznia);",
+    eetWho2: "stowarzyszeń i innych podatników pożytku publicznego przy imprezach, które nie są działalnością gospodarczą (np. bal czy zabawa stowarzyszenia), oraz przy drobnej działalności ubocznej;",
+    eetWho3: "publicznych szkół i placówek oświatowych oraz żywienia uczniów;",
+    eetWho4: "płatności, które nie są przychodem z działalności gospodarczej, i jednorazowych wpływów.",
+    eetWhoNote: "To uproszczony przegląd, nie porada prawna. Rozstrzyga czeska ustawa nr 180/2026 Sb. i wykładnia administracji skarbowej:",
+    eetOnState: "EET włączone",
+    eetEnvProd: "środowisko produkcyjne",
+    eetEnvTest: "środowisko testowe (Playground)",
+    eetTestNote: "Certyfikat testowy: sprzedaż trafia do środowiska testowego i nie jest ewidencjonowana naprawdę.",
+    eetIdsLine: "EIČ {0} · placówka {1} · kasa {2}",
+    eetCertTo: "Certyfikat ważny do {0}.",
+    eetCertSoon: "Wygasa za {0}.",
+    eetDaysN: ["{0} dzień", "{0} dni", "{0} dni"],
+    eetCounts: "Wysłano {0} · czeka {1}",
+    eetOldest: "Najstarsza niewysłana sprzedaż: {0}.",
+    eetOnHint: "Każdy opłacony rachunek od razu trafia do EET. Bez zasięgu czeka w telefonie i zostanie wysłany, gdy połączenie wróci; ustawa daje na to 48 godzin. Cofnięty lub usunięty rachunek trafia do EET jako storno.",
+    eetSendNow: "Wysłać oczekujące",
+    eetSending: "Wysyłanie oczekującej sprzedaży…",
+    eetTest: "Sprawdzić połączenie",
+    eetWorking: "Chwileczkę…",
+    eetTestOk: "Połączenie z EET działa (wiadomość testowa, nic nie zostało zaewidencjonowane).",
+    eetTestFail: "Połączenie z EET nie działa: {0}",
+    eetWarnN: "ostrzeżenie {0}",
+    eetLogBtn: "Wysłana sprzedaż",
+    eetSettings: "Ustawienia EET",
+    eetDisable: "Wyłączyć EET",
+    confirmEetOff: ["Wyłączenie EET", "Kolejne rachunki nie będą już wysyłane do EET. To, co czeka, zostanie jeszcze wysłane. Certyfikat zostaje w telefonie.", "Wyłączyć"],
+    eetRemoveCert: "Usunąć certyfikat z telefonu",
+    confirmEetRemove: ["Usunięcie certyfikatu", "Klucz i plik certyfikatu zostaną usunięte z telefonu. Bez certyfikatu nie da się nic wysłać do EET.", "Usunąć"],
+    eetWizHead: "Ustawienia EET",
+    eetWizIntro: "Numer placówki i certyfikat można bezpłatnie uzyskać w skrzynce informacji podatkowej (DIS+) na portalu MOJE daně:",
+    eetStep1: "Należy zalogować się do DIS+ (np. tożsamością bankową) i aktywować ewidencję sprzedaży.",
+    eetDisLink: "Otworzyć MOJE daně",
+    eetStep2: "W części Správa evidenčních jednotek należy założyć placówkę. Stoisko bez stałej podstawy to Mobilní provozovna. Przydzielony numer trzeba przepisać poniżej.",
+    eetStep3: "W części Pokladní certifikáty należy utworzyć certyfikat, pobrać plik .p12 na ten telefon i zanotować hasło.",
+    eetStep4: "Tutaj wystarczy wpisać numer placówki i wczytać certyfikat z hasłem.",
+    eetUnitLbl: "Numer jednostki ewidencyjnej (placówki)",
+    eetUnitHint: "Tylko cyfry, tak jak przydzielił DIS+.",
+    eetUnitBad: "Proszę wpisać numer z DIS+: tylko cyfry, najwyżej dziewięć, bez zera na początku.",
+    eetPoklLbl: "Oznaczenie kasy",
+    eetPoklHint: "Każdy telefon, który kasuje w tej samej placówce, potrzebuje innego oznaczenia.",
+    eetPoklBad: "Najwyżej 20 znaków: litery bez polskich znaków, cyfry, spacja oraz . , : ; / # - _",
+    eetCertLbl: "Certyfikat kasowy",
+    eetPickFile: "Wybrać plik .p12",
+    eetPickOther: "Wczytać inny certyfikat",
+    eetPwLbl: "Hasło do certyfikatu",
+    eetLoadCert: "Wczytać certyfikat",
+    eetCertOk: "Certyfikat dla {0} wczytany, ważny do {1}.",
+    eetKeepNote: "Plik .p12 i klucz prywatny zostają tylko w tym telefonie, nie są nigdzie wysyłane i nie trafiają do kopii zapasowej. Hasło nie jest zapisywane.",
+    eetTmoLbl: "Graniczny czas odpowiedzi",
+    eetTmoHint: "Jak długo czekać na potwierdzenie z EET. Jeśli nie przyjdzie, rachunek zostaje zapisany i wysłany ponownie później.",
+    eetNeed: "Najpierw należy wczytać certyfikat i wpisać numer placówki.",
+    eetEnable: "Włączyć EET",
+    eetSave: "Zapisać",
+    eetOnToast: "EET jest włączone, opłacone rachunki będą wysyłane.",
+    eetSaved: "Ustawienia EET zapisane.",
+    eetErrPw: "Hasło się nie zgadza. Proszę sprawdzić wielkie i małe litery.",
+    eetErrFile: "Nie udało się odczytać pliku. Proszę wybrać plik .p12 pobrany z DIS+.",
+    eetErrNoFile: "Najpierw trzeba wybrać plik .p12.",
+    eetErrNoPw: "Proszę wpisać hasło do certyfikatu.",
+    eetErrNoKey: "W pliku brakuje klucza prywatnego.",
+    eetErrCn: "To nie jest certyfikat kasowy EET (brakuje w nim EIČ).",
+    eetErrExpired: "Ten certyfikat już nie jest ważny. Nowy można utworzyć w DIS+.",
+    eetErrAlg: "Plik jest zaszyfrowany w sposób, którego Tapkasa nie zna. Proszę użyć pliku .p12 prosto z DIS+.",
+    eetErrCrypto: "Ta przeglądarka nie potrafi podpisywać. Proszę użyć aplikacji Tapkasa lub aktualnej przeglądarki.",
+    eetErrStore: "Certyfikat działa, ale telefon nie pozwolił zapisać go na stałe. Po ponownym uruchomieniu aplikacji trzeba będzie znowu wpisać hasło.",
+    eetLocked: "Proszę wpisać hasło do certyfikatu EET; do tego czasu sprzedaż czeka w telefonie.",
+    eetUnlock: "Wpisać hasło",
+    eetUnlocked: "Certyfikat EET jest gotowy.",
+    eetPwHead: "Hasło do certyfikatu EET",
+    eetMissing: "W telefonie brakuje certyfikatu EET (np. po przywróceniu kopii). Proszę ponownie wczytać plik .p12; do tego czasu sprzedaż czeka. Jeśli kopia pochodzi z innego telefonu, który nadal kasuje, trzeba zmienić oznaczenie kasy.",
+    eetCertGone: "Certyfikat wygasł. Sprzedaż czeka, aż w DIS+ powstanie i zostanie wczytany nowy.",
+    eetLate: "Część sprzedaży czeka dłużej niż 48 godzin. Proszę podłączyć telefon do internetu i jak najszybciej ją wysłać; obowiązek wysłania nadal obowiązuje.",
+    eetWaitN: ["{0} sprzedaż czeka na wysłanie.", "{0} sprzedaże czekają na wysłanie.", "{0} sprzedaży czeka na wysłanie."],
+    eetBadNote: "EET odrzuciło część sprzedaży. Szczegóły w Wysłanej sprzedaży.",
+    eetStatHead: "Ewidencja sprzedaży (EET)",
+    eetQHead: "Czeka na wysłanie",
+    eetLogHead: "Wysłane",
+    eetStatEmpty: "Na razie nic nie wysłano.",
+    eetStorno: "storno",
+    eetRcOk: "EET ✓",
+    eetRcWait: "EET czeka",
+    eetRcBad: "błąd EET",
+    eetRcHead: "Rachunek w EET",
+    eetRcGone: "Dla tego rachunku nie ma tu już zapisu EET.",
+    eetRcHint: "POK to kod potwierdzenia z EET. Według niego sprzedaż można znaleźć też w DIS+.",
+    eetToastOk: "EET ✓",
+    eetToastLater: "EET wyśle później",
+    eetToastStorno: "Rachunek wraca do poprawy, do EET idzie storno.",
+    eetToastRemote: "Drugie urządzenie usunęło opłacony rachunek, do EET idzie storno.",
+    eetDelNote: "Do EET zostanie wysłane storno (ujemna sprzedaż).",
+    eetPillAria: "EET: czeka {0}",
+    eetHist: "EET: wysłano {0} · czeka {1}",
+    eetVydejNote: "Wydawanie nic nie wysyła do EET, sprzedaż ewidencjonuje kasa.",
+    eetRenewBtn: "Odnowić certyfikat",
+    eetRenewing: "Odnawianie certyfikatu…",
+    eetRenewOk: "Nowy certyfikat jest wczytany, ważny do {0}.",
+    eetRenewFail: "Automatyczne odnowienie się nie udało ({0}). Nowy certyfikat można utworzyć w DIS+ w części Pokladní certifikáty i wczytać w Ustawieniach EET.",
+    eetRenewManual: "Nowy certyfikat tworzy się w DIS+ w części Pokladní certifikáty i wczytuje w Ustawieniach EET tak samo jak pierwszy.",
+    eetE_tmo: "brak odpowiedzi w czasie",
+    eetE_net: "brak połączenia",
+    eetE_odd: "nieoczekiwana odpowiedź",
+    eetE_kod: "błąd {0}: {1}"
 
   };
 
@@ -5182,7 +6107,119 @@
     x_choco: "Chocolate quente",
     x_sausage: "Salsicha",
     x_dep: "Caução da caneca",
-    x_ret: "Devolução da caneca"
+    x_ret: "Devolução da caneca",
+    eetHead: "EET 2.0 (Chéquia)",
+    eetIntro: "A partir de 1 de janeiro de 2027, as vendas voltam a ter de ser registadas na Chéquia (janeiro é um mês-piloto). A Tapkasa envia sozinha cada talão pago para o EET, sem custo extra. Sem rede, as vendas esperam no telemóvel e seguem assim que a ligação voltar.",
+    eetSetupBtn: "Configurar o EET",
+    eetNotMe: "O EET não se aplica a mim",
+    eetWhoBtn: "A quem não se aplica o EET?",
+    eetOffState: "O EET não se aplica a mim, nada é enviado",
+    eetChange: "Alterar",
+    eetWhoHead: "A quem não se aplica o EET",
+    eetWhoIntro: "Registam-se os pagamentos em dinheiro, com cartão ou por código QR recebidos presencialmente que são rendimentos empresariais. Entre outros, não se aplica a:",
+    eetWho1: "contribuintes em regime forfetário da 1.ª banda com rendimentos empresariais do ano anterior até 1 milhão de CZK que adiram ao EET OFF (até 10 de janeiro);",
+    eetWho2: "associações e outros contribuintes de utilidade pública em eventos que não são atividade empresarial (um baile, uma festa da associação) e numa pequena atividade acessória;",
+    eetWho3: "escolas e estabelecimentos de ensino públicos e refeições dos alunos;",
+    eetWho4: "pagamentos que não são rendimentos empresariais e receitas pontuais.",
+    eetWhoNote: "É um resumo simplificado, não aconselhamento jurídico. Prevalecem a lei checa n.º 180/2026 Sb. e a interpretação da administração fiscal:",
+    eetOnState: "EET ligado",
+    eetEnvProd: "ambiente real",
+    eetEnvTest: "ambiente de teste (Playground)",
+    eetTestNote: "Certificado de teste: as vendas vão para o ambiente de teste e não são registadas a sério.",
+    eetIdsLine: "EIČ {0} · estabelecimento {1} · caixa {2}",
+    eetCertTo: "Certificado válido até {0}.",
+    eetCertSoon: "Expira dentro de {0}.",
+    eetDaysN: ["{0} dia", "{0} dias", "{0} dias"],
+    eetCounts: "Enviadas {0} · em espera {1}",
+    eetOldest: "Venda por enviar mais antiga: {0}.",
+    eetOnHint: "Cada talão pago segue logo para o EET. Sem rede, espera no telemóvel e segue assim que a ligação voltar; a lei dá 48 horas. Um talão devolvido ou apagado vai para o EET como anulação.",
+    eetSendNow: "Enviar pendentes",
+    eetSending: "A enviar vendas pendentes…",
+    eetTest: "Testar ligação",
+    eetWorking: "Um momento…",
+    eetTestOk: "A ligação ao EET funciona (mensagem de teste, nada foi registado).",
+    eetTestFail: "A ligação ao EET não funciona: {0}",
+    eetWarnN: "aviso {0}",
+    eetLogBtn: "Vendas enviadas",
+    eetSettings: "Definições do EET",
+    eetDisable: "Desligar o EET",
+    confirmEetOff: ["Desligar o EET", "Os próximos talões deixam de ser enviados para o EET. O que está pendente ainda segue. O certificado fica no telemóvel.", "Desligar"],
+    eetRemoveCert: "Remover o certificado do telemóvel",
+    confirmEetRemove: ["Remover o certificado", "A chave e o ficheiro do certificado são apagados do telemóvel. Sem certificado não é possível enviar nada para o EET.", "Remover"],
+    eetWizHead: "Definições do EET",
+    eetWizIntro: "O número do estabelecimento e o certificado obtêm-se gratuitamente na caixa de informação fiscal (DIS+) do portal MOJE daně:",
+    eetStep1: "Inicie sessão no DIS+ (por exemplo com a identidade bancária) e ative o registo de vendas.",
+    eetDisLink: "Abrir MOJE daně",
+    eetStep2: "Em Správa evidenčních jednotek, crie o estabelecimento. Uma banca sem base fixa é uma Mobilní provozovna. Copie abaixo o número atribuído.",
+    eetStep3: "Em Pokladní certifikáty, crie um certificado, descarregue o ficheiro .p12 para este telemóvel e anote a palavra-passe.",
+    eetStep4: "Escreva aqui o número do estabelecimento e carregue o certificado com a palavra-passe.",
+    eetUnitLbl: "Número da unidade (estabelecimento)",
+    eetUnitHint: "Só algarismos, tal como atribuído no DIS+.",
+    eetUnitBad: "Escreva o número do DIS+: só algarismos, no máximo nove, sem zero inicial.",
+    eetPoklLbl: "Identificação da caixa",
+    eetPoklHint: "Cada telemóvel que cobra no mesmo estabelecimento precisa de uma identificação diferente.",
+    eetPoklBad: "Até 20 caracteres: letras sem acentos, algarismos, espaço e . , : ; / # - _",
+    eetCertLbl: "Certificado de caixa",
+    eetPickFile: "Escolher ficheiro .p12",
+    eetPickOther: "Carregar outro certificado",
+    eetPwLbl: "Palavra-passe do certificado",
+    eetLoadCert: "Carregar certificado",
+    eetCertOk: "Certificado de {0} carregado, válido até {1}.",
+    eetKeepNote: "O ficheiro .p12 e a chave privada ficam apenas neste telemóvel, não são enviados para lado nenhum e não estão na cópia de segurança. A palavra-passe não é guardada.",
+    eetTmoLbl: "Tempo máximo de resposta",
+    eetTmoHint: "Quanto tempo esperar pela confirmação do EET. Se não chegar, o talão é guardado e reenviado mais tarde.",
+    eetNeed: "Primeiro carregue o certificado e escreva o número do estabelecimento.",
+    eetEnable: "Ligar o EET",
+    eetSave: "Guardar",
+    eetOnToast: "O EET está ligado, os talões pagos vão ser enviados.",
+    eetSaved: "Definições do EET guardadas.",
+    eetErrPw: "A palavra-passe não está certa. Verifique maiúsculas e minúsculas.",
+    eetErrFile: "Não foi possível ler o ficheiro. Escolha o ficheiro .p12 descarregado do DIS+.",
+    eetErrNoFile: "Primeiro escolha um ficheiro .p12.",
+    eetErrNoPw: "Escreva a palavra-passe do certificado.",
+    eetErrNoKey: "Falta a chave privada no ficheiro.",
+    eetErrCn: "Este não é um certificado de caixa do EET (não tem EIČ).",
+    eetErrExpired: "Este certificado já não é válido. Crie um novo no DIS+.",
+    eetErrAlg: "O ficheiro está cifrado de uma forma que a Tapkasa não conhece. Use o ficheiro .p12 tal como vem do DIS+.",
+    eetErrCrypto: "Este navegador não consegue assinar. Use a app Tapkasa ou um navegador atualizado.",
+    eetErrStore: "O certificado funciona, mas o telemóvel não deixou guardá-lo de forma permanente. Depois de reiniciar a app, será preciso escrever a palavra-passe de novo.",
+    eetLocked: "Escreva a palavra-passe do certificado do EET; até lá, as vendas esperam no telemóvel.",
+    eetUnlock: "Escrever palavra-passe",
+    eetUnlocked: "O certificado do EET está pronto.",
+    eetPwHead: "Palavra-passe do certificado do EET",
+    eetMissing: "Falta o certificado do EET neste telemóvel (por exemplo após repor uma cópia). Carregue de novo o ficheiro .p12; entretanto, as vendas esperam. Se a cópia vem de outro telemóvel que continua a cobrar, altere a identificação da caixa.",
+    eetCertGone: "O certificado expirou. As vendas esperam até criar um novo no DIS+ e o carregar.",
+    eetLate: "Algumas vendas esperam há mais de 48 horas. Ligue o telemóvel à internet e envie-as o quanto antes; a obrigação de envio mantém-se.",
+    eetWaitN: ["{0} venda à espera de envio.", "{0} vendas à espera de envio.", "{0} vendas à espera de envio."],
+    eetBadNote: "O EET recusou uma venda. Veja Vendas enviadas.",
+    eetStatHead: "Registo de vendas (EET)",
+    eetQHead: "À espera de envio",
+    eetLogHead: "Enviadas",
+    eetStatEmpty: "Ainda nada enviado.",
+    eetStorno: "anulação",
+    eetRcOk: "EET ✓",
+    eetRcWait: "EET pendente",
+    eetRcBad: "erro EET",
+    eetRcHead: "Talão no EET",
+    eetRcGone: "Já não há registo do EET para este talão.",
+    eetRcHint: "O POK é o código de confirmação do EET. Com ele também encontra as vendas no DIS+.",
+    eetToastOk: "EET ✓",
+    eetToastLater: "o EET envia mais tarde",
+    eetToastStorno: "O talão volta para edição, vai uma anulação para o EET.",
+    eetToastRemote: "O outro dispositivo apagou um talão pago, vai uma anulação para o EET.",
+    eetDelNote: "É enviada para o EET uma anulação (venda negativa).",
+    eetPillAria: "EET: {0} pendentes",
+    eetHist: "EET: enviadas {0} · pendentes {1}",
+    eetVydejNote: "O balcão não envia nada para o EET; as vendas são registadas pela caixa.",
+    eetRenewBtn: "Renovar certificado",
+    eetRenewing: "A renovar o certificado…",
+    eetRenewOk: "O novo certificado está carregado, válido até {0}.",
+    eetRenewFail: "A renovação automática falhou ({0}). Crie um novo certificado no DIS+ em Pokladní certifikáty e carregue-o nas definições do EET.",
+    eetRenewManual: "Crie um novo certificado no DIS+ em Pokladní certifikáty e carregue-o nas definições do EET, tal como o primeiro.",
+    eetE_tmo: "sem resposta a tempo",
+    eetE_net: "sem ligação",
+    eetE_odd: "resposta inesperada",
+    eetE_kod: "erro {0}: {1}"
 
   };
   // ==== konec vkládaných překladů ====
@@ -5559,7 +6596,7 @@
   // instalaci se pustí rezerva RESERVE plateb navíc na ten den.
   var NUDGE_AT = 7;
   var RESERVE = 10;
-  var APP_VERSION = "1.1.0";
+  var APP_VERSION = "1.2.0";
   var SUPPORT_MAIL = "info@deriverge.com";
 
   // Pro se získá jedině nákupem v obchodě. Výjimkou jsou instalace z doby
@@ -6074,7 +7111,9 @@
       // Další otevřené akce vedle té, ve které se právě prodává. Aktivní akce
       // zůstává v kořeni stavu (event, evId, items, sales, nextNo), takže
       // zbytek aplikace s ní pracuje jako dřív a starší zálohy platí dál.
-      parked: []
+      parked: [],
+      // EET 2.0 (jen koruna): nastavení, fronta a odeslané; klíč ve stavu není
+      eet: eetFresh()
     };
   }
 
@@ -6252,6 +7291,7 @@
     d.taxRate = (typeof d.taxRate === "string" || typeof d.taxRate === "number") && vatNum(d.taxRate) !== null ? vatStr(d.taxRate) : "";
     d.tips = d.tips === true;
     d.customVat = typeof d.customVat === "string" ? d.customVat : "";
+    d.eet = normEet(d.eet);
     // počítadlo uzavřených akcí pro žádost o hodnocení; starší instalace
     // dostanou započtené akce, které už v archivu mají
     d.rateN = typeof d.rateN === "number" ? d.rateN : d.archives.length;
@@ -6420,6 +7460,7 @@
     if (prevPair === undefined || prevPair !== state.pair) {
       pairOpen();
     }
+    eetLoadKey();
   }
 
   // Běžná změna (ťuknutí na kartu, odškrtnutí, psaní v Menu): uloží se
@@ -6816,6 +7857,8 @@
       sale.lines.forEach(function (l) { l.ready = l.qty; });
     }
     state.sales.push(sale);
+    // EET: záznam do fronty ještě před uložením, ať se neztratí ani při pádu
+    eetSale(sale);
     state.order = [];
     linesOpen = false;
     sheet = null;
@@ -6830,6 +7873,11 @@
     if (giveBack > 0 && sale.total > 0) { msg += " · " + T("toastChange", czk(giveBack)); }
     showToast(msg, sale.id);
     say(msg);
+    if (sale.eet) {
+      // bez klíče (heslo, nový certifikát) se ani nezkouší: hláška to řekne hned
+      if (eetKeyState !== "ready") { eetToastNote({ sid: sale.id, k: "s" }, false); render(); }
+      eetFlush();
+    }
   }
 
   function undoSale(id) {
@@ -6840,6 +7888,8 @@
     while (i >= 0 && state.sales[i].id !== id) { i--; }
     if (i < 0) { return; }
     var sale = state.sales.splice(i, 1)[0];
+    // účet už je v EET: vrácení k úpravě je storno, opravený účet půjde znovu
+    var storno = eetStorno(sale);
     state.order = sale.lines.map(function (l) {
       var ol = { ref: refFor(l.name, l.price), name: l.name, price: l.price, qty: l.qty,
                  color: l.color || "", vat: vatStr(l.vat) };
@@ -6857,6 +7907,7 @@
     pushDelete([sale.id]);
     render();
     say(T("undoBtn"));
+    if (storno) { showToast(T("eetToastStorno")); eetFlush(); }
   }
 
   function showToast(text, undoId) {
@@ -7487,11 +8538,17 @@
     if (msg.t === "del" && Array.isArray(msg.ids)) {
       var delIds = msg.ids.filter(function (x) { return typeof x === "string"; });
       markGone(delIds);
+      // druhé zařízení smazalo zaplacený účet této kasy, který už je v EET
+      var eetDelN = 0;
       eachOpenEvent(function (ev) {
+        if (state.mode === "kasa") {
+          ev.sales.forEach(function (x) { if (delIds.indexOf(x.id) >= 0 && eetStorno(x)) { eetDelN++; } });
+        }
         var before = ev.sales.length;
         var kept = ev.sales.filter(function (x) { return delIds.indexOf(x.id) < 0; });
         if (kept.length !== before) { setEventSales(ev.id, kept); changed = true; }
       });
+      if (eetDelN) { saveNow(); showToast(T("eetToastRemote")); eetFlush(); }
     } else if (msg.t === "clear") {
       // Kasa bere uzávěrku jen od jiné kasy. Dřív ji smazala i zpráva
       // z výdeje, třeba po obnovení zálohy, a kasa přišla o tržbu.
@@ -8387,7 +9444,7 @@
     var h = '<div class="bar">' +
       (storeBroken ? '<div class="nudge" role="alert"><span class="t"><strong>' +
         esc(T("storeFail", T("tabMenu"), T("backupHead"))) + "</strong></span></div>" : "") +
-      renderNudge();
+      (state.mode === "kasa" ? eetNudge() : "") + renderNudge();
 
     if (linesOpen && state.order.length) {
       h += '<div class="bar-lines">';
@@ -8504,6 +9561,7 @@
          (s.depIn || s.depOut ? '<p class="meta dep">' + esc(depLines(s.depIn, s.depOut).join(" · ")) + "</p>" : "") +
          (s.taxOn ? '<p class="meta dep">' + esc(T("taxInclSum", czk(s.tax))) + "</p>" : "") +
          (s.tip ? '<p class="meta dep">' + esc(tipsLine(s.tip, s.tipCash, s.tipCard)) + "</p>" : "") +
+         eetHistLine() +
          "</section>";
 
     // v Co se prodalo jen zboží; zálohy a vrácení mají vlastní řádek nahoře
@@ -8526,13 +9584,13 @@
       h += '<section class="sec"><h2>' + esc(T("receiptsHead")) + "</h2>";
       // Tisíce účtenek naráz znamenaly desítky tisíc prvků na stránce
       // a každé překreslení Přehledu se na telefonu vleklo.
-      var rcAll = state.sales.length, rcShow = Math.min(rcAll, rcLimit);
+      var rcAll = state.sales.length, rcShow = Math.min(rcAll, rcLimit), eetMap = eetBySale();
       state.sales.slice(rcAll - rcShow).reverse().forEach(function (t) {
         var what = t.lines.map(function (l) { return l.qty + "× " + l.name; }).join(", ");
         h += '<div class="tx"><i class="dot ' + (t.method === "cash" ? "sp-cash" : "sp-card") + '"></i>' +
              '<div class="mid"><div class="w">' + esc(what) + "</div>" +
              '<div class="s">' + esc(whenStr(t.ts)) + " · " + esc(t.method === "cash" ? T("cashLower") : T("cardLower")) +
-               (t.tip > 0 ? " · " + esc(T("toastTip", czk(t.tip))) : "") + "</div></div>" +
+               (t.tip > 0 ? " · " + esc(T("toastTip", czk(t.tip))) : "") + eetRcMark(t, eetMap) + "</div></div>" +
              '<span class="a">' + czk(t.total) + "</span>" +
              '<button class="del" data-del="' + t.id + '" aria-label="' + esc(T("delReceiptAria")) + '">' + SVG.close + "</button></div>";
       });
@@ -9382,7 +10440,7 @@
 
     if (!till) {
       return proSection() + roleBlock(false) + (state.pair ? "" : '<p class="hint">' + esc(T("vydejPairHint")) + "</p>") +
-             bizBlock() + appBlock() + renderBackupBlock();
+             bizBlock() + eetVydejBlock() + appBlock() + renderBackupBlock();
     }
 
     var h = proSection() +
@@ -9424,7 +10482,7 @@
            '<button class="act" data-xmas="1">' + esc(T("xmasMenu")) + "</button>" +
            '<button class="act danger" data-reset="1">' + esc(T("resetMenu")) + "</button></div>" +
            '<p class="hint">' + esc(T("pricesHint")) + " " + esc(T("negHint")) + "</p>" +
-           (state.pair ? "" : queueBlock()) + bizBlock() + tipsBlock() + roleBlock(true) + appBlock() + renderBackupBlock();
+           (state.pair ? "" : queueBlock()) + bizBlock() + eetBlock() + tipsBlock() + roleBlock(true) + appBlock() + renderBackupBlock();
   }
 
   // ---------- párování (s tarifní bránou) ----------
@@ -10338,6 +11396,8 @@
            '<button class="btn-ghost" data-cancel="1">' + esc(T("back")) + "</button>";
     }
 
+    if (sheet.step.indexOf("eet") === 0) { h += eetSheet(); }
+
     return h;
   }
 
@@ -10836,6 +11896,7 @@
       var linkOn = !linkLost() && (nativePeers > 0 || linkFresh());
       roleHtml += '<i class="ldot' + (linkOn ? " on" : "") + '" role="img" aria-label="' + esc(linkText()) + '"></i>';
     }
+    roleHtml += eetPill();
     if (roleEl.getAttribute("data-h") !== roleHtml) { roleEl.innerHTML = roleHtml; roleEl.setAttribute("data-h", roleHtml); }
     document.getElementById("topLabel").textContent = T("ordersLabel");
     paintTopName();
@@ -10876,6 +11937,1357 @@
     if (top > 0) { t.style.bottom = Math.round(window.innerHeight - top + 8) + "px"; }
   }
 
+  // ==================== EET 2.0: kryptografie a zpráva ====================
+  // Vlastní drobná implementace (bez cizí knihovny): čtení PKCS#12 (.p12 od
+  // CA EET je ve starém tvaru: klíč 3DES-CBC, certifikáty RC2-40-CBC, MAC
+  // HMAC-SHA1), čtení certifikátu X.509, sestavení a podpis zprávy SOAP
+  // (WS-Security, XML-DSig, exc-c14n, SHA-256, RSA-SHA256). WebCrypto staré
+  // šifry neumí, proto SHA-1, DES a RC2 tady; podpis i SHA-256 dělá WebCrypto
+  // a soukromý klíč se do něj importuje jako neexportovatelný.
+  // Formát zprávy: „Formát a struktura údajů o evidované tržbě a popis
+  // datového rozhraní“ v1.2 (GFŘ, 25. 8. 2026), XSD a WSDL verze 4.1.
+  var EETX = (function () {
+    // ---------- ASN.1 DER (a BER s neurčitou délkou) ----------
+    function asn(b, p) {
+      var hs = p, tag = b[p++], cons = (tag & 0x20) !== 0;
+      if ((tag & 0x1f) === 0x1f) { throw new Error("asn-tag"); }
+      var l = b[p++], indef = false;
+      if (l === 0x80) { indef = true; }
+      else if (l & 0x80) {
+        var n = l & 0x7f;
+        if (n > 4) { throw new Error("asn-len"); }
+        l = 0;
+        while (n--) { l = l * 256 + b[p++]; }
+      }
+      var node = { tag: tag, cons: cons, hs: hs, cs: p, b: b };
+      if (indef) {
+        if (!cons) { throw new Error("asn-indef"); }
+        node.kids = [];
+        while (!(b[p] === 0 && b[p + 1] === 0)) {
+          if (p >= b.length) { throw new Error("asn-eoc"); }
+          var k = asn(b, p); node.kids.push(k); p = k.end;
+        }
+        node.ce = p; node.end = p + 2;
+      } else {
+        node.ce = p + l; node.end = p + l;
+        if (node.ce > b.length) { throw new Error("asn-short"); }
+        if (cons) {
+          node.kids = [];
+          var q = p;
+          while (q < node.ce) { var k2 = asn(b, q); node.kids.push(k2); q = k2.end; }
+        }
+      }
+      return node;
+    }
+    function body(n) { return n.b.subarray(n.cs, n.ce); }
+    function whole(n) { return n.b.subarray(n.hs, n.end); }
+    // OCTET STRING i rozdělená na části (BER)
+    function octets(n) {
+      if (!n.cons) { return body(n); }
+      var parts = n.kids.map(octets), len = 0;
+      parts.forEach(function (x) { len += x.length; });
+      var out = new Uint8Array(len), o = 0;
+      parts.forEach(function (x) { out.set(x, o); o += x.length; });
+      return out;
+    }
+    function kid(n, i) {
+      if (!n || !n.kids || !n.kids[i]) { throw new Error("asn-kid"); }
+      return n.kids[i];
+    }
+    function oid(n) {
+      var v = body(n), out = [Math.floor(v[0] / 40), v[0] % 40], x = 0;
+      for (var i = 1; i < v.length; i++) {
+        x = x * 128 + (v[i] & 0x7f);
+        if (!(v[i] & 0x80)) { out.push(x); x = 0; }
+      }
+      return out.join(".");
+    }
+    function int(n) {
+      var v = body(n), x = 0;
+      for (var i = 0; i < v.length; i++) { x = x * 256 + v[i]; }
+      return x;
+    }
+    function strip0(v) { var i = 0; while (i < v.length - 1 && v[i] === 0) { i++; } return v.subarray(i); }
+    function same(a, b) {
+      if (a.length !== b.length) { return false; }
+      for (var i = 0; i < a.length; i++) { if (a[i] !== b[i]) { return false; } }
+      return true;
+    }
+    function cat(a, b) { var o = new Uint8Array(a.length + b.length); o.set(a, 0); o.set(b, a.length); return o; }
+
+    // ---------- SHA-1 a HMAC-SHA1 (synchronně, pro PKCS#12) ----------
+    function sha1(m) {
+      var ml = m.length, nb = ((ml + 8) >> 6) + 1, w = new Uint32Array(nb * 16), i;
+      for (i = 0; i < ml; i++) { w[i >> 2] |= m[i] << (24 - (i % 4) * 8); }
+      w[ml >> 2] |= 0x80 << (24 - (ml % 4) * 8);
+      w[nb * 16 - 1] = (ml * 8) >>> 0;
+      w[nb * 16 - 2] = Math.floor(ml / 0x20000000);
+      var h0 = 0x67452301, h1 = 0xefcdab89, h2 = 0x98badcfe, h3 = 0x10325476, h4 = 0xc3d2e1f0;
+      var x = new Uint32Array(80);
+      for (var bk = 0; bk < nb; bk++) {
+        for (i = 0; i < 16; i++) { x[i] = w[bk * 16 + i]; }
+        for (i = 16; i < 80; i++) { var t = x[i - 3] ^ x[i - 8] ^ x[i - 14] ^ x[i - 16]; x[i] = (t << 1) | (t >>> 31); }
+        var a = h0, b = h1, c = h2, d = h3, e = h4;
+        for (i = 0; i < 80; i++) {
+          var f, k;
+          if (i < 20) { f = (b & c) | (~b & d); k = 0x5a827999; }
+          else if (i < 40) { f = b ^ c ^ d; k = 0x6ed9eba1; }
+          else if (i < 60) { f = (b & c) | (b & d) | (c & d); k = 0x8f1bbcdc; }
+          else { f = b ^ c ^ d; k = 0xca62c1d6; }
+          var tmp = (((a << 5) | (a >>> 27)) + f + e + k + x[i]) >>> 0;
+          e = d; d = c; c = (b << 30) | (b >>> 2); b = a; a = tmp;
+        }
+        h0 = (h0 + a) >>> 0; h1 = (h1 + b) >>> 0; h2 = (h2 + c) >>> 0; h3 = (h3 + d) >>> 0; h4 = (h4 + e) >>> 0;
+      }
+      var out = new Uint8Array(20), hs = [h0, h1, h2, h3, h4];
+      for (i = 0; i < 20; i++) { out[i] = (hs[i >> 2] >>> (24 - (i % 4) * 8)) & 0xff; }
+      return out;
+    }
+    function hmacSha1(key, msg) {
+      if (key.length > 64) { key = sha1(key); }
+      var ip = new Uint8Array(64), op = new Uint8Array(64);
+      for (var i = 0; i < 64; i++) { var kb = i < key.length ? key[i] : 0; ip[i] = kb ^ 0x36; op[i] = kb ^ 0x5c; }
+      return sha1(cat(op, sha1(cat(ip, msg))));
+    }
+
+    // RFC 7292 příloha B.2 (SHA-1: u = 20, v = 64); id 1 klíč, 2 IV, 3 MAC
+    function p12kdf(pw, salt, id, iter, n) {
+      var v = 64, u = 20, i, j;
+      function rep(x) {
+        if (!x.length) { return new Uint8Array(0); }
+        var o = new Uint8Array(v * Math.ceil(x.length / v));
+        for (var q = 0; q < o.length; q++) { o[q] = x[q % x.length]; }
+        return o;
+      }
+      var D = new Uint8Array(v); D.fill(id);
+      var I = cat(rep(salt), rep(pw)), out = new Uint8Array(n), got = 0;
+      while (got < n) {
+        var A = sha1(cat(D, I));
+        for (i = 1; i < iter; i++) { A = sha1(A); }
+        out.set(A.subarray(0, Math.min(u, n - got)), got);
+        got += u;
+        if (got >= n) { break; }
+        var B = rep(A);
+        for (j = 0; j < I.length; j += v) {
+          var c = 1;
+          for (i = v - 1; i >= 0; i--) { c += I[j + i] + B[i]; I[j + i] = c & 0xff; c >>= 8; }
+        }
+      }
+      return out;
+    }
+    function bmp(pw) {
+      var o = new Uint8Array(pw.length * 2 + 2);
+      for (var i = 0; i < pw.length; i++) { var c = pw.charCodeAt(i); o[i * 2] = c >> 8; o[i * 2 + 1] = c & 0xff; }
+      return o;
+    }
+
+    // ---------- DES / 3DES (EDE, CBC, jen dešifrování) ----------
+    var D_IP = [58,50,42,34,26,18,10,2,60,52,44,36,28,20,12,4,62,54,46,38,30,22,14,6,64,56,48,40,32,24,16,8,
+                57,49,41,33,25,17,9,1,59,51,43,35,27,19,11,3,61,53,45,37,29,21,13,5,63,55,47,39,31,23,15,7];
+    var D_FP = [40,8,48,16,56,24,64,32,39,7,47,15,55,23,63,31,38,6,46,14,54,22,62,30,37,5,45,13,53,21,61,29,
+                36,4,44,12,52,20,60,28,35,3,43,11,51,19,59,27,34,2,42,10,50,18,58,26,33,1,41,9,49,17,57,25];
+    var D_E = [32,1,2,3,4,5,4,5,6,7,8,9,8,9,10,11,12,13,12,13,14,15,16,17,16,17,18,19,20,21,20,21,
+               22,23,24,25,24,25,26,27,28,29,28,29,30,31,32,1];
+    var D_P = [16,7,20,21,29,12,28,17,1,15,23,26,5,18,31,10,2,8,24,14,32,27,3,9,19,13,30,6,22,11,4,25];
+    var D_PC1 = [57,49,41,33,25,17,9,1,58,50,42,34,26,18,10,2,59,51,43,35,27,19,11,3,60,52,44,36,
+                 63,55,47,39,31,23,15,7,62,54,46,38,30,22,14,6,61,53,45,37,29,21,13,5,28,20,12,4];
+    var D_PC2 = [14,17,11,24,1,5,3,28,15,6,21,10,23,19,12,4,26,8,16,7,27,20,13,2,
+                 41,52,31,37,47,55,30,40,51,45,33,48,44,49,39,56,34,53,46,42,50,36,29,32];
+    var D_SH = [1,1,2,2,2,2,2,2,1,2,2,2,2,2,2,1];
+    var D_S = [
+      [14,4,13,1,2,15,11,8,3,10,6,12,5,9,0,7,0,15,7,4,14,2,13,1,10,6,12,11,9,5,3,8,4,1,14,8,13,6,2,11,15,12,9,7,3,10,5,0,15,12,8,2,4,9,1,7,5,11,3,14,10,0,6,13],
+      [15,1,8,14,6,11,3,4,9,7,2,13,12,0,5,10,3,13,4,7,15,2,8,14,12,0,1,10,6,9,11,5,0,14,7,11,10,4,13,1,5,8,12,6,9,3,2,15,13,8,10,1,3,15,4,2,11,6,7,12,0,5,14,9],
+      [10,0,9,14,6,3,15,5,1,13,12,7,11,4,2,8,13,7,0,9,3,4,6,10,2,8,5,14,12,11,15,1,13,6,4,9,8,15,3,0,11,1,2,12,5,10,14,7,1,10,13,0,6,9,8,7,4,15,14,3,11,5,2,12],
+      [7,13,14,3,0,6,9,10,1,2,8,5,11,12,4,15,13,8,11,5,6,15,0,3,4,7,2,12,1,10,14,9,10,6,9,0,12,11,7,13,15,1,3,14,5,2,8,4,3,15,0,6,10,1,13,8,9,4,5,11,12,7,2,14],
+      [2,12,4,1,7,10,11,6,8,5,3,15,13,0,14,9,14,11,2,12,4,7,13,1,5,0,15,10,3,9,8,6,4,2,1,11,10,13,7,8,15,9,12,5,6,3,0,14,11,8,12,7,1,14,2,13,6,15,0,9,10,4,5,3],
+      [12,1,10,15,9,2,6,8,0,13,3,4,14,7,5,11,10,15,4,2,7,12,9,5,6,1,13,14,0,11,3,8,9,14,15,5,2,8,12,3,7,0,4,10,1,13,11,6,4,3,2,12,9,5,15,10,11,14,1,7,6,0,8,13],
+      [4,11,2,14,15,0,8,13,3,12,9,7,5,10,6,1,13,0,11,7,4,9,1,10,14,3,5,12,2,15,8,6,1,4,11,13,12,3,7,14,10,15,6,8,0,5,9,2,6,11,13,8,1,4,10,7,9,5,0,15,14,2,3,12],
+      [13,2,8,4,6,15,11,1,10,9,3,14,5,0,12,7,1,15,13,8,10,3,7,4,12,5,6,11,0,14,9,2,7,11,4,1,9,12,14,2,0,6,10,13,15,3,5,8,2,1,14,7,4,10,8,13,15,12,9,0,3,5,6,11]
+    ];
+    function bits(bytes) { var o = []; for (var i = 0; i < 64; i++) { o.push((bytes[i >> 3] >> (7 - (i & 7))) & 1); } return o; }
+    function perm(src, tbl) { var o = new Array(tbl.length); for (var i = 0; i < tbl.length; i++) { o[i] = src[tbl[i] - 1]; } return o; }
+    function desKeys(key8) {
+      var k = perm(bits(key8), D_PC1), C = k.slice(0, 28), D = k.slice(28), out = [];
+      for (var r = 0; r < 16; r++) {
+        for (var s = 0; s < D_SH[r]; s++) { C.push(C.shift()); D.push(D.shift()); }
+        out.push(perm(C.concat(D), D_PC2));
+      }
+      return out;
+    }
+    function desBlock(blk, ks, dec) {
+      var b = perm(bits(blk), D_IP), L = b.slice(0, 32), R = b.slice(32);
+      for (var r = 0; r < 16; r++) {
+        var k = ks[dec ? 15 - r : r], e = perm(R, D_E), f = [];
+        for (var s = 0; s < 8; s++) {
+          var o = s * 6, x = [];
+          for (var q = 0; q < 6; q++) { x.push(e[o + q] ^ k[o + q]); }
+          var row = (x[0] << 1) | x[5], col = (x[1] << 3) | (x[2] << 2) | (x[3] << 1) | x[4];
+          var v = D_S[s][row * 16 + col];
+          f.push((v >> 3) & 1, (v >> 2) & 1, (v >> 1) & 1, v & 1);
+        }
+        f = perm(f, D_P);
+        var nr = [];
+        for (var t = 0; t < 32; t++) { nr.push(L[t] ^ f[t]); }
+        L = R; R = nr;
+      }
+      var out = perm(R.concat(L), D_FP), res = new Uint8Array(8);
+      for (var i = 0; i < 64; i++) { res[i >> 3] |= out[i] << (7 - (i & 7)); }
+      return res;
+    }
+    // 3DES-EDE: dešifrování = D(k1, E(k2, D(k3, c)))
+    function des3Dec(key24, iv, data) {
+      var k1 = desKeys(key24.subarray(0, 8)), k2 = desKeys(key24.subarray(8, 16)), k3 = desKeys(key24.subarray(16, 24));
+      return cbcDec(data, iv, function (c) { return desBlock(desBlock(desBlock(c, k3, true), k2, false), k1, true); });
+    }
+    function desDec(key8, iv, data) {
+      var k = desKeys(key8);
+      return cbcDec(data, iv, function (c) { return desBlock(c, k, true); });
+    }
+    function cbcDec(data, iv, dec) {
+      if (!data.length || data.length % 8) { throw new Error("cbc-len"); }
+      var out = new Uint8Array(data.length), prev = iv;
+      for (var i = 0; i < data.length; i += 8) {
+        var c = data.subarray(i, i + 8), p = dec(c);
+        for (var j = 0; j < 8; j++) { out[i + j] = p[j] ^ prev[j]; }
+        prev = c;
+      }
+      var pad = out[out.length - 1];
+      if (pad < 1 || pad > 8) { throw new Error("pad"); }
+      for (var z = 1; z <= pad; z++) { if (out[out.length - z] !== pad) { throw new Error("pad"); } }
+      return out.subarray(0, out.length - pad);
+    }
+
+    // ---------- RC2 (RFC 2268, jen dešifrování) ----------
+    var PITABLE = [
+      0xd9,0x78,0xf9,0xc4,0x19,0xdd,0xb5,0xed,0x28,0xe9,0xfd,0x79,0x4a,0xa0,0xd8,0x9d,
+      0xc6,0x7e,0x37,0x83,0x2b,0x76,0x53,0x8e,0x62,0x4c,0x64,0x88,0x44,0x8b,0xfb,0xa2,
+      0x17,0x9a,0x59,0xf5,0x87,0xb3,0x4f,0x13,0x61,0x45,0x6d,0x8d,0x09,0x81,0x7d,0x32,
+      0xbd,0x8f,0x40,0xeb,0x86,0xb7,0x7b,0x0b,0xf0,0x95,0x21,0x22,0x5c,0x6b,0x4e,0x82,
+      0x54,0xd6,0x65,0x93,0xce,0x60,0xb2,0x1c,0x73,0x56,0xc0,0x14,0xa7,0x8c,0xf1,0xdc,
+      0x12,0x75,0xca,0x1f,0x3b,0xbe,0xe4,0xd1,0x42,0x3d,0xd4,0x30,0xa3,0x3c,0xb6,0x26,
+      0x6f,0xbf,0x0e,0xda,0x46,0x69,0x07,0x57,0x27,0xf2,0x1d,0x9b,0xbc,0x94,0x43,0x03,
+      0xf8,0x11,0xc7,0xf6,0x90,0xef,0x3e,0xe7,0x06,0xc3,0xd5,0x2f,0xc8,0x66,0x1e,0xd7,
+      0x08,0xe8,0xea,0xde,0x80,0x52,0xee,0xf7,0x84,0xaa,0x72,0xac,0x35,0x4d,0x6a,0x2a,
+      0x96,0x1a,0xd2,0x71,0x5a,0x15,0x49,0x74,0x4b,0x9f,0xd0,0x5e,0x04,0x18,0xa4,0xec,
+      0xc2,0xe0,0x41,0x6e,0x0f,0x51,0xcb,0xcc,0x24,0x91,0xaf,0x50,0xa1,0xf4,0x70,0x39,
+      0x99,0x7c,0x3a,0x85,0x23,0xb8,0xb4,0x7a,0xfc,0x02,0x36,0x5b,0x25,0x55,0x97,0x31,
+      0x2d,0x5d,0xfa,0x98,0xe3,0x8a,0x92,0xae,0x05,0xdf,0x29,0x10,0x67,0x6c,0xba,0xc9,
+      0xd3,0x00,0xe6,0xcf,0xe1,0x9e,0xa8,0x2c,0x63,0x16,0x01,0x3f,0x58,0xe2,0x89,0xa9,
+      0x0d,0x38,0x34,0x1b,0xab,0x33,0xff,0xb0,0xbb,0x48,0x0c,0x5f,0xb9,0xb1,0xcd,0x2e,
+      0xc5,0xf3,0xdb,0x47,0xe5,0xa5,0x9c,0x77,0x0a,0xa6,0x20,0x68,0xfe,0x7f,0xc1,0xad
+    ];
+    function rc2Keys(key, effBits) {
+      var L = new Uint8Array(128), T = key.length, i;
+      L.set(key);
+      for (i = T; i < 128; i++) { L[i] = PITABLE[(L[i - 1] + L[i - T]) & 0xff]; }
+      var T8 = (effBits + 7) >> 3, TM = 0xff >> (8 * T8 - effBits);
+      L[128 - T8] = PITABLE[L[128 - T8] & TM];
+      for (i = 127 - T8; i >= 0; i--) { L[i] = PITABLE[L[i + 1] ^ L[i + T8]]; }
+      var K = new Array(64);
+      for (i = 0; i < 64; i++) { K[i] = L[2 * i] | (L[2 * i + 1] << 8); }
+      return K;
+    }
+    function rc2Block(c, K) {
+      var R = [c[0] | (c[1] << 8), c[2] | (c[3] << 8), c[4] | (c[5] << 8), c[6] | (c[7] << 8)];
+      var S = [1, 2, 3, 5], j = 63;
+      function rmix() {
+        for (var i = 3; i >= 0; i--) {
+          R[i] = ((R[i] << (16 - S[i])) | (R[i] >>> S[i])) & 0xffff;
+          R[i] = (R[i] - K[j] - (R[(i + 3) & 3] & R[(i + 2) & 3]) - ((~R[(i + 3) & 3]) & R[(i + 1) & 3])) & 0xffff;
+          j--;
+        }
+      }
+      function rmash() { for (var i = 3; i >= 0; i--) { R[i] = (R[i] - K[R[(i + 3) & 3] & 63]) & 0xffff; } }
+      var r;
+      for (r = 0; r < 5; r++) { rmix(); }
+      rmash();
+      for (r = 0; r < 6; r++) { rmix(); }
+      rmash();
+      for (r = 0; r < 5; r++) { rmix(); }
+      var o = new Uint8Array(8);
+      for (var q = 0; q < 4; q++) { o[2 * q] = R[q] & 0xff; o[2 * q + 1] = R[q] >> 8; }
+      return o;
+    }
+    function rc2Dec(key, effBits, iv, data) {
+      var K = rc2Keys(key, effBits);
+      return cbcDec(data, iv, function (c) { return rc2Block(c, K); });
+    }
+
+    // ---------- PKCS#12 ----------
+    var OID_DATA = "1.2.840.113549.1.7.1", OID_ENC = "1.2.840.113549.1.7.6";
+    var OID_KEYBAG = "1.2.840.113549.1.12.10.1.1", OID_SHROUDED = "1.2.840.113549.1.12.10.1.2";
+    var OID_CERTBAG = "1.2.840.113549.1.12.10.1.3", OID_X509 = "1.2.840.113549.1.9.22.1";
+    var OID_PBES2 = "1.2.840.113549.1.5.13", OID_PBKDF2 = "1.2.840.113549.1.5.12";
+    var PBE = {
+      "1.2.840.113549.1.12.1.3": { c: "3des", k: 24 },   // pbeWithSHAAnd3-KeyTripleDES-CBC
+      "1.2.840.113549.1.12.1.4": { c: "2des", k: 16 },   // pbeWithSHAAnd2-KeyTripleDES-CBC
+      "1.2.840.113549.1.12.1.5": { c: "rc2", k: 16, e: 128 },
+      "1.2.840.113549.1.12.1.6": { c: "rc2", k: 5, e: 40 }
+    };
+    var PRF = { "1.2.840.113549.2.7": "SHA-1", "1.2.840.113549.2.9": "SHA-256", "1.2.840.113549.2.10": "SHA-384", "1.2.840.113549.2.11": "SHA-512" };
+    var AESCBC = { "2.16.840.1.101.3.4.1.2": 16, "2.16.840.1.101.3.4.1.22": 24, "2.16.840.1.101.3.4.1.42": 32 };
+
+    // AlgorithmIdentifier + šifrovaná data → otevřená data (Promise)
+    function pbeDecrypt(alg, data, pw) {
+      var o = oid(kid(alg, 0)), spec = PBE[o];
+      if (spec) {
+        var prm = kid(alg, 1), salt = body(kid(prm, 0)), iter = prm.kids[1] ? int(prm.kids[1]) : 1, bp = bmp(pw);
+        var key = p12kdf(bp, salt, 1, iter, spec.k), iv = p12kdf(bp, salt, 2, iter, 8);
+        try {
+          if (spec.c === "rc2") { return Promise.resolve(rc2Dec(key, spec.e, iv, data)); }
+          if (spec.c === "2des") { key = cat(key, key.subarray(0, 8)); }
+          return Promise.resolve(des3Dec(key, iv, data));
+        } catch (e) { return Promise.reject(new Error("password")); }
+      }
+      if (o === OID_PBES2 && typeof crypto !== "undefined" && crypto.subtle) {
+        // novější tvar (OpenSSL 3, přebalený .p12): PBKDF2 + AES-CBC přes WebCrypto
+        var p2 = kid(alg, 1), kdf = kid(p2, 0), enc = kid(p2, 1);
+        if (oid(kid(kdf, 0)) !== OID_PBKDF2) { return Promise.reject(new Error("alg")); }
+        var kp = kid(kdf, 1), ksalt = body(kid(kp, 0)), kiter = int(kid(kp, 1)), prf = "SHA-1";
+        for (var q = 2; q < kp.kids.length; q++) {
+          if (kp.kids[q].tag === 0x30) { prf = PRF[oid(kid(kp.kids[q], 0))] || ""; }
+        }
+        var klen = AESCBC[oid(kid(enc, 0))];
+        if (!klen || !prf) { return Promise.reject(new Error("alg")); }
+        var aiv = body(kid(enc, 1));
+        var pwb = typeof TextEncoder === "function" ? new TextEncoder().encode(pw) : bmp(pw);
+        return crypto.subtle.importKey("raw", pwb, "PBKDF2", false, ["deriveBits"]).then(function (base) {
+          return crypto.subtle.deriveBits({ name: "PBKDF2", salt: ksalt, iterations: kiter, hash: prf }, base, klen * 8);
+        }).then(function (raw) {
+          return crypto.subtle.importKey("raw", raw, "AES-CBC", false, ["decrypt"]);
+        }).then(function (k) {
+          return crypto.subtle.decrypt({ name: "AES-CBC", iv: aiv }, k, data);
+        }).then(function (pt) { return new Uint8Array(pt); }, function () { throw new Error("password"); });
+      }
+      return Promise.reject(new Error("alg"));
+    }
+
+    // .p12 + heslo → { key: PKCS#8 DER, certs: [DER…] }. Špatné heslo → Error("password").
+    function readP12(bytes, pw) {
+      var pfx;
+      try { pfx = asn(bytes, 0); } catch (e) { return Promise.reject(new Error("format")); }
+      try {
+        var authSafe = kid(pfx, 1);
+        if (oid(kid(authSafe, 0)) !== OID_DATA) { throw new Error("format"); }
+        var asData = octets(kid(kid(authSafe, 1), 0));
+        // MAC (HMAC-SHA1): spolehlivá kontrola hesla ještě před dešifrováním
+        var mac = pfx.kids[2];
+        if (mac) {
+          var dinfo = kid(mac, 0), malg = oid(kid(kid(dinfo, 0), 0));
+          if (malg === "1.3.14.3.2.26") {
+            var msalt = body(kid(mac, 1)), miter = mac.kids[2] ? int(mac.kids[2]) : 1;
+            var mkey = p12kdf(bmp(pw), msalt, 3, miter, 20);
+            if (!same(hmacSha1(mkey, asData), body(kid(dinfo, 1)))) { return Promise.reject(new Error("password")); }
+          }
+        }
+        var safes = asn(asData, 0).kids;
+      } catch (e) {
+        return Promise.reject(e && e.message === "password" ? e : new Error("format"));
+      }
+      var res = { keys: [], certs: [] };
+      function bags(sc) {
+        var list = asn(sc, 0).kids, jobs = [];
+        list.forEach(function (bag) {
+          var t = oid(kid(bag, 0)), val = kid(kid(bag, 1), 0);
+          if (t === OID_CERTBAG) {
+            if (oid(kid(val, 0)) === OID_X509) { res.certs.push(octets(kid(kid(val, 1), 0)).slice()); }
+          } else if (t === OID_KEYBAG) {
+            res.keys.push(whole(val).slice());
+          } else if (t === OID_SHROUDED) {
+            jobs.push(pbeDecrypt(kid(val, 0), octets(kid(val, 1)), pw).then(function (k) { res.keys.push(k.slice()); }));
+          }
+        });
+        return Promise.all(jobs);
+      }
+      var jobs = safes.map(function (ci) {
+        var t = oid(kid(ci, 0));
+        if (t === OID_DATA) { return bags(octets(kid(kid(ci, 1), 0))); }
+        if (t === OID_ENC) {
+          var ed = kid(kid(ci, 1), 0), eci = kid(ed, 1);
+          var encd = eci.kids[2];
+          if (!encd) { return Promise.resolve(); }
+          // [0] IMPLICIT OCTET STRING: obsah je přímo šifrovaný text (i po částech)
+          var raw = encd.cons ? octets(encd) : body(encd);
+          return pbeDecrypt(kid(eci, 1), raw, pw).then(bags);
+        }
+        return Promise.resolve();
+      });
+      return Promise.all(jobs).then(function () {
+        if (!res.keys.length) { throw new Error("nokey"); }
+        return res;
+      }, function (e) { throw (e && (e.message === "password" || e.message === "alg")) ? e : new Error("format"); });
+    }
+
+    // ---------- X.509 ----------
+    function nameCN(n) {
+      var cn = "";
+      (n.kids || []).forEach(function (set) {
+        (set.kids || []).forEach(function (atv) {
+          if (oid(kid(atv, 0)) === "2.5.4.3") { cn = txt(kid(atv, 1)); }
+        });
+      });
+      return cn;
+    }
+    function txt(n) {
+      var v = body(n);
+      if (n.tag === 0x1e) { var s = ""; for (var i = 0; i + 1 < v.length; i += 2) { s += String.fromCharCode((v[i] << 8) | v[i + 1]); } return s; }
+      try { return new TextDecoder("utf-8").decode(v); } catch (e) { return String.fromCharCode.apply(null, v); }
+    }
+    function asnTime(n) {
+      var s = String.fromCharCode.apply(null, body(n)), y, r;
+      if (n.tag === 0x17) { y = parseInt(s.slice(0, 2), 10); y += y < 50 ? 2000 : 1900; r = s.slice(2); }
+      else { y = parseInt(s.slice(0, 4), 10); r = s.slice(4); }
+      return Date.UTC(y, parseInt(r.slice(0, 2), 10) - 1, parseInt(r.slice(2, 4), 10),
+                      parseInt(r.slice(4, 6), 10), parseInt(r.slice(6, 8), 10), parseInt(r.slice(8, 10), 10) || 0);
+    }
+    function certInfo(der) {
+      var c = asn(der, 0), tbs = kid(c, 0), i = 0;
+      if (tbs.kids[0].tag === 0xa0) { i = 1; }
+      var serial = body(tbs.kids[i]), issuer = tbs.kids[i + 2], val = tbs.kids[i + 3], subj = tbs.kids[i + 4], spki = tbs.kids[i + 5];
+      var bitstr = body(kid(spki, 1)), rsa = asn(bitstr.subarray(1), 0);
+      return {
+        serial: Array.prototype.map.call(serial, function (x) { return ("0" + x.toString(16)).slice(-2); }).join(""),
+        issuer: nameCN(issuer), cn: nameCN(subj),
+        from: asnTime(kid(val, 0)), to: asnTime(kid(val, 1)),
+        n: strip0(body(kid(rsa, 0))).slice()
+      };
+    }
+    function keyModulus(pkcs8) {
+      var k = asn(pkcs8, 0), rsa = asn(body(kid(k, 2)), 0);
+      return strip0(body(kid(rsa, 1))).slice();
+    }
+    // Ze sady certifikátů ten, který patří ke klíči.
+    function pickCert(p12) {
+      for (var k = 0; k < p12.keys.length; k++) {
+        var n = keyModulus(p12.keys[k]);
+        for (var c = 0; c < p12.certs.length; c++) {
+          var ci = certInfo(p12.certs[c]);
+          if (same(ci.n, n)) { return { key: p12.keys[k], cert: p12.certs[c], info: ci }; }
+        }
+      }
+      return null;
+    }
+
+    // ---------- zpráva o tržbě ----------
+    var NS_SOAP = "http://schemas.xmlsoap.org/soap/envelope/", NS_EET = "http://fs.gov.cz/eet/schema/v4";
+    var NS_WSSE = "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd";
+    var NS_WSU = "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd";
+    var NS_DS = "http://www.w3.org/2000/09/xmldsig#", NS_EC = "http://www.w3.org/2001/10/xml-exc-c14n#";
+    var X509V3 = "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-x509-token-profile-1.0#X509v3";
+    var B64BIN = "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary";
+    var SOAP_ACTION = "http://fs.gov.cz/eet/OdeslaniTrzby";
+
+    function xa(v) {
+      return String(v).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;")
+        .replace(/\t/g, "&#x9;").replace(/\n/g, "&#xA;").replace(/\r/g, "&#xD;");
+    }
+    // Atributy bez jmenného prostoru v kanonickém pořadí (exc-c14n: podle názvu)
+    function attrs(o) {
+      return Object.keys(o).filter(function (k) { return o[k] !== undefined && o[k] !== null && o[k] !== ""; })
+        .sort().map(function (k) { return " " + k + '="' + xa(o[k]) + '"'; }).join("");
+    }
+    // Tělo už v kanonickém tvaru (exc-c14n, InclusiveNamespaces „v4“): zápis
+    // ve zprávě a text, ze kterého se počítá otisk, jsou tytéž bajty.
+    function bodyC14n(bodyId, hlav, data) {
+      return '<soapenv:Body xmlns:soapenv="' + NS_SOAP + '" xmlns:v4="' + NS_EET + '" xmlns:wsu="' + NS_WSU + '" wsu:Id="' + bodyId + '">' +
+        "<v4:Trzba><v4:Hlavicka" + attrs(hlav) + "></v4:Hlavicka><v4:Data" + attrs(data) + "></v4:Data></v4:Trzba></soapenv:Body>";
+    }
+    // SignedInfo v kanonickém tvaru (exc-c14n, InclusiveNamespaces „soapenv v4“)
+    function signedInfoC14n(bodyId, digest) {
+      return '<ds:SignedInfo xmlns:ds="' + NS_DS + '" xmlns:soapenv="' + NS_SOAP + '" xmlns:v4="' + NS_EET + '">' +
+        '<ds:CanonicalizationMethod Algorithm="' + NS_EC + '"><ec:InclusiveNamespaces xmlns:ec="' + NS_EC + '" PrefixList="soapenv v4"></ec:InclusiveNamespaces></ds:CanonicalizationMethod>' +
+        '<ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"></ds:SignatureMethod>' +
+        '<ds:Reference URI="#' + bodyId + '"><ds:Transforms><ds:Transform Algorithm="' + NS_EC + '">' +
+        '<ec:InclusiveNamespaces xmlns:ec="' + NS_EC + '" PrefixList="v4"></ec:InclusiveNamespaces></ds:Transform></ds:Transforms>' +
+        '<ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"></ds:DigestMethod>' +
+        "<ds:DigestValue>" + digest + "</ds:DigestValue></ds:Reference></ds:SignedInfo>";
+    }
+    function rid(n) {
+      var b = new Uint8Array(n || 12), s = "";
+      crypto.getRandomValues(b);
+      for (var i = 0; i < b.length; i++) { s += ("0" + b[i].toString(16)).slice(-2); }
+      return s.toUpperCase();
+    }
+    function uuid4() {
+      var b = new Uint8Array(16), h = "";
+      crypto.getRandomValues(b);
+      b[6] = (b[6] & 0x0f) | 0x40; b[8] = (b[8] & 0x3f) | 0x80;
+      for (var i = 0; i < 16; i++) { h += ("0" + b[i].toString(16)).slice(-2); if (i === 3 || i === 5 || i === 7 || i === 9) { h += "-"; } }
+      return h;
+    }
+    function b64e(bytes) {
+      var s = "";
+      for (var i = 0; i < bytes.length; i += 0x8000) { s += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000)); }
+      return btoa(s);
+    }
+    function u8(text) { return new TextEncoder().encode(text); }
+
+    // Celá podepsaná zpráva. key = CryptoKey (RSASSA-PKCS1-v1_5, SHA-256),
+    // certB64 = pokladní certifikát (DER v base64), hlav a data = atributy.
+    function signedEnvelope(key, certB64, hlav, data, ids) {
+      ids = ids || {};
+      var n = ids.n || rid(12);
+      var bodyId = "id-" + n, tokId = "X509-" + n, sigId = "SIG-" + n, kiId = "KI-" + n, strId = "STR-" + n;
+      var bc = bodyC14n(bodyId, hlav, data);
+      return crypto.subtle.digest("SHA-256", u8(bc)).then(function (dg) {
+        var si = signedInfoC14n(bodyId, b64e(new Uint8Array(dg)));
+        return crypto.subtle.sign({ name: "RSASSA-PKCS1-v1_5" }, key, u8(si)).then(function (sig) {
+          return '<?xml version="1.0" encoding="UTF-8"?>' +
+            '<soapenv:Envelope xmlns:soapenv="' + NS_SOAP + '" xmlns:v4="' + NS_EET + '"><soapenv:Header>' +
+            '<wsse:Security xmlns:wsse="' + NS_WSSE + '" xmlns:wsu="' + NS_WSU + '">' +
+            '<wsse:BinarySecurityToken EncodingType="' + B64BIN + '" ValueType="' + X509V3 + '" wsu:Id="' + tokId + '">' + certB64 + "</wsse:BinarySecurityToken>" +
+            '<ds:Signature Id="' + sigId + '" xmlns:ds="' + NS_DS + '">' + si +
+            "<ds:SignatureValue>" + b64e(new Uint8Array(sig)) + "</ds:SignatureValue>" +
+            '<ds:KeyInfo Id="' + kiId + '"><wsse:SecurityTokenReference wsu:Id="' + strId + '">' +
+            '<wsse:Reference URI="#' + tokId + '" ValueType="' + X509V3 + '"></wsse:Reference></wsse:SecurityTokenReference></ds:KeyInfo>' +
+            "</ds:Signature></wsse:Security></soapenv:Header>" + bc + "</soapenv:Envelope>";
+        });
+      });
+    }
+
+    // Odpověď (potvrzení, chyba, SOAP Fault) → prostý objekt. Struktura je
+    // daná XSD, proto stačí vyhledání podle názvů prvků.
+    function unxml(s) {
+      return String(s).replace(/&#x([0-9a-fA-F]+);/g, function (m, h) { return String.fromCharCode(parseInt(h, 16)); })
+        .replace(/&#(\d+);/g, function (m, d) { return String.fromCharCode(parseInt(d, 10)); })
+        .replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&apos;/g, "'").replace(/&amp;/g, "&");
+    }
+    function atts(s) {
+      var o = {}, re = /([A-Za-z_][\w.-]*)\s*=\s*"([^"]*)"/g, m;
+      while ((m = re.exec(s))) { o[m[1]] = unxml(m[2]); }
+      return o;
+    }
+    function parseReply(text) {
+      var t = String(text || ""), out = { warn: [] };
+      var od = t.search(/<(?:[\w-]+:)?Odpoved[\s>]/);
+      if (od < 0) {
+        var f = /<(?:[\w-]+:)?faultstring[^>]*>([\s\S]*?)<\/(?:[\w-]+:)?faultstring>/.exec(t);
+        out.fault = f ? unxml(f[1]).trim() : "";
+        return out;
+      }
+      var r = t.slice(od);
+      var hl = /<(?:[\w-]+:)?Hlavicka\b([^>]*)>/.exec(r);
+      if (hl) { var ha = atts(hl[1]); out.uuid = ha.uuid_zpravy || ""; out.at = ha.dat_prij || ha.dat_odmit || ""; }
+      var po = /<(?:[\w-]+:)?Potvrzeni\b([^>]*)>/.exec(r);
+      if (po) { var pa = atts(po[1]); out.pok = pa.pok || ""; out.test = pa.test === "true" || pa.test === "1"; }
+      var ch = /<(?:[\w-]+:)?Chyba\b([^>]*?)(\/>|>([\s\S]*?)<\/(?:[\w-]+:)?Chyba>)/.exec(r);
+      if (ch) {
+        var ca = atts(ch[1]);
+        out.kod = parseInt(ca.kod, 10);
+        out.msg = unxml(ch[3] || "").replace(/\s+/g, " ").trim();
+        out.test = ca.test === "true" || ca.test === "1";
+      }
+      var vr = /<(?:[\w-]+:)?Varovani\b([^>]*?)(\/>|>([\s\S]*?)<\/(?:[\w-]+:)?Varovani>)/g, m;
+      while ((m = vr.exec(r))) {
+        out.warn.push({ kod: parseInt(atts(m[1]).kod_varov, 10), msg: unxml(m[3] || "").replace(/\s+/g, " ").trim() });
+      }
+      return out;
+    }
+
+    // Čas podle specifikace: místní čas s posunem (+01:00 / +02:00 v Česku), bez zlomků sekund
+    function stamp(ms) {
+      var d = new Date(ms), off = -d.getTimezoneOffset(), sg = off < 0 ? "-" : "+";
+      off = Math.abs(off);
+      function p2(x) { return ("0" + x).slice(-2); }
+      return d.getFullYear() + "-" + p2(d.getMonth() + 1) + "-" + p2(d.getDate()) + "T" +
+        p2(d.getHours()) + ":" + p2(d.getMinutes()) + ":" + p2(d.getSeconds()) + sg + p2(Math.floor(off / 60)) + ":" + p2(off % 60);
+    }
+    // Částka: přesně dvě desetinná místa, bez „-0.00“ (maska CastkaType)
+    function amount(x) {
+      var c = Math.round(x * 100);
+      if (!isFinite(c) || Math.abs(c) >= 1e10) { return null; }
+      var a = Math.abs(c);
+      return (c < 0 ? "-" : "") + Math.floor(a / 100) + "." + ("0" + (a % 100)).slice(-2);
+    }
+
+    return {
+      readP12: readP12, pickCert: pickCert, certInfo: certInfo, signedEnvelope: signedEnvelope,
+      parseReply: parseReply, stamp: stamp, amount: amount, uuid4: uuid4, b64e: b64e, u8: u8,
+      SOAP_ACTION: SOAP_ACTION, _t: { sha1: sha1, hmacSha1: hmacSha1, p12kdf: p12kdf, desBlock: desBlock, desKeys: desKeys,
+        des3Dec: des3Dec, rc2Keys: rc2Keys, rc2Block: rc2Block, bodyC14n: bodyC14n, signedInfoC14n: signedInfoC14n, asn: asn }
+    };
+  })();
+
+
+  // ==================== EET 2.0: evidence tržeb ====================
+  // Jen pro korunu a jen na kase. Každý zaplacený účet (hotově, kartou,
+  // vrácení zálohy jako záporná tržba) dostane záznam ve frontě state.eet.q:
+  // pořadové číslo z vlastní řady zařízení, čas a částka, které se už nikdy
+  // nemění (opakované zaslání nese stejná data, mění se jen hlavička). Fronta
+  // je součástí stavu, má tedy tři kopie a přežije zavření aplikace; odesílá
+  // se hned a při každé další příležitosti, po potvrzení (POK) se záznam
+  // přesune do state.eet.log. Soukromý klíč ve stavu není: leží jako
+  // neexportovatelný CryptoKey v IndexedDB (tapkasa-eet) a vedle něj
+  // zašifrovaný .p12 pro případ, že by klíč zmizel. Heslo se neukládá, záloha
+  // dat klíč nenese. Spárovaný výdej nic neodesílá (záznamy vznikají jen
+  // v commit() na kase) a nastavení EET se do druhého zařízení nekopíruje.
+
+  var EET_URL = { prod: "https://trzbyeet.gov.cz/eet/services/EETServiceSOAP/v4",
+                  test: "https://pg.trzbyeet.gov.cz/eet/services/EETServiceSOAP/v4" };
+  var EET_CA = "https://ca.caeet.gov.cz/api";
+  var EET_DIS = "https://mojedane.gov.cz/pmd/home/prihlaseni-do-dis";
+  var EET_INFO = "https://eet.gov.cz/";
+  var EET_TMO = [2, 5, 10];
+  var EET_LOG_MAX = 400;
+  var EET_H48 = 48 * 3600000, EET_H36 = 36 * 3600000;
+  var EET_POKL_RE = /^[0-9a-zA-Z.,:;\/#\-_ ]{1,20}$/;
+  var EET_CIS_RE = /^[0-9a-zA-Z.,:;\/#\-_ ]{1,25}$/;
+  var EET_TIME_RE = /^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(Z|[+\-]\d\d:\d\d)$/;
+  var EET_AMT_RE = /^((0|-?[1-9]\d{0,7})\.\d\d|-0\.(0[1-9]|[1-9]\d))$/;
+  var EET_UUID_RE = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
+  var EET_P12_LS = "tapkasa.eet.p12";
+
+  var eetKey = null, eetKeyFp = "", eetKeyState = "none";   // none | loading | ready | locked | missing
+  var eetBusy = false, eetTimer = null, eetRound = null, eetDbP = null;
+  var eetImp = null;          // vybraný soubor v nastavení: { bytes, name }
+  var eetNote = "";           // výsledek ověření spojení nebo obnovy certifikátu
+  var eetWorking = false;     // běží ověření, nahrání certifikátu nebo obnova
+
+  function eetFresh() {
+    return { on: 0, eic: "", unit: "", pokl: "", seq: 0, tmo: 5, cert: null, q: [], log: [], sent: 0,
+             hideDay: "", renew: "", renewAt: 0 };
+  }
+
+  // Záznam z uloženého stavu nebo zálohy: jen hodnoty, které projdou maskami
+  // XSD, ať poškozená záloha nevyrobí zprávu, kterou EET odmítne.
+  function eetRecOk(r) {
+    return isObj(r) && okId(r.id) && (r.sid === "" || okId(r.sid)) &&
+      typeof r.eic === "string" && /^CZ[0-9]{8,10}$/.test(r.eic) &&
+      typeof r.u === "string" && /^[1-9][0-9]{0,8}$/.test(r.u) &&
+      typeof r.p === "string" && EET_POKL_RE.test(r.p) &&
+      typeof r.n === "string" && EET_CIS_RE.test(r.n) &&
+      typeof r.d === "string" && EET_TIME_RE.test(r.d) &&
+      typeof r.a === "string" && EET_AMT_RE.test(r.a) &&
+      (r.env === "test" || r.env === "prod");
+  }
+  function eetRecNorm(r) {
+    r.k = r.k === "x" ? "x" : "s";
+    r.t = finNum(r.t, 0); r.tries = Math.max(0, Math.floor(finNum(r.tries, 0))); r.last = finNum(r.last, 0);
+    r.st = r.st === "ok" ? "ok" : r.st === "bad" ? "bad" : "q";
+    if (typeof r.pok !== "string") { delete r.pok; }
+    if (typeof r.msg !== "string") { delete r.msg; }
+    if (typeof r.kod !== "number" || !isFinite(r.kod)) { delete r.kod; }
+    if (!Array.isArray(r.w)) { delete r.w; }
+    return r;
+  }
+  function normEet(e) {
+    var o = eetFresh();
+    if (!isObj(e)) { return o; }
+    o.on = e.on === 1 || e.on === -1 ? e.on : 0;
+    o.unit = typeof e.unit === "string" && /^[1-9][0-9]{0,8}$/.test(e.unit) ? e.unit : "";
+    o.pokl = typeof e.pokl === "string" && EET_POKL_RE.test(e.pokl) ? e.pokl : "";
+    o.seq = Math.max(0, Math.floor(finNum(e.seq, 0)));
+    o.tmo = EET_TMO.indexOf(e.tmo) >= 0 ? e.tmo : 5;
+    o.sent = Math.max(0, Math.floor(finNum(e.sent, 0)));
+    o.hideDay = typeof e.hideDay === "string" ? e.hideDay : "";
+    o.renew = typeof e.renew === "string" && EET_UUID_RE.test(e.renew) ? e.renew : "";
+    o.renewAt = finNum(e.renewAt, 0);
+    var c = e.cert;
+    if (isObj(c) && typeof c.b64 === "string" && /^[A-Za-z0-9+\/=]{100,8000}$/.test(c.b64) &&
+        typeof c.fp === "string" && /^[0-9a-f]{64}$/.test(c.fp) && typeof c.cn === "string" && /^CZ[0-9]{8,10}$/.test(c.cn)) {
+      o.cert = { b64: c.b64, fp: c.fp, cn: c.cn, iss: typeof c.iss === "string" ? c.iss.slice(0, 120) : "",
+                 from: finNum(c.from, 0), to: finNum(c.to, 0), test: c.test === true };
+      o.eic = c.cn;
+    }
+    o.q = (Array.isArray(e.q) ? e.q : []).filter(eetRecOk).map(eetRecNorm).slice(-5000);
+    o.q.forEach(function (r) { if (r.st === "ok") { r.st = "q"; } });
+    o.log = (Array.isArray(e.log) ? e.log : []).filter(eetRecOk).map(eetRecNorm).slice(-EET_LOG_MAX);
+    // pořadová čísla nesmí jít znovu: řada pokračuje i za čísly ze záznamů
+    o.q.concat(o.log).forEach(function (r) {
+      if (r.p === o.pokl && /^\d+$/.test(r.n)) { o.seq = Math.max(o.seq, parseInt(r.n, 10)); }
+    });
+    return o;
+  }
+
+  // Obnova zálohy: klíč patří telefonu. Když tenhle telefon EET nastavené
+  // má, nastavení zůstává jeho; ze zálohy se převezmou jen neodeslané tržby.
+  // Jinak (nový telefon místo ztraceného) se nastavení převezme celé a stačí
+  // nahrát certifikát znovu.
+  function eetRestore(own, inc) {
+    var keep = own.cert ? JSON.parse(JSON.stringify(own)) : inc;
+    var seen = {};
+    keep.q.concat(keep.log).forEach(function (r) { seen[r.id] = true; });
+    (own.cert ? inc.q : own.q).forEach(function (r) { if (!seen[r.id]) { keep.q.push(r); seen[r.id] = true; } });
+    keep.seq = Math.max(own.seq, inc.seq);
+    return keep;
+  }
+
+  function eetDefaultPokl() {
+    var abc = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789", b = new Uint8Array(4), s = "TK-";
+    try { crypto.getRandomValues(b); } catch (e) { for (var j = 0; j < 4; j++) { b[j] = Math.floor(Math.random() * 256); } }
+    for (var i = 0; i < 4; i++) { s += abc.charAt(b[i] % abc.length); }
+    return s;
+  }
+
+  // ---------- úložiště klíče ----------
+  function eetDb() {
+    if (!eetDbP) {
+      eetDbP = new Promise(function (res) {
+        var rq;
+        try { rq = indexedDB.open("tapkasa-eet", 1); } catch (e) { res(null); return; }
+        rq.onupgradeneeded = function () { try { rq.result.createObjectStore("k"); } catch (e) {} };
+        rq.onsuccess = function () { res(rq.result); };
+        rq.onerror = rq.onblocked = function () { res(null); };
+      });
+    }
+    return eetDbP;
+  }
+  function eetGet(k) {
+    return eetDb().then(function (d) {
+      if (!d) { return null; }
+      return new Promise(function (res) {
+        try {
+          var rq = d.transaction("k", "readonly").objectStore("k").get(k);
+          rq.onsuccess = function () { res(rq.result || null); };
+          rq.onerror = function () { res(null); };
+        } catch (e) { res(null); }
+      });
+    });
+  }
+  // false: nejde uložit (třeba CryptoKey, který WebView neumí zapsat)
+  function eetPut(k, v) {
+    return eetDb().then(function (d) {
+      if (!d) { return false; }
+      return new Promise(function (res) {
+        try {
+          var tx = d.transaction("k", "readwrite");
+          tx.oncomplete = function () { res(true); };
+          tx.onerror = tx.onabort = function () { res(false); };
+          tx.objectStore("k").put(v, k);
+        } catch (e) { res(false); }
+      });
+    });
+  }
+  function eetDel(k) {
+    return eetDb().then(function (d) {
+      if (!d) { return; }
+      try { d.transaction("k", "readwrite").objectStore("k")["delete"](k); } catch (e) {}
+    });
+  }
+  // uložený .p12 (zašifrovaný vlastním heslem): { fp, b }
+  function eetP12() {
+    return eetGet("p12").then(function (p) {
+      if (p && typeof p.fp === "string" && p.b) { return { fp: p.fp, b: new Uint8Array(p.b) }; }
+      try {
+        var t = localStorage.getItem(EET_P12_LS), i = t ? t.indexOf(":") : -1;
+        if (i > 0) { return { fp: t.slice(0, i), b: unb64(t.slice(i + 1)) }; }
+      } catch (e) {}
+      return null;
+    });
+  }
+
+  // Klíč k certifikátu ze stavu. Volá se při startu a po každé výměně stavu.
+  function eetLoadKey() {
+    var c = state.eet.cert;
+    if (!c) { eetKey = null; eetKeyFp = ""; eetKeyState = "none"; return; }
+    if (eetKey && eetKeyFp === c.fp) { eetKeyState = "ready"; eetRetryNow(); return; }
+    eetKeyState = "loading";
+    var fp = c.fp;
+    eetGet("key:" + fp).then(function (k) {
+      if (!state.eet.cert || state.eet.cert.fp !== fp) { return; }
+      if (k && typeof k === "object" && k.type === "private") { eetKey = k; eetKeyFp = fp; eetKeyState = "ready"; return; }
+      return eetP12().then(function (p) {
+        if (state.eet.cert && state.eet.cert.fp === fp) { eetKeyState = p && p.fp === fp ? "locked" : "missing"; }
+      });
+    }).then(function () { render(); eetRetryNow(); }, function () { eetKeyState = "missing"; render(); });
+  }
+
+  // .p12 + heslo → klíč do telefonu, certifikát do stavu.
+  // Výsledek { err: klíč textu } nebo { ok: true, warn: klíč textu nebo "" }.
+  function eetInstall(bytes, pw) {
+    if (!(window.crypto && crypto.subtle && typeof crypto.subtle.importKey === "function" && utf8)) {
+      return Promise.resolve({ err: "eetErrCrypto" });
+    }
+    var pick = null, key = null, fp = "";
+    return EETX.readP12(bytes, pw).then(function (r) {
+      pick = EETX.pickCert(r);
+      if (!pick) { throw new Error("nokey"); }
+      if (!/^CZ[0-9]{8,10}$/.test(pick.info.cn)) { throw new Error("cn"); }
+      if (pick.info.to <= Date.now()) { throw new Error("expired"); }
+      return crypto.subtle.importKey("pkcs8", pick.key, { name: "RSASSA-PKCS1-v1_5", hash: "SHA-256" }, false, ["sign"]);
+    }).then(function (k) {
+      key = k;
+      return crypto.subtle.digest("SHA-256", pick.cert);
+    }).then(function (d) {
+      fp = hex(new Uint8Array(d));
+      return eetPut("key:" + fp, key);
+    }).then(function (kept) {
+      return eetPut("p12", { fp: fp, b: bytes.slice().buffer }).then(function () {
+        try { localStorage.setItem(EET_P12_LS, fp + ":" + b64(bytes)); } catch (e) {}
+        var e = state.eet, old = e.cert, test = /playground/i.test(pick.info.issuer);
+        if (old && old.fp !== fp) { eetDel("key:" + old.fp); }
+        e.cert = { b64: EETX.b64e(pick.cert), fp: fp, cn: pick.info.cn, iss: pick.info.issuer.slice(0, 120),
+                   from: pick.info.from, to: pick.info.to, test: test };
+        e.eic = pick.info.cn;
+        // testovací záznamy do ostrého prostředí nepatří, nemají žádnou platnost
+        if (!test) { e.q = e.q.filter(function (r) { return r.env !== "test"; }); }
+        // nový certifikát může spravit odmítnutý podpis: zkusit znovu
+        e.q.forEach(function (r) { if (r.st === "bad") { r.st = "q"; r.last = 0; } });
+        eetKey = key; eetKeyFp = fp; eetKeyState = "ready";
+        saveNow();
+        return { ok: true, warn: kept ? "" : "eetErrStore" };
+      });
+    }).catch(function (err) {
+      var m = err && err.message;
+      return { err: m === "password" ? "eetErrPw" : m === "nokey" ? "eetErrNoKey" : m === "cn" ? "eetErrCn"
+                  : m === "expired" ? "eetErrExpired" : m === "alg" ? "eetErrAlg" : "eetErrFile" };
+    });
+  }
+
+  function eetForget() {
+    var c = state.eet.cert;
+    if (c) { eetDel("key:" + c.fp); }
+    eetDel("p12");
+    try { localStorage.removeItem(EET_P12_LS); } catch (e) {}
+    state.eet.cert = null; state.eet.eic = "";
+    eetKey = null; eetKeyFp = ""; eetKeyState = "none";
+    saveNow();
+  }
+
+  // ---------- záznamy ----------
+  function eetOn() { var e = state.eet; return e.on === 1 && !!e.cert && !!e.unit && !!e.pokl; }
+
+  function eetNewRec(sid, kind, amt, ts) {
+    var e = state.eet, a = EETX.amount(amt);
+    if (a === null || !e.cert || !e.unit || !e.pokl) { return null; }
+    e.seq += 1;
+    var r = { id: uid(), sid: sid || "", k: kind, eic: e.cert.cn, u: e.unit, p: e.pokl, n: String(e.seq),
+              d: EETX.stamp(ts), a: a, t: ts, env: e.cert.test ? "test" : "prod", tries: 0, last: 0, st: "q" };
+    e.q.push(r);
+    return r;
+  }
+
+  // Zaplacený účet. Eviduje se skutečně přijatá částka: zboží, připočtená
+  // daň i spropitné (stánkaři patří, finanční správa evidenci spropitného
+  // nezpochybní), vratná záloha je součástí tržby a její vrácení záporná
+  // tržba. Účet za nulu z nákupu a vrácení obalů jde podle doporučení
+  // GFŘ jako dvě zprávy (kladná a záporná).
+  function eetSale(sale) {
+    if (!eetOn() || state.currency !== "CZK" || state.mode !== "kasa") { return; }
+    var amt = mr(sale.total + (sale.tip || 0)), parts = [];
+    if (amt !== 0) {
+      parts = [amt];
+    } else {
+      var pos = 0, neg = 0;
+      sale.lines.forEach(function (l) { var v = l.price * l.qty; if (v > 0) { pos += v; } else { neg += v; } });
+      pos = mr(pos); neg = mr(neg);
+      if (pos > 0 && neg < 0) { parts = [pos, neg]; }
+    }
+    var first = null;
+    parts.forEach(function (x) { var r = eetNewRec(sale.id, "s", x, sale.ts); if (r && !first) { first = r; } });
+    if (first) { sale.eet = first.n; }
+  }
+
+  // Vrácený nebo smazaný účet, který už v EET je: storno jako záporná tržba
+  // s vlastním pořadovým číslem a časem vrácení, bez vazby na původní zprávu.
+  function eetStorno(sale) {
+    if (!sale || !sale.eet || !state.eet.cert) { return false; }
+    var amt = mr(-(sale.total + (sale.tip || 0)));
+    return !!amt && !!eetNewRec(sale.id, "x", amt, Date.now());
+  }
+
+  // ---------- odesílání ----------
+  function eetEnv() { var c = state.eet.cert; return c && c.test ? "test" : "prod"; }
+  function eetCanSend(r) {
+    var c = state.eet.cert;
+    return !!c && eetKeyState === "ready" && r.eic === c.cn && r.env === eetEnv() && c.to > Date.now();
+  }
+  function eetWait(r) { return r.tries > 0 ? Math.min(300000, 15000 * Math.pow(2, r.tries - 1)) : 0; }
+  // Start aplikace, návrat do popředí, signál zpátky: čekající tržby hned,
+  // bez čekání na další pokus podle prodlevy.
+  function eetRetryNow() {
+    state.eet.q.forEach(function (r) { if (r.st === "q") { r.last = 0; } });
+    eetFlush();
+  }
+
+  function eetNext() {
+    var q = state.eet.q, now = Date.now(), i;
+    // nejdřív právě zaplacené účty, pak opakování podle pořadí
+    for (i = 0; i < q.length; i++) {
+      if (q[i].tries === 0 && q[i].st === "q" && eetCanSend(q[i]) && !(eetRound && eetRound[q[i].id])) { return q[i]; }
+    }
+    for (i = 0; i < q.length; i++) {
+      var r = q[i];
+      if (!eetCanSend(r) || (eetRound && eetRound[r.id])) { continue; }
+      if (eetRound || (r.st === "q" && now - r.last >= eetWait(r))) { return r; }
+    }
+    return null;
+  }
+
+  // force: ručně „Odeslat čekající“, každý záznam jednou, i ty s chybou
+  function eetFlush(force) {
+    if (force) { eetRound = {}; }
+    if (eetTimer) { clearTimeout(eetTimer); eetTimer = null; }
+    if (eetBusy || !state.eet.q.length) { if (!eetBusy) { eetRound = null; } return; }
+    var r = eetNext();
+    if (!r) { eetRound = null; eetPlan(); return; }
+    if (eetRound) { eetRound[r.id] = true; }
+    eetBusy = true;
+    eetSendRec(r).then(function () {
+      eetBusy = false; render(); eetFlush();
+    });
+  }
+
+  function eetPlan() {
+    var now = Date.now(), wait = null;
+    state.eet.q.forEach(function (r) {
+      if (r.st !== "q" || !eetCanSend(r)) { return; }
+      var due = Math.max(1000, r.last + eetWait(r) - now);
+      if (wait === null || due < wait) { wait = due; }
+    });
+    if (wait !== null) { eetTimer = setTimeout(function () { eetTimer = null; eetFlush(); }, Math.min(wait, 300000)); }
+  }
+
+  // Podepsaná zpráva na EET s mezní dobou odezvy. Výsledek je objekt
+  // z EETX.parseReply, výjimka „timeout“ nebo chyba sítě.
+  function eetPost(hl, data) {
+    var c = state.eet.cert, key = eetKey, url = c.test ? EET_URL.test : EET_URL.prod;
+    return EETX.signedEnvelope(key, c.b64, hl, data).then(function (xml) {
+      var ctl = typeof AbortController === "function" ? new AbortController() : null, timer = null;
+      var limit = new Promise(function (res, rej) {
+        timer = setTimeout(function () { if (ctl) { try { ctl.abort(); } catch (e) {} } rej(new Error("timeout")); }, (state.eet.tmo || 5) * 1000);
+      });
+      var req = fetch(url, {
+        method: "POST", body: xml, cache: "no-store", credentials: "omit", signal: ctl ? ctl.signal : undefined,
+        headers: { "Content-Type": "text/xml; charset=utf-8", "SOAPAction": '"' + EETX.SOAP_ACTION + '"' }
+      }).then(function (resp) {
+        var gid = "";
+        try { gid = resp.headers.get("X-Global-Transaction-Id") || ""; } catch (e) {}
+        return resp.text().then(function (t) { var o = EETX.parseReply(t); o.http = resp.status; o.gid = gid; return o; });
+      });
+      return Promise.race([req, limit]).then(function (o) { clearTimeout(timer); return o; },
+        function (e) { clearTimeout(timer); throw e; });
+    });
+  }
+
+  function eetSendRec(r) {
+    var id = r.id, first = r.tries === 0;
+    r.tries += 1; r.last = Date.now();
+    // první zaslání se pozná podle počtu pokusů, musí ho mít uložené i po pádu
+    saveNow();
+    var hl = { uuid_zpravy: EETX.uuid4(), dat_odesl: EETX.stamp(Date.now()), prvni_zaslani: first ? "true" : "false" };
+    var data = { eic_popl: r.eic, id_jednotky: r.u, id_pokl: r.p, porad_cis: r.n, dat_trzby: r.d, celk_trzba: r.a };
+    return eetPost(hl, data).then(function (res) { eetApply(id, res); },
+      function (err) { eetApply(id, { net: true, tmo: !!(err && err.message === "timeout"), warn: [] }); });
+  }
+
+  // Vlastní kódy mimo číselník EET: -900 vypršela mezní doba odezvy,
+  // -901 bez spojení, -902 nečitelná odpověď.
+  function eetApply(id, res) {
+    var e = state.eet, ix = -1;
+    for (var i = 0; i < e.q.length; i++) { if (e.q[i].id === id) { ix = i; break; } }
+    if (ix < 0) { return; }
+    var r = e.q[ix];
+    if (res.pok) {
+      r.st = "ok"; r.pok = String(res.pok).slice(0, 39); r.at = Date.now();
+      if (res.test) { r.tst = true; }
+      var w = (res.warn || []).map(function (x) { return x.kod; }).filter(function (x) { return isFinite(x); }).slice(0, 10);
+      if (w.length) { r.w = w; }
+      delete r.kod; delete r.msg; delete r.gid;
+      e.q.splice(ix, 1);
+      e.log.push(r);
+      if (e.log.length > EET_LOG_MAX) { e.log.splice(0, e.log.length - EET_LOG_MAX); }
+      e.sent += 1;
+      eetToastNote(r, true);
+    } else {
+      var kod = typeof res.kod === "number" && isFinite(res.kod) ? res.kod : null;
+      r.kod = kod !== null ? kod : res.net ? (res.tmo ? -900 : -901) : -902;
+      r.msg = String(res.msg || res.fault || "").slice(0, 120);
+      if (res.gid) { r.gid = String(res.gid).slice(0, 64); }
+      // chyba formátu nebo podpisu se opakováním nespraví; čeká na nový
+      // certifikát nebo na ruční odeslání (povinnost odeslat trvá)
+      if (kod !== null && [0, 2, 3, 4, 6, 7].indexOf(kod) >= 0) { r.st = "bad"; }
+      else if (kod === 8 && r.tries >= 5) { r.st = "bad"; }
+      eetToastNote(r, false);
+    }
+    saveNow();
+  }
+
+  // hláška po zaplacení se doplní o výsledek, dokud je na obrazovce
+  function eetToastNote(r, ok) {
+    if (!toast || !r.sid || r.k !== "s" || toast.undo !== r.sid || toast.eet) { return; }
+    toast.eet = 1;
+    toast.text += " · " + T(ok ? "eetToastOk" : "eetToastLater");
+  }
+
+  // Ověřovací zpráva: EET ji zkontroluje (podpis, formát, čísla), nic neeviduje.
+  function eetTest() {
+    var e = state.eet;
+    if (!e.cert || eetKeyState !== "ready" || !e.unit || !e.pokl) { eetNote = T("eetNeed"); render(); return; }
+    eetWorking = true; eetNote = ""; render();
+    var now = Date.now();
+    var hl = { uuid_zpravy: EETX.uuid4(), dat_odesl: EETX.stamp(now), prvni_zaslani: "true", overeni: "true" };
+    var data = { eic_popl: e.cert.cn, id_jednotky: e.unit, id_pokl: e.pokl, porad_cis: "TEST", dat_trzby: EETX.stamp(now), celk_trzba: "1.00" };
+    eetPost(hl, data).then(function (res) {
+      eetWorking = false;
+      eetNote = res.kod === 0 ? T("eetTestOk") : T("eetTestFail", eetErrText(res.kod, res.msg || res.fault));
+      if (res.warn && res.warn.length) {
+        eetNote += " " + res.warn.map(function (w) { return T("eetWarnN", w.kod) + ": " + w.msg; }).join(" · ");
+      }
+      render();
+    }, function (err) {
+      eetWorking = false;
+      eetNote = T("eetTestFail", T(err && err.message === "timeout" ? "eetE_tmo" : "eetE_net"));
+      render();
+    });
+  }
+
+  function eetErrText(kod, msg) {
+    if (kod === -900) { return T("eetE_tmo"); }
+    if (kod === -901) { return T("eetE_net"); }
+    if (typeof kod !== "number" || kod === -902) { return T("eetE_odd"); }
+    return T("eetE_kod", kod, msg || "");
+  }
+
+  // ---------- obnova certifikátu přes rozhraní CA EET ----------
+  // caeetapi_jwt.yml: JWT (RS256, x5t#S256) podepsaný obnovovaným
+  // certifikátem, POST /request/renew → GET /request/{id}/status →
+  // POST /request/{id}/claim-download → po uložení POST …/ack-download.
+  // Převzetí se potvrdí až po úspěšném nahrání nového klíče: když se cokoli
+  // pokazí, nový certifikát zůstane ke stažení v DIS+ (30 dní).
+  function b64u(bytes) { return b64(bytes).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, ""); }
+  function eetJwt(key, certB64) {
+    return crypto.subtle.digest("SHA-256", unb64(certB64)).then(function (d) {
+      var now = Math.floor(Date.now() / 1000);
+      var head = b64u(utf8.encode(JSON.stringify({ alg: "RS256", typ: "JWT", "x5t#S256": b64u(new Uint8Array(d)) })));
+      var pay = b64u(utf8.encode(JSON.stringify({ iat: now, exp: now + 240 })));
+      return crypto.subtle.sign({ name: "RSASSA-PKCS1-v1_5" }, key, utf8.encode(head + "." + pay)).then(function (s) {
+        return head + "." + pay + "." + b64u(new Uint8Array(s));
+      });
+    });
+  }
+  function eetCa(method, path, key, certB64) {
+    return eetJwt(key, certB64).then(function (jwt) {
+      return fetch(EET_CA + path, { method: method, cache: "no-store", credentials: "omit",
+        headers: { "Authorization": "Bearer " + jwt, "Accept": "application/json" } });
+    }).then(function (resp) {
+      if (resp.status === 204) { return {}; }
+      return resp.text().then(function (t) {
+        var j = null;
+        try { j = JSON.parse(t); } catch (e) {}
+        if (!resp.ok) { var er = new Error("ca"); er.info = (j && j.message) || ("HTTP " + resp.status); er.http = resp.status; throw er; }
+        return j || {};
+      });
+    });
+  }
+  function eetRenew() {
+    var e = state.eet, c = e.cert;
+    if (eetWorking) { return; }
+    if (!c || c.test || eetKeyState !== "ready" || c.to <= Date.now()) { eetNote = T("eetRenewManual"); render(); return; }
+    eetWorking = true; eetNote = T("eetRenewing"); render();
+    var oldKey = eetKey, oldB64 = c.b64, until = Date.now() + 180000;
+    var reuse = e.renew && Date.now() - e.renewAt < 25 * 86400000 ? e.renew : "";
+    function poll(id) {
+      return eetCa("GET", "/request/" + id + "/status", oldKey, oldB64).then(function (st) {
+        if (st.state === "INPROCESS" && Date.now() < until) {
+          var s = Math.min(30, Math.max(1, parseInt(st.pollAfterSeconds, 10) || 2));
+          return new Promise(function (res) { setTimeout(res, s * 1000); }).then(function () { return poll(id); });
+        }
+        if (st.state === "ISSUED" || st.state === "DELIVERING") { return id; }
+        var er = new Error("ca"); er.info = String(st.state || "") + (st.rejectedReason ? ": " + st.rejectedReason : "");
+        if (st.state !== "INPROCESS") { e.renew = ""; }
+        throw er;
+      });
+    }
+    (reuse ? Promise.resolve({ reqId: reuse }) : eetCa("POST", "/request/renew", oldKey, oldB64)).then(function (r) {
+      if (!r || typeof r.reqId !== "string" || !EET_UUID_RE.test(r.reqId)) { var er = new Error("ca"); er.info = "reqId"; throw er; }
+      if (r.reqId !== e.renew) { e.renew = r.reqId; e.renewAt = Date.now(); saveNow(); }
+      return poll(r.reqId);
+    }).then(function (id) {
+      return eetCa("POST", "/request/" + id + "/claim-download", oldKey, oldB64).then(function (p) {
+        if (!p || typeof p.pkcs12 !== "string" || typeof p.password !== "string") { var er = new Error("ca"); er.info = "pkcs12"; throw er; }
+        return eetInstall(unb64(p.pkcs12), p.password).then(function (res) {
+          if (res.err) { var er2 = new Error("ca"); er2.info = T(res.err); throw er2; }
+          return eetCa("POST", "/request/" + id + "/ack-download", oldKey, oldB64);
+        });
+      });
+    }).then(function () {
+      e.renew = ""; eetWorking = false;
+      eetNote = T("eetRenewOk", new Date(e.cert.to).toLocaleDateString(langInfo().loc));
+      saveNow(); render(); eetFlush();
+    }, function (err) {
+      eetWorking = false;
+      eetNote = T("eetRenewFail", err && err.info ? err.info : T("eetE_net"));
+      saveNow(); render();
+    });
+  }
+
+  // ---------- přehled stavu ----------
+  function eetStats() {
+    var e = state.eet, now = Date.now(), o = { wait: 0, bad: 0, oldest: 0 };
+    e.q.forEach(function (r) {
+      o.wait++;
+      if (r.st === "bad") { o.bad++; }
+      if (!o.oldest || r.t < o.oldest) { o.oldest = r.t; }
+    });
+    o.late = o.oldest > 0 && now - o.oldest > EET_H48;
+    o.slow = o.oldest > 0 && now - o.oldest > EET_H36;
+    o.days = e.cert ? Math.floor((e.cert.to - now) / 86400000) : null;
+    return o;
+  }
+
+  // Co je potřeba udělat, od nejvážnějšího: { k: klíč textu, red, act: tlačítko }
+  function eetAlert() {
+    var e = state.eet, s = eetStats();
+    if (!e.cert && !s.wait) { return null; }
+    if (eetKeyState === "locked") { return { k: "eetLocked", red: true, act: "unlock" }; }
+    if (eetKeyState === "missing" || (!e.cert && s.wait)) { return { k: "eetMissing", red: true, act: "setup" }; }
+    if (e.cert && s.days !== null && e.cert.to <= Date.now()) { return { k: "eetCertGone", red: true, act: "setup" }; }
+    if (s.late) { return { k: "eetLate", red: true, act: "send" }; }
+    if (s.bad) { return { k: "eetBadNote", red: true, act: "stat" }; }
+    if (s.slow) { return { k: "eetSlow", red: false, act: "send" }; }
+    if (e.on === 1 && s.days !== null && s.days <= 14) { return { k: "eetCertSoon", red: false, act: "setup", soon: true }; }
+    return null;
+  }
+
+  function eetMoney(a) {
+    var n = Number(a), cents = Math.round(n * 100) % 100 !== 0;
+    try {
+      return new Intl.NumberFormat(langInfo().loc, { style: "currency", currency: "CZK",
+        minimumFractionDigits: cents ? 2 : 0, maximumFractionDigits: 2 }).format(n);
+    } catch (e) { return n.toFixed(2) + " Kč"; }
+  }
+  function eetDate(ms) { try { return new Date(ms).toLocaleDateString(langInfo().loc); } catch (e) { return ""; } }
+  function eetDaysText(n) { return tp("eetDaysN", n).split("{0}").join(String(n)); }
+  function eetWaitText(n) { return tp("eetWaitN", n).split("{0}").join(String(n)); }
+
+  // Hlavička: počet neodeslaných (a vykřičník, když je co řešit).
+  function eetPill() {
+    var e = state.eet, s = eetStats(), al = eetAlert();
+    if (!e.cert && !s.wait) { return ""; }
+    if (!s.wait && !(al && (al.red || al.soon))) { return ""; }
+    var red = !!(al && al.red);
+    return ' <button type="button" class="eetp' + (red ? " red" : "") + '" data-eetpill="1" aria-label="' +
+           esc(T("eetPillAria", s.wait)) + '">EET' + (s.wait ? " " + s.wait : "") + (red ? " !" : "") + "</button>";
+  }
+
+  // Lišta na prodeji: jen věci, které hoří (klíč, 48 hodin, chyba), a blížící
+  // se konec certifikátu (jde schovat do zítřka).
+  function eetNudge() {
+    var al = eetAlert();
+    if (!al || (al.soon && state.eet.hideDay === todayKey())) { return ""; }
+    var s = eetStats();
+    var txt = al.k === "eetCertSoon" ? T("eetCertSoon", eetDaysText(Math.max(0, s.days)))
+            : al.k === "eetSlow" ? eetWaitText(s.wait) : T(al.k);
+    var btn = al.act === "unlock" ? T("eetUnlock") : al.act === "send" ? T("eetSendNow")
+            : al.act === "stat" ? T("eetLogBtn") : T("eetSettings");
+    return '<div class="nudge" role="alert"><span class="t"><strong>EET:</strong> ' + esc(txt) + "</span>" +
+           '<button class="go" data-eetgo="' + al.act + '">' + esc(btn) + "</button>" +
+           (al.soon ? '<button class="x" data-eethide="1" aria-label="' + esc(T("nudgeHide")) + '">' + SVG.close + "</button>" : "") +
+           "</div>";
+  }
+
+  // Menu: jen u koruny, jen na kase (výdej nic neodesílá).
+  function eetBlock() {
+    var e = state.eet;
+    if (state.currency !== "CZK") { return ""; }
+    var h = '<div class="sec"><h2>' + esc(T("eetHead")) + "</h2></div>";
+    if (e.on === -1) {
+      return h + '<div class="link"><i></i>' + esc(T("eetOffState")) + "</div>" +
+        '<div class="acts" style="padding-top:0"><button class="act" data-eetundecide="1">' + esc(T("eetChange")) + "</button>" +
+        '<button class="act" data-eetwho="1">' + esc(T("eetWhoBtn")) + "</button></div>" + eetPendingNote();
+    }
+    if (e.on !== 1) {
+      return h + '<p class="hint" style="text-align:left;padding:0 16px 4px">' + esc(T("eetIntro")) + "</p>" +
+        '<div class="acts" style="padding-top:6px;padding-bottom:6px"><button class="act on" data-eetsetup="1">' + esc(T("eetSetupBtn")) + "</button>" +
+        '<button class="act" data-eetnotme="1">' + esc(T("eetNotMe")) + "</button></div>" +
+        '<div class="acts" style="padding-top:0;padding-bottom:14px"><button class="act ghostlink" data-eetwho="1">' + esc(T("eetWhoBtn")) + "</button></div>" +
+        eetPendingNote();
+    }
+    var c = e.cert, s = eetStats(), al = eetAlert();
+    var good = !al || !al.red;
+    h += '<div class="link' + (good ? " on" : "") + '" role="status"><i></i>' + esc(T("eetOnState")) + " · " +
+         esc(T(c && c.test ? "eetEnvTest" : "eetEnvProd")) + "</div>";
+    var rows = [];
+    rows.push(esc(T("eetIdsLine", "\u0001" + (c ? c.cn : "") + "\u0002", "\u0001" + e.unit + "\u0002").split("{2}").join("\u0001" + e.pokl + "\u0002"))
+      .replace(/\u0001/g, '<span class="nw">').replace(/\u0002/g, "</span>"));
+    if (c) {
+      rows.push(esc(T("eetCertTo", eetDate(c.to))) +
+        (s.days !== null && s.days <= 30 && s.days >= 0 ? ' <span class="w">' + esc(T("eetCertSoon", eetDaysText(s.days))) + "</span>" : ""));
+    }
+    rows.push(esc(T("eetCounts", e.sent, s.wait)));
+    if (s.wait) { rows.push(esc(T("eetOldest", whenStr(s.oldest)))); }
+    if (c && c.test) { rows.push('<span class="w">' + esc(T("eetTestNote")) + "</span>"); }
+    if (al) { rows.push('<span class="w">' + esc(al.k === "eetCertSoon" ? "" : al.k === "eetSlow" ? eetWaitText(s.wait) : T(al.k)) + "</span>"); }
+    h += '<div class="eet-info">' + rows.filter(function (x) { return x && x !== '<span class="w"></span>'; }).join("<br>") + "</div>";
+    if (eetNote) { h += '<p class="hint" role="status" style="text-align:left;padding:8px 16px 0;font-weight:600;color:var(--ink-2)">' + esc(eetNote) + "</p>"; }
+    h += '<div class="acts" style="padding-top:10px;padding-bottom:6px">' +
+         (eetKeyState === "locked" ? '<button class="act on" data-eetunlockask="1">' + esc(T("eetUnlock")) + "</button>" : "") +
+         (s.wait ? '<button class="act" data-eetsend="1">' + esc(T("eetSendNow")) + "</button>" : "") +
+         '<button class="act" data-eettest="1"' + (eetWorking ? " disabled" : "") + ">" + esc(eetWorking ? T("eetWorking") : T("eetTest")) + "</button>" +
+         '<button class="act" data-eetstat="1">' + esc(T("eetLogBtn")) + "</button>" +
+         '<button class="act" data-eetsetup="1">' + esc(T("eetSettings")) + "</button>" +
+         (c && !c.test && s.days !== null && s.days <= 30 ? '<button class="act" data-eetrenew="1"' + (eetWorking ? " disabled" : "") + ">" + esc(T("eetRenewBtn")) + "</button>" : "") +
+         '<button class="act danger" data-eetoff="1">' + esc(T("eetDisable")) + "</button></div>" +
+         '<p class="hint" style="text-align:left;padding-top:0">' + esc(T("eetOnHint")) + "</p>";
+    return h;
+  }
+  // EET vypnuté, ale něco ještě čeká na odeslání
+  function eetPendingNote() {
+    var s = eetStats();
+    if (!s.wait) { return ""; }
+    return '<p class="hint" style="text-align:left;padding:0 16px 8px;color:var(--accent);font-weight:600">' + esc(eetWaitText(s.wait)) + "</p>" +
+      '<div class="acts" style="padding-top:0"><button class="act" data-eetsend="1">' + esc(T("eetSendNow")) + "</button>" +
+      '<button class="act" data-eetstat="1">' + esc(T("eetLogBtn")) + "</button></div>";
+  }
+
+  // Přehled: řádek pod tržbou
+  function eetHistLine() {
+    var e = state.eet;
+    if (!(e.on === 1 || e.q.length) || (state.currency !== "CZK" && !e.q.length)) { return ""; }
+    var s = eetStats(), al = eetAlert();
+    return '<p class="meta dep"><button class="eetm' + (al && al.red ? " bad" : s.wait ? " wait" : "") + '" data-eetstat="1">' +
+           esc(T("eetHist", e.sent, s.wait)) + "</button></p>";
+  }
+
+  // sid → stav záznamů účtu (pro řádky účtenek)
+  function eetBySale() {
+    var m = {};
+    state.eet.log.forEach(function (r) { if (r.sid && r.k === "s" && !m[r.sid]) { m[r.sid] = "ok"; } });
+    state.eet.q.forEach(function (r) { if (r.sid && r.k === "s") { m[r.sid] = r.st === "bad" ? "bad" : (m[r.sid] === "bad" ? "bad" : "wait"); } });
+    return m;
+  }
+  function eetRcMark(t, map) {
+    if (!t.eet) { return ""; }
+    var st = map[t.id] || "ok";
+    return ' · <button class="eetm' + (st === "ok" ? "" : " " + st) + '" data-eetrc="' + esc(t.id) + '">' +
+           esc(T(st === "ok" ? "eetRcOk" : st === "bad" ? "eetRcBad" : "eetRcWait")) + "</button>";
+  }
+
+  function eetRecRow(r, full) {
+    var st = r.st === "ok" ? "" : r.st === "bad" ? T("eetRcBad") : T("eetRcWait");
+    return '<div class="eetr"><span class="n">#' + esc(r.n) + "</span>" +
+      '<span class="m">' + esc(whenStr(r.t)) + (r.k === "x" ? " · " + esc(T("eetStorno")) : "") +
+        (r.env === "test" ? " · test" : "") + (st ? " · " + esc(st) : "") +
+        (r.pok ? '<span class="k">POK ' + esc(full ? r.pok : r.pok.slice(0, 13) + "…" + r.pok.slice(-3)) + "</span>" : "") +
+        (r.w && r.w.length ? '<span class="k">' + esc(r.w.map(function (x) { return T("eetWarnN", x); }).join(", ")) + "</span>" : "") +
+        (r.st !== "ok" && r.kod !== undefined ? '<span class="e">' + esc(eetErrText(r.kod, r.msg)) + "</span>" : "") +
+      "</span>" +
+      '<span class="a">' + esc(eetMoney(r.a)) + "</span></div>";
+  }
+
+  // ---------- panely ----------
+  function eetSheet() {
+    var e = state.eet, h = "";
+    if (sheet.step === "eet") {
+      var c = e.cert;
+      var unit = sheet.unit !== undefined ? sheet.unit : e.unit;
+      var pokl = sheet.pokl !== undefined ? sheet.pokl : (e.pokl || sheet.poklDef);
+      h += "<h2>" + esc(T("eetWizHead")) + "</h2>" +
+        '<p class="sub">' + esc(T("eetWizIntro")) + "</p>" +
+        '<ol class="eet-steps"><li>' + esc(T("eetStep1")) + ' <a class="eet-a" href="' + EET_DIS + '" target="_blank" rel="noopener">' + esc(T("eetDisLink")) + "</a></li>" +
+        "<li>" + esc(T("eetStep2")) + "</li><li>" + esc(T("eetStep3")) + "</li><li>" + esc(T("eetStep4")) + "</li></ol>" +
+        '<label class="sf eet-f"><span>' + esc(T("eetUnitLbl")) + "</span>" +
+          '<input class="inp" id="eetUnit" inputmode="numeric" autocomplete="off" maxlength="9" value="' + esc(unit) + '"></label>' +
+        '<p class="sub' + (sheet.unitErr ? " eet-err" : "") + '">' + esc(T(sheet.unitErr ? "eetUnitBad" : "eetUnitHint")) + "</p>" +
+        '<label class="sf eet-f"><span>' + esc(T("eetPoklLbl")) + "</span>" +
+          '<input class="inp" id="eetPokl" autocomplete="off" autocapitalize="characters" maxlength="20" value="' + esc(pokl) + '"></label>' +
+        '<p class="sub' + (sheet.poklErr ? " eet-err" : "") + '">' + esc(T(sheet.poklErr ? "eetPoklBad" : "eetPoklHint")) + "</p>" +
+        '<div class="sf eet-f"><span>' + esc(T("eetCertLbl")) + "</span></div>" +
+        (c ? '<p class="sub eet-ok">' + esc(T("eetCertOk", c.cn, eetDate(c.to))) + "</p>" +
+             (c.test ? '<p class="sub eet-err">' + esc(T("eetTestNote")) + "</p>" : "") : "") +
+        '<label class="btn-ghost eet-file">' + esc(eetImp && eetImp.name ? eetImp.name : T(c ? "eetPickOther" : "eetPickFile")) +
+          '<input type="file" id="eetFile" style="display:none"></label>' +
+        '<label class="sf eet-f"><span>' + esc(T("eetPwLbl")) + "</span>" +
+          '<input class="inp" id="eetPw" type="password" autocomplete="off" autocapitalize="off" spellcheck="false"></label>' +
+        (sheet.err ? '<p class="sub eet-err" role="alert">' + esc(T(sheet.err)) + "</p>" : "") +
+        (sheet.warn ? '<p class="sub eet-err">' + esc(T(sheet.warn)) + "</p>" : "") +
+        '<button class="btn-ghost strong" data-eetload="1"' + (eetWorking ? " disabled" : "") + ">" +
+          esc(eetWorking ? T("eetWorking") : T("eetLoadCert")) + "</button>" +
+        '<p class="sub">' + esc(T("eetKeepNote")) + "</p>" +
+        '<div class="sf eet-f"><span>' + esc(T("eetTmoLbl")) + "</span></div>" +
+        '<div class="seg eet-seg" role="group" aria-label="' + esc(T("eetTmoLbl")) + '">';
+      var tmo = sheet.tmo || e.tmo;
+      EET_TMO.forEach(function (x) {
+        h += '<button class="' + (tmo === x ? "on" : "") + '" data-eettmo="' + x + '" aria-pressed="' + (tmo === x) + '">' + x + " s</button>";
+      });
+      var can = !!c && eetKeyState === "ready";
+      h += "</div>" + '<p class="sub">' + esc(T("eetTmoHint")) + "</p>" +
+        (!can ? '<p class="sub">' + esc(T("eetNeed")) + "</p>" : "") +
+        '<button class="btn-done" data-eetenable="1"' + (can ? "" : " disabled") + ">" + esc(T(e.on === 1 ? "eetSave" : "eetEnable")) + "</button>" +
+        (c ? '<button class="btn-ghost" style="color:var(--accent)" data-eetrm="1">' + esc(T("eetRemoveCert")) + "</button>" : "") +
+        '<button class="btn-ghost" data-cancel="1">' + esc(T("back")) + "</button>";
+    }
+    if (sheet.step === "eetpw") {
+      h += "<h2>" + esc(T("eetPwHead")) + "</h2>" +
+        '<p class="sub">' + esc(T("eetLocked")) + "</p>" +
+        '<label class="sf eet-f"><span>' + esc(T("eetPwLbl")) + "</span>" +
+          '<input class="inp" id="eetPw" type="password" autocomplete="off" autocapitalize="off" spellcheck="false"></label>' +
+        (sheet.err ? '<p class="sub eet-err" role="alert">' + esc(T(sheet.err)) + "</p>" : "") +
+        '<button class="btn-done" data-eetunlock="1"' + (eetWorking ? " disabled" : "") + ">" + esc(eetWorking ? T("eetWorking") : T("eetUnlock")) + "</button>" +
+        '<button class="btn-ghost" data-eetsetup="1">' + esc(T("eetPickOther")) + "</button>" +
+        '<button class="btn-ghost" data-cancel="1">' + esc(T("back")) + "</button>";
+    }
+    if (sheet.step === "eetwho") {
+      h += "<h2>" + esc(T("eetWhoHead")) + "</h2>" +
+        '<p class="sub">' + esc(T("eetWhoIntro")) + "</p>" +
+        '<ul class="eet-steps"><li>' + esc(T("eetWho1")) + "</li><li>" + esc(T("eetWho2")) + "</li><li>" +
+          esc(T("eetWho3")) + "</li><li>" + esc(T("eetWho4")) + "</li></ul>" +
+        '<p class="sub">' + esc(T("eetWhoNote")) + ' <a class="eet-a" href="' + EET_INFO + '" target="_blank" rel="noopener">eet.gov.cz</a></p>' +
+        '<button class="btn-done" data-cancel="1">' + esc(T("close")) + "</button>";
+    }
+    if (sheet.step === "eetstat") {
+      var s = eetStats(), al = eetAlert();
+      h += "<h2>" + esc(T("eetStatHead")) + "</h2>" +
+        '<p class="sub">' + esc(T("eetCounts", e.sent, s.wait)) + (e.cert && e.cert.test ? " · " + esc(T("eetEnvTest")) : "") + "</p>" +
+        (al ? '<p class="sub eet-err">' + esc(al.k === "eetCertSoon" ? T("eetCertSoon", eetDaysText(Math.max(0, s.days)))
+                                          : al.k === "eetSlow" ? eetWaitText(s.wait) : T(al.k)) + "</p>" : "");
+      if (e.q.length) {
+        h += '<div class="eetl"><div class="sf"><span>' + esc(T("eetQHead")) + "</span></div>";
+        e.q.slice(0, 60).forEach(function (r) { h += eetRecRow(r); });
+        h += "</div>";
+      }
+      var done = e.log.slice(-40).reverse();
+      h += '<div class="eetl"><div class="sf"><span>' + esc(T("eetLogHead")) + "</span></div>";
+      if (!done.length) { h += '<p class="sub">' + esc(T("eetStatEmpty")) + "</p>"; }
+      done.forEach(function (r) { h += eetRecRow(r); });
+      h += "</div>" +
+        (s.wait ? '<button class="btn-done" data-eetsend="1">' + esc(T("eetSendNow")) + "</button>" : "") +
+        (eetKeyState === "locked" ? '<button class="btn-ghost strong" data-eetunlockask="1">' + esc(T("eetUnlock")) + "</button>" : "") +
+        '<button class="btn-ghost" data-cancel="1">' + esc(T("close")) + "</button>";
+    }
+    if (sheet.step === "eetrc") {
+      var list = e.q.concat(e.log).filter(function (r) { return r.sid === sheet.id; });
+      h += "<h2>" + esc(T("eetRcHead")) + "</h2>";
+      if (!list.length) { h += '<p class="sub">' + esc(T("eetRcGone")) + "</p>"; }
+      list.forEach(function (r) {
+        h += eetRecRow(r, true);
+      });
+      h += '<p class="sub">' + esc(T("eetRcHint")) + "</p>" +
+        '<button class="btn-done" data-cancel="1">' + esc(T("close")) + "</button>";
+    }
+    return h;
+  }
+
+  // Výběr souboru .p12 v nastavení. Jen ho přečte; heslo se zadává zvlášť.
+  function eetPickFile(file) {
+    if (!file || !sheet || sheet.step !== "eet") { return; }
+    if (file.size > 100000) { sheet.err = "eetErrFile"; render(); return; }
+    var rd = new FileReader();
+    rd.onload = function () {
+      if (!sheet || sheet.step !== "eet") { return; }
+      eetImp = { bytes: new Uint8Array(rd.result), name: String(file.name || "").slice(0, 60) };
+      sheet.err = ""; sheet.warn = "";
+      // panel se překreslí celý: heslo napsané předem nesmí zmizet
+      var pw = document.getElementById("eetPw"), keep = pw ? pw.value : "";
+      render();
+      var pw2 = document.getElementById("eetPw");
+      if (pw2 && keep) { pw2.value = keep; }
+      if (pw2) { try { pw2.focus(); } catch (e) {} }
+    };
+    rd.onerror = function () { if (sheet && sheet.step === "eet") { sheet.err = "eetErrFile"; render(); } };
+    rd.readAsArrayBuffer(file);
+  }
+
+  // Výdej: EET nenastavuje, jen ukáže, že nic neposílá (a co případně čeká
+  // z doby, kdy byl kasou).
+  function eetVydejBlock() {
+    var e = state.eet;
+    if (!e.cert && !e.q.length) { return ""; }
+    return '<div class="sec"><h2>' + esc(T("eetHead")) + "</h2></div>" +
+      '<p class="hint" style="text-align:left;padding:0 16px 8px">' + esc(T("eetVydejNote")) + "</p>" + eetPendingNote();
+  }
+
   // ---------- interaction ----------
 
   var SEL = "[data-tab],[data-add],[data-custom],[data-step],[data-toggle],[data-clearask],[data-pay]," +
@@ -10889,7 +13301,10 @@
             "[data-restorebuy],[data-oblang],[data-obcur],[data-obnext],[data-obback],[data-obdemo],[data-obempty]," +
             "[data-evsheet],[data-evswitch],[data-evnew],[data-evcreate],[data-evdel],[data-cvat],[data-backupfile]," +
             "[data-diag],[data-shortok],[data-rescue],[data-nudgehide],[data-sign],[data-adddep],[data-queuemode],[data-serveall],[data-morerc],[data-firstitem]," +
-            "[data-tip],[data-tipother],[data-tipset],[data-taxmode],[data-itx],[data-tipsmode],[data-obtax],[data-obxmas],[data-xmas]";
+            "[data-tip],[data-tipother],[data-tipset],[data-taxmode],[data-itx],[data-tipsmode],[data-obtax],[data-obxmas],[data-xmas]," +
+            "[data-eetsetup],[data-eetnotme],[data-eetundecide],[data-eetwho],[data-eettmo],[data-eetload],[data-eetenable],[data-eetrm]," +
+            "[data-eetoff],[data-eetsend],[data-eettest],[data-eetstat],[data-eetpill],[data-eetrc],[data-eetunlockask],[data-eetunlock]," +
+            "[data-eetrenew],[data-eethide],[data-eetgo]";
 
   document.addEventListener("click", function (ev) {
     if (suppressClick) { suppressClick = false; return; }
@@ -11032,9 +13447,13 @@
     if (d.del) {
       var id = d.del;
       var cd = T("confirmDelReceipt");
-      ask(cd[0], cd[1], cd[2], function () {
+      var dsale = null;
+      state.sales.forEach(function (s) { if (s.id === id) { dsale = s; } });
+      ask(cd[0], cd[1] + (dsale && dsale.eet && state.eet.cert ? " " + T("eetDelNote") : ""), cd[2], function () {
+        var dst = eetStorno(dsale);
         state.sales = state.sales.filter(function (s) { return s.id !== id; });
         saveNow(); pushDelete([id]);
+        if (dst) { eetFlush(); }
       });
       return;
     }
@@ -11371,13 +13790,15 @@
       var gone = findSale(d.drop);
       if (!gone) { return; }
       var co = T("confirmDropOrder");
-      ask(co[0].split("{0}").join(String(gone.no)), co[1], co[2], function () {
+      ask(co[0].split("{0}").join(String(gone.no)), co[1] + (gone.eet && state.eet.cert ? " " + T("eetDelNote") : ""), co[2], function () {
+        var gst = eetStorno(gone);
         var gAt = locateSale(gone.id);
         if (gAt) {
           var src = gAt.evId === state.evId ? state.sales : (parkedById(gAt.evId) || { sales: [] }).sales;
           setEventSales(gAt.evId, src.filter(function (x) { return x.id !== gone.id; }));
         }
         save(); pushDelete([gone.id]);
+        if (gst) { saveNow(); eetFlush(); }
       });
       return;
     }
@@ -11558,6 +13979,111 @@
       return;
     }
 
+    // ---- EET 2.0 ----
+    if (d.eetgo) {
+      d = { eetunlockask: d.eetgo === "unlock" ? 1 : 0, eetsetup: d.eetgo === "setup" ? 1 : 0,
+            eetsend: d.eetgo === "send" ? 1 : 0, eetstat: d.eetgo === "stat" ? 1 : 0 };
+    }
+    if (d.eetsetup) {
+      if (state.mode !== "kasa") { return; }
+      eetImp = null;
+      sheet = { step: "eet", poklDef: state.eet.pokl || eetDefaultPokl() };
+      render(); return;
+    }
+    if (d.eetnotme) { state.eet.on = -1; save(); render(); return; }
+    if (d.eetundecide) { state.eet.on = 0; save(); render(); return; }
+    if (d.eetwho) { sheet = { step: "eetwho" }; render(); return; }
+    if (d.eettmo) {
+      if (sheet && sheet.step === "eet") { sheet.tmo = EET_TMO.indexOf(parseInt(d.eettmo, 10)) >= 0 ? parseInt(d.eettmo, 10) : 5; render(); }
+      return;
+    }
+    if (d.eetload) {
+      if (!sheet || sheet.step !== "eet" || eetWorking) { return; }
+      var epw = document.getElementById("eetPw"), epv = epw ? epw.value : "";
+      if (!eetImp || !eetImp.bytes) { sheet.err = "eetErrNoFile"; render(); return; }
+      if (!epv) { sheet.err = "eetErrNoPw"; render(); return; }
+      eetWorking = true; sheet.err = ""; sheet.warn = ""; render();
+      eetInstall(eetImp.bytes, epv).then(function (res) {
+        eetWorking = false; epv = "";
+        var ep2 = document.getElementById("eetPw");
+        if (ep2) { ep2.value = ""; }
+        if (sheet && sheet.step === "eet") {
+          if (res.err) { sheet.err = res.err; } else { sheet.warn = res.warn; eetImp = null; }
+        }
+        render();
+        if (!res.err) { eetFlush(); }
+      });
+      return;
+    }
+    if (d.eetenable) {
+      if (!sheet || sheet.step !== "eet") { return; }
+      var eu = document.getElementById("eetUnit"), ep = document.getElementById("eetPokl");
+      var euv = String(eu ? eu.value : sheet.unit || "").trim(), epk = String(ep ? ep.value : sheet.pokl || "").trim();
+      sheet.unit = euv; sheet.pokl = epk;
+      sheet.unitErr = !/^[1-9][0-9]{0,8}$/.test(euv);
+      sheet.poklErr = !EET_POKL_RE.test(epk);
+      if (sheet.unitErr || sheet.poklErr || !state.eet.cert || eetKeyState !== "ready") { render(); return; }
+      var eWas = state.eet.on === 1;
+      state.eet.unit = euv; state.eet.pokl = epk; state.eet.tmo = sheet.tmo || state.eet.tmo; state.eet.on = 1;
+      sheet = null; eetImp = null; eetNote = "";
+      saveNow(); render();
+      showToast(T(eWas ? "eetSaved" : "eetOnToast"));
+      // hned ověřit spojení zkušební zprávou (nic se neeviduje)
+      eetTest(); eetFlush();
+      return;
+    }
+    if (d.eetrm) {
+      var erq = state.eet.q.length, er = T("confirmEetRemove");
+      ask(er[0], er[1] + (erq ? " " + eetWaitText(erq) : ""), er[2], function () { eetForget(); });
+      return;
+    }
+    if (d.eetoff) {
+      var eo = T("confirmEetOff");
+      ask(eo[0], eo[1], eo[2], function () { state.eet.on = 0; eetNote = ""; saveNow(); });
+      return;
+    }
+    if (d.eetsend) {
+      if (eetKeyState === "locked") { sheet = { step: "eetpw" }; render(); return; }
+      if (eetKeyState !== "ready") {
+        if (state.mode === "kasa") { eetImp = null; sheet = { step: "eet", poklDef: state.eet.pokl || eetDefaultPokl() }; render(); }
+        return;
+      }
+      state.eet.q.forEach(function (r) { if (r.st === "q") { r.last = 0; } });
+      eetFlush(true);
+      showToast(T("eetSending"));
+      return;
+    }
+    if (d.eettest) { eetTest(); return; }
+    if (d.eetstat) { sheet = { step: "eetstat" }; render(); return; }
+    if (d.eetpill) { sheet = { step: eetKeyState === "locked" ? "eetpw" : "eetstat" }; render(); return; }
+    if (d.eetrc) { sheet = { step: "eetrc", id: d.eetrc }; render(); return; }
+    if (d.eetunlockask) { sheet = { step: "eetpw" }; render(); return; }
+    if (d.eetunlock) {
+      if (!sheet || sheet.step !== "eetpw" || eetWorking) { return; }
+      var upw = document.getElementById("eetPw"), upv = upw ? upw.value : "";
+      if (!upv) { sheet.err = "eetErrNoPw"; render(); return; }
+      eetWorking = true; sheet.err = ""; render();
+      eetP12().then(function (p) {
+        if (!p || !state.eet.cert || p.fp !== state.eet.cert.fp) { return { err: "eetMissing" }; }
+        return eetInstall(p.b, upv);
+      }).then(function (res) {
+        eetWorking = false; upv = "";
+        var up2 = document.getElementById("eetPw");
+        if (up2) { up2.value = ""; }
+        if (res.err) {
+          if (sheet && sheet.step === "eetpw") { sheet.err = res.err; }
+          render(); return;
+        }
+        if (sheet && sheet.step === "eetpw") { sheet = null; }
+        render();
+        showToast(T(res.warn || "eetUnlocked"));
+        eetFlush();
+      });
+      return;
+    }
+    if (d.eetrenew) { eetRenew(); return; }
+    if (d.eethide) { state.eet.hideDay = todayKey(); save(); render(); return; }
+
     if (d.backup) {
       sheet = { step: "text", title: T("backupHead"), body: JSON.stringify(state), backup: true };
       render(); return;
@@ -11635,6 +14161,8 @@
       next.resDay = state.resDay;
       next.graceDay = state.graceDay;
       next.nudgeDay = state.nudgeDay;
+      // EET: klíč a nastavení patří telefonu, záloha přidá neodeslané tržby
+      next.eet = eetRestore(state.eet, next.eet);
       state = next;
       archMissing = [];   // záloha nese archiv celý
       sheet = null;
@@ -11746,6 +14274,12 @@
       if (add) { add.click(); }
       return;
     }
+    if (el.id === "eetPw") {
+      var eb = document.querySelector("[data-eetload],[data-eetunlock]");
+      if (eb) { ev.preventDefault(); eb.click(); }
+      return;
+    }
+    if (el.id === "eetUnit" || el.id === "eetPokl") { el.blur(); return; }
     if (el.id === "evName" || el.id === "taxRate") { el.blur(); return; }
     if (el.id === "pairCode") {
       var jb = document.querySelector("[data-pairjoin]");
@@ -11821,6 +14355,12 @@
       return;
     }
 
+    // nastavení EET: rozepsané hodnoty drží panel, do stavu jdou až tlačítkem
+    if ((el.id === "eetUnit" || el.id === "eetPokl") && sheet && sheet.step === "eet") {
+      if (el.id === "eetUnit") { sheet.unit = el.value; } else { sheet.pokl = el.value; }
+      return;
+    }
+
     var nameId = el.dataset.nm;
     var priceId = el.dataset.pr;
     var vatId = el.dataset.vat;
@@ -11857,6 +14397,8 @@
   document.addEventListener("visibilitychange", function () {
     if (document.visibilityState === "hidden") { saveNow(); return; }
     if (!wakeLock) { wakeAsked = false; keepAwake(); }
+    // na pozadí časovače stojí: po návratu hned zkusit, co čeká na EET
+    eetRetryNow();
   });
   // Odložené uložení nesmí zůstat viset, když systém aplikaci uspí nebo zavře.
   window.addEventListener("pagehide", function () { saveNow(); });
@@ -11875,6 +14417,7 @@
   render();
 
   pairOpen();
+  eetLoadKey();
   // po rušném dni: o hodnocení požádat při dalším spuštění, v klidu
   setTimeout(function () { try { askPendingReview(); } catch (e) {} }, 6000);
 
@@ -11887,6 +14430,7 @@
 
   document.addEventListener("change", function (ev) {
     var el = ev.target;
+    if (el && el.id === "eetFile" && el.files && el.files[0]) { eetPickFile(el.files[0]); return; }
     if (!el || el.id !== "restoreFile" || !el.files || !el.files[0]) { return; }
     var rd = new FileReader();
     rd.onload = function () {
@@ -11903,6 +14447,8 @@
   ["online", "offline"].forEach(function (t) {
     window.addEventListener(t, function () { if (sheet && sheet.step === "paywall") { render(); } });
   });
+  // signál je zpátky: čekající tržby EET hned, bez čekání na další pokus
+  window.addEventListener("online", eetRetryNow);
 
   window.addEventListener("storage", function (ev) {
     if (ev.key !== KEY || !ev.newValue) { return; }

@@ -2,8 +2,8 @@
 
 „Pokladna do kapsy.“ Tenhle adresář balí webovou pokladnu `tapkasa/index.html`
 do nativních aplikací pro App Store a Google Play pomocí
-[Capacitoru](https://capacitorjs.com) 8. Aktuální verze: **1.1.0**
-(Android versionCode 13).
+[Capacitoru](https://capacitorjs.com) 8. Aktuální verze: **1.2.0**
+(Android versionCode 14).
 
 ```
 mobile/
