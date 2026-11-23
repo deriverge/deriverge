@@ -4850,9 +4850,65 @@
     return false;
   }
 
+  // Americká angličtina. Slovník en je britský (colour, till, VAT, postcode),
+  // ale nejvíc nových uživatelů přichází z USA. Kdo má angličtinu a dolar,
+  // dostane tyto řetězce místo britských; zbytek slovníku je společný.
+  // DPH v aplikaci znamená „cena včetně daně, souhrn daň vyčíslí“, v USA
+  // tomu odpovídá sales tax zahrnutá v ceně.
+  var EN_US = {
+    obIntro: "Sell at a booth, market or event. No sign-up, no extra hardware. Everything stays on your device.",
+    demoEvent: "My booth",
+    cardHint: "Charge the amount on your card reader, then confirm.",
+    roleKasa: "Register",
+    noOrdersVydej: "As soon as the register rings something up, it shows up here.",
+    sfRegNo: "Business ID (EIN)",
+    sfVatId: "Sales tax ID",
+    sfZip: "ZIP code",
+    archReopen: "Reopen in the register",
+    archReopenAria: "Reopen event {0} in the register",
+    archBusy: "Close the event you have open first, reopening needs an empty register.",
+    confirmArchOpen: ["Reopen event", "Receipts from “{0}” go back into the register and can be edited again. The event leaves the closed list.", "Reopen"],
+    toastArchOpen: "Event {0} is back in the register.",
+    pairOnlineHint: "The devices link over the internet; Wi-Fi or cellular data on both is enough. Linking without internet is available in the iPhone and iPad app and on Android 13 and newer.",
+    roleVydejHint: "This device only receives orders and checks them off. It does not charge.",
+    vydejPairHint: "Enter the same code as on the register. In the installed app, devices also find each other over the local network, even without internet.",
+    evNewHint: "For example a market booth next to your everyday café. Receipts and numbers start from one.",
+    itemsHead: "Items, prices and colors",
+    colorAria: "Card color",
+    pricesHint: "Prices and colors save as you type. Changing a price never touches saved receipts.",
+    colorHead: "Card color",
+    colorHint: "Staff remember the color faster than they read the name. The same color shows in the order queue.",
+    noColor: "No color",
+    colCustom: "Custom color",
+    colApply: "Use color",
+    confirmClose: ["Close event", "Revenue moves to the closed-events archive and the register resets for the next event.", "Close event"],
+    toastClosed: "Event closed, the register is reset.",
+    setupImportAsk: ["Copy settings?", "The menu, prices, colors, sales tax, currency and seller details on this device will be replaced with a copy from the other device. Orders stay.", "Copy"],
+    setupSendAsk: ["Send menu and details?", "The other device with the same code is asking for a copy of the menu, prices, sales tax, currency and seller details. Only send it if you know that device.", "Send"],
+    toastModeKasa: "This device is now the register",
+    toastModeKasaHeld: "This device is now the register. Orders from the other register ({0}) are not counted in its sales.",
+    obHow1: "Tap a color card and the item is on the order. Hold it to take one off again.",
+    obFiscal: "Tapkasa records your sales. It is not a certified fiscal register and does not process card payments.",
+    tourS9: "Replace the sample items and prices with your own here. The square on the left changes the color.",
+    proB3: "Only the register needs Pro, the counter joins free",
+    proTerms: "The subscription renews automatically, is billed to your app store account and can be canceled any time in your account settings.",
+    vatHead: "Sales tax",
+    vatOn: "Prices include sales tax",
+    vatOff: "Not tracking sales tax",
+    vatHint: "When on, you can set a tax rate in percent for each item. You enter prices with tax included; the sales summary works out the net amount and the tax on its own.",
+    vatAria: "Sales tax rate in percent",
+    docVatHead: "Sales tax breakdown",
+    docVatTax: "Tax",
+    docVatNone: "no tax",
+    docVatTotalTax: "Tax total:",
+    negHint: "A negative price is taken off the order, e.g. a cup deposit return. Returns don’t go to the order queue, and an order with only returns doesn’t count toward the daily limit.",
+    returnCashHint: "Pay this amount back from the register and confirm."
+  };
+
   function T(key, a, b) {
     var lang = state && state.lang ? state.lang : "cs";
-    var v = (I18N[lang] && I18N[lang][key] !== undefined) ? I18N[lang][key]
+    var v = (lang === "en" && state.currency === "USD" && EN_US[key] !== undefined) ? EN_US[key]
+          : (I18N[lang] && I18N[lang][key] !== undefined) ? I18N[lang][key]
           : (I18N.en[key] !== undefined ? I18N.en[key] : I18N.cs[key]);
     if (v === undefined) { return key; }
     if (typeof v === "string") {
