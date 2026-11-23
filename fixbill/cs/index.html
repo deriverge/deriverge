@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Fixbill: faktury a cenové nabídky z mobilu pro OSVČ a řemeslníky</title>
-<meta name="description" content="Faktury a cenové nabídky v telefonu pro živnostníky a řemeslníky: PDF za dvě minuty, podpis zákazníka na displeji, QR platba, párování plateb z výpisu a upomínky. Zdarma 5 dokladů měsíčně.">
+<meta name="description" content="Faktury a cenové nabídky v telefonu pro živnostníky a řemeslníky: PDF za dvě minuty, podpis zákazníka na displeji, QR platba a upomínky. Zdarma 5 dokladů měsíčně.">
 <link rel="canonical" href="https://deriverge.com/fixbill/cs/">
 <link rel="alternate" hreflang="en" href="https://deriverge.com/fixbill/">
 <link rel="alternate" hreflang="en-GB" href="https://deriverge.com/fixbill/en-gb/">
@@ -42,7 +42,8 @@
 <meta property="og:locale:alternate" content="pl_PL">
 <meta property="og:locale:alternate" content="pt_BR">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="/fixbill/fixbill.css">
+<link rel="stylesheet" href="/fixbill/fixbill.css?v=2">
+<script>(function(d,u){d.classList.add(/android/i.test(u)?'os-android':(/iphone|ipad|ipod/i.test(u)||(/macintosh/i.test(u)&&navigator.maxTouchPoints>1))?'os-ios':'os-desktop')})(document.documentElement,navigator.userAgent)</script>
 <script src="/fixbill/fixbill.js" defer></script>
 <script type="application/ld+json">
 {
@@ -61,12 +62,35 @@
   "https://play.google.com/store/apps/details?id=com.deriverge.fixbill"
  ],
  "image": "https://deriverge.com/fixbill/icon-512.png",
- "offers": {
-  "@type": "Offer",
-  "price": "0",
-  "priceCurrency": "CZK",
-  "description": "Stažení zdarma, 5 dokladů měsíčně. Fixbill Pro je nákup v aplikaci: měsíčně, ročně nebo jednorázově navždy."
- },
+ "offers": [
+  {
+   "@type": "Offer",
+   "price": "0",
+   "priceCurrency": "CZK",
+   "description": "Stažení zdarma, 5 dokladů měsíčně. Fixbill Pro je nákup v aplikaci: měsíčně, ročně nebo jednorázově navždy."
+  },
+  {
+   "@type": "Offer",
+   "name": "Fixbill Pro (1 month)",
+   "price": "49",
+   "priceCurrency": "CZK",
+   "category": "in-app purchase"
+  },
+  {
+   "@type": "Offer",
+   "name": "Fixbill Pro (1 year)",
+   "price": "399",
+   "priceCurrency": "CZK",
+   "category": "in-app purchase"
+  },
+  {
+   "@type": "Offer",
+   "name": "Fixbill Pro (lifetime)",
+   "price": "1499",
+   "priceCurrency": "CZK",
+   "category": "in-app purchase"
+  }
+ ],
  "publisher": {
   "@type": "Organization",
   "name": "deriverge s.r.o.",
@@ -102,9 +126,10 @@
       <h1>Faktura a cenová nabídka za <em>dvě minuty</em></h1>
       <p class="lede">Pro řemeslníky, živnostníky a malé firmy. Nabídku napíšete přímo na místě, zákazník ji podepíše na displeji a fakturu z ní uděláte jedním klepnutím. Platby z banky si Fixbill spáruje sám.</p>
       <div class="badges">
-        <a href="https://apps.apple.com/app/id6819481858"><img class="as" src="/fixbill/badge-appstore.svg" alt="Stáhnout v App Store" width="144" height="48"></a>
-        <a href="https://play.google.com/store/apps/details?id=com.deriverge.fixbill&amp;referrer=utm_source%3Dweb%26utm_campaign%3Dfixbill-cs"><img class="gp" src="/fixbill/badge-googleplay-cs.png" alt="Nyní na Google Play" width="184" height="71"></a>
+        <a class="s-as" href="https://apps.apple.com/app/id6819481858"><img class="as" src="/fixbill/badge-appstore.svg" alt="Stáhnout v App Store" width="144" height="48"></a>
+        <a class="s-gp" href="https://play.google.com/store/apps/details?id=com.deriverge.fixbill&amp;referrer=utm_source%3Dweb%26utm_medium%3Dlanding%26utm_campaign%3Dfixbill-cs"><img class="gp cs" src="/fixbill/badge-googleplay-cs.png" alt="Nyní na Google Play" width="162" height="63"></a>
       </div>
+      <p class="dl-qr"><img src="/fixbill/qr-get.svg" alt="QR kód ke stažení aplikace Fixbill" width="88" height="88" loading="lazy"><span>Namiřte fotoaparát telefonu na kód a stáhněte si Fixbill.</span></p>
       <p class="note">Zdarma 5 dokladů měsíčně. Bez registrace.</p>
     </div>
     <div class="hero-art" role="img" aria-label="Ukázka faktury ve Fixbill: rekonstrukce koupelny, tři položky, celkem 17 400 Kč, neuhrazeno, s QR kódem pro platbu. Nabídku zákazník podepsal na displeji.">
@@ -137,6 +162,7 @@
   <p class="sub">Bez aplikace: vyplníte formulář, zkontrolujete náhled a uložíte PDF. Nic se nikam neodesílá.</p>
   <div class="grid">
     <a class="card" href="/fixbill/cs/faktura-vzor/"><span class="ic"><svg aria-hidden="true"><use href="#i-doc"/></svg></span><h3>Faktura vzor</h3><p>Vzor faktury pro neplátce i plátce DPH. Vyplníte online a uložíte jako PDF.</p><span class="go">Vyplnit fakturu &rarr;</span></a>
+    <a class="card" href="/fixbill/cs/cenova-nabidka-vzor/"><span class="ic"><svg aria-hidden="true"><use href="#i-doc"/></svg></span><h3>Cenová nabídka vzor</h3><p>Vzor cenové nabídky pro řemeslníky. Vyplníte online a uložíte jako PDF.</p><span class="go">Vyplnit nabídku &rarr;</span></a>
   </div>
 
   <h2>Férové ceny</h2>
@@ -146,6 +172,7 @@
     <div class="plan hi"><p class="k">Fixbill Pro</p><h3>Měsíčně, ročně nebo navždy</h3><p>Neomezeně dokladů bez patičky, podpis zákazníka, fotky ze zakázky, párování plateb z banky, opakované faktury a úplný export pro účetní. Platíte měsíčně, ročně, nebo jednou navždy. Pokud je nabízeno zkušební období zdarma, uvidíte ho ještě před nákupem.</p></div>
     <div class="plan"><p class="k">Cenový slib</p><h3>Cena se vám nezmění</h3><p>Cenu vašeho předplatného nezvýšíme, dokud zůstane aktivní. Zrušit ho můžete kdykoli v účtu App Store nebo Google Play.</p></div>
   </div>
+  <p class="price-line">Fixbill Pro stojí 49 Kč měsíčně, 399 Kč ročně, nebo 1 499 Kč jednorázově navždy (ceny v App Store v listopadu 2026, na Google Play se mohou mírně lišit). Platnou cenu vždy uvidíte před nákupem.</p>
 
   <section class="private">
     <div>
@@ -166,15 +193,15 @@
     <h2>Stáhněte si Fixbill</h2>
     <p class="sub">Máte dotaz? Napište na <a href="mailto:info@deriverge.com">info@deriverge.com</a>.</p>
     <div class="badges">
-        <a href="https://apps.apple.com/app/id6819481858"><img class="as" src="/fixbill/badge-appstore.svg" alt="Stáhnout v App Store" width="144" height="48"></a>
-        <a href="https://play.google.com/store/apps/details?id=com.deriverge.fixbill&amp;referrer=utm_source%3Dweb%26utm_campaign%3Dfixbill-cs"><img class="gp" src="/fixbill/badge-googleplay-cs.png" alt="Nyní na Google Play" width="184" height="71"></a>
+        <a class="s-as" href="https://apps.apple.com/app/id6819481858"><img class="as" src="/fixbill/badge-appstore.svg" alt="Stáhnout v App Store" width="144" height="48"></a>
+        <a class="s-gp" href="https://play.google.com/store/apps/details?id=com.deriverge.fixbill&amp;referrer=utm_source%3Dweb%26utm_medium%3Dlanding%26utm_campaign%3Dfixbill-cs-cta"><img class="gp cs" src="/fixbill/badge-googleplay-cs.png" alt="Nyní na Google Play" width="162" height="63"></a>
       </div>
     <p class="note">Zdarma 5 dokladů měsíčně. Bez registrace.</p>
   </div>
 </main>
   <footer>
     <p><a href="/fixbill/support.html#cs">Podpora</a> &middot; <a href="/fixbill/privacy.html#cs">Soukromí</a> &middot; <a href="/fixbill/terms.html#cs">Podmínky použití</a></p>
-    <p>Vzory zdarma: <a href="/fixbill/estimate-template/" lang="en">Estimate template for contractors</a> &middot; <a href="/fixbill/en-gb/tradesman-invoice-template/" lang="en-GB">Tradesman invoice template (UK)</a> &middot; <a href="/fixbill/cs/faktura-vzor/" lang="cs">Faktura vzor</a> &middot; <a href="/fixbill/de/kostenvoranschlag-vorlage/" lang="de">Kostenvoranschlag Vorlage</a> &middot; <a href="/fixbill/fr/modele-devis-artisan/" lang="fr">Modèle de devis artisan</a> &middot; <a href="/fixbill/es/modelo-presupuesto-obra/" lang="es">Modelo de presupuesto de obra</a> &middot; <a href="/fixbill/it/modello-preventivo-edile/" lang="it">Modello preventivo lavori edili</a> &middot; <a href="/fixbill/pl/kosztorys-wzor/" lang="pl">Kosztorys wzór</a></p>
+    <p>Vzory zdarma: <a href="/fixbill/estimate-template/" lang="en">Estimate template for contractors</a> &middot; <a href="/fixbill/invoice-template/" lang="en">Invoice template</a> &middot; <a href="/fixbill/en-gb/tradesman-invoice-template/" lang="en-GB">Tradesman invoice template (UK)</a> &middot; <a href="/fixbill/en-gb/builders-quote-template/" lang="en-GB">Builders quote template (UK)</a> &middot; <a href="/fixbill/cs/faktura-vzor/" lang="cs">Faktura vzor</a> &middot; <a href="/fixbill/cs/cenova-nabidka-vzor/" lang="cs">Cenová nabídka vzor</a> &middot; <a href="/fixbill/sk/faktura-vzor/" lang="sk">Faktúra vzor</a> &middot; <a href="/fixbill/sk/cenova-ponuka-vzor/" lang="sk">Cenová ponuka vzor</a> &middot; <a href="/fixbill/de/kostenvoranschlag-vorlage/" lang="de">Kostenvoranschlag Vorlage</a> &middot; <a href="/fixbill/de/rechnung-kleinunternehmer/" lang="de">Rechnungsvorlage Kleinunternehmer</a> &middot; <a href="/fixbill/fr/modele-devis-artisan/" lang="fr">Modèle de devis artisan</a> &middot; <a href="/fixbill/fr/facture-auto-entrepreneur/" lang="fr">Modèle de facture auto-entrepreneur</a> &middot; <a href="/fixbill/es/modelo-presupuesto-obra/" lang="es">Modelo de presupuesto de obra</a> &middot; <a href="/fixbill/it/modello-preventivo-edile/" lang="it">Modello preventivo lavori edili</a> &middot; <a href="/fixbill/pl/kosztorys-wzor/" lang="pl">Kosztorys wzór</a> &middot; <a href="/fixbill/pt/modelo-orcamento-servico/" lang="pt-BR">Modelo de orçamento de serviço</a></p>
     <p>Jazyky: <a href="/fixbill/" lang="en" hreflang="en">English</a> &middot; <a href="/fixbill/en-gb/" lang="en-GB" hreflang="en-GB">English (UK)</a> &middot; <strong aria-current="page">Čeština</strong> &middot; <a href="/fixbill/sk/" lang="sk" hreflang="sk">Slovenčina</a> &middot; <a href="/fixbill/de/" lang="de" hreflang="de">Deutsch</a> &middot; <a href="/fixbill/fr/" lang="fr" hreflang="fr">Français</a> &middot; <a href="/fixbill/es/" lang="es" hreflang="es">Español</a> &middot; <a href="/fixbill/it/" lang="it" hreflang="it">Italiano</a> &middot; <a href="/fixbill/pl/" lang="pl" hreflang="pl">Polski</a> &middot; <a href="/fixbill/pt/" lang="pt-BR" hreflang="pt">Português</a></p>
     <p>Provozovatel: <a href="/">deriverge s.r.o.</a> &middot; <a href="mailto:info@deriverge.com">info@deriverge.com</a></p>
   </footer>

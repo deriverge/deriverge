@@ -11,8 +11,7 @@ EN = dict(
     gp_badge='badge-googleplay-en.png', as_alt='Download on the App Store', gp_alt='Get it on Google Play',
     currency='USD',
     title='Fixbill: Estimate & Invoice App for Contractors (iPhone, Android)',
-    desc='Estimates and invoices on your phone for contractors and small businesses: PDF in two minutes, client '
-         'signature on screen, payment QR codes, bank payment matching and reminders. Free for 5 documents a month.',
+    desc='Estimates and invoices on your phone for contractors: PDF in two minutes, client signature on screen, payment QR codes and reminders. Free for 5 documents a month.',
     og_title='Fixbill: estimates and invoices for contractors',
     og_desc='Write the estimate on site, let your client sign on screen, add a payment QR code and see who has paid. '
             'No account, your data stays on your phone.',
@@ -87,8 +86,7 @@ EN_GB.update(
     code='en-gb', path='en-gb/', hreflang='en-GB', html_lang='en-GB', og_locale='en_GB', name='English (UK)',
     currency='GBP',
     title='Quote and Invoice App for Tradesmen and Sole Traders | Fixbill',
-    desc='Quotes and invoices on your phone for tradesmen and sole traders: PDF in two minutes, customer signature on '
-         'screen, payment link QR code, bank payment matching and reminders. Free for 5 documents a month.',
+    desc='Quotes and invoices on your phone for tradesmen and sole traders: PDF in two minutes, customer signature on screen and reminders. Free for 5 documents a month.',
     og_title='Fixbill: quotes and invoices for tradesmen',
     og_desc='Write the quote on site, let your customer sign on screen, add a payment link QR code and see who has '
             'paid. No account, your data stays on your phone.',
@@ -145,8 +143,7 @@ CS = dict(
     code='cs', path='cs/', hreflang='cs', html_lang='cs', og_locale='cs_CZ', name='Čeština', legal='cs',
     gp_badge='badge-googleplay-cs.png', as_alt='Stáhnout v App Store', gp_alt='Nyní na Google Play', currency='CZK',
     title='Fixbill: faktury a cenové nabídky z mobilu pro OSVČ a řemeslníky',
-    desc='Faktury a cenové nabídky v telefonu pro živnostníky a řemeslníky: PDF za dvě minuty, podpis zákazníka na '
-         'displeji, QR platba, párování plateb z výpisu a upomínky. Zdarma 5 dokladů měsíčně.',
+    desc='Faktury a cenové nabídky v telefonu pro živnostníky a řemeslníky: PDF za dvě minuty, podpis zákazníka na displeji, QR platba a upomínky. Zdarma 5 dokladů měsíčně.',
     og_title='Fixbill: faktura a cenová nabídka za dvě minuty',
     og_desc='Nabídku napíšete na místě, zákazník ji podepíše na displeji, faktura má QR platbu a platby z banky se '
             'spárují samy. Bez účtu, data zůstávají v telefonu.',
@@ -218,8 +215,7 @@ SK = dict(
     code='sk', path='sk/', hreflang='sk', html_lang='sk', og_locale='sk_SK', name='Slovenčina', legal=None,
     gp_badge='badge-googleplay-en.png', as_alt='Stiahnuť v App Store', gp_alt='Teraz na Google Play', currency='EUR',
     title='Fixbill: faktúry a cenové ponuky z mobilu pre živnostníkov',
-    desc='Faktúry a cenové ponuky v telefóne pre živnostníkov a remeselníkov: PDF za dve minúty, podpis zákazníka na '
-         'displeji, odkaz na platbu s QR kódom, párovanie platieb z výpisu a upomienky. Zadarmo 5 dokladov mesačne.',
+    desc='Faktúry a cenové ponuky v telefóne pre živnostníkov a remeselníkov: PDF za dve minúty, podpis zákazníka na displeji a upomienky. Zadarmo 5 dokladov mesačne.',
     og_title='Fixbill: faktúra a cenová ponuka za dve minúty',
     og_desc='Ponuku napíšete na mieste, zákazník ju podpíše na displeji a z ponuky jedným ťuknutím urobíte faktúru. '
             'Bez účtu, dáta zostávajú v telefóne.',
@@ -290,9 +286,7 @@ DE = dict(
     code='de', path='de/', hreflang='de', html_lang='de', og_locale='de_DE', name='Deutsch', legal='de',
     gp_badge='badge-googleplay-en.png', as_alt='Laden im App Store', gp_alt='Jetzt bei Google Play', currency='EUR',
     title='Rechnung schreiben App für Handwerker und Kleinunternehmer | Fixbill',
-    desc='Rechnungen und Angebote auf dem Handy für Handwerker und Kleinunternehmer: PDF in zwei Minuten, '
-         'Kundenunterschrift auf dem Display, GiroCode, Zahlungsabgleich per Kontoauszug und Zahlungserinnerungen. '
-         'Kostenlos für 5 Dokumente im Monat.',
+    desc='Rechnungen und Angebote per Handy für Handwerker: PDF in zwei Minuten, Unterschrift auf dem Display, GiroCode und Zahlungserinnerungen. 5 Dokumente im Monat kostenlos.',
     og_title='Fixbill: Rechnung und Angebot in zwei Minuten',
     og_desc='Angebot vor Ort schreiben, auf dem Display unterschreiben lassen, Rechnung mit GiroCode senden und sehen, '
             'wer bezahlt hat. Kein Konto, Ihre Daten bleiben auf dem Handy.',
@@ -369,9 +363,7 @@ FR = dict(
     gp_badge='badge-googleplay-en.png', as_alt="Télécharger dans l'App Store", gp_alt='Disponible sur Google Play',
     currency='EUR',
     title='Application devis et facture pour artisans et auto-entrepreneurs | Fixbill',
-    desc="Devis et factures sur votre téléphone pour artisans et auto-entrepreneurs : PDF en deux minutes, signature "
-         "du client sur l'écran, QR code de paiement, rapprochement bancaire et relances. Gratuit pour 5 documents par "
-         "mois.",
+    desc="Devis et factures sur votre téléphone pour artisans : PDF en deux minutes, signature du client à l'écran et relances. Gratuit pour 5 documents par mois.",
     og_title='Fixbill : devis et factures en deux minutes',
     og_desc="Rédigez le devis sur le chantier, faites-le signer sur l'écran, ajoutez un QR code de paiement et voyez "
             "qui a payé. Sans compte, vos données restent sur votre téléphone.",
@@ -447,9 +439,7 @@ ES = dict(
     gp_badge='badge-googleplay-en.png', as_alt='Descárgalo en el App Store', gp_alt='Disponible en Google Play',
     currency='EUR',
     title='Fixbill: app para hacer presupuestos y facturas de obras y reformas',
-    desc='Presupuestos y facturas desde el móvil para autónomos, obras y reformas: PDF en dos minutos, firma del cliente '
-         'en pantalla, enlace de pago con código QR, conciliación de cobros y recordatorios. Gratis hasta 5 documentos '
-         'al mes.',
+    desc='Presupuestos y facturas desde el móvil para autónomos y reformas: PDF en dos minutos, firma del cliente en pantalla y recordatorios. Gratis hasta 5 documentos al mes.',
     og_title='Fixbill: presupuestos de obra en dos minutos',
     og_desc='Haz el presupuesto en la obra, deja que el cliente lo firme en tu pantalla y envíaselo en PDF antes de '
             'irte. Sin cuenta, tus datos se quedan en tu móvil.',
@@ -523,9 +513,8 @@ IT = dict(
     code='it', path='it/', hreflang='it', html_lang='it', og_locale='it_IT', name='Italiano', legal=None,
     gp_badge='badge-googleplay-en.png', as_alt="Scarica su App Store", gp_alt='Disponibile su Google Play',
     currency='EUR',
-    title='Fixbill: app per preventivi di lavori edili e artigiani (iPhone, Android)',
-    desc='Preventivi in PDF dal telefono per artigiani e imprese edili: pronti in due minuti, firma del cliente sullo '
-         'schermo, link di pagamento con QR code e promemoria. Gratis fino a 5 documenti al mese.',
+    title='Fixbill: app per preventivi edili e artigiani (iPhone, Android)',
+    desc='Preventivi in PDF dal telefono per artigiani e imprese edili: pronti in due minuti, firma del cliente sullo schermo e promemoria. Gratis fino a 5 documenti al mese.',
     og_title='Fixbill: preventivi in due minuti',
     og_desc='Scrivi il preventivo in cantiere, fallo firmare sullo schermo e invialo in PDF prima di andare via. Senza '
             'account, i tuoi dati restano sul telefono.',
@@ -596,8 +585,7 @@ PL = dict(
     code='pl', path='pl/', hreflang='pl', html_lang='pl', og_locale='pl_PL', name='Polski', legal=None,
     gp_badge='badge-googleplay-en.png', as_alt='Pobierz z App Store', gp_alt='Pobierz z Google Play', currency='PLN',
     title='Fixbill: aplikacja do wyceny i kosztorysów dla fachowców',
-    desc='Wyceny i kosztorysy w PDF z telefonu dla fachowców i ekip remontowych: gotowe w dwie minuty, podpis klienta '
-         'na ekranie, link do płatności z kodem QR i przypomnienia. Za darmo do 5 dokumentów miesięcznie.',
+    desc='Wyceny i kosztorysy w PDF z telefonu dla fachowców: gotowe w dwie minuty, podpis klienta na ekranie i przypomnienia. Za darmo do 5 dokumentów miesięcznie.',
     og_title='Fixbill: wycena i kosztorys w dwie minuty',
     og_desc='Przygotuj wycenę u klienta, daj ją podpisać na ekranie i wyślij PDF, zanim wyjdziesz. Bez konta, dane '
             'zostają w Twoim telefonie.',
@@ -669,8 +657,7 @@ PT = dict(
     gp_badge='badge-googleplay-en.png', as_alt='Baixar na App Store', gp_alt='Disponível no Google Play',
     currency='BRL',
     title='Fixbill: app de orçamento de serviço para autônomos e prestadores',
-    desc='Orçamentos de serviço em PDF pelo celular para autônomos e prestadores: prontos em dois minutos, assinatura '
-         'do cliente na tela, link de pagamento com QR code e lembretes. Grátis até 5 documentos por mês.',
+    desc='Orçamentos de serviço em PDF pelo celular para autônomos: prontos em dois minutos, assinatura do cliente na tela e lembretes. Grátis até 5 documentos por mês.',
     og_title='Fixbill: orçamento de serviço em dois minutos',
     og_desc='Faça o orçamento na visita, peça a assinatura do cliente na tela e envie o PDF antes de sair. Sem conta, '
             'seus dados ficam no celular.',

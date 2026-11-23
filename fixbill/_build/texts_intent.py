@@ -118,7 +118,7 @@ CS = dict(
 DE = dict(
     id='de-kostenvoranschlag', lang='de', html_lang='de', path='de/kostenvoranschlag-vorlage/',
     phrase='Kostenvoranschlag Vorlage',
-    title='Kostenvoranschlag Vorlage kostenlos: online ausfüllen, als PDF speichern | Fixbill',
+    title='Kostenvoranschlag Vorlage kostenlos: online ausfüllen, PDF | Fixbill',
     desc='Kostenlose Kostenvoranschlag Vorlage für Handwerker: online ausfüllen, Vorschau prüfen und als PDF speichern. '
          'Mit den wichtigen Angaben, Hinweisen zu § 649 BGB und zur Kleinunternehmerregelung.',
     h1='Kostenvoranschlag Vorlage für Handwerker',

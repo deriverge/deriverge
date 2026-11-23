@@ -18,19 +18,38 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from texts_lang import LANGS  # noqa: E402
-from texts_intent import PAGES  # noqa: E402
+from texts_intent import CS, DE, EN, ES, FR, GB, IT, PL  # noqa: E402
+from texts_intent2 import (CS_NABIDKA, DE_RECHNUNG, EN_INVOICE, FR_FACTURE, GB_QUOTE, PT_ORCAMENTO,  # noqa: E402
+                           SK_FAKTURA, SK_PONUKA)
+from texts_extra import FAQ, LANG_EXTRA, PRO_PRICES, TPL_HEAD  # noqa: E402
+
+PAGES = [EN, EN_INVOICE, GB, GB_QUOTE, CS, CS_NABIDKA, SK_FAKTURA, SK_PONUKA, DE, DE_RECHNUNG, FR, FR_FACTURE, ES,
+         IT, PL, PT_ORCAMENTO]
 
 FIX = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ROOT = os.path.dirname(FIX)
 SITE = 'https://deriverge.com'
 BASE = SITE + '/fixbill/'
-AS = 'https://apps.apple.com/app/id6819481858'
+AS = 'https://apps.apple.com/app/id6819481858'  # no provider token in the repo, so no ?pt=&ct= campaign
 GP = 'https://play.google.com/store/apps/details?id=com.deriverge.fixbill'
 MAIL = 'info@deriverge.com'
 LEGAL_DATE = '2026-10-06'
+ASSET_V = '2'  # bump when fixbill.css changes
 
 e = html.escape
 BY_CODE = {L['code']: L for L in LANGS}
+for _L in LANGS:
+    _x = LANG_EXTRA[_L['code']]
+    _L.update(h_faq=_x[0], h_related=_x[1], qr_alt=_x[2], qr_text=_x[3], price_line=_x[4])
+    if _L['code'] in TPL_HEAD:
+        _L['h_tpl'], _L['tpl_sub'] = TPL_HEAD[_L['code']]
+for _P in PAGES:
+    _P.setdefault('faq', FAQ.get(_P['id'], []))
+
+# One-line device switch in the head: phones see only their own store, computers both badges and a QR code.
+OS_JS = ("<script>(function(d,u){d.classList.add(/android/i.test(u)?'os-android':(/iphone|ipad|ipod/i.test(u)||"
+         "(/macintosh/i.test(u)&&navigator.maxTouchPoints>1))?'os-ios':'os-desktop')})"
+         "(document.documentElement,navigator.userAgent)</script>")
 
 
 def fr_spaces(obj):
@@ -55,17 +74,22 @@ for i, P in enumerate(PAGES):
         PAGES[i] = fr_spaces(P)
 
 
-def gp_link(campaign):
-    return GP + '&referrer=utm_source%3Dweb%26utm_campaign%3D' + campaign
+def gp_link(campaign, medium='landing'):
+    return f'{GP}&referrer=utm_source%3Dweb%26utm_medium%3D{medium}%26utm_campaign%3D{campaign}'
 
 
-def badges(L, campaign):
+def badges(L, campaign, qr=True):
+    """Store buttons: phones see their own store (class on <html>), computers both and a QR code to /fixbill/get/."""
+    cs = L['gp_badge'].endswith('-cs.png')  # the Czech Google Play artwork has no side padding
+    gp_cls, gp_w, gp_h = ('gp cs', 162, 63) if cs else ('gp', 184, 71)
+    code = (f'\n      <p class="dl-qr"><img src="/fixbill/qr-get.svg" alt="{e(L["qr_alt"])}" width="88" height="88" '
+            f'loading="lazy"><span>{e(L["qr_text"])}</span></p>') if qr else ''
     return (f'<div class="badges">\n'
-            f'        <a href="{AS}"><img class="as" src="/fixbill/badge-appstore.svg" alt="{e(L["as_alt"])}" '
-            f'width="144" height="48"></a>\n'
-            f'        <a href="{e(gp_link(campaign))}"><img class="gp" src="/fixbill/{L["gp_badge"]}" '
-            f'alt="{e(L["gp_alt"])}" width="184" height="71"></a>\n'
-            f'      </div>')
+            f'        <a class="s-as" href="{AS}"><img class="as" src="/fixbill/badge-appstore.svg" '
+            f'alt="{e(L["as_alt"])}" width="144" height="48"></a>\n'
+            f'        <a class="s-gp" href="{e(gp_link(campaign))}"><img class="{gp_cls}" '
+            f'src="/fixbill/{L["gp_badge"]}" alt="{e(L["gp_alt"])}" width="{gp_w}" height="{gp_h}"></a>\n'
+            f'      </div>{code}')
 
 
 SPRITE = '''<svg class="sprite" aria-hidden="true" focusable="false">
@@ -102,9 +126,19 @@ def app_ld(L, url):
         'operatingSystem': 'iOS, Android', 'applicationCategory': 'BusinessApplication',
         'inLanguage': L['hreflang'], 'description': L['ld_desc'], 'url': url,
         'downloadUrl': AS, 'installUrl': GP, 'sameAs': [AS, GP], 'image': BASE + 'icon-512.png',
-        'offers': {'@type': 'Offer', 'price': '0', 'priceCurrency': L['currency'], 'description': L['offer']},
+        'offers': offers(L),
         'publisher': publisher(),
     }
+
+
+def offers(L):
+    cur, month, year, life = PRO_PRICES[L['code']]
+    out = [{'@type': 'Offer', 'price': '0', 'priceCurrency': cur, 'description': L['offer']}]
+    for name, price in (('Fixbill Pro (1 month)', month), ('Fixbill Pro (1 year)', year),
+                        ('Fixbill Pro (lifetime)', life)):
+        out.append({'@type': 'Offer', 'name': name, 'price': price, 'priceCurrency': cur,
+                    'category': 'in-app purchase'})
+    return out
 
 
 def head(*, lang, title, desc, url, og_title, og_desc, og_locale, alternates, extra_ld, page_lang=None,
@@ -116,6 +150,8 @@ def head(*, lang, title, desc, url, og_title, og_desc, og_locale, alternates, ex
                          for L in LANGS if L['og_locale'] != og_locale)
     data = f' data-page-lang="{page_lang}"' if page_lang else ''
     js = ''.join(f'\n<script src="{s}" defer></script>' for s in scripts)
+    if len(title) > 65 and title.endswith(' | Fixbill'):
+        title = title[:-len(' | Fixbill')]  # the search phrase matters more than the brand in a long title
     return f'''<!DOCTYPE html>
 <html lang="{lang}"{data}>
 <head>
@@ -140,7 +176,8 @@ def head(*, lang, title, desc, url, og_title, og_desc, og_locale, alternates, ex
 <meta property="og:image:alt" content="Fixbill">
 <meta property="og:locale" content="{og_locale}">{og_alt}
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="/fixbill/fixbill.css">{js}
+<link rel="stylesheet" href="/fixbill/fixbill.css?v={ASSET_V}">
+{OS_JS}{js}
 {extra_ld}
 </head>'''
 
@@ -280,6 +317,7 @@ def lang_page(L):
   <div class="plans">
 {plans}
   </div>
+  <p class="price-line">{e(L["price_line"])}</p>
 
   <section class="private">
     <div>
@@ -296,7 +334,7 @@ def lang_page(L):
     <img class="appicon" src="/fixbill/icon-512.png" alt="" width="96" height="96">
     <h2>{e(L["cta_h"])}</h2>
     <p class="sub">{cta_sub}</p>
-    {badges(L, camp)}
+    {badges(L, camp + '-cta', qr=False)}
     <p class="note">{e(L["note"])}</p>
   </div>
 </main>
@@ -398,6 +436,33 @@ def intent_page(P):
     ]
     a = P['app']
     bullets = '\n'.join(f'        <li>{e(b)}</li>' for b in a['bullets'])
+    faq_html = ''
+    if P['faq']:
+        data.append({'@context': 'https://schema.org', '@type': 'FAQPage', 'inLanguage': P['html_lang'],
+                     'mainEntity': [{'@type': 'Question', 'name': q,
+                                     'acceptedAnswer': {'@type': 'Answer', 'text': t}} for q, t in P['faq']]})
+        items = '\n'.join(f'    <details><summary>{e(q)}</summary><p>{e(t)}</p></details>' for q, t in P['faq'])
+        faq_html = f'''
+  <section class="faq">
+    <h2>{e(L["h_faq"])}</h2>
+{items}
+  </section>
+'''
+    others = [Q for Q in templates_for(L) if Q['id'] != P['id']]
+    related = ''
+    if others:
+        links = '\n'.join(
+            f'    <li><a href="/fixbill/{Q["path"]}"'
+            f'{"" if Q["html_lang"] == P["html_lang"] else " lang=" + chr(34) + Q["html_lang"] + chr(34)}>'
+            f'{e(Q["card"])}</a></li>' for Q in others)
+        related = f'''
+  <nav class="related" aria-label="{e(L["h_related"])}">
+    <h2>{e(L["h_related"])}</h2>
+    <ul>
+{links}
+    </ul>
+  </nav>
+'''
     out = head(lang=P['html_lang'], title=P['title'], desc=P['desc'], url=url, og_title=P['h1'], og_desc=P['desc'],
                og_locale=L['og_locale'], alternates=[], extra_ld=ld(data), scripts=['/fixbill/gen.js'])
     out += f'''
@@ -406,7 +471,7 @@ def intent_page(P):
 <div class="page">
   <header class="top">
     {brand(L, "/fixbill/" + L["path"])}
-    <a class="top-app" href="#app">Fixbill App</a>
+    <span class="top-apps"><a class="top-app d" href="#app">Fixbill App</a><a class="top-app i" href="{AS}">App Store</a><a class="top-app a" href="{e(gp_link(camp + '-top'))}">Google Play</a></span>
   </header>
 <main>
   <nav class="crumbs" aria-label="Breadcrumb"><a href="/fixbill/{L["path"]}">{e(P["crumb"])}</a> &rsaquo; <span>{e(P["card"])}</span></nav>
@@ -422,7 +487,7 @@ def intent_page(P):
 {P["body"].strip()}
     <p class="fine">{e(P["fine"])}</p>
   </article>
-
+{faq_html}
   <section class="app-box" id="app">
     <div>
       <h2>{e(a["h2"])}</h2>
@@ -435,7 +500,7 @@ def intent_page(P):
     </div>
     <img class="appicon" src="/fixbill/icon-512.png" alt="" width="96" height="96">
   </section>
-</main>
+{related}</main>
 {footer(L)}
 </div>
 </body>
@@ -480,7 +545,54 @@ def write(rel, text):
     print('wrote', os.path.relpath(path, ROOT))
 
 
+def get_page():
+    """/fixbill/get/: the QR code target. Phones go straight to their store, anything else gets both buttons."""
+    L = BY_CODE['en']
+    gp = gp_link('get', 'qr')
+    return f'''<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Get Fixbill</title>
+<meta name="description" content="Download Fixbill for iPhone or Android.">
+<meta name="robots" content="noindex, follow">
+<meta name="apple-itunes-app" content="app-id=6819481858">
+<link rel="icon" type="image/png" sizes="192x192" href="/fixbill/icon-192.png">
+<link rel="stylesheet" href="/fixbill/fixbill.css?v={ASSET_V}">
+<script>(function(u){{if(/android/i.test(u))location.replace("{gp}");else if(/iphone|ipad|ipod/i.test(u)||(/macintosh/i.test(u)&&navigator.maxTouchPoints>1))location.replace("{AS}")}})(navigator.userAgent)</script>
+</head>
+<body>
+<div class="page">
+  <header class="top">
+    {brand(L, "/fixbill/")}
+  </header>
+<main>
+  <section class="intro">
+    <h1>Get Fixbill</h1>
+    <p class="lede">Pick your store.</p>
+    {badges(L, 'get', qr=False).replace('utm_medium%3Dlanding', 'utm_medium%3Dqr')}
+    <p class="note">{e(L["note"])}</p>
+  </section>
+</main>
+  <footer>
+    <p><a href="/fixbill/">Fixbill</a> &middot; <a href="/fixbill/support.html">Support</a> &middot; <a href="/">deriverge s.r.o.</a> &middot; <a href="mailto:{MAIL}">{MAIL}</a></p>
+  </footer>
+</div>
+</body>
+</html>
+'''
+
+
 def main():
+    seen = {}
+    for L in LANGS:
+        seen[L['title']] = L['code']
+    for P in PAGES:
+        if P['title'] in seen or P['desc'] in seen:
+            raise SystemExit(f'duplicate title or description: {P["id"]}')
+        seen[P['title']] = seen[P['desc']] = P['id']
+    write('get/index.html', get_page())
     for L in LANGS:
         write(L['path'] + 'index.html', lang_page(L))
     for P in PAGES:

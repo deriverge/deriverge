@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Fixbill: app de orçamento de serviço para autônomos e prestadores</title>
-<meta name="description" content="Orçamentos de serviço em PDF pelo celular para autônomos e prestadores: prontos em dois minutos, assinatura do cliente na tela, link de pagamento com QR code e lembretes. Grátis até 5 documentos por mês.">
+<meta name="description" content="Orçamentos de serviço em PDF pelo celular para autônomos: prontos em dois minutos, assinatura do cliente na tela e lembretes. Grátis até 5 documentos por mês.">
 <link rel="canonical" href="https://deriverge.com/fixbill/pt/">
 <link rel="alternate" hreflang="en" href="https://deriverge.com/fixbill/">
 <link rel="alternate" hreflang="en-GB" href="https://deriverge.com/fixbill/en-gb/">
@@ -42,7 +42,8 @@
 <meta property="og:locale:alternate" content="it_IT">
 <meta property="og:locale:alternate" content="pl_PL">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="/fixbill/fixbill.css">
+<link rel="stylesheet" href="/fixbill/fixbill.css?v=2">
+<script>(function(d,u){d.classList.add(/android/i.test(u)?'os-android':(/iphone|ipad|ipod/i.test(u)||(/macintosh/i.test(u)&&navigator.maxTouchPoints>1))?'os-ios':'os-desktop')})(document.documentElement,navigator.userAgent)</script>
 <script src="/fixbill/fixbill.js" defer></script>
 <script type="application/ld+json">
 {
@@ -61,12 +62,35 @@
   "https://play.google.com/store/apps/details?id=com.deriverge.fixbill"
  ],
  "image": "https://deriverge.com/fixbill/icon-512.png",
- "offers": {
-  "@type": "Offer",
-  "price": "0",
-  "priceCurrency": "BRL",
-  "description": "Download grátis com 5 documentos por mês. O Fixbill Pro é uma compra no app: mensal, anual ou vitalícia com pagamento único."
- },
+ "offers": [
+  {
+   "@type": "Offer",
+   "price": "0",
+   "priceCurrency": "BRL",
+   "description": "Download grátis com 5 documentos por mês. O Fixbill Pro é uma compra no app: mensal, anual ou vitalícia com pagamento único."
+  },
+  {
+   "@type": "Offer",
+   "name": "Fixbill Pro (1 month)",
+   "price": "12.90",
+   "priceCurrency": "BRL",
+   "category": "in-app purchase"
+  },
+  {
+   "@type": "Offer",
+   "name": "Fixbill Pro (1 year)",
+   "price": "99.90",
+   "priceCurrency": "BRL",
+   "category": "in-app purchase"
+  },
+  {
+   "@type": "Offer",
+   "name": "Fixbill Pro (lifetime)",
+   "price": "399.90",
+   "priceCurrency": "BRL",
+   "category": "in-app purchase"
+  }
+ ],
  "publisher": {
   "@type": "Organization",
   "name": "deriverge s.r.o.",
@@ -102,9 +126,10 @@
       <h1>Orçamento de serviço em <em>dois minutos</em>, direto do celular</h1>
       <p class="lede">Para autônomos, prestadores de serviço e pequenas empresas. Faça o orçamento durante a visita, peça a assinatura do cliente na tela e envie o PDF antes de ir embora.</p>
       <div class="badges">
-        <a href="https://apps.apple.com/app/id6819481858"><img class="as" src="/fixbill/badge-appstore.svg" alt="Baixar na App Store" width="144" height="48"></a>
-        <a href="https://play.google.com/store/apps/details?id=com.deriverge.fixbill&amp;referrer=utm_source%3Dweb%26utm_campaign%3Dfixbill-pt"><img class="gp" src="/fixbill/badge-googleplay-en.png" alt="Disponível no Google Play" width="184" height="71"></a>
+        <a class="s-as" href="https://apps.apple.com/app/id6819481858"><img class="as" src="/fixbill/badge-appstore.svg" alt="Baixar na App Store" width="144" height="48"></a>
+        <a class="s-gp" href="https://play.google.com/store/apps/details?id=com.deriverge.fixbill&amp;referrer=utm_source%3Dweb%26utm_medium%3Dlanding%26utm_campaign%3Dfixbill-pt"><img class="gp" src="/fixbill/badge-googleplay-en.png" alt="Disponível no Google Play" width="184" height="71"></a>
       </div>
+      <p class="dl-qr"><img src="/fixbill/qr-get.svg" alt="QR code para baixar o Fixbill" width="88" height="88" loading="lazy"><span>Aponte a câmera do celular para o código e baixe o Fixbill.</span></p>
       <p class="note">Grátis até 5 documentos por mês. Sem cadastro.</p>
     </div>
     <div class="hero-art" role="img" aria-label="Exemplo de orçamento no Fixbill: reforma de banheiro, três itens, total R$ 1.560,00, aprovado, com o QR code do link de pagamento. O cliente assinou na tela.">
@@ -133,6 +158,12 @@
     <div class="card"><span class="ic a"><svg aria-hidden="true"><use href="#i-tag"/></svg></span><h3>Com a cara da sua empresa</h3><p>Sua logo e suas cores em quatro modelos de documento. No Pro, também a sua assinatura e o seu carimbo.</p></div>
   </div>
 
+  <h2>Modelos grátis para preencher online</h2>
+  <p class="sub">Sem aplicativo: preencha o formulário, confira a prévia e salve o PDF. Nada é enviado.</p>
+  <div class="grid">
+    <a class="card" href="/fixbill/pt/modelo-orcamento-servico/"><span class="ic"><svg aria-hidden="true"><use href="#i-doc"/></svg></span><h3>Modelo de orçamento de serviço</h3><p>Orçamento com mão de obra, materiais, prazo e validade. Preencha online e salve em PDF.</p><span class="go">Preencher o orçamento &rarr;</span></a>
+  </div>
+
   <h2>Preço justo</h2>
   <p class="sub">Sem planos semanais e sem aumento de preço enquanto você for assinante.</p>
   <div class="plans">
@@ -140,6 +171,7 @@
     <div class="plan hi"><p class="k">Fixbill Pro</p><h3>Mensal, anual ou vitalício</h3><p>Documentos ilimitados sem rodapé, assinatura do cliente, fotos do serviço e todos os quatro modelos. Pague por mês, por ano ou uma única vez para sempre. Se houver um período de teste grátis, você verá antes da compra.</p></div>
     <div class="plan"><p class="k">Preço garantido</p><h3>Seu preço não muda</h3><p>Não aumentaremos o preço da sua assinatura enquanto ela estiver ativa. Cancele quando quiser na sua conta da App Store ou do Google Play.</p></div>
   </div>
+  <p class="price-line">O Fixbill Pro custa R$ 12,90 por mês, R$ 99,90 por ano ou R$ 399,90 uma única vez, para sempre (preços na App Store no Brasil em novembro de 2026; no Google Play podem variar um pouco). O preço atual aparece sempre antes da compra.</p>
 
   <section class="private">
     <div>
@@ -160,15 +192,15 @@
     <h2>Baixe o Fixbill</h2>
     <p class="sub">Dúvidas? Escreva para <a href="mailto:info@deriverge.com">info@deriverge.com</a>.</p>
     <div class="badges">
-        <a href="https://apps.apple.com/app/id6819481858"><img class="as" src="/fixbill/badge-appstore.svg" alt="Baixar na App Store" width="144" height="48"></a>
-        <a href="https://play.google.com/store/apps/details?id=com.deriverge.fixbill&amp;referrer=utm_source%3Dweb%26utm_campaign%3Dfixbill-pt"><img class="gp" src="/fixbill/badge-googleplay-en.png" alt="Disponível no Google Play" width="184" height="71"></a>
+        <a class="s-as" href="https://apps.apple.com/app/id6819481858"><img class="as" src="/fixbill/badge-appstore.svg" alt="Baixar na App Store" width="144" height="48"></a>
+        <a class="s-gp" href="https://play.google.com/store/apps/details?id=com.deriverge.fixbill&amp;referrer=utm_source%3Dweb%26utm_medium%3Dlanding%26utm_campaign%3Dfixbill-pt-cta"><img class="gp" src="/fixbill/badge-googleplay-en.png" alt="Disponível no Google Play" width="184" height="71"></a>
       </div>
     <p class="note">Grátis até 5 documentos por mês. Sem cadastro.</p>
   </div>
 </main>
   <footer>
     <p><a href="/fixbill/support.html">Suporte (EN)</a> &middot; <a href="/fixbill/privacy.html">Privacidade (EN)</a> &middot; <a href="/fixbill/terms.html">Termos de uso (EN)</a></p>
-    <p>Modelos grátis: <a href="/fixbill/estimate-template/" lang="en">Estimate template for contractors</a> &middot; <a href="/fixbill/en-gb/tradesman-invoice-template/" lang="en-GB">Tradesman invoice template (UK)</a> &middot; <a href="/fixbill/cs/faktura-vzor/" lang="cs">Faktura vzor</a> &middot; <a href="/fixbill/de/kostenvoranschlag-vorlage/" lang="de">Kostenvoranschlag Vorlage</a> &middot; <a href="/fixbill/fr/modele-devis-artisan/" lang="fr">Modèle de devis artisan</a> &middot; <a href="/fixbill/es/modelo-presupuesto-obra/" lang="es">Modelo de presupuesto de obra</a> &middot; <a href="/fixbill/it/modello-preventivo-edile/" lang="it">Modello preventivo lavori edili</a> &middot; <a href="/fixbill/pl/kosztorys-wzor/" lang="pl">Kosztorys wzór</a></p>
+    <p>Modelos grátis: <a href="/fixbill/estimate-template/" lang="en">Estimate template for contractors</a> &middot; <a href="/fixbill/invoice-template/" lang="en">Invoice template</a> &middot; <a href="/fixbill/en-gb/tradesman-invoice-template/" lang="en-GB">Tradesman invoice template (UK)</a> &middot; <a href="/fixbill/en-gb/builders-quote-template/" lang="en-GB">Builders quote template (UK)</a> &middot; <a href="/fixbill/cs/faktura-vzor/" lang="cs">Faktura vzor</a> &middot; <a href="/fixbill/cs/cenova-nabidka-vzor/" lang="cs">Cenová nabídka vzor</a> &middot; <a href="/fixbill/sk/faktura-vzor/" lang="sk">Faktúra vzor</a> &middot; <a href="/fixbill/sk/cenova-ponuka-vzor/" lang="sk">Cenová ponuka vzor</a> &middot; <a href="/fixbill/de/kostenvoranschlag-vorlage/" lang="de">Kostenvoranschlag Vorlage</a> &middot; <a href="/fixbill/de/rechnung-kleinunternehmer/" lang="de">Rechnungsvorlage Kleinunternehmer</a> &middot; <a href="/fixbill/fr/modele-devis-artisan/" lang="fr">Modèle de devis artisan</a> &middot; <a href="/fixbill/fr/facture-auto-entrepreneur/" lang="fr">Modèle de facture auto-entrepreneur</a> &middot; <a href="/fixbill/es/modelo-presupuesto-obra/" lang="es">Modelo de presupuesto de obra</a> &middot; <a href="/fixbill/it/modello-preventivo-edile/" lang="it">Modello preventivo lavori edili</a> &middot; <a href="/fixbill/pl/kosztorys-wzor/" lang="pl">Kosztorys wzór</a> &middot; <a href="/fixbill/pt/modelo-orcamento-servico/" lang="pt-BR">Modelo de orçamento de serviço</a></p>
     <p>Idiomas: <a href="/fixbill/" lang="en" hreflang="en">English</a> &middot; <a href="/fixbill/en-gb/" lang="en-GB" hreflang="en-GB">English (UK)</a> &middot; <a href="/fixbill/cs/" lang="cs" hreflang="cs">Čeština</a> &middot; <a href="/fixbill/sk/" lang="sk" hreflang="sk">Slovenčina</a> &middot; <a href="/fixbill/de/" lang="de" hreflang="de">Deutsch</a> &middot; <a href="/fixbill/fr/" lang="fr" hreflang="fr">Français</a> &middot; <a href="/fixbill/es/" lang="es" hreflang="es">Español</a> &middot; <a href="/fixbill/it/" lang="it" hreflang="it">Italiano</a> &middot; <a href="/fixbill/pl/" lang="pl" hreflang="pl">Polski</a> &middot; <strong aria-current="page">Português</strong></p>
     <p>Responsável: <a href="/">deriverge s.r.o.</a> &middot; <a href="mailto:info@deriverge.com">info@deriverge.com</a></p>
   </footer>

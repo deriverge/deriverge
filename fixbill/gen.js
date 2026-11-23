@@ -134,7 +134,7 @@
     var s = byName.tax;
     if (!s) return { rate: 0, none: true, note: '', label: D.tax };
     var o = s.options[s.selectedIndex] || s.options[0];
-    if (o.value === 'none') return { rate: 0, none: true, note: o.dataset.note || '', label: D.tax };
+    if (/^none/.test(o.value)) return { rate: 0, none: true, note: o.dataset.note || '', label: D.tax };
     var rate = o.value === 'custom' ? num(val('taxrate')) : num(o.value);
     return { rate: rate, none: false, note: o.dataset.note || '', label: o.dataset.tax || D.tax };
   }
