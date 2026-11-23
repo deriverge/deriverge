@@ -53,7 +53,10 @@ instalace úvod nikdy neuvidí.
    Se zapnutým spropitným nabídne Bez spropitného, 10, 15, 20 % (s částkou)
    a Jinou částku; počítá se z ceny zboží bez připočtené daně a bez záloh
    (americká etiketa radí z částky před daní) a u hotovosti se přičte
-   k částce k zaplacení i k výpočtu vrácení.
+   k částce k zaplacení i k výpočtu vrácení. U dolaru se platba hotově
+   zaokrouhlí na nejbližších 5 centů (od 1.2.0, v Menu jde vypnout,
+   kartou zůstává přesná); rozdíl nese účet v poli `rnd` a přehled, text
+   souhrnu, PDF i uzavřená akce ho ukazují zvlášť, tržba za zboží se nemění.
 3. **Objednávky**: zaplacený účet se zařadí do fronty s číslem; položky se
    odškrtávají, `Vydáno` uzavře, od dvou čekajících jde `Vydat vše`. V hlavičce
    je pořád vidět počet čekajících. Kdo vydává zboží hned při placení, frontu
