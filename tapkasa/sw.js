@@ -50,8 +50,11 @@ self.addEventListener("fetch", function (e) {
     e.respondWith(
       fetch(req)
         .then(function (res) {
-          var copy = res.clone();
-          caches.open(CACHE).then(function (c) { c.put("./index.html", copy); });
+          // Jen platná odpověď: chybová stránka serveru (404, 500) by jinak nahradila offline kopii aplikace.
+          if (res.ok) {
+            var copy = res.clone();
+            caches.open(CACHE).then(function (c) { c.put("./index.html", copy); }).catch(function () {});
+          }
           return res;
         })
         .catch(function () {
@@ -68,8 +71,10 @@ self.addEventListener("fetch", function (e) {
     caches.match(req).then(function (hit) {
       if (hit) { return hit; }
       return fetch(req).then(function (res) {
-        var copy = res.clone();
-        caches.open(CACHE).then(function (c) { c.put(req, copy); }).catch(function () {});
+        if (res.ok) {
+          var copy = res.clone();
+          caches.open(CACHE).then(function (c) { c.put(req, copy); }).catch(function () {});
+        }
         return res;
       });
     })
