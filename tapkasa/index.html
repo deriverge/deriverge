@@ -5657,17 +5657,38 @@
   function isObj(x) { return !!x && typeof x === "object" && !Array.isArray(x); }
 
   // Doplní účtenkám číslo, stav, čas změny a akci; vrátí nejvyšší číslo.
+  // Číslo z uloženého stavu; text nebo nesmysl z poškozené zálohy by se
+  // jinak propsal do tržby jako NaN.
+  function finNum(x, dflt) {
+    var n = typeof x === "number" ? x : typeof x === "string" ? parsePrice(x) : NaN;
+    return isFinite(n) ? n : dflt;
+  }
+
+  // Id jde do atributů v HTML (data-ticket, data-del…), proto jen písmena,
+  // číslice, podtržítko a pomlčka. Aplikace jiná nevytváří; cokoli jiného
+  // přišlo z poškozené zálohy nebo od cizího zařízení.
+  function okId(x) { return typeof x === "string" && /^[A-Za-z0-9_-]{1,64}$/.test(x); }
+
   function normSales(list, evId) {
     var maxNo = 0;
     list.forEach(function (s, i) {
+      if (!okId(s.id)) { s.id = uid(); }
+      if (s.ev !== undefined && !okId(s.ev)) { delete s.ev; }
+      s.ts = finNum(s.ts, 0);
+      s.method = s.method === "card" ? "card" : "cash";
       if (typeof s.no !== "number") { s.no = i + 1; }
       if (s.no > maxNo) { maxNo = s.no; }
       s.status = s.status === "open" ? "open" : "served";
       s.updatedAt = typeof s.updatedAt === "number" ? s.updatedAt : (s.ts || 0);
-      if (!Array.isArray(s.lines)) { s.lines = []; }
+      s.lines = Array.isArray(s.lines) ? s.lines.filter(isObj) : [];
       s.lines.forEach(function (l) {
+        l.name = typeof l.name === "string" ? l.name : String(l.name || "");
+        l.price = finNum(l.price, 0);
+        l.qty = finNum(l.qty, 1);
         l.ready = typeof l.ready === "number" ? l.ready : l.qty;
       });
+      s.total = finNum(s.total, NaN);
+      if (isNaN(s.total)) { s.total = mr(s.lines.reduce(function (a, l) { return a + l.price * l.qty; }, 0)); }
       if (evId && (typeof s.ev !== "string" || !s.ev)) { s.ev = evId; }
     });
     return maxNo;
@@ -5676,6 +5697,11 @@
   // Položky uložené před zavedením barev je dostanou samy, každá jinou.
   // Prázdný řetězec je vědomá volba "bez barvy", tu necháváme být.
   function normItems(items) {
+    items.forEach(function (it) {
+      if (!okId(it.id)) { it.id = uid(); }
+      it.name = typeof it.name === "string" ? it.name : String(it.name || "");
+      it.price = finNum(it.price, 0);
+    });
     var used = {};
     items.forEach(function (it) { if (it.color) { used[it.color] = true; } });
     var next = 0;
@@ -5744,7 +5770,7 @@
     d.archives = Array.isArray(d.archives) ? d.archives.filter(isObj) : [];
     // fronta výdeje odložená při přepnutí na kasu (účtenky jiného zařízení)
     d.held = Array.isArray(d.held) ? d.held.filter(isObj) : [];
-    d.evId = typeof d.evId === "string" && d.evId ? d.evId : uid();
+    d.evId = okId(d.evId) ? d.evId : uid();
     // id smazaných a vrácených účtenek, ať je protějšek, který smazání
     // nezachytil, nevrátí zpátky do tržby
     d.gone = Array.isArray(d.gone) ? d.gone.filter(function (x) { return typeof x === "string"; }).slice(-500) : [];
@@ -5752,7 +5778,7 @@
     evSeen[d.evId] = true;
     d.parked = Array.isArray(d.parked) ? d.parked.filter(isObj) : [];
     d.parked.forEach(function (pk) {
-      if (typeof pk.id !== "string" || !pk.id || evSeen[pk.id]) { pk.id = uid(); }
+      if (!okId(pk.id) || evSeen[pk.id]) { pk.id = uid(); }
       evSeen[pk.id] = true;
       pk.event = typeof pk.event === "string" ? pk.event : "";
       pk.items = Array.isArray(pk.items) ? pk.items.filter(isObj) : [];
@@ -5762,7 +5788,7 @@
       pk.nextNo = typeof pk.nextNo === "number" && pk.nextNo > pkMax ? pk.nextNo : pkMax + 1;
     });
     // starší archivy vznikaly bez identifikátoru, bez něj by je nešlo smazat
-    d.archives.forEach(function (a) { if (!a.id) { a.id = uid(); } });
+    d.archives.forEach(function (a) { if (!okId(a.id)) { a.id = uid(); } });
     d.event = typeof d.event === "string" ? d.event : "";
     d.savedAt = typeof d.savedAt === "number" ? d.savedAt : 0;
     d.mode = d.mode === "vydej" ? "vydej" : "kasa";
@@ -7481,7 +7507,7 @@
   // jen čisté, úplné údaje. Rozbitá zpráva dřív shodila aplikaci při
   // každém dalším spuštění.
   function cleanSale(inc) {
-    if (!isObj(inc) || typeof inc.id !== "string" || !inc.id || inc.id.length > 64) { return null; }
+    if (!isObj(inc) || !okId(inc.id)) { return null; }
     if (!Array.isArray(inc.lines) || !inc.lines.length) { return null; }
     var no = Number(inc.no);
     if (!isFinite(no) || no < 1) { return null; }
@@ -7510,7 +7536,7 @@
       updatedAt: isFinite(Number(inc.updatedAt)) ? Number(inc.updatedAt) : 0,
       lines: lines
     };
-    if (typeof inc.ev === "string" && inc.ev) { o.ev = inc.ev.slice(0, 40); }
+    if (okId(inc.ev) && inc.ev.length <= 40) { o.ev = inc.ev; }
     if (isFinite(Number(inc.servedAt)) && inc.servedAt) { o.servedAt = Number(inc.servedAt); }
     return o;
   }
