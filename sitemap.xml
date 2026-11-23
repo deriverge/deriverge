@@ -567,12 +567,433 @@
     <xhtml:link rel="alternate" hreflang="hi" href="https://deriverge.com/hi/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://deriverge.com/"/>
   </url>
-  <url><loc>https://deriverge.com/tapkasa/pokladna.html</loc><lastmod>2026-09-07</lastmod><priority>1.0</priority></url>
-  <url><loc>https://deriverge.com/tapkasa/pos.html</loc><lastmod>2026-09-07</lastmod><priority>0.9</priority></url>
-  <url><loc>https://deriverge.com/tapkasa/</loc><lastmod>2026-09-07</lastmod><priority>0.8</priority></url>
-  <url><loc>https://deriverge.com/tapkasa/pokladna-na-jarmark.html</loc><lastmod>2026-09-07</lastmod><priority>0.8</priority></url>
-  <url><loc>https://deriverge.com/tapkasa/pokladna-na-festival.html</loc><lastmod>2026-09-07</lastmod><priority>0.8</priority></url>
-  <url><loc>https://deriverge.com/tapkasa/festival-pos.html</loc><lastmod>2026-09-07</lastmod><priority>0.7</priority></url>
+  <url>
+    <loc>https://deriverge.com/tapkasa/pokladna.html</loc>
+    <lastmod>2026-11-23</lastmod>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://deriverge.com/tapkasa/pokladna.html"/>
+    <xhtml:link rel="alternate" hreflang="sk" href="https://deriverge.com/tapkasa/sk/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://deriverge.com/tapkasa/pos.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://deriverge.com/tapkasa/de/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://deriverge.com/tapkasa/pl/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://deriverge.com/tapkasa/fr/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://deriverge.com/tapkasa/it/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://deriverge.com/tapkasa/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://deriverge.com/tapkasa/pt/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://deriverge.com/tapkasa/pos.html"/>
+  </url>
+  <url>
+    <loc>https://deriverge.com/tapkasa/sk/</loc>
+    <lastmod>2026-11-23</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://deriverge.com/tapkasa/pokladna.html"/>
+    <xhtml:link rel="alternate" hreflang="sk" href="https://deriverge.com/tapkasa/sk/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://deriverge.com/tapkasa/pos.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://deriverge.com/tapkasa/de/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://deriverge.com/tapkasa/pl/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://deriverge.com/tapkasa/fr/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://deriverge.com/tapkasa/it/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://deriverge.com/tapkasa/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://deriverge.com/tapkasa/pt/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://deriverge.com/tapkasa/pos.html"/>
+  </url>
+  <url>
+    <loc>https://deriverge.com/tapkasa/pos.html</loc>
+    <lastmod>2026-11-23</lastmod>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://deriverge.com/tapkasa/pokladna.html"/>
+    <xhtml:link rel="alternate" hreflang="sk" href="https://deriverge.com/tapkasa/sk/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://deriverge.com/tapkasa/pos.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://deriverge.com/tapkasa/de/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://deriverge.com/tapkasa/pl/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://deriverge.com/tapkasa/fr/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://deriverge.com/tapkasa/it/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://deriverge.com/tapkasa/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://deriverge.com/tapkasa/pt/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://deriverge.com/tapkasa/pos.html"/>
+  </url>
+  <url>
+    <loc>https://deriverge.com/tapkasa/de/</loc>
+    <lastmod>2026-11-23</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://deriverge.com/tapkasa/pokladna.html"/>
+    <xhtml:link rel="alternate" hreflang="sk" href="https://deriverge.com/tapkasa/sk/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://deriverge.com/tapkasa/pos.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://deriverge.com/tapkasa/de/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://deriverge.com/tapkasa/pl/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://deriverge.com/tapkasa/fr/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://deriverge.com/tapkasa/it/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://deriverge.com/tapkasa/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://deriverge.com/tapkasa/pt/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://deriverge.com/tapkasa/pos.html"/>
+  </url>
+  <url>
+    <loc>https://deriverge.com/tapkasa/pl/</loc>
+    <lastmod>2026-11-23</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://deriverge.com/tapkasa/pokladna.html"/>
+    <xhtml:link rel="alternate" hreflang="sk" href="https://deriverge.com/tapkasa/sk/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://deriverge.com/tapkasa/pos.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://deriverge.com/tapkasa/de/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://deriverge.com/tapkasa/pl/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://deriverge.com/tapkasa/fr/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://deriverge.com/tapkasa/it/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://deriverge.com/tapkasa/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://deriverge.com/tapkasa/pt/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://deriverge.com/tapkasa/pos.html"/>
+  </url>
+  <url>
+    <loc>https://deriverge.com/tapkasa/fr/</loc>
+    <lastmod>2026-11-23</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://deriverge.com/tapkasa/pokladna.html"/>
+    <xhtml:link rel="alternate" hreflang="sk" href="https://deriverge.com/tapkasa/sk/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://deriverge.com/tapkasa/pos.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://deriverge.com/tapkasa/de/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://deriverge.com/tapkasa/pl/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://deriverge.com/tapkasa/fr/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://deriverge.com/tapkasa/it/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://deriverge.com/tapkasa/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://deriverge.com/tapkasa/pt/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://deriverge.com/tapkasa/pos.html"/>
+  </url>
+  <url>
+    <loc>https://deriverge.com/tapkasa/it/</loc>
+    <lastmod>2026-11-23</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://deriverge.com/tapkasa/pokladna.html"/>
+    <xhtml:link rel="alternate" hreflang="sk" href="https://deriverge.com/tapkasa/sk/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://deriverge.com/tapkasa/pos.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://deriverge.com/tapkasa/de/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://deriverge.com/tapkasa/pl/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://deriverge.com/tapkasa/fr/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://deriverge.com/tapkasa/it/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://deriverge.com/tapkasa/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://deriverge.com/tapkasa/pt/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://deriverge.com/tapkasa/pos.html"/>
+  </url>
+  <url>
+    <loc>https://deriverge.com/tapkasa/es/</loc>
+    <lastmod>2026-11-23</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://deriverge.com/tapkasa/pokladna.html"/>
+    <xhtml:link rel="alternate" hreflang="sk" href="https://deriverge.com/tapkasa/sk/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://deriverge.com/tapkasa/pos.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://deriverge.com/tapkasa/de/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://deriverge.com/tapkasa/pl/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://deriverge.com/tapkasa/fr/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://deriverge.com/tapkasa/it/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://deriverge.com/tapkasa/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://deriverge.com/tapkasa/pt/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://deriverge.com/tapkasa/pos.html"/>
+  </url>
+  <url>
+    <loc>https://deriverge.com/tapkasa/pt/</loc>
+    <lastmod>2026-11-23</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://deriverge.com/tapkasa/pokladna.html"/>
+    <xhtml:link rel="alternate" hreflang="sk" href="https://deriverge.com/tapkasa/sk/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://deriverge.com/tapkasa/pos.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://deriverge.com/tapkasa/de/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://deriverge.com/tapkasa/pl/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://deriverge.com/tapkasa/fr/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://deriverge.com/tapkasa/it/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://deriverge.com/tapkasa/es/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://deriverge.com/tapkasa/pt/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://deriverge.com/tapkasa/pos.html"/>
+  </url>
+  <url>
+    <loc>https://deriverge.com/tapkasa/pokladna-na-vanocni-trh.html</loc>
+    <lastmod>2026-11-23</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://deriverge.com/tapkasa/pokladna-na-vanocni-trh.html"/>
+    <xhtml:link rel="alternate" hreflang="sk" href="https://deriverge.com/tapkasa/sk/pokladna-na-vianocne-trhy/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://deriverge.com/tapkasa/christmas-market-till.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://deriverge.com/tapkasa/de/weihnachtsmarkt/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://deriverge.com/tapkasa/pl/jarmark-bozonarodzeniowy/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://deriverge.com/tapkasa/fr/marche-de-noel/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://deriverge.com/tapkasa/it/mercatino-di-natale/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://deriverge.com/tapkasa/es/mercadillo-navideno/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://deriverge.com/tapkasa/pt/mercado-de-natal/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://deriverge.com/tapkasa/christmas-market-till.html"/>
+  </url>
+  <url>
+    <loc>https://deriverge.com/tapkasa/sk/pokladna-na-vianocne-trhy/</loc>
+    <lastmod>2026-11-23</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://deriverge.com/tapkasa/pokladna-na-vanocni-trh.html"/>
+    <xhtml:link rel="alternate" hreflang="sk" href="https://deriverge.com/tapkasa/sk/pokladna-na-vianocne-trhy/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://deriverge.com/tapkasa/christmas-market-till.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://deriverge.com/tapkasa/de/weihnachtsmarkt/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://deriverge.com/tapkasa/pl/jarmark-bozonarodzeniowy/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://deriverge.com/tapkasa/fr/marche-de-noel/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://deriverge.com/tapkasa/it/mercatino-di-natale/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://deriverge.com/tapkasa/es/mercadillo-navideno/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://deriverge.com/tapkasa/pt/mercado-de-natal/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://deriverge.com/tapkasa/christmas-market-till.html"/>
+  </url>
+  <url>
+    <loc>https://deriverge.com/tapkasa/christmas-market-till.html</loc>
+    <lastmod>2026-11-23</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://deriverge.com/tapkasa/pokladna-na-vanocni-trh.html"/>
+    <xhtml:link rel="alternate" hreflang="sk" href="https://deriverge.com/tapkasa/sk/pokladna-na-vianocne-trhy/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://deriverge.com/tapkasa/christmas-market-till.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://deriverge.com/tapkasa/de/weihnachtsmarkt/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://deriverge.com/tapkasa/pl/jarmark-bozonarodzeniowy/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://deriverge.com/tapkasa/fr/marche-de-noel/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://deriverge.com/tapkasa/it/mercatino-di-natale/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://deriverge.com/tapkasa/es/mercadillo-navideno/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://deriverge.com/tapkasa/pt/mercado-de-natal/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://deriverge.com/tapkasa/christmas-market-till.html"/>
+  </url>
+  <url>
+    <loc>https://deriverge.com/tapkasa/de/weihnachtsmarkt/</loc>
+    <lastmod>2026-11-23</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://deriverge.com/tapkasa/pokladna-na-vanocni-trh.html"/>
+    <xhtml:link rel="alternate" hreflang="sk" href="https://deriverge.com/tapkasa/sk/pokladna-na-vianocne-trhy/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://deriverge.com/tapkasa/christmas-market-till.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://deriverge.com/tapkasa/de/weihnachtsmarkt/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://deriverge.com/tapkasa/pl/jarmark-bozonarodzeniowy/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://deriverge.com/tapkasa/fr/marche-de-noel/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://deriverge.com/tapkasa/it/mercatino-di-natale/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://deriverge.com/tapkasa/es/mercadillo-navideno/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://deriverge.com/tapkasa/pt/mercado-de-natal/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://deriverge.com/tapkasa/christmas-market-till.html"/>
+  </url>
+  <url>
+    <loc>https://deriverge.com/tapkasa/pl/jarmark-bozonarodzeniowy/</loc>
+    <lastmod>2026-11-23</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://deriverge.com/tapkasa/pokladna-na-vanocni-trh.html"/>
+    <xhtml:link rel="alternate" hreflang="sk" href="https://deriverge.com/tapkasa/sk/pokladna-na-vianocne-trhy/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://deriverge.com/tapkasa/christmas-market-till.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://deriverge.com/tapkasa/de/weihnachtsmarkt/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://deriverge.com/tapkasa/pl/jarmark-bozonarodzeniowy/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://deriverge.com/tapkasa/fr/marche-de-noel/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://deriverge.com/tapkasa/it/mercatino-di-natale/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://deriverge.com/tapkasa/es/mercadillo-navideno/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://deriverge.com/tapkasa/pt/mercado-de-natal/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://deriverge.com/tapkasa/christmas-market-till.html"/>
+  </url>
+  <url>
+    <loc>https://deriverge.com/tapkasa/fr/marche-de-noel/</loc>
+    <lastmod>2026-11-23</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://deriverge.com/tapkasa/pokladna-na-vanocni-trh.html"/>
+    <xhtml:link rel="alternate" hreflang="sk" href="https://deriverge.com/tapkasa/sk/pokladna-na-vianocne-trhy/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://deriverge.com/tapkasa/christmas-market-till.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://deriverge.com/tapkasa/de/weihnachtsmarkt/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://deriverge.com/tapkasa/pl/jarmark-bozonarodzeniowy/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://deriverge.com/tapkasa/fr/marche-de-noel/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://deriverge.com/tapkasa/it/mercatino-di-natale/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://deriverge.com/tapkasa/es/mercadillo-navideno/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://deriverge.com/tapkasa/pt/mercado-de-natal/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://deriverge.com/tapkasa/christmas-market-till.html"/>
+  </url>
+  <url>
+    <loc>https://deriverge.com/tapkasa/it/mercatino-di-natale/</loc>
+    <lastmod>2026-11-23</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://deriverge.com/tapkasa/pokladna-na-vanocni-trh.html"/>
+    <xhtml:link rel="alternate" hreflang="sk" href="https://deriverge.com/tapkasa/sk/pokladna-na-vianocne-trhy/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://deriverge.com/tapkasa/christmas-market-till.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://deriverge.com/tapkasa/de/weihnachtsmarkt/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://deriverge.com/tapkasa/pl/jarmark-bozonarodzeniowy/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://deriverge.com/tapkasa/fr/marche-de-noel/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://deriverge.com/tapkasa/it/mercatino-di-natale/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://deriverge.com/tapkasa/es/mercadillo-navideno/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://deriverge.com/tapkasa/pt/mercado-de-natal/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://deriverge.com/tapkasa/christmas-market-till.html"/>
+  </url>
+  <url>
+    <loc>https://deriverge.com/tapkasa/es/mercadillo-navideno/</loc>
+    <lastmod>2026-11-23</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://deriverge.com/tapkasa/pokladna-na-vanocni-trh.html"/>
+    <xhtml:link rel="alternate" hreflang="sk" href="https://deriverge.com/tapkasa/sk/pokladna-na-vianocne-trhy/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://deriverge.com/tapkasa/christmas-market-till.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://deriverge.com/tapkasa/de/weihnachtsmarkt/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://deriverge.com/tapkasa/pl/jarmark-bozonarodzeniowy/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://deriverge.com/tapkasa/fr/marche-de-noel/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://deriverge.com/tapkasa/it/mercatino-di-natale/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://deriverge.com/tapkasa/es/mercadillo-navideno/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://deriverge.com/tapkasa/pt/mercado-de-natal/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://deriverge.com/tapkasa/christmas-market-till.html"/>
+  </url>
+  <url>
+    <loc>https://deriverge.com/tapkasa/pt/mercado-de-natal/</loc>
+    <lastmod>2026-11-23</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://deriverge.com/tapkasa/pokladna-na-vanocni-trh.html"/>
+    <xhtml:link rel="alternate" hreflang="sk" href="https://deriverge.com/tapkasa/sk/pokladna-na-vianocne-trhy/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://deriverge.com/tapkasa/christmas-market-till.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://deriverge.com/tapkasa/de/weihnachtsmarkt/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://deriverge.com/tapkasa/pl/jarmark-bozonarodzeniowy/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://deriverge.com/tapkasa/fr/marche-de-noel/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://deriverge.com/tapkasa/it/mercatino-di-natale/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://deriverge.com/tapkasa/es/mercadillo-navideno/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://deriverge.com/tapkasa/pt/mercado-de-natal/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://deriverge.com/tapkasa/christmas-market-till.html"/>
+  </url>
+  <url>
+    <loc>https://deriverge.com/tapkasa/pokladna-pro-spolek.html</loc>
+    <lastmod>2026-11-23</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://deriverge.com/tapkasa/pokladna-pro-spolek.html"/>
+    <xhtml:link rel="alternate" hreflang="sk" href="https://deriverge.com/tapkasa/sk/pokladna-na-skolsku-akciu/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://deriverge.com/tapkasa/bake-sale-cash-register.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://deriverge.com/tapkasa/de/vereinsfest/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://deriverge.com/tapkasa/pl/festyn-szkolny/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://deriverge.com/tapkasa/fr/kermesse/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://deriverge.com/tapkasa/it/festa-della-scuola/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://deriverge.com/tapkasa/es/fiesta-del-colegio/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://deriverge.com/tapkasa/pt/festa-da-escola/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://deriverge.com/tapkasa/bake-sale-cash-register.html"/>
+  </url>
+  <url>
+    <loc>https://deriverge.com/tapkasa/sk/pokladna-na-skolsku-akciu/</loc>
+    <lastmod>2026-11-23</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://deriverge.com/tapkasa/pokladna-pro-spolek.html"/>
+    <xhtml:link rel="alternate" hreflang="sk" href="https://deriverge.com/tapkasa/sk/pokladna-na-skolsku-akciu/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://deriverge.com/tapkasa/bake-sale-cash-register.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://deriverge.com/tapkasa/de/vereinsfest/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://deriverge.com/tapkasa/pl/festyn-szkolny/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://deriverge.com/tapkasa/fr/kermesse/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://deriverge.com/tapkasa/it/festa-della-scuola/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://deriverge.com/tapkasa/es/fiesta-del-colegio/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://deriverge.com/tapkasa/pt/festa-da-escola/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://deriverge.com/tapkasa/bake-sale-cash-register.html"/>
+  </url>
+  <url>
+    <loc>https://deriverge.com/tapkasa/bake-sale-cash-register.html</loc>
+    <lastmod>2026-11-23</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://deriverge.com/tapkasa/pokladna-pro-spolek.html"/>
+    <xhtml:link rel="alternate" hreflang="sk" href="https://deriverge.com/tapkasa/sk/pokladna-na-skolsku-akciu/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://deriverge.com/tapkasa/bake-sale-cash-register.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://deriverge.com/tapkasa/de/vereinsfest/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://deriverge.com/tapkasa/pl/festyn-szkolny/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://deriverge.com/tapkasa/fr/kermesse/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://deriverge.com/tapkasa/it/festa-della-scuola/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://deriverge.com/tapkasa/es/fiesta-del-colegio/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://deriverge.com/tapkasa/pt/festa-da-escola/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://deriverge.com/tapkasa/bake-sale-cash-register.html"/>
+  </url>
+  <url>
+    <loc>https://deriverge.com/tapkasa/de/vereinsfest/</loc>
+    <lastmod>2026-11-23</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://deriverge.com/tapkasa/pokladna-pro-spolek.html"/>
+    <xhtml:link rel="alternate" hreflang="sk" href="https://deriverge.com/tapkasa/sk/pokladna-na-skolsku-akciu/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://deriverge.com/tapkasa/bake-sale-cash-register.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://deriverge.com/tapkasa/de/vereinsfest/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://deriverge.com/tapkasa/pl/festyn-szkolny/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://deriverge.com/tapkasa/fr/kermesse/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://deriverge.com/tapkasa/it/festa-della-scuola/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://deriverge.com/tapkasa/es/fiesta-del-colegio/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://deriverge.com/tapkasa/pt/festa-da-escola/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://deriverge.com/tapkasa/bake-sale-cash-register.html"/>
+  </url>
+  <url>
+    <loc>https://deriverge.com/tapkasa/pl/festyn-szkolny/</loc>
+    <lastmod>2026-11-23</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://deriverge.com/tapkasa/pokladna-pro-spolek.html"/>
+    <xhtml:link rel="alternate" hreflang="sk" href="https://deriverge.com/tapkasa/sk/pokladna-na-skolsku-akciu/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://deriverge.com/tapkasa/bake-sale-cash-register.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://deriverge.com/tapkasa/de/vereinsfest/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://deriverge.com/tapkasa/pl/festyn-szkolny/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://deriverge.com/tapkasa/fr/kermesse/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://deriverge.com/tapkasa/it/festa-della-scuola/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://deriverge.com/tapkasa/es/fiesta-del-colegio/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://deriverge.com/tapkasa/pt/festa-da-escola/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://deriverge.com/tapkasa/bake-sale-cash-register.html"/>
+  </url>
+  <url>
+    <loc>https://deriverge.com/tapkasa/fr/kermesse/</loc>
+    <lastmod>2026-11-23</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://deriverge.com/tapkasa/pokladna-pro-spolek.html"/>
+    <xhtml:link rel="alternate" hreflang="sk" href="https://deriverge.com/tapkasa/sk/pokladna-na-skolsku-akciu/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://deriverge.com/tapkasa/bake-sale-cash-register.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://deriverge.com/tapkasa/de/vereinsfest/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://deriverge.com/tapkasa/pl/festyn-szkolny/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://deriverge.com/tapkasa/fr/kermesse/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://deriverge.com/tapkasa/it/festa-della-scuola/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://deriverge.com/tapkasa/es/fiesta-del-colegio/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://deriverge.com/tapkasa/pt/festa-da-escola/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://deriverge.com/tapkasa/bake-sale-cash-register.html"/>
+  </url>
+  <url>
+    <loc>https://deriverge.com/tapkasa/it/festa-della-scuola/</loc>
+    <lastmod>2026-11-23</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://deriverge.com/tapkasa/pokladna-pro-spolek.html"/>
+    <xhtml:link rel="alternate" hreflang="sk" href="https://deriverge.com/tapkasa/sk/pokladna-na-skolsku-akciu/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://deriverge.com/tapkasa/bake-sale-cash-register.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://deriverge.com/tapkasa/de/vereinsfest/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://deriverge.com/tapkasa/pl/festyn-szkolny/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://deriverge.com/tapkasa/fr/kermesse/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://deriverge.com/tapkasa/it/festa-della-scuola/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://deriverge.com/tapkasa/es/fiesta-del-colegio/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://deriverge.com/tapkasa/pt/festa-da-escola/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://deriverge.com/tapkasa/bake-sale-cash-register.html"/>
+  </url>
+  <url>
+    <loc>https://deriverge.com/tapkasa/es/fiesta-del-colegio/</loc>
+    <lastmod>2026-11-23</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://deriverge.com/tapkasa/pokladna-pro-spolek.html"/>
+    <xhtml:link rel="alternate" hreflang="sk" href="https://deriverge.com/tapkasa/sk/pokladna-na-skolsku-akciu/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://deriverge.com/tapkasa/bake-sale-cash-register.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://deriverge.com/tapkasa/de/vereinsfest/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://deriverge.com/tapkasa/pl/festyn-szkolny/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://deriverge.com/tapkasa/fr/kermesse/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://deriverge.com/tapkasa/it/festa-della-scuola/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://deriverge.com/tapkasa/es/fiesta-del-colegio/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://deriverge.com/tapkasa/pt/festa-da-escola/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://deriverge.com/tapkasa/bake-sale-cash-register.html"/>
+  </url>
+  <url>
+    <loc>https://deriverge.com/tapkasa/pt/festa-da-escola/</loc>
+    <lastmod>2026-11-23</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://deriverge.com/tapkasa/pokladna-pro-spolek.html"/>
+    <xhtml:link rel="alternate" hreflang="sk" href="https://deriverge.com/tapkasa/sk/pokladna-na-skolsku-akciu/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://deriverge.com/tapkasa/bake-sale-cash-register.html"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://deriverge.com/tapkasa/de/vereinsfest/"/>
+    <xhtml:link rel="alternate" hreflang="pl" href="https://deriverge.com/tapkasa/pl/festyn-szkolny/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://deriverge.com/tapkasa/fr/kermesse/"/>
+    <xhtml:link rel="alternate" hreflang="it" href="https://deriverge.com/tapkasa/it/festa-della-scuola/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://deriverge.com/tapkasa/es/fiesta-del-colegio/"/>
+    <xhtml:link rel="alternate" hreflang="pt" href="https://deriverge.com/tapkasa/pt/festa-da-escola/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://deriverge.com/tapkasa/bake-sale-cash-register.html"/>
+  </url>
+  <url>
+    <loc>https://deriverge.com/tapkasa/pokladna-na-festival.html</loc>
+    <lastmod>2026-11-23</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://deriverge.com/tapkasa/pokladna-na-festival.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://deriverge.com/tapkasa/festival-pos.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://deriverge.com/tapkasa/festival-pos.html"/>
+  </url>
+  <url>
+    <loc>https://deriverge.com/tapkasa/festival-pos.html</loc>
+    <lastmod>2026-11-23</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="cs" href="https://deriverge.com/tapkasa/pokladna-na-festival.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://deriverge.com/tapkasa/festival-pos.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://deriverge.com/tapkasa/festival-pos.html"/>
+  </url>
+  <url>
+    <loc>https://deriverge.com/tapkasa/pokladna-na-jarmark.html</loc>
+    <lastmod>2026-11-23</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url><loc>https://deriverge.com/tapkasa/</loc><lastmod>2026-11-23</lastmod><priority>0.8</priority></url>
   <url><loc>https://deriverge.com/tapkasa/support.html</loc><lastmod>2026-09-07</lastmod><priority>0.5</priority></url>
   <url><loc>https://deriverge.com/tapkasa/privacy.html</loc><lastmod>2026-09-07</lastmod><priority>0.3</priority></url>
   <url><loc>https://deriverge.com/tapkasa/terms.html</loc><lastmod>2026-09-07</lastmod><priority>0.3</priority></url>

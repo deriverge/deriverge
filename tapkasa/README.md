@@ -93,9 +93,10 @@ Menu → **Záloha dat** vypíše/načte celý stav jako text nebo soubor.
 
 ## Offline
 
-`sw.js` (cache `kasa-v5`) cachuje jen sebe, ikony a přibalená písma; cizí
+`sw.js` (cache `kasa-v6`) cachuje jen sebe, ikony a přibalená písma; cizí
 adresy pouští vždy na síť, párování nesmí dostávat odpovědi z cache. Navigace jde
-network-first, offline z cache.
+network-first, offline z cache; do cache se ukládá jen aplikace sama, úvodní stránky
+ve stejné složce (`pokladna.html`, `pos.html`, `de/` …) jdou rovnou na síť.
 
 ## Soubory
 

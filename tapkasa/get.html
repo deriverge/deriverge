@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Get Tapkasa</title>
+<meta name="description" content="Download Tapkasa for iPhone, iPad or Android.">
+<meta name="robots" content="noindex, follow">
+<meta name="apple-itunes-app" content="app-id=6807075649">
+<link rel="icon" type="image/png" sizes="192x192" href="/tapkasa/icon-192.png">
+<link rel="stylesheet" href="/tapkasa/landing.css?v=1">
+<script>
+/* The QR code on the Tapkasa pages points here: phones go straight to their store, anything else gets both buttons. */
+(function () {
+  var u = navigator.userAgent, m = 'qr';
+  try { if (/[?&]m=web\b/.test(location.search)) m = 'web'; } catch (e) {}
+  var gp = 'https://play.google.com/store/apps/details?id=com.deriverge.tapkasa&referrer=utm_source%3Dweb%26utm_medium%3D' + m + '%26utm_campaign%3Dget';
+  if (/android/i.test(u)) location.replace(gp);
+  else if (/iphone|ipad|ipod/i.test(u) || (/macintosh/i.test(u) && navigator.maxTouchPoints > 1)) location.replace('https://apps.apple.com/app/id6807075649');
+})();
+</script>
+</head>
+<body>
+<div class="page">
+  <header class="top"><a class="brand" href="/tapkasa/pos.html"><span class="logo" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span><b>Tapkasa</b><small>Pocket POS</small></span></a></header>
+  <main>
+    <h1>Get Tapkasa</h1>
+    <p class="lede">Pick your store, or open the app right here in your browser.</p>
+    <div class="get">
+      <div class="stores">
+        <a class="as" href="https://apps.apple.com/app/id6807075649"><img src="/tapkasa/badge-appstore.svg" alt="Download on the App Store" width="156" height="52"></a>
+        <a class="gp" href="https://play.google.com/store/apps/details?id=com.deriverge.tapkasa&amp;referrer=utm_source%3Dweb%26utm_medium%3Dqr%26utm_campaign%3Dget"><img src="/tapkasa/badge-googleplay-en.png" alt="Get it on Google Play" width="199" height="77"></a>
+      </div>
+      <a class="btn try" href="/tapkasa/">Try it in the browser</a>
+    </div>
+  </main>
+  <footer><p><a href="/tapkasa/pos.html">About Tapkasa</a> &middot; <a href="/tapkasa/support.html#en">Support</a> &middot; deriverge s.r.o. &middot; <a href="mailto:info@deriverge.com">info@deriverge.com</a></p></footer>
+</div>
+</body>
+</html>

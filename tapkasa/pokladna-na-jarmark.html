@@ -3,64 +3,248 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Pokladna pro školní jarmark a vánoční trhy</title>
-<meta name="description" content="Jak zvládnout kasu na jarmarku: menu předem, prodej na tři ťuknutí, večer přesná tržba a doklad. Zdarma do 10 účtů denně.">
+<title>Pokladna na jarmark a farmářský trh do mobilu | Tapkasa</title>
+<meta name="description" content="Pokladna do mobilu na jarmark, farmářský nebo řemeslný trh: vlastní položky i jiná částka, vrácení spočítá aplikace, večer tržba po položkách. Bez internetu a bez registrace.">
 <link rel="canonical" href="https://deriverge.com/tapkasa/pokladna-na-jarmark.html">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/tapkasa/icon-192.png">
+<link rel="apple-touch-icon" href="/tapkasa/apple-touch-icon.png">
+<meta name="apple-itunes-app" content="app-id=6807075649">
+<meta name="theme-color" content="#FBFAF7">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Pokladna pro školní jarmark a vánoční trhy">
-<meta property="og:description" content="Jak zvládnout kasu na jarmarku: menu předem, prodej na tři ťuknutí, večer přesná tržba a doklad. Zdarma do 10 účtů denně.">
+<meta property="og:site_name" content="Tapkasa">
+<meta property="og:title" content="Pokladna na jarmark a farmářský trh">
+<meta property="og:description" content="Pokladna do mobilu na jarmark, farmářský nebo řemeslný trh: vlastní položky i jiná částka, vrácení spočítá aplikace, večer tržba po položkách. Bez internetu a bez registrace.">
 <meta property="og:url" content="https://deriverge.com/tapkasa/pokladna-na-jarmark.html">
 <meta property="og:image" content="https://deriverge.com/tapkasa/og.png">
-<style>
-  body{margin:0;background:#FBFAF7;color:#15120E;font:16px/1.68 -apple-system,"Segoe UI",Roboto,sans-serif}
-  main{max-width:680px;margin:0 auto;padding:36px 20px 60px}
-  .brand{display:flex;align-items:center;gap:14px;margin-bottom:30px}
-  .logo{width:46px;height:46px;border-radius:11px;background:#fff;border:1px solid #E4DFD5;display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:7px}
-  .logo i{border-radius:5px;display:block}
-  .brand b{font-size:17px;display:block;line-height:1.3}
-  .brand span{color:#6B6357;font-size:13px;display:block}
-  h1{font-size:30px;line-height:1.15;margin:0 0 6px;letter-spacing:-.01em;text-wrap:balance}
-  .muted{color:#6B6357;margin:0 0 22px}
-  h2{font-size:20px;margin:32px 0 8px}
-  ul,ol{padding-left:22px}
-  li{margin:7px 0}
-  p{margin:10px 0}
-  .badges{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:16px 0}
-  .badges img{height:48px;width:auto;display:block}
-  .tip{background:#fff;border:1px solid #E4DFD5;border-radius:12px;padding:14px 18px;margin:18px 0;font-size:15px}
-  a{color:#15120E}
-  footer{margin-top:52px;padding-top:18px;border-top:1px solid #E4DFD5;color:#6B6357;font-size:14px}
-  footer a{color:#6B6357}
-</style>
+<meta property="og:image:width" content="1024">
+<meta property="og:image:height" content="500">
+<meta property="og:image:alt" content="Tapkasa">
+<meta property="og:locale" content="cs_CZ">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="/tapkasa/landing.css?v=1">
+<script>(function(d,u){d.classList.add(/android/i.test(u)?'os-android':(/iphone|ipad|ipod/i.test(u)||(/macintosh/i.test(u)&&navigator.maxTouchPoints>1))?'os-ios':'os-desktop')})(document.documentElement,navigator.userAgent)</script>
+<script src="/tapkasa/landing.js?v=1" defer></script>
+<script type="application/ld+json">
+[
+ {
+  "@context": "https://schema.org",
+  "@type": "MobileApplication",
+  "name": "Tapkasa",
+  "operatingSystem": "iOS, Android",
+  "applicationCategory": "BusinessApplication",
+  "inLanguage": "cs",
+  "description": "Pokladna do mobilu pro stánky, trhy, jarmarky a spolkové akce. Počítá vrácení, řadí objednávky do fronty, eviduje vratné zálohy a funguje bez internetu. Data zůstávají v zařízení.",
+  "url": "https://deriverge.com/tapkasa/pokladna-na-jarmark.html",
+  "downloadUrl": "https://apps.apple.com/app/id6807075649",
+  "installUrl": "https://play.google.com/store/apps/details?id=com.deriverge.tapkasa",
+  "sameAs": [
+   "https://apps.apple.com/app/id6807075649",
+   "https://play.google.com/store/apps/details?id=com.deriverge.tapkasa"
+  ],
+  "image": "https://deriverge.com/tapkasa/icon-512.png",
+  "offers": {
+   "@type": "Offer",
+   "price": "0",
+   "priceCurrency": "CZK",
+   "description": "Zdarma 10 zaplacených účtů denně. Tapkasa Pro je předplatné v aplikaci (měsíční nebo roční)."
+  },
+  "publisher": {
+   "@type": "Organization",
+   "name": "deriverge s.r.o.",
+   "url": "https://deriverge.com/"
+  }
+ },
+ {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "inLanguage": "cs",
+  "mainEntity": [
+   {
+    "@type": "Question",
+    "name": "Vyplatí se Tapkasa i na jeden trh do roka?",
+    "acceptedAnswer": {
+     "@type": "Answer",
+     "text": "Ano. Verze zdarma nic nestojí a nemá žádný paušál, 10 zaplacených účtů denně malému stánku často stačí."
+    }
+   },
+   {
+    "@type": "Question",
+    "name": "Umí Tapkasa DPH?",
+    "acceptedAnswer": {
+     "@type": "Answer",
+     "text": "Souhrn tržeb v PDF obsahuje údaje prodejce a rozpis DPH. Není to ale daňový doklad ani účtenka pro zákazníka."
+    }
+   },
+   {
+    "@type": "Question",
+    "name": "Je Tapkasa zdarma?",
+    "acceptedAnswer": {
+     "@type": "Answer",
+     "text": "Ano, do 10 zaplacených účtů denně na jednom zařízení. Neomezené účtování a propojení dvou zařízení odemyká předplatné Tapkasa Pro, které si noví předplatitelé mohou 14 dní vyzkoušet zdarma."
+    }
+   },
+   {
+    "@type": "Question",
+    "name": "Je to registrační nebo fiskální pokladna?",
+    "acceptedAnswer": {
+     "@type": "Answer",
+     "text": "Ne. Tapkasa prodeje počítá a zaznamenává, ale není certifikovaná pokladna, neposílá data úřadům a nevystavuje daňové doklady."
+    }
+   },
+   {
+    "@type": "Question",
+    "name": "Kde jsou moje data?",
+    "acceptedAnswer": {
+     "@type": "Answer",
+     "text": "Jen ve vašem zařízení. Tapkasa nemá účty ani cloud. Zálohu si uložíte do souboru a na novém telefonu ji načtete."
+    }
+   },
+   {
+    "@type": "Question",
+    "name": "V jakých jazycích a měnách funguje?",
+    "acceptedAnswer": {
+     "@type": "Answer",
+     "text": "V devíti jazycích (čeština, slovenština, angličtina, němčina, polština, francouzština, italština, španělština a portugalština) a ve 33 měnách včetně korun a eur."
+    }
+   }
+  ]
+ },
+ {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+   {
+    "@type": "ListItem",
+    "position": 1,
+    "name": "Tapkasa",
+    "item": "https://deriverge.com/tapkasa/pokladna.html"
+   },
+   {
+    "@type": "ListItem",
+    "position": 2,
+    "name": "Pokladna na jarmark a farmářský trh",
+    "item": "https://deriverge.com/tapkasa/pokladna-na-jarmark.html"
+   }
+  ]
+ }
+]
+</script>
 </head>
 <body>
+<div class="page">
+  <header class="top">
+    <a class="brand" href="/tapkasa/pokladna.html"><span class="logo" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span><b>Tapkasa</b><small>Pokladna do kapsy</small></span></a>
+    
+  </header>
 <main>
-  <a href="pokladna.html" style="text-decoration:none;color:inherit"><div class="brand"><div class="logo" aria-hidden="true"><i style="background:#D6402A"></i><i style="background:#F5CE3E"></i><i style="background:#2158C4"></i><i style="background:#127A4E"></i></div><div><b>Tapkasa</b><span>Pokladna do kapsy</span></div></div></a>
-  <h1>Pokladna pro školní jarmark: jak mít večer jasno v tržbě</h1>
-  <p class="muted">Praktický postup pro jarmarky, vánoční trhy a spolkové akce, kde prodávají dobrovolníci.</p>
+  <nav class="crumbs" aria-label="Breadcrumb"><a href="/tapkasa/pokladna.html">Tapkasa</a> &rsaquo; <span>Pokladna na jarmark a farmářský trh</span></nav>
+  <section class="hero">
+    <div>
+      <p class="eyebrow">Řemeslné jarmarky, farmářské a bleší trhy</p>
+      <h1>Pokladna na jarmark a farmářský trh</h1>
+      <p class="lede">Prodáváte med, keramiku nebo koláče a nechcete tahat pokladnu ani platit paušál. Tapkasa v telefonu si pamatuje ceny, spočítá vrácení a večer ukáže, co se prodávalo nejvíc.</p>
+      <div class="get">
+        <div class="stores">
+          <a class="as" href="https://apps.apple.com/app/id6807075649"><img src="/tapkasa/badge-appstore.svg" alt="Stáhnout v App Store" width="156" height="52"></a>
+          <a class="gp cs" href="https://play.google.com/store/apps/details?id=com.deriverge.tapkasa&amp;referrer=utm_source%3Dweb%26utm_medium%3Dlanding%26utm_campaign%3Dtapkasa-cs-fair"><img src="/tapkasa/badge-googleplay-cs.png" alt="Nyní na Google Play" width="175" height="68"></a>
+        </div>
+        <a class="btn try" href="/tapkasa/">Vyzkoušet v prohlížeči</a>
+      </div>
+      <p class="qr"><img src="/tapkasa/qr-get.svg" alt="QR kód ke stažení aplikace Tapkasa" width="92" height="92" loading="lazy"><span>Namiřte fotoaparát telefonu na kód a stáhněte si Tapkasu.</span></p>
+      <p class="note">Zdarma 10 zaplacených účtů denně. Bez registrace.</p>
+    </div>
+    <div class="heroimg"><img src="/tapkasa/shot-prodej.png" alt="Prodejní obrazovka Tapkasy: barevné karty položek s cenami a částka k zaplacení" width="369" height="800" fetchpriority="high"></div>
+  </section>
 
-  <p>Jarmark má jednoduchá pravidla: prodává se pár věcí, u kasy se střídají lidé, kteří pokladnu nikdy neviděli, a večer chce někdo vědět, kolik se vybralo. Papírek a kasička fungují, dokud se nezačne stát fronta a dokud nikdo nechce přehled po položkách.</p>
+  <article class="prose">
+    <h2>Vlastní zboží i jiná částka</h2>
+    <p>Nejčastější zboží si uložte jako barevné karty. Na kus, který v menu není, je tlačítko „+ Jiná částka“: naťukáte cenu a účtujete dál.</p>
+    <h2>Víte, co se prodává</h2>
+    <p>Přehled ukáže prodané kusy po položkách. Po pár trzích vidíte, čeho vzít víc a co zůstává ležet.</p>
+    <h2>Hotově i kartou</h2>
+    <p>U hotovosti ťuknete na bankovku, kterou jste dostali, a vidíte, kolik vrátit. Pokud máte vlastní terminál, platbu kartou v Tapkase jen označíte a v přehledu ji uvidíte zvlášť.</p>
+    <h2>Jeden trh, jedna uzávěrka</h2>
+    <p>Tlačítkem Uzavřít akci tržbu uložíte do archivu a na dalším trhu začínáte od nuly. Souhrn tržeb za zvolené období vytvoříte jako PDF.</p>
+  </article>
 
-  <h2>1. Menu připravte předem</h2>
-  <p>Doma v klidu naťukejte položky: svařák, punč, perníčky, výrobky dětí. Každé dejte barvu, obsluha pak nehledá název, ale sahá po barevné kartě. Ceny volte tak, ať se dobře vrací: 30, 50, 80 korun.</p>
+  <h2>Jak to funguje</h2>
+  <ol class="steps">
+    <li><h3>Naťukejte si menu</h3><p>Každá položka má název, cenu a barvu. Zabere to pár minut doma, nebo začněte s ukázkovým menu.</p></li>
+    <li><h3>Ťukejte na karty</h3><p>Ťuknutí přidá kus, podržení ho odebere. Dole pořád vidíte, kolik má zákazník zaplatit.</p></li>
+    <li><h3>Hotově, nebo kartou</h3><p>U hotovosti Tapkasa spočítá vrácení. Kartu vezmete na vlastním terminálu a v Tapkase platbu jen označíte.</p></li>
+  </ol>
 
-  <h2>2. Kasu zvládne kdokoli</h2>
-  <p>Prodej je ťuknutí na kartu položky a volba hotově nebo kartou. U hotovosti pokladna sama spočítá, kolik vrátit, takže se u kasy nemusí počítat z hlavy ani při návalu. Omylem přidaný kus se odebere podržením karty.</p>
-
-  <h2>3. Večer bez počítání kasičky</h2>
-  <p>Přehled ukáže tržbu celkem, po položkách i rozdělení hotovost/karta. Souhrnný prodejní doklad vystavíte jako PDF a pošlete pokladníkovi spolku nebo do školy. Pokud jste plátci DPH, doklad rozepíše základ a daň sám.</p>
-
-  <div class="tip"><b>Kolik to stojí:</b> do 10 zaplacených účtů denně je Tapkasa zdarma, což na menší jarmark stačí. Na větší akci odemknete neomezené účtování na 14 dní zdarma.</div>
-
-  <h2>Stáhněte si Tapkasu</h2>
-  <div class="badges">
-    <a href="https://apps.apple.com/app/id6807075649"><img src="badge-appstore.svg" alt="Stáhnout v App Store"></a>
-    <a href="https://play.google.com/store/apps/details?id=com.deriverge.tapkasa"><img src="badge-googleplay-cs.png" alt="Nyní na Google Play"></a>
+  <h2>Co Tapkasa umí</h2>
+  <div class="grid">
+    <div class="card"><h3>Vrácení bez počítání</h3><p>Ťuknete na bankovku, kterou jste dostali, a vidíte, kolik vrátit.</p></div>
+    <div class="card"><h3>Fronta objednávek s čísly</h3><p>Zaplacený účet dostane číslo a čeká ve frontě, dokud ho neoznačíte jako vydaný.</p></div>
+    <div class="card"><h3>Kasa a výdej na dvou telefonech</h3><p>Druhé zařízení ukazuje objednávky a umí je číst nahlas. Propojení je součástí Tapkasa Pro.</p></div>
+    <div class="card"><h3>Funguje bez internetu</h3><p>Všechno běží v telefonu. Dva iPhony nebo dva telefony s Androidem se spojí i bez signálu.</p></div>
+    <div class="card"><h3>Vratné zálohy</h3><p>Záloha na hrnek nebo kelímek a její vrácení jako samostatné položky, v přehledu zvlášť.</p></div>
+    <div class="card"><h3>Data zůstávají u vás</h3><p>Žádný účet ani cloud. Zálohu dat si uložíte do souboru, kam chcete.</p></div>
   </div>
-  <p>Nebo si ji nejdřív <a href="index.html">vyzkoušejte v prohlížeči</a>, funguje bez instalace.</p>
 
-  <footer><a href="pokladna.html">O aplikaci Tapkasa</a> &middot; <a href="pokladna-na-festival.html">Pokladna na festival</a> &middot; <a href="support.html">Podpora</a><br>deriverge s.r.o.</footer>
+  <h2>Jak Tapkasa vypadá</h2>
+  <div class="shots">
+    <img src="/tapkasa/shot-prodej.png" alt="Prodejní obrazovka Tapkasy: barevné karty položek s cenami a částka k zaplacení" width="369" height="800" loading="lazy">
+    <img src="/tapkasa/shot-fronta.png" alt="Fronta objednávek s čísly na druhém telefonu" width="369" height="800" loading="lazy">
+    <img src="/tapkasa/shot-dph.png" alt="Souhrn tržeb s rozpisem DPH" width="369" height="800" loading="lazy">
+  </div>
+
+  <section class="isnot">
+    <h2>Co Tapkasa není</h2>
+    <ul>
+      <li>Není to fiskální ani certifikovaná pokladna a nic neposílá úřadům. Souhrn tržeb z Tapkasy není daňový doklad ani účtenka pro zákazníka.</li>
+      <li>Nezpracovává platby kartou. Kartu berete na vlastním terminálu, Tapkasa si prodej jen zapíše.</li>
+      <li>Netiskne účtenky ani lístky.</li>
+    </ul>
+    <p>Na stánky, jarmarky a příležitostný prodej to obvykle stačí. Jaké povinnosti máte právě vy, si ověřte u účetní nebo na finančním úřadě.</p>
+  </section>
+
+  <h2>Kolik Tapkasa stojí</h2>
+  <div class="prose">
+    <p>Zdarma: celé menu, přehledy, vratné zálohy i záloha dat na jednom zařízení a 10 zaplacených účtů denně. Účet, kterým jen vracíte zálohu, se do limitu nepočítá.</p>
+    <p>Tapkasa Pro: neomezený počet účtů a propojení kasy s výdejem. Je to předplatné na měsíc nebo na rok přes App Store nebo Google Play a noví předplatitelé mají 14 dní na zkoušku zdarma. Cenu ve své měně uvidíte v aplikaci před nákupem, zrušit ho můžete kdykoli v nastavení obchodu.</p>
+    <p>Stánku stačí jedno předplatné: druhý telefon se k zařízení s Tapkasa Pro připojí zdarma.</p>
+  </div>
+
+  <h2>Časté otázky</h2>
+  <div class="faq">
+    <details><summary>Vyplatí se Tapkasa i na jeden trh do roka?</summary><p>Ano. Verze zdarma nic nestojí a nemá žádný paušál, 10 zaplacených účtů denně malému stánku často stačí.</p></details>
+    <details><summary>Umí Tapkasa DPH?</summary><p>Souhrn tržeb v PDF obsahuje údaje prodejce a rozpis DPH. Není to ale daňový doklad ani účtenka pro zákazníka.</p></details>
+    <details><summary>Je Tapkasa zdarma?</summary><p>Ano, do 10 zaplacených účtů denně na jednom zařízení. Neomezené účtování a propojení dvou zařízení odemyká předplatné Tapkasa Pro, které si noví předplatitelé mohou 14 dní vyzkoušet zdarma.</p></details>
+    <details><summary>Je to registrační nebo fiskální pokladna?</summary><p>Ne. Tapkasa prodeje počítá a zaznamenává, ale není certifikovaná pokladna, neposílá data úřadům a nevystavuje daňové doklady.</p></details>
+    <details><summary>Kde jsou moje data?</summary><p>Jen ve vašem zařízení. Tapkasa nemá účty ani cloud. Zálohu si uložíte do souboru a na novém telefonu ji načtete.</p></details>
+    <details><summary>V jakých jazycích a měnách funguje?</summary><p>V devíti jazycích (čeština, slovenština, angličtina, němčina, polština, francouzština, italština, španělština a portugalština) a ve 33 měnách včetně korun a eur.</p></details>
+  </div>
+
+  <section class="cta">
+    <h2>Vyzkoušejte Tapkasu ještě před akcí</h2>
+    <div class="get">
+        <div class="stores">
+          <a class="as" href="https://apps.apple.com/app/id6807075649"><img src="/tapkasa/badge-appstore.svg" alt="Stáhnout v App Store" width="156" height="52"></a>
+          <a class="gp cs" href="https://play.google.com/store/apps/details?id=com.deriverge.tapkasa&amp;referrer=utm_source%3Dweb%26utm_medium%3Dlanding%26utm_campaign%3Dtapkasa-cs-fair-cta"><img src="/tapkasa/badge-googleplay-cs.png" alt="Nyní na Google Play" width="175" height="68"></a>
+        </div>
+        <a class="btn try" href="/tapkasa/">Vyzkoušet v prohlížeči</a>
+      </div>
+      <p class="qr"><img src="/tapkasa/qr-get.svg" alt="QR kód ke stažení aplikace Tapkasa" width="92" height="92" loading="lazy"><span>Namiřte fotoaparát telefonu na kód a stáhněte si Tapkasu.</span></p>
+    <p class="note">Zdarma 10 zaplacených účtů denně. Bez registrace.</p>
+  </section>
+
+  <h2>Další návody</h2>
+  <ul class="more">
+    <li><a href="/tapkasa/pokladna.html">Pokladna na stánek</a></li>
+    <li><a href="/tapkasa/pokladna-na-vanocni-trh.html">Pokladna na vánoční trhy</a></li>
+    <li><a href="/tapkasa/pokladna-pro-spolek.html">Pokladna pro spolek a školní akci</a></li>
+    <li><a href="/tapkasa/pokladna-na-festival.html">Pokladna na festival</a></li>
+  </ul>
 </main>
+  <footer>
+    <p><a href="/tapkasa/support.html#cs">Podpora</a> &middot; <a href="/tapkasa/privacy.html#cs">Soukromí</a> &middot; <a href="/tapkasa/terms.html#cs">Podmínky</a> &middot; <a href="/tapkasa/">Otevřít Tapkasu v prohlížeči</a></p>
+    <p>Jazyky: <a href="/tapkasa/sk/" lang="sk" hreflang="sk">Slovenčina</a> &middot; <a href="/tapkasa/pos.html" lang="en" hreflang="en">English</a> &middot; <a href="/tapkasa/de/" lang="de" hreflang="de">Deutsch</a> &middot; <a href="/tapkasa/pl/" lang="pl" hreflang="pl">Polski</a> &middot; <a href="/tapkasa/fr/" lang="fr" hreflang="fr">Français</a> &middot; <a href="/tapkasa/it/" lang="it" hreflang="it">Italiano</a> &middot; <a href="/tapkasa/es/" lang="es" hreflang="es">Español</a> &middot; <a href="/tapkasa/pt/" lang="pt-PT" hreflang="pt">Português</a></p>
+    <p>Provozovatel: <a href="/">deriverge s.r.o.</a> &middot; <a href="mailto:info@deriverge.com">info@deriverge.com</a></p>
+  </footer>
+</div>
+<div class="sticky"><span><b>Tapkasa</b><small>Pokladna do kapsy</small></span><a class="btn primary" href="https://play.google.com/store/apps/details?id=com.deriverge.tapkasa&amp;referrer=utm_source%3Dweb%26utm_medium%3Dlanding%26utm_campaign%3Dtapkasa-cs-fair-bar">Google Play</a></div>
 </body>
 </html>

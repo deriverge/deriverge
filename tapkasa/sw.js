@@ -1,7 +1,7 @@
 /* Kasa na stánek — offline cache.
    The stand may have no signal; once the app has been opened online it keeps working. */
 
-var CACHE = "kasa-v5";
+var CACHE = "kasa-v6";
 var SHELL = ["./", "./index.html", "./manifest.webmanifest",
   "./icon-192.png", "./icon-512.png", "./icon-maskable-512.png", "./apple-touch-icon.png",
   "./fonts/archivo-latin.woff2", "./fonts/archivo-latin-ext.woff2",
@@ -43,6 +43,10 @@ self.addEventListener("fetch", function (e) {
 
   // Page loads: fresh copy when online, cached copy when not.
   if (req.mode === "navigate") {
+    // Only the app itself. The landing pages next to it (pokladna.html, pos.html, de/ ...) share this
+    // scope: stored under "./index.html" they would replace the offline copy of the app.
+    var appPath = new URL("./", self.location.href).pathname;
+    if (url.pathname !== appPath && url.pathname !== appPath + "index.html") { return; }
     e.respondWith(
       fetch(req)
         .then(function (res) {
