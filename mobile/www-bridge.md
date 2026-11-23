@@ -80,7 +80,21 @@ Starší kódy (5 znaků nebo vlastní) jdou dál bez šifrování pod kódem sa
 ## Fakturace (`billing.js`)
 
 Stejný princip: globál `window.TapkasaBilling` s `getEntitlement()`,
-`purchase(product)`, `restore()`. Na nativní platformě jde přes
+`purchase(product)`, `purchasePass()`, `restore()`. Na nativní platformě jde přes
 `Capacitor.registerPlugin("Purchases")` (@revenuecat/purchases-capacitor,
 nativní část registruje `npx cap sync` sám); v prohlížeči všechno vrací
 `'free'`. Podrobnosti a klíče viz `README.md` a komentář v `billing.js`.
+
+### Pas na akci (od 1.3.0)
+
+| Hook | Směr | Co dělá |
+| --- | --- | --- |
+| `window.__kasaBuyPass()` | web → nativní | `billing.js`: `getProducts({ productIdentifiers: ["tapkasa.pass.event72"], type: "NON_SUBSCRIPTION" })` a `purchaseStoreProduct`; zrušení mlčí, chyba jde do `__kasaBillingFail("pass" \| "offering", kód, text)` |
+| `window.__kasaPass({ tx, src, buy, at })` | nativní → web | transakce pasu z `CustomerInfo.nonSubscriptionTransactions` (`tx: [{ id, t }]`), `src` `"start"` \| `"buy"` \| `"restore"`, `buy` = id právě koupené transakce, `at` = `requestDate` serveru RevenueCat |
+| `window.__KASA_PRICES__.pass` | nativní → web | `priceString` pasu z obchodu (načítá `__kasaLoadPrices`) |
+
+Kolik pasů je nevyužitých a kdy který běží, drží stránka (`state.pass`);
+most jen nakupuje a hlásí transakce. Bez `__kasaBuyPass` (web, starší most)
+se pas nenabízí. Po startu a po návratu do popředí (nejvýš jednou za
+minutu) most znovu načte CustomerInfo, takže se připíše i nákup schválený
+později.

@@ -130,6 +130,14 @@ v `billing.js`).
   v klientu. Tajný (secret) klíč do aplikace nikdy nepatří.
 - Testovací nákupy jsou v RevenueCat vidět až po zapnutí přepínače
   Sandbox data.
+- **Pas na akci** (od 1.3.0): spotřebovatelný produkt `tapkasa.pass.event72`
+  (App Store CONSUMABLE, Google Play jednorázový produkt s možností
+  nákupu `event72`). Aplikace ho kupuje přímo (`getProducts` +
+  `purchaseStoreProduct`), v nabídce být nemusí. V RevenueCat musí mít typ
+  Consumable (SDK ho na Androidu po nákupu spotřebuje) a **nesmí být
+  v entitlementu `pro`**, jinak by Pro odemkl natrvalo. Založení v obou
+  obchodech: `node store/tool/create-pass-products.mjs` (nanečisto),
+  `… --go` (zápis).
 
 Web volá `__kasaBuy`, `__kasaRestore`, výsledek přichází přes
 `__kasaEntitlement`, ceny přes `__KASA_PRICES__`. V prohlížeči (mimo
