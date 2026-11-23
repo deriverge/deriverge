@@ -6,7 +6,7 @@ hotově či kartou, fronta objednávek, přehled tržby. Jeden soubor, žádný 
 a Google Play (nativní obal je v `../mobile/`, podklady pro obchody v `../store/`).
 
 Webová verze běží na `https://www.deriverge.com/tapkasa/`. Aktuální verze
-aplikace: **1.0.9**.
+aplikace: **1.1.0**.
 
 ## První spuštění
 
@@ -14,13 +14,20 @@ Nová instalace projde dvoukrokovým úvodem: výběr jazyka (9 jazyků: češti
 slovenština, angličtina, němčina, francouzština, španělština, italština,
 polština, portugalština) a měny (33 měn, každá s vlastními bankovkami pro
 vracení a počtem desetinných míst). Druhý krok vysvětlí ovládání a nabídne
-ukázkové menu, nebo prázdný start. Jazyk i měnu jde kdykoliv změnit v Menu;
-existující instalace úvod nikdy neuvidí.
+ukázkové menu (kavárna), ukázkové menu z vánočního trhu (svařák, punč,
+trdelník nebo místní obdoba, horká čokoláda, klobása, záloha na hrnek a její
+vrácení; názvy podle jazyka, ceny podle měny), nebo prázdný start. U dolaru
+(USD, CAD) nabídne jednou větou daň připočtenou při placení, výchozí zůstává
+cena včetně daně. Jazyk i měnu jde kdykoliv změnit v Menu; existující
+instalace úvod nikdy neuvidí.
 
 ## Tarify
 
 - **Zdarma**: všechno na jednom zařízení, 10 zaplacených účtů denně.
-  Počítadlo je v prodejní liště; o půlnoci se nuluje.
+  Počítadlo je v prodejní liště; o půlnoci se nuluje. Po vyčerpání jde
+  rozpracovaný účet dokončit: se signálem jednou denně tento jeden účet,
+  bez signálu (nebo když nákup selže) poprvé s rezervou +10 plateb na ten
+  den (jednou za instalaci), potom jeden účet denně.
 - **Tapkasa Pro** (předplatné přes App Store / Google Play): neomezené platby
   a párování více zařízení. Kód smí *vytvořit* jen Pro; *připojit se* může
   zařízení zdarma, objednávky ale začne brát až po pozdravu od zařízení s Pro
@@ -42,6 +49,11 @@ existující instalace úvod nikdy neuvidí.
 2. **Zaplatit**: částka a dvě tlačítka. U *Hotově* naťukáte přijaté peníze
    (bankovky podle zvolené měny) a aplikace spočítá vrácení; nedoplatek chce
    druhé, výslovné potvrzení. Částka k vrácení zůstane i v hlášce po zaplacení.
+   S připočtenou daní ukáže účet i okno placení mezisoučet, daň a celkem.
+   Se zapnutým spropitným nabídne Bez spropitného, 10, 15, 20 % (s částkou)
+   a Jinou částku; počítá se z ceny zboží bez připočtené daně a bez záloh
+   (americká etiketa radí z částky před daní) a u hotovosti se přičte
+   k částce k zaplacení i k výpočtu vrácení.
 3. **Objednávky**: zaplacený účet se zařadí do fronty s číslem; položky se
    odškrtávají, `Vydáno` uzavře, od dvou čekajících jde `Vydat vše`. V hlavičce
    je pořád vidět počet čekajících. Kdo vydává zboží hned při placení, frontu
@@ -52,11 +64,20 @@ existující instalace úvod nikdy neuvidí.
    a vynuluje. `Souhrn tržeb (PDF)` sestaví souhrn
    za zvolené období (s údaji prodejce a rozpisem DPH; jde poslat e-mailem,
    sdílet, uložit nebo zkopírovat). Není to daňový doklad ani účtenka pro
-   zákazníka, Tapkasa není fiskální pokladna.
+   zákazníka, Tapkasa není fiskální pokladna. Tržba je zboží včetně daně;
+   připočtená daň a spropitné (mimo tržbu, hotově a kartou zvlášť) mají
+   v přehledu, textu souhrnu, PDF i v uzavřené akci vlastní řádek.
 5. **Menu**: na kase nejdřív název akce a položky (ceny podle měny, nová
    položka dostane první volnou ze 14 barev, nebo vlastní barva z kolečka;
    Enter vede z názvu na cenu a na další řádek), pak fronta, údaje prodejce,
-   role zařízení (Kasa/Výdej) s párováním a hlasem, jazyk, měna, záloha dat.
+   daň, spropitné, role zařízení (Kasa/Výdej) s párováním a hlasem, jazyk,
+   měna, záloha dat. Daň: „Ceny zahrnují daň“ (výchozí; plátce DPH zadává
+   sazby u položek a souhrn rozpočítá základ a daň), nebo „Daň se připočte
+   při placení“ s jednou sazbou na zařízení (až tři desetinná místa); u položky
+   jde daň vypnout tlačítkem vedle ceny, vratné zálohy se nedaní, dokud je
+   někdo nezapne. Daň se počítá z celého účtu a zaokrouhluje jednou na
+   desetinná místa měny, polovina nahoru. Spropitné je výchozí vypnuté.
+   Ukázkové menu z vánočního trhu jde nahrát i tady.
    Poděkování nahlas na kase a čtení objednávek na výdeji mají každé vlastní
    přepínač; poděkování je u nové instalace vypnuté.
 
@@ -92,6 +113,13 @@ potvrdit. Objednávky se přenášejí:
 
 Sloučení podle `id` a novějšího `updatedAt`, na pořadí zpráv nezáleží,
 výpadek se dorovná. Výdej má díky tomu kopii prodejů (záloha mimo iPad).
+
+Od 1.1.0 nese účtenka volitelná pole `tax`, `taxRate`, `taxBase` (připočtená
+daň) a `tip` (spropitné), řádek `tx` (0 bez daně, 1 s daní); převzetí menu
+nese `taxAdd`, `taxRate`, `tips` a `tx` u položek. Starší verze je ignorují
+a `total` (zboží s daní, bez spropitného) jim sedí; když účtenku po
+odškrtnutí vrátí, kasa o daň ani spropitné nepřijde, a od starší verze
+převzaté menu nechá vlastní nastavení daně a spropitného.
 
 ## Data
 

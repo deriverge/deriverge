@@ -557,6 +557,32 @@
   .edit .e-pr.neg{color:var(--accent)}
   .hero .meta.dep{color:var(--ink-2)}
   .ob-note.ob-free{color:var(--ink-2);font-weight:600}
+
+  /* ---------- daň připočtená k ceně a spropitné ---------- */
+  .line.tot{padding-top:6px;padding-bottom:6px;background:var(--paper)}
+  .line.tot .nm,.line.tot .amt{font-size:13px;color:var(--ink-2)}
+  .brk{display:grid;grid-template-columns:1fr auto;gap:2px 12px;margin:8px 0 0;font-size:13px;line-height:1.45;color:var(--ink-2)}
+  .brk .v{font-family:var(--mono);font-variant-numeric:tabular-nums;font-weight:600;text-align:right}
+  .tipl{margin:16px 0 6px;font-size:11px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3)}
+  .tips{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
+  .tips button{grid-column:span 2;min-height:46px;padding:7px 4px;border:1px solid var(--rule);border-radius:var(--r-btn);
+    background:var(--surface);font-size:15px;font-weight:700;line-height:1.2;color:var(--ink);overflow-wrap:anywhere}
+  .tips button.w3{grid-column:span 3;font-size:14px;font-weight:600;color:var(--ink-2)}
+  .tips button .a{display:block;margin-top:2px;font-family:var(--mono);font-size:12px;font-weight:600;color:var(--ink-3)}
+  .tips button.on{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+  .tips button.on .a{color:var(--paper)}
+  .edit .etx{flex:0 0 auto;min-width:58px;height:40px;padding:0 6px;border:1px solid var(--rule);border-radius:8px;
+    background:var(--surface);font-family:var(--mono);font-size:12px;font-weight:700;color:var(--ink-2);white-space:nowrap}
+  .edit .etx.off{background:var(--sunk);color:var(--ink-3);font-family:inherit;font-weight:600}
+  .taxrate{display:flex;align-items:center;gap:8px;padding:4px 16px 4px}
+  .taxrate label{flex:1;min-width:0;font-size:14px;font-weight:600;color:var(--ink-2)}
+  .taxrate .inp{width:96px;flex:0 0 auto;text-align:right;font-family:var(--mono);font-weight:700}
+  .taxrate .pc{font-family:var(--mono);font-weight:700;color:var(--ink-2)}
+  .seg.tight button{padding:11px 8px;font-size:14px;line-height:1.25}
+  .ob-tax{margin:18px 0 0;padding:12px;border:1px solid var(--rule);border-radius:var(--r-tile);background:var(--surface)}
+  .ob-tax p{margin:0;font-size:13px;line-height:1.45;color:var(--ink-2)}
+  .ob-tax .act{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;margin-top:10px}
+  .ob-tax .taxrate{padding:10px 0 0}
   .pw-legal{padding:6px 4px 0;text-align:center;font-size:12px;color:var(--ink-3)}
   .pw-legal a{color:var(--ink-3);text-decoration:underline;text-underline-offset:2px}
   /* webová verze: Pro se kupuje v aplikaci, odkazy do obchodů a QR kódy */
@@ -1113,7 +1139,7 @@
     toastEnterCode: "Zadejte kód z druhého zařízení (8 znaků)",
     toastResent: "Fronta odeslána znovu",
     setupImportBtn: "Převzít menu a údaje z druhého zařízení",
-    setupImportAsk: ["Převzít nastavení?", "Menu, ceny, barvy, DPH, měna a údaje prodejce se na tomto zařízení nahradí kopií z druhého zařízení. Objednávky zůstanou.", "Převzít"],
+    setupImportAsk: ["Převzít nastavení?", "Menu, ceny, barvy, DPH, spropitné, měna a údaje prodejce se na tomto zařízení nahradí kopií z druhého zařízení. Objednávky zůstanou.", "Převzít"],
     setupImportWait: "Žádost odeslána. Potvrďte ji na druhém zařízení.",
     setupImportDone: "Menu a údaje převzaty z druhého zařízení.",
     toastModeKasa: "Zařízení je teď kasa",
@@ -1268,7 +1294,7 @@
     pairBadCheck: "Kód nesedí. Zkontrolujte ho znak po znaku.",
     pairOldCode: "Tento kód je ze starší verze Tapkasy. Aktualizujte druhé zařízení a vytvořte na něm nový kód.",
     pairNoCrypto: "Toto zařízení neumí šifrované párování. Aktualizujte systém nebo prohlížeč.",
-    setupSendAsk: ["Poslat menu a údaje?", "Druhé zařízení se stejným kódem žádá o kopii menu, cen, DPH, měny a údajů prodejce. Pošlete ji, jen pokud to zařízení znáte.", "Poslat"],
+    setupSendAsk: ["Poslat menu a údaje?", "Druhé zařízení se stejným kódem žádá o kopii menu, cen, DPH, spropitného, měny a údajů prodejce. Pošlete ji, jen pokud to zařízení znáte.", "Poslat"],
     setupSendLate: "Žádost už vypršela. Ať ji druhé zařízení pošle znovu.",
     setupSent: "Menu a údaje odeslány.",
     diagShow: "Podrobnosti spojení",
@@ -1325,7 +1351,46 @@
     proChoose: "Vybrat",
     proTryRow: "Vyzkoušet Pro {0} zdarma",
     pairEnterHere: "Na druhém zařízení otevřete {0}, opište tento kód a ťukněte na {1}.",
-    pairBothKasa: "Obě zařízení jsou teď nastavená jako {0}. Má-li tohle jen vydávat objednávky, přepněte ho na {1}."
+    pairBothKasa: "Obě zařízení jsou teď nastavená jako {0}. Má-li tohle jen vydávat objednávky, přepněte ho na {1}.",
+    taxModeIncl: "Ceny zahrnují daň",
+    taxModeAdd: "Daň se připočte při placení",
+    taxRateLbl: "Sazba daně",
+    taxRateAria: "Sazba daně v procentech",
+    taxNoRate: "Zadejte sazbu, jinak se k ceně nic nepřičte.",
+    taxAddHint: "Ceny v menu zadáváte bez daně. Při placení se daň spočítá z celého účtu a přičte se; účet ukáže mezisoučet, daň a celkem. Položku bez daně přepnete tlačítkem vedle ceny, vratné zálohy se nedaní.",
+    taxItemOn: "Položka se daní. Ťuknutím daň vypnete.",
+    taxItemOff: "Položka bez daně. Ťuknutím daň zapnete.",
+    subtotal: "Mezisoučet",
+    taxLine: "Daň {0} %",
+    withTax: "s daní",
+    taxInclSum: "Z toho připočtená daň: {0}",
+    tipsHead: "Spropitné",
+    tipsOn: "Spropitné při placení zapnuté",
+    tipsOff: "Spropitné při placení vypnuté",
+    tipsHint: "Při placení se nabídne 10, 15 nebo 20 % z ceny zboží (bez připočtené daně a záloh), nebo jiná částka. Spropitné se nepočítá do tržby za zboží ani do daně, přehled i souhrn ho ukazují zvlášť.",
+    tipNone: "Bez spropitného",
+    tipCustomHint: "Částka, kterou zákazník přidá navíc k účtu.",
+    tipSet: "Použít",
+    tipIncl: "Z toho spropitné {0}",
+    toastTip: "spropitné {0}",
+    tipsLine: "Spropitné mimo tržbu: {0} (hotově {1}, kartou {2})",
+    docTips: "Spropitné mimo tržbu",
+    obTaxAsk: "Ceny bez daně a daň až při placení, jak je zvykem v USA a Kanadě? Zapnout to můžete tady, nebo později v {0}.",
+    graceHint: "Zákazník čeká? Jednou denně dokončíte rozpracovaný účet i po vyčerpání limitu.",
+    graceNote: "Další účty dnes už jen s Tapkasa Pro.",
+    graceDone: "Denní limit je vyčerpaný, tento účet ale dokončíte.",
+    obXmas: "Ukázkové menu z vánočního trhu",
+    xmasMenu: "Menu z vánočního trhu",
+    confirmXmas: ["Menu z vánočního trhu", "Celý seznam položek se nahradí ukázkovým menu z vánočního trhu, i se zálohou na hrnek. Uložené prodeje zůstanou.", "Nahradit"],
+    xmasEvent: "Vánoční trh",
+    x_mulled: "Svařák",
+    x_punch: "Punč",
+    x_pastry: "Trdelník",
+    x_choco: "Horká čokoláda",
+    x_sausage: "Klobása",
+    x_dep: "Záloha na hrnek",
+    x_ret: "Vrácení hrnku"
+
   };
 
   I18N.en = {
@@ -1546,7 +1611,7 @@
     toastEnterCode: "Enter the code from the other device (8 characters)",
     toastResent: "Queue sent again",
     setupImportBtn: "Copy menu and details from the other device",
-    setupImportAsk: ["Copy settings?", "The menu, prices, colours, VAT, currency and seller details on this device will be replaced with a copy from the other device. Orders stay.", "Copy"],
+    setupImportAsk: ["Copy settings?", "The menu, prices, colours, VAT, tips, currency and seller details on this device will be replaced with a copy from the other device. Orders stay.", "Copy"],
     setupImportWait: "Request sent. Confirm it on the other device.",
     setupImportDone: "Menu and details copied from the other device.",
     toastModeKasa: "This device is now the till",
@@ -1703,7 +1768,7 @@
     pairBadCheck: "The code does not match. Check it character by character.",
     pairOldCode: "This code comes from an older version of Tapkasa. Update the other device and create a new code on it.",
     pairNoCrypto: "This device does not support encrypted pairing. Please update the system or browser.",
-    setupSendAsk: ["Send menu and details?", "The other device with the same code is asking for a copy of the menu, prices, VAT, currency and seller details. Only send it if you know that device.", "Send"],
+    setupSendAsk: ["Send menu and details?", "The other device with the same code is asking for a copy of the menu, prices, VAT, tips, currency and seller details. Only send it if you know that device.", "Send"],
     setupSendLate: "The request has expired. Ask the other device to send it again.",
     setupSent: "Menu and details sent.",
     diagShow: "Connection details",
@@ -1760,7 +1825,46 @@
     proChoose: "Choose",
     proTryRow: "Try Pro free for {0}",
     pairEnterHere: "On the other device open {0}, enter this code and tap {1}.",
-    pairBothKasa: "Both devices are set to {0}. If this one should only hand out orders, switch it to {1}."
+    pairBothKasa: "Both devices are set to {0}. If this one should only hand out orders, switch it to {1}.",
+    taxModeIncl: "Prices include tax",
+    taxModeAdd: "Add tax at checkout",
+    taxRateLbl: "Tax rate",
+    taxRateAria: "Tax rate in percent",
+    taxNoRate: "Enter a rate, otherwise nothing is added to the price.",
+    taxAddHint: "Enter menu prices without tax. At checkout the tax is worked out on the whole order and added on top; the order shows subtotal, tax and total. Switch an item to no tax with the button next to its price; refundable deposits aren’t taxed.",
+    taxItemOn: "Item is taxed. Tap to turn tax off.",
+    taxItemOff: "Item has no tax. Tap to turn tax on.",
+    subtotal: "Subtotal",
+    taxLine: "Tax {0}%",
+    withTax: "incl. tax",
+    taxInclSum: "Including tax added at checkout: {0}",
+    tipsHead: "Tip",
+    tipsOn: "Tips at checkout on",
+    tipsOff: "Tips at checkout off",
+    tipsHint: "At checkout you can offer 10, 15 or 20% of the goods (before any tax added at checkout, without deposits), or another amount. Tips don’t count towards sales or tax; the stats and the summary show them separately.",
+    tipNone: "No tip",
+    tipCustomHint: "The amount the customer adds on top of the order.",
+    tipSet: "Add tip",
+    tipIncl: "Includes a {0} tip",
+    toastTip: "tip {0}",
+    tipsLine: "Tips, not in sales: {0} (cash {1}, card {2})",
+    docTips: "Tips, not in sales",
+    obTaxAsk: "Prices without tax and tax added at checkout, as usual in the US and Canada? Turn it on here, or later in {0}.",
+    graceHint: "Customer waiting? Once a day you can finish the current order even after the limit.",
+    graceNote: "Further orders today need Tapkasa Pro.",
+    graceDone: "Today’s free limit is used up, but you can finish this order.",
+    obXmas: "Sample menu: Christmas market",
+    xmasMenu: "Christmas market menu",
+    confirmXmas: ["Christmas market menu", "The whole item list is replaced with a sample Christmas market menu, mug deposit included. Saved sales stay.", "Replace"],
+    xmasEvent: "Christmas market",
+    x_mulled: "Mulled wine",
+    x_punch: "Mulled cider",
+    x_pastry: "Mince pies",
+    x_choco: "Hot chocolate",
+    x_sausage: "Bratwurst",
+    x_dep: "Mug deposit",
+    x_ret: "Mug return"
+
   };
 
   // ==== strojově vkládané překlady (gen-i18n.cjs) ====
@@ -1984,7 +2088,7 @@
     toastEnterCode: "Zadajte kód z druhého zariadenia (8 znakov)",
     toastResent: "Objednávky odoslané znova",
     setupImportBtn: "Prevziať menu a údaje z druhého zariadenia",
-    setupImportAsk: ["Prevziať nastavenia?", "Menu, ceny, farby, DPH, mena a údaje predajcu sa na tomto zariadení nahradia kópiou z druhého zariadenia. Objednávky zostanú.", "Prevziať"],
+    setupImportAsk: ["Prevziať nastavenia?", "Menu, ceny, farby, DPH, prepitné, mena a údaje predajcu sa na tomto zariadení nahradia kópiou z druhého zariadenia. Objednávky zostanú.", "Prevziať"],
     setupImportWait: "Žiadosť odoslaná. Potvrďte ju na druhom zariadení.",
     setupImportDone: "Menu a údaje prevzaté z druhého zariadenia.",
     toastModeKasa: "Zariadenie je teraz kasa",
@@ -2139,7 +2243,7 @@
     pairBadCheck: "Kód nesedí. Skontrolujte ho znak po znaku.",
     pairOldCode: "Tento kód je zo staršej verzie Tapkasy. Aktualizujte druhé zariadenie a vytvorte na ňom nový kód.",
     pairNoCrypto: "Toto zariadenie nepodporuje šifrované párovanie. Aktualizujte systém alebo prehliadač.",
-    setupSendAsk: ["Poslať menu a údaje?", "Druhé zariadenie s rovnakým kódom žiada o kópiu menu, cien, DPH, meny a údajov predajcu. Pošlite ju, len ak to zariadenie poznáte.", "Poslať"],
+    setupSendAsk: ["Poslať menu a údaje?", "Druhé zariadenie s rovnakým kódom žiada o kópiu menu, cien, DPH, prepitného, meny a údajov predajcu. Pošlite ju, len ak to zariadenie poznáte.", "Poslať"],
     setupSendLate: "Žiadosť už vypršala. Nech ju druhé zariadenie pošle znova.",
     setupSent: "Menu a údaje odoslané.",
     diagShow: "Podrobnosti spojenia",
@@ -2196,7 +2300,46 @@
     proChoose: "Vybrať",
     proTryRow: "Vyskúšať Pro {0} zadarmo",
     pairEnterHere: "Na druhom zariadení otvorte {0}, opíšte tento kód a ťuknite na {1}.",
-    pairBothKasa: "Obe zariadenia sú teraz nastavené ako {0}. Ak má toto len vydávať objednávky, prepnite ho na {1}."
+    pairBothKasa: "Obe zariadenia sú teraz nastavené ako {0}. Ak má toto len vydávať objednávky, prepnite ho na {1}.",
+    taxModeIncl: "Ceny zahŕňajú daň",
+    taxModeAdd: "Daň sa pripočíta pri platení",
+    taxRateLbl: "Sadzba dane",
+    taxRateAria: "Sadzba dane v percentách",
+    taxNoRate: "Zadajte sadzbu, inak sa k cene nič nepripočíta.",
+    taxAddHint: "Ceny v menu zadávate bez dane. Pri platení sa daň vypočíta z celého účtu a pripočíta sa; účet ukáže medzisúčet, daň a spolu. Položku bez dane prepnete tlačidlom vedľa ceny, vratné zálohy sa nedania.",
+    taxItemOn: "Položka sa daní. Ťuknutím daň vypnete.",
+    taxItemOff: "Položka bez dane. Ťuknutím daň zapnete.",
+    subtotal: "Medzisúčet",
+    taxLine: "Daň {0} %",
+    withTax: "s daňou",
+    taxInclSum: "Z toho pripočítaná daň: {0}",
+    tipsHead: "Prepitné",
+    tipsOn: "Prepitné pri platení zapnuté",
+    tipsOff: "Prepitné pri platení vypnuté",
+    tipsHint: "Pri platení sa ponúkne 10, 15 alebo 20 % z ceny tovaru (bez pripočítanej dane a záloh), alebo iná suma. Prepitné sa nepočíta do tržby za tovar ani do dane, prehľad aj súhrn ho ukazujú zvlášť.",
+    tipNone: "Bez prepitného",
+    tipCustomHint: "Suma, ktorú zákazník pridá navyše k účtu.",
+    tipSet: "Použiť",
+    tipIncl: "Z toho prepitné {0}",
+    toastTip: "prepitné {0}",
+    tipsLine: "Prepitné mimo tržby: {0} (v hotovosti {1}, kartou {2})",
+    docTips: "Prepitné mimo tržby",
+    obTaxAsk: "Ceny bez dane a daň až pri platení, ako je zvykom v USA a Kanade? Zapnúť to môžete tu, alebo neskôr v {0}.",
+    graceHint: "Zákazník čaká? Raz denne dokončíte rozpracovaný účet aj po vyčerpaní limitu.",
+    graceNote: "Ďalšie účty dnes už len s Tapkasa Pro.",
+    graceDone: "Denný limit je vyčerpaný, tento účet však dokončíte.",
+    obXmas: "Ukážkové menu z vianočných trhov",
+    xmasMenu: "Menu z vianočných trhov",
+    confirmXmas: ["Menu z vianočných trhov", "Celý zoznam položiek sa nahradí ukážkovým menu z vianočných trhov, aj so zálohou za hrnček. Uložené predaje zostanú.", "Nahradiť"],
+    xmasEvent: "Vianočné trhy",
+    x_mulled: "Varené víno",
+    x_punch: "Punč",
+    x_pastry: "Lokše",
+    x_choco: "Horúca čokoláda",
+    x_sausage: "Klobása",
+    x_dep: "Záloha za hrnček",
+    x_ret: "Vrátenie hrnčeka"
+
   };
 
   I18N.de = {
@@ -2419,7 +2562,7 @@
     toastEnterCode: "Code vom anderen Gerät eingeben (8 Zeichen)",
     toastResent: "Warteschlange erneut gesendet",
     setupImportBtn: "Menü und Daten vom anderen Gerät übernehmen",
-    setupImportAsk: ["Einstellungen übernehmen?", "Menü, Preise, Farben, Umsatzsteuer, Währung und Verkäuferangaben auf diesem Gerät werden durch eine Kopie vom anderen Gerät ersetzt. Bestellungen bleiben.", "Übernehmen"],
+    setupImportAsk: ["Einstellungen übernehmen?", "Menü, Preise, Farben, Umsatzsteuer, Trinkgeld, Währung und Verkäuferangaben auf diesem Gerät werden durch eine Kopie vom anderen Gerät ersetzt. Bestellungen bleiben.", "Übernehmen"],
     setupImportWait: "Anfrage gesendet. Bitte am anderen Gerät bestätigen.",
     setupImportDone: "Menü und Daten vom anderen Gerät übernommen.",
     toastModeKasa: "Dieses Gerät ist jetzt die Kasse",
@@ -2574,7 +2717,7 @@
     pairBadCheck: "Der Code stimmt nicht. Bitte Zeichen für Zeichen prüfen.",
     pairOldCode: "Dieser Code stammt aus einer älteren Tapkasa-Version. Aktualisieren Sie das andere Gerät und erstellen Sie dort einen neuen Code.",
     pairNoCrypto: "Dieses Gerät unterstützt keine verschlüsselte Kopplung. Bitte System oder Browser aktualisieren.",
-    setupSendAsk: ["Menü und Angaben senden?", "Das andere Gerät mit demselben Code bittet um eine Kopie von Menü, Preisen, Umsatzsteuer, Währung und Verkäuferangaben. Senden Sie sie nur, wenn Sie das Gerät kennen.", "Senden"],
+    setupSendAsk: ["Menü und Angaben senden?", "Das andere Gerät mit demselben Code bittet um eine Kopie von Menü, Preisen, Umsatzsteuer, Trinkgeld, Währung und Verkäuferangaben. Senden Sie sie nur, wenn Sie das Gerät kennen.", "Senden"],
     setupSendLate: "Die Anfrage ist abgelaufen. Bitte am anderen Gerät erneut senden.",
     setupSent: "Menü und Angaben gesendet.",
     diagShow: "Verbindungsdetails",
@@ -2631,7 +2774,46 @@
     proChoose: "Wählen",
     proTryRow: "Pro {0} gratis testen",
     pairEnterHere: "Öffnen Sie auf dem anderen Gerät {0}, geben Sie diesen Code ein und tippen Sie auf {1}.",
-    pairBothKasa: "Beide Geräte sind gerade als {0} eingestellt. Soll dieses nur Bestellungen ausgeben, stellen Sie es auf {1} um."
+    pairBothKasa: "Beide Geräte sind gerade als {0} eingestellt. Soll dieses nur Bestellungen ausgeben, stellen Sie es auf {1} um.",
+    taxModeIncl: "Preise inklusive Steuer",
+    taxModeAdd: "Steuer beim Bezahlen aufschlagen",
+    taxRateLbl: "Steuersatz",
+    taxRateAria: "Steuersatz in Prozent",
+    taxNoRate: "Geben Sie einen Satz ein, sonst wird nichts aufgeschlagen.",
+    taxAddHint: "Menüpreise geben Sie ohne Steuer ein. Beim Bezahlen wird die Steuer auf die ganze Bestellung berechnet und aufgeschlagen; die Bestellung zeigt Zwischensumme, Steuer und Gesamt. Steuerfreie Artikel schalten Sie mit der Taste neben dem Preis um, Pfand wird nicht besteuert.",
+    taxItemOn: "Artikel wird besteuert. Tippen schaltet die Steuer aus.",
+    taxItemOff: "Artikel ohne Steuer. Tippen schaltet die Steuer ein.",
+    subtotal: "Zwischensumme",
+    taxLine: "Steuer {0} %",
+    withTax: "inkl. Steuer",
+    taxInclSum: "Davon aufgeschlagene Steuer: {0}",
+    tipsHead: "Trinkgeld",
+    tipsOn: "Trinkgeld beim Bezahlen an",
+    tipsOff: "Trinkgeld beim Bezahlen aus",
+    tipsHint: "Beim Bezahlen werden 10, 15 oder 20 % vom Warenwert angeboten (ohne aufgeschlagene Steuer und Pfand), oder ein anderer Betrag. Trinkgeld zählt weder zum Warenumsatz noch zur Steuer; Übersicht und Bericht zeigen es getrennt.",
+    tipNone: "Kein Trinkgeld",
+    tipCustomHint: "Der Betrag, den der Kunde zusätzlich zur Bestellung gibt.",
+    tipSet: "Übernehmen",
+    tipIncl: "Davon Trinkgeld {0}",
+    toastTip: "Trinkgeld {0}",
+    tipsLine: "Trinkgeld, nicht im Umsatz: {0} (bar {1}, Karte {2})",
+    docTips: "Trinkgeld, nicht im Umsatz",
+    obTaxAsk: "Preise ohne Steuer und Steuer erst beim Bezahlen, wie in den USA und Kanada üblich? Das schalten Sie hier ein oder später im {0}.",
+    graceHint: "Kunde wartet? Einmal am Tag schließen Sie die angefangene Bestellung auch nach dem Limit ab.",
+    graceNote: "Weitere Bestellungen heute nur mit Tapkasa Pro.",
+    graceDone: "Das Tageslimit ist aufgebraucht, diese Bestellung schließen Sie aber noch ab.",
+    obXmas: "Beispielmenü Weihnachtsmarkt",
+    xmasMenu: "Menü Weihnachtsmarkt",
+    confirmXmas: ["Menü Weihnachtsmarkt", "Die ganze Artikelliste wird durch ein Beispielmenü vom Weihnachtsmarkt ersetzt, mit Tassenpfand. Gespeicherte Verkäufe bleiben.", "Ersetzen"],
+    xmasEvent: "Weihnachtsmarkt",
+    x_mulled: "Glühwein",
+    x_punch: "Kinderpunsch",
+    x_pastry: "Waffel",
+    x_choco: "Heiße Schokolade",
+    x_sausage: "Bratwurst",
+    x_dep: "Tassenpfand",
+    x_ret: "Pfand zurück"
+
   };
 
   I18N.fr = {
@@ -2854,7 +3036,7 @@
     toastEnterCode: "Saisissez le code de l’autre appareil (8 caractères)",
     toastResent: "File renvoyée",
     setupImportBtn: "Reprendre le menu et les infos de l’autre appareil",
-    setupImportAsk: ["Reprendre les réglages ?", "Le menu, les prix, les couleurs, la TVA, la devise et les coordonnées du vendeur de cet appareil seront remplacés par une copie de l’autre appareil. Les commandes restent.", "Reprendre"],
+    setupImportAsk: ["Reprendre les réglages ?", "Le menu, les prix, les couleurs, la TVA, le pourboire, la devise et les coordonnées du vendeur de cet appareil seront remplacés par une copie de l’autre appareil. Les commandes restent.", "Reprendre"],
     setupImportWait: "Demande envoyée. Confirmez-la sur l’autre appareil.",
     setupImportDone: "Menu et infos repris de l’autre appareil.",
     toastModeKasa: "Cet appareil est maintenant la caisse",
@@ -3009,7 +3191,7 @@
     pairBadCheck: "Le code ne correspond pas. Vérifiez-le caractère par caractère.",
     pairOldCode: "Ce code vient d’une ancienne version de Tapkasa. Mettez à jour l’autre appareil et créez-y un nouveau code.",
     pairNoCrypto: "Cet appareil ne prend pas en charge l’appairage chiffré. Mettez à jour le système ou le navigateur.",
-    setupSendAsk: ["Envoyer le menu et les infos ?", "L’autre appareil avec le même code demande une copie du menu, des prix, de la TVA, de la devise et des coordonnées du vendeur. Envoyez-la seulement si vous connaissez cet appareil.", "Envoyer"],
+    setupSendAsk: ["Envoyer le menu et les infos ?", "L’autre appareil avec le même code demande une copie du menu, des prix, de la TVA, du pourboire, de la devise et des coordonnées du vendeur. Envoyez-la seulement si vous connaissez cet appareil.", "Envoyer"],
     setupSendLate: "La demande a expiré. Demandez à l’autre appareil de la renvoyer.",
     setupSent: "Menu et infos envoyés.",
     diagShow: "Détails de la connexion",
@@ -3066,7 +3248,46 @@
     proChoose: "Choisir",
     proTryRow: "Essayer Pro gratuitement pendant {0}",
     pairEnterHere: "Sur l’autre appareil, ouvrez {0}, saisissez ce code et touchez {1}.",
-    pairBothKasa: "Les deux appareils sont en mode {0}. Si celui-ci doit seulement servir les commandes, passez-le en mode {1}."
+    pairBothKasa: "Les deux appareils sont en mode {0}. Si celui-ci doit seulement servir les commandes, passez-le en mode {1}.",
+    taxModeIncl: "Prix taxe comprise",
+    taxModeAdd: "Taxe ajoutée au paiement",
+    taxRateLbl: "Taux de taxe",
+    taxRateAria: "Taux de taxe en pourcentage",
+    taxNoRate: "Saisissez un taux, sinon rien n’est ajouté au prix.",
+    taxAddHint: "Saisissez les prix du menu hors taxe. Au paiement, la taxe est calculée sur toute la commande et ajoutée ; la commande affiche le sous-total, la taxe et le total. Le bouton à côté du prix met un article sans taxe ; les consignes ne sont pas taxées.",
+    taxItemOn: "Article taxé. Touchez pour retirer la taxe.",
+    taxItemOff: "Article sans taxe. Touchez pour appliquer la taxe.",
+    subtotal: "Sous-total",
+    taxLine: "Taxe {0} %",
+    withTax: "taxe comprise",
+    taxInclSum: "Dont taxe ajoutée : {0}",
+    tipsHead: "Pourboire",
+    tipsOn: "Pourboire au paiement activé",
+    tipsOff: "Pourboire au paiement désactivé",
+    tipsHint: "Au paiement, 10, 15 ou 20 % du montant des articles sont proposés (sans la taxe ajoutée ni les consignes), ou un autre montant. Le pourboire ne compte ni dans la recette ni dans la taxe ; l’aperçu et le récapitulatif l’affichent à part.",
+    tipNone: "Sans pourboire",
+    tipCustomHint: "Le montant que le client ajoute à la commande.",
+    tipSet: "Valider",
+    tipIncl: "Dont pourboire {0}",
+    toastTip: "pourboire {0}",
+    tipsLine: "Pourboires hors recette : {0} (espèces {1}, carte {2})",
+    docTips: "Pourboires, hors recette",
+    obTaxAsk: "Des prix hors taxe et la taxe ajoutée au paiement, comme aux États-Unis et au Canada ? Activez-le ici, ou plus tard dans {0}.",
+    graceHint: "Un client attend ? Une fois par jour, vous pouvez terminer la commande en cours même après la limite.",
+    graceNote: "Les commandes suivantes aujourd’hui nécessitent Tapkasa Pro.",
+    graceDone: "La limite du jour est atteinte, mais vous pouvez terminer cette commande.",
+    obXmas: "Menu d’exemple : marché de Noël",
+    xmasMenu: "Menu marché de Noël",
+    confirmXmas: ["Menu marché de Noël", "La liste d’articles sera remplacée par un menu d’exemple de marché de Noël, consigne du gobelet comprise. Les ventes enregistrées sont conservées.", "Remplacer"],
+    xmasEvent: "Marché de Noël",
+    x_mulled: "Vin chaud",
+    x_punch: "Jus de pomme chaud",
+    x_pastry: "Pain d’épices",
+    x_choco: "Chocolat chaud",
+    x_sausage: "Saucisse grillée",
+    x_dep: "Consigne gobelet",
+    x_ret: "Retour gobelet"
+
   };
 
   I18N.es = {
@@ -3289,7 +3510,7 @@
     toastEnterCode: "Introduzca el código del otro dispositivo (8 caracteres)",
     toastResent: "Cola reenviada",
     setupImportBtn: "Copiar el menú y los datos del otro dispositivo",
-    setupImportAsk: ["¿Copiar la configuración?", "El menú, los precios, los colores, el IVA, la moneda y los datos del vendedor de este dispositivo se sustituirán por una copia del otro dispositivo. Los pedidos se conservan.", "Copiar"],
+    setupImportAsk: ["¿Copiar la configuración?", "El menú, los precios, los colores, el IVA, la propina, la moneda y los datos del vendedor de este dispositivo se sustituirán por una copia del otro dispositivo. Los pedidos se conservan.", "Copiar"],
     setupImportWait: "Solicitud enviada. Confírmela en el otro dispositivo.",
     setupImportDone: "Menú y datos copiados del otro dispositivo.",
     toastModeKasa: "Este dispositivo ahora es la caja",
@@ -3444,7 +3665,7 @@
     pairBadCheck: "El código no coincide. Revíselo carácter por carácter.",
     pairOldCode: "Este código es de una versión anterior de Tapkasa. Actualice el otro dispositivo y cree en él un código nuevo.",
     pairNoCrypto: "Este dispositivo no admite el emparejamiento cifrado. Actualice el sistema o el navegador.",
-    setupSendAsk: ["¿Enviar menú y datos?", "El otro dispositivo con el mismo código pide una copia del menú, precios, IVA, moneda y datos del vendedor. Envíela solo si conoce ese dispositivo.", "Enviar"],
+    setupSendAsk: ["¿Enviar menú y datos?", "El otro dispositivo con el mismo código pide una copia del menú, precios, IVA, propina, moneda y datos del vendedor. Envíela solo si conoce ese dispositivo.", "Enviar"],
     setupSendLate: "La solicitud ha caducado. Pida al otro dispositivo que la envíe de nuevo.",
     setupSent: "Menú y datos enviados.",
     diagShow: "Detalles de la conexión",
@@ -3501,7 +3722,46 @@
     proChoose: "Elegir",
     proTryRow: "Probar Pro gratis durante {0}",
     pairEnterHere: "En el otro dispositivo, abra {0}, introduzca este código y toque {1}.",
-    pairBothKasa: "Los dos dispositivos están en modo {0}. Si este solo debe entregar pedidos, cámbielo a {1}."
+    pairBothKasa: "Los dos dispositivos están en modo {0}. Si este solo debe entregar pedidos, cámbielo a {1}.",
+    taxModeIncl: "Precios con impuestos",
+    taxModeAdd: "Impuesto añadido al cobrar",
+    taxRateLbl: "Tipo del impuesto",
+    taxRateAria: "Tipo del impuesto en porcentaje",
+    taxNoRate: "Indique un tipo; si no, no se añade nada al precio.",
+    taxAddHint: "Los precios del menú se introducen sin impuestos. Al cobrar, el impuesto se calcula sobre toda la cuenta y se suma; la cuenta muestra subtotal, impuesto y total. Un artículo sin impuesto se cambia con el botón junto al precio; los depósitos retornables no tributan.",
+    taxItemOn: "Artículo con impuesto. Toque para quitarlo.",
+    taxItemOff: "Artículo sin impuesto. Toque para aplicarlo.",
+    subtotal: "Subtotal",
+    taxLine: "Impuesto {0} %",
+    withTax: "con impuesto",
+    taxInclSum: "De ello, impuesto añadido: {0}",
+    tipsHead: "Propina",
+    tipsOn: "Propina al cobrar activada",
+    tipsOff: "Propina al cobrar desactivada",
+    tipsHint: "Al cobrar se ofrece un 10, 15 o 20 % del importe de los artículos (sin el impuesto añadido ni los depósitos), u otra cantidad. La propina no cuenta en la recaudación ni en el impuesto; el resumen la muestra aparte.",
+    tipNone: "Sin propina",
+    tipCustomHint: "El importe que el cliente añade a la cuenta.",
+    tipSet: "Aplicar",
+    tipIncl: "Incluye {0} de propina",
+    toastTip: "propina {0}",
+    tipsLine: "Propinas fuera de la recaudación: {0} (efectivo {1}, tarjeta {2})",
+    docTips: "Propinas, fuera de la recaudación",
+    obTaxAsk: "¿Precios sin impuestos y el impuesto al cobrar, como es habitual en EE. UU. y Canadá? Actívelo aquí, o más tarde en {0}.",
+    graceHint: "¿Hay un cliente esperando? Una vez al día puede terminar la cuenta en curso aunque el límite esté agotado.",
+    graceNote: "Las siguientes cuentas de hoy requieren Tapkasa Pro.",
+    graceDone: "El límite de hoy está agotado, pero esta cuenta la puede terminar.",
+    obXmas: "Menú de ejemplo: mercado navideño",
+    xmasMenu: "Menú de mercado navideño",
+    confirmXmas: ["Menú de mercado navideño", "La lista de artículos se sustituye por un menú de ejemplo de mercado navideño, con depósito de la taza. Las ventas guardadas se conservan.", "Sustituir"],
+    xmasEvent: "Mercado navideño",
+    x_mulled: "Vino caliente",
+    x_punch: "Ponche",
+    x_pastry: "Churros",
+    x_choco: "Chocolate caliente",
+    x_sausage: "Salchicha",
+    x_dep: "Depósito de la taza",
+    x_ret: "Devolución de la taza"
+
   };
 
   I18N.it = {
@@ -3724,7 +3984,7 @@
     toastEnterCode: "Inserite il codice dell’altro dispositivo (8 caratteri)",
     toastResent: "Coda inviata di nuovo",
     setupImportBtn: "Copiare menu e dati dall’altro dispositivo",
-    setupImportAsk: ["Copiare le impostazioni?", "Menu, prezzi, colori, IVA, valuta e dati del venditore su questo dispositivo verranno sostituiti con una copia dall’altro dispositivo. Gli ordini restano.", "Copiare"],
+    setupImportAsk: ["Copiare le impostazioni?", "Menu, prezzi, colori, IVA, mancia, valuta e dati del venditore su questo dispositivo verranno sostituiti con una copia dall’altro dispositivo. Gli ordini restano.", "Copiare"],
     setupImportWait: "Richiesta inviata. Confermatela sull’altro dispositivo.",
     setupImportDone: "Menu e dati copiati dall’altro dispositivo.",
     toastModeKasa: "Questo dispositivo ora è la cassa",
@@ -3879,7 +4139,7 @@
     pairBadCheck: "Il codice non corrisponde. Controllatelo carattere per carattere.",
     pairOldCode: "Questo codice proviene da una versione precedente di Tapkasa. Aggiornate l’altro dispositivo e create lì un nuovo codice.",
     pairNoCrypto: "Questo dispositivo non supporta l’abbinamento cifrato. Aggiornate il sistema o il browser.",
-    setupSendAsk: ["Inviare menu e dati?", "L’altro dispositivo con lo stesso codice chiede una copia di menu, prezzi, IVA, valuta e dati del venditore. Inviatela solo se conoscete quel dispositivo.", "Inviare"],
+    setupSendAsk: ["Inviare menu e dati?", "L’altro dispositivo con lo stesso codice chiede una copia di menu, prezzi, IVA, mancia, valuta e dati del venditore. Inviatela solo se conoscete quel dispositivo.", "Inviare"],
     setupSendLate: "La richiesta è scaduta. Chiedete all’altro dispositivo di inviarla di nuovo.",
     setupSent: "Menu e dati inviati.",
     diagShow: "Dettagli della connessione",
@@ -3936,7 +4196,46 @@
     proChoose: "Scegliere",
     proTryRow: "Provare Pro gratis per {0}",
     pairEnterHere: "Sull’altro dispositivo aprite {0}, inserite questo codice e toccate {1}.",
-    pairBothKasa: "Entrambi i dispositivi sono in modalità {0}. Se questo deve solo consegnare gli ordini, passatelo a {1}."
+    pairBothKasa: "Entrambi i dispositivi sono in modalità {0}. Se questo deve solo consegnare gli ordini, passatelo a {1}.",
+    taxModeIncl: "Prezzi con imposta inclusa",
+    taxModeAdd: "Imposta aggiunta al pagamento",
+    taxRateLbl: "Aliquota",
+    taxRateAria: "Aliquota in percentuale",
+    taxNoRate: "Inserite un’aliquota, altrimenti al prezzo non si aggiunge nulla.",
+    taxAddHint: "I prezzi del menu si inseriscono senza imposta. Al pagamento l’imposta si calcola sull’intero conto e si aggiunge; il conto mostra subtotale, imposta e totale. Il pulsante accanto al prezzo toglie l’imposta a un articolo; le cauzioni non sono tassate.",
+    taxItemOn: "Articolo tassato. Toccate per togliere l’imposta.",
+    taxItemOff: "Articolo senza imposta. Toccate per applicarla.",
+    subtotal: "Subtotale",
+    taxLine: "Imposta {0}%",
+    withTax: "imposta inclusa",
+    taxInclSum: "Di cui imposta aggiunta: {0}",
+    tipsHead: "Mancia",
+    tipsOn: "Mancia al pagamento attiva",
+    tipsOff: "Mancia al pagamento disattivata",
+    tipsHint: "Al pagamento si propone il 10, 15 o 20% della merce (senza imposta aggiunta né cauzioni), oppure un altro importo. La mancia non conta negli incassi né nell’imposta; panoramica e riepilogo la mostrano a parte.",
+    tipNone: "Senza mancia",
+    tipCustomHint: "L’importo che il cliente aggiunge al conto.",
+    tipSet: "Applicare",
+    tipIncl: "Di cui mancia {0}",
+    toastTip: "mancia {0}",
+    tipsLine: "Mance fuori dagli incassi: {0} (contanti {1}, carta {2})",
+    docTips: "Mance, fuori dagli incassi",
+    obTaxAsk: "Prezzi senza imposta e imposta aggiunta al pagamento, come negli Stati Uniti e in Canada? Attivatelo qui, o più tardi in {0}.",
+    graceHint: "Il cliente aspetta? Una volta al giorno potete chiudere il conto in corso anche a limite esaurito.",
+    graceNote: "Gli altri conti di oggi richiedono Tapkasa Pro.",
+    graceDone: "Il limite di oggi è esaurito, ma questo conto si può chiudere.",
+    obXmas: "Menu di esempio: mercatino di Natale",
+    xmasMenu: "Menu mercatino di Natale",
+    confirmXmas: ["Menu mercatino di Natale", "L’intero elenco di articoli viene sostituito da un menu di esempio del mercatino di Natale, cauzione della tazza compresa. Le vendite salvate restano.", "Sostituire"],
+    xmasEvent: "Mercatino di Natale",
+    x_mulled: "Vin brulé",
+    x_punch: "Succo di mela caldo",
+    x_pastry: "Strudel",
+    x_choco: "Cioccolata calda",
+    x_sausage: "Würstel",
+    x_dep: "Cauzione tazza",
+    x_ret: "Reso tazza"
+
   };
 
   I18N.pl = {
@@ -4159,7 +4458,7 @@
     toastEnterCode: "Proszę wpisać kod z drugiego urządzenia (8 znaków)",
     toastResent: "Kolejka wysłana ponownie",
     setupImportBtn: "Przejąć menu i dane z drugiego urządzenia",
-    setupImportAsk: ["Przejąć ustawienia?", "Menu, ceny, kolory, VAT, waluta i dane sprzedawcy na tym urządzeniu zostaną zastąpione kopią z drugiego urządzenia. Zamówienia zostaną.", "Przejąć"],
+    setupImportAsk: ["Przejąć ustawienia?", "Menu, ceny, kolory, VAT, napiwki, waluta i dane sprzedawcy na tym urządzeniu zostaną zastąpione kopią z drugiego urządzenia. Zamówienia zostaną.", "Przejąć"],
     setupImportWait: "Prośba wysłana. Proszę ją potwierdzić na drugim urządzeniu.",
     setupImportDone: "Menu i dane przejęte z drugiego urządzenia.",
     toastModeKasa: "To urządzenie jest teraz kasą",
@@ -4314,7 +4613,7 @@
     pairBadCheck: "Kod się nie zgadza. Proszę sprawdzić go znak po znaku.",
     pairOldCode: "Ten kod pochodzi ze starszej wersji Tapkasy. Proszę zaktualizować drugie urządzenie i utworzyć na nim nowy kod.",
     pairNoCrypto: "To urządzenie nie obsługuje szyfrowanego parowania. Proszę zaktualizować system lub przeglądarkę.",
-    setupSendAsk: ["Wysłać menu i dane?", "Drugie urządzenie z tym samym kodem prosi o kopię menu, cen, VAT, waluty i danych sprzedawcy. Kopię należy wysłać tylko wtedy, gdy to urządzenie jest znane.", "Wysłać"],
+    setupSendAsk: ["Wysłać menu i dane?", "Drugie urządzenie z tym samym kodem prosi o kopię menu, cen, VAT, napiwków, waluty i danych sprzedawcy. Kopię należy wysłać tylko wtedy, gdy to urządzenie jest znane.", "Wysłać"],
     setupSendLate: "Prośba wygasła. Niech drugie urządzenie wyśle ją ponownie.",
     setupSent: "Menu i dane wysłane.",
     diagShow: "Szczegóły połączenia",
@@ -4371,7 +4670,46 @@
     proChoose: "Wybrać",
     proTryRow: "Wypróbować Pro za darmo przez {0}",
     pairEnterHere: "Na drugim urządzeniu trzeba otworzyć {0}, wpisać ten kod i stuknąć {1}.",
-    pairBothKasa: "Oba urządzenia działają teraz jako {0}. Jeśli to ma tylko wydawać zamówienia, trzeba je przełączyć na {1}."
+    pairBothKasa: "Oba urządzenia działają teraz jako {0}. Jeśli to ma tylko wydawać zamówienia, trzeba je przełączyć na {1}.",
+    taxModeIncl: "Ceny zawierają podatek",
+    taxModeAdd: "Podatek doliczany przy płatności",
+    taxRateLbl: "Stawka podatku",
+    taxRateAria: "Stawka podatku w procentach",
+    taxNoRate: "Bez stawki nic nie zostanie doliczone do ceny.",
+    taxAddHint: "Ceny w menu wpisuje się bez podatku. Przy płatności podatek jest liczony od całego rachunku i doliczany; rachunek pokazuje sumę częściową, podatek i razem. Pozycję bez podatku przełącza się przyciskiem obok ceny, kaucje zwrotne nie są opodatkowane.",
+    taxItemOn: "Pozycja z podatkiem. Dotknięcie wyłącza podatek.",
+    taxItemOff: "Pozycja bez podatku. Dotknięcie włącza podatek.",
+    subtotal: "Suma częściowa",
+    taxLine: "Podatek {0}%",
+    withTax: "z podatkiem",
+    taxInclSum: "W tym doliczony podatek: {0}",
+    tipsHead: "Napiwek",
+    tipsOn: "Napiwek przy płatności włączony",
+    tipsOff: "Napiwek przy płatności wyłączony",
+    tipsHint: "Przy płatności pojawi się 10, 15 lub 20% wartości towaru (bez doliczonego podatku i kaucji) albo inna kwota. Napiwek nie wlicza się do utargu ani do podatku; przegląd i podsumowanie pokazują go osobno.",
+    tipNone: "Bez napiwku",
+    tipCustomHint: "Kwota, którą klient dodaje do rachunku.",
+    tipSet: "Zastosować",
+    tipIncl: "W tym napiwek {0}",
+    toastTip: "napiwek {0}",
+    tipsLine: "Napiwki poza utargiem: {0} (gotówka {1}, karta {2})",
+    docTips: "Napiwki, poza utargiem",
+    obTaxAsk: "Ceny bez podatku i podatek doliczany przy płatności, jak w USA i Kanadzie? Można to włączyć tutaj albo później w {0}.",
+    graceHint: "Klient czeka? Raz dziennie można dokończyć rozpoczęty rachunek także po wyczerpaniu limitu.",
+    graceNote: "Kolejne rachunki dziś tylko z Tapkasa Pro.",
+    graceDone: "Dzienny limit jest wyczerpany, ale ten rachunek można dokończyć.",
+    obXmas: "Przykładowe menu: jarmark świąteczny",
+    xmasMenu: "Menu jarmarku świątecznego",
+    confirmXmas: ["Menu jarmarku świątecznego", "Cała lista pozycji zostanie zastąpiona przykładowym menu z jarmarku świątecznego, z kaucją za kubek. Zapisana sprzedaż zostanie.", "Zastąpić"],
+    xmasEvent: "Jarmark świąteczny",
+    x_mulled: "Grzaniec",
+    x_punch: "Poncz",
+    x_pastry: "Pierniki",
+    x_choco: "Gorąca czekolada",
+    x_sausage: "Kiełbasa z grilla",
+    x_dep: "Kaucja za kubek",
+    x_ret: "Zwrot kubka"
+
   };
 
   I18N.pt = {
@@ -4594,7 +4932,7 @@
     toastEnterCode: "Introduza o código do outro dispositivo (8 caracteres)",
     toastResent: "Fila enviada de novo",
     setupImportBtn: "Copiar o menu e os dados do outro dispositivo",
-    setupImportAsk: ["Copiar as definições?", "O menu, os preços, as cores, o IVA, a moeda e os dados do vendedor neste dispositivo serão substituídos por uma cópia do outro dispositivo. Os pedidos ficam.", "Copiar"],
+    setupImportAsk: ["Copiar as definições?", "O menu, os preços, as cores, o IVA, a gorjeta, a moeda e os dados do vendedor neste dispositivo serão substituídos por uma cópia do outro dispositivo. Os pedidos ficam.", "Copiar"],
     setupImportWait: "Pedido de cópia enviado. Confirme-o no outro dispositivo.",
     setupImportDone: "Menu e dados copiados do outro dispositivo.",
     toastModeKasa: "Este dispositivo é agora a caixa",
@@ -4749,7 +5087,7 @@
     pairBadCheck: "O código não corresponde. Verifique-o carácter a carácter.",
     pairOldCode: "Este código é de uma versão anterior da Tapkasa. Atualize o outro dispositivo e crie nele um código novo.",
     pairNoCrypto: "Este dispositivo não suporta o emparelhamento cifrado. Atualize o sistema ou o navegador.",
-    setupSendAsk: ["Enviar menu e dados?", "O outro dispositivo com o mesmo código pede uma cópia do menu, preços, IVA, moeda e dados do vendedor. Envie-a só se conhecer esse dispositivo.", "Enviar"],
+    setupSendAsk: ["Enviar menu e dados?", "O outro dispositivo com o mesmo código pede uma cópia do menu, preços, IVA, gorjeta, moeda e dados do vendedor. Envie-a só se conhecer esse dispositivo.", "Enviar"],
     setupSendLate: "O pedido de cópia expirou. Peça ao outro dispositivo que o envie de novo.",
     setupSent: "Menu e dados enviados.",
     diagShow: "Detalhes da ligação",
@@ -4806,7 +5144,46 @@
     proChoose: "Escolher",
     proTryRow: "Experimentar o Pro grátis durante {0}",
     pairEnterHere: "No outro dispositivo, abra {0}, introduza este código e toque em {1}.",
-    pairBothKasa: "Os dois dispositivos estão em modo {0}. Se este deve apenas entregar pedidos, mude-o para {1}."
+    pairBothKasa: "Os dois dispositivos estão em modo {0}. Se este deve apenas entregar pedidos, mude-o para {1}.",
+    taxModeIncl: "Preços com imposto",
+    taxModeAdd: "Imposto somado no pagamento",
+    taxRateLbl: "Taxa do imposto",
+    taxRateAria: "Taxa do imposto em percentagem",
+    taxNoRate: "Indique uma taxa, caso contrário nada é somado ao preço.",
+    taxAddHint: "Os preços do menu são introduzidos sem imposto. No pagamento, o imposto é calculado sobre a conta toda e somado; a conta mostra subtotal, imposto e total. O botão ao lado do preço tira o imposto a um artigo; as cauções não pagam imposto.",
+    taxItemOn: "Artigo com imposto. Toque para o retirar.",
+    taxItemOff: "Artigo sem imposto. Toque para o aplicar.",
+    subtotal: "Subtotal",
+    taxLine: "Imposto {0}%",
+    withTax: "com imposto",
+    taxInclSum: "Dos quais imposto somado: {0}",
+    tipsHead: "Gorjeta",
+    tipsOn: "Gorjeta no pagamento ligada",
+    tipsOff: "Gorjeta no pagamento desligada",
+    tipsHint: "No pagamento são sugeridos 10, 15 ou 20% do valor dos artigos (sem o imposto somado nem cauções), ou outro valor. A gorjeta não conta na receita nem no imposto; o resumo mostra-a à parte.",
+    tipNone: "Sem gorjeta",
+    tipCustomHint: "O valor que o cliente junta à conta.",
+    tipSet: "Aplicar",
+    tipIncl: "Inclui {0} de gorjeta",
+    toastTip: "gorjeta {0}",
+    tipsLine: "Gorjetas fora da receita: {0} (numerário {1}, cartão {2})",
+    docTips: "Gorjetas, fora da receita",
+    obTaxAsk: "Preços sem imposto e imposto somado no pagamento, como nos EUA e no Canadá? Pode ligar aqui, ou mais tarde em {0}.",
+    graceHint: "Cliente à espera? Uma vez por dia pode terminar a conta em curso mesmo depois do limite.",
+    graceNote: "As contas seguintes de hoje precisam do Tapkasa Pro.",
+    graceDone: "O limite de hoje esgotou-se, mas pode terminar esta conta.",
+    obXmas: "Menu de exemplo: mercado de Natal",
+    xmasMenu: "Menu de mercado de Natal",
+    confirmXmas: ["Menu de mercado de Natal", "A lista de artigos é toda substituída por um menu de exemplo de mercado de Natal, com caução da caneca. As vendas guardadas ficam.", "Substituir"],
+    xmasEvent: "Mercado de Natal",
+    x_mulled: "Vinho quente",
+    x_punch: "Ponche",
+    x_pastry: "Farturas",
+    x_choco: "Chocolate quente",
+    x_sausage: "Salsicha",
+    x_dep: "Caução da caneca",
+    x_ret: "Devolução da caneca"
+
   };
   // ==== konec vkládaných překladů ====
 
@@ -4883,8 +5260,8 @@
     colApply: "Use color",
     confirmClose: ["Close event", "Revenue moves to the closed-events archive and the register resets for the next event.", "Close event"],
     toastClosed: "Event closed, the register is reset.",
-    setupImportAsk: ["Copy settings?", "The menu, prices, colors, sales tax, currency and seller details on this device will be replaced with a copy from the other device. Orders stay.", "Copy"],
-    setupSendAsk: ["Send menu and details?", "The other device with the same code is asking for a copy of the menu, prices, sales tax, currency and seller details. Only send it if you know that device.", "Send"],
+    setupImportAsk: ["Copy settings?", "The menu, prices, colors, sales tax, tips, currency and seller details on this device will be replaced with a copy from the other device. Orders stay.", "Copy"],
+    setupSendAsk: ["Send menu and details?", "The other device with the same code is asking for a copy of the menu, prices, sales tax, tips, currency and seller details. Only send it if you know that device.", "Send"],
     toastModeKasa: "This device is now the register",
     toastModeKasaHeld: "This device is now the register. Orders from the other register ({0}) are not counted in its sales.",
     obHow1: "Tap a color card and the item is on the order. Hold it to take one off again.",
@@ -4893,7 +5270,7 @@
     proB3: "Only the register needs Pro, the counter joins free",
     proTerms: "The subscription renews automatically, is billed to your app store account and can be canceled any time in your account settings.",
     vatHead: "Sales tax",
-    vatOn: "Prices include sales tax",
+    vatOn: "Tracking sales tax",
     vatOff: "Not tracking sales tax",
     vatHint: "When on, you can set a tax rate in percent for each item. You enter prices with tax included; the sales summary works out the net amount and the tax on its own.",
     vatAria: "Sales tax rate in percent",
@@ -4902,7 +5279,21 @@
     docVatNone: "no tax",
     docVatTotalTax: "Tax total:",
     negHint: "A negative price is taken off the order, e.g. a cup deposit return. Returns don’t go to the order queue, and an order with only returns doesn’t count toward the daily limit.",
-    returnCashHint: "Pay this amount back from the register and confirm."
+    returnCashHint: "Pay this amount back from the register and confirm.",
+    taxModeIncl: "Prices include sales tax",
+    taxModeAdd: "Add sales tax at checkout",
+    taxRateLbl: "Sales tax rate",
+    taxRateAria: "Sales tax rate in percent",
+    taxAddHint: "Enter menu prices before tax. At checkout, sales tax is figured on the whole order and added on top; the order shows subtotal, tax and total. Make an item tax-free with the button next to its price; refundable deposits aren’t taxed.",
+    taxItemOn: "Item is taxable. Tap to make it tax-free.",
+    taxItemOff: "Item is tax-free. Tap to make it taxable.",
+    taxInclSum: "Sales tax collected: {0}",
+    tipsHint: "At checkout, offer 10, 15 or 20% of the items (before sales tax added at checkout, without deposits), or a custom tip. Tips aren’t counted in sales or sales tax; Stats and the summary show them separately.",
+    obTaxAsk: "In the US, menu prices usually leave out sales tax and it’s added at checkout. Turn that on here, or later in {0}.",
+    x_punch: "Hot cider",
+    x_pastry: "Cookies",
+    x_choco: "Hot cocoa"
+
   };
 
   function T(key, a, b) {
@@ -5168,7 +5559,7 @@
   // instalaci se pustí rezerva RESERVE plateb navíc na ten den.
   var NUDGE_AT = 7;
   var RESERVE = 10;
-  var APP_VERSION = "1.0.9";
+  var APP_VERSION = "1.1.0";
   var SUPPORT_MAIL = "info@deriverge.com";
 
   // Pro se získá jedině nákupem v obchodě. Výjimkou jsou instalace z doby
@@ -5208,24 +5599,32 @@
     return !nativeApp() || off || !!(sheet && sheet.buyFailed);
   }
 
+  // Rozpracovaný účet jde dokončit i po vyčerpání limitu. Bez signálu
+  // (a na webu, po neúspěšném nákupu) poprvé s rezervou, potom jeden účet
+  // denně. Se signálem jednou denně tento jeden účet, rezerva zůstává
+  // schovaná na chvíli bez signálu. Dřív se signálem nešlo nic: zákazník
+  // u stánku čekal, než prodavač dokoupí Pro.
   function canRescue() {
-    if (isPro() || !state.order.length || !cantBuyNow()) { return false; }
+    if (isPro() || !state.order.length) { return false; }
+    if (!cantBuyNow()) { return state.graceDay !== todayKey(); }
     return !state.resUsed || state.graceDay !== todayKey();
   }
 
-  // Dokončit rozpracovaný účet: poprvé rezerva +RESERVE na dnešek, potom
-  // nanejvýš jeden účet navíc denně. Rovnou se otevře placení.
+  // Dokončit rozpracovaný účet: poprvé bez signálu rezerva +RESERVE na
+  // dnešek, jinak nanejvýš jeden účet navíc denně. Rovnou se otevře placení.
   function rescueBill() {
-    var t = todayKey(), note;
-    if (!state.resUsed) {
+    var t = todayKey(), note, offline = cantBuyNow();
+    if (offline && !state.resUsed) {
       state.resUsed = true; state.resDay = t;
       note = T("toastReserve", RESERVE);
     } else {
       state.graceDay = t;
-      note = T("rescueOneNote");
+      var tr = offerTrial();
+      note = offline ? T("rescueOneNote")
+        : T("graceDone") + " " + (tr ? T("nudgeTrial", trialText(tr)) : T("nudgePro"));
     }
     saveNow();
-    sheet = { step: "method", total: mr(orderTotal()), method: null, received: 0, note: note };
+    sheet = paySheet(note);
     render();
   }
 
@@ -5636,6 +6035,30 @@
     });
   }
 
+  // Ukázkové menu z vánočního trhu: názvy podle jazyka (trdelník, Waffel,
+  // strudel, churros…), ceny podle měny tak, jak se na trzích opravdu
+  // platí; pro měny bez vlastního ceníku hrubý přepočet z korun. Záloha
+  // na hrnek a její vrácení jsou vratná záloha, nezdaní se a nejdou do fronty.
+  var XMAS_ITEMS = [
+    { t: "x_mulled",  czk: 90,  color: "cervena",  p: { EUR: 4.5, USD: 8, GBP: 6,   PLN: 22, CHF: 7 } },
+    { t: "x_punch",   czk: 80,  color: "oranzova", p: { EUR: 4,   USD: 5, GBP: 5,   PLN: 16, CHF: 6 } },
+    { t: "x_pastry",  czk: 120, color: "zluta",    p: { EUR: 5,   USD: 4, GBP: 4,   PLN: 18, CHF: 6 } },
+    { t: "x_choco",   czk: 80,  color: "hneda",    p: { EUR: 4,   USD: 5, GBP: 4.5, PLN: 18, CHF: 6 } },
+    { t: "x_sausage", czk: 130, color: "purpur",   p: { EUR: 5,   USD: 9, GBP: 7,   PLN: 28, CHF: 9 } },
+    { t: "x_dep",     czk: 50,  color: "modra",    p: { EUR: 3,   USD: 5, GBP: 3,   PLN: 10, CHF: 5 }, dep: true },
+    { t: "x_ret",     czk: 50,  color: "grafit",   p: { EUR: 3,   USD: 5, GBP: 3,   PLN: 10, CHF: 5 }, dep: true, neg: true }
+  ];
+
+  function xmasItems() {
+    var cur = curInfo().c;
+    return XMAS_ITEMS.map(function (i) {
+      var price = cur === "CZK" ? i.czk : (i.p[cur] !== undefined ? i.p[cur] : demoPrice(i.czk));
+      var o = { id: uid(), name: T(i.t), price: i.neg ? -price : price, color: i.color };
+      if (i.dep) { o.dep = true; }
+      return o;
+    });
+  }
+
   function fresh() {
     return {
       // thanks: kasa po zaplacení nahlas poděkuje. U nové instalace vypnuto:
@@ -5643,6 +6066,7 @@
       v: 3, event: "", evId: uid(), gone: [], mode: "kasa", nextNo: 1, voice: true, thanks: false, noQueue: false, pair: "",
       lang: detectLang(), currency: detectCurrency(),
       setup: false, license: "", payDay: "", payN: 0, biz: "", vat: false, tourDone: false,
+      taxAdd: false, taxRate: "", tips: false,
       resUsed: false, resDay: "", graceDay: "", nudgeDay: "",
       rateN: 0, rateAsked: 0,
       seller: {},
@@ -5689,6 +6113,13 @@
       });
       s.total = finNum(s.total, NaN);
       if (isNaN(s.total)) { s.total = mr(s.lines.reduce(function (a, l) { return a + l.price * l.qty; }, 0)); }
+      // připočtená daň a spropitné (1.1.0+): poškozená čísla pryč, ať se
+      // do přehledu nepropíše NaN
+      if (s.taxRate !== undefined && !(typeof s.taxRate === "number" && isFinite(s.taxRate) && typeof s.tax === "number" && isFinite(s.tax))) {
+        delete s.taxRate; delete s.tax; delete s.taxBase;
+      }
+      if (s.taxBase !== undefined && !(typeof s.taxBase === "number" && isFinite(s.taxBase))) { delete s.taxBase; }
+      if (s.tip !== undefined && !(typeof s.tip === "number" && isFinite(s.tip) && s.tip > 0)) { delete s.tip; }
       if (evId && (typeof s.ev !== "string" || !s.ev)) { s.ev = evId; }
     });
     return maxNo;
@@ -5701,6 +6132,7 @@
       if (!okId(it.id)) { it.id = uid(); }
       it.name = typeof it.name === "string" ? it.name : String(it.name || "");
       it.price = finNum(it.price, 0);
+      if (it.tx !== undefined && it.tx !== 0 && it.tx !== 1) { delete it.tx; }
     });
     var used = {};
     items.forEach(function (it) { if (it.color) { used[it.color] = true; } });
@@ -5815,6 +6247,10 @@
     d.nudgeDay = typeof d.nudgeDay === "string" ? d.nudgeDay : "";
     d.biz = typeof d.biz === "string" ? d.biz : "";
     d.vat = d.vat === true;   // starší instalace DPH neřešily, zůstanou vypnuté
+    // daň připočtená při placení a spropitné (1.1.0); výchozí je dnešní chování
+    d.taxAdd = d.taxAdd === true;
+    d.taxRate = (typeof d.taxRate === "string" || typeof d.taxRate === "number") && vatNum(d.taxRate) !== null ? vatStr(d.taxRate) : "";
+    d.tips = d.tips === true;
     d.customVat = typeof d.customVat === "string" ? d.customVat : "";
     // počítadlo uzavřených akcí pro žádost o hodnocení; starší instalace
     // dostanou započtené akce, které už v archivu mají
@@ -6216,6 +6652,70 @@
     return lines.length > 0 && lines.every(function (l) { return l.price < 0; });
   }
 
+  // ---------- daň připočtená k ceně ----------
+  // Výchozí je cena včetně daně, jak ji zná Evropa (DPH, MwSt.). V USA,
+  // Kanadě a podobně se ceny píšou bez daně a sales tax se přičte až při
+  // placení. Pak platí jedna sazba pro celé zařízení (state.taxRate,
+  // v procentech) a jednotlivá položka ji může mít vypnutou (tx 0).
+  // Vratné zálohy se nezdaňují, dokud je u položky někdo výslovně nezapne
+  // (tx 1). Řádek účtu si rozhodnutí nese s sebou jako sazbu DPH.
+  // Daň se počítá z celého účtu a zaokrouhluje jednou, na desetinná místa
+  // měny, polovina nahoru (tak to dělá většina států USA).
+  function taxRateNum() {
+    var r = vatNum(state.taxRate);
+    return state.taxAdd && r !== null && r > 0 && r < 100 ? r : 0;
+  }
+  function itemTaxed(it) { return it.tx === 1 || (it.tx !== 0 && !it.dep); }
+  function lineTaxed(l) { return l.tx === 1 || (l.tx !== 0 && !l.dep); }
+  // DPH zahrnutá v ceně (sazby u položek) platí jen tam, kde se daň nepřičítá
+  function vatIncl() { return state.vat && !state.taxAdd; }
+
+  function moneyHalfUp(n) {
+    var f = Math.pow(10, curInfo().dec);
+    return (n < 0 ? -1 : 1) * Math.round(Math.abs(n) * f + 1e-7) / f;
+  }
+
+  // Účet: mezisoučet (ceny z menu), zdaněná část, daň a celkem.
+  function billCalc(lines) {
+    var sub = 0, base = 0;
+    lines.forEach(function (l) {
+      var v = l.price * l.qty;
+      sub += v;
+      if (lineTaxed(l)) { base += v; }
+    });
+    sub = mr(sub); base = mr(base);
+    var rate = taxRateNum();
+    var tax = rate ? moneyHalfUp(base * rate / 100) : 0;
+    return { sub: sub, base: base, rate: rate, tax: tax, total: mr(sub + tax) };
+  }
+
+  function orderDue() { return billCalc(state.order).total; }
+
+  // ---------- spropitné ----------
+  // Počítá se z ceny zboží bez připočtené daně a bez záloh. Tak to radí
+  // americká etiketa (Emily Post: spropitné z částky před daní) a je to
+  // férové: daň ani hrnek nejsou obsluha. U cen s DPH (Evropa) je to cena
+  // z menu. Do tržby za zboží ani do daně se nepočítá, v přehledu
+  // a souhrnu je zvlášť.
+  var TIP_PCTS = [10, 15, 20];
+  function tipBase(lines) {
+    var b = 0;
+    lines.forEach(function (l) { if (!l.dep) { b += l.price * l.qty; } });
+    return Math.max(0, mr(b));
+  }
+  function tipFor(pct) { return moneyHalfUp(tipBase(state.order) * pct / 100); }
+
+  // Platba k zaplacení: účet a k tomu spropitné.
+  function dueOf(sh) { return mr(sh.total + (sh.tip || 0)); }
+
+  // Okno placení nad rozpracovaným účtem (spropitné na začátku žádné).
+  function paySheet(note) {
+    var c = billCalc(state.order);
+    var sh = { step: "method", total: c.total, calc: c, method: null, received: 0, tip: 0, tipPick: "0" };
+    if (note) { sh.note = note; }
+    return sh;
+  }
+
   function salesTotal() {
     return state.sales.reduce(function (s, t) { return s + t.total; }, 0);
   }
@@ -6253,11 +6753,12 @@
       var nl = { ref: item.id, name: item.name, price: item.price, qty: 1,
                  color: item.color, vat: vatStr(item.vat) };
       if (item.dep) { nl.dep = 1; }
+      if (item.tx === 0 || item.tx === 1) { nl.tx = item.tx; }
       state.order.push(nl);
     }
     save();
     render();
-    say(item.name + " · " + czk(orderTotal()));
+    say(item.name + " · " + czk(orderDue()));
   }
 
   function bump(idx, delta) {
@@ -6274,14 +6775,17 @@
 
   function commit() {
     var refund = returnOnly(state.order);
+    var tip = sheet && sheet.total > 0 && sheet.tip > 0 ? mr(sheet.tip) : 0;
     // kolik vrátit: po zavření panelu už částka nikde nebyla vidět
-    var giveBack = sheet && sheet.step === "cash" && sheet.received > 0 ? mr(sheet.received - sheet.total) : 0;
+    var giveBack = sheet && sheet.step === "cash" && sheet.received > 0 ? mr(sheet.received - dueOf(sheet)) : 0;
     if (limitHit() && !refund) {
       sheet = { step: "paywall", reason: "limit" };
       render(); return;
     }
     if (!refund) { countPayment(); }
+    if (tourActive()) { tourPaid = true; }
     var now = Date.now();
+    var calc = sheet.calc || null;
     var sale = {
       id: uid(),
       no: state.nextNo++,
@@ -6294,9 +6798,14 @@
       lines: state.order.map(function (l) {
         var ln = { name: l.name, price: l.price, qty: l.qty, color: l.color || "", vat: vatStr(l.vat), ready: 0 };
         if (l.dep) { ln.dep = 1; }
+        if (l.tx === 0 || l.tx === 1) { ln.tx = l.tx; }
         return ln;
       })
     };
+    // Připočtená daň a spropitné jsou volitelná pole: starší verze je
+    // nezná, ignoruje je a total (zboží s daní, bez spropitného) jí dál sedí.
+    if (calc && calc.rate) { sale.tax = calc.tax; sale.taxRate = calc.rate; sale.taxBase = calc.base; }
+    if (tip) { sale.tip = tip; }
     // Účet bez ničeho k přípravě (jen vrácení nebo záloha) do fronty
     // výdeje nepatří, rovnou je vydaný.
     // Vypnutá fronta platí jen pro samostatnou kasu: se spárovaným výdejem
@@ -6317,6 +6826,7 @@
     if (state.mode === "kasa" && state.thanks) { sayThanks(); }
     var how = sale.method === "cash" ? T("cashLower") : T("cardLower");
     var msg = sale.total < 0 ? T("toastReturned", czk(-sale.total), how) : T("toastSaved", czk(sale.total), how);
+    if (tip) { msg += " · " + T("toastTip", czk(tip)); }
     if (giveBack > 0 && sale.total > 0) { msg += " · " + T("toastChange", czk(giveBack)); }
     showToast(msg, sale.id);
     say(msg);
@@ -6334,6 +6844,7 @@
       var ol = { ref: refFor(l.name, l.price), name: l.name, price: l.price, qty: l.qty,
                  color: l.color || "", vat: vatStr(l.vat) };
       if (l.dep) { ol.dep = 1; }
+      if (l.tx === 0 || l.tx === 1) { ol.tx = l.tx; }
       return ol;
     });
     // opravený prodej nesmí spotřebovat druhou z bezplatných plateb dne;
@@ -6789,9 +7300,11 @@
         var o = { id: it.id, name: it.name, price: it.price, color: it.color || "" };
         if (it.vat !== undefined) { o.vat = it.vat; }
         if (it.dep) { o.dep = true; }
+        if (it.tx === 0 || it.tx === 1) { o.tx = it.tx; }
         return o;
       }),
-      seller: state.seller || {}, currency: state.currency, vat: state.vat === true, event: state.event || ""
+      seller: state.seller || {}, currency: state.currency, vat: state.vat === true, event: state.event || "",
+      taxAdd: state.taxAdd === true, taxRate: vatStr(state.taxRate), tips: state.tips === true
     };
   }
 
@@ -6843,7 +7356,10 @@
     // šifrované by u velkého menu přerostlo limit Nearby (32 kB).
     chunks.forEach(function (c, i) {
       var m = { t: "setup", seq: i, n: chunks.length, last: i === chunks.length - 1, items: c };
-      if (i === 0) { m.seller = p.seller; m.currency = p.currency; m.vat = p.vat; m.event = p.event; }
+      if (i === 0) {
+        m.seller = p.seller; m.currency = p.currency; m.vat = p.vat; m.event = p.event;
+        m.taxAdd = p.taxAdd; m.taxRate = p.taxRate; m.tips = p.tips;
+      }
       nativeSend(JSON.parse(JSON.stringify(m)));
       relayPost(m);
     });
@@ -6863,6 +7379,10 @@
     if (typeof msg.currency === "string") { setupParts.currency = msg.currency; }
     if (typeof msg.vat === "boolean") { setupParts.vat = msg.vat; }
     if (typeof msg.event === "string") { setupParts.event = msg.event; }
+    // od 1.1.0; od starší verze nepřijdou a vlastní nastavení zůstane
+    if (typeof msg.taxAdd === "boolean") { setupParts.taxAdd = msg.taxAdd; }
+    if (typeof msg.taxRate === "string" || typeof msg.taxRate === "number") { setupParts.taxRate = vatStr(msg.taxRate); }
+    if (typeof msg.tips === "boolean") { setupParts.tips = msg.tips; }
     (Array.isArray(msg.items) ? msg.items : []).forEach(function (it) {
       if (!it || typeof it.name !== "string" || typeof it.price !== "number") { return; }
       var id = typeof it.id === "string" && it.id ? it.id : uid();
@@ -6871,6 +7391,7 @@
       var o = { id: id, name: it.name, price: it.price, color: typeof it.color === "string" ? it.color : "" };
       if (it.vat !== undefined) { o.vat = it.vat; }
       if (it.dep) { o.dep = true; }
+      if (it.tx === 0 || it.tx === 1) { o.tx = it.tx; }
       setupParts.items.push(o);
     });
     // Použít až úplné menu: části přes přeposílač chodí v libovolném
@@ -6890,6 +7411,9 @@
     }
     if (got.currency && CURRENCIES.some(function (c) { return c.c === got.currency; })) { state.currency = got.currency; }
     state.vat = got.vat === true;
+    if (typeof got.taxAdd === "boolean") { state.taxAdd = got.taxAdd; }
+    if (typeof got.taxRate === "string") { state.taxRate = vatNum(got.taxRate) === null ? "" : got.taxRate; }
+    if (typeof got.tips === "boolean") { state.tips = got.tips; }
     if (got.event) { state.event = got.event; }
     muted = true; save(); muted = false;
     afterReplace(state.pair);
@@ -7160,11 +7684,15 @@
         var ln = { name: l.name, price: l.price, qty: l.qty, ready: l.ready || 0, color: l.color || "" };
         if (l.vat) { ln.vat = l.vat; }
         if (l.dep) { ln.dep = 1; }
+        if (l.tx === 0 || l.tx === 1) { ln.tx = l.tx; }
         return ln;
       })
     };
     if (s.ev) { o.ev = s.ev; }
     if (s.servedAt) { o.servedAt = s.servedAt; }
+    // od 1.1.0: připočtená daň a spropitné; starší verze je přeskočí
+    if (typeof s.taxRate === "number") { o.tax = s.tax || 0; o.taxRate = s.taxRate; if (typeof s.taxBase === "number") { o.taxBase = s.taxBase; } }
+    if (s.tip > 0) { o.tip = s.tip; }
     return o;
   }
 
@@ -7524,6 +8052,7 @@
         vat: typeof l.vat === "string" || typeof l.vat === "number" ? vatStr(l.vat) : ""
       };
       if (l.dep) { cl.dep = 1; }
+      if (l.tx === 0 || l.tx === 1) { cl.tx = l.tx; }
       lines.push(cl);
     }
     var total = Number(inc.total);
@@ -7538,6 +8067,7 @@
     };
     if (okId(inc.ev) && inc.ev.length <= 40) { o.ev = inc.ev; }
     if (isFinite(Number(inc.servedAt)) && inc.servedAt) { o.servedAt = Number(inc.servedAt); }
+    saleExtras(o, inc);
     return o;
   }
 
@@ -7615,7 +8145,9 @@
         if (typeof il.ready === "number") { l.ready = il.ready; }
         if (il.vat && !l.vat) { l.vat = il.vat; }
         if (il.dep && !l.dep) { l.dep = 1; }
+        if ((il.tx === 0 || il.tx === 1) && l.tx === undefined) { l.tx = il.tx; }
       });
+      saleExtras(have, inc);
       return;
     }
     var old = have.lines;
@@ -7623,6 +8155,7 @@
       var o = { name: il.name, price: il.price, qty: il.qty, ready: il.ready || 0,
                 color: il.color || "", vat: il.vat || "" };
       if (il.dep) { o.dep = 1; }
+      if (il.tx === 0 || il.tx === 1) { o.tx = il.tx; }
       if (!o.vat) {
         old.forEach(function (ol) {
           if (!o.vat && ol.name === o.name && ol.price === o.price && ol.vat) { o.vat = ol.vat; }
@@ -7631,6 +8164,20 @@
       return o;
     });
     if (typeof inc.total === "number") { have.total = inc.total; }
+    saleExtras(have, inc);
+  }
+
+  // Připočtená daň a spropitné z příchozí účtenky, jen platná čísla. Co už
+  // účtenka má, zůstává: starší verze tato pole neposílá, a když výdej
+  // s 1.0.9 vrátí účtenku po odškrtnutí, nesmí o ně kasa přijít.
+  function saleExtras(o, inc) {
+    if (typeof o.taxRate !== "number" && typeof inc.taxRate === "number" && isFinite(inc.taxRate) &&
+        inc.taxRate > 0 && inc.taxRate < 100 && typeof inc.tax === "number" && isFinite(inc.tax)) {
+      o.taxRate = inc.taxRate;
+      o.tax = inc.tax;
+      if (typeof inc.taxBase === "number" && isFinite(inc.taxBase)) { o.taxBase = inc.taxBase; }
+    }
+    if (!(o.tip > 0) && typeof inc.tip === "number" && isFinite(inc.tip) && inc.tip > 0) { o.tip = inc.tip; }
   }
 
   function evTotal(ev) {
@@ -7679,6 +8226,7 @@
       var o = { id: uid(), name: it.name, price: it.price, color: it.color || "" };
       if (it.vat !== undefined) { o.vat = it.vat; }
       if (it.dep) { o.dep = true; }
+      if (it.tx === 0 || it.tx === 1) { o.tx = it.tx; }
       return o;
     }) : [];
     swapInEvent({ id: uid(), event: name, items: items, sales: [], nextNo: 1, createdAt: Date.now() });
@@ -7728,11 +8276,18 @@
   function stats() {
     // depIn = vybrané zálohy, depOut = vráceno zákazníkům (záporné řádky);
     // kusy počítají jen skutečné zboží
-    var s = { total: 0, cash: 0, card: 0, count: state.sales.length, pieces: 0, items: [], depIn: 0, depOut: 0 };
+    // tax = připočtená daň (jen účty s taxRate), tip = spropitné mimo tržbu
+    var s = { total: 0, cash: 0, card: 0, count: state.sales.length, pieces: 0, items: [], depIn: 0, depOut: 0,
+              tax: 0, taxOn: false, tip: 0, tipCash: 0, tipCard: 0 };
     var map = {};
     state.sales.forEach(function (t) {
       s.total += t.total;
       if (t.method === "cash") { s.cash += t.total; } else { s.card += t.total; }
+      if (typeof t.taxRate === "number") { s.taxOn = true; s.tax += t.tax || 0; }
+      if (t.tip > 0) {
+        s.tip += t.tip;
+        if (t.method === "cash") { s.tipCash += t.tip; } else { s.tipCard += t.tip; }
+      }
       t.lines.forEach(function (l) {
         // sazba je součástí klíče, ať se do archivu nesloučí stejná položka
         // prodávaná pod dvěma sazbami
@@ -7748,6 +8303,7 @@
       });
     });
     s.depIn = mr(s.depIn); s.depOut = mr(s.depOut);
+    s.tax = mr(s.tax); s.tip = mr(s.tip); s.tipCash = mr(s.tipCash); s.tipCard = mr(s.tipCard);
     Object.keys(map).forEach(function (k) { s.items.push(map[k]); });
     s.items.sort(function (a, b) { return b.sum - a.sum || b.qty - a.qty; });
     return s;
@@ -7762,13 +8318,20 @@
     out.push(T("sumTotal") + " " + czk(s.total));
     out.push("  " + T("cashLower") + ": " + czk(s.cash));
     out.push("  " + T("cardLower") + ": " + czk(s.card));
+    if (s.taxOn) { out.push("  " + T("taxInclSum", czk(s.tax))); }
     out.push(T("sumBills") + " " + s.count + " · " + T("sumPieces") + " " + s.pieces);
     depLines(s.depIn, s.depOut).forEach(function (ln) { out.push("  " + ln); });
+    if (s.tip) { out.push(tipsLine(s.tip, s.tipCash, s.tipCard)); }
     out.push("");
     s.items.forEach(function (i) {
       out.push(i.qty + "× " + i.name + " (" + czk(i.price) + ") = " + czk(i.sum));
     });
     return out.join("\n");
+  }
+
+  // Spropitné je mimo tržbu, ale patří k penězům v kase: hotově a kartou zvlášť.
+  function tipsLine(tip, cash, card) {
+    return T("tipsLine", czk(tip), czk(cash)).split("{2}").join(czk(card));
   }
 
   // Zálohy a vrácení zvlášť, jen když nějaké byly.
@@ -7818,6 +8381,7 @@
 
   function renderBar() {
     var n = orderCount();
+    var bc = billCalc(state.order);
     // Nejde zapisovat do žádné kopie: hláška v toastu zmizí s další
     // platbou, proto zůstává i nad prodejní lištou, dokud to trvá.
     var h = '<div class="bar">' +
@@ -7836,15 +8400,19 @@
                "</span>" +
                '<span class="amt">' + czk(l.price * l.qty) + "</span></div>";
       });
+      if (bc.rate && bc.base !== 0) {
+        h += '<div class="line tot"><span class="nm">' + esc(T("subtotal")) + '</span><span class="amt">' + czk(bc.sub) + "</span></div>" +
+             '<div class="line tot"><span class="nm">' + esc(T("taxLine", rateTxt(bc.rate))) + '</span><span class="amt">' + czk(bc.tax) + "</span></div>";
+      }
       h += "</div>";
     }
 
     h += '<div class="bar-main">';
     if (state.order.length) {
       h += '<button class="bar-sum" data-toggle="1" aria-expanded="' + (linesOpen ? "true" : "false") + '">' +
-             '<span class="c">' + n + " " + tp("itemsN", n) +
+             '<span class="c">' + n + " " + tp("itemsN", n) + (bc.rate && bc.base !== 0 ? " · " + esc(T("withTax")) : "") +
              (linesOpen ? T("hideLines") : T("editLines")) + "</span>" +
-             '<span class="t num">' + czk(orderTotal()) + "</span></button>" +
+             '<span class="t num">' + czk(bc.total) + "</span></button>" +
            '<button class="btn-clear" data-clearask="1">' + esc(T("cancelOrder")) + "</button>" +
            '<button class="btn-pay" data-pay="1">' + esc(T("pay")) + "</button>";
     } else {
@@ -7934,6 +8502,8 @@
            '<span class="lg"><i class="sp-card"></i><span class="k">' + esc(T("card")) + '</span><span class="v">' + czk(s.card) + "</span></span>" +
          "</div>" +
          (s.depIn || s.depOut ? '<p class="meta dep">' + esc(depLines(s.depIn, s.depOut).join(" · ")) + "</p>" : "") +
+         (s.taxOn ? '<p class="meta dep">' + esc(T("taxInclSum", czk(s.tax))) + "</p>" : "") +
+         (s.tip ? '<p class="meta dep">' + esc(tipsLine(s.tip, s.tipCash, s.tipCard)) + "</p>" : "") +
          "</section>";
 
     // v Co se prodalo jen zboží; zálohy a vrácení mají vlastní řádek nahoře
@@ -7961,7 +8531,8 @@
         var what = t.lines.map(function (l) { return l.qty + "× " + l.name; }).join(", ");
         h += '<div class="tx"><i class="dot ' + (t.method === "cash" ? "sp-cash" : "sp-card") + '"></i>' +
              '<div class="mid"><div class="w">' + esc(what) + "</div>" +
-             '<div class="s">' + esc(whenStr(t.ts)) + " · " + esc(t.method === "cash" ? T("cashLower") : T("cardLower")) + "</div></div>" +
+             '<div class="s">' + esc(whenStr(t.ts)) + " · " + esc(t.method === "cash" ? T("cashLower") : T("cardLower")) +
+               (t.tip > 0 ? " · " + esc(T("toastTip", czk(t.tip))) : "") + "</div></div>" +
              '<span class="a">' + czk(t.total) + "</span>" +
              '<button class="del" data-del="' + t.id + '" aria-label="' + esc(T("delReceiptAria")) + '">' + SVG.close + "</button></div>";
       });
@@ -7991,7 +8562,8 @@
         h += '<div class="arch"><div class="mid"><div>' + esc(a.event) + "</div>" +
              '<div class="s">' + new Date(a.closedAt).toLocaleDateString(langInfo().loc) + " · " +
              a.count + " " + tp("billsN", a.count) + " · " + esc(T("cashLower")) + " " + czk(a.cash) +
-             ", " + esc(T("cardLower")) + " " + czk(a.card) + "</div></div>" +
+             ", " + esc(T("cardLower")) + " " + czk(a.card) +
+             (a.tip > 0 ? " · " + esc(T("toastTip", czk(a.tip))) : "") + "</div></div>" +
              '<span class="num">' + czk(a.total) + "</span>" +
              // vrátit lze jen akci, u které jsou uložené účtenky; starší
              // archivy je nemají a doúčtovat by se nedaly
@@ -8037,8 +8609,13 @@
     if (isNaN(from) || isNaN(to)) { return null; }
 
     var total = 0, cashSum = 0, cardSum = 0, bills = 0, depIn = 0, depOut = 0;
+    var tipSum = 0, tipCash = 0, tipCard = 0;
     var items = {}, events = {};
-    var addItem = function (name, price, qty, sum, vat, dep) {
+    // Rozpis daně. Ceny s DPH (inclRates: hrubé částky podle sazby položky)
+    // dávají základ zpětně; u daně připočtené při placení nese každá
+    // účtenka sazbu, zdaněný základ i daň sama (added).
+    var inclRates = {}, added = {}, addedAny = false;
+    var addItem = function (name, price, qty, sum, vat, dep, incl) {
       var v = vatStr(vat);
       var k = name + "|" + price + "|" + v;
       if (!items[k]) { items[k] = { name: name, price: price, vat: v, qty: 0, sum: 0 }; }
@@ -8046,6 +8623,36 @@
       items[k].qty += qty;
       items[k].sum += sum;
       if (price < 0) { depOut -= sum; } else if (dep) { depIn += sum; }
+      if (incl) {
+        var r = vatNum(v);
+        var key = r === null ? "" : String(r);
+        inclRates[key] = (inclRates[key] || 0) + sum;
+      }
+    };
+    var addSale = function (s, evItems) {
+      bills += 1;
+      total += s.total || 0;
+      if (s.method === "cash") { cashSum += s.total || 0; } else { cardSum += s.total || 0; }
+      if (s.tip > 0) {
+        tipSum += s.tip;
+        if (s.method === "cash") { tipCash += s.tip; } else { tipCard += s.tip; }
+      }
+      var isAdded = typeof s.taxRate === "number";
+      var lineSum = 0;
+      s.lines.forEach(function (l) {
+        lineSum += l.qty * l.price;
+        addItem(l.name, l.price, l.qty, l.qty * l.price, isAdded ? "" : resolveVat(l.name, l.vat, evItems), l.dep, !isAdded);
+      });
+      if (isAdded) {
+        addedAny = true;
+        var base = typeof s.taxBase === "number" ? s.taxBase : lineSum;
+        var key = String(s.taxRate);
+        if (!added[key]) { added[key] = { base: 0, tax: 0 }; }
+        added[key].base += base;
+        added[key].tax += s.tax || 0;
+        if (!added[""]) { added[""] = { base: 0, tax: 0 }; }
+        added[""].base += lineSum - base;
+      }
     };
 
     // otevřené akce: účtenky podle data prodeje
@@ -8054,13 +8661,8 @@
       if (onlyName && evName !== onlyName) { return; }
       ev.sales.forEach(function (s) {
         if (s.ts < from || s.ts > to) { return; }
-        bills += 1;
-        total += s.total;
-        if (s.method === "cash") { cashSum += s.total; } else { cardSum += s.total; }
         events[evName] = true;
-        s.lines.forEach(function (l) {
-          addItem(l.name, l.price, l.qty, l.qty * l.price, resolveVat(l.name, l.vat, ev.items), l.dep);
-        });
+        addSale(s, ev.items);
       });
     });
 
@@ -8072,18 +8674,13 @@
       if (onlyName && (a.event || T("noName")) !== onlyName) { return; }
       var aName = (a.event || T("noName")) + " (" + new Date(a.closedAt).toLocaleDateString(langInfo().loc) + ")";
       if (Array.isArray(a.sales) && a.sales.length) {
+        // bez sazby na řádku platí sazba uložená v archivu při uzávěrce,
+        // ne dnešní menu
+        var aItems = Array.isArray(a.items) && a.items.length ? a.items : undefined;
         a.sales.forEach(function (s) {
           if (!s || !Array.isArray(s.lines) || s.ts < from || s.ts > to) { return; }
-          bills += 1;
-          total += s.total || 0;
-          if (s.method === "cash") { cashSum += s.total || 0; } else { cardSum += s.total || 0; }
           events[aName] = true;
-          // bez sazby na řádku platí sazba uložená v archivu při uzávěrce,
-          // ne dnešní menu
-          var aItems = Array.isArray(a.items) && a.items.length ? a.items : undefined;
-          s.lines.forEach(function (l) {
-            addItem(l.name, l.price, l.qty, l.qty * l.price, resolveVat(l.name, l.vat, aItems), l.dep);
-          });
+          addSale(s, aItems);
         });
         return;
       }
@@ -8094,43 +8691,50 @@
       cardSum += a.card || 0;
       events[aName] = true;
       (a.items || []).forEach(function (i) {
-        addItem(i.name, i.price, i.qty, i.sum, resolveVat(i.name, i.vat), i.dep);
+        addItem(i.name, i.price, i.qty, i.sum, resolveVat(i.name, i.vat), i.dep, true);
       });
     });
 
     if (!bills) { return ""; }
     depIn = mr(depIn); depOut = mr(depOut);
+    tipSum = mr(tipSum); tipCash = mr(tipCash); tipCard = mr(tipCard);
 
     var list = Object.keys(items).map(function (k) { return items[k]; });
     list.sort(function (a, b) { return b.sum - a.sum || b.qty - a.qty; });
 
-    // Rozpis DPH počítáme jednou a používají ho text i PDF. Ceny se zadávají
-    // včetně daně, základ tedy dopočítáváme zpětně: zaklad = cena/(1+sazba/100).
-    // Položky bez sazby jdou do základu celé, aby základ a daň daly dohromady
-    // přesně celkovou tržbu.
-    var vatRows = [], vatBase = 0, vatTax = 0, anyRate = false;
-    if (state.vat) {
-      var rates = {};
-      list.forEach(function (i) {
-        var r = vatNum(i.vat);
-        var key = r === null ? "" : String(r);
-        if (r !== null) { anyRate = true; }
-        rates[key] = (rates[key] || 0) + i.sum;
+    // Rozpis daně počítáme jednou a používají ho text i PDF. Ceny s DPH:
+    // zaklad = cena/(1+sazba/100). Položky bez sazby jdou do základu celé,
+    // aby základ a daň daly dohromady přesně celkovou tržbu; to platí
+    // i s připočtenou daní (zboží bez daně + daň = tržba).
+    var rowMap = {};
+    var putRow = function (key, base, tax, incl) {
+      if (!rowMap[key]) { rowMap[key] = { rate: key === "" ? null : parseFloat(key), base: 0, tax: 0 }; }
+      if (incl) { rowMap[key].incl = true; }
+      rowMap[key].base = vr(rowMap[key].base + base);
+      rowMap[key].tax = vr(rowMap[key].tax + tax);
+    };
+    var inclAny = state.vat && Object.keys(inclRates).some(function (k) { return k !== ""; });
+    if (inclAny || addedAny) {
+      Object.keys(inclRates).forEach(function (key) {
+        var gross = inclRates[key];
+        var r = inclAny && key !== "" ? parseFloat(key) : null;
+        var base = r === null ? vr(gross) : vr(gross / (1 + r / 100));
+        putRow(r === null ? "" : key, base, vr(gross - base), true);
       });
-      if (anyRate) {
-        Object.keys(rates).sort(function (a, b) {
-          return (parseFloat(a) || 0) - (parseFloat(b) || 0);
-        }).forEach(function (key) {
-          var gross = rates[key];
-          var r = key === "" ? null : parseFloat(key);
-          var base = r === null ? vr(gross) : vr(gross / (1 + r / 100));
-          var tax = vr(gross - base);
-          vatBase = vr(vatBase + base);
-          vatTax = vr(vatTax + tax);
-          vatRows.push({ rate: r, gross: gross, base: base, tax: tax });
-        });
-      }
+      Object.keys(added).forEach(function (key) { putRow(key, added[key].base, added[key].tax); });
     }
+    var vatRows = [], vatBase = 0, vatTax = 0;
+    Object.keys(rowMap).sort(function (a, b) {
+      return (parseFloat(a) || 0) - (parseFloat(b) || 0);
+    }).forEach(function (key) {
+      var row = rowMap[key];
+      // nulový řádek jen z připočtené daně (třeba samé zálohy) se vynechá;
+      // u cen s DPH zůstává rozpis, jak byl
+      if (!row.base && !row.tax && !row.incl) { return; }
+      vatRows.push({ rate: row.rate, base: row.base, tax: row.tax });
+      vatBase = vr(vatBase + row.base);
+      vatTax = vr(vatTax + row.tax);
+    });
 
     var now = new Date();
     var no = "TK-" + docDate(now).replace(/-/g, "") + "-" + ("0" + now.getHours()).slice(-2) + ("0" + now.getMinutes()).slice(-2) +
@@ -8152,7 +8756,7 @@
     out.push(T("docItemsHead"));
     list.forEach(function (i) {
       out.push(i.qty + "x " + i.name + " (" + czk(i.price) + ")  " + czk(i.sum) +
-               (state.vat && vatNum(i.vat) !== null ? "  " + rateTxt(i.vat) + " %" : ""));
+               (vatIncl() && vatNum(i.vat) !== null ? "  " + rateTxt(i.vat) + " %" : ""));
     });
     out.push("");
 
@@ -8176,6 +8780,7 @@
     out.push(T("card") + ": " + czk(cardSum));
     depLines(depIn, depOut).forEach(function (ln) { out.push(ln); });
     out.push(T("docTotal") + ": " + czk(total));
+    if (tipSum) { out.push(tipsLine(tipSum, tipCash, tipCard)); }
     out.push("");
     out.push(T("docFooter"));
 
@@ -8188,7 +8793,8 @@
       events: Object.keys(events),
       items: list,
       vatRows: vatRows, vatBase: vatBase, vatTax: vatTax,
-      bills: bills, cash: cashSum, card: cardSum, total: total, depIn: depIn, depOut: depOut
+      bills: bills, cash: cashSum, card: cardSum, total: total, depIn: depIn, depOut: depOut,
+      tip: tipSum, tipCash: tipCash, tipCard: tipCard
     };
   }
 
@@ -8255,7 +8861,7 @@
     var LAST = PDF_H - M - 14 - 10;               // poslední řádek nad patičkou
     var SUM_LIMIT = PDF_H - M - 14 - 8;           // spodek souhrnu nad patičkou
     var V = doc.vatRows.length;
-    var sumH = 24 + (V ? 45 + V * rowH : 0) + 76;
+    var sumH = 24 + (V ? 45 + V * rowH : 0) + 76 + (doc.tip ? 18 : 0);
     var cap = function (base) { return Math.max(1, Math.floor((LAST - base) / rowH) + 1); };
 
     var pages = [], rest = doc.items.slice();
@@ -8322,7 +8928,7 @@
     var clip = function (t, max) { return pdfClip(g, t, max); };
 
     var loc = langInfo().loc;
-    var vatOn = state.vat && doc.vatRows.length > 0;
+    var vatOn = vatIncl() && doc.vatRows.length > 0;
     var y;
 
     // Sloupce si šířku spočítají podle skutečného obsahu. Pevné hodnoty by
@@ -8457,7 +9063,7 @@
       }
 
       // souhrn v jemném panelu, ať je nejdůležitější číslo hned vidět
-      var boxTop = y - 6, boxH = 82;
+      var boxTop = y - 6, boxH = 82 + (doc.tip ? 18 : 0);
       g.fillStyle = "#FBFAF7";
       g.beginPath();
       if (g.roundRect) { g.roundRect(M - 6, boxTop, PDF_W - 2 * M + 12, boxH, 8); }
@@ -8480,6 +9086,15 @@
       g.fillText(T("docTotal"), M + 4, yb);
       font(16, 700); ink(ACC);
       right(czk(doc.total), xSum - 4, yb);
+      // spropitné pod celkem: patří k penězům v kase, ne do tržby
+      if (doc.tip) {
+        yb += 18;
+        font(10, 400); ink(INK2);
+        g.fillText(clip(T("docTips") + " (" + T("cashLower") + " " + czk(doc.tipCash) + ", " + T("cardLower") + " " + czk(doc.tipCard) + ")",
+          xSum - M - 110), M + 4, yb);
+        font(10.5, 700); ink(INK);
+        right(czk(doc.tip), xSum - 4, yb);
+      }
       y = boxTop + boxH;
     }
 
@@ -8780,7 +9395,7 @@
 
     state.items.forEach(function (it, i) {
       var c = colorOf(it.color);
-      h += '<div class="edit' + (state.vat ? " vat" : "") + '">' +
+      h += '<div class="edit' + (vatIncl() || state.taxAdd ? " vat" : "") + '">' +
              '<button class="sw' + (c ? "" : " none") + '"' + (c ? ' style="background:' + c.bg + '"' : "") +
                ' data-col="' + it.id + '" aria-label="' + esc(T("colorAria")) + '"></button>' +
              '<input class="e-nm" data-nm="' + it.id + '" value="' + esc(it.name) + '" placeholder="' + esc(T("nameAria")) +
@@ -8792,8 +9407,11 @@
                : "") +
              '<input class="e-pr' + (it.price < 0 ? " neg" : "") + '" data-pr="' + it.id + '"' + (it.price < 0 ? ' data-neg="1"' : "") +
                ' inputmode="decimal" enterkeyhint="next" value="' + priceStr(Math.abs(it.price)) + '" aria-label="' + esc(T("priceAria")) + '">' +
-             // sazba se ukazuje jen plátcům DPH, ostatním by řádek jen zabírala
-             (state.vat
+             // Připočtená daň: přepínač, jestli se položka daní (jedna sazba
+             // pro všechno). Sazba DPH v ceně se ukazuje jen plátcům DPH,
+             // ostatním by řádek jen zabírala.
+             (state.taxAdd ? taxToggle(it)
+               : vatIncl()
                ? '<input class="e-vat" data-vat="' + it.id + '" inputmode="decimal" placeholder="%" value="' +
                  esc(vatStr(it.vat)) + '" aria-label="' + esc(T("vatAria")) + '">'
                : "") +
@@ -8803,9 +9421,10 @@
 
     return h + '<div class="acts"><button class="act" data-new="1">' + esc(T("addItem")) + "</button>" +
            '<button class="act" data-adddep="1">' + esc(T("addDeposit")) + "</button>" +
+           '<button class="act" data-xmas="1">' + esc(T("xmasMenu")) + "</button>" +
            '<button class="act danger" data-reset="1">' + esc(T("resetMenu")) + "</button></div>" +
            '<p class="hint">' + esc(T("pricesHint")) + " " + esc(T("negHint")) + "</p>" +
-           (state.pair ? "" : queueBlock()) + bizBlock() + roleBlock(true) + appBlock() + renderBackupBlock();
+           (state.pair ? "" : queueBlock()) + bizBlock() + tipsBlock() + roleBlock(true) + appBlock() + renderBackupBlock();
   }
 
   // ---------- párování (s tarifní bránou) ----------
@@ -9134,7 +9753,8 @@
   function rateTxt(v) {
     var n = vatNum(v);
     if (n === null) { return ""; }
-    try { return new Intl.NumberFormat(langInfo().loc, { maximumFractionDigits: 2 }).format(n); } catch (e) { return String(n); }
+    // tři desetinná místa: sales tax má sazby jako 8,875 %
+    try { return new Intl.NumberFormat(langInfo().loc, { maximumFractionDigits: 3, useGrouping: false }).format(n); } catch (e) { return String(n); }
   }
 
   function vatNum(v) {
@@ -9149,10 +9769,42 @@
       '<div class="acts" style="padding-bottom:6px"><button class="act" data-sellersheet="1">' +
         esc(sellerFilled() ? T("sellerSet") : T("sellerEmpty")) + "</button></div>" +
       '<p class="hint">' + esc(T("bizHint")) + "</p>" +
-      '<div class="sec"><h2>' + esc(T("vatHead")) + "</h2></div>" +
-      '<div class="acts" style="padding-bottom:6px"><button class="act' + (state.vat ? " on" : "") +
+      '<div class="sec"><h2>' + esc(T("vatHead")) + "</h2></div>" + taxBlock();
+  }
+
+  // Daň: cena včetně daně (dnešní chování, DPH s volitelnými sazbami
+  // u položek), nebo daň připočtená při placení jednou sazbou.
+  function taxBlock() {
+    var add = state.taxAdd === true;
+    var h = '<div class="seg tight" role="group" aria-label="' + esc(T("vatHead")) + '">' +
+      '<button class="' + (add ? "" : "on") + '" data-taxmode="incl" aria-pressed="' + !add + '">' + esc(T("taxModeIncl")) + "</button>" +
+      '<button class="' + (add ? "on" : "") + '" data-taxmode="add" aria-pressed="' + add + '">' + esc(T("taxModeAdd")) + "</button></div>";
+    if (!add) {
+      return h + '<div class="acts" style="padding-bottom:6px"><button class="act' + (state.vat ? " on" : "") +
         '" data-vatmode="1">' + esc(state.vat ? T("vatOn") : T("vatOff")) + "</button></div>" +
-      '<p class="hint">' + esc(T("vatHint")) + "</p>";
+        '<p class="hint">' + esc(T("vatHint")) + "</p>";
+    }
+    return h + '<div class="taxrate" style="padding-top:12px"><label for="taxRate">' + esc(T("taxRateLbl")) + "</label>" +
+        '<input class="inp" id="taxRate" inputmode="decimal" enterkeyhint="done" placeholder="0" value="' +
+        esc(state.taxRate ? rateTxt(state.taxRate) : "") + '" aria-label="' + esc(T("taxRateAria")) + '"><span class="pc">%</span></div>' +
+      '<p class="hint" id="taxNoRate" style="color:var(--accent);font-weight:600;padding-bottom:0' + (taxRateNum() ? ";display:none" : "") + '">' +
+        esc(T("taxNoRate")) + "</p>" +
+      '<p class="hint">' + esc(T("taxAddHint")) + "</p>";
+  }
+
+  function taxToggle(it) {
+    var on = itemTaxed(it), r = taxRateNum();
+    return '<button class="etx' + (on ? "" : " off") + '" data-itx="' + it.id + '" aria-pressed="' + on + '" aria-label="' +
+           esc(T(on ? "taxItemOn" : "taxItemOff")) + '">' + esc(on ? "+" + (r ? pctTxt(r) : "%") : T("docVatNone")) + "</button>";
+  }
+
+  // Spropitné při placení: výchozí vypnuté, zapíná se tady.
+  function tipsBlock() {
+    var on = state.tips === true;
+    return '<div class="sec"><h2>' + esc(T("tipsHead")) + "</h2></div>" +
+      '<div class="acts" style="padding-bottom:6px"><button class="act' + (on ? " on" : "") +
+        '" data-tipsmode="1" aria-pressed="' + on + '">' + (on ? SVG.check : "") + esc(T(on ? "tipsOn" : "tipsOff")) + "</button></div>" +
+      '<p class="hint">' + esc(T("tipsHint")) + "</p>";
   }
 
   function tourReplayBlock() {
@@ -9281,6 +9933,48 @@
     });
   }
 
+  // Číselná klávesnice pro jinou částku a vlastní spropitné (v setinách).
+  function keypadHtml() {
+    var h = '<div class="keys">';
+    ["1", "2", "3", "4", "5", "6", "7", "8", "9"].forEach(function (d) {
+      h += '<button class="key" data-dig="' + d + '">' + d + "</button>";
+    });
+    return h + '<button class="key" data-dig="0">0</button>' +
+           '<button class="key" data-dig="00">00</button>' +
+           '<button class="key" data-back="1" aria-label="' + esc(T("delDigit")) + '">' + SVG.back + "</button></div>";
+  }
+
+  function pctTxt(p) {
+    try { return new Intl.NumberFormat(langInfo().loc, { style: "percent", maximumFractionDigits: 3 }).format(p / 100); }
+    catch (e) { return p + " %"; }
+  }
+
+  // Rozpis účtu při placení: jen když je co rozepisovat (připočtená daň,
+  // spropitné). Jinak zůstává okno jako dřív, částka a dvě tlačítka.
+  function billBreakdown(sh) {
+    var c = sh.calc, tip = sh.tip > 0 ? sh.tip : 0;
+    var taxed = !!c && !!c.rate && c.base !== 0;   // samotná záloha se nedaní, není co rozepisovat
+    if (!c || (!taxed && !tip)) { return ""; }
+    var row = function (k, v) { return "<span>" + esc(k) + '</span><span class="v">' + esc(v) + "</span>"; };
+    return '<div class="brk">' + row(T("subtotal"), czk(c.sub)) +
+           (taxed ? row(T("taxLine", rateTxt(c.rate)), czk(c.tax)) : "") +
+           (tip ? row(T("tipsHead"), czk(tip)) : "") + "</div>";
+  }
+
+  // Volba spropitného: 10, 15, 20 % (s částkou pod procentem), bez a jiná částka.
+  function tipChooser(sh) {
+    var h = '<p class="tipl">' + esc(T("tipsHead")) + '</p><div class="tips" role="group" aria-label="' + esc(T("tipsHead")) + '">';
+    TIP_PCTS.forEach(function (p) {
+      var on = sh.tipPick === String(p);
+      h += '<button class="' + (on ? "on" : "") + '" data-tip="' + p + '" aria-pressed="' + on + '">' + esc(pctTxt(p)) +
+           '<span class="a">' + czk(tipFor(p)) + "</span></button>";
+    });
+    var none = !sh.tip, custom = sh.tipPick === "c" && sh.tip > 0;
+    return h + '<button class="w3' + (none ? " on" : "") + '" data-tip="0" aria-pressed="' + none + '">' + esc(T("tipNone")) + "</button>" +
+           '<button class="w3' + (custom ? " on" : "") + '" data-tipother="1" aria-pressed="' + custom + '">' +
+             esc(custom ? czk(sh.tip) : T("customHead")) + "</button></div>";
+  }
+
   // Obsah panelu bez obalu. Obal .scrim a .sheet má vstupní animace fade
   // a rise. Kdyby se překresloval při každém ťuknutí na bankovku, animace
   // by se přehrály znovu a panel by pokaždé probliknul. Obal proto vzniká
@@ -9295,9 +9989,12 @@
 
     if (sheet.step === "method") {
       var n = orderCount();
-      h += "<h2>" + esc(T(payBack ? "toReturn" : "toPay")) + "</h2><div class=\"big num\">" + czk(payBack ? -sheet.total : sheet.total) + "</div>" +
+      var offerTip = state.tips && !payBack && sheet.total > 0;
+      h += "<h2>" + esc(T(payBack ? "toReturn" : "toPay")) + "</h2><div class=\"big num\">" + czk(payBack ? -sheet.total : dueOf(sheet)) + "</div>" +
            '<p class="sub">' + n + " " + tp("itemsN", n) + "</p>" +
+           billBreakdown(sheet) +
            (sheet.note ? '<p class="sub pnote">' + esc(sheet.note) + "</p>" : "") +
+           (offerTip ? tipChooser(sheet) : "") +
            '<div class="pay2">' +
              '<button class="btn-m m-cash" data-method="cash"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="3"/></svg>' + esc(T("cash")) + "</button>" +
              '<button class="btn-m m-card" data-method="card"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>' + esc(T("card")) + "</button>" +
@@ -9322,12 +10019,14 @@
     }
 
     if (sheet.step === "cash" && !payBack) {
-      var back = mr(sheet.received - sheet.total);
+      var due = dueOf(sheet);
+      var back = mr(sheet.received - due);
       var got = sheet.received > 0;
-      h += "<h2>" + esc(T("cash")) + "</h2><div class=\"big num\">" + czk(sheet.total) + "</div>" +
+      h += "<h2>" + esc(T("cash")) + "</h2><div class=\"big num\">" + czk(due) + "</div>" +
+           (sheet.tip > 0 ? '<p class="sub">' + esc(T("tipIncl", czk(sheet.tip))) + "</p>" : "") +
            '<p class="sub">' + esc(T("cashHint")) + "</p>" +
            '<div class="keys cash">' +
-             '<button class="key w3' + (got && sheet.received === sheet.total ? " on" : "") + '" data-exact="1">' + esc(T("exact")) + "</button>" +
+             '<button class="key w3' + (got && sheet.received === due ? " on" : "") + '" data-exact="1">' + esc(T("exact")) + "</button>" +
              '<button class="key w2" data-zero="1">' + esc(T("zero")) + "</button>";
       notesFor().forEach(function (v) { h += '<button class="key" data-note="' + v + '">' + noteLbl(v) + "</button>"; });
       h += "</div>";
@@ -9350,27 +10049,30 @@
     }
 
     if (sheet.step === "card" && !payBack) {
-      h += "<h2>" + esc(T("card")) + "</h2><div class=\"big num\">" + czk(sheet.total) + "</div>" +
+      h += "<h2>" + esc(T("card")) + "</h2><div class=\"big num\">" + czk(dueOf(sheet)) + "</div>" +
+           (sheet.tip > 0 ? '<p class="sub">' + esc(T("tipIncl", czk(sheet.tip))) + "</p>" : "") +
            '<p class="sub">' + esc(T("cardHint")) + "</p>" +
            '<div class="paid m-card"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>' +
-           esc(T("toTerminal", czk(sheet.total))) + "</div>" +
+           esc(T("toTerminal", czk(dueOf(sheet)))) + "</div>" +
            '<button class="btn-done" data-commit="1">' + esc(T("done")) + "</button>" +
            '<button class="btn-ghost" data-cancel="1">' + esc(T("back")) + "</button>";
     }
 
     if (sheet.step === "custom") {
       h += "<h2>" + esc(T("customHead")) + "</h2><div class=\"big num\">" + czk(minorToMajor(sheet.amount)) + "</div>" +
-           '<p class="sub">' + esc(T("customHint")) + '</p><div class="keys">';
-      ["1", "2", "3", "4", "5", "6", "7", "8", "9"].forEach(function (d) {
-        h += '<button class="key" data-dig="' + d + '">' + d + "</button>";
-      });
-      h += '<button class="key" data-dig="0">0</button>' +
-           '<button class="key" data-dig="00">00</button>' +
-           '<button class="key" data-back="1" aria-label="' + esc(T("delDigit")) + '">' + SVG.back + "</button></div>" +
+           '<p class="sub">' + esc(T("customHint")) + "</p>" + keypadHtml() +
            // plátce DPH: jiná částka potřebuje sazbu, jinak by v dokladu
            // skončila celá jako bez daně
-           (state.vat ? customVatChips() : "") +
+           (vatIncl() ? customVatChips() : "") +
            '<button class="btn-done" data-addcustom="1"' + (sheet.amount > 0 ? "" : " disabled") + ">" + esc(T("addToOrder")) + "</button>" +
+           '<button class="btn-ghost" data-cancel="1">' + esc(T("back")) + "</button>";
+    }
+
+    // vlastní spropitné: stejná klávesnice jako jiná částka, pak zpět k placení
+    if (sheet.step === "tip") {
+      h += "<h2>" + esc(T("tipsHead")) + "</h2><div class=\"big num\">" + czk(minorToMajor(sheet.amount)) + "</div>" +
+           '<p class="sub">' + esc(T("tipCustomHint")) + "</p>" + keypadHtml() +
+           '<button class="btn-done" data-tipset="1">' + esc(T("tipSet")) + "</button>" +
            '<button class="btn-ghost" data-cancel="1">' + esc(T("back")) + "</button>";
     }
 
@@ -9514,7 +10216,8 @@
         h += "<h2>" + esc(T("orderHead")) + " #" + s.no + "</h2>" +
              '<div class="big num">' + ready(s) + "/" + pieces(s) + "</div>" +
              '<p class="sub">' + clock(s.ts) + " · " + czk(s.total) + " " +
-               esc(s.method === "cash" ? T("cashLower") : T("cardLower")) + "</p>" +
+               esc(s.method === "cash" ? T("cashLower") : T("cardLower")) +
+               (s.tip > 0 ? " · " + esc(T("toastTip", czk(s.tip))) : "") + "</p>" +
              '<div class="steps">';
         s.lines.forEach(function (l, i) {
           if (!needsPrep(l)) { return; }   // index zůstává původní, kvůli data-line
@@ -9606,10 +10309,15 @@
            // Limit padl a koupit teď nejde: rozpracovaný účet se dokončí.
            // Poprvé s rezervou na zbytek dne, potom už jen tento jeden účet.
            (sheet.reason === "limit" && canRescue()
-             ? '<div class="pw-rescue"><p>' + esc(T("rescueHint")) + "</p>" +
-               '<button class="btn-ghost strong" data-rescue="1">' +
-                 esc(state.resUsed ? T("rescueOneBtn") : T("rescueResBtn", RESERVE)) + "</button>" +
-               '<p class="pw-rnote">' + esc(state.resUsed ? T("rescueOneNote") : T("rescueResNote")) + "</p></div>"
+             ? (cantBuyNow()
+               ? '<div class="pw-rescue"><p>' + esc(T("rescueHint")) + "</p>" +
+                 '<button class="btn-ghost strong" data-rescue="1">' +
+                   esc(state.resUsed ? T("rescueOneBtn") : T("rescueResBtn", RESERVE)) + "</button>" +
+                 '<p class="pw-rnote">' + esc(state.resUsed ? T("rescueOneNote") : T("rescueResNote")) + "</p></div>"
+               // se signálem: jednou denně dokončit tento účet, klidně a bez rezervy
+               : '<div class="pw-rescue"><p>' + esc(T("graceHint")) + "</p>" +
+                 '<button class="btn-ghost strong" data-rescue="1">' + esc(T("rescueOneBtn")) + "</button>" +
+                 '<p class="pw-rnote">' + esc(T("graceNote")) + "</p></div>")
              : "") +
            // na webu se nekupuje ani neobnovuje: rovnou cesta do obchodů
            (nativeApp() ? '<button class="btn-ghost" data-restorebuy="1">' + esc(T("proRestore")) + "</button>"
@@ -9744,6 +10452,21 @@
     }
   }
 
+  // Dolar (a kanadský dolar): ceny se tam píšou bez daně. Úvod to jednou
+  // větou nabídne, nic nevnucuje; výchozí zůstává cena včetně daně.
+  function taxMarket() { return state.currency === "USD" || state.currency === "CAD"; }
+
+  function obTaxBlock() {
+    var on = state.taxAdd === true;
+    return '<div class="ob-tax"><p>' + esc(T("obTaxAsk", T("tabMenu"))) + "</p>" +
+      '<button class="act' + (on ? " on" : "") + '" data-obtax="1" aria-pressed="' + on + '">' + (on ? SVG.check : "") +
+        esc(T("taxModeAdd")) + "</button>" +
+      (on ? '<div class="taxrate"><label for="taxRate">' + esc(T("taxRateLbl")) + "</label>" +
+        '<input class="inp" id="taxRate" inputmode="decimal" enterkeyhint="done" placeholder="0" value="' +
+        esc(state.taxRate ? rateTxt(state.taxRate) : "") + '" aria-label="' + esc(T("taxRateAria")) + '"><span class="pc">%</span></div>' : "") +
+      "</div>";
+  }
+
   function renderOnboard() {
     if (state.setup) { return ""; }
     var h = '<div class="ob"><div class="ob-in">' +
@@ -9776,8 +10499,10 @@
       '<p class="ob-note ob-free">' + esc(T("obFree", FREE_LIMIT, trialText({ n: 14, unit: "DAY" }))) + "</p>" +
       // poctivé vymezení: nejde o fiskální pokladnu (EET, eKasa, TSE…)
       '<p class="ob-note">' + esc(T("obFiscal")) + "</p>" +
+      (taxMarket() ? obTaxBlock() : "") +
       '<div class="ob-spacer"></div>' +
       '<div class="ob-foot"><button class="btn-done" data-obdemo="1">' + esc(T("obDemo")) + "</button>" +
+      '<button class="btn-ghost" data-obxmas="1">' + esc(T("obXmas")) + "</button>" +
       '<button class="btn-ghost" data-obempty="1">' + esc(T("obEmpty")) + "</button></div>";
     }
     return h + "</div></div>";
@@ -9789,32 +10514,43 @@
   // vedle reality, průvodce běží nad živou aplikací.
   var tourIx = -1, tourRaf = 0, tourScrolledFor = -1, tourLastKey = "", tourLastBox = "";
   var tourEntered = -1, tourBase = 0, tourEdited = false;
+  // Zaplaceno během průvodce. Kdo jde napřed a zaplatí dřív, než ho
+  // průvodce dovede k placení, má kroky prodeje za sebou: přeskočí se
+  // a navazuje se frontou objednávek. Dřív mu po zaplacení radil
+  // „ťukněte znovu, ať je co účtovat“.
+  var tourPaid = false;
+
+  function payOpen() { return !!sheet && (sheet.step === "method" || sheet.step === "cash" || sheet.step === "card" || sheet.step === "tip"); }
 
   var TOUR = [
     { key: "tourS1", sel: function () { return ".prod"; },
-      done: function () { return state.order.length > 0; } },
+      done: function () { return state.order.length > 0 || tourPaid; } },
     // Stačí ubrat jeden kus. Dřív krok čekal na prázdný účet, a kdo předtím
     // ťukl dvakrát, držel kartu a průvodce se nehnul.
-    { key: "tourS1b", sel: function () { return ".prod"; },
+    // Drží se karta, která je na účtu. Jen jiná částka (bez karty) se
+    // podržením ubrat nedá, krok se pak přeskočí.
+    { key: "tourS1b", sel: function () { return ".prod.is-on"; },
       enter: function () { tourBase = orderCount(); },
       done: function () {
+        if (tourPaid || !state.order.some(function (l) { return !!findItem(l.ref); })) { return true; }
         var n = orderCount();
         if (n > tourBase) { tourBase = n; }   // mezitím přibyl další kus
         return !state.order.length || n < tourBase;
       } },
     { key: "tourS1c", sel: function () { return ".prod"; },
-      done: function () { return state.order.length > 0; } },
+      done: function () { return state.order.length > 0 || tourPaid; } },
     { key: "tourS2", sel: function () { return "[data-pay]"; },
-      done: function () { return !!sheet && (sheet.step === "method" || sheet.step === "cash" || sheet.step === "card"); } },
+      done: function () { return tourPaid || payOpen(); } },
     { key: "tourS3", sel: function () { return '[data-method="cash"]'; },
-      done: function () { return !!sheet && (sheet.step === "cash" || sheet.step === "card"); } },
+      done: function () { return tourPaid || (!!sheet && (sheet.step === "cash" || sheet.step === "card")); } },
     { key: "tourS4", sel: function () {
         return (sheet && (sheet.step === "card" || sheet.received > 0)) ? "[data-commit]" : "[data-exact]"; },
-      done: function () { return state.sales.length > 0 && !sheet; } },
+      done: function () { return tourPaid && !payOpen(); } },
+    // Fronta je vypnutá, nebo už je vydáno: k lístku není co vést.
     { key: "tourS5", sel: function () { return '[data-tab="orders"]'; },
-      done: function () { return view === "orders"; } },
+      done: function () { return view === "orders" || !openOrders().length; } },
     { key: "tourS6", sel: function () { return (sheet && sheet.step === "ticket") ? "[data-serve]" : ".tk"; },
-      done: function () { return state.sales.some(function (x) { return x.status !== "open"; }); } },
+      done: function () { return !openOrders().length || state.sales.some(function (x) { return x.status !== "open"; }); } },
     { key: "tourS7", sel: function () { return '[data-tab="history"]'; },
       done: function () { return view === "history"; } },
     { key: "tourS8", sel: function () { return '[data-tab="menu"]'; },
@@ -9842,6 +10578,7 @@
     }
     tourIx = 0;
     tourEntered = -1;
+    tourPaid = false;
     tourScrolledFor = -1;
     view = "sell";
     sheet = null;
@@ -9911,6 +10648,17 @@
 
     var el = null;
     try { el = document.querySelector(TOUR[tourIx].sel()); } catch (e) {}
+    // Otevřené okno (placení, klávesnice, paywall): bublina, která neukazuje
+    // dovnitř okna, se schová a po jeho zavření se vrátí se správným krokem.
+    // Dřív visela „podržte kartu“ nad oknem placení.
+    var modal = document.querySelector("#sheetSlot .scrim");
+    var hide = !!modal && (!el || !modal.contains(el));
+    if (card.style.display !== (hide ? "none" : "")) { card.style.display = hide ? "none" : ""; }
+    if (hide) {
+      ring.style.display = "none";
+      tourLastBox = "";
+      return;
+    }
     if (el) {
       // Nový krok si cíl přisune do středu obrazovky. Jen jednou na krok,
       // aby kroužek nebojoval s ručním posouváním uživatele.
@@ -10140,7 +10888,8 @@
             "[data-tourskip],[data-tourstart],[data-offlinehelp],[data-country],[data-docmail],[data-docshare],[data-docsave],[data-sellersheet],[data-archopen],[data-archdel],[data-vatmode],[data-langsheet],[data-cursheet],[data-setlang],[data-setcur],[data-paywall],[data-buy]," +
             "[data-restorebuy],[data-oblang],[data-obcur],[data-obnext],[data-obback],[data-obdemo],[data-obempty]," +
             "[data-evsheet],[data-evswitch],[data-evnew],[data-evcreate],[data-evdel],[data-cvat],[data-backupfile]," +
-            "[data-diag],[data-shortok],[data-rescue],[data-nudgehide],[data-sign],[data-adddep],[data-queuemode],[data-serveall],[data-morerc],[data-firstitem]";
+            "[data-diag],[data-shortok],[data-rescue],[data-nudgehide],[data-sign],[data-adddep],[data-queuemode],[data-serveall],[data-morerc],[data-firstitem]," +
+            "[data-tip],[data-tipother],[data-tipset],[data-taxmode],[data-itx],[data-tipsmode],[data-obtax],[data-obxmas],[data-xmas]";
 
   document.addEventListener("click", function (ev) {
     if (suppressClick) { suppressClick = false; return; }
@@ -10173,7 +10922,7 @@
       return;
     }
 
-    if (d.custom) { sheet = { step: "custom", amount: 0, vat: state.vat ? defaultCustomVat() : "" }; render(); return; }
+    if (d.custom) { sheet = { step: "custom", amount: 0, vat: vatIncl() ? defaultCustomVat() : "" }; render(); return; }
     if (d.dig) {
       // číslice navíc se ignoruje, dřív se částka potichu změnila na 999 999
       var nv = parseInt(String(sheet.amount) + d.dig, 10) || 0;
@@ -10188,7 +10937,7 @@
 
     if (d.addcustom) {
       var cl = { ref: uid(), name: T("customItem"), price: mr(minorToMajor(sheet.amount)), qty: 1 };
-      if (state.vat) {
+      if (vatIncl()) {
         cl.vat = vatStr(sheet.vat);
         state.customVat = cl.vat === "" ? "-" : cl.vat;
       }
@@ -10214,18 +10963,40 @@
         sheet = { step: "paywall", reason: "limit" };
         render(); return;
       }
-      sheet = { step: "method", total: mr(orderTotal()), method: null, received: 0 };
+      sheet = paySheet();
       render(); return;
     }
     if ((d.method || d.commit) && Date.now() - stepShownAt < 450) { return; }
     if (d.method) { sheet.method = d.method; sheet.step = d.method; render(); return; }
     if (d.note) { sheet.received = mr(sheet.received + parseFloat(d.note)); sheet.shortAsk = 0; render(); return; }
-    if (d.exact) { sheet.received = sheet.total; sheet.shortAsk = 0; render(); return; }
+    if (d.exact) { sheet.received = dueOf(sheet); sheet.shortAsk = 0; render(); return; }
     if (d.zero) { sheet.received = 0; sheet.shortAsk = 0; render(); return; }
+    // Spropitné: procento ze zboží před daní, nebo vlastní částka z klávesnice.
+    if (d.tip) {
+      if (!sheet || sheet.step !== "method") { return; }
+      var pct = parseInt(d.tip, 10) || 0;
+      sheet.tipPick = String(pct);
+      sheet.tip = pct ? tipFor(pct) : 0;
+      render(); return;
+    }
+    if (d.tipother) {
+      if (!sheet || sheet.step !== "method") { return; }
+      var f0 = Math.pow(10, curInfo().dec);
+      sheet = { step: "tip", amount: sheet.tipPick === "c" ? Math.round((sheet.tip || 0) * f0) : 0, back: sheet };
+      render(); return;
+    }
+    if (d.tipset) {
+      if (!sheet || sheet.step !== "tip" || !sheet.back) { return; }
+      var tb = sheet.back, ta = mr(minorToMajor(sheet.amount));
+      tb.tip = ta;
+      tb.tipPick = ta > 0 ? "c" : "0";
+      sheet = tb;
+      render(); return;
+    }
     // Hotově s nedoplatkem: první ťuknutí jen upozorní, uložit jde až
     // druhým, výslovným potvrzením. Nic nenaťukáno (0) = bez počítání vrácení.
     if (d.commit) {
-      if (sheet && sheet.step === "cash" && sheet.received > 0 && mr(sheet.received - sheet.total) < 0) {
+      if (sheet && sheet.step === "cash" && sheet.received > 0 && mr(sheet.received - dueOf(sheet)) < 0) {
         sheet.shortAsk = Date.now(); render(); return;
       }
       commit(); return;
@@ -10376,11 +11147,15 @@
         var s = stats();
         // účtenky si archiv nese s sebou, jinak by nešlo akci vrátit zpět
         // do kasy a doúčtovat ji
-        state.archives.push({
+        var arch = {
           id: uid(), closedAt: Date.now(), event: state.event || T("noName"), evId: state.evId,
           total: s.total, cash: s.cash, card: s.card, count: s.count, pieces: s.pieces, items: s.items,
           sales: state.sales.slice(), nextNo: state.nextNo
-        });
+        };
+        // připočtená daň a spropitné jen tam, kde nějaké byly
+        if (s.taxOn) { arch.tax = s.tax; }
+        if (s.tip) { arch.tip = s.tip; arch.tipCash = s.tipCash; arch.tipCard = s.tipCard; }
+        state.archives.push(arch);
         // Akce zůstává otevřená (název, menu), jen začíná znovu od nuly:
         // denní uzávěrka kavárny tak nevyžaduje zakládat akci každý den.
         state.sales = [];
@@ -10447,6 +11222,7 @@
             var o = { id: uid(), name: it.name, price: it.price, color: it.color || "" };
             if (it.vat !== undefined) { o.vat = it.vat; }
             if (it.dep) { o.dep = true; }
+            if (it.tx === 0 || it.tx === 1) { o.tx = it.tx; }
             return o;
           });
           swapInEvent({ id: rid, event: ao.event, items: ritems, sales: rsales, nextNo: rnext, createdAt: Date.now() });
@@ -10523,6 +11299,17 @@
       var moved = state.items.splice(idx, 1)[0];
       state.items.splice(idx - 1, 0, moved);
       save(); render(); return;
+    }
+
+    // ukázkové menu z vánočního trhu (i pro snímky do obchodů)
+    if (d.xmas) {
+      var cx2 = T("confirmXmas");
+      ask(cx2[0], cx2[1], cx2[2], function () {
+        state.items = xmasItems();
+        if (!state.event.trim() || state.event === T("demoEvent")) { state.event = T("xmasEvent"); }
+        save();
+      });
+      return;
     }
 
     if (d.reset) {
@@ -10739,6 +11526,21 @@
       save(); render();
       return;
     }
+    if (d.taxmode) {
+      state.taxAdd = d.taxmode === "add";
+      save(); render();
+      return;
+    }
+    if (d.itx) {
+      var txi = findItem(d.itx);
+      if (txi) { txi.tx = itemTaxed(txi) ? 0 : 1; save(); render(); }
+      return;
+    }
+    if (d.tipsmode) {
+      state.tips = !state.tips;
+      save(); render();
+      return;
+    }
 
     if (d.mode) {
       var nextMode = d.mode === "vydej" ? "vydej" : "kasa";
@@ -10791,12 +11593,18 @@
 
     // ---- onboarding ----
     if (d.oblang) { state.lang = d.oblang; moneyFmt = null; nfPlain = null; save(); render(); return; }
-    if (d.obcur) { setCurrency(d.obcur); save(); render(); return; }
+    if (d.obcur) {
+      setCurrency(d.obcur);
+      // připočtená daň patří k dolaru; po změně měny v úvodu zase výchozí
+      if (!taxMarket()) { state.taxAdd = false; }
+      save(); render(); return;
+    }
+    if (d.obtax) { state.taxAdd = !state.taxAdd; save(); render(); return; }
     if (d.obnext) { obStep = 2; render(); var obEl = document.querySelector(".ob"); if (obEl) { obEl.scrollTop = 0; } return; }
     if (d.obback) { obStep = 1; render(); return; }
-    if (d.obdemo || d.obempty) {
-      state.items = d.obdemo ? defaultItems() : [];
-      state.event = T("demoEvent");
+    if (d.obdemo || d.obempty || d.obxmas) {
+      state.items = d.obdemo ? defaultItems() : d.obxmas ? xmasItems() : [];
+      state.event = T(d.obxmas ? "xmasEvent" : "demoEvent");
       state.setup = true;
       obStep = 1;
       try { localStorage.setItem("kasa.setupDone", "1"); } catch (e) {}
@@ -10938,7 +11746,7 @@
       if (add) { add.click(); }
       return;
     }
-    if (el.id === "evName") { el.blur(); return; }
+    if (el.id === "evName" || el.id === "taxRate") { el.blur(); return; }
     if (el.id === "pairCode") {
       var jb = document.querySelector("[data-pairjoin]");
       if (jb) { ev.preventDefault(); el.blur(); jb.click(); }
@@ -10980,6 +11788,21 @@
       wheelImg = null;
       wheelPaint();
       wheelPreview();
+      return;
+    }
+
+    // Sazba připočtené daně. Bez překreslení (klávesnice zůstane), jen
+    // popisky přepínačů u položek a upozornění na chybějící sazbu.
+    if (el.id === "taxRate") {
+      var tr = vatNum(el.value);
+      state.taxRate = tr !== null && tr < 100 ? String(tr) : "";
+      save();
+      var rn = taxRateNum();
+      [].forEach.call(document.querySelectorAll(".etx:not(.off)"), function (b) {
+        b.textContent = "+" + (rn ? pctTxt(rn) : "%");
+      });
+      var nr = document.getElementById("taxNoRate");
+      if (nr) { nr.style.display = rn ? "none" : ""; }
       return;
     }
 
