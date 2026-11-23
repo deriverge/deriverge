@@ -1713,12 +1713,13 @@ def page_board_platform(p):
         *([section('free plugin', 'Our free importer plugin', f'''      <div class="prose">
         <p>Deriverge Job Feed Importer is a free WordPress plugin that reads the feed straight into {esc(nm)}: no WP All Import Pro and no mapping by hand. It imports on a schedule in small batches, updates the jobs that changed and expires the ones that left the feed. It is GPL, has no paid version and works with any XML, JSON or JSON Lines job feed, not only ours.</p>
         <ol><li>Download the plugin and install it under <strong>Plugins, Add New, Upload Plugin</strong>. {esc(nm)} has to be active.</li>
-        <li>Open <strong>Job Listings, Feed Import</strong> and paste the address of your <code>open.xml</code> file, or choose the free sample feed.</li>
+        <li>Open <strong>Job Manager, Feed Import</strong> (<strong>Job Listings, Feed Import</strong> in older versions of {esc(nm)}) and paste the address of your <code>open.xml</code> file, or choose the free sample feed.</li>
         <li>Choose whether new jobs are published right away or wait for your approval, and what happens to a job that leaves the feed.</li>
         <li>Press <strong>Run now</strong>. After the first import the feed is imported once a day.</li></ol>
       </div>
+      <img src="/tools/img/wp-job-manager-feed-import.png" width="1280" height="760" loading="lazy" style="border:1px solid var(--line-strong);border-radius:6px;margin:8px 0 16px" alt="The Feed Import page in WordPress: two feeds with the result of their last import, a Run now button for each, the daily schedule and a log of recent imports.">
       <div class="cta-row"><a class="btn" href="{PLUGIN_ZIP}" download>Download the plugin (zip)</a></div>
-      <p class="note">Version 1.0.0, tested with WordPress 7.1 and PHP 8.3; needs WordPress 6.2 and PHP 7.4 or newer. If you already use WP All Import Pro, the steps below work too.</p>''', hid='plugin')] if p.get('plugin') else []),
+      <p class="note">Version 1.0.0, tested with WordPress 7.1 on PHP 8.3 and WordPress 6.8 on PHP 7.4; needs WordPress 6.2 and PHP 7.4 or newer. If you already use WP All Import Pro, the steps below work too.</p>''', hid='plugin')] if p.get('plugin') else []),
         section('connect', f'Connect the feed to {nm}' + (' with WP All Import' if p.get('plugin') else ''), f'      <div class="prose"><ol>{steps}</ol></div>', hid='connect'),
         section('mapping', 'Field mapping', f'''      <div class="tbl-wrap"><table class="tbl tbl--fit"><thead><tr><th>{esc(nm)} field</th><th>Element in our XML</th></tr></thead><tbody>{maprows}</tbody></table></div>
       <p class="note">Our file follows the Indeed XML job feed format, with a few extra elements. <a href="/tools/job-data-feed/job-board-software/#elements">All elements</a>.</p>''', hid='mapping'),
