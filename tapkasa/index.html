@@ -55,6 +55,7 @@
     --accent-tint:#FFF6F4;
     --cash:#0F7A4F;
     --card:#1D5BD6;
+    --qr:#6A3FB0;
     --track:#EDE9E0;
     --r-tile:12px;
     --r-btn:10px;
@@ -238,6 +239,10 @@
   .btn-m:active{transform:scale(.98)}
   .m-cash{background:var(--cash)}
   .m-card{background:var(--card)}
+  .m-qr{background:var(--qr)}
+  /* QR převodem pod hotovostí a kartou přes celou šířku: tři sloupce by
+     na úzkém telefonu lámaly dlouhé názvy (QR-Überweisung, Transferencia) */
+  .pay2 .m-qr{grid-column:1 / -1;flex-direction:row;justify-content:center;gap:10px;padding:15px 10px}
 
   .keys{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}
   .key{padding:13px 4px;border-radius:var(--r-btn);border:1px solid var(--rule);background:var(--surface);font-size:15px;font-weight:600;font-variant-numeric:tabular-nums}
@@ -282,6 +287,7 @@
   .split i:only-child{border-radius:5px}
   .sp-cash{background:var(--cash)}
   .sp-card{background:var(--card)}
+  .sp-qr{background:var(--qr)}
   .legend{display:flex;gap:18px;margin-top:10px;flex-wrap:wrap}
   .lg{display:flex;align-items:baseline;gap:7px;font-size:13px}
   .lg i{width:9px;height:9px;border-radius:2px;flex:0 0 auto;transform:translateY(-1px)}
@@ -828,6 +834,38 @@
   .eetr .a{flex:0 0 auto;font-family:var(--mono);font-weight:700;font-variant-numeric:tabular-nums}
   .eetr .k{display:block;margin-top:2px;font-family:var(--mono);font-size:11px;color:var(--ink-3);overflow-wrap:anywhere;user-select:all;-webkit-user-select:all}
   .eetr .e{display:block;margin-top:2px;color:var(--accent);font-size:12px;font-weight:600}
+  /* ---------- QR platba převodem ---------- */
+  /* kód co nejširší, ale tlačítko Zaplaceno musí zůstat vidět i na malém telefonu */
+  .qrpay{margin:12px auto 0;max-width:min(440px,calc(100vh - 280px));max-width:min(440px,calc(100dvh - 280px));min-width:220px;border:1px solid var(--rule);border-radius:10px;overflow:hidden;background:#fff}
+  .qrpay svg{display:block;width:100%;height:auto}
+  .sheet .big.qrbig{text-align:center;margin-top:10px}
+  .qrmeta{margin:4px 0 0;text-align:center;font-size:12px;line-height:1.45;color:var(--ink-3);overflow-wrap:anywhere}
+  .sheet .sub.qrhint{text-align:center}
+  .qrset .sf{margin-top:12px}
+  .qrset .seg{margin:14px 0 0}
+  .sheet .sub.qr-err{color:var(--accent);font-weight:600}
+  .sheet .sub.qr-ok{color:var(--cash);font-weight:600}
+  .qrprev{display:flex;gap:12px;align-items:center;margin-top:12px;padding:10px;border:1px solid var(--rule);border-radius:var(--r-tile);background:var(--surface)}
+  .qrprev svg{flex:0 0 auto;width:128px;height:128px}
+  .qrprev p{margin:0;font-size:12px;line-height:1.45;color:var(--ink-2);overflow-wrap:anywhere}
+  .qrprev strong{display:block;font-family:var(--mono);font-size:12px;color:var(--ink)}
+  /* ---------- pas na akci ---------- */
+  .pw-pass{margin-top:16px}
+  .pw-plan.pass{width:100%;border-color:#8CC7AA;background:#F0F7F3}
+  .pw-plan.pass .k{color:var(--cash)}
+  .pw-plan.pass .go{background:var(--cash);color:#fff}
+  .pw-auto{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:8px;padding:8px;border:0;background:none;font-size:13px;font-weight:600;color:var(--ink-2)}
+  .pw-auto i{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border:1.5px solid var(--ink-3);border-radius:5px;background:var(--surface)}
+  .pw-auto i svg{width:14px;height:14px;stroke:#fff;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+  .pw-auto[aria-checked="true"] i{background:var(--cash);border-color:var(--cash)}
+  .pw-auto[aria-checked="false"] i svg{visibility:hidden}
+  .pw-own{margin-top:14px}
+  .passp{display:inline-block;position:relative;margin-left:8px;padding:1px 7px;border:1px solid #8CC7AA;border-radius:999px;background:#F0F7F3;color:#0B5E3C;
+    font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:0;text-transform:none;line-height:16px;vertical-align:1px}
+  .passp::after{content:"";position:absolute;inset:-12px -6px}
+  .passp.idle{border-color:var(--rule);background:var(--surface);color:var(--ink-2)}
+  .pass-st{margin:10px 0 0;padding:12px 14px;border:1px solid #BFE0D0;border-radius:var(--r-tile);background:#F0F7F3;font-size:14px;line-height:1.45;color:var(--ink)}
+  .pass-st strong{font-family:var(--mono)}
 </style>
 
 <div class="shell">
@@ -1537,8 +1575,71 @@
     rndOff: "Hotovost se nezaokrouhluje",
     rndHint: "Platba hotově se zaokrouhlí na nejbližších 5 centů, kartou zůstává přesná. Přehled i souhrn tržeb ukazují zaokrouhlení zvlášť.",
     rndNote: "Zaokrouhleno na 5 centů z {0}.",
-    rndLine: "Zaokrouhlení hotovosti: {0}"
-
+    rndLine: "Zaokrouhlení hotovosti: {0}",
+    // QR platba převodem a pas na akci (1.3.0)
+    qrPay: "QR převodem",
+    qrLower: "QR převodem",
+    qrAria: "QR kód platby {0}",
+    qrHint: "Zákazník kód naskenuje ve své bankovní aplikaci a platbu odešle. Tapkasa platbu neověřuje: Zaplaceno ťukněte, až vám zákazník ukáže odeslanou platbu.",
+    qrPaid: "Zaplaceno",
+    qrMsgNo: "účtenka {0}",
+    splitAriaQr: "Hotově {0}, kartou {1}, QR převodem {2}",
+    tipsLineQr: "Spropitné mimo tržbu: {0} (hotově {1}, kartou {2}, QR převodem {3})",
+    qrHead: "QR platba převodem",
+    qrSetBtn: "Nastavit účet pro QR platby",
+    qrEdit: "Upravit účet pro QR platby",
+    qrMenuHint: "Při placení přibude tlačítko QR převodem: zákazník naskenuje kód s částkou ve své bankovní aplikaci. Peníze jdou rovnou na váš účet, Tapkasa k nim nemá přístup a platbu neověřuje.",
+    qrSetHint: "Účet, na který mají platby chodit. Kód předvyplní účet, částku, číslo účtenky a název akce.",
+    qrFmtLbl: "Formát kódu",
+    qrFmtSk: "Slovensko (PAY by square)",
+    qrFmtEu: "Eurozóna (EPC QR)",
+    qrFmtSpayd: "QR Platba",
+    qrFmtPbs: "PAY by square",
+    qrFmtEpc: "EPC QR (GiroCode)",
+    qrAccLblCz: "Číslo účtu nebo IBAN",
+    qrAccLblSk: "IBAN nebo slovenské číslo účtu",
+    qrAccLblEu: "IBAN",
+    qrAccPhCz: "19-2000145399/0800",
+    qrAccPhSk: "SK31 1200 0000 1987 4263 7541",
+    qrAccPhEu: "DE89 3704 0044 0532 0130 00",
+    qrNameLbl: "Jméno příjemce",
+    qrBicLbl: "BIC (nepovinné)",
+    qrErrCur: "QR platby umí Tapkasa jen v korunách a eurech.",
+    qrErrNone: "Zadejte číslo účtu.",
+    qrErrAcc: "Číslo účtu nesedí, kontrolní součet nevychází. Zkontrolujte ho.",
+    qrErrIban: "IBAN nesedí, kontrolní číslice nevycházejí. Zkontrolujte ho.",
+    qrErrFmtCz: "Zadejte číslo účtu ve tvaru 123456789/0800 (s předčíslím 19-123456789/0800) nebo IBAN.",
+    qrErrFmtEu: "Zadejte IBAN, třeba DE89 3704 0044 0532 0130 00.",
+    qrErrNeedIban: "Pro platby v eurech mimo Slovensko zadejte IBAN.",
+    qrErrBic: "BIC nesedí, má 8 nebo 11 znaků.",
+    qrErrName: "Vyplňte jméno příjemce, banky ho u plateb v eurech chtějí.",
+    qrOk: "Účet je v pořádku.",
+    qrPrevAria: "Náhled QR kódu platby",
+    qrPrevHint: "Náhled na {0}: načtěte ho svou bankovní aplikací a zkontrolujte účet a jméno. Platbu odesílat nemusíte.",
+    qrClear: "Odebrat účet",
+    confirmQrClear: ["Odebrat účet", "Tlačítko QR převodem z placení zmizí. Uložené účtenky zůstanou.", "Odebrat"],
+    passName: "Pas na akci",
+    passPitch: "Pas na akci: Pro na 72 hodin za {0}, bez předplatného",
+    passPitchNoPrice: "Pas na akci: Pro na 72 hodin, bez předplatného",
+    passSub: "Pro na 72 hodin, bez předplatného",
+    passBuy: "Koupit pas",
+    passAuto: "Spustit hned po nákupu",
+    passTerms: "Pas na akci je jednorázový nákup, nic se neobnovuje ani neplatí znovu. Odemkne Tapkasa Pro na tomto zařízení na 72 hodin od spuštění. Nespuštěný pas nevyprší.",
+    passHow: "Pas odemkne Pro na tomto zařízení na 72 hodin od spuštění: neomezené platby a párování druhého zařízení. Nespuštěný pas počká, dokud ho nespustíte.",
+    passHours: "{0} h",
+    passMins: "{0} min",
+    passUnusedN: ["{0} nevyužitý pas", "{0} nevyužité pasy", "{0} nevyužitých pasů"],
+    passStartSaved: "Spustit uložený pas (72 h)",
+    passStartMore: "Spustit další pas (+72 h)",
+    confirmPassStart: ["Spustit pas na akci", "Tapkasa Pro poběží na tomto zařízení 72 hodin, do {0}. Spuštěný pas nejde zastavit.", "Spustit"],
+    passOnToast: "Pas na akci běží do {0}.",
+    passSavedToast: "Pas je uložený. Spustíte ho v {0}, až ho budete potřebovat.",
+    passReadyToast: "Nevyužité pasy na akci: {0}. Spustíte je v Menu.",
+    passMenuOn: "Pas na akci běží, zbývá {0} (do {1})",
+    passPill: "Pas {0}",
+    passPillAria: "Pas na akci, zbývá {0}",
+    passEnded: "Pas na akci skončil. Další spustíte nebo koupíte v Menu.",
+    passPending: "Platba čeká na schválení. Pas se připíše, jakmile ji obchod potvrdí."
   };
 
   I18N.en = {
@@ -2130,8 +2231,71 @@
     rndOff: "Cash not rounded",
     rndHint: "Cash payments are rounded to the nearest 5 cents; card payments stay exact. Stats and the sales summary show the rounding separately.",
     rndNote: "Rounded to the nearest 5¢ from {0}.",
-    rndLine: "Cash rounding: {0}"
-
+    rndLine: "Cash rounding: {0}",
+    // QR platba převodem a pas na akci (1.3.0)
+    qrPay: "QR transfer",
+    qrLower: "QR transfer",
+    qrAria: "QR code to pay {0}",
+    qrHint: "The customer scans the code in their banking app and sends the payment. Tapkasa does not check the payment: tap Paid once the customer shows you the payment has been sent.",
+    qrPaid: "Paid",
+    qrMsgNo: "receipt {0}",
+    splitAriaQr: "Cash {0}, card {1}, QR transfer {2}",
+    tipsLineQr: "Tips, not in sales: {0} (cash {1}, card {2}, QR transfer {3})",
+    qrHead: "QR bank transfer",
+    qrSetBtn: "Set up account for QR payments",
+    qrEdit: "Edit account for QR payments",
+    qrMenuHint: "Checkout gets a QR transfer button: the customer scans a code with the amount in their banking app. The money goes straight to your account; Tapkasa has no access to it and does not check the payment.",
+    qrSetHint: "The account payments should go to. The code fills in the account, amount, receipt number and event name.",
+    qrFmtLbl: "Code format",
+    qrFmtSk: "Slovakia (PAY by square)",
+    qrFmtEu: "Euro area (EPC QR)",
+    qrFmtSpayd: "QR Platba",
+    qrFmtPbs: "PAY by square",
+    qrFmtEpc: "EPC QR (GiroCode)",
+    qrAccLblCz: "Account number or IBAN",
+    qrAccLblSk: "IBAN or Slovak account number",
+    qrAccLblEu: "IBAN",
+    qrAccPhCz: "19-2000145399/0800",
+    qrAccPhSk: "SK31 1200 0000 1987 4263 7541",
+    qrAccPhEu: "IE29 AIBK 9311 5212 3456 78",
+    qrNameLbl: "Payee name",
+    qrBicLbl: "BIC (optional)",
+    qrErrCur: "Tapkasa does QR payments only in Czech koruna and euro.",
+    qrErrNone: "Enter the account number.",
+    qrErrAcc: "The account number doesn’t add up, the check digits are wrong. Please check it.",
+    qrErrIban: "The IBAN doesn’t add up, the check digits are wrong. Please check it.",
+    qrErrFmtCz: "Enter the account number as 123456789/0800 (with a prefix, 19-123456789/0800) or an IBAN.",
+    qrErrFmtEu: "Enter an IBAN, e.g. IE29 AIBK 9311 5212 3456 78.",
+    qrErrNeedIban: "For euro payments outside Slovakia, enter an IBAN.",
+    qrErrBic: "The BIC doesn’t look right, it has 8 or 11 characters.",
+    qrErrName: "Enter the payee name, banks require it for euro payments.",
+    qrOk: "The account checks out.",
+    qrPrevAria: "Preview of the payment QR code",
+    qrPrevHint: "Preview for {0}: scan it with your banking app and check the account and name. No need to send the payment.",
+    qrClear: "Remove account",
+    confirmQrClear: ["Remove account", "The QR transfer button disappears from checkout. Saved receipts stay.", "Remove"],
+    passName: "Event pass",
+    passPitch: "Event pass: Pro for 72 hours for {0}, no subscription",
+    passPitchNoPrice: "Event pass: Pro for 72 hours, no subscription",
+    passSub: "Pro for 72 hours, no subscription",
+    passBuy: "Buy pass",
+    passAuto: "Start right after purchase",
+    passTerms: "The event pass is a one-time purchase; nothing renews or charges again. It unlocks Tapkasa Pro on this device for 72 hours from when you start it. An unstarted pass never expires.",
+    passHow: "The pass unlocks Pro on this device for 72 hours from when you start it: unlimited payments and pairing a second device. An unstarted pass waits until you start it.",
+    passHours: "{0} h",
+    passMins: "{0} min",
+    passUnusedN: ["{0} unused pass", "{0} unused passes", "{0} unused passes"],
+    passStartSaved: "Start saved pass (72 h)",
+    passStartMore: "Start another pass (+72 h)",
+    confirmPassStart: ["Start event pass", "Tapkasa Pro will run on this device for 72 hours, until {0}. A started pass can’t be stopped.", "Start"],
+    passOnToast: "Event pass running until {0}.",
+    passSavedToast: "Pass saved. Start it in {0} when you need it.",
+    passReadyToast: "Unused event passes: {0}. Start them in Menu.",
+    passMenuOn: "Event pass running, {0} left (until {1})",
+    passPill: "Pass {0}",
+    passPillAria: "Event pass, {0} left",
+    passEnded: "The event pass has ended. Start or buy another in Menu.",
+    passPending: "The payment is awaiting approval. The pass is added as soon as the store confirms it."
   };
 
   // ==== strojově vkládané překlady (gen-i18n.cjs) ====
@@ -2724,8 +2888,71 @@
     rndOff: "Hotovosť sa nezaokrúhľuje",
     rndHint: "Platba v hotovosti sa zaokrúhli na najbližších 5 centov, kartou zostáva presná. Prehľad aj súhrn tržieb ukazujú zaokrúhlenie zvlášť.",
     rndNote: "Zaokrúhlené na 5 centov z {0}.",
-    rndLine: "Zaokrúhlenie hotovosti: {0}"
-
+    rndLine: "Zaokrúhlenie hotovosti: {0}",
+    // QR platba převodem a pas na akci (1.3.0)
+    qrPay: "QR prevodom",
+    qrLower: "QR prevodom",
+    qrAria: "QR kód platby {0}",
+    qrHint: "Zákazník kód naskenuje vo svojej bankovej aplikácii a platbu odošle. Tapkasa platbu neoveruje: Zaplatené ťuknite, keď vám zákazník ukáže odoslanú platbu.",
+    qrPaid: "Zaplatené",
+    qrMsgNo: "účtenka {0}",
+    splitAriaQr: "V hotovosti {0}, kartou {1}, QR prevodom {2}",
+    tipsLineQr: "Prepitné mimo tržby: {0} (v hotovosti {1}, kartou {2}, QR prevodom {3})",
+    qrHead: "QR platba prevodom",
+    qrSetBtn: "Nastaviť účet pre QR platby",
+    qrEdit: "Upraviť účet pre QR platby",
+    qrMenuHint: "Pri platení pribudne tlačidlo QR prevodom: zákazník naskenuje kód so sumou vo svojej bankovej aplikácii. Peniaze idú priamo na váš účet, Tapkasa k nim nemá prístup a platbu neoveruje.",
+    qrSetHint: "Účet, na ktorý majú platby chodiť. Kód predvyplní účet, sumu, číslo účtenky a názov akcie.",
+    qrFmtLbl: "Formát kódu",
+    qrFmtSk: "Slovensko (PAY by square)",
+    qrFmtEu: "Eurozóna (EPC QR)",
+    qrFmtSpayd: "QR Platba",
+    qrFmtPbs: "PAY by square",
+    qrFmtEpc: "EPC QR (GiroCode)",
+    qrAccLblCz: "Číslo účtu alebo IBAN",
+    qrAccLblSk: "IBAN alebo číslo účtu",
+    qrAccLblEu: "IBAN",
+    qrAccPhCz: "19-2000145399/0800",
+    qrAccPhSk: "SK31 1200 0000 1987 4263 7541",
+    qrAccPhEu: "AT61 1904 3002 3457 3201",
+    qrNameLbl: "Meno príjemcu",
+    qrBicLbl: "BIC (nepovinné)",
+    qrErrCur: "QR platby Tapkasa zvláda len v korunách a eurách.",
+    qrErrNone: "Zadajte číslo účtu.",
+    qrErrAcc: "Číslo účtu nesedí, kontrolný súčet nevychádza. Skontrolujte ho.",
+    qrErrIban: "IBAN nesedí, kontrolné číslice nevychádzajú. Skontrolujte ho.",
+    qrErrFmtCz: "Zadajte číslo účtu v tvare 123456789/0800 (s predčíslím 19-123456789/0800) alebo IBAN.",
+    qrErrFmtEu: "Zadajte IBAN, napríklad SK31 1200 0000 1987 4263 7541.",
+    qrErrNeedIban: "Pre platby v eurách mimo Slovenska zadajte IBAN.",
+    qrErrBic: "BIC nesedí, má 8 alebo 11 znakov.",
+    qrErrName: "Vyplňte meno príjemcu, banky ho pri platbách v eurách vyžadujú.",
+    qrOk: "Účet je v poriadku.",
+    qrPrevAria: "Náhľad QR kódu platby",
+    qrPrevHint: "Náhľad na {0}: načítajte ho svojou bankovou aplikáciou a skontrolujte účet a meno. Platbu odosielať nemusíte.",
+    qrClear: "Odobrať účet",
+    confirmQrClear: ["Odobrať účet", "Tlačidlo QR prevodom z platenia zmizne. Uložené účtenky zostanú.", "Odobrať"],
+    passName: "Pas na akciu",
+    passPitch: "Pas na akciu: Pro na 72 hodín za {0}, bez predplatného",
+    passPitchNoPrice: "Pas na akciu: Pro na 72 hodín, bez predplatného",
+    passSub: "Pro na 72 hodín, bez predplatného",
+    passBuy: "Kúpiť pas",
+    passAuto: "Spustiť hneď po nákupe",
+    passTerms: "Pas na akciu je jednorazový nákup, nič sa neobnovuje ani znova neplatí. Odomkne Tapkasa Pro na tomto zariadení na 72 hodín od spustenia. Nespustený pas nevyprší.",
+    passHow: "Pas odomkne Pro na tomto zariadení na 72 hodín od spustenia: neobmedzené platby a párovanie druhého zariadenia. Nespustený pas počká, kým ho nespustíte.",
+    passHours: "{0} h",
+    passMins: "{0} min",
+    passUnusedN: ["{0} nevyužitý pas", "{0} nevyužité pasy", "{0} nevyužitých pasov"],
+    passStartSaved: "Spustiť uložený pas (72 h)",
+    passStartMore: "Spustiť ďalší pas (+72 h)",
+    confirmPassStart: ["Spustiť pas na akciu", "Tapkasa Pro pobeží na tomto zariadení 72 hodín, do {0}. Spustený pas sa nedá zastaviť.", "Spustiť"],
+    passOnToast: "Pas na akciu beží do {0}.",
+    passSavedToast: "Pas je uložený. Spustíte ho v {0}, keď ho budete potrebovať.",
+    passReadyToast: "Nevyužité pasy na akciu: {0}. Spustíte ich v Menu.",
+    passMenuOn: "Pas na akciu beží, zostáva {0} (do {1})",
+    passPill: "Pas {0}",
+    passPillAria: "Pas na akciu, zostáva {0}",
+    passEnded: "Pas na akciu skončil. Ďalší spustíte alebo kúpite v Menu.",
+    passPending: "Platba čaká na schválenie. Pas sa pripíše, hneď ako ju obchod potvrdí."
   };
 
   I18N.de = {
@@ -3317,8 +3544,71 @@
     rndOff: "Bargeld wird nicht gerundet",
     rndHint: "Barzahlungen werden auf die nächsten 5 Cent gerundet, Kartenzahlungen bleiben genau. Übersicht und Umsatzbericht zeigen die Rundung getrennt.",
     rndNote: "Von {0} auf 5 Cent gerundet.",
-    rndLine: "Bargeldrundung: {0}"
-
+    rndLine: "Bargeldrundung: {0}",
+    // QR platba převodem a pas na akci (1.3.0)
+    qrPay: "QR-Überweisung",
+    qrLower: "QR-Überweisung",
+    qrAria: "QR-Code zum Bezahlen von {0}",
+    qrHint: "Die Kundschaft scannt den Code in ihrer Banking-App und sendet die Zahlung ab. Tapkasa prüft die Zahlung nicht: Tippen Sie auf Bezahlt, sobald man Ihnen die gesendete Zahlung zeigt.",
+    qrPaid: "Bezahlt",
+    qrMsgNo: "Beleg {0}",
+    splitAriaQr: "Bar {0}, Karte {1}, QR-Überweisung {2}",
+    tipsLineQr: "Trinkgeld, nicht im Umsatz: {0} (bar {1}, Karte {2}, QR-Überweisung {3})",
+    qrHead: "QR-Überweisung",
+    qrSetBtn: "Konto für QR-Zahlungen einrichten",
+    qrEdit: "Konto für QR-Zahlungen ändern",
+    qrMenuHint: "Beim Bezahlen kommt die Taste QR-Überweisung dazu: Die Kundschaft scannt einen Code mit dem Betrag in ihrer Banking-App. Das Geld geht direkt auf Ihr Konto, Tapkasa hat keinen Zugriff darauf und prüft die Zahlung nicht.",
+    qrSetHint: "Das Konto, auf das die Zahlungen gehen. Der Code füllt Konto, Betrag, Belegnummer und Eventnamen vor.",
+    qrFmtLbl: "Code-Format",
+    qrFmtSk: "Slowakei (PAY by square)",
+    qrFmtEu: "Euroraum (GiroCode)",
+    qrFmtSpayd: "QR Platba",
+    qrFmtPbs: "PAY by square",
+    qrFmtEpc: "GiroCode (EPC-QR)",
+    qrAccLblCz: "Kontonummer oder IBAN",
+    qrAccLblSk: "IBAN oder slowakische Kontonummer",
+    qrAccLblEu: "IBAN",
+    qrAccPhCz: "19-2000145399/0800",
+    qrAccPhSk: "SK31 1200 0000 1987 4263 7541",
+    qrAccPhEu: "DE89 3704 0044 0532 0130 00",
+    qrNameLbl: "Name des Empfängers",
+    qrBicLbl: "BIC (optional)",
+    qrErrCur: "QR-Zahlungen gibt es in Tapkasa nur in Kronen und Euro.",
+    qrErrNone: "Bitte geben Sie die Kontonummer ein.",
+    qrErrAcc: "Die Kontonummer stimmt nicht, die Prüfsumme geht nicht auf. Bitte prüfen Sie sie.",
+    qrErrIban: "Die IBAN stimmt nicht, die Prüfziffern gehen nicht auf. Bitte prüfen Sie sie.",
+    qrErrFmtCz: "Geben Sie die Kontonummer als 123456789/0800 (mit Präfix 19-123456789/0800) oder die IBAN ein.",
+    qrErrFmtEu: "Geben Sie eine IBAN ein, z. B. DE89 3704 0044 0532 0130 00.",
+    qrErrNeedIban: "Für Euro-Zahlungen außerhalb der Slowakei geben Sie bitte die IBAN ein.",
+    qrErrBic: "Die BIC stimmt nicht, sie hat 8 oder 11 Zeichen.",
+    qrErrName: "Bitte geben Sie den Namen des Empfängers ein, Banken verlangen ihn bei Euro-Zahlungen.",
+    qrOk: "Das Konto ist in Ordnung.",
+    qrPrevAria: "Vorschau des QR-Codes",
+    qrPrevHint: "Vorschau über {0}: Scannen Sie ihn mit Ihrer Banking-App und prüfen Sie Konto und Namen. Absenden müssen Sie die Zahlung nicht.",
+    qrClear: "Konto entfernen",
+    confirmQrClear: ["Konto entfernen", "Die Taste QR-Überweisung verschwindet beim Bezahlen. Gespeicherte Belege bleiben.", "Entfernen"],
+    passName: "Event-Pass",
+    passPitch: "Event-Pass: Pro für 72 Stunden für {0}, ohne Abo",
+    passPitchNoPrice: "Event-Pass: Pro für 72 Stunden, ohne Abo",
+    passSub: "Pro für 72 Stunden, ohne Abo",
+    passBuy: "Pass kaufen",
+    passAuto: "Gleich nach dem Kauf starten",
+    passTerms: "Der Event-Pass ist ein Einmalkauf, nichts verlängert sich oder wird erneut berechnet. Er schaltet Tapkasa Pro auf diesem Gerät für 72 Stunden ab dem Start frei. Ein nicht gestarteter Pass verfällt nicht.",
+    passHow: "Der Pass schaltet Pro auf diesem Gerät für 72 Stunden ab dem Start frei: unbegrenzt viele Zahlungen und ein zweites gekoppeltes Gerät. Ein nicht gestarteter Pass wartet, bis Sie ihn starten.",
+    passHours: "{0} Std.",
+    passMins: "{0} Min.",
+    passUnusedN: ["{0} ungenutzter Pass", "{0} ungenutzte Pässe", "{0} ungenutzte Pässe"],
+    passStartSaved: "Gespeicherten Pass starten (72 Std.)",
+    passStartMore: "Weiteren Pass starten (+72 Std.)",
+    confirmPassStart: ["Event-Pass starten", "Tapkasa Pro läuft auf diesem Gerät 72 Stunden, bis {0}. Ein gestarteter Pass lässt sich nicht anhalten.", "Starten"],
+    passOnToast: "Der Event-Pass läuft bis {0}.",
+    passSavedToast: "Pass gespeichert. Sie starten ihn unter {0}, wenn Sie ihn brauchen.",
+    passReadyToast: "Ungenutzte Event-Pässe: {0}. Sie starten sie im Menü.",
+    passMenuOn: "Event-Pass läuft, noch {0} (bis {1})",
+    passPill: "Pass {0}",
+    passPillAria: "Event-Pass, noch {0}",
+    passEnded: "Der Event-Pass ist abgelaufen. Einen weiteren starten oder kaufen Sie im Menü.",
+    passPending: "Die Zahlung wartet auf Freigabe. Der Pass wird gutgeschrieben, sobald der Store sie bestätigt."
   };
 
   I18N.fr = {
@@ -3910,8 +4200,71 @@
     rndOff: "Espèces non arrondies",
     rndHint: "Les paiements en espèces sont arrondis aux 5 cents les plus proches, ceux par carte restent exacts. L’aperçu et le récapitulatif affichent l’arrondi à part.",
     rndNote: "Arrondi à 5 cents depuis {0}.",
-    rndLine: "Arrondi des espèces : {0}"
-
+    rndLine: "Arrondi des espèces : {0}",
+    // QR platba převodem a pas na akci (1.3.0)
+    qrPay: "Virement QR",
+    qrLower: "virement QR",
+    qrAria: "QR code pour payer {0}",
+    qrHint: "Le client scanne le code dans son appli bancaire et envoie le paiement. Tapkasa ne vérifie pas le paiement : touchez Payé quand le client vous montre le virement envoyé.",
+    qrPaid: "Payé",
+    qrMsgNo: "ticket {0}",
+    splitAriaQr: "Espèces {0}, carte {1}, virement QR {2}",
+    tipsLineQr: "Pourboires hors recette : {0} (espèces {1}, carte {2}, virement QR {3})",
+    qrHead: "Paiement par virement QR",
+    qrSetBtn: "Configurer le compte pour les paiements QR",
+    qrEdit: "Modifier le compte pour les paiements QR",
+    qrMenuHint: "Au moment de payer, un bouton Virement QR s’ajoute : le client scanne un code avec le montant dans son appli bancaire. L’argent arrive directement sur votre compte, Tapkasa n’y a pas accès et ne vérifie pas le paiement.",
+    qrSetHint: "Le compte sur lequel arrivent les paiements. Le code préremplit le compte, le montant, le numéro de ticket et le nom de l’événement.",
+    qrFmtLbl: "Format du code",
+    qrFmtSk: "Slovaquie (PAY by square)",
+    qrFmtEu: "Zone euro (QR EPC)",
+    qrFmtSpayd: "QR Platba",
+    qrFmtPbs: "PAY by square",
+    qrFmtEpc: "QR EPC (GiroCode)",
+    qrAccLblCz: "Numéro de compte ou IBAN",
+    qrAccLblSk: "IBAN ou numéro de compte slovaque",
+    qrAccLblEu: "IBAN",
+    qrAccPhCz: "19-2000145399/0800",
+    qrAccPhSk: "SK31 1200 0000 1987 4263 7541",
+    qrAccPhEu: "FR76 3000 6000 0112 3456 7890 189",
+    qrNameLbl: "Nom du bénéficiaire",
+    qrBicLbl: "BIC (facultatif)",
+    qrErrCur: "Tapkasa ne gère les paiements QR qu’en couronnes tchèques et en euros.",
+    qrErrNone: "Saisissez le numéro de compte.",
+    qrErrAcc: "Le numéro de compte est incorrect, la clé de contrôle ne correspond pas. Vérifiez-le.",
+    qrErrIban: "L’IBAN est incorrect, la clé de contrôle ne correspond pas. Vérifiez-le.",
+    qrErrFmtCz: "Saisissez le numéro de compte sous la forme 123456789/0800 (avec préfixe, 19-123456789/0800) ou un IBAN.",
+    qrErrFmtEu: "Saisissez un IBAN, par exemple FR76 3000 6000 0112 3456 7890 189.",
+    qrErrNeedIban: "Pour les paiements en euros hors Slovaquie, saisissez un IBAN.",
+    qrErrBic: "Le BIC est incorrect, il compte 8 ou 11 caractères.",
+    qrErrName: "Saisissez le nom du bénéficiaire, les banques l’exigent pour les paiements en euros.",
+    qrOk: "Le compte est correct.",
+    qrPrevAria: "Aperçu du QR code de paiement",
+    qrPrevHint: "Aperçu pour {0} : scannez-le avec votre appli bancaire et vérifiez le compte et le nom. Inutile d’envoyer le paiement.",
+    qrClear: "Supprimer le compte",
+    confirmQrClear: ["Supprimer le compte", "Le bouton Virement QR disparaît du paiement. Les tickets enregistrés restent.", "Supprimer"],
+    passName: "Pass événement",
+    passPitch: "Pass événement : Pro pendant 72 heures pour {0}, sans abonnement",
+    passPitchNoPrice: "Pass événement : Pro pendant 72 heures, sans abonnement",
+    passSub: "Pro pendant 72 heures, sans abonnement",
+    passBuy: "Acheter le pass",
+    passAuto: "Démarrer juste après l’achat",
+    passTerms: "Le pass événement est un achat unique : rien ne se renouvelle ni n’est facturé à nouveau. Il débloque Tapkasa Pro sur cet appareil pendant 72 heures à partir de son démarrage. Un pass non démarré n’expire pas.",
+    passHow: "Le pass débloque Pro sur cet appareil pendant 72 heures à partir de son démarrage : paiements illimités et jumelage d’un deuxième appareil. Un pass non démarré attend que vous le démarriez.",
+    passHours: "{0} h",
+    passMins: "{0} min",
+    passUnusedN: ["{0} pass non utilisé", "{0} pass non utilisés", "{0} pass non utilisés"],
+    passStartSaved: "Démarrer un pass enregistré (72 h)",
+    passStartMore: "Démarrer un autre pass (+72 h)",
+    confirmPassStart: ["Démarrer le pass événement", "Tapkasa Pro fonctionnera sur cet appareil pendant 72 heures, jusqu’à {0}. Un pass démarré ne peut pas être arrêté.", "Démarrer"],
+    passOnToast: "Pass événement actif jusqu’à {0}.",
+    passSavedToast: "Pass enregistré. Démarrez-le dans {0} quand vous en aurez besoin.",
+    passReadyToast: "Pass événement non utilisés : {0}. Démarrez-les dans Menu.",
+    passMenuOn: "Pass événement actif, encore {0} (jusqu’à {1})",
+    passPill: "Pass {0}",
+    passPillAria: "Pass événement, encore {0}",
+    passEnded: "Le pass événement est terminé. Démarrez-en ou achetez-en un autre dans Menu.",
+    passPending: "Le paiement attend une validation. Le pass sera ajouté dès que la boutique l’aura confirmé."
   };
 
   I18N.es = {
@@ -4503,8 +4856,71 @@
     rndOff: "Efectivo sin redondear",
     rndHint: "Los pagos en efectivo se redondean a los 5 centavos más cercanos; con tarjeta se cobra exacto. El resumen muestra el redondeo aparte.",
     rndNote: "Redondeado a 5 centavos desde {0}.",
-    rndLine: "Redondeo en efectivo: {0}"
-
+    rndLine: "Redondeo en efectivo: {0}",
+    // QR platba převodem a pas na akci (1.3.0)
+    qrPay: "Transferencia QR",
+    qrLower: "por transferencia QR",
+    qrAria: "Código QR para pagar {0}",
+    qrHint: "El cliente escanea el código en su app bancaria y envía el pago. Tapkasa no comprueba el pago: toque Pagado cuando el cliente le muestre la transferencia enviada.",
+    qrPaid: "Pagado",
+    qrMsgNo: "ticket {0}",
+    splitAriaQr: "Efectivo {0}, tarjeta {1}, transferencia QR {2}",
+    tipsLineQr: "Propinas fuera de la recaudación: {0} (efectivo {1}, tarjeta {2}, transferencia QR {3})",
+    qrHead: "Pago por transferencia QR",
+    qrSetBtn: "Configurar cuenta para pagos QR",
+    qrEdit: "Editar cuenta para pagos QR",
+    qrMenuHint: "Al cobrar aparece el botón Transferencia QR: el cliente escanea un código con el importe en su app bancaria. El dinero llega directamente a su cuenta; Tapkasa no tiene acceso a él ni comprueba el pago.",
+    qrSetHint: "La cuenta a la que llegan los pagos. El código rellena la cuenta, el importe, el número de ticket y el nombre del evento.",
+    qrFmtLbl: "Formato del código",
+    qrFmtSk: "Eslovaquia (PAY by square)",
+    qrFmtEu: "Zona euro (QR EPC)",
+    qrFmtSpayd: "QR Platba",
+    qrFmtPbs: "PAY by square",
+    qrFmtEpc: "QR EPC (GiroCode)",
+    qrAccLblCz: "Número de cuenta o IBAN",
+    qrAccLblSk: "IBAN o número de cuenta eslovaco",
+    qrAccLblEu: "IBAN",
+    qrAccPhCz: "19-2000145399/0800",
+    qrAccPhSk: "SK31 1200 0000 1987 4263 7541",
+    qrAccPhEu: "ES91 2100 0418 4502 0005 1332",
+    qrNameLbl: "Nombre del beneficiario",
+    qrBicLbl: "BIC (opcional)",
+    qrErrCur: "Tapkasa solo hace pagos QR en coronas checas y euros.",
+    qrErrNone: "Escriba el número de cuenta.",
+    qrErrAcc: "El número de cuenta no cuadra, el dígito de control no coincide. Revíselo.",
+    qrErrIban: "El IBAN no cuadra, los dígitos de control no coinciden. Revíselo.",
+    qrErrFmtCz: "Escriba el número de cuenta como 123456789/0800 (con prefijo, 19-123456789/0800) o un IBAN.",
+    qrErrFmtEu: "Escriba un IBAN, por ejemplo ES91 2100 0418 4502 0005 1332.",
+    qrErrNeedIban: "Para pagos en euros fuera de Eslovaquia, escriba un IBAN.",
+    qrErrBic: "El BIC no es correcto, tiene 8 u 11 caracteres.",
+    qrErrName: "Escriba el nombre del beneficiario, los bancos lo exigen en los pagos en euros.",
+    qrOk: "La cuenta es correcta.",
+    qrPrevAria: "Vista previa del código QR de pago",
+    qrPrevHint: "Vista previa de {0}: escanéelo con su app bancaria y compruebe la cuenta y el nombre. No hace falta enviar el pago.",
+    qrClear: "Quitar cuenta",
+    confirmQrClear: ["Quitar cuenta", "El botón Transferencia QR desaparece del cobro. Los tickets guardados se mantienen.", "Quitar"],
+    passName: "Pase de evento",
+    passPitch: "Pase de evento: Pro durante 72 horas por {0}, sin suscripción",
+    passPitchNoPrice: "Pase de evento: Pro durante 72 horas, sin suscripción",
+    passSub: "Pro durante 72 horas, sin suscripción",
+    passBuy: "Comprar pase",
+    passAuto: "Activar justo después de comprar",
+    passTerms: "El pase de evento es una compra única: nada se renueva ni se vuelve a cobrar. Desbloquea Tapkasa Pro en este dispositivo durante 72 horas desde que se activa. Un pase sin activar no caduca.",
+    passHow: "El pase desbloquea Pro en este dispositivo durante 72 horas desde que se activa: cobros ilimitados y vincular un segundo dispositivo. Un pase sin activar espera hasta que usted lo active.",
+    passHours: "{0} h",
+    passMins: "{0} min",
+    passUnusedN: ["{0} pase sin usar", "{0} pases sin usar", "{0} pases sin usar"],
+    passStartSaved: "Activar pase guardado (72 h)",
+    passStartMore: "Activar otro pase (+72 h)",
+    confirmPassStart: ["Activar pase de evento", "Tapkasa Pro funcionará en este dispositivo 72 horas, hasta {0}. Un pase activado no se puede detener.", "Activar"],
+    passOnToast: "Pase de evento activo hasta {0}.",
+    passSavedToast: "Pase guardado. Actívelo en {0} cuando lo necesite.",
+    passReadyToast: "Pases de evento sin usar: {0}. Actívelos en Menú.",
+    passMenuOn: "Pase de evento activo, quedan {0} (hasta {1})",
+    passPill: "Pase {0}",
+    passPillAria: "Pase de evento, quedan {0}",
+    passEnded: "El pase de evento ha terminado. Active o compre otro en Menú.",
+    passPending: "El pago espera aprobación. El pase se añadirá en cuanto la tienda lo confirme."
   };
 
   I18N.it = {
@@ -5096,8 +5512,71 @@
     rndOff: "Contanti non arrotondati",
     rndHint: "I pagamenti in contanti si arrotondano ai 5 centesimi più vicini, quelli con carta restano esatti. Panoramica e riepilogo mostrano l’arrotondamento a parte.",
     rndNote: "Arrotondato a 5 centesimi da {0}.",
-    rndLine: "Arrotondamento contanti: {0}"
-
+    rndLine: "Arrotondamento contanti: {0}",
+    // QR platba převodem a pas na akci (1.3.0)
+    qrPay: "Bonifico QR",
+    qrLower: "con bonifico QR",
+    qrAria: "Codice QR per pagare {0}",
+    qrHint: "Il cliente inquadra il codice con l’app della sua banca e invia il pagamento. Tapkasa non verifica il pagamento: toccate Pagato quando il cliente vi mostra il bonifico inviato.",
+    qrPaid: "Pagato",
+    qrMsgNo: "scontrino {0}",
+    splitAriaQr: "Contanti {0}, carta {1}, bonifico QR {2}",
+    tipsLineQr: "Mance fuori dagli incassi: {0} (contanti {1}, carta {2}, bonifico QR {3})",
+    qrHead: "Pagamento con bonifico QR",
+    qrSetBtn: "Impostare il conto per i pagamenti QR",
+    qrEdit: "Modificare il conto per i pagamenti QR",
+    qrMenuHint: "Al pagamento compare il pulsante Bonifico QR: il cliente inquadra un codice con l’importo nell’app della sua banca. I soldi arrivano direttamente sul vostro conto, Tapkasa non vi ha accesso e non verifica il pagamento.",
+    qrSetHint: "Il conto su cui arrivano i pagamenti. Il codice compila conto, importo, numero di scontrino e nome dell’evento.",
+    qrFmtLbl: "Formato del codice",
+    qrFmtSk: "Slovacchia (PAY by square)",
+    qrFmtEu: "Area euro (QR EPC)",
+    qrFmtSpayd: "QR Platba",
+    qrFmtPbs: "PAY by square",
+    qrFmtEpc: "QR EPC (GiroCode)",
+    qrAccLblCz: "Numero di conto o IBAN",
+    qrAccLblSk: "IBAN o numero di conto slovacco",
+    qrAccLblEu: "IBAN",
+    qrAccPhCz: "19-2000145399/0800",
+    qrAccPhSk: "SK31 1200 0000 1987 4263 7541",
+    qrAccPhEu: "IT60 X054 2811 1010 0000 0123 456",
+    qrNameLbl: "Nome del beneficiario",
+    qrBicLbl: "BIC (facoltativo)",
+    qrErrCur: "Tapkasa gestisce i pagamenti QR solo in corone ceche ed euro.",
+    qrErrNone: "Inserite il numero di conto.",
+    qrErrAcc: "Il numero di conto non torna, la cifra di controllo non corrisponde. Controllatelo.",
+    qrErrIban: "L’IBAN non torna, le cifre di controllo non corrispondono. Controllatelo.",
+    qrErrFmtCz: "Inserite il numero di conto come 123456789/0800 (con prefisso, 19-123456789/0800) o un IBAN.",
+    qrErrFmtEu: "Inserite un IBAN, per esempio IT60 X054 2811 1010 0000 0123 456.",
+    qrErrNeedIban: "Per i pagamenti in euro fuori dalla Slovacchia inserite un IBAN.",
+    qrErrBic: "Il BIC non è corretto, ha 8 o 11 caratteri.",
+    qrErrName: "Inserite il nome del beneficiario, le banche lo richiedono per i pagamenti in euro.",
+    qrOk: "Il conto è corretto.",
+    qrPrevAria: "Anteprima del codice QR di pagamento",
+    qrPrevHint: "Anteprima per {0}: inquadratela con l’app della vostra banca e controllate conto e nome. Non serve inviare il pagamento.",
+    qrClear: "Rimuovere il conto",
+    confirmQrClear: ["Rimuovere il conto", "Il pulsante Bonifico QR sparisce dal pagamento. Gli scontrini salvati restano.", "Rimuovere"],
+    passName: "Pass evento",
+    passPitch: "Pass evento: Pro per 72 ore a {0}, senza abbonamento",
+    passPitchNoPrice: "Pass evento: Pro per 72 ore, senza abbonamento",
+    passSub: "Pro per 72 ore, senza abbonamento",
+    passBuy: "Acquistare il pass",
+    passAuto: "Attivare subito dopo l’acquisto",
+    passTerms: "Il pass evento è un acquisto singolo: niente si rinnova né viene addebitato di nuovo. Sblocca Tapkasa Pro su questo dispositivo per 72 ore dall’attivazione. Un pass non attivato non scade.",
+    passHow: "Il pass sblocca Pro su questo dispositivo per 72 ore dall’attivazione: pagamenti illimitati e abbinamento di un secondo dispositivo. Un pass non attivato aspetta finché non lo attivate.",
+    passHours: "{0} h",
+    passMins: "{0} min",
+    passUnusedN: ["{0} pass non usato", "{0} pass non usati", "{0} pass non usati"],
+    passStartSaved: "Attivare un pass salvato (72 h)",
+    passStartMore: "Attivare un altro pass (+72 h)",
+    confirmPassStart: ["Attivare il pass evento", "Tapkasa Pro resterà attivo su questo dispositivo per 72 ore, fino a {0}. Un pass attivato non si può fermare.", "Attivare"],
+    passOnToast: "Pass evento attivo fino a {0}.",
+    passSavedToast: "Pass salvato. Lo attivate in {0} quando serve.",
+    passReadyToast: "Pass evento non usati: {0}. Li attivate in Menu.",
+    passMenuOn: "Pass evento attivo, restano {0} (fino a {1})",
+    passPill: "Pass {0}",
+    passPillAria: "Pass evento, restano {0}",
+    passEnded: "Il pass evento è terminato. Ne attivate o acquistate un altro in Menu.",
+    passPending: "Il pagamento è in attesa di approvazione. Il pass verrà aggiunto appena lo store lo conferma."
   };
 
   I18N.pl = {
@@ -5689,8 +6168,71 @@
     rndOff: "Gotówka bez zaokrąglania",
     rndHint: "Płatności gotówką są zaokrąglane do najbliższych 5 centów, kartą pozostają dokładne. Przegląd i podsumowanie pokazują zaokrąglenie osobno.",
     rndNote: "Zaokrąglono do 5 centów z {0}.",
-    rndLine: "Zaokrąglenie gotówki: {0}"
-
+    rndLine: "Zaokrąglenie gotówki: {0}",
+    // QR platba převodem a pas na akci (1.3.0)
+    qrPay: "Przelew QR",
+    qrLower: "przelewem QR",
+    qrAria: "Kod QR do zapłaty {0}",
+    qrHint: "Klient skanuje kod w aplikacji swojego banku i wysyła płatność. Tapkasa nie sprawdza płatności: proszę stuknąć Zapłacono, gdy klient pokaże wysłany przelew.",
+    qrPaid: "Zapłacono",
+    qrMsgNo: "paragon {0}",
+    splitAriaQr: "Gotówką {0}, kartą {1}, przelewem QR {2}",
+    tipsLineQr: "Napiwki poza utargiem: {0} (gotówka {1}, karta {2}, przelew QR {3})",
+    qrHead: "Płatność przelewem QR",
+    qrSetBtn: "Ustawić konto do płatności QR",
+    qrEdit: "Zmienić konto do płatności QR",
+    qrMenuHint: "Przy płatności pojawi się przycisk Przelew QR: klient skanuje kod z kwotą w aplikacji swojego banku. Pieniądze trafiają prosto na konto sprzedawcy, Tapkasa nie ma do nich dostępu i nie sprawdza płatności.",
+    qrSetHint: "Konto, na które mają trafiać płatności. Kod uzupełni konto, kwotę, numer paragonu i nazwę imprezy.",
+    qrFmtLbl: "Format kodu",
+    qrFmtSk: "Słowacja (PAY by square)",
+    qrFmtEu: "Strefa euro (QR EPC)",
+    qrFmtSpayd: "QR Platba",
+    qrFmtPbs: "PAY by square",
+    qrFmtEpc: "QR EPC (GiroCode)",
+    qrAccLblCz: "Numer konta lub IBAN",
+    qrAccLblSk: "IBAN lub słowacki numer konta",
+    qrAccLblEu: "IBAN",
+    qrAccPhCz: "19-2000145399/0800",
+    qrAccPhSk: "SK31 1200 0000 1987 4263 7541",
+    qrAccPhEu: "DE89 3704 0044 0532 0130 00",
+    qrNameLbl: "Nazwa odbiorcy",
+    qrBicLbl: "BIC (opcjonalnie)",
+    qrErrCur: "Płatności QR działają w Tapkasie tylko w koronach czeskich i euro.",
+    qrErrNone: "Proszę wpisać numer konta.",
+    qrErrAcc: "Numer konta się nie zgadza, suma kontrolna nie pasuje. Proszę go sprawdzić.",
+    qrErrIban: "IBAN się nie zgadza, cyfry kontrolne nie pasują. Proszę go sprawdzić.",
+    qrErrFmtCz: "Proszę wpisać numer konta w formacie 123456789/0800 (z prefiksem: 19-123456789/0800) lub IBAN.",
+    qrErrFmtEu: "Proszę wpisać IBAN, np. DE89 3704 0044 0532 0130 00.",
+    qrErrNeedIban: "Do płatności w euro poza Słowacją proszę wpisać IBAN.",
+    qrErrBic: "BIC się nie zgadza, ma 8 lub 11 znaków.",
+    qrErrName: "Proszę wpisać nazwę odbiorcy, banki wymagają jej przy płatnościach w euro.",
+    qrOk: "Konto jest w porządku.",
+    qrPrevAria: "Podgląd kodu QR płatności",
+    qrPrevHint: "Podgląd na {0}: proszę zeskanować go aplikacją banku i sprawdzić konto i nazwę. Płatności nie trzeba wysyłać.",
+    qrClear: "Usunąć konto",
+    confirmQrClear: ["Usunięcie konta", "Przycisk Przelew QR zniknie z płatności. Zapisane paragony zostaną.", "Usunąć"],
+    passName: "Karnet na imprezę",
+    passPitch: "Karnet na imprezę: Pro na 72 godziny za {0}, bez subskrypcji",
+    passPitchNoPrice: "Karnet na imprezę: Pro na 72 godziny, bez subskrypcji",
+    passSub: "Pro na 72 godziny, bez subskrypcji",
+    passBuy: "Kupić karnet",
+    passAuto: "Uruchomić od razu po zakupie",
+    passTerms: "Karnet na imprezę to zakup jednorazowy, nic się nie odnawia ani nie jest pobierane ponownie. Odblokowuje Tapkasa Pro na tym urządzeniu na 72 godziny od uruchomienia. Nieuruchomiony karnet nie wygasa.",
+    passHow: "Karnet odblokowuje Pro na tym urządzeniu na 72 godziny od uruchomienia: nielimitowane płatności i parowanie drugiego urządzenia. Nieuruchomiony karnet czeka, aż zostanie uruchomiony.",
+    passHours: "{0} godz.",
+    passMins: "{0} min",
+    passUnusedN: ["{0} niewykorzystany karnet", "{0} niewykorzystane karnety", "{0} niewykorzystanych karnetów"],
+    passStartSaved: "Uruchomić zapisany karnet (72 godz.)",
+    passStartMore: "Uruchomić kolejny karnet (+72 godz.)",
+    confirmPassStart: ["Uruchomienie karnetu", "Tapkasa Pro będzie działać na tym urządzeniu przez 72 godziny, do {0}. Uruchomionego karnetu nie można zatrzymać.", "Uruchomić"],
+    passOnToast: "Karnet na imprezę działa do {0}.",
+    passSavedToast: "Karnet zapisany. Można go uruchomić w {0}, gdy będzie potrzebny.",
+    passReadyToast: "Niewykorzystane karnety na imprezę: {0}. Uruchamia się je w Menu.",
+    passMenuOn: "Karnet na imprezę działa, zostało {0} (do {1})",
+    passPill: "Karnet {0}",
+    passPillAria: "Karnet na imprezę, zostało {0}",
+    passEnded: "Karnet na imprezę się skończył. Kolejny można uruchomić lub kupić w Menu.",
+    passPending: "Płatność czeka na zatwierdzenie. Karnet zostanie dodany, gdy sklep ją potwierdzi."
   };
 
   I18N.pt = {
@@ -6282,8 +6824,71 @@
     rndOff: "Dinheiro sem arredondamento",
     rndHint: "Os pagamentos em dinheiro são arredondados aos 5 cêntimos mais próximos; com cartão ficam exatos. O resumo mostra o arredondamento à parte.",
     rndNote: "Arredondado a 5 cêntimos a partir de {0}.",
-    rndLine: "Arredondamento em dinheiro: {0}"
-
+    rndLine: "Arredondamento em dinheiro: {0}",
+    // QR platba převodem a pas na akci (1.3.0)
+    qrPay: "Transferência QR",
+    qrLower: "por transferência QR",
+    qrAria: "Código QR para pagar {0}",
+    qrHint: "O cliente lê o código na app do banco e envia o pagamento. A Tapkasa não verifica o pagamento: toque em Pago quando o cliente lhe mostrar a transferência enviada.",
+    qrPaid: "Pago",
+    qrMsgNo: "talão {0}",
+    splitAriaQr: "Dinheiro {0}, cartão {1}, transferência QR {2}",
+    tipsLineQr: "Gorjetas fora da receita: {0} (numerário {1}, cartão {2}, transferência QR {3})",
+    qrHead: "Pagamento por transferência QR",
+    qrSetBtn: "Configurar conta para pagamentos QR",
+    qrEdit: "Editar conta para pagamentos QR",
+    qrMenuHint: "Ao cobrar aparece o botão Transferência QR: o cliente lê um código com o valor na app do banco. O dinheiro vai diretamente para a sua conta; a Tapkasa não tem acesso a ele nem verifica o pagamento.",
+    qrSetHint: "A conta para onde vão os pagamentos. O código preenche a conta, o valor, o número do talão e o nome do evento.",
+    qrFmtLbl: "Formato do código",
+    qrFmtSk: "Eslováquia (PAY by square)",
+    qrFmtEu: "Zona euro (QR EPC)",
+    qrFmtSpayd: "QR Platba",
+    qrFmtPbs: "PAY by square",
+    qrFmtEpc: "QR EPC (GiroCode)",
+    qrAccLblCz: "Número de conta ou IBAN",
+    qrAccLblSk: "IBAN ou número de conta eslovaco",
+    qrAccLblEu: "IBAN",
+    qrAccPhCz: "19-2000145399/0800",
+    qrAccPhSk: "SK31 1200 0000 1987 4263 7541",
+    qrAccPhEu: "PT50 0002 0123 1234 5678 9015 4",
+    qrNameLbl: "Nome do beneficiário",
+    qrBicLbl: "BIC (opcional)",
+    qrErrCur: "A Tapkasa só faz pagamentos QR em coroas checas e euros.",
+    qrErrNone: "Introduza o número de conta.",
+    qrErrAcc: "O número de conta não bate certo, o dígito de controlo não corresponde. Verifique-o.",
+    qrErrIban: "O IBAN não bate certo, os dígitos de controlo não correspondem. Verifique-o.",
+    qrErrFmtCz: "Introduza o número de conta como 123456789/0800 (com prefixo, 19-123456789/0800) ou um IBAN.",
+    qrErrFmtEu: "Introduza um IBAN, por exemplo PT50 0002 0123 1234 5678 9015 4.",
+    qrErrNeedIban: "Para pagamentos em euros fora da Eslováquia, introduza um IBAN.",
+    qrErrBic: "O BIC não está correto, tem 8 ou 11 caracteres.",
+    qrErrName: "Introduza o nome do beneficiário, os bancos exigem-no nos pagamentos em euros.",
+    qrOk: "A conta está correta.",
+    qrPrevAria: "Pré-visualização do código QR de pagamento",
+    qrPrevHint: "Pré-visualização de {0}: leia-o com a app do seu banco e confirme a conta e o nome. Não precisa de enviar o pagamento.",
+    qrClear: "Remover conta",
+    confirmQrClear: ["Remover conta", "O botão Transferência QR desaparece do pagamento. Os talões guardados ficam.", "Remover"],
+    passName: "Passe de evento",
+    passPitch: "Passe de evento: Pro durante 72 horas por {0}, sem subscrição",
+    passPitchNoPrice: "Passe de evento: Pro durante 72 horas, sem subscrição",
+    passSub: "Pro durante 72 horas, sem subscrição",
+    passBuy: "Comprar passe",
+    passAuto: "Ativar logo após a compra",
+    passTerms: "O passe de evento é uma compra única: nada se renova nem volta a ser cobrado. Desbloqueia a Tapkasa Pro neste dispositivo durante 72 horas a partir da ativação. Um passe por ativar não expira.",
+    passHow: "O passe desbloqueia o Pro neste dispositivo durante 72 horas a partir da ativação: pagamentos ilimitados e emparelhamento de um segundo dispositivo. Um passe por ativar fica à espera até ser ativado.",
+    passHours: "{0} h",
+    passMins: "{0} min",
+    passUnusedN: ["{0} passe por usar", "{0} passes por usar", "{0} passes por usar"],
+    passStartSaved: "Ativar passe guardado (72 h)",
+    passStartMore: "Ativar outro passe (+72 h)",
+    confirmPassStart: ["Ativar passe de evento", "A Tapkasa Pro vai funcionar neste dispositivo durante 72 horas, até {0}. Um passe ativado não pode ser parado.", "Ativar"],
+    passOnToast: "Passe de evento ativo até {0}.",
+    passSavedToast: "Passe guardado. Ative-o em {0} quando precisar.",
+    passReadyToast: "Passes de evento por usar: {0}. Ative-os no Menu.",
+    passMenuOn: "Passe de evento ativo, faltam {0} (até {1})",
+    passPill: "Passe {0}",
+    passPillAria: "Passe de evento, faltam {0}",
+    passEnded: "O passe de evento terminou. Ative ou compre outro no Menu.",
+    passPending: "O pagamento aguarda aprovação. O passe é adicionado assim que a loja o confirmar."
   };
   // ==== konec vkládaných překladů ====
 
@@ -6665,9 +7270,14 @@
   // Pro se získá jedině nákupem v obchodě. Výjimkou jsou instalace z doby
   // před zavedením tarifů: těm zůstává, co už používaly (license "pro-legacy",
   // dřív "pro-dev").
+  // Během běžícího pasu na akci (1.3.0) se zařízení chová jako Pro.
   function isPro() {
     if (!state) { return false; }
-    return state.license === "pro" || state.license === "pro-legacy" || state.license === "pro-dev";
+    return subPro() || passActive();
+  }
+  // Pro z předplatného (nebo z doby před tarify), bez pasu
+  function subPro() {
+    return !!state && (state.license === "pro" || state.license === "pro-legacy" || state.license === "pro-dev");
   }
 
   function todayKey() {
@@ -6734,6 +7344,188 @@
     state.payN = (state.payN || 0) + 1;
   }
 
+  // ==================== pas na akci (1.3.0) ====================
+  // Jednorázový spotřebovatelný nákup tapkasa.pass.event72 (mobile/billing.js,
+  // RevenueCat): kredit, který po spuštění odemkne Pro na 72 hodin na tomto
+  // zařízení. Nespuštěný kredit nevyprší, nic se neobnovuje ani neplatí znovu.
+  // Kredit = transakce z obchodu; state.pass.tx drží jejich id: 0 nevyužitý,
+  // jinak čas spuštění. Pas patří zařízení: má tři kopie jako ostatní data,
+  // do zálohy dat se nedává a z ní se nepřebírá (jinak by šel kopírovat).
+  // Posunutí hodin pas neprodlouží: hi je nejpozdější čas, který zařízení
+  // vidělo (i čas serveru RevenueCat). Jdou-li hodiny o víc než 10 minut
+  // pozpátku, pas neplatí, dokud se nesrovnají; hi se nikdy nesnižuje, ani
+  // časem serveru (jinak by pas spuštěný s hodinami napřed běžel déle).
+  var PASS_MS = 72 * 3600000, PASS_SKEW = 600000;
+
+  function passTxOk(id) { return typeof id === "string" && /^[A-Za-z0-9._:-]{1,120}$/.test(id); }
+
+  function normPass(p) {
+    var o = { tx: {}, until: 0, hi: 0, auto: true };
+    if (!isObj(p)) { return o; }
+    if (isObj(p.tx)) {
+      Object.keys(p.tx).forEach(function (k) {
+        var v = p.tx[k];
+        if (passTxOk(k)) { o.tx[k] = typeof v === "number" && isFinite(v) && v > 0 ? v : 0; }
+      });
+    }
+    o.until = typeof p.until === "number" && isFinite(p.until) && p.until > 0 ? p.until : 0;
+    o.hi = typeof p.hi === "number" && isFinite(p.hi) && p.hi > 0 ? p.hi : 0;
+    o.auto = p.auto !== false;
+    return o;
+  }
+
+  function passNow() { return Math.max(Date.now(), state && state.pass ? state.pass.hi || 0 : 0); }
+  function passLeft() {
+    var p = state && state.pass, now = Date.now();
+    if (!p || !p.until || now < p.hi - PASS_SKEW) { return 0; }
+    return Math.max(0, p.until - now);
+  }
+  function passActive() { return passLeft() > 0; }
+  function passUnused() {
+    var tx = state && state.pass ? state.pass.tx : {};
+    return Object.keys(tx).filter(function (k) { return tx[k] === 0; }).length;
+  }
+  // Pas se kupuje jen v aplikaci z obchodu; web nabízí odkazy do obchodů.
+  function passOffer() { return nativeApp() && typeof window.__kasaBuyPass === "function"; }
+
+  function passPrice() {
+    var p = (window.__KASA_PRICES__ || {}).pass;
+    if (p) { return p; }
+    if (nativeApp() && typeof window.__kasaLoadPrices === "function" && Date.now() - pricesAskedAt > 15000) {
+      pricesAskedAt = Date.now();
+      setTimeout(function () { try { window.__kasaLoadPrices(); } catch (e) {} }, 0);
+    }
+    return "";
+  }
+
+  // zbývající čas: celé hodiny nahoru (hned po spuštění 72 h), poslední
+  // hodinu minuty
+  function passLeftText(ms) {
+    return ms >= 3600000 ? T("passHours", Math.ceil(ms / 3600000)) : T("passMins", Math.max(1, Math.ceil(ms / 60000)));
+  }
+  function passUnusedText(n) { return tp("passUnusedN", n).split("{0}").join(String(n)); }
+
+  // Spustí nevyužitý kredit (nejstarší, nebo daný). Běžící pas se prodlouží.
+  function passStart(id) {
+    var p = state.pass;
+    if (!id) {
+      id = Object.keys(p.tx).filter(function (k) { return p.tx[k] === 0; }).sort()[0];
+    }
+    if (!id || p.tx[id] !== 0) { return false; }
+    var now = passNow();
+    p.tx[id] = now;
+    p.until = Math.max(p.until, now) + PASS_MS;
+    p.hi = now;
+    saveNow();
+    passWas = true; passTxt = "";
+    return true;
+  }
+
+  // Nejpozdější viděný čas: stačí jednou za minutu, a jen se spuštěným pasem.
+  function passSeen() {
+    var p = state.pass, now = Date.now();
+    if (p.until && now > p.hi + 60000) { p.hi = now; save(); }
+  }
+
+  // Hlavička: běžící pas se zbývajícím časem, jinak počet nevyužitých pasů
+  // (jen na kase bez předplatného). Ťuknutím se otevře panel pasu.
+  function passPill() {
+    if (passActive()) {
+      var left = passLeftText(passLeft());
+      return ' <button type="button" class="passp" data-passsheet="1" aria-label="' + esc(T("passPillAria", left)) + '">' +
+             esc(T("passPill", left)) + "</button>";
+    }
+    var n = passUnused();
+    if (!n || subPro() || state.mode !== "kasa") { return ""; }
+    return ' <button type="button" class="passp idle" data-passsheet="1" aria-label="' + esc(passUnusedText(n)) + '">' +
+           esc(T("passPill", "×" + n)) + "</button>";
+  }
+
+  // Dlaždice nákupu pasu a volba, jestli ho po nákupu hned spustit.
+  function passTile() {
+    var auto = state.pass.auto !== false;
+    return '<div class="pw-pass"><button class="pw-plan pass" data-buypass="1"><span class="k">' + esc(T("passName")) + "</span>" +
+           '<span class="p num">' + esc(passPrice() || "…") + "</span>" +
+           '<span class="s">' + esc(T("passSub")) + "</span>" +
+           '<span class="go">' + esc(T("passBuy")) + "</span></button>" +
+           '<button class="pw-auto" role="checkbox" aria-checked="' + auto + '" data-passauto="1"><i>' + SVG.check + "</i>" +
+             esc(T("passAuto")) + "</button></div>";
+  }
+
+  // Spuštění nevyužitého pasu: běží 72 hodin a zastavit nejde, proto potvrzení.
+  // U limitu se po spuštění rovnou otevře placení rozpracovaného účtu.
+  function askPassStart() {
+    if (!passUnused()) { return; }
+    var from = sheet, end = Math.max(state.pass.until, passNow()) + PASS_MS;
+    var cf = T("confirmPassStart");
+    ask(cf[0], cf[1].split("{0}").join(whenStr(end)), cf[2], function () {
+      if (!passStart()) { return; }
+      if (from && from.step === "paywall" && from.reason === "limit" && state.order.length) { sheet = paySheet(); }
+      showToast(T("passOnToast", whenStr(state.pass.until)));
+    });
+    if (from && sheet) { sheet.back = from; }   // Zpět vrátí paywall nebo panel pasu
+  }
+
+  function billingBuyPass() {
+    if (typeof window.__kasaBuyPass === "function") {
+      try { window.__kasaBuyPass(); return; }
+      catch (e) { billAlert("billSetupFail", String(e && e.message || e)); return; }
+    }
+    if (nativeApp()) { billAlert("billModuleMissing", window.__kasaBillingError || ""); return; }
+    showGetApp();
+  }
+
+  // Most (mobile/billing.js) hlásí transakce pasu z RevenueCat po startu,
+  // nákupu a obnově: {tx: [{id}], src: "start"|"buy"|"restore", buy: id, at}.
+  // Neznámé id je nový kredit (i nákup dokončený, když aplikace neběžela).
+  // Po nákupu se pas podle volby rovnou spustí. at = čas serveru RevenueCat.
+  window.__kasaPass = function (data) {
+    if (!state || !isObj(data)) { return; }
+    var p = state.pass, added = [];
+    (Array.isArray(data.tx) ? data.tx : []).forEach(function (x) {
+      var id = x && x.id !== undefined ? String(x.id) : "";
+      if (passTxOk(id) && !Object.prototype.hasOwnProperty.call(p.tx, id)) { p.tx[id] = 0; added.push(id); }
+    });
+    var at = Number(data.at), hiMoved = false;
+    if (p.until && isFinite(at) && at > 1.5e12 && at > p.hi) { p.hi = at; hiMoved = true; }
+    if (data.src === "buy") {
+      var bid = data.buy !== undefined && data.buy !== null ? String(data.buy) : "";
+      var id = passTxOk(bid) && p.tx[bid] === 0 ? bid : added[added.length - 1];
+      var wall = sheet && (sheet.step === "paywall" || sheet.step === "pass") ? sheet : null;
+      if (id && p.auto !== false) {
+        passStart(id);
+        if (wall) { sheet = wall.step === "paywall" && wall.reason === "limit" && state.order.length ? paySheet() : null; }
+        render();
+        showToast(T("passOnToast", whenStr(p.until)));
+      } else if (id) {
+        saveNow(); render();
+        showToast(T("passSavedToast", T("tabMenu")));
+      } else {
+        save(); render();
+        showToast(T("proBuyPending"));
+      }
+      return;
+    }
+    // start a návrat do popředí: ukládat a překreslovat, jen když se něco změnilo
+    if (!added.length && !hiMoved) { return; }
+    saveNow(); render();
+    if (added.length) { passToastAt = Date.now(); showToast(T("passReadyToast", passUnused())); }
+  };
+  var passToastAt = 0;
+
+  // Jednou za minutu: zapamatovat čas, v hlavičce přepsat zbývající čas
+  // a po konci pasu překreslit (limit, párování) a říct to.
+  var passWas = null, passTxt = "";
+  function passTick() {
+    if (!state || !state.pass) { return; }
+    passSeen();
+    var on = passActive(), txt = on ? passLeftText(passLeft()) : "";
+    if (on === passWas && txt === passTxt) { return; }
+    var ended = passWas === true && !on;
+    passWas = on; passTxt = txt;
+    if (ended) { render(); showToast(T("passEnded")); } else { paintRole(); }
+  }
+
   // most pro nativní nákupy: mobilní obal zavolá po startu / po nákupu
   // src: "buy" | "restore" | "start" (starší most ho neposílá). Po koupi nebo
   // obnovení se paywall zavře a ukáže se potvrzení; při startu jen tiše
@@ -6749,7 +7541,8 @@
     if (fresh) { celebratePro(); }
     // Dřív se po obnově bez předplatného nestalo vůbec nic a zaplacený
     // nákup bez aktivace skončil taky potichu.
-    if (!pro && src === "restore") { showToast(T("proRestoreNone")); }
+    // obnova bez předplatného, ale s vráceným pasem: hlášku o pasu nepřebíjet
+    if (!pro && src === "restore") { if (Date.now() - passToastAt > 3000) { showToast(T("proRestoreNone")); } }
     else if (!pro && src === "buy") { showToast(T("proBuyPending")); }
   };
 
@@ -6757,7 +7550,7 @@
   window.__kasaBillingFail = function (kind, code, raw) {
     if (code === "15") { return; }                       // nákup už probíhá
     var msg = code === "10" || code === "35" ? T("billNet")
-            : code === "20" ? T("billPending")
+            : code === "20" ? T(kind === "pass" ? "passPending" : "billPending")
             : kind === "offering" || code === "2" || code === "3" || code === "5" || code === "23" ? T("billStore")
             : T("billFail", code || "?");
     // na paywallu u limitu se po neúspěchu nabídne dokončení účtu
@@ -6889,34 +7682,72 @@
     return h + '<p class="ga-move">' + esc(T("getAppMove", T("tabMenu"), T("backupHead"))) + "</p></div>";
   }
 
-  // QR kód bez knihovny a bez sítě (bajtový režim, oprava chyb M, verze 1
-  // až 6, tedy do 106 bajtů; odkazy do obchodů mají do 70). Postup podle
-  // ISO 18004 ve stejné struktuře jako implementace Project Nayuki; výstup
-  // je modul po modulu shodný s generátorem Kazuhiko Arase. Vrací matici
-  // [y][x] s true pro tmavý modul, pro delší text null.
+  // QR kód bez knihovny a bez sítě (oprava chyb M, verze 1 až 40). Postup
+  // podle ISO 18004 ve stejné struktuře jako implementace Project Nayuki;
+  // pro verze 1 až 6 v bajtovém režimu je výstup modul po modulu shodný
+  // s generátorem Kazuhiko Arase (odkazy do obchodů). Text jen z velkých
+  // písmen, číslic a znaků " $%*+-./:" jde alfanumerickým režimem (PAY by
+  // square je o čtvrtinu menší), jinak bajty UTF-8. Platební kódy (SPAYD,
+  // EPC, PAY by square) chtějí úroveň M; EPC nejvýš verzi 13, to s rezervou
+  // splníme. Vrací matici [y][x] s true pro tmavý modul, pro delší text null.
+  var QR_ALNUM = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ $%*+-./:";
+  // úroveň M: EC kódová slova na blok a počet bloků pro verze 1–40
+  var QR_ECC_M = [0, 10, 16, 26, 18, 24, 16, 18, 22, 22, 26, 30, 22, 22, 24, 24, 28, 28, 26, 26, 26,
+                  26, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28];
+  var QR_BLK_M = [0, 1, 1, 1, 2, 2, 4, 4, 4, 5, 5, 5, 8, 9, 9, 10, 10, 11, 13, 14, 16,
+                  17, 17, 18, 20, 21, 23, 25, 26, 28, 29, 31, 33, 35, 37, 38, 40, 43, 45, 47, 49];
   function qrMatrix(text) {
-    var bytes = [], s = unescape(encodeURIComponent(String(text)));
-    for (var i = 0; i < s.length; i++) { bytes.push(s.charCodeAt(i)); }
-    // [EC kódová slova na blok, počet bloků, datová slova v bloku], úroveň M
-    var EC = [null, [10, 1, 16], [16, 1, 28], [26, 1, 44], [18, 2, 32], [24, 2, 43], [16, 4, 27]];
-    var ALIGN = [null, [], [6, 18], [6, 22], [6, 26], [6, 30], [6, 34]];
-    var ver = 1;
-    while (ver <= 6 && EC[ver][1] * EC[ver][2] < bytes.length + 2) { ver++; }
-    if (ver > 6) { return null; }
-    var ecLen = EC[ver][0], nb = EC[ver][1], dLen = EC[ver][2], cap = nb * dLen;
+    var s = String(text), i, j, k;
+    var alnum = s.length > 0 && s.split("").every(function (c) { return QR_ALNUM.indexOf(c) >= 0; });
+    var bytes = [];
+    if (!alnum) {
+      var u = unescape(encodeURIComponent(s));
+      for (i = 0; i < u.length; i++) { bytes.push(u.charCodeAt(i)); }
+    }
+    // kolik bitů nese daná verze (moduly bez funkčních vzorů) a kolik dat potřebujeme
+    function rawModules(v) {
+      var r = (16 * v + 128) * v + 64;
+      if (v >= 2) {
+        var na = Math.floor(v / 7) + 2;
+        r -= (25 * na - 10) * na - 55;
+        if (v >= 7) { r -= 36; }
+      }
+      return r;
+    }
+    function ccBits(v) {
+      return alnum ? (v < 10 ? 9 : v < 27 ? 11 : 13) : (v < 10 ? 8 : 16);
+    }
+    function dataBits() {
+      return alnum ? Math.floor(s.length / 2) * 11 + (s.length % 2) * 6 : bytes.length * 8;
+    }
+    var ver = 1, rawCw, cap;
+    for (; ver <= 40; ver++) {
+      rawCw = Math.floor(rawModules(ver) / 8);
+      cap = rawCw - QR_ECC_M[ver] * QR_BLK_M[ver];
+      if (4 + ccBits(ver) + dataBits() <= cap * 8) { break; }
+    }
+    if (ver > 40) { return null; }
+    var ecLen = QR_ECC_M[ver], nb = QR_BLK_M[ver];
     var size = ver * 4 + 17;
 
-    // data: režim 0100, délka 8 bitů, bajty, ukončení, výplň 0xEC 0x11
+    // data: režim (0100 bajty, 0010 alfanumerický), délka, obsah, ukončení,
+    // výplň 0xEC 0x11
     var bits = [];
-    function put(v, n) { for (var k = n - 1; k >= 0; k--) { bits.push((v >>> k) & 1); } }
-    put(4, 4); put(bytes.length, 8);
-    bytes.forEach(function (b) { put(b, 8); });
+    function put(v, n) { for (var q = n - 1; q >= 0; q--) { bits.push((v >>> q) & 1); } }
+    if (alnum) {
+      put(2, 4); put(s.length, ccBits(ver));
+      for (i = 0; i + 1 < s.length; i += 2) { put(QR_ALNUM.indexOf(s[i]) * 45 + QR_ALNUM.indexOf(s[i + 1]), 11); }
+      if (s.length % 2) { put(QR_ALNUM.indexOf(s[s.length - 1]), 6); }
+    } else {
+      put(4, 4); put(bytes.length, ccBits(ver));
+      bytes.forEach(function (b) { put(b, 8); });
+    }
     put(0, Math.min(4, cap * 8 - bits.length));
     while (bits.length % 8) { bits.push(0); }
     var data = [];
     for (i = 0; i < bits.length; i += 8) {
       var v = 0;
-      for (var k = 0; k < 8; k++) { v = (v << 1) | bits[i + k]; }
+      for (k = 0; k < 8; k++) { v = (v << 1) | bits[i + k]; }
       data.push(v);
     }
     for (var pad = 0xEC; data.length < cap; pad ^= 0xEC ^ 0x11) { data.push(pad); }
@@ -6924,7 +7755,7 @@
     // Reed-Solomon nad GF(256), polynom 0x11D
     function mul(x, y) {
       var z = 0;
-      for (var j = 7; j >= 0; j--) { z = (z << 1) ^ ((z >>> 7) * 0x11D); z ^= ((y >>> j) & 1) * x; }
+      for (var q = 7; q >= 0; q--) { z = (z << 1) ^ ((z >>> 7) * 0x11D); z ^= ((y >>> q) & 1) * x; }
       return z;
     }
     var div = [];
@@ -6932,27 +7763,34 @@
     div.push(1);
     var root = 1;
     for (i = 0; i < ecLen; i++) {
-      for (var j = 0; j < div.length; j++) {
+      for (j = 0; j < div.length; j++) {
         div[j] = mul(div[j], root);
         if (j + 1 < div.length) { div[j] ^= div[j + 1]; }
       }
       root = mul(root, 2);
     }
-    var blocks = [], ecs = [];
+    // Od verze 5 se bloky dělí na kratší a o jedno slovo delší; slova se
+    // prokládají po sloupcích, výplň kratších bloků se vynechá.
+    var nShort = nb - rawCw % nb, shortLen = Math.floor(rawCw / nb), blocks = [], at = 0;
     for (i = 0; i < nb; i++) {
-      var blk = data.slice(i * dLen, (i + 1) * dLen), rem = div.map(function () { return 0; });
+      var blk = data.slice(at, at + shortLen - ecLen + (i < nShort ? 0 : 1)), rem = div.map(function () { return 0; });
+      at += blk.length;
       blk.forEach(function (b) {
         var f = b ^ rem.shift();
         rem.push(0);
         for (var q = 0; q < div.length; q++) { rem[q] ^= mul(div[q], f); }
       });
-      blocks.push(blk); ecs.push(rem);
+      if (i < nShort) { blk.push(0); }
+      blocks.push(blk.concat(rem));
     }
     var code = [];
-    for (i = 0; i < dLen; i++) { for (j = 0; j < nb; j++) { code.push(blocks[j][i]); } }
-    for (i = 0; i < ecLen; i++) { for (j = 0; j < nb; j++) { code.push(ecs[j][i]); } }
+    for (i = 0; i < blocks[0].length; i++) {
+      for (j = 0; j < nb; j++) {
+        if (i !== shortLen - ecLen || j >= nShort) { code.push(blocks[j][i]); }
+      }
+    }
 
-    // matice a příznak funkčních modulů (hledáčky, časování, zarovnání, formát)
+    // matice a příznak funkčních modulů (hledáčky, časování, zarovnání, formát, verze)
     var m = [], fn = [];
     for (i = 0; i < size; i++) { m.push([]); fn.push([]); for (j = 0; j < size; j++) { m[i].push(false); fn[i].push(false); } }
     function setF(x, y, dark) { m[y][x] = dark; fn[y][x] = true; }
@@ -6965,13 +7803,28 @@
         }
       }
     });
-    var al = ALIGN[ver];
+    var al = [];
+    if (ver > 1) {
+      var na = Math.floor(ver / 7) + 2, step = Math.floor((ver * 8 + na * 3 + 5) / (na * 4 - 4)) * 2;
+      al = [6];
+      for (var ap = size - 7; al.length < na; ap -= step) { al.splice(1, 0, ap); }
+    }
     for (i = 0; i < al.length; i++) {
       for (j = 0; j < al.length; j++) {
         if ((i === 0 && j === 0) || (i === 0 && j === al.length - 1) || (i === al.length - 1 && j === 0)) { continue; }
         for (var ay = -2; ay <= 2; ay++) {
           for (var ax = -2; ax <= 2; ax++) { setF(al[i] + ax, al[j] + ay, Math.max(Math.abs(ax), Math.abs(ay)) !== 1); }
         }
+      }
+    }
+    // informace o verzi (od verze 7), BCH kód s polynomem 0x1F25
+    if (ver >= 7) {
+      var vr = ver;
+      for (i = 0; i < 12; i++) { vr = (vr << 1) ^ ((vr >>> 11) * 0x1F25); }
+      var vb = (ver << 12) | vr;
+      for (i = 0; i < 18; i++) {
+        var bit = ((vb >>> i) & 1) !== 0, va = size - 11 + i % 3, vc = Math.floor(i / 3);
+        setF(va, vc, bit); setF(vc, va, bit);
       }
     }
     function drawFormat(mask) {
@@ -7073,6 +7926,222 @@
       '" shape-rendering="crispEdges"><rect width="' + w + '" height="' + w + '" fill="#fff"/><path fill="#000" d="' + path + '"/></svg>';
     return qrCache[key];
   }
+
+  // ==================== QR platba převodem ====================
+  // Zákazník naskenuje kód z telefonu prodejce ve své bankovní aplikaci,
+  // ta předvyplní účet, částku a zprávu. Peníze jdou přímo na účet
+  // prodejce, Tapkasa je nevidí a platbu neověřuje: prodejce ji potvrdí
+  // sám tlačítkem Zaplaceno. Tři formáty podle měny:
+  //   CZK                  QR Platba (SPAYD 1.0, ČBA)
+  //   EUR, Slovensko       PAY by square (SBA, verze 1.1.0 se jménem příjemce)
+  //   EUR, jinde           EPC QR / GiroCode (EPC069-12, verze 002, UTF-8)
+  // Zpráva pro příjemce je bez diakritiky: tuzemský platební styk ji
+  // stejně neunese a starší bankovní aplikace by ji rozsypaly.
+
+  function qrPlain(t) {
+    var s = String(t || "");
+    try { s = s.normalize("NFD").replace(/[\u0300-\u036f]/g, ""); } catch (e) {}
+    var map = { "ß": "ss", "ł": "l", "Ł": "L", "đ": "d", "Đ": "D", "ø": "o", "Ø": "O", "æ": "ae", "Æ": "AE", "œ": "oe", "Œ": "OE", "–": "-", "„": "\"", "“": "\"", "”": "\"", "’": "'" };
+    return s.replace(/[^\x20-\x7e]/g, function (c) { return map[c] || (/\s/.test(c) ? " " : ""); }).replace(/\s+/g, " ").trim();
+  }
+
+  // IBAN: délky pro země SEPA, ostatní aspoň 15 a nejvýš 34 znaků.
+  var IBAN_LEN = { AD: 24, AT: 20, BE: 16, BG: 22, CH: 21, CY: 28, CZ: 24, DE: 22, DK: 18, EE: 20, ES: 24, FI: 18,
+    FO: 18, FR: 27, GB: 22, GI: 23, GL: 18, GR: 27, HR: 21, HU: 28, IE: 22, IS: 26, IT: 27, LI: 21, LT: 20, LU: 20,
+    LV: 21, MC: 27, MT: 31, NL: 18, NO: 15, PL: 28, PT: 25, RO: 24, SE: 24, SI: 19, SK: 24, SM: 27, VA: 22 };
+  function mod97(digits) {
+    var r = 0;
+    for (var i = 0; i < digits.length; i += 7) { r = parseInt(String(r) + digits.slice(i, i + 7), 10) % 97; }
+    return r;
+  }
+  function ibanDigits(s) {
+    return s.replace(/[A-Z]/g, function (c) { return String(c.charCodeAt(0) - 55); });
+  }
+  function ibanOk(s) {
+    if (!/^[A-Z]{2}\d\d[A-Z0-9]{11,30}$/.test(s)) { return false; }
+    var want = IBAN_LEN[s.slice(0, 2)];
+    if (want && s.length !== want) { return false; }
+    return mod97(ibanDigits(s.slice(4) + s.slice(0, 4))) === 1;
+  }
+  function ibanShow(s) { return String(s || "").replace(/(.{4})/g, "$1 ").trim(); }
+  // Tuzemské číslo účtu v Česku a na Slovensku: [předčíslí-]číslo/kód banky,
+  // obě části s kontrolním součtem modulo 11 (vyhláška ČNB 169/2011).
+  function domAccOk(prefix, num) {
+    var wp = [10, 5, 8, 4, 2, 1], wn = [6, 3, 7, 9, 10, 5, 8, 4, 2, 1], a = 0, b = 0, i;
+    var p = ("000000" + prefix).slice(-6), n = ("0000000000" + num).slice(-10);
+    for (i = 0; i < 6; i++) { a += wp[i] * Number(p[i]); }
+    for (i = 0; i < 10; i++) { b += wn[i] * Number(n[i]); }
+    return a % 11 === 0 && b % 11 === 0 && /[1-9].*[1-9]/.test(n);
+  }
+  function domToIban(cc, prefix, num, bank) {
+    var bban = bank + ("000000" + prefix).slice(-6) + ("0000000000" + num).slice(-10);
+    var ck = 98 - mod97(ibanDigits(bban + cc + "00"));
+    return cc + ("0" + ck).slice(-2) + bban;
+  }
+
+  // Formát kódu podle měny a nastavení: "spayd", "pbs", "epc" nebo "".
+  function qrKind() {
+    var q = state.qr || {};
+    if (state.currency === "CZK") { return "spayd"; }
+    if (state.currency !== "EUR") { return ""; }
+    if (q.fmt === "pbs" || q.fmt === "epc") { return q.fmt; }
+    var acc = String(q.acc || "").replace(/\s+/g, "").toUpperCase();
+    return acc.slice(0, 2) === "SK" || state.lang === "sk" ? "pbs" : "epc";
+  }
+
+  // Účet z nastavení: {iban, bic, name, err} (err je klíč překladu nebo "").
+  function qrAccount() {
+    var q = state.qr || {}, kind = qrKind();
+    var raw = String(q.acc || "").replace(/\s+/g, "").toUpperCase();
+    var out = { kind: kind, iban: "", bic: String(q.bic || "").replace(/\s+/g, "").toUpperCase(),
+                name: String(q.name || "").trim(), err: "" };
+    if (!kind) { out.err = "qrErrCur"; return out; }
+    if (!raw) { out.err = "qrErrNone"; return out; }
+    var dom = /^(?:(\d{1,6})-)?(\d{2,10})\/(\d{4})$/.exec(raw);
+    if (dom) {
+      if (kind === "epc") { out.err = "qrErrNeedIban"; return out; }
+      if (!domAccOk(dom[1] || "", dom[2])) { out.err = "qrErrAcc"; return out; }
+      out.iban = domToIban(kind === "pbs" ? "SK" : "CZ", dom[1] || "", dom[2], dom[3]);
+    } else if (/^[A-Z]{2}\d\d/.test(raw)) {
+      if (!ibanOk(raw)) { out.err = "qrErrIban"; return out; }
+      out.iban = raw;
+    } else {
+      out.err = kind === "spayd" ? "qrErrFmtCz" : "qrErrFmtEu";
+      return out;
+    }
+    if (out.bic && !/^[A-Z]{4}[A-Z]{2}[A-Z0-9]{2}([A-Z0-9]{3})?$/.test(out.bic)) { out.err = "qrErrBic"; return out; }
+    if (kind !== "spayd" && !out.name) { out.err = "qrErrName"; return out; }
+    return out;
+  }
+
+  // QR platbu nabízí jen kasa s měnou, kterou umíme, a s platným účtem.
+  function qrReady() {
+    return state.mode === "kasa" && !!state.qr && !qrAccount().err;
+  }
+
+  // Zpráva pro příjemce: název akce a číslo účtenky.
+  function qrMessage(no) {
+    var ev = qrPlain(state.event);
+    return (ev ? ev.slice(0, 40) + ", " : "") + qrPlain(T("qrMsgNo", no));
+  }
+
+  // Text kódu. amount v měně účtu (koruny, eura), no = číslo účtenky.
+  function qrPayload(amount, no, acc) {
+    acc = acc || qrAccount();
+    var am = amount.toFixed(2), msg = qrMessage(no);
+    // SPAYD nese částku nejvýš na 10 znaků, EPC do 999 999 999,99
+    if (acc.err || !(amount > 0) || am.length > (acc.kind === "spayd" ? 10 : 12)) { return ""; }
+    if (acc.kind === "spayd") {
+      // hodnoty nesmí obsahovat hvězdičku, oddělovač polí (kóduje se %2A)
+      var sv = function (t, max) { return qrPlain(t).slice(0, max).replace(/\*/g, "%2A"); };
+      var p = "SPD*1.0*ACC:" + acc.iban + (acc.bic ? "+" + acc.bic : "") + "*AM:" + am + "*CC:CZK";
+      if (/^\d{1,10}$/.test(String(no))) { p += "*X-VS:" + no; }
+      p += "*MSG:" + sv(msg, 60);
+      if (acc.name) { p += "*RN:" + sv(acc.name, 35); }
+      return p;
+    }
+    if (acc.kind === "epc") {
+      // EPC069-12 verze 002: BIC v rámci EHP nepovinný, poslední prázdné
+      // řádky se nepíšou
+      return ["BCD", "002", "1", "SCT", acc.bic, acc.name.slice(0, 70), acc.iban, "EUR" + am, "", "", msg.slice(0, 140)].join("\n");
+    }
+    return paySquare(am, String(no), msg, acc);
+  }
+
+  // PAY by square: pole oddělená tabulátorem, CRC32, LZMA, base32hex.
+  // Pořadí polí podle specifikace (a knihovny bysquare): ID faktury,
+  // počet plateb, typ 1 = příkaz, částka, měna, splatnost, VS, KS, SS,
+  // reference, poznámka, počet účtů, IBAN, BIC, trvalý příkaz 0, inkaso 0,
+  // jméno příjemce, ulice, obec. Hlavička verze 1.1.0: jméno příjemce
+  // nese (od 1.2.0 je povinné), a přečtou ji i aplikace, které 1.2.0 neznají.
+  function paySquare(am, vs, note, acc) {
+    var d = new Date();
+    var due = d.getFullYear() + ("0" + (d.getMonth() + 1)).slice(-2) + ("0" + d.getDate()).slice(-2);
+    var tab = function (t) { return String(t || "").replace(/\t/g, " "); };
+    var fields = ["", "1", "1", am, "EUR", due, /^\d{1,10}$/.test(vs) ? vs : "", "", "", "", tab(note).slice(0, 140),
+                  "1", acc.iban, acc.bic, "0", "0", tab(qrPlain(acc.name)).slice(0, 70), "", ""];
+    var u = unescape(encodeURIComponent(fields.join("\t"))), body = [], i;
+    for (i = 0; i < u.length; i++) { body.push(u.charCodeAt(i)); }
+    var c = crc32(body);
+    var withCrc = [c & 0xFF, (c >>> 8) & 0xFF, (c >>> 16) & 0xFF, (c >>> 24) & 0xFF].concat(body);
+    var all = [0x01, 0x00, withCrc.length & 0xFF, (withCrc.length >>> 8) & 0xFF].concat(lzmaRaw(withCrc));
+    return base32hex(all);
+  }
+
+  function crc32(bytes) {
+    var c, crc = 0xFFFFFFFF;
+    for (var i = 0; i < bytes.length; i++) {
+      c = (crc ^ bytes[i]) & 0xFF;
+      for (var k = 0; k < 8; k++) { c = c & 1 ? (c >>> 1) ^ 0xEDB88320 : c >>> 1; }
+      crc = (crc >>> 8) ^ c;
+    }
+    return (crc ^ 0xFFFFFFFF) >>> 0;
+  }
+
+  function base32hex(bytes) {
+    var A = "0123456789ABCDEFGHIJKLMNOPQRSTUV", out = "", acc = 0, n = 0;
+    for (var i = 0; i < bytes.length; i++) {
+      acc = (acc << 8) | bytes[i]; n += 8;
+      while (n >= 5) { out += A[(acc >>> (n - 5)) & 31]; n -= 5; }
+      acc &= (1 << n) - 1;
+    }
+    if (n > 0) { out += A[(acc << (5 - n)) & 31]; }
+    return out;
+  }
+
+  // Surový proud LZMA1 (lc 3, lp 0, pb 2) bez hlavičky, jak ho chce PAY by
+  // square. Vlastní minimální kodér: zapisuje jen literály a značku konce
+  // proudu. To je platný proud, který přečte každý dekodér LZMA (ověřeno
+  // Pythonem lzma a knihovnou bysquare); u sto bajtů platby by hledání
+  // shod ušetřilo jen pár znaků. Pravděpodobnosti a intervalový kodér podle
+  // LZMA SDK (public domain).
+  function lzmaRaw(bytes) {
+    var out = [], low = 0, range = 0xFFFFFFFF, cache = 0, cacheSize = 1, i;
+    var P32 = 4294967296, P24 = 16777216;
+    function probs(n) { var a = []; for (var q = 0; q < n; q++) { a.push(1024); } return a; }
+    var isMatch = probs(12 * 16), isRep = probs(12), lit = probs(0x300 << 3);
+    var lenChoice = probs(1), lenLow = probs(16 * 8), posSlot = probs(4 * 64), align = probs(16);
+    function shiftLow() {
+      var lo = low % P32;
+      if (lo < 0xFF000000 || low >= P32) {
+        var carry = low >= P32 ? 1 : 0, temp = cache;
+        do { out.push((temp + carry) & 0xFF); temp = 0xFF; } while (--cacheSize !== 0);
+        cache = Math.floor(lo / P24);
+      }
+      cacheSize++;
+      low = (lo % P24) * 256;
+    }
+    function norm() { while (range < P24) { range = (range * 256) >>> 0; shiftLow(); } }
+    function bit(p, ix, b) {
+      var pr = p[ix], bound = (range >>> 11) * pr;
+      if (b) { low += bound; range -= bound; p[ix] = pr - (pr >>> 5); }
+      else { range = bound; p[ix] = pr + ((2048 - pr) >>> 5); }
+      norm();
+    }
+    function tree(p, base, nBits, sym) {
+      for (var q = nBits - 1, m = 1; q >= 0; q--) { var b = (sym >>> q) & 1; bit(p, base + m, b); m = (m << 1) | b; }
+    }
+    var prev = 0;
+    for (i = 0; i < bytes.length; i++) {
+      bit(isMatch, i & 3, 0);                        // stav 0 (samé literály), posState = pozice & 3
+      tree(lit, (prev >>> 5) * 0x300, 8, bytes[i]);   // kontext: horní 3 bity předchozího bajtu
+      prev = bytes[i];
+    }
+    // značka konce: shoda délky 2 se vzdáleností 0xFFFFFFFF
+    var ps = bytes.length & 3;
+    bit(isMatch, ps, 1);
+    bit(isRep, 0, 0);
+    bit(lenChoice, 0, 0);
+    tree(lenLow, ps * 8, 3, 0);
+    tree(posSlot, 0, 6, 63);
+    for (i = 25; i >= 0; i--) { range = range >>> 1; low += range; norm(); }
+    for (i = 0, ps = 1; i < 4; i++) { bit(align, ps, 1); ps = (ps << 1) | 1; }
+    for (i = 0; i < 5; i++) { shiftLow(); }
+    return out;
+  }
+
+  // Účet zkrácený pro Menu: první a poslední čtyři znaky.
+  function qrAccShort(iban) { return iban.slice(0, 4) + " … " + iban.slice(-4); }
 
   // ukázkové menu: názvy podle jazyka, ceny hrubě přepočtené na zvolenou měnu
   var DEMO_ITEMS = [
@@ -7176,7 +8245,10 @@
       // zbytek aplikace s ní pracuje jako dřív a starší zálohy platí dál.
       parked: [],
       // EET 2.0 (jen koruna): nastavení, fronta a odeslané; klíč ve stavu není
-      eet: eetFresh()
+      eet: eetFresh(),
+      // QR platba převodem a pas na akci (1.3.0)
+      qr: { acc: "", name: "", bic: "", fmt: "" },
+      pass: normPass(null)
     };
   }
 
@@ -7201,7 +8273,8 @@
       if (!okId(s.id)) { s.id = uid(); }
       if (s.ev !== undefined && !okId(s.ev)) { delete s.ev; }
       s.ts = finNum(s.ts, 0);
-      s.method = s.method === "card" ? "card" : "cash";
+      // qr = převodem přes QR kód (1.3.0); starší verze z něj udělají hotovost
+      s.method = s.method === "card" || s.method === "qr" ? s.method : "cash";
       if (typeof s.no !== "number") { s.no = i + 1; }
       if (s.no > maxNo) { maxNo = s.no; }
       s.status = s.status === "open" ? "open" : "served";
@@ -7358,6 +8431,13 @@
     d.cashRound = d.cashRound !== false;
     d.customVat = typeof d.customVat === "string" ? d.customVat : "";
     d.eet = normEet(d.eet);
+    // QR platba převodem (1.3.0): účet prodejce, jak ho zadal (číslo účtu
+    // nebo IBAN), jméno příjemce, BIC a u eura formát kódu
+    var dq = isObj(d.qr) ? d.qr : {};
+    d.qr = { acc: typeof dq.acc === "string" ? dq.acc.slice(0, 60) : "", name: typeof dq.name === "string" ? dq.name.slice(0, 70) : "",
+             bic: typeof dq.bic === "string" ? dq.bic.slice(0, 20) : "", fmt: dq.fmt === "pbs" || dq.fmt === "epc" ? dq.fmt : "" };
+    // pas na akci (1.3.0) patří zařízení: z vložené zálohy se nepřebírá
+    d.pass = normPass(d.pass);
     // počítadlo uzavřených akcí pro žádost o hodnocení; starší instalace
     // dostanou započtené akce, které už v archivu mají
     d.rateN = typeof d.rateN === "number" ? d.rateN : d.archives.length;
@@ -7833,6 +8913,10 @@
     return sh;
   }
 
+  // Způsob platby v textu a barva tečky: hotově, kartou, QR převodem.
+  function methodLower(m) { return m === "cash" ? T("cashLower") : m === "qr" ? T("qrLower") : T("cardLower"); }
+  function methodDot(m) { return m === "cash" ? "sp-cash" : m === "qr" ? "sp-qr" : "sp-card"; }
+
   function salesTotal() {
     return state.sales.reduce(function (s, t) { return s + t.total; }, 0);
   }
@@ -7945,7 +9029,7 @@
     pushOrder(sale, true);
     render();
     if (state.mode === "kasa" && state.thanks) { sayThanks(); }
-    var how = sale.method === "cash" ? T("cashLower") : T("cardLower");
+    var how = methodLower(sale.method);
     var msg = sale.total < 0 ? T("toastReturned", czk(-sale.total), how) : T("toastSaved", czk(sale.total), how);
     if (tip) { msg += " · " + T("toastTip", czk(tip)); }
     if (giveBack > 0 && sale.total > 0) { msg += " · " + T("toastChange", czk(giveBack)); }
@@ -8433,7 +9517,9 @@
         return o;
       }),
       seller: state.seller || {}, currency: state.currency, vat: state.vat === true, event: state.event || "",
-      taxAdd: state.taxAdd === true, taxRate: vatStr(state.taxRate), tips: state.tips === true
+      taxAdd: state.taxAdd === true, taxRate: vatStr(state.taxRate), tips: state.tips === true,
+      // účet pro QR platby (1.3.0) patří k údajům prodejce
+      qr: state.qr && state.qr.acc ? state.qr : null
     };
   }
 
@@ -8488,6 +9574,7 @@
       if (i === 0) {
         m.seller = p.seller; m.currency = p.currency; m.vat = p.vat; m.event = p.event;
         m.taxAdd = p.taxAdd; m.taxRate = p.taxRate; m.tips = p.tips;
+        if (p.qr) { m.qr = p.qr; }
       }
       nativeSend(JSON.parse(JSON.stringify(m)));
       relayPost(m);
@@ -8512,6 +9599,7 @@
     if (typeof msg.taxAdd === "boolean") { setupParts.taxAdd = msg.taxAdd; }
     if (typeof msg.taxRate === "string" || typeof msg.taxRate === "number") { setupParts.taxRate = vatStr(msg.taxRate); }
     if (typeof msg.tips === "boolean") { setupParts.tips = msg.tips; }
+    if (isObj(msg.qr) && typeof msg.qr.acc === "string") { setupParts.qr = msg.qr; }
     (Array.isArray(msg.items) ? msg.items : []).forEach(function (it) {
       if (!it || typeof it.name !== "string" || typeof it.price !== "number") { return; }
       var id = typeof it.id === "string" && it.id ? it.id : uid();
@@ -8543,6 +9631,10 @@
     if (typeof got.taxAdd === "boolean") { state.taxAdd = got.taxAdd; }
     if (typeof got.taxRate === "string") { state.taxRate = vatNum(got.taxRate) === null ? "" : got.taxRate; }
     if (typeof got.tips === "boolean") { state.tips = got.tips; }
+    if (got.qr) {
+      var gq = got.qr, str = function (x, n) { return typeof x === "string" ? x.slice(0, n) : ""; };
+      state.qr = { acc: str(gq.acc, 60), name: str(gq.name, 70), bic: str(gq.bic, 20), fmt: gq.fmt === "pbs" || gq.fmt === "epc" ? gq.fmt : "" };
+    }
     if (got.event) { state.event = got.event; }
     muted = true; save(); muted = false;
     afterReplace(state.pair);
@@ -8811,9 +9903,14 @@
   // Sazba DPH řádku a akce musí cestovat s účtenkou: kasa jinak po
   // odškrtnutí na výdeji dostala zpátky účtenku bez sazeb a doklad pak
   // sazbu hádal podle aktuálního menu.
+  // QR převodem (1.3.0) jde ven jako "card" s pm "qr": starší verze
+  // (1.2.0 a dřív) neznámý způsob platby mění na hotovost, a hotovost v kase
+  // by pak nesouhlasila. Karta je jako převod bezhotovostní, novější verze
+  // pozná QR podle pm. Způsob platby se po zaplacení nemění a mergeSale ho
+  // nepřebírá, takže ho vrácená účtenka od starší verze nepřepíše.
   function slim(s) {
     var o = {
-      id: s.id, no: s.no, ts: s.ts, total: s.total, method: s.method,
+      id: s.id, no: s.no, ts: s.ts, total: s.total, method: s.method === "qr" ? "card" : s.method,
       status: s.status, updatedAt: s.updatedAt,
       lines: s.lines.map(function (l) {
         var ln = { name: l.name, price: l.price, qty: l.qty, ready: l.ready || 0, color: l.color || "" };
@@ -8828,6 +9925,7 @@
     // od 1.1.0: připočtená daň a spropitné; starší verze je přeskočí
     if (typeof s.taxRate === "number") { o.tax = s.tax || 0; o.taxRate = s.taxRate; if (typeof s.taxBase === "number") { o.taxBase = s.taxBase; } }
     if (s.tip > 0) { o.tip = s.tip; }
+    if (s.method === "qr") { o.pm = "qr"; }
     return o;
   }
 
@@ -9195,7 +10293,8 @@
       id: inc.id, no: Math.floor(no),
       ts: isFinite(Number(inc.ts)) ? Number(inc.ts) : Date.now(),
       total: isFinite(total) ? total : lines.reduce(function (a, x) { return a + x.price * x.qty; }, 0),
-      method: inc.method === "card" ? "card" : "cash",
+      // QR převodem přichází jako karta s pm "qr", viz slim()
+      method: inc.pm === "qr" ? "qr" : inc.method === "card" ? "card" : "cash",
       status: inc.status === "open" ? "open" : "served",
       updatedAt: isFinite(Number(inc.updatedAt)) ? Number(inc.updatedAt) : 0,
       lines: lines
@@ -9412,16 +10511,19 @@
     // depIn = vybrané zálohy, depOut = vráceno zákazníkům (záporné řádky);
     // kusy počítají jen skutečné zboží
     // tax = připočtená daň (jen účty s taxRate), tip = spropitné mimo tržbu
-    var s = { total: 0, cash: 0, card: 0, count: state.sales.length, pieces: 0, items: [], depIn: 0, depOut: 0,
-              tax: 0, taxOn: false, tip: 0, tipCash: 0, tipCard: 0, rnd: 0 };
+    // qr = převodem přes QR kód (1.3.0), qrOn = aspoň jedna taková účtenka
+    var s = { total: 0, cash: 0, card: 0, qr: 0, qrOn: false, count: state.sales.length, pieces: 0, items: [], depIn: 0, depOut: 0,
+              tax: 0, taxOn: false, tip: 0, tipCash: 0, tipCard: 0, tipQr: 0, rnd: 0 };
     var map = {};
     state.sales.forEach(function (t) {
       s.total += t.total;
-      if (t.method === "cash") { s.cash += t.total; } else { s.card += t.total; }
+      if (t.method === "cash") { s.cash += t.total; }
+      else if (t.method === "qr") { s.qr += t.total; s.qrOn = true; }
+      else { s.card += t.total; }
       if (typeof t.taxRate === "number") { s.taxOn = true; s.tax += t.tax || 0; }
       if (t.tip > 0) {
         s.tip += t.tip;
-        if (t.method === "cash") { s.tipCash += t.tip; } else { s.tipCard += t.tip; }
+        if (t.method === "cash") { s.tipCash += t.tip; } else if (t.method === "qr") { s.tipQr += t.tip; } else { s.tipCard += t.tip; }
       }
       if (t.rnd) { s.rnd += t.rnd; }
       t.lines.forEach(function (l) {
@@ -9439,7 +10541,7 @@
       });
     });
     s.depIn = mr(s.depIn); s.depOut = mr(s.depOut);
-    s.tax = mr(s.tax); s.tip = mr(s.tip); s.tipCash = mr(s.tipCash); s.tipCard = mr(s.tipCard); s.rnd = mr(s.rnd);
+    s.qr = mr(s.qr); s.tax = mr(s.tax); s.tip = mr(s.tip); s.tipCash = mr(s.tipCash); s.tipCard = mr(s.tipCard); s.tipQr = mr(s.tipQr); s.rnd = mr(s.rnd);
     Object.keys(map).forEach(function (k) { s.items.push(map[k]); });
     s.items.sort(function (a, b) { return b.sum - a.sum || b.qty - a.qty; });
     return s;
@@ -9454,10 +10556,11 @@
     out.push(T("sumTotal") + " " + czk(s.total));
     out.push("  " + T("cashLower") + ": " + czk(s.cash));
     out.push("  " + T("cardLower") + ": " + czk(s.card));
+    if (s.qrOn) { out.push("  " + T("qrLower") + ": " + czk(s.qr)); }
     if (s.taxOn) { out.push("  " + T("taxInclSum", czk(s.tax))); }
     out.push(T("sumBills") + " " + s.count + " · " + T("sumPieces") + " " + s.pieces);
     depLines(s.depIn, s.depOut).forEach(function (ln) { out.push("  " + ln); });
-    if (s.tip) { out.push(tipsLine(s.tip, s.tipCash, s.tipCard)); }
+    if (s.tip) { out.push(tipsLine(s.tip, s.tipCash, s.tipCard, s.tipQr)); }
     if (s.rnd) { out.push(T("rndLine", rndTxt(s.rnd))); }
     out.push("");
     s.items.forEach(function (i) {
@@ -9466,9 +10569,10 @@
     return out.join("\n");
   }
 
-  // Spropitné je mimo tržbu, ale patří k penězům v kase: hotově a kartou zvlášť.
-  function tipsLine(tip, cash, card) {
-    return T("tipsLine", czk(tip), czk(cash)).split("{2}").join(czk(card));
+  // Spropitné je mimo tržbu, ale patří k penězům v kase: hotově a kartou
+  // zvlášť, QR převodem jen když nějaké bylo.
+  function tipsLine(tip, cash, card, qr) {
+    return T(qr ? "tipsLineQr" : "tipsLine", czk(tip), czk(cash)).split("{2}").join(czk(card)).split("{3}").join(czk(qr || 0));
   }
 
   // Zálohy a vrácení zvlášť, jen když nějaké byly.
@@ -9627,20 +10731,23 @@
 
     if (s.total > 0) {
       // vrácení hotově může hotovost stáhnout pod nulu, pruh to nesmí rozbít
-      var cashPos = Math.max(0, s.cash), cardPos = Math.max(0, s.card);
-      var pc = Math.round((cashPos / ((cashPos + cardPos) || 1)) * 100);
-      h += '<div class="split" role="img" aria-label="' + esc(T("splitAria", czk(s.cash), czk(s.card))) + '">';
-      if (cashPos > 0) { h += '<i class="sp-cash" style="width:' + pc + '%"></i>'; }
-      if (cardPos > 0) { h += '<i class="sp-card" style="flex:1"></i>'; }
+      var cashPos = Math.max(0, s.cash), cardPos = Math.max(0, s.card), qrPos = Math.max(0, s.qr);
+      var all = (cashPos + cardPos + qrPos) || 1;
+      h += '<div class="split" role="img" aria-label="' +
+           esc(s.qrOn ? T("splitAriaQr", czk(s.cash), czk(s.card)).split("{2}").join(czk(s.qr)) : T("splitAria", czk(s.cash), czk(s.card))) + '">';
+      if (cashPos > 0) { h += '<i class="sp-cash" style="width:' + Math.round(cashPos / all * 100) + '%"></i>'; }
+      if (cardPos > 0) { h += '<i class="sp-card" style="' + (qrPos > 0 ? "width:" + Math.round(cardPos / all * 100) + "%" : "flex:1") + '"></i>'; }
+      if (qrPos > 0) { h += '<i class="sp-qr" style="flex:1"></i>'; }
       h += "</div>";
     }
     h += '<div class="legend">' +
            '<span class="lg"><i class="sp-cash"></i><span class="k">' + esc(T("cash")) + '</span><span class="v">' + czk(s.cash) + "</span></span>" +
            '<span class="lg"><i class="sp-card"></i><span class="k">' + esc(T("card")) + '</span><span class="v">' + czk(s.card) + "</span></span>" +
+           (s.qrOn ? '<span class="lg"><i class="sp-qr"></i><span class="k">' + esc(T("qrPay")) + '</span><span class="v">' + czk(s.qr) + "</span></span>" : "") +
          "</div>" +
          (s.depIn || s.depOut ? '<p class="meta dep">' + esc(depLines(s.depIn, s.depOut).join(" · ")) + "</p>" : "") +
          (s.taxOn ? '<p class="meta dep">' + esc(T("taxInclSum", czk(s.tax))) + "</p>" : "") +
-         (s.tip ? '<p class="meta dep">' + esc(tipsLine(s.tip, s.tipCash, s.tipCard)) + "</p>" : "") +
+         (s.tip ? '<p class="meta dep">' + esc(tipsLine(s.tip, s.tipCash, s.tipCard, s.tipQr)) + "</p>" : "") +
          (s.rnd ? '<p class="meta dep">' + esc(T("rndLine", rndTxt(s.rnd))) + "</p>" : "") +
          eetHistLine() +
          "</section>";
@@ -9668,9 +10775,9 @@
       var rcAll = state.sales.length, rcShow = Math.min(rcAll, rcLimit), eetMap = eetBySale();
       state.sales.slice(rcAll - rcShow).reverse().forEach(function (t) {
         var what = t.lines.map(function (l) { return l.qty + "× " + l.name; }).join(", ");
-        h += '<div class="tx"><i class="dot ' + (t.method === "cash" ? "sp-cash" : "sp-card") + '"></i>' +
+        h += '<div class="tx"><i class="dot ' + methodDot(t.method) + '"></i>' +
              '<div class="mid"><div class="w">' + esc(what) + "</div>" +
-             '<div class="s">' + esc(whenStr(t.ts)) + " · " + esc(t.method === "cash" ? T("cashLower") : T("cardLower")) +
+             '<div class="s">' + esc(whenStr(t.ts)) + " · " + esc(methodLower(t.method)) +
                (t.tip > 0 ? " · " + esc(T("toastTip", czk(t.tip))) : "") + eetRcMark(t, eetMap) + "</div></div>" +
              '<span class="a">' + czk(t.total) + "</span>" +
              '<button class="del" data-del="' + t.id + '" aria-label="' + esc(T("delReceiptAria")) + '">' + SVG.close + "</button></div>";
@@ -9702,6 +10809,7 @@
              '<div class="s">' + new Date(a.closedAt).toLocaleDateString(langInfo().loc) + " · " +
              a.count + " " + tp("billsN", a.count) + " · " + esc(T("cashLower")) + " " + czk(a.cash) +
              ", " + esc(T("cardLower")) + " " + czk(a.card) +
+             (typeof a.qr === "number" ? ", " + esc(T("qrLower")) + " " + czk(a.qr) : "") +
              (a.tip > 0 ? " · " + esc(T("toastTip", czk(a.tip))) : "") + "</div></div>" +
              '<span class="num">' + czk(a.total) + "</span>" +
              // vrátit lze jen akci, u které jsou uložené účtenky; starší
@@ -9747,8 +10855,8 @@
     var to = new Date(toS + "T23:59:59.999").getTime();
     if (isNaN(from) || isNaN(to)) { return null; }
 
-    var total = 0, cashSum = 0, cardSum = 0, bills = 0, depIn = 0, depOut = 0;
-    var tipSum = 0, tipCash = 0, tipCard = 0, rndSum = 0;
+    var total = 0, cashSum = 0, cardSum = 0, qrSum = 0, qrOn = false, bills = 0, depIn = 0, depOut = 0;
+    var tipSum = 0, tipCash = 0, tipCard = 0, tipQr = 0, rndSum = 0;
     var items = {}, events = {};
     // Rozpis daně. Ceny s DPH (inclRates: hrubé částky podle sazby položky)
     // dávají základ zpětně; u daně připočtené při placení nese každá
@@ -9771,10 +10879,12 @@
     var addSale = function (s, evItems) {
       bills += 1;
       total += s.total || 0;
-      if (s.method === "cash") { cashSum += s.total || 0; } else { cardSum += s.total || 0; }
+      if (s.method === "cash") { cashSum += s.total || 0; }
+      else if (s.method === "qr") { qrSum += s.total || 0; qrOn = true; }
+      else { cardSum += s.total || 0; }
       if (s.tip > 0) {
         tipSum += s.tip;
-        if (s.method === "cash") { tipCash += s.tip; } else { tipCard += s.tip; }
+        if (s.method === "cash") { tipCash += s.tip; } else if (s.method === "qr") { tipQr += s.tip; } else { tipCard += s.tip; }
       }
       if (s.rnd) { rndSum += s.rnd; }
       var isAdded = typeof s.taxRate === "number";
@@ -9829,6 +10939,7 @@
       total += a.total || 0;
       cashSum += a.cash || 0;
       cardSum += a.card || 0;
+      if (typeof a.qr === "number") { qrSum += a.qr; qrOn = true; }
       events[aName] = true;
       (a.items || []).forEach(function (i) {
         addItem(i.name, i.price, i.qty, i.sum, resolveVat(i.name, i.vat), i.dep, true);
@@ -9837,7 +10948,7 @@
 
     if (!bills) { return ""; }
     depIn = mr(depIn); depOut = mr(depOut);
-    tipSum = mr(tipSum); tipCash = mr(tipCash); tipCard = mr(tipCard); rndSum = mr(rndSum);
+    tipSum = mr(tipSum); tipCash = mr(tipCash); tipCard = mr(tipCard); tipQr = mr(tipQr); rndSum = mr(rndSum); qrSum = mr(qrSum);
 
     var list = Object.keys(items).map(function (k) { return items[k]; });
     list.sort(function (a, b) { return b.sum - a.sum || b.qty - a.qty; });
@@ -9918,9 +11029,10 @@
     out.push(T("docReceipts") + " " + bills);
     out.push(T("cash") + ": " + czk(cashSum));
     out.push(T("card") + ": " + czk(cardSum));
+    if (qrOn) { out.push(T("qrPay") + ": " + czk(qrSum)); }
     depLines(depIn, depOut).forEach(function (ln) { out.push(ln); });
     out.push(T("docTotal") + ": " + czk(total));
-    if (tipSum) { out.push(tipsLine(tipSum, tipCash, tipCard)); }
+    if (tipSum) { out.push(tipsLine(tipSum, tipCash, tipCard, tipQr)); }
     if (rndSum) { out.push(T("rndLine", rndTxt(rndSum))); }
     out.push("");
     out.push(T("docFooter"));
@@ -9934,8 +11046,8 @@
       events: Object.keys(events),
       items: list,
       vatRows: vatRows, vatBase: vatBase, vatTax: vatTax,
-      bills: bills, cash: cashSum, card: cardSum, total: total, depIn: depIn, depOut: depOut,
-      tip: tipSum, tipCash: tipCash, tipCard: tipCard, rnd: rndSum
+      bills: bills, cash: cashSum, card: cardSum, qr: qrSum, qrOn: qrOn, total: total, depIn: depIn, depOut: depOut,
+      tip: tipSum, tipCash: tipCash, tipCard: tipCard, tipQr: tipQr, rnd: rndSum
     };
   }
 
@@ -10002,7 +11114,7 @@
     var LAST = PDF_H - M - 14 - 10;               // poslední řádek nad patičkou
     var SUM_LIMIT = PDF_H - M - 14 - 8;           // spodek souhrnu nad patičkou
     var V = doc.vatRows.length;
-    var sumH = 24 + (V ? 45 + V * rowH : 0) + 76 + (doc.tip ? 18 : 0) + (doc.rnd ? 18 : 0);
+    var sumH = 24 + (V ? 45 + V * rowH : 0) + 76 + (doc.qrOn ? 15 : 0) + (doc.tip ? 18 : 0) + (doc.rnd ? 18 : 0);
     var cap = function (base) { return Math.max(1, Math.floor((LAST - base) / rowH) + 1); };
 
     var pages = [], rest = doc.items.slice();
@@ -10204,7 +11316,7 @@
       }
 
       // souhrn v jemném panelu, ať je nejdůležitější číslo hned vidět
-      var boxTop = y - 6, boxH = 82 + (doc.tip ? 18 : 0) + (doc.rnd ? 18 : 0);
+      var boxTop = y - 6, boxH = 82 + (doc.qrOn ? 15 : 0) + (doc.tip ? 18 : 0) + (doc.rnd ? 18 : 0);
       g.fillStyle = "#FBFAF7";
       g.beginPath();
       if (g.roundRect) { g.roundRect(M - 6, boxTop, PDF_W - 2 * M + 12, boxH, 8); }
@@ -10219,6 +11331,7 @@
       if (dl.length) { g.fillText(clip(dl.join(" · "), halfW), M + 4, yb + 15); }
       right(T("cash") + ": " + czk(doc.cash), xSum - 4, yb); yb += 15;
       right(T("card") + ": " + czk(doc.card), xSum - 4, yb); yb += 12;
+      if (doc.qrOn) { yb += 3; right(T("qrPay") + ": " + czk(doc.qr), xSum - 4, yb); yb += 12; }
 
       g.strokeStyle = LINE; g.lineWidth = 0.7;
       g.beginPath(); g.moveTo(M + 4, yb + 0.5); g.lineTo(xSum - 4, yb + 0.5); g.stroke();
@@ -10231,7 +11344,8 @@
       if (doc.tip) {
         yb += 18;
         font(10, 400); ink(INK2);
-        g.fillText(clip(T("docTips") + " (" + T("cashLower") + " " + czk(doc.tipCash) + ", " + T("cardLower") + " " + czk(doc.tipCard) + ")",
+        g.fillText(clip(T("docTips") + " (" + T("cashLower") + " " + czk(doc.tipCash) + ", " + T("cardLower") + " " + czk(doc.tipCard) +
+          (doc.tipQr ? ", " + T("qrLower") + " " + czk(doc.tipQr) : "") + ")",
           xSum - M - 110), M + 4, yb);
         font(10.5, 700); ink(INK);
         right(czk(doc.tip), xSum - 4, yb);
@@ -10573,7 +11687,7 @@
            '<button class="act" data-xmas="1">' + esc(T("xmasMenu")) + "</button>" +
            '<button class="act danger" data-reset="1">' + esc(T("resetMenu")) + "</button></div>" +
            '<p class="hint">' + esc(T("pricesHint")) + " " + esc(T("negHint")) + "</p>" +
-           (state.pair ? "" : queueBlock()) + bizBlock() + eetBlock() + tipsBlock() + rndBlock() + roleBlock(true) + appBlock() + renderBackupBlock();
+           (state.pair ? "" : queueBlock()) + bizBlock() + eetBlock() + qrBlock() + tipsBlock() + rndBlock() + roleBlock(true) + appBlock() + renderBackupBlock();
   }
 
   // ---------- párování (s tarifní bránou) ----------
@@ -10669,19 +11783,33 @@
 
   function proSection() {
     var h = '<div class="sec"><h2>' + esc(T("proHead")) + "</h2></div>";
-    if (isPro()) {
+    var n = passUnused();
+    var unused = n ? '<div class="link"><i></i>' + esc(passUnusedText(n)) + "</div>" : "";
+    if (subPro()) {
       return h + '<div class="link on"><i></i>' + SVG.check + esc(T("proActive")) +
-             "</div>";
+             "</div>" + unused;
+    }
+    // běžící pas na akci: kolik zbývá a do kdy
+    if (passActive()) {
+      return h + '<div class="link on"><i></i>' + SVG.check +
+             esc(T("passMenuOn", passLeftText(passLeft()), whenStr(state.pass.until))) + "</div>" + unused +
+             '<div class="acts" style="padding-top:0"><button class="act" data-passsheet="1">' + esc(T("passName")) + "</button></div>";
     }
     var ptr = offerTrial();
+    var startBtn = n ? '<button class="act on" data-passstart="1">' + esc(T("passStartSaved")) + "</button>" : "";
     // Výdej neúčtuje, počítadlo plateb zdarma by tu jen strašilo, že se
     // platí i za druhé zařízení. Stačí říct, že Pro patří na kasu.
     if (state.mode === "vydej") {
-      return h + '<div class="link"><i></i>' + esc(T("proFree")) + " · " + esc(T("proB3")) + "</div>";
+      return h + '<div class="link"><i></i>' + esc(T("proFree")) + " · " + esc(T("proB3")) + "</div>" + unused +
+             (n ? '<div class="acts" style="padding-top:0">' + startBtn + "</div>" : "");
     }
-    return h + '<div class="link"><i></i>' + esc(T("proFree")) + " · " + esc(proLeftText(freeLeft())) + "</div>" +
-           '<div class="acts" style="padding-top:0"><button class="act on" data-paywall="menu">' +
-             esc(ptr ? T("proTryRow", trialText(ptr)) : T("proRow")) + "</button></div>";
+    var pp = passOffer() && !n ? passPrice() : "";
+    return h + '<div class="link"><i></i>' + esc(T("proFree")) + " · " + esc(proLeftText(freeLeft())) + "</div>" + unused +
+           '<div class="acts" style="padding-top:0">' + startBtn + '<button class="act' + (n ? "" : " on") + '" data-paywall="menu">' +
+             esc(ptr ? T("proTryRow", trialText(ptr)) : T("proRow")) + "</button></div>" +
+           // pas na akci jednou větou, cena z obchodu
+           (passOffer() && !n ? '<p class="hint" style="text-align:left;padding-top:0">' +
+             esc(pp ? T("passPitch", pp) : T("passPitchNoPrice")) + "</p>" : "");
   }
 
   // drobný ukazatel zbývajících plateb zdarma v prodejní liště
@@ -10947,6 +12075,32 @@
            esc(T(on ? "taxItemOn" : "taxItemOff")) + '">' + esc(on ? "+" + (r ? pctTxt(r) : "%") : T("docVatNone")) + "</button>";
   }
 
+  // QR platba převodem (1.3.0): jen koruna a euro. Bez platného účtu se
+  // při placení nenabízí.
+  function qrFmtKey(kind) { return kind === "spayd" ? "qrFmtSpayd" : kind === "pbs" ? "qrFmtPbs" : "qrFmtEpc"; }
+  function qrBlock() {
+    var kind = qrKind();
+    if (!kind) { return ""; }
+    var acc = qrAccount(), set = !!(state.qr && state.qr.acc);
+    return '<div class="sec"><h2>' + esc(T("qrHead")) + "</h2></div>" +
+      (set && !acc.err ? '<div class="link on"><i></i>' + esc(qrAccShort(acc.iban) + " · " + T(qrFmtKey(kind))) + "</div>" : "") +
+      (set && acc.err ? '<p class="hint" style="text-align:left;padding:0 16px 4px;color:var(--accent);font-weight:600">' + esc(T(acc.err)) + "</p>" : "") +
+      '<div class="acts" style="padding-bottom:6px"><button class="act' + (set ? "" : " on") + '" data-qrset="1">' +
+        esc(T(set ? "qrEdit" : "qrSetBtn")) + "</button></div>" +
+      '<p class="hint">' + esc(T("qrMenuHint")) + "</p>";
+  }
+  // Kontrola účtu a náhled kódu na nejmenší částku, ať si prodejce kód
+  // zkusí načíst svou bankovní aplikací. Mění se při psaní bez překreslení.
+  function qrLiveHtml() {
+    if (!state.qr || !state.qr.acc) { return ""; }
+    var a = qrAccount();
+    if (a.err) { return '<p class="sub qr-err" role="status">' + esc(T(a.err)) + "</p>"; }
+    var one = 1, txt = qrPayload(one, 1, a);
+    return '<p class="sub qr-ok" role="status">' + esc(T("qrOk")) + "</p>" +
+      '<div class="qrprev">' + qrSvg(txt, T("qrPrevAria")) + "<p><strong>" + esc(ibanShow(a.iban)) + "</strong>" +
+        esc(a.name) + (a.name ? "<br>" : "") + esc(T(qrFmtKey(a.kind))) + "<br>" + esc(T("qrPrevHint", czk(one))) + "</p></div>";
+  }
+
   // Spropitné při placení: výchozí vypnuté, zapíná se tady.
   function tipsBlock() {
     var on = state.tips === true;
@@ -11145,6 +12299,8 @@
     // Záporný součet (jen vrácení zálohy, nebo vrácení převáží nákup):
     // zákazník nic neplatí, vyplácí se mu. Bez bankovek a počítání vrácení.
     var payBack = (sheet.step === "method" || sheet.step === "cash" || sheet.step === "card") && sheet.total < 0;
+    // QR převodem jen za kladnou částku a s platným účtem (vrací se hotově či na kartu)
+    var offerQr = !payBack && sheet.total > 0 && qrReady() && !!qrPayload(dueOf(sheet), state.nextNo);
 
     if (sheet.step === "method") {
       var n = orderCount();
@@ -11157,6 +12313,7 @@
            '<div class="pay2">' +
              '<button class="btn-m m-cash" data-method="cash"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="3"/></svg>' + esc(T("cash")) + "</button>" +
              '<button class="btn-m m-card" data-method="card"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>' + esc(T("card")) + "</button>" +
+             (offerQr ? '<button class="btn-m m-qr" data-method="qr"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v.01M14 20h.01M17 20h4v-3"/></svg>' + esc(T("qrPay")) + "</button>" : "") +
            "</div><button class=\"btn-ghost\" data-cancel=\"1\">" + esc(T("backToOrder")) + "</button>";
     }
 
@@ -11215,6 +12372,22 @@
            '<div class="paid m-card"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>' +
            esc(T("toTerminal", czk(dueOf(sheet)))) + "</div>" +
            '<button class="btn-done" data-commit="1">' + esc(T("done")) + "</button>" +
+           '<button class="btn-ghost" data-cancel="1">' + esc(T("back")) + "</button>";
+    }
+
+    // QR převodem: velký kód na celou šířku, zákazník ho skenuje z telefonu
+    // prodejce. Tapkasa platbu neověřuje, prodejce ji potvrdí sám.
+    if (sheet.step === "qr") {
+      var qAcc = qrAccount(), qAmt = dueOf(sheet), qNo = state.nextNo;
+      var qText = qrPayload(qAmt, qNo, qAcc);
+      h += "<h2>" + esc(T("qrPay")) + "</h2>" +
+           (qText ? '<div class="qrpay">' + qrSvg(qText, T("qrAria", czk(qAmt))) + "</div>" : '<p class="sub qr-err">' + esc(T(qAcc.err || "qrErrNone")) + "</p>") +
+           '<div class="big num qrbig">' + czk(qAmt) + "</div>" +
+           (sheet.tip > 0 ? '<p class="sub qrhint">' + esc(T("tipIncl", czk(sheet.tip))) + "</p>" : "") +
+           '<p class="qrmeta">' + esc((state.event ? state.event + ", " : "") + T("qrMsgNo", qNo)) + (qAcc.kind === "spayd" ? " · VS " + qNo : "") + "<br>" +
+             esc(ibanShow(qAcc.iban)) + (qAcc.name ? " · " + esc(qAcc.name) : "") + "</p>" +
+           (qText ? '<button class="btn-done go" data-commit="1">' + esc(T("qrPaid")) + "</button>" : "") +
+           '<p class="sub qrhint">' + esc(T("qrHint")) + "</p>" +
            '<button class="btn-ghost" data-cancel="1">' + esc(T("back")) + "</button>";
     }
 
@@ -11376,7 +12549,7 @@
         h += "<h2>" + esc(T("orderHead")) + " #" + s.no + "</h2>" +
              '<div class="big num">' + ready(s) + "/" + pieces(s) + "</div>" +
              '<p class="sub">' + clock(s.ts) + " · " + czk(s.total) + " " +
-               esc(s.method === "cash" ? T("cashLower") : T("cardLower")) +
+               esc(methodLower(s.method)) +
                (s.tip > 0 ? " · " + esc(T("toastTip", czk(s.tip))) : "") + "</p>" +
              '<div class="steps">';
         s.lines.forEach(function (l, i) {
@@ -11463,9 +12636,15 @@
              '<div class="pw-b">' + PW_CHECK + esc(T("proB2")) + "</div>" +
              '<div class="pw-b">' + PW_CHECK + esc(T("proB3")) + "</div>" +
            "</div>" +
+           // nevyužitý pas na akci: nejrychlejší cesta dál
+           (passUnused() ? '<button class="btn-done go pw-own" data-passstart="1">' + esc(T("passStartSaved")) + "</button>" +
+             '<p class="sub" style="text-align:center">' + esc(passUnusedText(passUnused())) + "</p>" : "") +
+           // Pas na akci (1.3.0): u limitu jako první, jinak pod předplatným.
+           (passOffer() && sheet.reason === "limit" ? passTile() : "") +
            // Na webu se nekupuje a cenu určuje obchod podle země: dřív tu
            // byly náhradní dolarové ceny, které většině lidí neplatily.
            (nativeApp() ? '<div class="pw-plans">' + planButton("monthly") + planButton("yearly") + "</div>" : "") +
+           (passOffer() && sheet.reason !== "limit" ? passTile() : "") +
            // Limit padl a koupit teď nejde: rozpracovaný účet se dokončí.
            // Poprvé s rezervou na zbytek dne, potom už jen tento jeden účet.
            (sheet.reason === "limit" && canRescue()
@@ -11484,9 +12663,48 @@
              : storeBlock() + '<p class="pw-webprice">' + esc(T("webPrice")) + "</p>") +
            '<button class="btn-ghost" data-cancel="1">' + esc(T("proLater")) + "</button>" +
            '<p class="hint" style="padding:10px 4px 0">' +
-             (trialOf("monthly") || trialOf("yearly") ? esc(T("proTrialTerms")) + " " : "") + esc(T("proTerms")) + "</p>" +
+             (trialOf("monthly") || trialOf("yearly") ? esc(T("proTrialTerms")) + " " : "") + esc(T("proTerms")) +
+             (passOffer() ? " " + esc(T("passTerms")) : "") + "</p>" +
            '<p class="pw-legal"><a href="https://www.deriverge.com/tapkasa/privacy.html" target="_blank" rel="noopener">' + esc(T("proPrivacy")) + "</a>" +
            ' · <a href="https://www.deriverge.com/tapkasa/terms.html" target="_blank" rel="noopener">' + esc(T("proTermsLink")) + "</a></p>";
+    }
+
+    // Pas na akci: stav, spuštění nevyužitého pasu a nákup dalšího.
+    if (sheet.step === "pass") {
+      var pn = passUnused(), pon = passActive();
+      h += '<div class="pw-mark">' + PRO_MARK + "</div>" +
+           '<h2 style="text-align:center">' + esc(T("passName")) + "</h2>" +
+           (pon ? '<div class="pass-st">' + esc(T("passMenuOn", passLeftText(passLeft()), whenStr(state.pass.until))) + "</div>" : "") +
+           (pn ? '<div class="pass-st">' + esc(passUnusedText(pn)) + "</div>" : "") +
+           '<p class="sub" style="text-align:center;font-size:14px">' + esc(T("passHow")) + "</p>" +
+           (pn ? '<button class="btn-done go" data-passstart="1">' + esc(T(pon ? "passStartMore" : "passStartSaved")) + "</button>" : "") +
+           (passOffer() ? passTile() : (!nativeApp() ? storeBlock() : "")) +
+           '<button class="btn-ghost" data-cancel="1">' + esc(T("close")) + "</button>" +
+           '<p class="hint" style="padding:10px 4px 0">' + esc(T("passTerms")) + "</p>";
+    }
+
+    // QR platba převodem: účet prodejce, kontrola a náhled kódu
+    if (sheet.step === "qrset") {
+      var qk = qrKind(), qq = state.qr || {};
+      h += '<div class="qrset"><h2>' + esc(T("qrHead")) + "</h2>" +
+           '<p class="sub">' + esc(T("qrSetHint")) + "</p>" +
+           (state.currency === "EUR"
+             ? '<div class="seg tight" role="group" aria-label="' + esc(T("qrFmtLbl")) + '">' +
+                 '<button class="' + (qk === "pbs" ? "on" : "") + '" data-qrfmt="pbs" aria-pressed="' + (qk === "pbs") + '">' + esc(T("qrFmtSk")) + "</button>" +
+                 '<button class="' + (qk === "epc" ? "on" : "") + '" data-qrfmt="epc" aria-pressed="' + (qk === "epc") + '">' + esc(T("qrFmtEu")) + "</button></div>"
+             : "") +
+           '<label class="sf"><span>' + esc(T(qk === "spayd" ? "qrAccLblCz" : qk === "pbs" ? "qrAccLblSk" : "qrAccLblEu")) + "</span>" +
+             '<input class="inp" data-qf="acc" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="60" value="' +
+             esc(qq.acc || "") + '" placeholder="' + esc(T(qk === "spayd" ? "qrAccPhCz" : qk === "pbs" ? "qrAccPhSk" : "qrAccPhEu")) + '"></label>' +
+           '<label class="sf"><span>' + esc(T("qrNameLbl")) + "</span>" +
+             '<input class="inp" data-qf="name" autocomplete="off" maxlength="70" value="' + esc(qq.name || "") + '"></label>' +
+           (qk === "epc" ? '<label class="sf"><span>' + esc(T("qrBicLbl")) + "</span>" +
+             '<input class="inp" data-qf="bic" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="11" value="' +
+             esc(qq.bic || "") + '"></label>' : "") +
+           '<div id="qrLive">' + qrLiveHtml() + "</div>" +
+           '<button class="btn-done" data-cancel="1">' + esc(T("done")) + "</button>" +
+           (qq.acc ? '<button class="btn-ghost" data-qrclear="1">' + esc(T("qrClear")) + "</button>" : "") +
+           "</div>";
     }
 
     // jen web: ťuknutí na tarif nebo obnovu nákupu (showGetApp)
@@ -11682,7 +12900,7 @@
   // „ťukněte znovu, ať je co účtovat“.
   var tourPaid = false;
 
-  function payOpen() { return !!sheet && (sheet.step === "method" || sheet.step === "cash" || sheet.step === "card" || sheet.step === "tip"); }
+  function payOpen() { return !!sheet && (sheet.step === "method" || sheet.step === "cash" || sheet.step === "card" || sheet.step === "qr" || sheet.step === "tip"); }
 
   var TOUR = [
     { key: "tourS1", sel: function () { return ".prod"; },
@@ -11704,9 +12922,9 @@
     { key: "tourS2", sel: function () { return "[data-pay]"; },
       done: function () { return tourPaid || payOpen(); } },
     { key: "tourS3", sel: function () { return '[data-method="cash"]'; },
-      done: function () { return tourPaid || (!!sheet && (sheet.step === "cash" || sheet.step === "card")); } },
+      done: function () { return tourPaid || (!!sheet && (sheet.step === "cash" || sheet.step === "card" || sheet.step === "qr")); } },
     { key: "tourS4", sel: function () {
-        return (sheet && (sheet.step === "card" || sheet.received > 0)) ? "[data-commit]" : "[data-exact]"; },
+        return (sheet && (sheet.step === "card" || sheet.step === "qr" || sheet.received > 0)) ? "[data-commit]" : "[data-exact]"; },
       done: function () { return tourPaid && !payOpen(); } },
     // Fronta je vypnutá, nebo už je vydáno: k lístku není co vést.
     { key: "tourS5", sel: function () { return '[data-tab="orders"]'; },
@@ -11977,6 +13195,19 @@
     el.setAttribute("aria-label", till ? T("evSwitchAria", name) : name);
   }
 
+  // Role v hlavičce s tečkou spojení, stavem EET a pasem na akci.
+  function paintRole() {
+    var roleTxt = state.mode === "vydej" ? T("roleVydej") : T("roleKasa");
+    var roleEl = document.getElementById("topRole");
+    var roleHtml = esc(roleTxt);
+    if (state.pair) {
+      var linkOn = !linkLost() && (nativePeers > 0 || linkFresh());
+      roleHtml += '<i class="ldot' + (linkOn ? " on" : "") + '" role="img" aria-label="' + esc(linkText()) + '"></i>';
+    }
+    roleHtml += eetPill() + passPill();
+    if (roleEl.getAttribute("data-h") !== roleHtml) { roleEl.innerHTML = roleHtml; roleEl.setAttribute("data-h", roleHtml); }
+  }
+
   function render(toTop) {
     // žádost o kopii menu čekala, až se zavře otevřený panel
     if (setupAskWaiting && !sheet && state.setup && !tourActive()) {
@@ -11991,15 +13222,7 @@
     // Se spárovaným druhým zařízením nese role v hlavičce tečku spojení:
     // zelená = protějšek se ozývá, červená = objednávky teď nikam nedojdou.
     // Dřív to bylo vidět jen hluboko v Menu.
-    var roleTxt = state.mode === "vydej" ? T("roleVydej") : T("roleKasa");
-    var roleEl = document.getElementById("topRole");
-    var roleHtml = esc(roleTxt);
-    if (state.pair) {
-      var linkOn = !linkLost() && (nativePeers > 0 || linkFresh());
-      roleHtml += '<i class="ldot' + (linkOn ? " on" : "") + '" role="img" aria-label="' + esc(linkText()) + '"></i>';
-    }
-    roleHtml += eetPill();
-    if (roleEl.getAttribute("data-h") !== roleHtml) { roleEl.innerHTML = roleHtml; roleEl.setAttribute("data-h", roleHtml); }
+    paintRole();
     document.getElementById("topLabel").textContent = T("ordersLabel");
     paintTopName();
     document.getElementById("topInfo").textContent = String(waiting);
@@ -13406,7 +14629,8 @@
             "[data-tip],[data-tipother],[data-tipset],[data-taxmode],[data-itx],[data-tipsmode],[data-obtax],[data-obxmas],[data-xmas]," +
             "[data-eetsetup],[data-eetnotme],[data-eetundecide],[data-eetwho],[data-eettmo],[data-eetload],[data-eetenable],[data-eetrm]," +
             "[data-eetoff],[data-eetsend],[data-eettest],[data-eetstat],[data-eetpill],[data-eetrc],[data-eetunlockask],[data-eetunlock]," +
-            "[data-eetrenew],[data-eethide],[data-eetgo],[data-rndmode]";
+            "[data-eetrenew],[data-eethide],[data-eetgo],[data-rndmode]," +
+            "[data-qrset],[data-qrfmt],[data-qrclear],[data-buypass],[data-passauto],[data-passstart],[data-passsheet]";
 
   document.addEventListener("click", function (ev) {
     if (suppressClick) { suppressClick = false; return; }
@@ -13533,7 +14757,7 @@
     }
 
     if (d.cancel || d.scrim) {
-      if (sheet && (sheet.step === "cash" || sheet.step === "card")) {
+      if (sheet && (sheet.step === "cash" || sheet.step === "card" || sheet.step === "qr")) {
         sheet.step = "method"; sheet.received = 0;
       } else if (sheet && sheet.back) {
         sheet = sheet.back;   // údaje prodejce otevřené z dokladu: zpět do dokladu
@@ -13676,6 +14900,8 @@
         // připočtená daň a spropitné jen tam, kde nějaké byly
         if (s.taxOn) { arch.tax = s.tax; }
         if (s.tip) { arch.tip = s.tip; arch.tipCash = s.tipCash; arch.tipCard = s.tipCard; }
+        // QR převodem jen tam, kde nějaký byl; starší verze pole přeskočí
+        if (s.qrOn) { arch.qr = s.qr; if (s.tipQr) { arch.tipQr = s.tipQr; } }
         if (s.rnd) { arch.rnd = s.rnd; }
         state.archives.push(arch);
         // Akce zůstává otevřená (název, menu), jen začíná znovu od nuly:
@@ -14189,7 +15415,9 @@
     if (d.eethide) { state.eet.hideDay = todayKey(); save(); render(); return; }
 
     if (d.backup) {
-      sheet = { step: "text", title: T("backupHead"), body: JSON.stringify(state), backup: true };
+      // pas na akci patří zařízení, do zálohy nejde
+      sheet = { step: "text", title: T("backupHead"), backup: true,
+                body: JSON.stringify(state, function (k, v) { return this === state && k === "pass" ? undefined : v; }) };
       render(); return;
     }
 
@@ -14213,6 +15441,26 @@
     }
 
     if (d.paywall) { sheet = { step: "paywall", reason: d.paywall }; render(); return; }
+    // pas na akci
+    if (d.passsheet) { sheet = { step: "pass" }; render(); return; }
+    if (d.buypass) { billingBuyPass(); return; }
+    if (d.passauto) { state.pass.auto = state.pass.auto === false; save(); render(); return; }
+    if (d.passstart) { askPassStart(); return; }
+    // QR platba převodem: nastavení účtu
+    if (d.qrset) {
+      var qs = state.qr;
+      if (state.currency === "EUR" && !qs.fmt) { qs.fmt = qrKind(); }
+      if (!qs.name && state.seller && state.seller.name) { qs.name = String(state.seller.name).slice(0, 70); }
+      sheet = { step: "qrset" }; save(); render(); return;
+    }
+    if (d.qrfmt) { state.qr.fmt = d.qrfmt === "pbs" ? "pbs" : "epc"; save(); render(); return; }
+    if (d.qrclear) {
+      var qc = T("confirmQrClear");
+      var qback = sheet;
+      ask(qc[0], qc[1], qc[2], function () { state.qr = { acc: "", name: "", bic: "", fmt: "" }; save(); });
+      if (qback && sheet) { sheet.back = qback; }
+      return;
+    }
     if (d.rescue) {
       if (sheet && sheet.step === "paywall" && canRescue()) { rescueBill(); }
       return;
@@ -14265,6 +15513,7 @@
       next.resDay = state.resDay;
       next.graceDay = state.graceDay;
       next.nudgeDay = state.nudgeDay;
+      next.pass = state.pass;
       // EET: klíč a nastavení patří telefonu, záloha přidá neodeslané tržby
       next.eet = eetRestore(state.eet, next.eet);
       state = next;
@@ -14414,6 +15663,18 @@
       return;
     }
 
+    // účet pro QR platby: rovnou do stavu, kontrola a náhled bez překreslení
+    if (el.dataset.qf) {
+      var qmax = { acc: 60, name: 70, bic: 20 }[el.dataset.qf];
+      if (qmax && state.qr) {
+        state.qr[el.dataset.qf] = String(el.value).slice(0, qmax);
+        save();
+        var qlive = document.getElementById("qrLive");
+        if (qlive) { qlive.innerHTML = qrLiveHtml(); }
+      }
+      return;
+    }
+
     if (el.id === "docFrom" || el.id === "docTo") {
       if (sheet && sheet.step === "doc") {
         if (el.id === "docFrom") { sheet.from = el.value; } else { sheet.to = el.value; }
@@ -14531,6 +15792,9 @@
   setInterval(function () {
     if ((view === "menu" || state.pair) && !sheet) { render(); }
   }, 30000);
+  // pas na akci: zbývající čas v hlavičce a konec pasu
+  passTick();
+  setInterval(passTick, 60000);
 
   document.addEventListener("change", function (ev) {
     var el = ev.target;

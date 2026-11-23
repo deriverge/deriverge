@@ -1,7 +1,7 @@
 # Tapkasa, pokladna do kapsy
 
 Pokladna pro prodej na stánku, trhu nebo akci, barevné karty položek, platba
-hotově či kartou, fronta objednávek, přehled tržby. Jeden soubor, žádný backend,
+hotově, kartou nebo QR převodem, fronta objednávek, přehled tržby. Jeden soubor, žádný backend,
 žádná registrace. Dřívější „Kasa na stánek“, rozšířená na produkt pro App Store
 a Google Play (nativní obal je v `../mobile/`, podklady pro obchody v `../store/`).
 
@@ -33,6 +33,8 @@ instalace úvod nikdy neuvidí.
   zařízení zdarma, objednávky ale začne brát až po pozdravu od zařízení s Pro
   (platí 30 dní, každý další pozdrav ho prodlouží). Stánku tak stačí jedno
   předplatné a dvě zařízení zdarma se spolu nespárují.
+- **Pas na akci** (od 1.3.0): jednorázový spotřebovatelný nákup
+  `tapkasa.pass.event72` (99 Kč / 3,99 € / 2,99 $), viz kapitola níže.
 - Paywall ukazuje 14denní zkušební dobu jen tomu, kdo na ni má nárok
   (z RevenueCat, viz `../mobile/billing.js`).
 - Instalace z doby před tarify (mají prodeje, archiv nebo párování) dostávají
@@ -46,7 +48,8 @@ instalace úvod nikdy neuvidí.
 1. **Prodej**: klepnutím na kartu přidáte kus, podržením jeden kus uberete
    (karta při držení plní pruh). `+ Jiná částka` otevře klávesnici, u měn
    s haléři/centy se ťuká v setinách (125 → 1,25 €). Souhrn dole rozbalí účet.
-2. **Zaplatit**: částka a dvě tlačítka. U *Hotově* naťukáte přijaté peníze
+2. **Zaplatit**: částka a dvě tlačítka (s nastaveným účtem pro QR platby
+   tři, viz QR platba převodem). U *Hotově* naťukáte přijaté peníze
    (bankovky podle zvolené měny) a aplikace spočítá vrácení; nedoplatek chce
    druhé, výslovné potvrzení. Částka k vrácení zůstane i v hlášce po zaplacení.
    S připočtenou daní ukáže účet i okno placení mezisoučet, daň a celkem.
@@ -62,7 +65,7 @@ instalace úvod nikdy neuvidí.
    je pořád vidět počet čekajících. Kdo vydává zboží hned při placení, frontu
    v Menu vypne (jen kasa bez spárovaného výdeje) a účty se ukládají rovnou
    jako vydané.
-4. **Přehled**: tržba, rozpad hotově/kartou, prodané kusy, účtenky (posledních
+4. **Přehled**: tržba, rozpad hotově/kartou (a QR převodem, když nějaký byl), prodané kusy, účtenky (posledních
    100, starší na tlačítko; z jiného dne s datem), `Uzavřít akci` archivuje
    a vynuluje. `Souhrn tržeb (PDF)` sestaví souhrn
    za zvolené období (s údaji prodejce a rozpisem DPH; jde poslat e-mailem,
@@ -74,7 +77,7 @@ instalace úvod nikdy neuvidí.
    položka dostane první volnou ze 14 barev, nebo vlastní barva z kolečka;
    Enter vede z názvu na cenu a na další řádek), pak fronta, údaje prodejce,
    daň, spropitné, role zařízení (Kasa/Výdej) s párováním a hlasem, jazyk,
-   měna, záloha dat. Daň: „Ceny zahrnují daň“ (výchozí; plátce DPH zadává
+   měna, záloha dat; u koruny a eura účet pro QR platby. Daň: „Ceny zahrnují daň“ (výchozí; plátce DPH zadává
    sazby u položek a souhrn rozpočítá základ a daň), nebo „Daň se připočte
    při placení“ s jednou sazbou na zařízení (až tři desetinná místa); u položky
    jde daň vypnout tlačítkem vedle ceny, vratné zálohy se nedaní, dokud je
@@ -166,6 +169,72 @@ prostředí, ostrý do produkčního.
   s potvrzením převzetí až po uložení nového klíče; když nevyjde
   (CORS, síť), návod na ruční vydání v DIS+.
 
+## QR platba převodem (od 1.3.0)
+
+Třetí způsob platby vedle hotovosti a karty, jen u koruny a eura a jen na
+kase. Zákazník naskenuje kód z telefonu prodejce ve své bankovní aplikaci,
+ta předvyplní účet, částku, zprávu (název akce a číslo účtenky) a u koruny
+variabilní symbol (číslo účtenky). Peníze jdou přímo na účet prodejce.
+Automatické ověření není: prodejce platbu potvrdí tlačítkem Zaplaceno, Zpět
+vrací volbu způsobu platby a účet zůstává.
+
+- **Formáty**: CZK → QR Platba (SPAYD 1.0: `ACC`, `AM`, `CC`, `X-VS`, `MSG`
+  do 60 znaků, `RN` do 35); EUR se slovenským formátem → PAY by square
+  (pole oddělená tabulátorem, CRC32, LZMA1 lc 3 lp 0 pb 2, base32hex;
+  hlavička verze 1.1.0 se jménem příjemce, které 1.2.0 vyžaduje); EUR jinde
+  → EPC QR / GiroCode (verze 002, UTF-8, BIC nepovinný). Zpráva a jméno
+  u SPAYD a PAY by square jsou bez diakritiky.
+- **LZMA**: vlastní minimální kodér (`lzmaRaw`) zapisuje jen literály
+  a značku konce proudu; je to platný proud LZMA, ověřený Pythonem
+  (`lzma`, FORMAT_RAW) a knihovnou `bysquare`. Bez cizí knihovny.
+- **Generátor QR** (`qrMatrix`) umí od 1.3.0 verze 1 až 40 a alfanumerický
+  režim (PAY by square); úroveň opravy chyb M. Odkazy do obchodů vycházejí
+  modul po modulu stejně jako dřív.
+- **Nastavení** v Menu (sekce QR platba převodem): číslo účtu
+  (`[předčíslí-]číslo/kód banky`, kontrolní součty modulo 11, převod na
+  IBAN; u slovenského formátu i slovenské tuzemské číslo) nebo IBAN
+  (délka podle země, modulo 97), jméno příjemce (povinné u eura), u EPC
+  BIC, u eura volba Slovensko / eurozóna. Náhled kódu na nejmenší částku.
+  Ve stavu `state.qr` (`acc`, `name`, `bic`, `fmt`), jde do zálohy dat
+  a s kopií údajů prodejce i na spárované zařízení.
+- **Účtenka** nese `method: "qr"`; přehled, text souhrnu, PDF, uzávěrka
+  (`qr`, `tipQr` v archivu) a archiv ho ukazují zvlášť. Párovací zprávy
+  posílají QR jako `method: "card"` s `pm: "qr"`: verze 1.2.0 a starší by
+  neznámý způsob změnily na hotovost a hotovost v kase by nesouhlasila;
+  `mergeSale` způsob platby nepřebírá, takže ho vrácená účtenka od starší
+  verze nepřepíše. Záloha z 1.3.0 obnovená ve starší verzi ukáže QR jako
+  hotovost (součet tržby sedí).
+- **EET**: QR platba na místě je evidovaná tržba (bezhotovostní, „platba
+  QR kódem“ podle příručky EET 2.0). Datová zpráva způsob platby nenese,
+  `eetSale` eviduje každý zaplacený účet bez ohledu na způsob, tedy i QR
+  (částka včetně spropitného).
+
+## Pas na akci (od 1.3.0)
+
+Jednorázový spotřebovatelný nákup `tapkasa.pass.event72`: kredit, který po
+spuštění odemkne Pro na 72 hodin na tomto zařízení (neomezené platby,
+vytvoření párovacího kódu). Nespuštěný kredit nevyprší, nic se neobnovuje.
+Nabízí se hlavně u denního limitu (dlaždice nad předplatným) a v obrazovce
+Pro (pod předplatným); na webu se nenabízí, jen odkazy do obchodů.
+
+- Po nákupu se pas podle volby „Spustit hned po nákupu“ (výchozí) spustí,
+  u limitu se rovnou otevře placení; jinak čeká a spustí se v Menu nebo
+  z odznaku v hlavičce (potvrzení, zastavit nejde). Další pas běžící pas
+  prodlouží o 72 hodin.
+- Stav `state.pass`: `tx` (id transakce z obchodu → 0 nevyužitý, jinak čas
+  spuštění), `until`, `hi` (nejpozdější viděný čas, i čas serveru
+  RevenueCat), `auto`. Ukládá se se stavem (localStorage, IndexedDB,
+  soubor aplikace), do zálohy dat se nedává a z ní se nepřebírá. Hodiny
+  posunuté o víc než 10 minut zpět pas pozastaví.
+- Kredity = transakce pasu z `CustomerInfo.nonSubscriptionTransactions`
+  (most `__kasaPass` po startu, návratu do popředí, nákupu a obnově);
+  neznámé id je nový kredit. Po přeinstalaci se nevyužité pasy obnovit
+  spolehlivě nedají: RevenueCat má bez účtu nové anonymní ID, Apple
+  spotřebované nákupy do obnovy nedává a Google Play Billing 8 vrací jen
+  nespotřebované; navíc bez serveru nejde zjistit, které už byly spuštěné.
+- Hlavička: `Pas 71 h` během pasu, `Pas ×2` s nevyužitými pasy (kasa bez
+  předplatného). Konec pasu ohlásí hláška a limit platí znovu.
+
 ## Data
 
 Tři nezávislé kopie: `localStorage` (`kavakasa.v1`), IndexedDB (`kavakasa`)
@@ -176,7 +245,9 @@ uzavřených akcí má od 1.0.6 vlastní kopii (`kavakasa.v1.arch`, IndexedDB
 nese `archIds`. Ukládání se odkládá o 400 ms, zaplacení, uzávěrka, obnova
 zálohy a skrytí aplikace se ukládají hned. Migrace stavů zvládá všechny
 starší verze, stav z 1.0.5 se navíc jednou odloží do IndexedDB (`pre106`).
-Menu → **Záloha dat** vypíše/načte celý stav jako text nebo soubor.
+Menu → **Záloha dat** vypíše/načte celý stav jako text nebo soubor. Licence,
+denní počítadlo a pas na akci při obnově zůstávají zařízení; pas se do
+zálohy ani nezapisuje.
 
 ## Offline
 
