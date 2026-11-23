@@ -602,7 +602,9 @@
   .ob-langs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:7px}
   .ob-langs button{padding:10px 4px;border:1px solid var(--rule);border-radius:var(--r-btn);background:var(--surface);font-size:13px;font-weight:600}
   .ob-langs button.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
-  .ob-curs{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:7px;max-height:132px;overflow-y:auto;padding-bottom:2px}
+  /* Celý seznam měn, stránka se posouvá jako celek: okénko se třemi řádky
+     a vlastním posuvem se na telefonu špatně ovládalo. */
+  .ob-curs{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:7px;padding-bottom:2px}
   .ob-curs button{padding:10px 2px;border:1px solid var(--rule);border-radius:var(--r-btn);background:var(--surface);font-family:var(--mono);font-size:13px;font-weight:700;color:var(--ink-2)}
   .ob-curs button.on{background:var(--ink);color:var(--paper);border-color:var(--ink)}
   .ob-how{display:flex;flex-direction:column;gap:14px;margin-top:4px}
@@ -614,6 +616,14 @@
   .ob-spacer{flex:1;min-height:22px}
   .ob .btn-done{margin-top:10px}
   .ob .btn-ghost{margin-top:8px}
+  /* Tlačítka úvodu drží u spodního okraje i na malém telefonu, kde se
+     obsah nevejde na výšku; dřív byla schovaná pod ohybem. */
+  .ob-foot{position:sticky;bottom:0;margin:0 -24px calc(-1 * (var(--safe-b) + 24px));
+    padding:4px 24px calc(var(--safe-b) + 18px);
+    background:linear-gradient(to bottom,rgba(251,250,247,0),var(--paper) 16px)}
+  .ob-back{align-self:flex-start;margin:-14px 0 12px -6px;padding:10px 8px;border:0;background:none;
+    color:var(--ink-2);font-size:14px;font-weight:600;display:flex;align-items:center;gap:6px}
+  .ob-back svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
 
   /* ---------- fronta objednávek ---------- */
   .tickets{display:flex;flex-direction:column;gap:10px;padding:14px 16px 20px}
@@ -950,7 +960,7 @@
     tourS6: "Otevřete lístek a ťukněte na Vydáno.",
     tourS7: "V Přehledu vidíte tržbu; odtud se dělá i souhrn tržeb do PDF.",
     tourS8: "Otevřete Menu.",
-    tourS9: "Tady vyplňte údaje prodejce, tisknou se na souhrn tržeb.",
+    tourS9: "Tady přepište ukázkové položky a ceny na své. Barvu změníte čtverečkem vlevo.",
     tourSkip: "Přeskočit",
     tourNeedsItems: "Průvodce vás provede prodejem, nejdřív ale přidejte do menu aspoň jednu položku.",
     tourDoneToast: "Hotovo! Umíte všechno podstatné.",
@@ -1370,7 +1380,7 @@
     tourS6: "Open the order and tap Served.",
     tourS7: "Stats shows your revenue; the PDF sales summary lives here too.",
     tourS8: "Open Menu.",
-    tourS9: "Fill in your seller details here, they print on the sales summary.",
+    tourS9: "Replace the sample items and prices with your own here. The square on the left changes the colour.",
     tourSkip: "Skip",
     tourNeedsItems: "The tour walks you through a sale, so add at least one item to the menu first.",
     tourDoneToast: "Done! You know everything that matters.",
@@ -1791,7 +1801,7 @@
     tourS6: "Otvorte lístok a ťuknite na Vydané.",
     tourS7: "V Prehľade vidíte tržbu; odtiaľ sa robí aj súhrn tržieb do PDF.",
     tourS8: "Otvorte Menu.",
-    tourS9: "Tu vyplňte údaje predajcu, tlačia sa na súhrn tržieb.",
+    tourS9: "Tu prepíšte ukážkové položky a ceny na svoje. Farbu zmeníte štvorčekom vľavo.",
     tourSkip: "Preskočiť",
     tourNeedsItems: "Sprievodca vás prevedie predajom, najskôr však pridajte do menu aspoň jednu položku.",
     tourDoneToast: "Hotovo! Ovládate všetko podstatné.",
@@ -2211,7 +2221,7 @@
     tourS6: "Öffnen Sie die Bestellung und tippen Sie auf Ausgegeben.",
     tourS7: "Die Übersicht zeigt den Umsatz; hier entsteht auch der Umsatzbericht als PDF.",
     tourS8: "Öffnen Sie das Menü.",
-    tourS9: "Tragen Sie hier die Verkäuferdaten ein, sie stehen auf dem Umsatzbericht.",
+    tourS9: "Ersetzen Sie hier die Beispielartikel und Preise durch Ihre eigenen. Die Farbe ändern Sie über das Quadrat links.",
     tourSkip: "Überspringen",
     tourNeedsItems: "Der Rundgang führt Sie durch einen Verkauf. Legen Sie dafür zuerst mindestens einen Artikel im Menü an.",
     tourDoneToast: "Fertig! Sie kennen jetzt alles Wichtige.",
@@ -2631,7 +2641,7 @@
     tourS6: "Ouvrez la commande et touchez Servie.",
     tourS7: "Le Bilan montre la recette ; le récapitulatif des ventes en PDF se fait ici.",
     tourS8: "Ouvrez le Menu.",
-    tourS9: "Renseignez ici les coordonnées du vendeur, elles figurent sur le récapitulatif.",
+    tourS9: "Remplacez ici les articles et les prix d’exemple par les vôtres. Le carré à gauche change la couleur.",
     tourSkip: "Passer",
     tourNeedsItems: "Le guide vous accompagne pour une vente, ajoutez donc d’abord au moins un article au menu.",
     tourDoneToast: "Terminé ! Vous maîtrisez l’essentiel.",
@@ -3051,7 +3061,7 @@
     tourS6: "Abra el pedido y toque Entregado.",
     tourS7: "El Resumen muestra la recaudación; aquí se hace también el resumen de ventas en PDF.",
     tourS8: "Abra el Menú.",
-    tourS9: "Rellene aquí los datos del vendedor, salen en el resumen de ventas.",
+    tourS9: "Sustituya aquí los artículos y precios de ejemplo por los suyos. El cuadrado de la izquierda cambia el color.",
     tourSkip: "Omitir",
     tourNeedsItems: "La guía le acompaña en una venta, así que añada primero al menos un artículo al menú.",
     tourDoneToast: "¡Listo! Ya domina lo esencial.",
@@ -3471,7 +3481,7 @@
     tourS6: "Aprite la comanda e toccate Servito.",
     tourS7: "Incassi mostra l’incasso; qui si fa anche il riepilogo vendite in PDF.",
     tourS8: "Aprite il Menu.",
-    tourS9: "Compilate qui i dati del venditore, finiscono sul riepilogo.",
+    tourS9: "Sostituite qui gli articoli e i prezzi di esempio con i vostri. Il quadratino a sinistra cambia il colore.",
     tourSkip: "Saltare",
     tourNeedsItems: "La guida vi accompagna in una vendita, quindi aggiungete prima almeno un articolo al menu.",
     tourDoneToast: "Fatto! Sapete tutto l’essenziale.",
@@ -3891,7 +3901,7 @@
     tourS6: "Proszę otworzyć bon i stuknąć Wydano.",
     tourS7: "Utarg pokazuje sprzedaż; tu też robi się podsumowanie w PDF.",
     tourS8: "Proszę otworzyć Menu.",
-    tourS9: "Tu wypełnij dane sprzedawcy, trafią na podsumowanie.",
+    tourS9: "Tutaj można zastąpić przykładowe pozycje i ceny własnymi. Kwadrat po lewej zmienia kolor.",
     tourSkip: "Pominąć",
     tourNeedsItems: "Przewodnik przeprowadza przez sprzedaż, najpierw trzeba dodać do menu co najmniej jedną pozycję.",
     tourDoneToast: "Gotowe! To już wszystko, co najważniejsze.",
@@ -4311,7 +4321,7 @@
     tourS6: "Abra o pedido e toque em Entregue.",
     tourS7: "O Resumo mostra a receita; o resumo de vendas em PDF faz-se aqui.",
     tourS8: "Abra o Menu.",
-    tourS9: "Preencha aqui os dados do vendedor, saem no resumo de vendas.",
+    tourS9: "Substitua aqui os artigos e preços de exemplo pelos seus. O quadrado à esquerda muda a cor.",
     tourSkip: "Saltar",
     tourNeedsItems: "O guia acompanha-o numa venda, por isso adicione primeiro pelo menos um artigo ao menu.",
     tourDoneToast: "Pronto! Já domina o essencial.",
@@ -9338,6 +9348,8 @@
   function renderOnboard() {
     if (state.setup) { return ""; }
     var h = '<div class="ob"><div class="ob-in">' +
+      // z druhého kroku jde zpět k jazyku a měně (iPhone tlačítko Zpět nemá)
+      (obStep > 1 ? '<button class="ob-back" data-obback="1">' + SVG.back + esc(T("back")) + "</button>" : "") +
       '<div class="ob-mark"><i style="background:#D6402A"></i><i style="background:#F5CE3E"></i><i style="background:#2158C4"></i><i style="background:#127A4E"></i></div>' +
       "<h1>Tapkasa</h1>" +
       '<p class="tag">' + esc(T("obTagline")) + "</p>";
@@ -9354,7 +9366,7 @@
       });
       h += "</div>" +
         '<div class="ob-spacer"></div>' +
-        '<button class="btn-done" data-obnext="1">' + esc(T("obNext")) + "</button>";
+        '<div class="ob-foot"><button class="btn-done" data-obnext="1">' + esc(T("obNext")) + "</button></div>";
     } else {
       h += '<div class="ob-how" style="margin-top:26px">' +
         '<div class="ob-row"><i style="background:#D6402A">' + ICON.sell + "</i><p>" + esc(T("obHow1")) + "</p></div>" +
@@ -9366,8 +9378,8 @@
       // poctivé vymezení: nejde o fiskální pokladnu (EET, eKasa, TSE…)
       '<p class="ob-note">' + esc(T("obFiscal")) + "</p>" +
       '<div class="ob-spacer"></div>' +
-      '<button class="btn-done" data-obdemo="1">' + esc(T("obDemo")) + "</button>" +
-      '<button class="btn-ghost" data-obempty="1">' + esc(T("obEmpty")) + "</button>";
+      '<div class="ob-foot"><button class="btn-done" data-obdemo="1">' + esc(T("obDemo")) + "</button>" +
+      '<button class="btn-ghost" data-obempty="1">' + esc(T("obEmpty")) + "</button></div>";
     }
     return h + "</div></div>";
   }
@@ -9377,12 +9389,20 @@
   // a krok se splní až tím, že to uživatel opravdu udělá. Žádné obrázky
   // vedle reality, průvodce běží nad živou aplikací.
   var tourIx = -1, tourRaf = 0, tourScrolledFor = -1, tourLastKey = "", tourLastBox = "";
+  var tourEntered = -1, tourBase = 0, tourEdited = false;
 
   var TOUR = [
     { key: "tourS1", sel: function () { return ".prod"; },
       done: function () { return state.order.length > 0; } },
+    // Stačí ubrat jeden kus. Dřív krok čekal na prázdný účet, a kdo předtím
+    // ťukl dvakrát, držel kartu a průvodce se nehnul.
     { key: "tourS1b", sel: function () { return ".prod"; },
-      done: function () { return state.order.length === 0; } },
+      enter: function () { tourBase = orderCount(); },
+      done: function () {
+        var n = orderCount();
+        if (n > tourBase) { tourBase = n; }   // mezitím přibyl další kus
+        return !state.order.length || n < tourBase;
+      } },
     { key: "tourS1c", sel: function () { return ".prod"; },
       done: function () { return state.order.length > 0; } },
     { key: "tourS2", sel: function () { return "[data-pay]"; },
@@ -9400,8 +9420,12 @@
       done: function () { return view === "history"; } },
     { key: "tourS8", sel: function () { return '[data-tab="menu"]'; },
       done: function () { return view === "menu"; } },
-    { key: "tourS9", sel: function () { return "[data-sellersheet]"; },
-      done: function () { return !!sheet && sheet.step === "seller"; } }
+    // Poslední krok ukáže, kde si člověk přepíše ukázkové menu na své. Dřív
+    // průvodce končil ve formuláři s údaji prodejce a k vlastním položkám,
+    // bez kterých se prodávat nedá, nedovedl.
+    { key: "tourS9", sel: function () { return ".edit"; }, last: true,
+      enter: function () { tourEdited = false; },
+      done: function () { return tourEdited; } }
   ];
 
   // Aktivitu řídí jen tourIx; příznak tourDone rozhoduje pouze o automatickém
@@ -9418,6 +9442,7 @@
       return;
     }
     tourIx = 0;
+    tourEntered = -1;
     tourScrolledFor = -1;
     view = "sell";
     sheet = null;
@@ -9448,7 +9473,14 @@
   function tourTick() {
     if (!tourActive()) { return; }
     var guard = 0;
-    while (tourActive() && TOUR[tourIx].done() && guard++ < TOUR.length) { tourIx += 1; }
+    while (tourActive() && guard++ < TOUR.length * 2) {
+      if (tourEntered !== tourIx) {
+        tourEntered = tourIx;
+        if (TOUR[tourIx].enter) { TOUR[tourIx].enter(); }
+      }
+      if (!TOUR[tourIx].done()) { break; }
+      tourIx += 1;
+    }
     if (tourIx >= TOUR.length) { tourEnd(true); }
   }
 
@@ -9473,6 +9505,10 @@
     var card = layer.querySelector(".tour-card");
     layer.querySelector(".tour-n").textContent = (tourIx + 1) + "/" + TOUR.length;
     layer.querySelector(".tour-t").textContent = T(TOUR[tourIx].key);
+    // poslední krok se nepřeskakuje, ale potvrzuje
+    var skipBtn = layer.querySelector(".tour-skip");
+    var skipText = TOUR[tourIx].last ? T("done") : T("tourSkip");
+    if (skipBtn && skipBtn.textContent !== skipText) { skipBtn.textContent = skipText; }
 
     var el = null;
     try { el = document.querySelector(TOUR[tourIx].sel()); } catch (e) {}
@@ -9693,7 +9729,7 @@
             "[data-ticket],[data-line],[data-serve],[data-reopen],[data-drop],[data-col],[data-setcol],[data-applycustom],[data-mode],[data-voice],[data-voicetest],"+
             "[data-paircreate],[data-pairjoin],[data-pairoff],[data-resync],[data-relaytest],[data-setupimport]," +
             "[data-tourskip],[data-tourstart],[data-offlinehelp],[data-country],[data-docmail],[data-docshare],[data-docsave],[data-sellersheet],[data-archopen],[data-archdel],[data-vatmode],[data-langsheet],[data-cursheet],[data-setlang],[data-setcur],[data-paywall],[data-buy]," +
-            "[data-restorebuy],[data-oblang],[data-obcur],[data-obnext],[data-obdemo],[data-obempty]," +
+            "[data-restorebuy],[data-oblang],[data-obcur],[data-obnext],[data-obback],[data-obdemo],[data-obempty]," +
             "[data-evsheet],[data-evswitch],[data-evnew],[data-evcreate],[data-evdel],[data-cvat],[data-backupfile]," +
             "[data-diag],[data-shortok],[data-rescue],[data-nudgehide],[data-sign],[data-adddep]";
 
@@ -10232,7 +10268,7 @@
       return;
     }
 
-    if (d.tourskip) { tourEnd(false); return; }
+    if (d.tourskip) { tourEnd(tourActive() && !!TOUR[tourIx].last); return; }
     if (d.tourstart) { tourStart(true); return; }
 
     if (d.offlinehelp) { sheet = { step: "offhelp" }; render(); return; }
@@ -10304,7 +10340,8 @@
     // ---- onboarding ----
     if (d.oblang) { state.lang = d.oblang; moneyFmt = null; nfPlain = null; save(); render(); return; }
     if (d.obcur) { setCurrency(d.obcur); save(); render(); return; }
-    if (d.obnext) { obStep = 2; render(); return; }
+    if (d.obnext) { obStep = 2; render(); var obEl = document.querySelector(".ob"); if (obEl) { obEl.scrollTop = 0; } return; }
+    if (d.obback) { obStep = 1; render(); return; }
     if (d.obdemo || d.obempty) {
       state.items = d.obdemo ? defaultItems() : [];
       state.event = T("demoEvent");
