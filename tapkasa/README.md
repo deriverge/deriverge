@@ -6,7 +6,7 @@ hotově či kartou, fronta objednávek, přehled tržby. Jeden soubor, žádný 
 a Google Play (nativní obal je v `../mobile/`, podklady pro obchody v `../store/`).
 
 Webová verze běží na `https://www.deriverge.com/tapkasa/`. Aktuální verze
-aplikace: **1.0.6**.
+aplikace: **1.0.9**.
 
 ## První spuštění
 
@@ -41,20 +41,34 @@ existující instalace úvod nikdy neuvidí.
    s haléři/centy se ťuká v setinách (125 → 1,25 €). Souhrn dole rozbalí účet.
 2. **Zaplatit**: částka a dvě tlačítka. U *Hotově* naťukáte přijaté peníze
    (bankovky podle zvolené měny) a aplikace spočítá vrácení; nedoplatek chce
-   druhé, výslovné potvrzení.
+   druhé, výslovné potvrzení. Částka k vrácení zůstane i v hlášce po zaplacení.
 3. **Objednávky**: zaplacený účet se zařadí do fronty s číslem; položky se
-   odškrtávají, `Vydáno` uzavře. V hlavičce je pořád vidět počet čekajících.
-4. **Přehled**: tržba, rozpad hotově/kartou, prodané kusy, účtenky,
-   `Uzavřít akci` archivuje a vynuluje. `Souhrn tržeb (PDF)` sestaví souhrn
+   odškrtávají, `Vydáno` uzavře, od dvou čekajících jde `Vydat vše`. V hlavičce
+   je pořád vidět počet čekajících. Kdo vydává zboží hned při placení, frontu
+   v Menu vypne (jen kasa bez spárovaného výdeje) a účty se ukládají rovnou
+   jako vydané.
+4. **Přehled**: tržba, rozpad hotově/kartou, prodané kusy, účtenky (posledních
+   100, starší na tlačítko; z jiného dne s datem), `Uzavřít akci` archivuje
+   a vynuluje. `Souhrn tržeb (PDF)` sestaví souhrn
    za zvolené období (s údaji prodejce a rozpisem DPH; jde poslat e-mailem,
    sdílet, uložit nebo zkopírovat). Není to daňový doklad ani účtenka pro
    zákazníka, Tapkasa není fiskální pokladna.
-5. **Menu**: role zařízení (Kasa/Výdej), název akce, položky (ceny podle
-   měny, 14 barev nebo vlastní barva z kolečka), párování, jazyk, měna, záloha dat.
+5. **Menu**: na kase nejdřív název akce a položky (ceny podle měny, nová
+   položka dostane první volnou ze 14 barev, nebo vlastní barva z kolečka;
+   Enter vede z názvu na cenu a na další řádek), pak fronta, údaje prodejce,
+   role zařízení (Kasa/Výdej) s párováním a hlasem, jazyk, měna, záloha dat.
+   Poděkování nahlas na kase a čtení objednávek na výdeji mají každé vlastní
+   přepínač; poděkování je u nové instalace vypnuté.
+
+Angličtina s dolarem dostane americké výrazy (Register, sales tax, color,
+ZIP code, booth); jinak platí britský slovník. Čas se píše podle jazyka
+zařízení (v USA „4:27 PM“).
 
 ## Dvě zařízení
 
 Role se přepíná v Menu: **Kasa** účtuje, **Výdej** jen odškrtává frontu.
+Se spárovaným druhým zařízením má role v hlavičce tečku: zelená, když se
+protějšek ozývá, červená, když objednávky teď nikam nedojdou.
 Když se výdej přepne zpátky na kasu, účtenky cizí kasy se odloží stranou
 (`state.held`) a do tržby se nepočítají; při návratu na výdej se vrátí do fronty.
 
