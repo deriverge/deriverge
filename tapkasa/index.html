@@ -533,6 +533,10 @@
   .pw-plan .s{font-size:11px;color:var(--ink-3)}
   .pw-plan .tr{margin-top:4px;font-size:12px;font-weight:600;line-height:1.3;color:var(--cash);text-align:center}
   .pw-plan.best{border-color:var(--accent);background:var(--accent-tint)}
+  .pw-plan .go{margin-top:9px;padding:8px 16px;border-radius:999px;background:var(--ink);color:var(--paper);font-size:13px;font-weight:700;line-height:1.2;text-align:center}
+  .pw-plan.best .go{background:var(--accent);color:#fff}
+  .pw-try{margin:8px 0 0;text-align:center;font-size:15px;line-height:1.4;font-weight:700;color:var(--cash)}
+  .pw-webprice{margin:16px 0 0;text-align:center;font-size:13px;line-height:1.45;color:var(--ink-2)}
   .pw-plan:active{transform:scale(.98)}
   /* limit vyčerpaný a koupit nejde: dokončení účtu, bez strašení */
   .pw-rescue{margin-top:14px;padding:12px;border:1px dashed var(--rule);border-radius:var(--r-tile);background:var(--paper)}
@@ -1176,8 +1180,8 @@
     billFail: "Nákup se nepodařil (kód {0}). Zkuste to prosím znovu.",
     proPitch: "Neomezené platby a propojená zařízení.",
     proB1: "Neomezený počet plateb každý den",
-    proB2: "Propojení pokladny s dalšími zařízeními",
-    proB3: "Podpoříte další vývoj aplikace",
+    proB2: "Druhý telefon nebo tablet jako výdej objednávek",
+    proB3: "Pro stačí na kase, výdej se připojí zdarma",
     proMonthly: "Měsíčně",
     proYearly: "Ročně",
     proPerMonth: "{0} / měsíc",
@@ -1199,7 +1203,7 @@
     proWall: "Denní limit {0} plateb zdarma je vyčerpaný. S Tapkasa Pro účtujete bez omezení.",
     proPairWall: "Propojení více zařízení je součást Tapkasa Pro.",
     proJoinFree: "Připojit se ke kódu jde i zdarma. Pro potřebuje jen zařízení, které kód vytváří.",
-    freeBadge: "{0}/{1} dnes",
+    freeBadge: "zdarma {0}/{1}",
     langHead: "Jazyk",
     currencyHead: "Měna",
     currencyHint: "Ovlivní jen zobrazování a rychlé bankovky. Uložené ceny se nepřepočítávají.",
@@ -1311,6 +1315,9 @@
     queueHint: "Vydáváte zboží hned při placení? Frontu vypněte a zaplacené účty se uloží rovnou jako vydané. Když objednávky připravujete nebo je vydává druhé zařízení, nechte ji zapnutou.",
     queueTip: "Vydáváte hned při placení? Frontu vypnete v {0}.",
     storeFail: "Data se nedaří uložit do zařízení. Udělejte si hned zálohu ({0} › {1}).",
+    webPrice: "Cenu ve vaší měně ukáže obchod ještě před potvrzením.",
+    proChoose: "Vybrat",
+    proTryRow: "Vyzkoušet Pro {0} zdarma",
   };
 
   I18N.en = {
@@ -1604,8 +1611,8 @@
     billFail: "The purchase failed (code {0}). Please try again.",
     proPitch: "Unlimited payments and connected devices.",
     proB1: "Unlimited payments every day",
-    proB2: "Pair the till with more devices",
-    proB3: "You support further development",
+    proB2: "A second phone or tablet as the order counter",
+    proB3: "Only the till needs Pro, the counter joins free",
     proMonthly: "Monthly",
     proYearly: "Yearly",
     proPerMonth: "{0} / month",
@@ -1627,7 +1634,7 @@
     proWall: "Today’s limit of {0} free payments is used up. With Tapkasa Pro you charge without limits.",
     proPairWall: "Connecting more devices is part of Tapkasa Pro.",
     proJoinFree: "Joining with a code is free. Only the device that creates the code needs Pro.",
-    freeBadge: "{0}/{1} today",
+    freeBadge: "free {0}/{1}",
     langHead: "Language",
     currencyHead: "Currency",
     currencyHint: "Affects display and quick cash buttons only. Stored prices are not converted.",
@@ -1741,6 +1748,9 @@
     queueHint: "Do you hand over the goods as you take payment? Turn the queue off and paid orders are saved as served straight away. Keep it on if you prepare orders or a second device hands them out.",
     queueTip: "Handing goods over as you take payment? Turn the queue off in {0}.",
     storeFail: "Your data can’t be saved on this device. Make a backup now ({0} › {1}).",
+    webPrice: "The store shows the price in your currency before you confirm.",
+    proChoose: "Choose",
+    proTryRow: "Try Pro free for {0}",
   };
 
   // ==== strojově vkládané překlady (gen-i18n.cjs) ====
@@ -2037,8 +2047,8 @@
     billFail: "Nákup sa nepodaril (kód {0}). Skúste to, prosím, znova.",
     proPitch: "Neobmedzené platby a prepojené zariadenia.",
     proB1: "Neobmedzený počet platieb každý deň",
-    proB2: "Prepojenie pokladne s ďalšími zariadeniami",
-    proB3: "Podporíte ďalší vývoj aplikácie",
+    proB2: "Druhý telefón alebo tablet ako výdaj objednávok",
+    proB3: "Pro stačí na kase, výdaj sa pripojí zadarmo",
     proMonthly: "Mesačne",
     proYearly: "Ročne",
     proPerMonth: "{0} / mesiac",
@@ -2060,7 +2070,7 @@
     proWall: "Denný limit {0} platieb zadarmo je vyčerpaný. S Tapkasa Pro účtujete bez obmedzení.",
     proPairWall: "Prepojenie viacerých zariadení je súčasťou Tapkasa Pro.",
     proJoinFree: "Pripojiť sa ku kódu môžete aj zadarmo. Pro potrebuje len zariadenie, ktoré kód vytvára.",
-    freeBadge: "{0}/{1} dnes",
+    freeBadge: "zadarmo {0}/{1}",
     langHead: "Jazyk",
     currencyHead: "Mena",
     currencyHint: "Ovplyvní len zobrazovanie a rýchle bankovky. Uložené ceny sa neprepočítavajú.",
@@ -2172,6 +2182,9 @@
     queueHint: "Vydávate tovar hneď pri platení? Rad vypnite a zaplatené účty sa uložia rovno ako vydané. Keď objednávky pripravujete alebo ich vydáva druhé zariadenie, nechajte ho zapnutý.",
     queueTip: "Vydávate hneď pri platení? Rad vypnete v {0}.",
     storeFail: "Dáta sa nedarí uložiť do zariadenia. Urobte si hneď zálohu ({0} › {1}).",
+    webPrice: "Cenu vo vašej mene ukáže obchod ešte pred potvrdením.",
+    proChoose: "Vybrať",
+    proTryRow: "Vyskúšať Pro {0} zadarmo",
   };
 
   I18N.de = {
@@ -2467,8 +2480,8 @@
     billFail: "Der Kauf ist fehlgeschlagen (Code {0}). Bitte erneut versuchen.",
     proPitch: "Unbegrenzte Zahlungen und gekoppelte Geräte.",
     proB1: "Jeden Tag unbegrenzt viele Zahlungen",
-    proB2: "Kasse mit weiteren Geräten koppeln",
-    proB3: "Sie unterstützen die Weiterentwicklung der App",
+    proB2: "Zweites Handy oder Tablet als Ausgabe",
+    proB3: "Pro braucht nur die Kasse, die Ausgabe verbindet sich gratis",
     proMonthly: "Monatlich",
     proYearly: "Jährlich",
     proPerMonth: "{0} / Monat",
@@ -2490,7 +2503,7 @@
     proWall: "Das Tageslimit von {0} kostenlosen Zahlungen ist aufgebraucht. Mit Tapkasa Pro kassieren Sie ohne Limit.",
     proPairWall: "Mehrere Geräte zu koppeln ist Teil von Tapkasa Pro.",
     proJoinFree: "Einem Code beitreten ist auch gratis. Pro braucht nur das Gerät, das den Code erstellt.",
-    freeBadge: "{0}/{1} heute",
+    freeBadge: "gratis {0}/{1}",
     langHead: "Sprache",
     currencyHead: "Währung",
     currencyHint: "Betrifft nur die Anzeige und die Schnelltasten für Scheine. Gespeicherte Preise werden nicht umgerechnet.",
@@ -2602,6 +2615,9 @@
     queueHint: "Geben Sie die Ware direkt beim Kassieren aus? Dann schalten Sie die Warteschlange aus, bezahlte Bestellungen gelten sofort als ausgegeben. Lassen Sie sie an, wenn Sie Bestellungen zubereiten oder ein zweites Gerät sie ausgibt.",
     queueTip: "Sie geben die Ware direkt beim Kassieren aus? Die Warteschlange lässt sich unter {0} ausschalten.",
     storeFail: "Die Daten lassen sich auf diesem Gerät nicht speichern. Erstellen Sie jetzt ein Backup ({0} › {1}).",
+    webPrice: "Den Preis in Ihrer Währung zeigt der Store vor der Bestätigung.",
+    proChoose: "Wählen",
+    proTryRow: "Pro {0} gratis testen",
   };
 
   I18N.fr = {
@@ -2897,8 +2913,8 @@
     billFail: "L’achat a échoué (code {0}). Veuillez réessayer.",
     proPitch: "Paiements illimités et appareils connectés.",
     proB1: "Paiements illimités chaque jour",
-    proB2: "Connexion de la caisse à d’autres appareils",
-    proB3: "Vous soutenez le développement de l’application",
+    proB2: "Un deuxième téléphone ou une tablette comme comptoir",
+    proB3: "Pro suffit sur la caisse, le comptoir se connecte gratuitement",
     proMonthly: "Mensuel",
     proYearly: "Annuel",
     proPerMonth: "{0} / mois",
@@ -2920,7 +2936,7 @@
     proWall: "La limite de {0} paiements gratuits par jour est atteinte. Avec Tapkasa Pro, vous encaissez sans limite.",
     proPairWall: "La connexion de plusieurs appareils fait partie de Tapkasa Pro.",
     proJoinFree: "Rejoindre avec un code est gratuit : seul l’appareil qui crée le code a besoin de Pro.",
-    freeBadge: "{0}/{1} aujourd’hui",
+    freeBadge: "gratuit {0}/{1}",
     langHead: "Langue",
     currencyHead: "Devise",
     currencyHint: "Ne change que l’affichage et les boutons de billets. Les prix enregistrés ne sont pas convertis.",
@@ -3032,6 +3048,9 @@
     queueHint: "Vous remettez la marchandise dès l’encaissement ? Désactivez la file : les commandes payées sont enregistrées directement comme servies. Laissez-la activée si vous préparez les commandes ou si un deuxième appareil les sert.",
     queueTip: "Vous servez dès l’encaissement ? Désactivez la file dans {0}.",
     storeFail: "Les données ne peuvent pas être enregistrées sur cet appareil. Faites une sauvegarde maintenant ({0} › {1}).",
+    webPrice: "La boutique d’applications affiche le prix dans votre devise avant la confirmation.",
+    proChoose: "Choisir",
+    proTryRow: "Essayer Pro gratuitement pendant {0}",
   };
 
   I18N.es = {
@@ -3327,8 +3346,8 @@
     billFail: "La compra ha fallado (código {0}). Vuelva a intentarlo.",
     proPitch: "Pagos ilimitados y dispositivos conectados.",
     proB1: "Pagos ilimitados cada día",
-    proB2: "Conecte la caja con más dispositivos",
-    proB3: "Apoya el desarrollo de la app",
+    proB2: "Un segundo móvil o tableta para la barra",
+    proB3: "Pro solo hace falta en la caja, la barra se conecta gratis",
     proMonthly: "Mensual",
     proYearly: "Anual",
     proPerMonth: "{0} / mes",
@@ -3350,7 +3369,7 @@
     proWall: "El límite diario de {0} pagos gratis está agotado. Con Tapkasa Pro cobra sin límites.",
     proPairWall: "Conectar varios dispositivos es parte de Tapkasa Pro.",
     proJoinFree: "Conectarse con un código es gratis: Pro solo lo necesita el dispositivo que crea el código.",
-    freeBadge: "{0}/{1} hoy",
+    freeBadge: "gratis {0}/{1}",
     langHead: "Idioma",
     currencyHead: "Moneda",
     currencyHint: "Solo afecta a lo que se muestra y a los billetes rápidos. Los precios guardados no se recalculan.",
@@ -3462,6 +3481,9 @@
     queueHint: "¿Entrega el producto al cobrar? Desactive la cola y las cuentas cobradas se guardan directamente como entregadas. Déjela activada si prepara los pedidos o si los entrega un segundo dispositivo.",
     queueTip: "¿Entrega al cobrar? Desactive la cola en {0}.",
     storeFail: "Los datos no se pueden guardar en este dispositivo. Haga una copia de seguridad ahora ({0} › {1}).",
+    webPrice: "La tienda de aplicaciones muestra el precio en su moneda antes de confirmar.",
+    proChoose: "Elegir",
+    proTryRow: "Probar Pro gratis durante {0}",
   };
 
   I18N.it = {
@@ -3757,8 +3779,8 @@
     billFail: "L’acquisto non è riuscito (codice {0}). Riprovate.",
     proPitch: "Pagamenti illimitati e dispositivi collegati.",
     proB1: "Pagamenti illimitati ogni giorno",
-    proB2: "Collegamento della cassa ad altri dispositivi",
-    proB3: "Sostegno allo sviluppo dell’app",
+    proB2: "Un secondo telefono o tablet come banco",
+    proB3: "Pro serve solo sulla cassa, il banco si collega gratis",
     proMonthly: "Mensile",
     proYearly: "Annuale",
     proPerMonth: "{0} / mese",
@@ -3780,7 +3802,7 @@
     proWall: "Il limite giornaliero di {0} pagamenti gratis è esaurito. Con Tapkasa Pro si incassa senza limiti.",
     proPairWall: "Il collegamento di più dispositivi fa parte di Tapkasa Pro.",
     proJoinFree: "Collegarsi con un codice è gratis: il Pro serve solo al dispositivo che crea il codice.",
-    freeBadge: "{0}/{1} oggi",
+    freeBadge: "gratis {0}/{1}",
     langHead: "Lingua",
     currencyHead: "Valuta",
     currencyHint: "Cambia solo la visualizzazione e i tagli rapidi delle banconote. I prezzi salvati non si riconvertono.",
@@ -3892,6 +3914,9 @@
     queueHint: "Consegnate la merce al momento del pagamento? Disattivate la coda: i conti pagati vengono salvati subito come serviti. Lasciatela attiva se preparate gli ordini o se li consegna un secondo dispositivo.",
     queueTip: "Consegnate subito al pagamento? La coda si disattiva in {0}.",
     storeFail: "Impossibile salvare i dati su questo dispositivo. Fate subito un backup ({0} › {1}).",
+    webPrice: "Lo store mostra il prezzo nella vostra valuta prima della conferma.",
+    proChoose: "Scegliere",
+    proTryRow: "Provare Pro gratis per {0}",
   };
 
   I18N.pl = {
@@ -4187,8 +4212,8 @@
     billFail: "Zakup się nie powiódł (kod {0}). Proszę spróbować ponownie.",
     proPitch: "Płatności bez limitu i połączone urządzenia.",
     proB1: "Płatności bez limitu każdego dnia",
-    proB2: "Połączenie kasy z kolejnymi urządzeniami",
-    proB3: "Wsparcie dalszego rozwoju aplikacji",
+    proB2: "Drugi telefon lub tablet jako wydawka",
+    proB3: "Pro wystarczy na kasie, wydawka łączy się za darmo",
     proMonthly: "Miesięcznie",
     proYearly: "Rocznie",
     proPerMonth: "{0} / miesiąc",
@@ -4210,7 +4235,7 @@
     proWall: "Dzienny limit {0} darmowych płatności wyczerpany. Z Tapkasa Pro można przyjmować płatności bez limitu.",
     proPairWall: "Łączenie kilku urządzeń to część Tapkasa Pro.",
     proJoinFree: "Dołączenie przez kod jest darmowe. Pro jest potrzebne tylko na urządzeniu, które tworzy kod.",
-    freeBadge: "{0}/{1} dziś",
+    freeBadge: "za darmo {0}/{1}",
     langHead: "Język",
     currencyHead: "Waluta",
     currencyHint: "Wpływa tylko na wyświetlanie i szybkie banknoty. Zapisane ceny się nie przeliczają.",
@@ -4322,6 +4347,9 @@
     queueHint: "Towar jest wydawany od razu przy płatności? Po wyłączeniu kolejki opłacone rachunki zapisują się od razu jako wydane. Kolejkę warto zostawić włączoną, gdy zamówienia są przygotowywane albo wydaje je drugie urządzenie.",
     queueTip: "Towar jest wydawany od razu przy płatności? Kolejkę można wyłączyć w {0}.",
     storeFail: "Danych nie można zapisać na tym urządzeniu. Proszę od razu zrobić kopię zapasową ({0} › {1}).",
+    webPrice: "Cenę w wybranej walucie sklep pokazuje przed potwierdzeniem.",
+    proChoose: "Wybrać",
+    proTryRow: "Wypróbować Pro za darmo przez {0}",
   };
 
   I18N.pt = {
@@ -4617,8 +4645,8 @@
     billFail: "A compra falhou (código {0}). Tente novamente.",
     proPitch: "Pagamentos sem limites e dispositivos ligados entre si.",
     proB1: "Pagamentos sem limite todos os dias",
-    proB2: "Emparelhar a caixa com mais dispositivos",
-    proB3: "Apoia o desenvolvimento da app",
+    proB2: "Um segundo telemóvel ou tablet como balcão",
+    proB3: "O Pro só é preciso na caixa, o balcão liga-se grátis",
     proMonthly: "Mensal",
     proYearly: "Anual",
     proPerMonth: "{0} / mês",
@@ -4640,7 +4668,7 @@
     proWall: "O limite diário de {0} pagamentos grátis esgotou. Com o Tapkasa Pro cobra sem limites.",
     proPairWall: "Ligar vários dispositivos faz parte do Tapkasa Pro.",
     proJoinFree: "Ligar por código é grátis: só o dispositivo que cria o código precisa do Pro.",
-    freeBadge: "{0}/{1} hoje",
+    freeBadge: "grátis {0}/{1}",
     langHead: "Idioma",
     currencyHead: "Moeda",
     currencyHint: "Só afeta o que aparece no ecrã e os botões das notas. Os preços guardados não são convertidos.",
@@ -4752,6 +4780,9 @@
     queueHint: "Entrega o produto logo ao receber? Desative a fila e as contas pagas ficam guardadas logo como entregues. Mantenha-a ativa se prepara os pedidos ou se um segundo dispositivo os entrega.",
     queueTip: "Entrega logo ao receber? Desative a fila em {0}.",
     storeFail: "Não é possível guardar os dados neste dispositivo. Faça já uma cópia de segurança ({0} › {1}).",
+    webPrice: "A loja mostra o preço na sua moeda antes da confirmação.",
+    proChoose: "Escolher",
+    proTryRow: "Experimentar o Pro grátis durante {0}",
   };
   // ==== konec vkládaných překladů ====
 
@@ -4993,7 +5024,18 @@
            esc(T(yearly ? "proYearly" : "proMonthly")) + '</span><span class="p num">' + esc(price) + "</span>" +
            '<span class="s">' + esc(T(yearly ? "proPerYear" : "proPerMonth", "")).replace(" / ", "/") + "</span>" +
            (tr ? '<span class="tr">' + esc(T(yearly ? "proTrialThenY" : "proTrialThenM", trialText(tr), price)) + "</span>" : "") +
+           // Dlaždice je zároveň tlačítko nákupu, ale nevypadala tak: pod ní
+           // byla jen „Obnovit nákup“ a „Teď ne“. Výzva na dlaždici říká,
+           // kam ťuknout.
+           '<span class="go">' + esc(tr ? T("nudgeTry") : T("proChoose")) + "</span>" +
            "</button>";
+  }
+
+  // Zkušební doba, kterou smíme nabídnout: v aplikaci jen ta, kterou obchod
+  // potvrdil pro tohoto uživatele; na webu obecných 14 dní (koupě je stejně
+  // až v aplikaci a tam se ukáže skutečná nabídka).
+  function offerTrial() {
+    return trialOf("monthly") || trialOf("yearly") || (nativeApp() ? null : { n: 14, unit: "DAY" });
   }
 
   var PRO_MARK = '<svg viewBox="0 0 48 48" aria-hidden="true"><rect x="4" y="4" width="19" height="19" rx="5" fill="#D6402A"/><rect x="25" y="4" width="19" height="19" rx="5" fill="#F5CE3E"/><rect x="4" y="25" width="19" height="19" rx="5" fill="#2158C4"/><rect x="25" y="25" width="19" height="19" rx="5" fill="#127A4E"/></svg>';
@@ -7657,7 +7699,7 @@
     if (isPro() || state.mode !== "kasa" || state.nudgeDay === todayKey()) { return ""; }
     var used = paymentsToday(), left = freeLeft();
     if (used < NUDGE_AT || left <= 0) { return ""; }
-    var tr = trialOf("monthly") || trialOf("yearly") || (nativeApp() ? null : { n: 14, unit: "DAY" });
+    var tr = offerTrial();
     return '<div class="nudge" role="status"><span class="t"><strong>' + esc(proLeftText(left)) + ".</strong> " +
              esc(tr ? T("nudgeTrial", trialText(tr)) : T("nudgePro")) + "</span>" +
              '<button class="go" data-paywall="nudge">' + esc(tr ? T("nudgeTry") : T("proRow")) + "</button>" +
@@ -8721,14 +8763,23 @@
       return h + '<div class="link on"><i></i>' + SVG.check + esc(T("proActive")) +
              "</div>";
     }
+    var ptr = offerTrial();
+    // Výdej neúčtuje, počítadlo plateb zdarma by tu jen strašilo, že se
+    // platí i za druhé zařízení. Stačí říct, že Pro patří na kasu.
+    if (state.mode === "vydej") {
+      return h + '<div class="link"><i></i>' + esc(T("proFree")) + " · " + esc(T("proB3")) + "</div>";
+    }
     return h + '<div class="link"><i></i>' + esc(T("proFree")) + " · " + esc(proLeftText(freeLeft())) + "</div>" +
-           '<div class="acts" style="padding-top:0"><button class="act on" data-paywall="menu">' + esc(T("proRow")) + "</button></div>";
+           '<div class="acts" style="padding-top:0"><button class="act on" data-paywall="menu">' +
+             esc(ptr ? T("proTryRow", trialText(ptr)) : T("proRow")) + "</button></div>";
   }
 
   // drobný ukazatel zbývajících plateb zdarma v prodejní liště
   function freeCounter() {
     if (isPro()) { return ""; }
-    return ' <span class="fcnt">' + esc(T("freeBadge", paymentsToday(), dailyLimit())) + "</span>";
+    // ťuknutím se dá zjistit, co počítadlo znamená a co nabízí Pro
+    return ' <button class="fcnt" data-paywall="menu" aria-label="' + esc(proLeftText(freeLeft())) + '">' +
+           esc(T("freeBadge", paymentsToday(), dailyLimit())) + "</button>";
   }
 
   // cena do editačního pole: bez zbytečných nul, s tečkou
@@ -9399,12 +9450,17 @@
              esc(sheet.reason === "limit" ? T("proWall", FREE_LIMIT)
                : sheet.reason === "pair" ? T("proPairWall")
                : T("proPitch")) + "</p>" +
+           // zkušební doba je nejsilnější důvod, proč Pro vyzkoušet hned;
+           // dřív byla jen drobným písmem pod cenou
+           (offerTrial() ? '<p class="pw-try">' + esc(T("nudgeTrial", trialText(offerTrial()))) + "</p>" : "") +
            '<div class="pw-list">' +
              '<div class="pw-b">' + PW_CHECK + esc(T("proB1")) + "</div>" +
              '<div class="pw-b">' + PW_CHECK + esc(T("proB2")) + "</div>" +
              '<div class="pw-b">' + PW_CHECK + esc(T("proB3")) + "</div>" +
            "</div>" +
-           '<div class="pw-plans">' + planButton("monthly") + planButton("yearly") + "</div>" +
+           // Na webu se nekupuje a cenu určuje obchod podle země: dřív tu
+           // byly náhradní dolarové ceny, které většině lidí neplatily.
+           (nativeApp() ? '<div class="pw-plans">' + planButton("monthly") + planButton("yearly") + "</div>" : "") +
            // Limit padl a koupit teď nejde: rozpracovaný účet se dokončí.
            // Poprvé s rezervou na zbytek dne, potom už jen tento jeden účet.
            (sheet.reason === "limit" && canRescue()
@@ -9414,7 +9470,8 @@
                '<p class="pw-rnote">' + esc(state.resUsed ? T("rescueOneNote") : T("rescueResNote")) + "</p></div>"
              : "") +
            // na webu se nekupuje ani neobnovuje: rovnou cesta do obchodů
-           (nativeApp() ? '<button class="btn-ghost" data-restorebuy="1">' + esc(T("proRestore")) + "</button>" : storeBlock()) +
+           (nativeApp() ? '<button class="btn-ghost" data-restorebuy="1">' + esc(T("proRestore")) + "</button>"
+             : storeBlock() + '<p class="pw-webprice">' + esc(T("webPrice")) + "</p>") +
            '<button class="btn-ghost" data-cancel="1">' + esc(T("proLater")) + "</button>" +
            '<p class="hint" style="padding:10px 4px 0">' +
              (trialOf("monthly") || trialOf("yearly") ? esc(T("proTrialTerms")) + " " : "") + esc(T("proTerms")) + "</p>" +
