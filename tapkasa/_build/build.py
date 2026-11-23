@@ -31,6 +31,30 @@ LEGAL_DATE = '2026-09-07'
 CODES = ['cs', 'sk', 'en', 'de', 'pl', 'fr', 'it', 'es', 'pt']
 TOPICS = ['stall', 'xmas', 'club', 'festival', 'fair']  # every language has the first three
 
+# Tapkasa Pro prices per page language (currency, month, year) and the sentence under "What it costs".
+# Store prices of 23 November 2026 (App Store and Google Play aligned that day). No Polish price is confirmed, so the
+# Polish pages keep the general sentence only. Update together with the stores.
+PRO_PRICES = {'cs': ('CZK', '129', '999'), 'en': ('USD', '4.99', '39.99'),
+              **{c: ('EUR', '5.99', '44.99') for c in ('sk', 'de', 'fr', 'it', 'es', 'pt')}}
+PRICE_LINE = {
+    'cs': 'Tapkasa Pro stojí 129 Kč měsíčně nebo 999 Kč ročně (ceny v App Store a na Google Play v listopadu 2026). '
+          'Platnou cenu vždy uvidíte před nákupem.',
+    'sk': 'Tapkasa Pro stojí 5,99 € mesačne alebo 44,99 € ročne (ceny v App Store a na Google Play v novembri 2026). '
+          'Platnú cenu vždy uvidíte pred nákupom.',
+    'en': 'Tapkasa Pro costs $4.99 a month or $39.99 a year in the US (App Store and Google Play, November 2026; other '
+          'countries differ). You always see the current price before you buy.',
+    'de': 'Tapkasa Pro kostet 5,99 € im Monat oder 44,99 € im Jahr (Preise im App Store und bei Google Play, November '
+          '2026). Den aktuellen Preis sehen Sie immer vor dem Kauf.',
+    'fr': "Tapkasa Pro coûte 5,99 € par mois ou 44,99 € par an (prix sur l'App Store et Google Play en novembre 2026). "
+          "Le prix en vigueur s'affiche toujours avant l'achat.",
+    'it': "Tapkasa Pro costa 5,99 € al mese o 44,99 € all'anno (prezzi su App Store e Google Play a novembre 2026). "
+          "Il prezzo aggiornato lo vedi sempre prima dell'acquisto.",
+    'es': 'Tapkasa Pro cuesta 5,99 € al mes o 44,99 € al año (precios de App Store y Google Play en noviembre de '
+          '2026). Siempre ves el precio vigente antes de comprar.',
+    'pt': 'A Tapkasa Pro custa 5,99 € por mês ou 44,99 € por ano (preços na App Store e no Google Play em novembro de '
+          '2026). Vê sempre o preço atual antes de comprar.',
+}
+
 e = html.escape
 LANGS = {c: importlib.import_module('texts_' + c).T for c in CODES}
 
@@ -56,6 +80,7 @@ def fr_spaces(obj):
 
 
 LANGS['fr'] = fr_spaces(LANGS['fr'])
+PRICE_LINE['fr'] = fr_spaces(PRICE_LINE['fr'])
 
 
 def url(path):
@@ -105,6 +130,16 @@ def lang_menu(code, topic):
             f'{e(L["name"])}">{e(L["name"])}</summary><ul>{"".join(items)}</ul></details></nav>')
 
 
+def offers(code):
+    L = LANGS[code]
+    out = [{'@type': 'Offer', 'price': '0', 'priceCurrency': L['currency'], 'description': L['offer']}]
+    if code in PRO_PRICES:
+        cur, month, year = PRO_PRICES[code]
+        out += [{'@type': 'Offer', 'name': f'Tapkasa Pro ({n})', 'price': v, 'priceCurrency': cur,
+                 'category': 'in-app subscription'} for n, v in (('1 month', month), ('1 year', year))]
+    return out
+
+
 def page(code, topic):
     L = LANGS[code]
     P = L['pages'][topic]
@@ -122,7 +157,7 @@ def page(code, topic):
          'operatingSystem': 'iOS, Android', 'applicationCategory': 'BusinessApplication',
          'inLanguage': L['hreflang'], 'description': L['ld_desc'], 'url': u, 'downloadUrl': AS, 'installUrl': GP,
          'sameAs': [AS, GP], 'image': BASE + 'icon-512.png',
-         'offers': {'@type': 'Offer', 'price': '0', 'priceCurrency': L['currency'], 'description': L['offer']},
+         'offers': offers(code),
          'publisher': {'@type': 'Organization', 'name': 'deriverge s.r.o.', 'url': SITE + '/'}},
         {'@context': 'https://schema.org', '@type': 'FAQPage', 'inLanguage': L['hreflang'], 'mainEntity': [
             {'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': a}} for q, a in faq]},
@@ -139,6 +174,8 @@ def page(code, topic):
     feats = '\n'.join(f'    <div class="card"><h3>{e(h)}</h3><p>{e(p)}</p></div>' for h, p in L['feats'])
     nots = '\n'.join(f'      <li>{e(n)}</li>' for n in L['nots'])
     price = '\n'.join(f'    <p>{e(p)}</p>' for p in L['price'])
+    if code in PRICE_LINE:
+        price += f'\n    <p><strong>{e(PRICE_LINE[code])}</strong></p>'
     shots = '\n'.join(f'    <img src="/tapkasa/{f}" alt="{e(a)}" width="369" height="800" loading="lazy">'
                       for f, a in zip(('shot-prodej.png', 'shot-fronta.png', 'shot-dph.png'), L['shot_alts']))
     faq_html = '\n'.join(f'    <details><summary>{e(q)}</summary><p>{e(a)}</p></details>' for q, a in faq)
