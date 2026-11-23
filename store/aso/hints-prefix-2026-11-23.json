@@ -1,0 +1,1665 @@
+{
+ "day": "2026-11-23",
+ "source": "našeptávač App Storu (MZSearchHints, bez přihlášení) pro začátky slov; země → začátek dotazu → co obchod nabízí. Prázdný seznam = výraz skoro nikdo nehledá.",
+ "hints": {
+  "de": {
+   "kasse f": [
+    "lokantab — kasse für cafés",
+    "tapkasa – kasse für stände",
+    "tiply – kasse für events"
+   ],
+   "kasse v": [],
+   "kasse s": [
+    "kasse spiele",
+    "kasse simulator",
+    "kasse sales",
+    "goalino: kasse simulator",
+    "inventar & kasse - sellstock",
+    "lager, verkauf, kasse & steuer"
+   ],
+   "kasse o": [],
+   "kassen": [
+    "kassenbon scanner app",
+    "kassen app",
+    "kassenbuch kostenlos",
+    "kassen spiele",
+    "kassensystem kostenlos",
+    "kassensystem",
+    "kassenfix",
+    "kassenbuch",
+    "kassenzettel",
+    "kassenbon"
+   ],
+   "verein": [
+    "vereinsplaner",
+    "vereinonline app",
+    "verein.cloud®",
+    "vereinsticket app",
+    "vereinsplaner: app für vereine",
+    "verein",
+    "vereinsflieger",
+    "vereinsstunden",
+    "vereinsapp",
+    "verein für deutsche schäferhunde"
+   ],
+   "vereins": [
+    "vereinsplaner",
+    "vereinsticket app",
+    "vereinsplaner: app für vereine",
+    "vereinsstunden",
+    "vereinsflieger",
+    "vereinsorganisator",
+    "vereinsapp",
+    "vereinskasse",
+    "vereins-app des hce 99",
+    "vereinsrechner"
+   ],
+   "fest": [
+    "festool",
+    "festspielhaus baden-baden",
+    "festina connected",
+    "festool work",
+    "festung kufstein",
+    "festa",
+    "festival",
+    "festle.app",
+    "festkasse",
+    "festas populares"
+   ],
+   "festk": [
+    "festkasse",
+    "festko",
+    "kassen-helfer: fest-kasse"
+   ],
+   "stand": [
+    "standoff 2",
+    "standort арр",
+    "standort teilen",
+    "standort",
+    "standort ändern",
+    "standoff",
+    "standard notes",
+    "standard bank",
+    "standard life",
+    "standof"
+   ],
+   "glühwein": [],
+   "bon": [
+    "bonprix",
+    "bonify",
+    "bonjour ratp",
+    "bonimo",
+    "bonprix.de",
+    "bonus drive",
+    "bonchat",
+    "bonn mobil",
+    "bonjur ratp",
+    "bonjour rapt"
+   ],
+   "bonk": [
+    "bonkhoff's davert meat",
+    "bonk: body count passport",
+    "bonkoungou distribution",
+    "bonkr",
+    "bonkbox",
+    "bonko streamer",
+    "bonkers",
+    "bonkestra: physikrätsel",
+    "bonkmark!",
+    "bonkproof!"
+   ],
+   "ausschank": [],
+   "getränke": [
+    "getränke hoffmann",
+    "getränke könner",
+    "getränkeliste",
+    "getränkewart 2.0",
+    "getränke paradies",
+    "getränke degenhart",
+    "getränkeparadies gefromm",
+    "getränkewart",
+    "getränke",
+    "getränke mixer"
+   ],
+   "strichliste": [
+    "strichlisten app",
+    "strichliste",
+    "strichliste - getränke zähler",
+    "strichliste – zähler & klicker",
+    "strichliste: zähler & klicker",
+    "strichliste - cico",
+    "strichliste zähler tracker",
+    "strichliste & klickzähler",
+    "bierdeckel: strichliste",
+    "count & track: strichliste"
+   ],
+   "flohmarkt": [
+    "flohmarkt app",
+    "flohmarkt termine",
+    "flohmarktdealer",
+    "flohmarkt finder",
+    "flohmärkte",
+    "trödelradar – flohmärkte",
+    "shpock flohmarkt kleinanzeigen",
+    "quoka kleinanzeigen flohmarkt",
+    "online flohmarkt",
+    "trüffl: die flohmarkt-live-app"
+   ],
+   "basar": [
+    "basarlino",
+    "basar",
+    "bazaraki",
+    "basart",
+    "basarsoft",
+    "kasse basar",
+    "basar & flohmarkt: polvendo",
+    "basari house adventure game",
+    "basara",
+    "basarchef"
+   ],
+   "schulfest": [],
+   "kuchen": [
+    "kuchen spiele",
+    "kuchen backen",
+    "kuchen sortieren",
+    "küchenplaner 3d kostenlos",
+    "kuchen",
+    "küchen spiel",
+    "küchenwaage",
+    "küchenplaner kostenlos",
+    "küchenplaner",
+    "küchenwaage kostenlos"
+   ],
+   "imbiss": [
+    "imbiss hofmann",
+    "imbiss",
+    "imbiss flamingo foodtruck",
+    "kalay imbiss",
+    "dalin pizzeria & imbiss",
+    "imbiss schnell genuss",
+    "imbiss im garten",
+    "imbiss bei michael de",
+    "imbiss tal",
+    "imbiss b188"
+   ],
+   "markt": [
+    "marktkauf app kostenlos",
+    "markt guru",
+    "marktkauf",
+    "markt.de",
+    "marktcom",
+    "marktplaats.nl",
+    "marktplaats",
+    "marktplatz",
+    "markt",
+    "media markt"
+   ],
+   "marktstand": [
+    "marktstand kasse",
+    "boothlog - marktstand-verkäufe",
+    "mein marktstand"
+   ],
+   "verkauf": [
+    "verkaufsapp",
+    "verkauf spiele",
+    "verkaufen",
+    "verkaufen auf etsy",
+    "verkaufsoffener sonntag",
+    "verkauf",
+    "verkäufer spiele",
+    "verkaufen spiele",
+    "verkäufer prüfung",
+    "verkäufer"
+   ],
+   "rückgeld": [
+    "rückgeldrechner",
+    "rückgeld",
+    "groschen – rückgeldrechner"
+   ],
+   "wechselgeld": [
+    "wechselgeld rechner",
+    "wechselgeld",
+    "chango - wechselgeldhilfe"
+   ],
+   "pfand": [
+    "pfandrechner",
+    "pfandgeben",
+    "pfandflaschen",
+    "pfandhaus",
+    "pfandabär",
+    "pfand",
+    "pfando app",
+    "findflasche: dein pfandradar",
+    "pfandhauskönig",
+    "pfand & leergut: findflasche"
+   ],
+   "bestell": [
+    "essen bestellen",
+    "bestelleck",
+    "bestellen",
+    "bestell gastro",
+    "lebensmittel bestellen",
+    "sumvo: umsatz & bestellungen",
+    "p&m bestellapp",
+    "bestellung",
+    "einkauf bestellen",
+    "fotos bestellen"
+   ],
+   "theke": [
+    "thekey.academy",
+    "theken taschenrechner",
+    "thekemove",
+    "thekeworks",
+    "thekentracker",
+    "thekendienst",
+    "thekedays",
+    "thekeymaker-authuno",
+    "thekeypower",
+    "thekeys.estate"
+   ],
+   "einfache kasse": [
+    "offline pos – einfache kasse"
+   ],
+   "mobile kasse": [],
+   "offene": [
+    "offene ladenkasse",
+    "tag des offenen denkmals",
+    "offene atemübungen",
+    "x survive: offene welt",
+    "offene ladenkasse - helfer",
+    "offene stadt: krimi & fahren",
+    "offene hilfen bruchsal-bretten",
+    "offene welt fahren mafia-stadt",
+    "offene-besichtigungs-manager",
+    "offene tür kirche"
+   ],
+   "ladenkasse": [
+    "offene ladenkasse",
+    "offene ladenkasse - helfer",
+    "pos ladenkasse – kassensystem"
+   ],
+   "weihnachtsm": [
+    "weihnachtsmann anrufen deutsch",
+    "weihnachtsmann",
+    "weihnachtsmann anrufen",
+    "weihnachtsmann videoanruf",
+    "ho ho hop! weihnachtsmann",
+    "weihnachtsmann anrufen mit pnp",
+    "weihnachtsmalbuch nach zahlen",
+    "weihnachtsmusik & lieder",
+    "weihnachtsmusik: meisterwerke",
+    "weihnachtsmann-videoanruf – fa"
+   ],
+   "kassier": [
+    "kassierer spiel",
+    "kassieren",
+    "supermarkt -kassierer spiel",
+    "kassierer",
+    "kassiererin",
+    "kassierer kino filme kasse kinder spiel",
+    "bank-kassierer-register-spiele",
+    "cashier: kassierer-spiele",
+    "fr.-stories lesen & kassieren",
+    "schneiderei und boutique kleidung und kassierer"
+   ],
+   "kassa": [
+    "kassala",
+    "kassandra planner",
+    "inpos — kassa va ijara",
+    "vereinskasse: beiträge & kassa",
+    "yoga with kassandra",
+    "kassaline gmbh",
+    "kassacentralen i skane ab",
+    "kassa!",
+    "kassatap pos: cash register",
+    "kassa security"
+   ],
+   "handkasse": [],
+   "barkasse": [],
+   "getränkekasse": [],
+   "kasse ohne": [],
+   "kasse kostenlos": [],
+   "pos": [
+    "postbank",
+    "post & dhl",
+    "postident app",
+    "postbank online banking",
+    "postbank bestsign app",
+    "postbank app neu",
+    "post",
+    "poste italiane",
+    "post dhl",
+    "post und dhl"
+   ],
+   "kassenhelfer": [
+    "kassenhelfer",
+    "kassen-helfer: fest-kasse"
+   ],
+   "verkaufs": [
+    "verkaufsapp",
+    "verkaufsspiele",
+    "verkaufsoffener sonntag",
+    "verkaufswert rechner",
+    "pipedrive – verkaufs-crm",
+    "verkaufsoffener sonntag - de",
+    "verkaufsautomaten-simulator",
+    "verkaufspreisrechner",
+    "verkaufshaie",
+    "account note: verkaufstracker"
+   ]
+  },
+  "at": {
+   "kassa": [
+    "kassabuch",
+    "kassa spiel",
+    "kassa",
+    "kassandra planner",
+    "inpos — kassa va ijara",
+    "kupfticket scan & kassa",
+    "kassa!",
+    "kassaapparat deluxe",
+    "kassabus",
+    "kassa security"
+   ],
+   "kasse": [
+    "kassemo",
+    "kassemo registrierkasse",
+    "kassensystem",
+    "kasse",
+    "asello kasse",
+    "sumup: kassen- und finanztools",
+    "apro kassensysteme gmbh",
+    "kassenbelege - belege sammeln",
+    "kassenaerztliche bundesvereinigung",
+    "kassenbuch vorlage für numbers"
+   ],
+   "verein": [
+    "vereinsplaner",
+    "vereinfacht",
+    "vereinsplaner: app für vereine",
+    "vereinsherz",
+    "vereinskasse: club treasurer",
+    "sbf pflach vereinsapp",
+    "easyverein",
+    "vereinsplaner gmbh",
+    "verein der wirtschaftsregion fuschlsee",
+    "verein amazone"
+   ],
+   "fest": [
+    "festool",
+    "festnetz",
+    "festung kufstein",
+    "festlbus",
+    "festl",
+    "festa",
+    "festive feathers",
+    "festonik",
+    "kalendari festave",
+    "ahmedabad shopping fest 26-27"
+   ],
+   "punsch": [
+    "punschhutte"
+   ],
+   "stand": [
+    "standoff 2",
+    "standard",
+    "standort арр",
+    "standart",
+    "standard notes",
+    "standort ändern",
+    "standoff",
+    "standort",
+    "standard life",
+    "standort teilen"
+   ],
+   "bonk": [
+    "bonkers",
+    "bonk: body count passport",
+    "bonked: rave survivors",
+    "bonkmark!",
+    "bonkproof!"
+   ],
+   "kassen": [
+    "kassensystem",
+    "sumup: kassen- und finanztools",
+    "apro kassensysteme gmbh",
+    "kassenbelege - belege sammeln",
+    "kassenaerztliche bundesvereinigung",
+    "kassenbuch vorlage für numbers",
+    "kassenbuch: einnahmen ausgaben",
+    "kassenbuch: umsätze verwalten",
+    "kassensystem für geschäft",
+    "kassenbuch - saldo & ausg."
+   ],
+   "registrierkass": [
+    "registrierkasse",
+    "kassemo registrierkasse",
+    "hellocash registrierkasse",
+    "everbill registrierkassa",
+    "karteck: taxi-registrierkasse",
+    "quickbon registrierkasse",
+    "t-mobile registrierkasse"
+   ],
+   "ausschank": [],
+   "pfand": [
+    "pfandabär",
+    "pfandigo",
+    "ewp recycling pfand österreich ggmbh",
+    "pfand",
+    "dorotheum pfand",
+    "findflasche: dein pfandradar",
+    "pfandhauskönig",
+    "pfand & leergut: findflasche",
+    "pfandreto",
+    "pfandlens – pfand scanner"
+   ],
+   "zeltfest": [],
+   "feuerwehrfest": []
+  },
+  "cz": {
+   "poklad": [
+    "pokladna",
+    "pokladnička",
+    "lovec pokladu",
+    "eet 2.0 pokladna andapos",
+    "eúčtenka - eet 2.0 pokladna",
+    "kasa plus - mobil pokladna",
+    "kasolo – pokladna s eet 2.0",
+    "peena - týmová pokladna",
+    "t pokladna",
+    "trynx pokladna"
+   ],
+   "kasa": [
+    "kasa smart",
+    "kasa",
+    "kasalka",
+    "kasalka sport centrum",
+    "kasa defteri ck",
+    "mbs kasa",
+    "go kasa",
+    "kasaba bilgi teknolojileri ticaret a.s.",
+    "kasamba psychic reading chat",
+    "kasamba ltd"
+   ],
+   "stán": [
+    "k-stání čr",
+    "stánok nmh",
+    "tagbox stánky"
+   ],
+   "trh": [
+    "pare - zbav se trhání vlasů",
+    "trhovište",
+    "tehotenstvi +",
+    "threads",
+    "threema",
+    "fingo trhovisko sk",
+    "čsob finanční trhy"
+   ],
+   "prodej": [
+    "prodej obleceni",
+    "prodej",
+    "targalo prodejce",
+    "čez prodej, a.s."
+   ],
+   "tržb": [],
+   "účtenk": [
+    "účtenkovník",
+    "edou účtenky",
+    "záruky a účtenky",
+    "keepr: záruky a účtenky",
+    "garantaro ai: záruky a účtenky",
+    "profi účtenka",
+    "účtenka",
+    "autooffice – účtenky k platbám",
+    "eso9 účtenky"
+   ],
+   "eet": [
+    "eet",
+    "eet 2.0: easyplatby kartou/qr",
+    "eet 2.0 pokladna andapos",
+    "eetuj – eet 2.0 sales records",
+    "e&eturbos",
+    "eetdrs visual acuity test",
+    "eeto calendar",
+    "eethuis kilis doner kebab",
+    "bp and aral eets tollbox",
+    "electrical engineer's tool-eet"
+   ],
+   "jarmar": [],
+   "festiv": [
+    "festival otevřených sklepů",
+    "festive feathers",
+    "kare kare festival",
+    "wishes dance festival",
+    "sziget festival",
+    "emj festival",
+    "united festival",
+    "zlin film festival",
+    "airbeat one festival",
+    "festival slunovrat"
+   ],
+   "objedn": [
+    "objedname gps",
+    "objednávka obědů",
+    "objedname",
+    "objedname s.r.o.",
+    "objednáme driver",
+    "objednáme.cz",
+    "e-objednávky",
+    "salona: objednání do salonu",
+    "vermeer cs - objednávky",
+    "webapetit objednaj"
+   ],
+   "výdej": [],
+   "bufet": [
+    "bufet",
+    "bufet gymnázium"
+   ],
+   "pos": [
+    "poseidon",
+    "posta online",
+    "postparty",
+    "posta",
+    "positrex",
+    "posseidon",
+    "postident",
+    "posilka",
+    "posilka fitness",
+    "postfold: bookmark folders"
+   ],
+   "kavárn": [],
+   "vánoč": [
+    "vánoční zvoneček / xmas bell",
+    "vánoční výtah",
+    "vánoční zvonečky",
+    "vánoční hry",
+    "vánoční tapety",
+    "hopsváča: vánoční nášup",
+    "superzet: vánoční zápletka"
+   ],
+   "svař": [],
+   "zálo": [
+    "záložka"
+   ],
+   "spolek": [
+    "spolek rozjezdise",
+    "jiri spolek"
+   ],
+   "ples": [
+    "plesouni",
+    "plesk mobile",
+    "plesso: emotional intelligence",
+    "emanuela plesea",
+    "jan plesek"
+   ],
+   "mobilní pok": [],
+   "pokladní": []
+  },
+  "us": {
+   "cash reg": [
+    "cash register games",
+    "cash register practice",
+    "cash register",
+    "cash register simulator",
+    "cash register for business",
+    "cash register counter",
+    "cash register free",
+    "cash register express",
+    "cash register calculator",
+    "cash register training"
+   ],
+   "craft fair": [
+    "craft fair companion",
+    "craft fair",
+    "artkiv: craft fair inventory",
+    "booth math: craft fair profit",
+    "boothlog - craft fair tracker",
+    "boothtap: craft fair tracker",
+    "fairpulse: craft fair tracker"
+   ],
+   "craft show": [
+    "craft show tracker lite"
+   ],
+   "bake sale": [],
+   "vendor": [
+    "vendormate credentialing",
+    "vendor cafe",
+    "vendor access",
+    "vendor hub",
+    "vendormate",
+    "vendorstat",
+    "vendor",
+    "vendor credentialing",
+    "vendora",
+    "vendor id"
+   ],
+   "booth": [
+    "booth.events",
+    "boothcool",
+    "photo booth",
+    "boothiq",
+    "booth copilot",
+    "boothbook",
+    "boothmate",
+    "boothee",
+    "booth",
+    "booth event"
+   ],
+   "concession": [
+    "the concession",
+    "i scream concessions",
+    "the concession golf club llc",
+    "concessions international, llc",
+    "concessions inventory",
+    "concession: mine & prosper",
+    "concessions io",
+    "concessionario exclusive cars",
+    "ank concessions",
+    "bmw concessionaires app"
+   ],
+   "farmers market": [
+    "farmers market",
+    "farmers market finder",
+    "localize farmers market",
+    "sprouts farmers market",
+    "farmers market online",
+    "city farmers market",
+    "sprouts farmers market rewards",
+    "root: farmers market finder",
+    "farmers market haul",
+    "localize - farmers market"
+   ],
+   "pos": [
+    "poshmark",
+    "postmates",
+    "posh",
+    "possible finance: loans & cash",
+    "possible",
+    "poshmark: buy & sell fashion",
+    "postparty",
+    "pose",
+    "postermywall",
+    "poster maker"
+   ],
+   "point of sale": [
+    "square point of sale app",
+    "point of sale",
+    "malia pos — point of sale",
+    "paypal point of sale",
+    "shopify point of sale",
+    "fooda point of sale",
+    "chase point of sale",
+    "square point of sale & payment",
+    "helcim: point of sale",
+    "givebacks point of sale"
+   ],
+   "sales track": [
+    "sales tracker",
+    "inventory and sales tracker",
+    "tallyhub: app sales tracker",
+    "sowia - crm & sales tracker",
+    "sales tracking",
+    "sales-tracker",
+    "sales tracker - qrcode barcode",
+    "sales tracker pos",
+    "sales tracker by art robots",
+    "sales trackr"
+   ],
+   "simple pos": [
+    "simple pos report",
+    "simple pos",
+    "simple pos: cash register",
+    "simple poster",
+    "simple pose: camera pose guide",
+    "clara - simple pos reorder",
+    "egopos lite - simple pos",
+    "posecraft: simple pose maker",
+    "register – simple pos"
+   ],
+   "market stall": [
+    "tapkasa: market stall pos"
+   ],
+   "fundraiser": [
+    "fundraiser",
+    "fundraiser assist",
+    "scoreboard fundraiser",
+    "snap fundraiser",
+    "blast fundraiser",
+    "popcorn fundraiser",
+    "team fundraiser",
+    "2day fundraiser",
+    "bloomerang fundraiser",
+    "fundraiser assist 100"
+   ],
+   "pop up": [
+    "pop up bagels",
+    "pop up blocker",
+    "pop up",
+    "pop up blocker browser",
+    "pop up shop",
+    "pop up ad blocker",
+    "pop up timer",
+    "pop up la",
+    "pop-up blocking web browser",
+    "pop up kite"
+   ],
+   "lemonade": [
+    "lemonade insurance",
+    "lemonade pet",
+    "lemonade",
+    "lemonade stand",
+    "lemonade tycoon",
+    "lemonade car insurance",
+    "lemonade work",
+    "lemonade day",
+    "lemonade stand game",
+    "squeeze! lemonade stand"
+   ],
+   "garage sale": [
+    "garage sale finder",
+    "garage sales near me",
+    "garage sale",
+    "garage sale map",
+    "garage sale pricing",
+    "garage sale treasure map",
+    "garage sale cashier",
+    "garage sale tracker",
+    "garage sale ai",
+    "garage sale hq"
+   ],
+   "yard sale": [
+    "yard sale treasure map",
+    "yard sale",
+    "yard sale finder",
+    "yard sales near me",
+    "yard sale map",
+    "find garage & yard sale",
+    "yard sale treasure",
+    "yard sale search",
+    "yard sale treasure hunt",
+    "local yard sales"
+   ],
+   "order ticket": [
+    "kcx order ticket"
+   ],
+   "cash box": [
+    "cash box"
+   ],
+   "cash drawer": [
+    "cash drawer cool counting app",
+    "cash drawer keeper",
+    "cash drawer count: till log"
+   ],
+   "change calc": [
+    "change calculator",
+    "percent change calculator",
+    "euro change calculator",
+    "rebookcost: change calculator"
+   ],
+   "till": [
+    "tillys",
+    "till",
+    "till: kids & teen banking",
+    "tilly tally",
+    "tillamook",
+    "tiller",
+    "tilly bagel",
+    "tilly tally | cash counter",
+    "tilly bagel shop",
+    "tillwhen: countdown widgets"
+   ],
+   "register": [
+    "register2park",
+    "registered offender",
+    "register games",
+    "register play",
+    "register practice",
+    "register",
+    "register go pak",
+    "register counter",
+    "register to park",
+    "register 2"
+   ],
+   "checkout": [
+    "checkout 51",
+    "checkout 51: cash back savings",
+    "checkout",
+    "checkout game",
+    "checkout 24",
+    "checkout uchicago",
+    "chase checkout",
+    "checkout frenzy",
+    "checkout saver",
+    "boat checkout"
+   ],
+   "food truck": [
+    "food truck finder",
+    "food truck games",
+    "food truck pup",
+    "food truck chef",
+    "food truck pub",
+    "food truck",
+    "food truckalico",
+    "food truck simulator",
+    "food trucks near me",
+    "food truck tracker"
+   ],
+   "festival": [
+    "festival foods",
+    "festival dust",
+    "festival",
+    "festival dust: music festivals",
+    "festival planner",
+    "festival international de louisiane",
+    "festival international",
+    "festival of books",
+    "festival at sea",
+    "the festival of genomics and biodata"
+   ],
+   "offline pos": [
+    "offline pos",
+    "offline pos-simplecashregister",
+    "offline pos & billing",
+    "offline pos: billmate billing",
+    "aseller offline pos manager",
+    "pocketpos - offline pos",
+    "possible - offline pos",
+    "stockdey: offline pos & stock",
+    "tidy shop: offline pos",
+    "tillbee - offline pos & retail"
+   ],
+   "cash only": [],
+   "snack bar": [
+    "snack bar",
+    "cat snack bar",
+    "cat snack bar: food games",
+    "snack bar best kebab",
+    "snack bar japan",
+    "cat chef snack bar tycoon",
+    "grillerz snack bar",
+    "k-food snack bar",
+    "kitty snack  bar",
+    "la michoacana snack bar"
+   ],
+   "tally": [
+    "tally counter",
+    "tally",
+    "tally khata",
+    "tally flex",
+    "tally counter free",
+    "tally ho",
+    "tally tracker",
+    "tally marks counter",
+    "tally count",
+    "tally counter widget"
+   ]
+  },
+  "gb": {
+   "till": [
+    "till games",
+    "till system",
+    "till",
+    "tilly",
+    "tiller verify",
+    "tiller",
+    "days till",
+    "tillwhen: countdown widgets",
+    "tilly — website builder",
+    "tilla"
+   ],
+   "market stall": [
+    "fair till: market stall pos"
+   ],
+   "craft fair": [
+    "craft fair companion",
+    "artkiv: craft fair inventory",
+    "booth math: craft fair profit",
+    "fairpulse: craft fair tracker"
+   ],
+   "car boot": [
+    "car boot sale",
+    "car boot",
+    "auctly: car boot resale"
+   ],
+   "fete": [
+    "notre fête",
+    "tadam - fête et cadeaux",
+    "فطير دهب | feteer dahab",
+    "jocuri de fete",
+    "jocuri fete",
+    "fête de l'huma",
+    "fetelle lingerie",
+    "fete finders",
+    "fête des vendanges neuchatel",
+    "fête du bruit"
+   ],
+   "bake sale": [],
+   "cash reg": [
+    "cash register",
+    "cash register game",
+    "pos cash register",
+    "cash register express",
+    "cash-register",
+    "cash register pos",
+    "cash register for business",
+    "cash register toy",
+    "cash register fashion store",
+    "cash register multi"
+   ],
+   "pos": [
+    "post office",
+    "postcode lottery",
+    "post office travel app",
+    "post tag",
+    "post office credit card",
+    "post office travel money card",
+    "poste italiane",
+    "poster maker",
+    "pose",
+    "post office easyid"
+   ],
+   "tuck shop": [
+    "tuck shop"
+   ],
+   "christmas market": [
+    "christmas markets",
+    "christmas market hidden object",
+    "christmas market puzzle",
+    "silverton christmas market"
+   ],
+   "school fair": [],
+   "cash box": [],
+   "float": [
+    "float",
+    "float video saver",
+    "floating clock",
+    "floating sandbox",
+    "float tube",
+    "floatworks",
+    "floating notes",
+    "floatplane",
+    "float me",
+    "floaty"
+   ]
+  },
+  "fr": {
+   "caisse": [
+    "caisse d'epargne",
+    "caisse d'epargne mon compte",
+    "caisse d'epargne pro",
+    "caisse de retraite",
+    "caisse epargne",
+    "caisse enregistreuse gratuite",
+    "caisse enregistreuse",
+    "caisse",
+    "caisse sociale de monaco",
+    "ma caisse – caisse & stock"
+   ],
+   "kermesse": [
+    "la kermesse festival 2026",
+    "la kermesse",
+    "la kermesse festival 2027"
+   ],
+   "buvette": [
+    "bartill – caisse buvette & bar",
+    "bartime - buvette de club"
+   ],
+   "marché": [
+    "marché frai",
+    "mon marché",
+    "saveur marché",
+    "marché pour gagner de l’argent",
+    "le marché parisien",
+    "le marché tchad",
+    "mon-marché.fr",
+    "super marché u",
+    "marché malin",
+    "marché aux affaire"
+   ],
+   "brocante": [
+    "vide-greniers et brocantes",
+    "brocante",
+    "brocante et vide grenier",
+    "brocradar - brocantes",
+    "application brocante",
+    "brocante paris",
+    "agenda brocante",
+    "vide grenier brocante",
+    "mes brocantes",
+    "selency : brocante à la maison"
+   ],
+   "vide gren": [
+    "vide-greniers.org",
+    "vide grenier",
+    "vide grenier brocante",
+    "vide grenier.org",
+    "brocante et vide grenier",
+    "vide-greniers et brocantes",
+    "vide-greniers",
+    "au vide grenier",
+    "mon vide-grenier",
+    "trouver des vide greniers"
+   ],
+   "association": [
+    "solitaire association",
+    "association de mots",
+    "hello association",
+    "solitaire associations journey",
+    "association colorwood",
+    "association",
+    "association master",
+    "associations drop: card puzzle",
+    "association le bon samaritain",
+    "the rallysport association"
+   ],
+   "stand": [
+    "standoff 2",
+    "standard notes",
+    "standoff",
+    "stand by me",
+    "stand up",
+    "standard bank",
+    "stand up! the work break timer",
+    "standby",
+    "standard de liege",
+    "stand de tir"
+   ],
+   "encaiss": [
+    "encaissement",
+    "lyf pro encaissement mobile",
+    "invoxa: devis & encaissement"
+   ],
+   "marché de no": [
+    "marché de noël amiens 2026"
+   ],
+   "rendu monnaie": [],
+   "consigne": [
+    "consigne bagage",
+    "consigne",
+    "radical: consigne à bagages",
+    "loop consigne",
+    "bounce: consigne à bagages",
+    "qeepl — consigne à bagages",
+    "nannybag - consignes bagages",
+    "boxspot : consigne à bagages",
+    "gobolt consignee",
+    "le fourgon, courses consignées"
+   ],
+   "caisse asso": [],
+   "tombola": [
+    "tirage tombola",
+    "tombola",
+    "tombola : tirage au sort",
+    "tombola online",
+    "tombola 3d - random numbers",
+    "tombola enhanced",
+    "tombola parlante - smorfia",
+    "tombola pouch",
+    "tómbola cine español",
+    "cartelle della tombola"
+   ],
+   "fête": [
+    "les fêtes du jour",
+    "fête foraine",
+    "calendrier des fêtes",
+    "fête le mur",
+    "notre fête",
+    "tadam - fête et cadeaux",
+    "yeppy : invitations & fêtes",
+    "jeux de fête foraine",
+    "fête du bruit",
+    "fête foraine de tours"
+   ]
+  },
+  "es": {
+   "caja": [
+    "cajamar",
+    "caja rural",
+    "cajasiete",
+    "cajalnet",
+    "caja laboral kutxa",
+    "cajasur",
+    "caja laboral",
+    "cajamar caja rural",
+    "caja rural de navarra",
+    "caja rural del sur"
+   ],
+   "tpv": [
+    "tpv escola",
+    "tpvsports",
+    "tpv movil",
+    "tpv",
+    "tpv caixabank",
+    "tpv square",
+    "tpv bar",
+    "tpv restaurantes",
+    "tpv santander",
+    "tpv caixa"
+   ],
+   "mercadillo": [
+    "mercadillo dos hermanas",
+    "broc: cosy mercadillo",
+    "mi mercadillo",
+    "vidasso : mercadillos"
+   ],
+   "feria": [
+    "feria valencia",
+    "feria",
+    "feria jerez",
+    "feria cordoba",
+    "feria avis",
+    "feria de sevilla app",
+    "feria aotec 2026",
+    "feria avis canarias",
+    "feria muestrario internacional de valencia",
+    "feria de zaragoza"
+   ],
+   "puesto": [
+    "squeeze! puesto de limonada",
+    "puestos de trabajo",
+    "puesto app",
+    "alpha puesto de bolsa",
+    "dejate el sombrero puesto",
+    "interval puesto de bolsa",
+    "mini sell: asistente puesto"
+   ],
+   "barra": [
+    "barrabes",
+    "barras fms",
+    "barrabes esquí y montaña",
+    "escaner codigo barras",
+    "barra led",
+    "smartweight: carga de barra",
+    "temporizador visual en barra",
+    "barrancos",
+    "lector barras",
+    "codigo barras"
+   ],
+   "caseta": [
+    "casetas",
+    "casetas jerez",
+    "casetas sevilla",
+    "geo casetas",
+    "casetagram",
+    "donde esta la caseta",
+    "salon la caseta",
+    "¿dónde está la caseta?"
+   ],
+   "cobrar": [
+    "payphone: app para cobrar",
+    "cobrar",
+    "precios salón: cuánto cobrar",
+    "págame: forma fácil de cobrar",
+    "valora — cuánto cobrar"
+   ],
+   "ventas": [
+    "ventas",
+    "sumvo: ventas y pedidos",
+    "fiadito: libreta de ventas",
+    "amazon ventas",
+    "tamus ventas",
+    "las ventas",
+    "ventas a la mano",
+    "ventas en terreno vtr",
+    "ventas fáciles: control ventas",
+    "ventas & crm"
+   ],
+   "fiesta": [
+    "fiesta sport club",
+    "fiesta radar",
+    "fiesta mentirosa",
+    "fiesta de mentirosos",
+    "fiestas galicia",
+    "fiestable",
+    "fiesta",
+    "fiesta.live",
+    "fiesta de la verdura",
+    "fiestas de la verdura."
+   ],
+   "chiringuito": [
+    "el chiringuito"
+   ],
+   "navid": [
+    "navidrome",
+    "navidad: lista de regalos",
+    "lotería de navidad y del niño",
+    "snowdesk – nieve navideña",
+    "widgets cuenta atrás navidad",
+    "travesuras del elfo: navidad",
+    "flo navidrome",
+    "deco my tree: árbol de navidad",
+    "ho ho hop! papá noel navidad",
+    "navidad: juegos para niños 2-5"
+   ],
+   "pos": [
+    "postparty",
+    "post it",
+    "postfinance",
+    "poste italiane",
+    "postnord",
+    "posteid",
+    "pose ai",
+    "pose",
+    "poses pareja",
+    "posiciones sexuales gratis"
+   ],
+   "punto de venta": [
+    "misventas: punto de venta",
+    "punto de venta : moon pos",
+    "punto de venta pro",
+    "bartab: punto de venta",
+    "eleventa punto de venta",
+    "kahve - punto de venta",
+    "mercadys: punto de venta pos",
+    "mi inventario y punto de venta",
+    "mitienda: punto de venta",
+    "nadushop • punto de venta"
+   ],
+   "kermes": [
+    "la kermesse",
+    "la kermesse festival 2027"
+   ]
+  },
+  "pl": {
+   "kasa": [
+    "kasa stefczyka",
+    "kasa stefczyka online",
+    "kasa smart",
+    "kasa fiskalna",
+    "kasa",
+    "kasai",
+    "kasa gra",
+    "kasa defteri ck",
+    "kasa przyszłości",
+    "mbs kasa"
+   ],
+   "kiermasz": [],
+   "jarmark": [],
+   "stoisko": [
+    "squeeze! stoisko z lemoniadą"
+   ],
+   "festyn": [],
+   "sprzeda": [
+    "sprzedajemy.pl",
+    "sprzedaz ubran",
+    "sprzedajemy",
+    "sprzedaz",
+    "allegro sprzedaż",
+    "sprzedajai",
+    "autoplac.pl - kup i sprzedaj",
+    "daro mobilna sprzedaż",
+    "polak sprzedaje",
+    "redealio – sprzedawaj łatwiej"
+   ],
+   "targ": [
+    "targeo mapa",
+    "targobank",
+    "target",
+    "target dart counter",
+    "target scan",
+    "targetir",
+    "targi kielce",
+    "targa scan",
+    "target.ai",
+    "targi poznanskie"
+   ],
+   "pos": [
+    "posnania",
+    "postaw na milion",
+    "post przerywany",
+    "postnord",
+    "posten",
+    "post nl",
+    "post & dhl",
+    "post",
+    "postbank",
+    "positions"
+   ],
+   "utarg": [],
+   "kasjer": [
+    "kasjer gra",
+    "kasjer"
+   ],
+   "paragon": [
+    "e-paragony",
+    "paragony",
+    "pan paragon",
+    "paragon",
+    "keepr: gwarancje i paragony",
+    "receipt aid: skaner paragonów",
+    "e paragon",
+    "kto za co: dziel paragony",
+    "paragon technologie gmbh",
+    "paragon group usa llc"
+   ]
+  },
+  "it": {
+   "cassa": [
+    "cassa edile",
+    "cassa edile napoli",
+    "cassa edile caserta",
+    "cassa edile roma",
+    "cassa edile brescia",
+    "cassa in cloud",
+    "cassa edile online",
+    "cassa digitale",
+    "cassa edile milano",
+    "cassa"
+   ],
+   "sagra": [
+    "sagrada familia app",
+    "sagrada familia official",
+    "sagrada familia ufficiale",
+    "audioguida sagrada familia",
+    "la sagrada familia",
+    "sagrario pilates",
+    "sagrada",
+    "basílica sagrada família",
+    "biblia sagrada",
+    "sagrando"
+   ],
+   "mercatin": [
+    "mercatino usato",
+    "mercatino musicale",
+    "riù mercatino",
+    "mercatino",
+    "il mercatino",
+    "mercatini vintage",
+    "mercatino di beba store",
+    "mercatino store",
+    "mercatini",
+    "haggle shop: re del mercatino"
+   ],
+   "bancarell": [
+    "cibo di strada cuoco bancarelle gioco"
+   ],
+   "registratore": [
+    "registratore vocale gratis",
+    "registratore vocale",
+    "registratore chiamate iphone",
+    "registratore audio",
+    "registratore vocale gratuito",
+    "registratore schermo",
+    "registratore",
+    "registratore chiamate gratis",
+    "registratore chiamate",
+    "registratore russare sonno"
+   ],
+   "pos": [
+    "poste italiane",
+    "poste id",
+    "postepay",
+    "poste",
+    "poste business",
+    "postapay",
+    "postepay evolution",
+    "poste id spid",
+    "post office",
+    "posta"
+   ],
+   "chiosco": [
+    "squeeze! chiosco di limonata",
+    "il chiosco arcobaleno",
+    "chiosco giocattoli - giocare",
+    "al chiosco beach",
+    "boba corner: chiosco di boba"
+   ],
+   "festa": [
+    "festa tp link",
+    "festa dei gigli",
+    "festa app",
+    "invito festa",
+    "gioco e festa",
+    "festa del mugello",
+    "auguri buona festa della mamma",
+    "kalendari festave",
+    "festas populares",
+    "party pie: 45 giochi di festa"
+   ],
+   "incass": [
+    "incassi",
+    "gestione incassi",
+    "incassapos",
+    "cashtrails+: spese e incassi",
+    "cobrado: gestione incassi",
+    "ibeauty: incassi salone",
+    "ingaggio: lavori e incassi",
+    "poker incassi",
+    "speedup incassi",
+    "speedup incassi 20"
+   ],
+   "vendite": [
+    "vendite",
+    "vendite moto",
+    "account note: gestione vendite",
+    "alihelper: vendite e pacchi",
+    "artkiv: inventario e vendite",
+    "boothlog - vendite in fiera",
+    "chirak - vendite - inventario",
+    "crm vendite pipeline",
+    "dailysaleslog: vendite e pdf",
+    "ecosistema vendite b2b"
+   ]
+  },
+  "sk": {
+   "poklad": [
+    "pokladna",
+    "virtualna pokladna",
+    "pokladnica",
+    "virtualna registracna pokladna",
+    "aurus pokladňa mobile",
+    "flowy pokladňa",
+    "lovec pokladu",
+    "peena - týmová pokladna",
+    "trynx pokladna",
+    "viky hledá poklady"
+   ],
+   "kasa": [
+    "kasa defteri ck",
+    "mbs kasa",
+    "kasa smart",
+    "ka-sat finder for tooway",
+    "kasamba psychic reading chat",
+    "kasaba bilgi teknolojileri ticaret a.s.",
+    "kasamba ltd",
+    "ka-sat pointer",
+    "ka-sat pointer fma",
+    "kasa stefczyka online"
+   ],
+   "stán": [
+    "stánok nmh"
+   ],
+   "jarmo": [],
+   "predaj": [
+    "cebede predajňa - scan&shop"
+   ],
+   "trh": [
+    "pare - zbav sa trhania vlasov",
+    "trhovište",
+    "fingo trhovisko sk",
+    "čsob finanční trhy"
+   ],
+   "vianoč": []
+  },
+  "pt": {
+   "caixa r": [
+    "caixa registradra supermercado",
+    "caixa refeição e alimentação",
+    "caixa registradora restaurante",
+    "caixa registradora - pos",
+    "caixa registradora moda loja",
+    "caixa residencial",
+    "caixa registadora supermercado",
+    "caixa tem",
+    "banco atm - caixa registradora",
+    "caixas de cinema filmes caixa registradora jogo"
+   ],
+   "feira": [
+    "feira organizada",
+    "feira viva cultura e desporto e.m.",
+    "feiras novas 2026",
+    "feira são mateus",
+    "feira dos sabores do tejo",
+    "feira museus",
+    "feira do empreendedor recife",
+    "feira do jeans de toritama",
+    "feira do empreendedor sebraepr",
+    "feirão das frutas"
+   ],
+   "banca": [
+    "a banca",
+    "a banca portugal",
+    "bancamiga",
+    "conta bancária",
+    "banca transilvania",
+    "banca currency converter",
+    "banca móvil bcp",
+    "banca comerciala romana",
+    "bancamiga suite",
+    "banca móvil bac"
+   ],
+   "pos": [
+    "postparty",
+    "post finance",
+    "postnord",
+    "postnl",
+    "pose",
+    "positions",
+    "post it",
+    "poste italiane",
+    "post",
+    "posicoes"
+   ],
+   "quermesse": [],
+   "vendas": [
+    "vendas novas",
+    "showroomprive: vendas privadas",
+    "vendas",
+    "vendas e serviços - infor+",
+    "vendasnovas desporto",
+    "vendas, financeiro e estoque",
+    "vendas fácil",
+    "vendas diárias",
+    "vendas e entregas - gestor",
+    "vendashn"
+   ],
+   "ponto de venda": [
+    "ponto de venda pro",
+    "bartab: ponto de venda",
+    "posory pos: ponto de venda pdv",
+    "simple pos: ponto de venda"
+   ],
+   "registadora": [
+    "caixa registadora supermercado",
+    "kash: caixa registadora ia",
+    "mimas pos - caixa registadora",
+    "pos loja – caixa registadora",
+    "tunder · caixa registadora",
+    "banco atm - caixa registradora",
+    "caixa registradora - pos",
+    "caixa registradora moda loja",
+    "caixa registradora restaurante",
+    "caixas de cinema filmes caixa registradora jogo"
+   ]
+  },
+  "br": {
+   "caixa r": [
+    "caixa refeição e alimentação",
+    "caixa residencial",
+    "caixa refeicao",
+    "caixa tem",
+    "caixa refeição e alimentação vr",
+    "caixa registradora",
+    "caixa refeição alimentação",
+    "caixa reforma brasil",
+    "caixa residencia",
+    "caixa registradora jogo"
+   ],
+   "pdv": [
+    "pdv +",
+    "pdv avantti",
+    "pdv mundo",
+    "pdvaction",
+    "pdv gratuito",
+    "pdv",
+    "pdv legal",
+    "pdv pet",
+    "pdv mais",
+    "pdv 2.0"
+   ],
+   "feira": [
+    "feirao serasa limpa nome",
+    "feira conectada",
+    "feirao limpa nome",
+    "feirao acordo certo",
+    "feiras maringá",
+    "feirão limpa nome consulta cpf",
+    "feirao moda rio",
+    "feira do empreendedor",
+    "feira ebs 2026",
+    "feira do empreendedor piauí"
+   ],
+   "quermesse": [],
+   "vendas": [
+    "vendas online",
+    "vendas e estoque",
+    "vendas fiado",
+    "vendas e serviços",
+    "vendas",
+    "vendas de carro",
+    "vendas externas",
+    "vendas mobile",
+    "vendas jogo",
+    "vendas de carro jogo"
+   ],
+   "bazar": [
+    "bazart",
+    "bazar horizonte",
+    "bazara33",
+    "bazar",
+    "bazaraki",
+    "bazar setti",
+    "bazar estrelas",
+    "tikinti bazarı",
+    "vamos bazar",
+    "its bazar"
+   ],
+   "frente": [
+    "frente",
+    "frente de caixa",
+    "gravar frente e tras",
+    "super frete",
+    "camera frente e verso",
+    "siga em frente",
+    "siga em frente portonave",
+    "câmera dupla: frente e trás",
+    "camera frente e tras",
+    "dual: grave frente e verso"
+   ],
+   "festa jun": [],
+   "barraca": [
+    "barracao",
+    "clube de ofertas barracão",
+    "squeeze! barraca de limonada",
+    "barracão supermercados ltda",
+    "barracão delivery",
+    "barraca de tiro: bullseye",
+    "clube mercado barracão",
+    "tenttrail: barracas e árvores",
+    "toscoshot: barraca de tiro"
+   ],
+   "controle de vendas": [
+    "controle de vendas gratuito",
+    "controle de vendas e estoque",
+    "controle de vendas e estoque gratis",
+    "controle de vendas simples",
+    "controle de vendas",
+    "controle de vendas gratis",
+    "controle de vendas thiago pacheco",
+    "rede controle de vendas",
+    "controle de vendas facil",
+    "controle de vendas: minha loja"
+   ]
+  }
+ }
+}

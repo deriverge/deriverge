@@ -13,13 +13,13 @@ const sleep = (ms) => execFileSync('sleep', [String(ms / 1000)]);
 const UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36';
 // země: [storefront Apple, hl pro Play, výrazy]
 export const M = {
-  cz: [143489, 'cs', ['pokladna', 'pokladna na stánek', 'kasa', 'jarmark', 'vánoční trh', 'festival', 'mobilní pokladna', 'stánek', 'pokladna zdarma', 'výdej objednávek']],
-  sk: [143496, 'sk', ['pokladňa', 'pokladňa na stánok', 'kasa', 'jarmok', 'vianočné trhy', 'festival', 'mobilná pokladňa', 'stánok']],
-  de: [143443, 'de', ['kasse', 'kassensystem verein', 'vereinsfest', 'weihnachtsmarkt', 'bonkasse', 'vereinskasse', 'festkasse', 'kassen app', 'flohmarkt kasse', 'pfand']],
-  at: [143445, 'de', ['kasse', 'vereinskasse', 'vereinsfest', 'weihnachtsmarkt', 'bonkasse', 'festkasse', 'kassen app', 'punschstand']],
-  pl: [143478, 'pl', ['kasa', 'kasa na stoisko', 'kiermasz', 'jarmark', 'kasa mobilna', 'stoisko', 'festyn', 'jarmark świąteczny']],
-  gb: [143444, 'en-GB', ['market stall pos', 'craft fair', 'bake sale', 'cash register', 'till', 'christmas market', 'pos', 'till app', 'market stall', 'school fair']],
-  us: [143441, 'en-US', ['market stall pos', 'craft fair', 'bake sale', 'cash register', 'pos', 'craft fair pos', 'vendor pos', 'farmers market', 'concession stand', 'simple cash register']],
+  cz: [143489, 'cs', ['pokladna', 'pokladna na stánek', 'kasa', 'jarmark', 'vánoční trh', 'festival', 'mobilní pokladna', 'stánek', 'pokladna zdarma', 'výdej objednávek', 'svařák', 'spolek', 'školní akce', 'vratná záloha']],
+  sk: [143496, 'sk', ['pokladňa', 'pokladňa na stánok', 'kasa', 'jarmok', 'vianočné trhy', 'festival', 'mobilná pokladňa', 'stánok', 'varené víno', 'pokladňa offline']],
+  de: [143443, 'de', ['kasse', 'kassensystem verein', 'vereinsfest', 'weihnachtsmarkt', 'bonkasse', 'vereinskasse', 'festkasse', 'kassen app', 'flohmarkt kasse', 'pfand', 'marktstand', 'glühwein', 'basar', 'einfache kasse']],
+  at: [143445, 'de', ['kasse', 'vereinskasse', 'vereinsfest', 'weihnachtsmarkt', 'bonkasse', 'festkasse', 'kassen app', 'punschstand', 'kassa', 'punsch', 'christkindlmarkt']],
+  pl: [143478, 'pl', ['kasa', 'kasa na stoisko', 'kiermasz', 'jarmark', 'kasa mobilna', 'stoisko', 'festyn', 'jarmark świąteczny', 'stragan', 'kaucja', 'kiermasz szkolny']],
+  gb: [143444, 'en-GB', ['market stall pos', 'craft fair', 'bake sale', 'cash register', 'till', 'christmas market', 'pos', 'till app', 'market stall', 'school fair', 'school fete', 'car boot sale', 'fete']],
+  us: [143441, 'en-US', ['market stall pos', 'craft fair', 'bake sale', 'cash register', 'pos', 'craft fair pos', 'vendor pos', 'farmers market', 'concession stand', 'simple cash register', 'booth', 'vendor', 'craft show', 'cash register app', 'fundraiser']],
   fr: [143442, 'fr', ['caisse marché', 'kermesse', 'buvette', 'caisse enregistreuse', 'caisse', 'marché de noël', 'caisse association', 'brocante']],
   it: [143450, 'it', ['cassa sagra', 'mercatino', 'cassa', 'registratore di cassa', 'sagra', 'mercatino di natale', 'cassa bar', 'bancarella']],
   es: [143454, 'es', ['caja mercadillo', 'feria', 'tpv', 'caja registradora', 'mercadillo', 'tpv puesto', 'caja', 'mercadillo navideño']],

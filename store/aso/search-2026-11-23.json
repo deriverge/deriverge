@@ -1297,6 +1297,294 @@
     "Festa do Desenho (4803)",
     "Arraiá da Mira (5)"
    ]
+  },
+  "cz|svařák": {
+   "results": 1,
+   "rank": null,
+   "top10MedianRatings": 2,
+   "top10MaxRatings": 2,
+   "top5": [
+    "Vánoce Brno (2)"
+   ]
+  },
+  "cz|spolek": {
+   "results": 22,
+   "rank": null,
+   "top10MedianRatings": 2,
+   "top10MaxRatings": 115,
+   "top5": [
+    "Zaletsi.cz – letenky a zájezdy (115)",
+    "Velkobílovičtí vinaři (9)",
+    "Pitland.cz (2)",
+    "Moje Divadlo (0)",
+    "Rádio Ostravan (2)"
+   ]
+  },
+  "cz|školní akce": {
+   "results": 1,
+   "rank": null,
+   "top10MedianRatings": 0,
+   "top10MaxRatings": 0,
+   "top5": [
+    "School Calendar & Tasks - Bell (0)"
+   ]
+  },
+  "cz|vratná záloha": {
+   "results": 0,
+   "rank": null,
+   "top10MedianRatings": null,
+   "top10MaxRatings": 0,
+   "top5": []
+  },
+  "sk|varené víno": {
+   "results": 1,
+   "rank": null,
+   "top10MedianRatings": 480,
+   "top10MaxRatings": 480,
+   "top5": [
+    "Schnapsen, 66, Sixty Six (480)"
+   ]
+  },
+  "sk|pokladňa offline": {
+   "results": 16,
+   "rank": 4,
+   "top10MedianRatings": 0,
+   "top10MaxRatings": 2,
+   "top5": [
+    "Tunder · Offline Cash Register (0)",
+    "PosKing (0)",
+    "Shoppish POS: Offline Cashier (0)",
+    "Tapkasa: Market Stall POS (0)",
+    "Excart POS: Cashier, Inventory (0)"
+   ]
+  },
+  "de|marktstand": {
+   "results": 22,
+   "rank": null,
+   "top10MedianRatings": 1,
+   "top10MaxRatings": 21352,
+   "top5": [
+    "Marktstand Kasse (3)",
+    "BoothLog - Marktstand-Verkäufe (0)",
+    "Mein Marktstand (0)",
+    "FarmVille 2: Raus auf's Land (21352)",
+    "Cropolis: Farm & Stadt bauen (5)"
+   ]
+  },
+  "de|glühwein": {
+   "results": 19,
+   "rank": null,
+   "top10MedianRatings": 1,
+   "top10MaxRatings": 10,
+   "top5": [
+    "Eis Haus & Glühwein Hütte (0)",
+    "Weihnachtsmaat (10)",
+    "Adventspfad (0)",
+    "Weihnachsmärkte 2026 (2)",
+    "Weihnachtsmärkte Deutschland (0)"
+   ]
+  },
+  "de|basar": {
+   "results": 121,
+   "rank": null,
+   "top10MedianRatings": 2,
+   "top10MaxRatings": 847,
+   "top5": [
+    "basarlino (847)",
+    "easybasar (150)",
+    "MyBASAR (3)",
+    "BAZAR - Partyspiel (0)",
+    "MukiBasar (7)"
+   ]
+  },
+  "de|einfache kasse": {
+   "results": 74,
+   "rank": null,
+   "top10MedianRatings": 7586,
+   "top10MaxRatings": 3652261,
+   "top5": [
+    "Offline POS – Einfache Kasse (0)",
+    "helloCash Registrierkasse (24)",
+    "Reisekasse-App (602)",
+    "VR Banking - einfach sicher (561730)",
+    "S-Invest - Wertpapiere & Börse (106696)"
+   ]
+  },
+  "at|kassa": {
+   "results": 171,
+   "rank": null,
+   "top10MedianRatings": 9,
+   "top10MaxRatings": 1199,
+   "top5": [
+    "PoS Kasse (4)",
+    "Offene Ladenkasse - Helfer (43)",
+    "Simple Cash (10)",
+    "QuickBon Registrierkasse (385)",
+    "Kleine Kassa (0)"
+   ]
+  },
+  "at|punsch": {
+   "results": 8,
+   "rank": null,
+   "top10MedianRatings": 0,
+   "top10MaxRatings": 14737,
+   "top5": [
+    "UFB: Fighting Wrestling Games (0)",
+    "tief graben - Hafun (kostenlos) (0)",
+    "Super Rock Boxing Kampf 2 Spiel kostenlos (0)",
+    "International Real-Box-Champion Spiel (0)",
+    "Schnopsn - Online Schnapsen (14737)"
+   ]
+  },
+  "at|christkindlmarkt": {
+   "results": 10,
+   "rank": null,
+   "top10MedianRatings": 0,
+   "top10MaxRatings": 1,
+   "top5": [
+    "Wien Reiseführer – 1435 Vienna (0)",
+    "Christmas Market Puzzle (1)",
+    "Salzburg Audioguide – 1756 (0)",
+    "Weihnachsmärkte 2026 (0)",
+    "Adventspfad (0)"
+   ]
+  },
+  "pl|stragan": {
+   "results": 180,
+   "rank": null,
+   "top10MedianRatings": 4980,
+   "top10MaxRatings": 875941,
+   "top5": [
+    "Instagram (662568)",
+    "Threads (22279)",
+    "Instants – an Instagram app (393)",
+    "Google Maps (259291)",
+    "Claude by Anthropic (5699)"
+   ]
+  },
+  "pl|kaucja": {
+   "results": 63,
+   "rank": null,
+   "top10MedianRatings": 3,
+   "top10MaxRatings": 32,
+   "top5": [
+    "Zakaucjowani: Deposit Return (32)",
+    "Kaucjonetka (5)",
+    "ButelkoZbieracz (0)",
+    "KaucjaGO (4)",
+    "Butelkomaty.pl Odzyskaj kaucje (11)"
+   ]
+  },
+  "pl|kiermasz szkolny": {
+   "results": 0,
+   "rank": null,
+   "top10MedianRatings": null,
+   "top10MaxRatings": 0,
+   "top5": []
+  },
+  "gb|school fete": {
+   "results": 37,
+   "rank": null,
+   "top10MedianRatings": 22,
+   "top10MaxRatings": 130283,
+   "top5": [
+    "Car Driving 2026 : School Game (29689)",
+    "School Jotter 3 (14)",
+    "mySchoolApp (29)",
+    "Barbie Dreamhouse Adventures (66280)",
+    "Burnt Ash Primary School (5)"
+   ]
+  },
+  "gb|car boot sale": {
+   "results": 170,
+   "rank": null,
+   "top10MedianRatings": 1411,
+   "top10MaxRatings": 1095441,
+   "top5": [
+    "UK CarBoot (1)",
+    "LocalCarBoots (1)",
+    "Ganddee: Second Hand Shops Map (133)",
+    "Amazon Shopping (1095441)",
+    "YardSale: Garage Sale Manager (0)"
+   ]
+  },
+  "gb|fete": {
+   "results": 158,
+   "rank": null,
+   "top10MedianRatings": 105,
+   "top10MaxRatings": 66280,
+   "top5": [
+    "FET: Alternative Dating (4183)",
+    "Acrylic Nails! (53355)",
+    "Makeover Spa BFF Dress Up Game (2)",
+    "Fete Finders (0)",
+    "Kinkoo: Kink, Fet BDSM Dating (3835)"
+   ]
+  },
+  "us|booth": {
+   "results": 182,
+   "rank": null,
+   "top10MedianRatings": 1301,
+   "top10MaxRatings": 17871,
+   "top5": [
+    "LOL Booth (2787)",
+    "BOOTH: Photo Booth (13)",
+    "Booth.Events - pro photo booth (976)",
+    "MixBooth (3187)",
+    "ThisBooth: vintage photobooth (36)"
+   ]
+  },
+  "us|vendor": {
+   "results": 200,
+   "rank": null,
+   "top10MedianRatings": 148,
+   "top10MaxRatings": 699478,
+   "top5": [
+    "VendorsMap: Markets & Fairs (144)",
+    "Alibaba.com B2B Trade App (116232)",
+    "Vendor App (5)",
+    "Vendora - Buy & Sell (152)",
+    "DHgate-Online Wholesale Stores (634657)"
+   ]
+  },
+  "us|craft show": {
+   "results": 153,
+   "rank": null,
+   "top10MedianRatings": 83,
+   "top10MaxRatings": 270938,
+   "top5": [
+    "Craft Price Calculator (146)",
+    "Michaels Stores (270938)",
+    "Craft Show Tracker Lite (0)",
+    "Craft DIY Tutorial - Learn Art (541)",
+    "Knit + Stitch Show (0)"
+   ]
+  },
+  "us|cash register app": {
+   "results": 169,
+   "rank": null,
+   "top10MedianRatings": 6,
+   "top10MaxRatings": 1561,
+   "top5": [
+    "Simple Cash Register (3)",
+    "PoS Cash Register (8)",
+    "Cash Register Express (238)",
+    "Supermarket Cashier Simulator (1561)",
+    "Register Helper - Easy Cash (99)"
+   ]
+  },
+  "us|fundraiser": {
+   "results": 154,
+   "rank": null,
+   "top10MedianRatings": 334,
+   "top10MaxRatings": 132952,
+   "top5": [
+    "GoFundMe: Fundraise and Give (49295)",
+    "RAISE365 (2118)",
+    "Double Good (45078)",
+    "ACS FUNdraising (391)",
+    "MoneyDolly (132952)"
+   ]
   }
  },
  "hints": {
@@ -2306,6 +2594,223 @@
    "exact": false,
    "position": null,
    "hints": []
+  },
+  "cz|svařák": {
+   "exact": false,
+   "position": null,
+   "hints": []
+  },
+  "cz|spolek": {
+   "exact": false,
+   "position": null,
+   "hints": [
+    "spolek rozjezdise",
+    "jiri spolek"
+   ]
+  },
+  "cz|školní akce": {
+   "exact": false,
+   "position": null,
+   "hints": []
+  },
+  "cz|vratná záloha": {
+   "exact": false,
+   "position": null,
+   "hints": []
+  },
+  "sk|varené víno": {
+   "exact": false,
+   "position": null,
+   "hints": []
+  },
+  "sk|pokladňa offline": {
+   "exact": false,
+   "position": null,
+   "hints": []
+  },
+  "de|marktstand": {
+   "exact": false,
+   "position": null,
+   "hints": [
+    "marktstand kasse",
+    "boothlog - marktstand-verkäufe",
+    "mein marktstand"
+   ]
+  },
+  "de|glühwein": {
+   "exact": false,
+   "position": null,
+   "hints": []
+  },
+  "de|basar": {
+   "exact": true,
+   "position": 2,
+   "hints": [
+    "basarlino",
+    "basar",
+    "bazaraki",
+    "basart",
+    "basarsoft",
+    "kasse basar",
+    "basar & flohmarkt: polvendo",
+    "basari house adventure game",
+    "basara",
+    "basarchef"
+   ]
+  },
+  "de|einfache kasse": {
+   "exact": false,
+   "position": null,
+   "hints": [
+    "offline pos – einfache kasse"
+   ]
+  },
+  "at|kassa": {
+   "exact": true,
+   "position": 3,
+   "hints": [
+    "kassabuch",
+    "kassa spiel",
+    "kassa",
+    "kassandra planner",
+    "inpos — kassa va ijara",
+    "kupfticket scan & kassa",
+    "kassa!",
+    "kassaapparat deluxe",
+    "kassabus",
+    "kassa security"
+   ]
+  },
+  "at|punsch": {
+   "exact": false,
+   "position": null,
+   "hints": [
+    "punschhutte"
+   ]
+  },
+  "at|christkindlmarkt": {
+   "exact": false,
+   "position": null,
+   "hints": []
+  },
+  "pl|stragan": {
+   "exact": false,
+   "position": null,
+   "hints": [
+    "straganik u helci"
+   ]
+  },
+  "pl|kaucja": {
+   "exact": true,
+   "position": 2,
+   "hints": [
+    "kaucja.pl",
+    "kaucja",
+    "kaucja return",
+    "moja kaucja",
+    "kaucjago",
+    "kaucjago sp. z o.o.",
+    "kapsel – kaucja za butelki",
+    "kaucjusz – butelki z kaucją",
+    "pani kaucja"
+   ]
+  },
+  "pl|kiermasz szkolny": {
+   "exact": false,
+   "position": null,
+   "hints": []
+  },
+  "gb|school fete": {
+   "exact": false,
+   "position": null,
+   "hints": []
+  },
+  "gb|car boot sale": {
+   "exact": true,
+   "position": 1,
+   "hints": [
+    "car boot sale"
+   ]
+  },
+  "gb|fete": {
+   "exact": false,
+   "position": null,
+   "hints": [
+    "notre fête",
+    "tadam - fête et cadeaux",
+    "فطير دهب | feteer dahab",
+    "jocuri de fete",
+    "jocuri fete",
+    "fête de l&#39;huma",
+    "fetelle lingerie",
+    "fete finders",
+    "fête des vendanges neuchatel",
+    "fête du bruit"
+   ]
+  },
+  "us|booth": {
+   "exact": true,
+   "position": 9,
+   "hints": [
+    "booth.events",
+    "boothcool",
+    "photo booth",
+    "boothiq",
+    "booth copilot",
+    "boothbook",
+    "boothmate",
+    "boothee",
+    "booth",
+    "booth event"
+   ]
+  },
+  "us|vendor": {
+   "exact": true,
+   "position": 7,
+   "hints": [
+    "vendormate credentialing",
+    "vendor cafe",
+    "vendor access",
+    "vendor hub",
+    "vendormate",
+    "vendorstat",
+    "vendor",
+    "vendor credentialing",
+    "vendora",
+    "vendor id"
+   ]
+  },
+  "us|craft show": {
+   "exact": false,
+   "position": null,
+   "hints": [
+    "craft show tracker lite"
+   ]
+  },
+  "us|cash register app": {
+   "exact": true,
+   "position": 1,
+   "hints": [
+    "cash register app",
+    "abc123 cash register app",
+    "tri-c cash register app"
+   ]
+  },
+  "us|fundraiser": {
+   "exact": true,
+   "position": 1,
+   "hints": [
+    "fundraiser",
+    "fundraiser assist",
+    "scoreboard fundraiser",
+    "snap fundraiser",
+    "blast fundraiser",
+    "popcorn fundraiser",
+    "team fundraiser",
+    "2day fundraiser",
+    "bloomerang fundraiser",
+    "fundraiser assist 100"
+   ]
   }
  },
  "play": {
@@ -3659,6 +4164,318 @@
     "1001 Festas (50000+ / 363 hodn.)",
     "Que Es? Juego de Fiesta (1000+ / 0 hodn.)",
     "Sleepover Party Ideas (10000+ / 149 hodn.)"
+   ]
+  },
+  "cz|svařák": {
+   "results": 50,
+   "rank": null,
+   "top5MedianInstalls": 10000,
+   "top5MedianRatings": 215,
+   "top5": [
+    "SVARA BY FORTEGAMES ( SVARKA ) (500000+ / 7846 hodn.)",
+    "Svátky (10000+ / 215 hodn.)",
+    "Velká Bystřice (100+ / 0 hodn.)",
+    "Svátky (1000+ / 12 hodn.)",
+    "Svátky (100000+ / 2700 hodn.)"
+   ]
+  },
+  "cz|spolek": {
+   "results": 50,
+   "rank": null,
+   "top5MedianInstalls": 100000,
+   "top5MedianRatings": 0,
+   "top5": [
+    "Mitt PRO (10000+ / 0 hodn.)",
+    "ARCI (100000+ / 0 hodn.)",
+    "Svenskalag (100000+ / 0 hodn.)",
+    "Spolubidlo (1000+ / 6 hodn.)",
+    "Sporcle : Play Trivia Quizzes (500000+ / 2970 hodn.)"
+   ]
+  },
+  "cz|školní akce": {
+   "results": 50,
+   "rank": null,
+   "top5MedianInstalls": 5000,
+   "top5MedianRatings": 25,
+   "top5": [
+    "Školáček - Zábavné učení (10000+ / 102 hodn.)",
+    "Škola Online (500000+ / 5849 hodn.)",
+    "Školáček EDU (50+ / 0 hodn.)",
+    "Školka v mobilu (5000+ / 25 hodn.)",
+    "Digiškolka (5000+ / 13 hodn.)"
+   ]
+  },
+  "cz|vratná záloha": {
+   "results": 30,
+   "rank": null,
+   "top5MedianInstalls": 1000000,
+   "top5MedianRatings": 14446,
+   "top5": [
+    "VaultDrive: USB Photo Backup (1000+ / 0 hodn.)",
+    "Racing Classics PRO: Drag Race (10000000+ / 53010 hodn.)",
+    "Deleted File Recovery (1000000+ / 14446 hodn.)",
+    "Top Drives - Car Race Battles (10000000+ / 450458 hodn.)",
+    "All Backup & Restore (1000000+ / 5560 hodn.)"
+   ]
+  },
+  "sk|varené víno": {
+   "results": 50,
+   "rank": null,
+   "top5MedianInstalls": 50000,
+   "top5MedianRatings": 697,
+   "top5": [
+    "Vivino: Drink the Right Wine (10000000+ / 247832 hodn.)",
+    "Wine Profiles & Vine Varieties (5000+ / 49 hodn.)",
+    "Wine ID: Scanner & Tracker (50000+ / 2749 hodn.)",
+    "Varenje: Don’t Touch Berries (10000+ / 697 hodn.)",
+    "Varsom (50000+ / 71 hodn.)"
+   ]
+  },
+  "sk|pokladňa offline": {
+   "results": 50,
+   "rank": null,
+   "top5MedianInstalls": 100000,
+   "top5MedianRatings": 581,
+   "top5": [
+    "Elementary POS - cash register (100000+ / 581 hodn.)",
+    "POS Cashier App Offline (5000+ / 39 hodn.)",
+    "PoS Cash Register (100000+ / 589 hodn.)",
+    "Cash Register : Shopping Game (1000000+ / 2446 hodn.)",
+    "Offline Shop - Inventory POS (50000+ / 226 hodn.)"
+   ]
+  },
+  "de|marktstand": {
+   "results": 10,
+   "rank": null,
+   "top5MedianInstalls": 1000000,
+   "top5MedianRatings": 5276,
+   "top5": [
+    "marktguru - leaflets & offers (5000000+ / 40088 hodn.)",
+    "Marktkauf (100000+ / 3464 hodn.)",
+    "Prospekte und Angebote app (1000000+ / 16777 hodn.)",
+    "Mädchenflohmarkt Second Hand (1000000+ / 5276 hodn.)",
+    "comdirect trading App (100000+ / 1897 hodn.)"
+   ]
+  },
+  "de|glühwein": {
+   "results": 30,
+   "rank": null,
+   "top5MedianInstalls": 1000,
+   "top5MedianRatings": 5,
+   "top5": [
+    "Evergreen: Relationship Growth (100000+ / 9689 hodn.)",
+    "Glut' and free (10000+ / 0 hodn.)",
+    "Glück Auf Gera (500+ / 0 hodn.)",
+    "GEKLÄRT (1000+ / 147 hodn.)",
+    "Spieglein Spieglein (1000+ / 5 hodn.)"
+   ]
+  },
+  "de|basar": {
+   "results": 30,
+   "rank": null,
+   "top5MedianInstalls": 10000,
+   "top5MedianRatings": 6,
+   "top5": [
+    "basarlino | Basar-App (50000+ / 1344 hodn.)",
+    "easybasar - Consignment App (10000+ / 68 hodn.)",
+    "Basar & Flohmarkt: Polvendo (50+ / 6 hodn.)",
+    "Basaar - Buy and sell preloved (10000+ / 0 hodn.)",
+    "MyBASAR (10+ / 0 hodn.)"
+   ]
+  },
+  "de|einfache kasse": {
+   "results": 30,
+   "rank": null,
+   "top5MedianInstalls": 500,
+   "top5MedianRatings": 0,
+   "top5": [
+    "PoS Cash Register (100000+ / 589 hodn.)",
+    "Cash – Event Cash Register (100+ / 0 hodn.)",
+    "Simple POS: Cash Register (500+ / 0 hodn.)",
+    "Elementary POS - cash register (100000+ / 581 hodn.)",
+    "Simple POS: Cash Register App (10+ / 0 hodn.)"
+   ]
+  },
+  "at|kassa": {
+   "results": 30,
+   "rank": null,
+   "top5MedianInstalls": 1000,
+   "top5MedianRatings": 0,
+   "top5": [
+    "PoS Cash Register (100000+ / 589 hodn.)",
+    "kassa security (5000+ / 0 hodn.)",
+    "Kassa: Private Money Tracker (1+ / 0 hodn.)",
+    "Kassa (1000+ / 0 hodn.)",
+    "kassa.digital (100+ / 0 hodn.)"
+   ]
+  },
+  "at|punsch": {
+   "results": 12,
+   "rank": null,
+   "top5MedianInstalls": 50000,
+   "top5MedianRatings": 474,
+   "top5": [
+    "Potion Punch (10000000+ / 332994 hodn.)",
+    "Potion Punch 2: Cooking Quest (1000000+ / 57852 hodn.)",
+    "PFS - Back Office Grossiste (1000+ / 0 hodn.)",
+    "Puna: Beginner Calisthenics (100+ / 0 hodn.)",
+    "Resch&Frisch (50000+ / 474 hodn.)"
+   ]
+  },
+  "at|christkindlmarkt": {
+   "results": 9,
+   "rank": null,
+   "top5MedianInstalls": 100,
+   "top5MedianRatings": 0,
+   "top5": [
+    "Christ is King (100+ / 0 hodn.)",
+    "Chris Rudd Solicitors (50+ / 0 hodn.)",
+    "Chris Leong (10000+ / 0 hodn.)",
+    "Christ Everywhere (50+ / 0 hodn.)",
+    "Kristianstads GK&D (100+ / 0 hodn.)"
+   ]
+  },
+  "pl|stragan": {
+   "results": 12,
+   "rank": null,
+   "top5MedianInstalls": 5000,
+   "top5MedianRatings": 0,
+   "top5": [
+    "The Crows Watch (100+ / 0 hodn.)",
+    "Stamurai: Stuttering Therapy (100000+ / 6915 hodn.)",
+    "Chest Strap HR Monitor (1000+ / 0 hodn.)",
+    "Strangrs - Meet & Hang Out IRL (5000+ / 0 hodn.)",
+    "Strava: Run, Bike, Walk (100000000+ / 1223595 hodn.)"
+   ]
+  },
+  "pl|kaucja": {
+   "results": 13,
+   "rank": null,
+   "top5MedianInstalls": 1000,
+   "top5MedianRatings": 41,
+   "top5": [
+    "Kaucjonetka - Twoja kaucja (1000+ / 41 hodn.)",
+    "KaucjaPL - Punkty Zbiórki (5000+ / 41 hodn.)",
+    "Deposit Rush - collect & earn (10+ / 0 hodn.)",
+    "Butelkomat: Kaucja i Zwroty (5000+ / 42 hodn.)",
+    "Pani Kaucja: bony kaucyjne (50+ / 0 hodn.)"
+   ]
+  },
+  "pl|kiermasz szkolny": {
+   "results": 11,
+   "rank": null,
+   "top5MedianInstalls": 50000,
+   "top5MedianRatings": 176,
+   "top5": [
+    "Kids Chronicles (50000+ / 176 hodn.)",
+    "Spooky Soirée (100000+ / 9160 hodn.)",
+    "Tell a Story - Speech & Logic (1000000+ / 5790 hodn.)",
+    "True or False — Challenge Quiz (1000+ / 0 hodn.)",
+    "Ravensburger Professor kNOW! (10000+ / 0 hodn.)"
+   ]
+  },
+  "gb|school fete": {
+   "results": 14,
+   "rank": null,
+   "top5MedianInstalls": 1000,
+   "top5MedianRatings": 0,
+   "top5": [
+    "School Girls Simulator (10000000+ / 758974 hodn.)",
+    "School Fever (1000+ / 0 hodn.)",
+    "Fettes College, Edinburgh (100+ / 0 hodn.)",
+    "E School for all (50000+ / 0 hodn.)",
+    "Girls Preparatory School (50+ / 0 hodn.)"
+   ]
+  },
+  "gb|car boot sale": {
+   "results": 20,
+   "rank": null,
+   "top5MedianInstalls": 100000,
+   "top5MedianRatings": 0,
+   "top5": [
+    "Car Boot Sales UK (100+ / 0 hodn.)",
+    "Boots: Beauty & Pharmacy (5000000+ / 252350 hodn.)",
+    "boot Düsseldorf App (100000+ / 0 hodn.)",
+    "Carwow: Buy. Sell. Wow. (100000+ / 15124 hodn.)",
+    "Buster Boats (1000+ / 0 hodn.)"
+   ]
+  },
+  "gb|fete": {
+   "results": 50,
+   "rank": null,
+   "top5MedianInstalls": 100,
+   "top5MedianRatings": 0,
+   "top5": [
+    "Fete Finders (10+ / 0 hodn.)",
+    "Fete TV (500+ / 0 hodn.)",
+    "FETE (100+ / 0 hodn.)",
+    "My Fete Tickets Scanner (100+ / 0 hodn.)",
+    "FET.COM (5000+ / 0 hodn.)"
+   ]
+  },
+  "us|booth": {
+   "results": 30,
+   "rank": null,
+   "top5MedianInstalls": 1000,
+   "top5MedianRatings": 0,
+   "top5": [
+    "AI Photo Booth Pro: Software (1000+ / 0 hodn.)",
+    "LumaBooth Event Photobooth App (10000+ / 0 hodn.)",
+    "JemBooth - Photo Booth Strips (1000+ / 0 hodn.)",
+    "BoothPop: Photo Booth Camera (1000+ / 0 hodn.)",
+    "Instabooth Photo Booth (100+ / 0 hodn.)"
+   ]
+  },
+  "us|vendor": {
+   "results": 28,
+   "rank": null,
+   "top5MedianInstalls": 1000,
+   "top5MedianRatings": 0,
+   "top5": [
+    "Vendor App (10000+ / 78 hodn.)",
+    "vendor: Buy & Sell Locally (100+ / 0 hodn.)",
+    "Vendors App: Business Suite (1000+ / 0 hodn.)",
+    "Eatables Vendor (500+ / 0 hodn.)",
+    "VendorCafe (5000+ / 22 hodn.)"
+   ]
+  },
+  "us|craft show": {
+   "results": 30,
+   "rank": null,
+   "top5MedianInstalls": 10,
+   "top5MedianRatings": 0,
+   "top5": [
+    "Craft Show Tracker: Booth Log (1+ / 0 hodn.)",
+    "CraftShow Essentials (1+ / 0 hodn.)",
+    "Craft Brewers Conference 2026 (5000+ / 0 hodn.)",
+    "Showrizo: Watch Short Series (1000+ / 351 hodn.)",
+    "CraftSpot: Discover Handmade (10+ / 0 hodn.)"
+   ]
+  },
+  "us|cash register app": {
+   "results": 29,
+   "rank": null,
+   "top5MedianInstalls": 100000,
+   "top5MedianRatings": 581,
+   "top5": [
+    "PoS Cash Register (100000+ / 589 hodn.)",
+    "Elementary POS - cash register (100000+ / 581 hodn.)",
+    "Cash Register (500000+ / 20485 hodn.)",
+    "Simple POS: Cash Register (500+ / 0 hodn.)",
+    "POS Billing : Cash Register (1000+ / 0 hodn.)"
+   ]
+  },
+  "us|fundraiser": {
+   "results": 30,
+   "rank": null,
+   "top5MedianInstalls": 100000,
+   "top5MedianRatings": 1136,
+   "top5": [
+    "GoFundMe: Fundraise and Give (5000000+ / 82839 hodn.)",
+    "MoneyDolly - Fundraising (100000+ / 27065 hodn.)",
+    "givestar  - Fundraising App (10000+ / 158 hodn.)",
+    "DonorDrive Charity Fundraising (10000+ / 1136 hodn.)",
+    "ACS FUNdraising (100000+ / 766 hodn.)"
    ]
   }
  }
