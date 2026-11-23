@@ -90,8 +90,14 @@ export const gb = {
     // Druhá polovina jsou německá slova: en-GB se indexuje i v Německu a Rakousku. Jen výrazy, které obchod našeptává (měření 23. 11.).
     keywords: 'cash,register,pos,fete,bake,sale,car,boot,school,vereinskasse,wechselgeld,rückgeldrechner,kassieren',
   },
-  // Google Play: en-GB si bere texty en-US (obchod je dosadí sám), vlastní listing zatím nezakládáme.
-  play: null,
+  // Google Play: vlastní listing en-GB (zatím tam není, ukazoval se americký). Americký text teď mluví o bake sales a sales tax,
+  // evropským zařízením v britské angličtině sedí víc vánoční trhy, stánky a DPH v ceně.
+  play: {
+    locale: 'en-GB',
+    title: 'Tapkasa: Market Stall Till',
+    shortXmas: 'Till for Christmas markets and craft fairs. No card processing, works offline.',
+    shortYear: 'Till for market stalls, craft fairs and fetes. No card processing, offline.',
+  },
   promoXmas: 'Christmas market, craft fair or school fete? Type in your menu and sell with no sign-up and no internet. Mug deposits in one tap, numbered orders on a second phone.',
   promoYear: 'Market stall, craft fair or school fete? Type in your menu and start selling with no sign-up and no internet. Cup deposits in one tap, numbered orders on a second phone.',
   ...wn('mug or cup'),

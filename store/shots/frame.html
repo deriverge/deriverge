@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<title>Tapkasa: obchodní snímek</title>
+<style>
+  /* Každý snímek je barevná karta jako položky v aplikaci: červená, zelená, žlutá, modrá, grafit.
+     Titulek je velký, aby šel přečíst i na zmenšenině ve výsledcích hledání (kolem 230 px na šířku). */
+  @font-face{font-family:"Archivo";font-weight:400 700;src:url("../../tapkasa/fonts/archivo-latin-ext.woff2") format("woff2");
+    unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF}
+  @font-face{font-family:"Archivo";font-weight:400 700;src:url("../../tapkasa/fonts/archivo-latin.woff2") format("woff2");
+    unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{width:100%;height:100%;overflow:hidden}
+  body{font-family:"Archivo","Helvetica Neue",Arial,sans-serif;-webkit-font-smoothing:antialiased}
+  #stage{position:relative;width:100%;height:100%;overflow:hidden}
+  .copy{position:absolute;left:0;right:0;text-align:center}
+  .copy h1{font-weight:700;letter-spacing:-.035em;line-height:1.03;white-space:nowrap}
+  .copy h1 span{display:block}
+  .copy p{font-weight:500;letter-spacing:-.01em;line-height:1.25;white-space:nowrap}
+  .dev{position:absolute;background:#0B0A08;box-shadow:0 .4rem 1.2rem rgba(0,0,0,.18),0 2.2rem 5rem rgba(0,0,0,.28)}
+  .dev .scr{width:100%;height:100%;overflow:hidden;background:#FBFAF7}
+  .dev img{display:block;width:100%;height:auto}
+  .pill{position:absolute;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#fff;border-radius:99rem;white-space:nowrap;
+        box-shadow:0 .5rem 1.4rem rgba(0,0,0,.25)}
+  .bubble{position:absolute;display:flex;align-items:center;background:#12100D;color:#fff;font-weight:600;border-radius:99rem;white-space:nowrap;
+          box-shadow:0 .8rem 2.4rem rgba(0,0,0,.35)}
+  .bubble svg{flex:0 0 auto;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+</style>
+</head>
+<body>
+<div id="stage"></div>
+<script>
+(function () {
+  var S = window.__SPEC;                       // { w, h, kind, tone, lines:[l1,l2,sub], layout, a:{src,aspect,tablet}, b:{…}, pills:[a,b], bubble }
+  var W = 100, H = S.h / S.w * 100;            // rozměry v rem; 1 rem = 1 % šířky plátna
+  document.documentElement.style.fontSize = (innerWidth / 100) + "px";
+  var TONE = {
+    red:    { bg: ["#D4432B", "#B02E18"], ink: "#FFFFFF", acc: "#FFD84D", sub: "rgba(255,255,255,.88)" },
+    green:  { bg: ["#15865A", "#0C5C3B"], ink: "#FFFFFF", acc: "#FFD84D", sub: "rgba(255,255,255,.88)" },
+    yellow: { bg: ["#F8D447", "#EFC023"], ink: "#1D1600", acc: "#B3261A", sub: "rgba(29,22,0,.78)" },
+    blue:   { bg: ["#2A63D4", "#17449C"], ink: "#FFFFFF", acc: "#FFD84D", sub: "rgba(255,255,255,.88)" },
+    ink:    { bg: ["#2B313A", "#15181D"], ink: "#FFFFFF", acc: "#FFD84D", sub: "rgba(255,255,255,.85)" }
+  }[S.tone];
+  var st = document.getElementById("stage");
+  st.style.background = "linear-gradient(180deg," + TONE.bg[0] + " 0%," + TONE.bg[1] + " 100%)";
+  var wide = S.kind === "tablet";              // plátno 3:4
+  var top = wide ? 6.2 : (H < 190 ? 8.5 : 12.5);
+  var fsMax = wide ? 8.6 : 12.2, side = wide ? 6 : 5;
+  var esc = function (s) { return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;"); };
+  st.innerHTML = '<div class="copy" id="copy" style="top:' + top + 'rem;color:' + TONE.ink + '">' +
+    '<h1 id="h1"><span>' + esc(S.lines[0]) + '</span><span style="color:' + TONE.acc + '">' + esc(S.lines[1]) + "</span></h1>" +
+    '<p id="sub" style="color:' + TONE.sub + '">' + esc(S.lines[2]) + "</p></div>";
+  var h1 = document.getElementById("h1"), sub = document.getElementById("sub");
+  // Titulek se zmenšuje, dokud se oba řádky nevejdou na šířku.
+  function fit(el, max, min) {
+    var fs = max; el.style.fontSize = fs + "rem";
+    var lim = (W - 2 * side) * innerWidth / 100;
+    while (fs > min) {
+      var w = 0; [].forEach.call(el.children.length ? el.children : [el], function (c) {
+        var r = document.createRange(); r.selectNodeContents(c); w = Math.max(w, r.getBoundingClientRect().width); });
+      if (w <= lim) { break; }
+      fs -= 0.1; el.style.fontSize = fs + "rem";
+    }
+    return fs;
+  }
+  function device(d, wRem, x, y, z) {
+    var pad = d.tablet ? wRem * 0.022 : wRem * 0.028, rad = d.tablet ? wRem * 0.055 : wRem * 0.135;
+    var hRem = (wRem - 2 * pad) * d.aspect + 2 * pad;
+    var el = document.createElement("div"); el.className = "dev";
+    el.style.cssText = "width:" + wRem + "rem;height:" + hRem + "rem;left:" + x + "rem;top:" + y + "rem;padding:" + pad + "rem;border-radius:" + rad + "rem;z-index:" + z;
+    el.innerHTML = '<div class="scr" style="border-radius:' + (rad - pad) + 'rem"><img src="' + d.src + '" alt=""></div>';
+    st.appendChild(el);
+    return { w: wRem, h: hRem, x: x, y: y };
+  }
+  function hOf(d, wRem) { var pad = d.tablet ? wRem * 0.022 : wRem * 0.028; return (wRem - 2 * pad) * d.aspect + 2 * pad; }
+  function wOf(d, hRem) { var k = d.tablet ? 0.022 : 0.028; return hRem / ((1 - 2 * k) * d.aspect + 2 * k); }
+  function pill(text, color, x, y, fs) {
+    var el = document.createElement("div"); el.className = "pill"; el.textContent = text;
+    el.style.cssText = "left:" + x + "rem;top:" + y + "rem;background:" + color + ";font-size:" + fs + "rem;padding:" + fs * 0.62 + "rem " + fs * 1.15 + "rem;z-index:9";
+    st.appendChild(el);
+  }
+  function place() {
+    fit(h1, fsMax, 4);
+    var hf = parseFloat(h1.style.fontSize);
+    sub.style.marginTop = hf * 0.3 + "rem";
+    fit(sub, Math.min(hf * 0.4, wide ? 3.3 : 4.6), 2);
+    var px = innerWidth / 100;
+    var y0 = top + document.getElementById("copy").offsetHeight / px + (wide ? 4.4 : 6.2);
+    var bottom = wide ? 4.5 : 5.5;
+    if (S.layout === "single") {
+      var hh = H - y0 - bottom, ww = wOf(S.a, hh), maxW = wide ? 80 : 84;
+      if (ww > maxW) { ww = maxW; }
+      device(S.a, ww, (W - ww) / 2, y0, 1);
+    } else {
+      // dvě zařízení. Telefon: zadní vpravo nahoře (přesahuje okraj), přední vlevo dole.
+      // Tablet (plátno 3:4): tablet vzadu vlevo, telefon vpředu vpravo, ať jsou vidět čísla objednávek.
+      var back, front, pf = wide ? 1.9 : 2.7;
+      if (wide) {
+        back = device(S.b, 84, 5, y0, 1);
+        var hFw = Math.min(H - y0 - bottom - 8, hOf(S.a, 39)), wFw = wOf(S.a, hFw);
+        front = device(S.a, wFw, W - wFw - 6, H - bottom - hFw, 3);
+      } else {
+        var wB = H < 190 ? 52 : 62;
+        back = device(S.b, wB, W - wB + 9, y0, 1);
+        var hF = Math.min(H - y0 - bottom - 22, hOf(S.a, 56)), wF = wOf(S.a, hF);
+        front = device(S.a, wF, 5, H - bottom - hF, 3);
+      }
+      if (S.pills) {
+        pill(S.pills[1], S.tone === "green" ? "#12100D" : "#127A4E", back.x + 6, back.y - pf * 1.15, pf);
+        pill(S.pills[0], "#D6402A", front.x + (wide ? 4 : 6), front.y - pf * 1.15, pf);
+      }
+      if (S.bubble) {
+        var bf = wide ? 2.5 : 3.5;
+        var el = document.createElement("div"); el.className = "bubble";
+        el.innerHTML = '<svg viewBox="0 0 24 24" style="width:' + bf * 1.25 + "rem;height:" + bf * 1.25 + "rem;margin-right:" + bf * 0.45 + 'rem"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13"/></svg>' + esc(S.bubble);
+        el.style.cssText = (wide ? "left:9rem;top:" + (H - bottom - 22) + "rem" : "right:4rem;top:" + Math.min(back.y + back.h + 4, H - bottom - bf * 2.6) + "rem") +
+          ";font-size:" + bf + "rem;padding:" + bf * 0.7 + "rem " + bf * 1.2 + "rem;z-index:8";
+        st.appendChild(el);
+      }
+    }
+  }
+  var imgs = [S.a, S.b].filter(Boolean).map(function (d) { return new Promise(function (ok) { var i = new Image(); i.onload = i.onerror = ok; i.src = d.src; }); });
+  Promise.all(imgs.concat(document.fonts ? [document.fonts.load('700 10px "Archivo"', S.lines.join(" ")), document.fonts.load('500 10px "Archivo"', S.lines[2])] : []))
+    .then(function () { return document.fonts ? document.fonts.ready : null; })
+    .then(function () { place(); window.__ready = true; });
+})();
+</script>
+</body>
+</html>
