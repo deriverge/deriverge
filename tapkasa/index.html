@@ -8707,8 +8707,9 @@
     // aby základ a daň daly dohromady přesně celkovou tržbu; to platí
     // i s připočtenou daní (zboží bez daně + daň = tržba).
     var rowMap = {};
-    var putRow = function (key, base, tax) {
+    var putRow = function (key, base, tax, incl) {
       if (!rowMap[key]) { rowMap[key] = { rate: key === "" ? null : parseFloat(key), base: 0, tax: 0 }; }
+      if (incl) { rowMap[key].incl = true; }
       rowMap[key].base = vr(rowMap[key].base + base);
       rowMap[key].tax = vr(rowMap[key].tax + tax);
     };
@@ -8718,7 +8719,7 @@
         var gross = inclRates[key];
         var r = inclAny && key !== "" ? parseFloat(key) : null;
         var base = r === null ? vr(gross) : vr(gross / (1 + r / 100));
-        putRow(r === null ? "" : key, base, vr(gross - base));
+        putRow(r === null ? "" : key, base, vr(gross - base), true);
       });
       Object.keys(added).forEach(function (key) { putRow(key, added[key].base, added[key].tax); });
     }
@@ -8727,8 +8728,10 @@
       return (parseFloat(a) || 0) - (parseFloat(b) || 0);
     }).forEach(function (key) {
       var row = rowMap[key];
-      if (!row.base && !row.tax) { return; }
-      vatRows.push(row);
+      // nulový řádek jen z připočtené daně (třeba samé zálohy) se vynechá;
+      // u cen s DPH zůstává rozpis, jak byl
+      if (!row.base && !row.tax && !row.incl) { return; }
+      vatRows.push({ rate: row.rate, base: row.base, tax: row.tax });
       vatBase = vr(vatBase + row.base);
       vatTax = vr(vatTax + row.tax);
     });
