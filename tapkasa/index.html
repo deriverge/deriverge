@@ -48,7 +48,7 @@
     --sunk:#F2EEE6;
     --ink:#15120E;
     --ink-2:#5F5749;
-    --ink-3:#8C8474;
+    --ink-3:#736B5C;
     --rule:#E4DFD5;
     --accent:#D6402A;
     --accent-dk:#B93520;
@@ -490,6 +490,26 @@
 
   /* ---------- počítadlo plateb zdarma ---------- */
   .fcnt{display:inline-block;margin-left:6px;padding:1px 7px;border-radius:999px;background:var(--sunk);color:var(--ink-2);font-size:11px;font-weight:700;vertical-align:1px}
+  button.fcnt{border:0;font-family:inherit;position:relative}
+
+  /* ---------- cíle pro prst ----------
+     Malá tlačítka (krokovač kusů, křížky, šipky, barva) zůstávají na pohled
+     stejná, ale plocha pro ťuknutí má kolem sebe rezervu, celkem aspoň
+     44 × 44 bodů. Na stánku v rukavicích se do třicetibodového kroužku
+     netrefovalo. */
+  .step button,.toast button.x,.nudge .x,.nudge .go,.tx .del,.served .drop,.edit .mv,.edit .rm,.edit .sw,.edit .sg,
+  .arch .ab,button.fcnt,.act.ghostlink,.tour-skip{position:relative}
+  /* název akce ořezává dlouhý text (overflow), plochu mu proto zvětšuje
+     odsazení vyrovnané záporným okrajem */
+  button.top-name{padding:16px 14px 10px 16px;margin:-15px -14px -10px -16px;max-width:calc(100% + 30px)}
+  .step button::after,.nudge .x::after,.edit .sw::after{content:"";position:absolute;inset:-7px}
+  .toast button.x::after{content:"";position:absolute;inset:-10px -8px}
+  .nudge .go::after{content:"";position:absolute;inset:-6px 0}
+  .tx .del::after,.served .drop::after{content:"";position:absolute;inset:-8px -6px -8px -4px}
+  .edit .mv::after,.edit .rm::after,.arch .ab::after{content:"";position:absolute;inset:-6px -3px}
+  .edit .sg::after{content:"";position:absolute;inset:-6px -4px}
+  button.fcnt::after{content:"";position:absolute;inset:-14px -8px}
+  .act.ghostlink::after,.tour-skip::after{content:"";position:absolute;inset:-8px -6px}
 
   /* ---------- výběr jazyka / měny ---------- */
   .picker{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px;max-height:52dvh;overflow-y:auto;padding-bottom:2px}
@@ -655,8 +675,8 @@
   /* ---------- výběr barvy a přepínač režimu ---------- */
   .sw{flex:0 0 auto;width:30px;height:30px;border-radius:8px;border:1px solid rgba(0,0,0,.18)}
   .sw:active{transform:scale(.94)}
-  .sw.none{background:var(--surface);position:relative;overflow:hidden}
-  .sw.none::after{content:"";position:absolute;left:-4px;top:13px;width:38px;height:1px;background:var(--ink-3);transform:rotate(-45deg)}
+  /* přeškrtnutí kreslí pozadí; ::after je volné pro plochu ťuknutí */
+  .sw.none{background:linear-gradient(to top right,transparent calc(50% - .7px),var(--ink-3) calc(50% - .7px),var(--ink-3) calc(50% + .7px),transparent calc(50% + .7px)),var(--surface)}
 
   .wheelhead{margin-top:20px;font-size:11px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3)}
   .wheelwrap{display:flex;align-items:center;gap:18px;margin-top:12px;flex-wrap:wrap}
