@@ -8,6 +8,7 @@ refreshed in the browser by /js/site.js. The folder starts with an underscore, s
 """
 import datetime as dt
 import html
+import importlib.util
 import json
 import os
 import re
@@ -75,7 +76,43 @@ def fmt(n, sep):
     return f'{n:,}'.replace(',', sep)
 
 
-def page(lang, data, tr, en, langs_present):
+def _module(rel, name):
+    spec = importlib.util.spec_from_file_location(name, os.path.join(ROOT, rel))
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+def app_pages():
+    """Fixbill templates and Tapkasa pages per language, read from the two app builders (labels are their link texts).
+
+    -> {'fixbill': {lang: [(href, label)]}, 'tapkasa': {lang: (home href, [(href, label)])}}; English is the fallback.
+    """
+    fb = _module('fixbill/_build/build.py', 'fixbill_build')
+    fixbill = {}
+    for P in fb.PAGES:
+        if P['lang'] != 'en-gb':  # the homepage has no UK English version
+            fixbill.setdefault(P['lang'], []).append(('/fixbill/' + P['path'], P['card']))
+    tk = _module('tapkasa/_build/build.py', 'tapkasa_build')
+    tapkasa = {}
+    for c, T in tk.LANGS.items():
+        pages = T['pages']
+        more = [('/tapkasa/' + pages[k]['path'], pages[k]['card']) for k in ('xmas', 'club', 'fair') if k in pages]
+        tapkasa[c] = ('/tapkasa/' + pages['stall']['path'], more)
+    return {'fixbill': fixbill, 'tapkasa': tapkasa}
+
+
+def more_links(links, lang):
+    items = ' &middot; '.join(f'<a href="{html.escape(h)}">{html.escape(t)}</a>' for h, t in links)
+    return f'\n          <p class="app-more" lang="{lang}">{items}</p>' if links else ''
+
+
+def gp(app_id, code):
+    return (f'https://play.google.com/store/apps/details?id={app_id}&amp;referrer=utm_source%3Dweb%26utm_medium%3Dhome'
+            f'%26utm_campaign%3Dhome-{code}')
+
+
+def page(lang, data, tr, en, langs_present, apps):
     code, hreflang, og_locale, direction, sep = lang
     # Velikost indexu v textech překladů ({{mil}} milionů, {{wan}} × 10 000, {{lakh}} × 100 000, {{sites}}, {{systems}}).
     mil = f"{data['jobs'] // 100_000 / 10:.1f}"
@@ -86,6 +123,7 @@ def page(lang, data, tr, en, langs_present):
     tr, en = {k: fill(v) if isinstance(v, str) else v for k, v in tr.items()}, {k: fill(v) if isinstance(v, str) else v for k, v in en.items()}
     t = lambda k: html.escape(tr.get(k) or en[k], quote=True)  # noqa: E731
     path = '/' if code == 'en' else f'/{code}/'
+    tk_home = apps['tapkasa'][code if code in apps['tapkasa'] else 'en'][0]
     canonical = SITE + path
     alts = [l for l in LANGS if l[0] in langs_present]
     hreflang_links = '\n'.join(f'<link rel="alternate" hreflang="{l[1]}" href="{SITE}{"/" if l[0] == "en" else "/" + l[0] + "/"}">' for l in alts)
@@ -116,7 +154,7 @@ def page(lang, data, tr, en, langs_present):
         {'@context': 'https://schema.org', '@type': 'ItemList', 'name': tr.get('products.title') or en['products.title'], 'itemListElement': [
             {'@type': 'ListItem', 'position': 1, 'item': {'@type': 'WebApplication', 'name': 'Poštárna', 'url': 'https://www.postarna.cz/',
              'applicationCategory': 'BusinessApplication', 'operatingSystem': 'Web', 'publisher': {'@id': SITE + '/#org'}}},
-            {'@type': 'ListItem', 'position': 2, 'item': {'@type': 'MobileApplication', 'name': 'Tapkasa', 'url': SITE + '/tapkasa/pokladna.html',
+            {'@type': 'ListItem', 'position': 2, 'item': {'@type': 'MobileApplication', 'name': 'Tapkasa', 'url': SITE + tk_home,
              'applicationCategory': 'BusinessApplication', 'operatingSystem': 'iOS, Android', 'installUrl': 'https://apps.apple.com/app/id6807075649',
              'publisher': {'@id': SITE + '/#org'}}},
             {'@type': 'ListItem', 'position': 3, 'item': {'@type': 'MobileApplication', 'name': 'SealSlim', 'url': SITE + '/sealslim/',
@@ -127,10 +165,18 @@ def page(lang, data, tr, en, langs_present):
         ]},
     ]
     # Stránky aplikací v jazyce návštěvníka (jinak anglická verze): bez odkazu z úvodní stránky je Google nenajde.
+    fb_lang = code if code in apps['fixbill'] else 'en'
+    tk_lang = code if code in apps['tapkasa'] else 'en'
+    tk_more = apps['tapkasa'][tk_lang][1]
     app_urls = {
         'vzt_url': {'cs': '/vzt-monter/', 'sk': '/vzt-monter/sk/', 'de': '/vzt-monter/de/', 'pl': '/vzt-monter/pl/'}.get(code, '/vzt-monter/en/'),
         'fixbill_url': f'/fixbill/{code}/' if code in ('cs', 'sk', 'de', 'es', 'fr', 'it', 'pl', 'pt') else '/fixbill/',
-        'tapkasa_url': '/tapkasa/pokladna.html' if code in ('cs', 'sk') else '/tapkasa/pos.html',
+        'tapkasa_url': tk_home,
+        # links to the template and event pages in the visitor's language, right under the app's description
+        'fixbill_more': more_links(apps['fixbill'][fb_lang], fb_lang),
+        'tapkasa_more': more_links(tk_more, tk_lang),
+        'fixbill_gp': gp('com.deriverge.fixbill', code),
+        'tapkasa_gp': gp('com.deriverge.tapkasa', code),
     }
     values = {
         **app_urls,
@@ -184,6 +230,7 @@ def main():
     en = json.load(open(os.path.join(HERE, 'i18n', 'en.json'), encoding='utf-8'))
     present = [l[0] for l in LANGS if os.path.exists(os.path.join(HERE, 'i18n', l[0] + '.json'))]
     data = live_data()
+    apps = app_pages()
     print(f"index {data['jobs']:,} jobs, {data['companies']:,} companies; {data['actors']} public actors")
     for lang in LANGS:
         if lang[0] not in present:
@@ -194,7 +241,7 @@ def main():
             raise SystemExit(f'{lang[0]}: missing keys {missing[:5]}')
         if missing:
             print(f'  {lang[0]}: {len(missing)} keys fall back to English (test build only)')
-        print(' ', page(lang, data, tr, en, present))
+        print(' ', page(lang, data, tr, en, present, apps))
     update_sitemap(present, dt.date.today().isoformat())
 
 
