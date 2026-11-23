@@ -1376,6 +1376,9 @@
     tipsLine: "Spropitné mimo tržbu: {0} (hotově {1}, kartou {2})",
     docTips: "Spropitné mimo tržbu",
     obTaxAsk: "Ceny bez daně a daň až při placení, jak je zvykem v USA a Kanadě? Zapnout to můžete tady, nebo později v {0}.",
+    graceHint: "Zákazník čeká? Jednou denně dokončíte rozpracovaný účet i po vyčerpání limitu.",
+    graceNote: "Další účty dnes už jen s Tapkasa Pro.",
+    graceDone: "Denní limit je vyčerpaný, tento účet ale dokončíte.",
 
   };
 
@@ -1836,6 +1839,9 @@
     tipsLine: "Tips, not in sales: {0} (cash {1}, card {2})",
     docTips: "Tips, not in sales",
     obTaxAsk: "Prices without tax and tax added at checkout, as usual in the US and Canada? Turn it on here, or later in {0}.",
+    graceHint: "Customer waiting? Once a day you can finish the current order even after the limit.",
+    graceNote: "Further orders today need Tapkasa Pro.",
+    graceDone: "Today’s free limit is used up, but you can finish this order.",
 
   };
 
@@ -2297,6 +2303,9 @@
     tipsLine: "Prepitné mimo tržby: {0} (v hotovosti {1}, kartou {2})",
     docTips: "Prepitné mimo tržby",
     obTaxAsk: "Ceny bez dane a daň až pri platení, ako je zvykom v USA a Kanade? Zapnúť to môžete tu, alebo neskôr v {0}.",
+    graceHint: "Zákazník čaká? Raz denne dokončíte rozpracovaný účet aj po vyčerpaní limitu.",
+    graceNote: "Ďalšie účty dnes už len s Tapkasa Pro.",
+    graceDone: "Denný limit je vyčerpaný, tento účet však dokončíte.",
 
   };
 
@@ -2757,6 +2766,9 @@
     tipsLine: "Trinkgeld, nicht im Umsatz: {0} (bar {1}, Karte {2})",
     docTips: "Trinkgeld, nicht im Umsatz",
     obTaxAsk: "Preise ohne Steuer und Steuer erst beim Bezahlen, wie in den USA und Kanada üblich? Das schalten Sie hier ein oder später im {0}.",
+    graceHint: "Kunde wartet? Einmal am Tag schließen Sie die angefangene Bestellung auch nach dem Limit ab.",
+    graceNote: "Weitere Bestellungen heute nur mit Tapkasa Pro.",
+    graceDone: "Das Tageslimit ist aufgebraucht, diese Bestellung schließen Sie aber noch ab.",
 
   };
 
@@ -3217,6 +3229,9 @@
     tipsLine: "Pourboires hors recette : {0} (espèces {1}, carte {2})",
     docTips: "Pourboires, hors recette",
     obTaxAsk: "Des prix hors taxe et la taxe ajoutée au paiement, comme aux États-Unis et au Canada ? Activez-le ici, ou plus tard dans {0}.",
+    graceHint: "Un client attend ? Une fois par jour, vous pouvez terminer la commande en cours même après la limite.",
+    graceNote: "Les commandes suivantes aujourd’hui nécessitent Tapkasa Pro.",
+    graceDone: "La limite du jour est atteinte, mais vous pouvez terminer cette commande.",
 
   };
 
@@ -3677,6 +3692,9 @@
     tipsLine: "Propinas fuera de la recaudación: {0} (efectivo {1}, tarjeta {2})",
     docTips: "Propinas, fuera de la recaudación",
     obTaxAsk: "¿Precios sin impuestos y el impuesto al cobrar, como es habitual en EE. UU. y Canadá? Actívelo aquí, o más tarde en {0}.",
+    graceHint: "¿Hay un cliente esperando? Una vez al día puede terminar la cuenta en curso aunque el límite esté agotado.",
+    graceNote: "Las siguientes cuentas de hoy requieren Tapkasa Pro.",
+    graceDone: "El límite de hoy está agotado, pero esta cuenta la puede terminar.",
 
   };
 
@@ -4137,6 +4155,9 @@
     tipsLine: "Mance fuori dagli incassi: {0} (contanti {1}, carta {2})",
     docTips: "Mance, fuori dagli incassi",
     obTaxAsk: "Prezzi senza imposta e imposta aggiunta al pagamento, come negli Stati Uniti e in Canada? Attivatelo qui, o più tardi in {0}.",
+    graceHint: "Il cliente aspetta? Una volta al giorno potete chiudere il conto in corso anche a limite esaurito.",
+    graceNote: "Gli altri conti di oggi richiedono Tapkasa Pro.",
+    graceDone: "Il limite di oggi è esaurito, ma questo conto si può chiudere.",
 
   };
 
@@ -4597,6 +4618,9 @@
     tipsLine: "Napiwki poza utargiem: {0} (gotówka {1}, karta {2})",
     docTips: "Napiwki, poza utargiem",
     obTaxAsk: "Ceny bez podatku i podatek doliczany przy płatności, jak w USA i Kanadzie? Można to włączyć tutaj albo później w {0}.",
+    graceHint: "Klient czeka? Raz dziennie można dokończyć rozpoczęty rachunek także po wyczerpaniu limitu.",
+    graceNote: "Kolejne rachunki dziś tylko z Tapkasa Pro.",
+    graceDone: "Dzienny limit jest wyczerpany, ale ten rachunek można dokończyć.",
 
   };
 
@@ -5057,6 +5081,9 @@
     tipsLine: "Gorjetas fora da receita: {0} (numerário {1}, cartão {2})",
     docTips: "Gorjetas, fora da receita",
     obTaxAsk: "Preços sem imposto e imposto somado no pagamento, como nos EUA e no Canadá? Pode ligar aqui, ou mais tarde em {0}.",
+    graceHint: "Cliente à espera? Uma vez por dia pode terminar a conta em curso mesmo depois do limite.",
+    graceNote: "As contas seguintes de hoje precisam do Tapkasa Pro.",
+    graceDone: "O limite de hoje esgotou-se, mas pode terminar esta conta.",
 
   };
   // ==== konec vkládaných překladů ====
@@ -5470,21 +5497,29 @@
     return !nativeApp() || off || !!(sheet && sheet.buyFailed);
   }
 
+  // Rozpracovaný účet jde dokončit i po vyčerpání limitu. Bez signálu
+  // (a na webu, po neúspěšném nákupu) poprvé s rezervou, potom jeden účet
+  // denně. Se signálem jednou denně tento jeden účet, rezerva zůstává
+  // schovaná na chvíli bez signálu. Dřív se signálem nešlo nic: zákazník
+  // u stánku čekal, než prodavač dokoupí Pro.
   function canRescue() {
-    if (isPro() || !state.order.length || !cantBuyNow()) { return false; }
+    if (isPro() || !state.order.length) { return false; }
+    if (!cantBuyNow()) { return state.graceDay !== todayKey(); }
     return !state.resUsed || state.graceDay !== todayKey();
   }
 
-  // Dokončit rozpracovaný účet: poprvé rezerva +RESERVE na dnešek, potom
-  // nanejvýš jeden účet navíc denně. Rovnou se otevře placení.
+  // Dokončit rozpracovaný účet: poprvé bez signálu rezerva +RESERVE na
+  // dnešek, jinak nanejvýš jeden účet navíc denně. Rovnou se otevře placení.
   function rescueBill() {
-    var t = todayKey(), note;
-    if (!state.resUsed) {
+    var t = todayKey(), note, offline = cantBuyNow();
+    if (offline && !state.resUsed) {
       state.resUsed = true; state.resDay = t;
       note = T("toastReserve", RESERVE);
     } else {
       state.graceDay = t;
-      note = T("rescueOneNote");
+      var tr = offerTrial();
+      note = offline ? T("rescueOneNote")
+        : T("graceDone") + " " + (tr ? T("nudgeTrial", trialText(tr)) : T("nudgePro"));
     }
     saveNow();
     sheet = paySheet(note);
@@ -6622,6 +6657,7 @@
       render(); return;
     }
     if (!refund) { countPayment(); }
+    if (tourActive()) { tourPaid = true; }
     var now = Date.now();
     var calc = sheet.calc || null;
     var sale = {
@@ -10143,10 +10179,15 @@
            // Limit padl a koupit teď nejde: rozpracovaný účet se dokončí.
            // Poprvé s rezervou na zbytek dne, potom už jen tento jeden účet.
            (sheet.reason === "limit" && canRescue()
-             ? '<div class="pw-rescue"><p>' + esc(T("rescueHint")) + "</p>" +
-               '<button class="btn-ghost strong" data-rescue="1">' +
-                 esc(state.resUsed ? T("rescueOneBtn") : T("rescueResBtn", RESERVE)) + "</button>" +
-               '<p class="pw-rnote">' + esc(state.resUsed ? T("rescueOneNote") : T("rescueResNote")) + "</p></div>"
+             ? (cantBuyNow()
+               ? '<div class="pw-rescue"><p>' + esc(T("rescueHint")) + "</p>" +
+                 '<button class="btn-ghost strong" data-rescue="1">' +
+                   esc(state.resUsed ? T("rescueOneBtn") : T("rescueResBtn", RESERVE)) + "</button>" +
+                 '<p class="pw-rnote">' + esc(state.resUsed ? T("rescueOneNote") : T("rescueResNote")) + "</p></div>"
+               // se signálem: jednou denně dokončit tento účet, klidně a bez rezervy
+               : '<div class="pw-rescue"><p>' + esc(T("graceHint")) + "</p>" +
+                 '<button class="btn-ghost strong" data-rescue="1">' + esc(T("rescueOneBtn")) + "</button>" +
+                 '<p class="pw-rnote">' + esc(T("graceNote")) + "</p></div>")
              : "") +
            // na webu se nekupuje ani neobnovuje: rovnou cesta do obchodů
            (nativeApp() ? '<button class="btn-ghost" data-restorebuy="1">' + esc(T("proRestore")) + "</button>"
@@ -10342,32 +10383,43 @@
   // vedle reality, průvodce běží nad živou aplikací.
   var tourIx = -1, tourRaf = 0, tourScrolledFor = -1, tourLastKey = "", tourLastBox = "";
   var tourEntered = -1, tourBase = 0, tourEdited = false;
+  // Zaplaceno během průvodce. Kdo jde napřed a zaplatí dřív, než ho
+  // průvodce dovede k placení, má kroky prodeje za sebou: přeskočí se
+  // a navazuje se frontou objednávek. Dřív mu po zaplacení radil
+  // „ťukněte znovu, ať je co účtovat“.
+  var tourPaid = false;
+
+  function payOpen() { return !!sheet && (sheet.step === "method" || sheet.step === "cash" || sheet.step === "card" || sheet.step === "tip"); }
 
   var TOUR = [
     { key: "tourS1", sel: function () { return ".prod"; },
-      done: function () { return state.order.length > 0; } },
+      done: function () { return state.order.length > 0 || tourPaid; } },
     // Stačí ubrat jeden kus. Dřív krok čekal na prázdný účet, a kdo předtím
     // ťukl dvakrát, držel kartu a průvodce se nehnul.
-    { key: "tourS1b", sel: function () { return ".prod"; },
+    // Drží se karta, která je na účtu. Jen jiná částka (bez karty) se
+    // podržením ubrat nedá, krok se pak přeskočí.
+    { key: "tourS1b", sel: function () { return ".prod.is-on"; },
       enter: function () { tourBase = orderCount(); },
       done: function () {
+        if (tourPaid || !state.order.some(function (l) { return !!findItem(l.ref); })) { return true; }
         var n = orderCount();
         if (n > tourBase) { tourBase = n; }   // mezitím přibyl další kus
         return !state.order.length || n < tourBase;
       } },
     { key: "tourS1c", sel: function () { return ".prod"; },
-      done: function () { return state.order.length > 0; } },
+      done: function () { return state.order.length > 0 || tourPaid; } },
     { key: "tourS2", sel: function () { return "[data-pay]"; },
-      done: function () { return !!sheet && (sheet.step === "method" || sheet.step === "cash" || sheet.step === "card"); } },
+      done: function () { return tourPaid || payOpen(); } },
     { key: "tourS3", sel: function () { return '[data-method="cash"]'; },
-      done: function () { return !!sheet && (sheet.step === "cash" || sheet.step === "card"); } },
+      done: function () { return tourPaid || (!!sheet && (sheet.step === "cash" || sheet.step === "card")); } },
     { key: "tourS4", sel: function () {
         return (sheet && (sheet.step === "card" || sheet.received > 0)) ? "[data-commit]" : "[data-exact]"; },
-      done: function () { return state.sales.length > 0 && !sheet; } },
+      done: function () { return tourPaid && !payOpen(); } },
+    // Fronta je vypnutá, nebo už je vydáno: k lístku není co vést.
     { key: "tourS5", sel: function () { return '[data-tab="orders"]'; },
-      done: function () { return view === "orders"; } },
+      done: function () { return view === "orders" || !openOrders().length; } },
     { key: "tourS6", sel: function () { return (sheet && sheet.step === "ticket") ? "[data-serve]" : ".tk"; },
-      done: function () { return state.sales.some(function (x) { return x.status !== "open"; }); } },
+      done: function () { return !openOrders().length || state.sales.some(function (x) { return x.status !== "open"; }); } },
     { key: "tourS7", sel: function () { return '[data-tab="history"]'; },
       done: function () { return view === "history"; } },
     { key: "tourS8", sel: function () { return '[data-tab="menu"]'; },
@@ -10395,6 +10447,7 @@
     }
     tourIx = 0;
     tourEntered = -1;
+    tourPaid = false;
     tourScrolledFor = -1;
     view = "sell";
     sheet = null;
@@ -10464,6 +10517,17 @@
 
     var el = null;
     try { el = document.querySelector(TOUR[tourIx].sel()); } catch (e) {}
+    // Otevřené okno (placení, klávesnice, paywall): bublina, která neukazuje
+    // dovnitř okna, se schová a po jeho zavření se vrátí se správným krokem.
+    // Dřív visela „podržte kartu“ nad oknem placení.
+    var modal = document.querySelector("#sheetSlot .scrim");
+    var hide = !!modal && (!el || !modal.contains(el));
+    if (card.style.display !== (hide ? "none" : "")) { card.style.display = hide ? "none" : ""; }
+    if (hide) {
+      ring.style.display = "none";
+      tourLastBox = "";
+      return;
+    }
     if (el) {
       // Nový krok si cíl přisune do středu obrazovky. Jen jednou na krok,
       // aby kroužek nebojoval s ručním posouváním uživatele.
