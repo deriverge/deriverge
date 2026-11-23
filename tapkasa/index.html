@@ -713,6 +713,12 @@
   .link i{width:9px;height:9px;border-radius:999px;background:var(--ink-3);flex:0 0 auto}
   .link.on i{background:var(--cash)}
   .link.on{color:var(--ink)}
+  .ldot{display:inline-block;width:8px;height:8px;margin-left:6px;border-radius:50%;background:var(--accent);vertical-align:0}
+  .ldot.on{background:var(--cash)}
+  .paircode{margin:2px 16px 10px;padding:12px 14px;border:1px solid var(--rule);border-radius:var(--r-tile);background:var(--surface);
+    display:flex;align-items:baseline;justify-content:space-between;gap:6px 12px;flex-wrap:wrap}
+  .paircode .k{font-size:13px;color:var(--ink-2)}
+  .paircode strong{font-size:26px;line-height:1.1;letter-spacing:.06em;font-weight:700;user-select:all;-webkit-user-select:all}
 
   /* ---------- tablet (iPad) ---------- */
   @media (min-width:700px){
@@ -1318,6 +1324,8 @@
     webPrice: "Cenu ve vaší měně ukáže obchod ještě před potvrzením.",
     proChoose: "Vybrat",
     proTryRow: "Vyzkoušet Pro {0} zdarma",
+    pairEnterHere: "Na druhém zařízení otevřete {0}, opište tento kód a ťukněte na {1}.",
+    pairBothKasa: "Obě zařízení jsou teď nastavená jako {0}. Má-li tohle jen vydávat objednávky, přepněte ho na {1}."
   };
 
   I18N.en = {
@@ -1751,6 +1759,8 @@
     webPrice: "The store shows the price in your currency before you confirm.",
     proChoose: "Choose",
     proTryRow: "Try Pro free for {0}",
+    pairEnterHere: "On the other device open {0}, enter this code and tap {1}.",
+    pairBothKasa: "Both devices are set to {0}. If this one should only hand out orders, switch it to {1}."
   };
 
   // ==== strojově vkládané překlady (gen-i18n.cjs) ====
@@ -2185,6 +2195,8 @@
     webPrice: "Cenu vo vašej mene ukáže obchod ešte pred potvrdením.",
     proChoose: "Vybrať",
     proTryRow: "Vyskúšať Pro {0} zadarmo",
+    pairEnterHere: "Na druhom zariadení otvorte {0}, opíšte tento kód a ťuknite na {1}.",
+    pairBothKasa: "Obe zariadenia sú teraz nastavené ako {0}. Ak má toto len vydávať objednávky, prepnite ho na {1}."
   };
 
   I18N.de = {
@@ -2618,6 +2630,8 @@
     webPrice: "Den Preis in Ihrer Währung zeigt der Store vor der Bestätigung.",
     proChoose: "Wählen",
     proTryRow: "Pro {0} gratis testen",
+    pairEnterHere: "Öffnen Sie auf dem anderen Gerät {0}, geben Sie diesen Code ein und tippen Sie auf {1}.",
+    pairBothKasa: "Beide Geräte sind gerade als {0} eingestellt. Soll dieses nur Bestellungen ausgeben, stellen Sie es auf {1} um."
   };
 
   I18N.fr = {
@@ -3051,6 +3065,8 @@
     webPrice: "La boutique d’applications affiche le prix dans votre devise avant la confirmation.",
     proChoose: "Choisir",
     proTryRow: "Essayer Pro gratuitement pendant {0}",
+    pairEnterHere: "Sur l’autre appareil, ouvrez {0}, saisissez ce code et touchez {1}.",
+    pairBothKasa: "Les deux appareils sont en mode {0}. Si celui-ci doit seulement servir les commandes, passez-le en mode {1}."
   };
 
   I18N.es = {
@@ -3484,6 +3500,8 @@
     webPrice: "La tienda de aplicaciones muestra el precio en su moneda antes de confirmar.",
     proChoose: "Elegir",
     proTryRow: "Probar Pro gratis durante {0}",
+    pairEnterHere: "En el otro dispositivo, abra {0}, introduzca este código y toque {1}.",
+    pairBothKasa: "Los dos dispositivos están en modo {0}. Si este solo debe entregar pedidos, cámbielo a {1}."
   };
 
   I18N.it = {
@@ -3917,6 +3935,8 @@
     webPrice: "Lo store mostra il prezzo nella vostra valuta prima della conferma.",
     proChoose: "Scegliere",
     proTryRow: "Provare Pro gratis per {0}",
+    pairEnterHere: "Sull’altro dispositivo aprite {0}, inserite questo codice e toccate {1}.",
+    pairBothKasa: "Entrambi i dispositivi sono in modalità {0}. Se questo deve solo consegnare gli ordini, passatelo a {1}."
   };
 
   I18N.pl = {
@@ -4350,6 +4370,8 @@
     webPrice: "Cenę w wybranej walucie sklep pokazuje przed potwierdzeniem.",
     proChoose: "Wybrać",
     proTryRow: "Wypróbować Pro za darmo przez {0}",
+    pairEnterHere: "Na drugim urządzeniu trzeba otworzyć {0}, wpisać ten kod i stuknąć {1}.",
+    pairBothKasa: "Oba urządzenia działają teraz jako {0}. Jeśli to ma tylko wydawać zamówienia, trzeba je przełączyć na {1}."
   };
 
   I18N.pt = {
@@ -4783,6 +4805,8 @@
     webPrice: "A loja mostra o preço na sua moeda antes da confirmação.",
     proChoose: "Escolher",
     proTryRow: "Experimentar o Pro grátis durante {0}",
+    pairEnterHere: "No outro dispositivo, abra {0}, introduza este código e toque em {1}.",
+    pairBothKasa: "Os dois dispositivos estão em modo {0}. Se este deve apenas entregar pedidos, mude-o para {1}."
   };
   // ==== konec vkládaných překladů ====
 
@@ -7263,6 +7287,7 @@
   function gotHello(msg, via) {
     if (!state.pair || (msg.room && msg.room !== state.pair)) { return; }
     lastIn = Date.now();
+    peerRole = msg.role === "vydej" ? "vydej" : "kasa";
     refreshLink();
     var wasActive = pairActive();
     if (pairCtx && pairCtx.enc) {
@@ -7375,7 +7400,10 @@
   window.__kasaPeerState = function (d) { peerDiag = d; render(); };
 
   window.__kasaPeerCount = function (n) {
+    var hadPeers = nativePeers > 0;
     nativePeers = n | 0;
+    if (nativePeers > 0) { nativeLostAt = 0; }
+    else if (hadPeers) { nativeLostAt = Date.now(); render(); }
     nativeKnown = true;
     refreshLink();
     if (nativePeers > 0) {
@@ -8549,6 +8577,21 @@
   // Přijatá zpráva je důkaz spojení jen chvíli. Bez omezení stáří svítilo
   // „spárováno" donekonečna i po odpojení druhého zařízení.
   var LINK_FRESH_MS = 150000;
+  // Rady „zařízení se nenajdou?“ a „nic se neozvalo“ se ukazují až po
+  // chvíli. Dřív svítily červeně hned po vytvoření kódu, dřív než ho člověk
+  // stihl na druhém zařízení opsat, a vypadalo to jako chyba.
+  var PAIR_GRACE_MS = 45000;
+  var pairSetAt = Date.now();
+  var peerRole = "";          // role protějšku z posledního pozdravu
+  var nativeLostAt = 0;       // kdy vypadlo přímé spojení (0 = drží nebo nebylo)
+
+  function pairWaited() { return Date.now() - pairSetAt > PAIR_GRACE_MS; }
+
+  // Přímé spojení vypadlo a od té doby nic nepřišlo ani přes internet.
+  // Čerstvá zpráva z doby před výpadkem nesmí dál tvrdit „spárováno“.
+  function linkLost() {
+    return nativeLostAt > 0 && nativePeers === 0 && lastIn <= nativeLostAt && !anySse();
+  }
 
   function linkFresh() {
     return lastIn > 0 && (Date.now() - lastIn) < LINK_FRESH_MS;
@@ -8594,6 +8637,7 @@
   function linkText() {
     if (nativePeers > 0) { return T("linkPairedNative"); }   // nativní spojení je živé teď
     if (!state.pair) { return T("linkSearching"); }
+    if (linkLost()) { return T("linkSearching"); }
     if (linkFresh()) { return T("linkPaired"); }
     if (anySse()) { return T("linkSilent"); }
     // V aplikaci internet potřeba není; výzva ke kontrole internetu by
@@ -8686,7 +8730,11 @@
   // Kód smí vytvořit jen Pro; připojit se ke kódu může kdokoliv, takže
   // stánku stačí jediné předplatné na kase.
   function pairBlock(till) {
-    var h = '<div class="link linkstat' + (peers > 0 || linkFresh() ? " on" : "") + '"><i></i>' + esc(linkText()) + "</div>";
+    // Bez kódu se nic nehledá: „Druhé zařízení zatím nenalezeno“ tu dřív
+    // svítilo i tomu, kdo prodává na jednom telefonu, a vypadalo jako chyba.
+    var h = state.pair || nativePeers > 0
+      ? '<div class="link linkstat' + (!linkLost() && (peers > 0 || linkFresh()) ? " on" : "") + '" role="status"><i></i>' + esc(linkText()) + "</div>"
+      : "";
     // Rada s návodem se ukazuje vždy. Dřívější podmínka na nativní most se
     // na zařízení nevyhodnotila spolehlivě a tlačítko pak chybělo úplně.
     var ios = iosApp(), direct = peerLinkApp();
@@ -8697,7 +8745,7 @@
       // Místní síť (dotaz se často vůbec nezobrazí), Android nemá oprávnění
       // Zařízení v okolí nebo vypnutý Bluetooth; případně router izoluje
       // klienty. Rada se ukazuje jen v aplikaci, když spojení není.
-      h += (state.pair && nativePeers === 0
+      h += (state.pair && nativePeers === 0 && pairWaited()
              ? '<p class="hint" style="text-align:left;padding-top:0;padding-bottom:4px;color:var(--accent)">' + esc(T(ios ? "pairLocalNetHint" : "pairNearbyHint")) + "</p>"
              : "") +
            (ios ? '<div class="acts" style="padding-top:0;padding-bottom:6px"><button class="act" data-offlinehelp="1">' +
@@ -8720,12 +8768,24 @@
         return '<p class="hint" style="color:var(--accent);text-align:left;padding-top:0;padding-bottom:2px">' + esc(text) + "</p>";
       };
       var fresh = pairIsV2();
-      h += '<div class="link on" style="padding-top:0"><i></i>' + esc(T("pairCode")) + " <strong>" + esc(showCode(state.pair)) + "</strong></div>" +
+      var live = !linkLost() && (peers > 0 || linkFresh());
+      // Kód velkým písmem: je to jediné, co člověk potřebuje přečíst
+      // a opsat na druhém zařízení.
+      h += '<div class="paircode"><span class="k">' + esc(T("pairCode")) + '</span><strong class="num">' + esc(showCode(state.pair)) + "</strong></div>" +
+        (!lastIn && fresh
+          ? '<p class="hint" style="text-align:left;padding-top:0;padding-bottom:6px;color:var(--ink-2);font-weight:600">' +
+            esc(T("pairEnterHere", T("tabMenu"), T("join"))) + "</p>"
+          : "") +
+        // dvě kasy jsou v pořádku, ale kdo chtěl kasu a výdej, musí roli přepnout
+        (live && till && peerRole === "kasa"
+          ? '<p class="hint" style="text-align:left;padding-top:0;padding-bottom:6px;color:var(--ink-2)">' +
+            esc(T("pairBothKasa", T("roleKasa"), T("roleVydej"))) + "</p>"
+          : "") +
         (pairCtx && pairCtx.err ? warn(T("pairNoCrypto")) : "") +
         (fresh && !pairActive() ? warn(T(lastHiNoPro && Date.now() - lastHiNoPro < LINK_FRESH_MS ? "pairNoPro" : "pairWaitPro")) : "") +
         (!fresh ? warn(T(isPro() ? "pairLegacyPro" : "pairLegacy")) : "") +
         (relayError ? warn(relayError) : "") +
-        (!lastIn && fresh ? warn(T("pairUpdateOther")) : "") +
+        (!lastIn && fresh && pairWaited() ? warn(T("pairUpdateOther")) : "") +
         (!lastIn && !fresh && anySse()
           ? '<p class="hint" style="color:var(--accent);text-align:left;padding-top:0;padding-bottom:2px">' + T("pairMismatch") + "</p>"
           : "") +
@@ -9936,7 +9996,17 @@
     if (allowed.indexOf(view) < 0) { view = allowed[0]; }
 
     var waiting = openOrders().length;
-    document.getElementById("topRole").textContent = state.mode === "vydej" ? T("roleVydej") : T("roleKasa");
+    // Se spárovaným druhým zařízením nese role v hlavičce tečku spojení:
+    // zelená = protějšek se ozývá, červená = objednávky teď nikam nedojdou.
+    // Dřív to bylo vidět jen hluboko v Menu.
+    var roleTxt = state.mode === "vydej" ? T("roleVydej") : T("roleKasa");
+    var roleEl = document.getElementById("topRole");
+    var roleHtml = esc(roleTxt);
+    if (state.pair) {
+      var linkOn = !linkLost() && (nativePeers > 0 || linkFresh());
+      roleHtml += '<i class="ldot' + (linkOn ? " on" : "") + '" role="img" aria-label="' + esc(linkText()) + '"></i>';
+    }
+    if (roleEl.getAttribute("data-h") !== roleHtml) { roleEl.innerHTML = roleHtml; roleEl.setAttribute("data-h", roleHtml); }
     document.getElementById("topLabel").textContent = T("ordersLabel");
     paintTopName();
     document.getElementById("topInfo").textContent = String(waiting);
@@ -10481,6 +10551,7 @@
       var code = newPairCode();
       state.pair = code;
       state.pairV = 2;
+      pairSetAt = Date.now(); peerRole = "";
       saveNow(); pairOpen(); render();
       showToast(T("toastCode", showCode(code)));
       return;
@@ -10500,6 +10571,7 @@
       if (!canCrypt()) { showToast(T("pairNoCrypto")); return; }
       state.pair = code2;
       state.pairV = 2;
+      pairSetAt = Date.now(); peerRole = "";
       saveNow(); pairOpen(); render();
       showToast(T("toastJoining", showCode(code2)));
       return;
@@ -10526,6 +10598,7 @@
       peers = 0;
       nativePeers = 0;
       lastIn = 0; lastHiNoPro = 0;
+      peerRole = ""; nativeLostAt = 0;
       pairOpen();     // bez kódu se přeposílač i nativní hledání vypne
       save(); render();
       return;
@@ -10593,6 +10666,8 @@
       state.order = [];
       linesOpen = false;
       saveNow(); render();
+      // protějšek se o nové roli dozví hned, ne až s příštím pozdravem
+      if (state.pair) { try { nativeHello(); sayHello(true); } catch (eh) {} }
       showToast(state.mode === "kasa"
         ? (heldN ? T("toastModeKasaHeld", heldN) : T("toastModeKasa"))
         : T("toastModeVydej"));
@@ -10902,7 +10977,7 @@
   // Otevřené menu se proto jednou za půl minuty překreslí; díky diffování
   // se do stránky reálně sáhne, jen když se text stavu opravdu změní.
   setInterval(function () {
-    if (view === "menu" && !sheet) { render(); }
+    if ((view === "menu" || state.pair) && !sheet) { render(); }
   }, 30000);
 
   document.addEventListener("change", function (ev) {
