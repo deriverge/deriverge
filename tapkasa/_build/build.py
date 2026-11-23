@@ -32,9 +32,9 @@ CODES = ['cs', 'sk', 'en', 'de', 'pl', 'fr', 'it', 'es', 'pt']
 TOPICS = ['stall', 'xmas', 'club', 'festival', 'fair']  # every language has the first three
 
 # Tapkasa Pro prices per page language (currency, month, year) and the sentence under "What it costs".
-# Store prices of 23 November 2026 (App Store and Google Play aligned that day). No Polish price is confirmed, so the
-# Polish pages keep the general sentence only. Update together with the stores.
-PRO_PRICES = {'cs': ('CZK', '129', '999'), 'en': ('USD', '4.99', '39.99'),
+# Store prices of 23 November 2026 (App Store and Google Play aligned that day; Polish 24,99 / 199,99 zł checked in
+# both stores the same day). Update together with the stores.
+PRO_PRICES = {'cs': ('CZK', '129', '999'), 'en': ('USD', '4.99', '39.99'), 'pl': ('PLN', '24.99', '199.99'),
               **{c: ('EUR', '5.99', '44.99') for c in ('sk', 'de', 'fr', 'it', 'es', 'pt')}}
 PRICE_LINE = {
     'cs': 'Tapkasa Pro stojí 129 Kč měsíčně nebo 999 Kč ročně (ceny v App Store a na Google Play v listopadu 2026). '
@@ -43,6 +43,8 @@ PRICE_LINE = {
           'Platnú cenu vždy uvidíte pred nákupom.',
     'en': 'Tapkasa Pro costs $4.99 a month or $39.99 a year in the US (App Store and Google Play, November 2026; other '
           'countries differ). You always see the current price before you buy.',
+    'pl': 'Tapkasa Pro kosztuje 24,99 zł miesięcznie lub 199,99 zł rocznie (ceny w App Store i Google Play '
+          'w listopadzie 2026). Aktualną cenę zawsze widać przed zakupem.',
     'de': 'Tapkasa Pro kostet 5,99 € im Monat oder 44,99 € im Jahr (Preise im App Store und bei Google Play, November '
           '2026). Den aktuellen Preis sehen Sie immer vor dem Kauf.',
     'fr': "Tapkasa Pro coûte 5,99 € par mois ou 44,99 € par an (prix sur l'App Store et Google Play en novembre 2026). "
