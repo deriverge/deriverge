@@ -19,6 +19,20 @@
  * (měsíční a roční předplatné; ceny určuje obchod a paywall je bere odsud).
  * Balíčky v nabídce (offering) používají standardní identifikátory
  * $rc_monthly a $rc_annual. Zkušební doba se čte z nabídky (trialOf).
+ *
+ * Pas na akci (od 1.3.0): spotřebovatelný jednorázový nákup
+ * tapkasa.pass.event72. Kupuje se přímo přes getProducts + purchaseStoreProduct,
+ * takže v nabídce (offering) být nemusí. V RevenueCat (Product catalog →
+ * Products) musí mít typ Consumable a NESMÍ být v entitlementu "pro":
+ * spotřebovatelný produkt v entitlementu by ho podle RevenueCat odemkl
+ * natrvalo. Na Androidu ho SDK po ověření samo spotřebuje (consumeAsync),
+ * takže jde koupit znovu; na iOS je typ dán v App Store Connect (CONSUMABLE).
+ * Kolik pasů je nevyužitých a kdy který běží, drží aplikace (index.html,
+ * state.pass); sem patří jen nákup a seznam transakcí z CustomerInfo
+ * (nonSubscriptionTransactions), které aplikaci předává __kasaPass.
+ * Po přeinstalaci RevenueCat spotřebované nákupy obvykle nevrátí: má nové
+ * anonymní ID, Apple spotřebované nákupy do obnovy nedává a Google Play
+ * Billing 8 vrací jen nespotřebované. Co vrátí, aplikace připíše.
  */
 (function () {
   "use strict";
@@ -28,6 +42,7 @@
   var REVENUECAT_API_KEY_IOS = "appl_UDkkqtyFetmsKJAMwyFYbSrterz";
   var REVENUECAT_API_KEY_ANDROID = "goog_CQNzyidxRPuTylazpgieisHqyBL";
   var ENTITLEMENT_ID = "pro";
+  var PASS_ID = "tapkasa.pass.event72";
 
   var cap = window.Capacitor;
   var isNative = !!(cap && typeof cap.isNativePlatform === "function" && cap.isNativePlatform());
@@ -37,6 +52,7 @@
     return {
       getEntitlement: function () { return Promise.resolve("free"); },
       purchase: function () { return Promise.resolve("free"); },
+      purchasePass: function () { return Promise.resolve(null); },
       restore: function () { return Promise.resolve("free"); }
     };
   }
@@ -111,11 +127,62 @@
     return active && active[ENTITLEMENT_ID] ? "pro" : "free";
   }
 
-  function getEntitlement() {
+  // CustomerInfo, nebo null (offline apod.: stav v aplikaci nechat být)
+  function getInfo() {
     return ensureConfigured()
       .then(function () { return call("getCustomerInfo"); })
-      .then(function (res) { return levelOf(unwrapInfo(res)); })
-      .catch(function () { return null; }); // offline apod. — stav v aplikaci nechat být
+      .then(function (res) { return unwrapInfo(res); })
+      .catch(function () { return null; });
+  }
+
+  function getEntitlement() {
+    return getInfo().then(function (info) { return info ? levelOf(info) : null; });
+  }
+
+  // ---- pas na akci ----------------------------------------------------------
+  // Transakce pasu z CustomerInfo: [{id, t}] (id = transactionIdentifier).
+  function passTx(info) {
+    var list = (info && info.nonSubscriptionTransactions) || [];
+    var out = [];
+    for (var i = 0; i < list.length; i++) {
+      var x = list[i] || {};
+      if (x.productIdentifier !== PASS_ID || !x.transactionIdentifier) { continue; }
+      var t = Date.parse(x.purchaseDate || "");
+      out.push({ id: String(x.transactionIdentifier), t: isNaN(t) ? 0 : t });
+    }
+    return out;
+  }
+
+  // Předá aplikaci transakce pasu. buy = id právě koupené transakce.
+  // at = čas serveru RevenueCat (requestDate), aplikace podle něj hlídá hodiny.
+  function pushPass(info, src, buyTx) {
+    if (typeof window.__kasaPass !== "function" || !info) { return; }
+    var tx = passTx(info);
+    var buy = buyTx && buyTx.transactionIdentifier ? String(buyTx.transactionIdentifier) : "";
+    if (buy && !tx.some(function (x) { return x.id === buy; })) { tx.push({ id: buy, t: Date.now() }); }
+    var at = Date.parse(info.requestDate || "");
+    try { window.__kasaPass({ tx: tx, src: src, buy: buy || null, at: isNaN(at) ? null : at }); } catch (e) {}
+  }
+
+  var passProduct = null;   // StoreProduct z getProducts, platí celé sezení
+  function getPassProduct() {
+    if (passProduct) { return Promise.resolve(passProduct); }
+    return ensureConfigured()
+      .then(function () { return call("getProducts", { productIdentifiers: [PASS_ID], type: "NON_SUBSCRIPTION" }); })
+      .then(function (res) {
+        var list = (res && res.products) || (Array.isArray(res) ? res : []);
+        for (var i = 0; i < list.length; i++) {
+          if (list[i] && list[i].identifier === PASS_ID) { passProduct = list[i]; return passProduct; }
+        }
+        throw new Error("Tapkasa: pas '" + PASS_ID + "' není v nabídce");
+      });
+  }
+
+  // Nákup pasu: {info, tx} z obchodu. Chyby (i zrušení) jdou k volajícímu.
+  function purchasePass() {
+    return getPassProduct()
+      .then(function (p) { return call("purchaseStoreProduct", { product: p }); })
+      .then(function (res) { return { info: unwrapInfo(res), tx: (res && res.transaction) || null }; });
   }
 
   function findPackage(offering, product) {
@@ -150,12 +217,17 @@
   function restore() {
     return ensureConfigured()
       .then(function () { return call("restorePurchases"); })
-      .then(function (res) { return levelOf(unwrapInfo(res)); });
+      .then(function (res) {
+        var info = unwrapInfo(res);
+        pushPass(info, "restore");
+        return levelOf(info);
+      });
   }
 
   window.TapkasaBilling = {
     getEntitlement: getEntitlement,
     purchase: purchase,
+    purchasePass: purchasePass,
     restore: restore
   };
 
@@ -234,6 +306,28 @@
       });
   };
 
+  // Pas na akci: kupuje se kdykoli znovu (spotřebovatelný nákup).
+  window.__kasaBuyPass = function () {
+    if (busy) { return; }
+    busy = true;
+    purchasePass()
+      .then(function (r) { busy = false; pushPass(r.info, "buy", r.tx); })
+      .catch(function (e) {
+        busy = false;
+        if (isCancel(e)) { return; }
+        // Android: předchozí nákup pasu zůstal nespotřebovaný (aplikace
+        // spadla uprostřed). Obnova ho zpracuje a aplikace ho připíše.
+        if (isAlreadyOwned(e)) {
+          busy = true;
+          restore()
+            .then(function () { busy = false; })
+            .catch(function (e2) { busy = false; reportFail("pass", e2); });
+          return;
+        }
+        reportFail(/není v nabídce/.test(String(e && e.message || "")) ? "offering" : "pass", e);
+      });
+  };
+
   window.__kasaRestore = function () {
     if (busy) { return; }
     busy = true;
@@ -242,8 +336,23 @@
       .catch(function (e) { busy = false; reportFail("restore", e); });
   };
 
-  // Po startu: skutečný stav předplatného + ceny v měně obchodu.
-  getEntitlement().then(function (level) { push(level, "start"); });
+  // Po startu: skutečný stav předplatného, pasy z RevenueCat a ceny v měně
+  // obchodu. Návrat do popředí stav srovná znovu (nejvýš jednou za minutu):
+  // pas schválený později (rodič, platba v hotovosti) se tak připíše bez
+  // restartu aplikace.
+  var syncedAt = 0;
+  function syncInfo() {
+    syncedAt = Date.now();
+    getInfo().then(function (info) {
+      if (!info) { return; }
+      push(levelOf(info), "start");
+      pushPass(info, "start");
+    });
+  }
+  syncInfo();
+  document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "visible" && Date.now() - syncedAt > 60000) { syncInfo(); }
+  });
 
   // Ceny z obchodu. Po startu bez signálu se dřív už nenačetly a paywall
   // celé sezení ukazoval náhradní dolarové ceny; aplikace si je teď při
@@ -252,6 +361,18 @@
   function loadPrices() {
     if (pricesLoading) { return; }
     pricesLoading = true;
+    // cena pasu z obchodu (priceString), nezávisle na nabídce předplatného
+    getPassProduct()
+      .then(function (p) {
+        var ps = p && (p.priceString || p.price_string) || "";
+        if (!ps) { return; }
+        window.__KASA_PRICES__ = window.__KASA_PRICES__ || {};
+        window.__KASA_PRICES__.pass = ps;
+        if (typeof window.__kasaPricesChanged === "function") {
+          try { window.__kasaPricesChanged(); } catch (e) {}
+        }
+      })
+      .catch(function () {});
     ensureConfigured()
       .then(function () { return call("getOfferings"); })
       .then(function (res) {
@@ -265,6 +386,8 @@
         var prices = { monthly: ps(monthly), yearly: ps(yearly), monthlyTrial: null, yearlyTrial: null };
         if (!prices.monthly && !prices.yearly) { return; }
         var publish = function () {
+          var had = window.__KASA_PRICES__ || {};
+          if (had.pass && !prices.pass) { prices.pass = had.pass; }
           window.__KASA_PRICES__ = prices;
           if (typeof window.__kasaPricesChanged === "function") {
             try { window.__kasaPricesChanged(); } catch (e) {}

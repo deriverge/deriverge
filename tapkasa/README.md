@@ -6,7 +6,7 @@ hotově, kartou nebo QR převodem, fronta objednávek, přehled tržby. Jeden so
 a Google Play (nativní obal je v `../mobile/`, podklady pro obchody v `../store/`).
 
 Webová verze běží na `https://www.deriverge.com/tapkasa/`. Aktuální verze
-aplikace: **1.2.0**.
+aplikace: **1.3.0**.
 
 ## První spuštění
 
