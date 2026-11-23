@@ -59,8 +59,16 @@ export const SHOT_NAMES = ['01-stanek-za-2-minuty', '02-fronta-a-vydej', '03-vra
 const COLORS = ['cervena', 'oranzova', 'zluta', 'hneda', 'ruzova', 'zelena'];
 /** Text ze slovníku aplikace (I18N.<lang>.<key>), čte se ze souboru aplikace. */
 let appSrc = null;
-export function appText(lang, key) {
+export function appText(lang, key, cur) {
   appSrc = appSrc || fs.readFileSync(APP_FILE, 'utf8');
+  // Angličtina s dolarem: aplikace bere přednostně americké výrazy ze slovníku EN_US (Register místo Till).
+  if (lang === 'en' && cur === 'USD') {
+    const u = appSrc.indexOf('var EN_US = {');
+    if (u >= 0) {
+      const mu = appSrc.slice(u, appSrc.indexOf('\n  };', u)).match(new RegExp(`\\n\\s*${key}: ("(?:[^"\\\\]|\\\\.)*")`));
+      if (mu) return JSON.parse(mu[1]);
+    }
+  }
   const a = appSrc.indexOf(`I18N.${lang} = {`); if (a < 0) throw new Error('slovník ' + lang);
   const b = appSrc.indexOf('\n  };', a);
   const m = appSrc.slice(a, b).match(new RegExp(`\\n\\s*${key}: ("(?:[^"\\\\]|\\\\.)*")`));
@@ -70,7 +78,7 @@ export function appText(lang, key) {
 /** Položky stánku: šest druhů zboží, záloha a vrácení zálohy (stejně je zakládá tlačítko „+ Přidat zálohu“). */
 export function itemsFor(L) {
   const it = L.goods.map(([name, price], i) => ({ id: 'g' + i, name, price, color: COLORS[i] }));
-  it.push({ id: 'dep', name: appText(L.lang, 'depItem'), price: L.dep, color: 'nebeska', dep: true });
-  it.push({ id: 'ret', name: appText(L.lang, 'depReturn'), price: -L.dep, color: 'grafit', dep: true });
+  it.push({ id: 'dep', name: appText(L.lang, 'depItem', L.cur), price: L.dep, color: 'nebeska', dep: true });
+  it.push({ id: 'ret', name: appText(L.lang, 'depReturn', L.cur), price: -L.dep, color: 'grafit', dep: true });
   return it;
 }

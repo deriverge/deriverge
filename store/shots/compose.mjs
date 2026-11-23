@@ -34,7 +34,7 @@ for (const [key, L] of Object.entries(LOCALES)) {
     const dev = c.kind;
     const specs = [
       { layout: 'single', a: raw(dev, 'sell') },
-      { layout: 'duo', a: raw('phone', 'kasa-after'), b: raw(dev, 'counter'), pills: [appText(L.lang, 'roleKasa'), appText(L.lang, 'roleVydej')], bubble: appText(L.lang, 'speakNewOrder').replace('{0}', st.lastNo) },
+      { layout: 'duo', a: raw('phone', 'kasa-after'), b: raw(dev, 'counter'), pills: [appText(L.lang, 'roleKasa', L.cur), appText(L.lang, 'roleVydej', L.cur)], bubble: appText(L.lang, 'speakNewOrder', L.cur).replace('{0}', st.lastNo) },
       { layout: 'duo', a: raw('phone', 'cash'), b: raw(dev, 'history') },
       { layout: 'single', a: raw(dev, 'deposit') },
       { layout: 'single', a: raw(dev, 'card') },
