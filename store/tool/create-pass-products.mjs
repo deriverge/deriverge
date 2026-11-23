@@ -198,7 +198,7 @@ async function googlePlay() {
     purchaseOptions: [{ purchaseOptionId: OPTION, buyOption: { legacyCompatible: true, multiQuantityEnabled: false },
       regionalPricingAndAvailabilityConfigs: configs,
       newRegionsConfig: { usdPrice: money('USD', PRICE.USD), eurPrice: money('EUR', PRICE.EUR), availability: 'AVAILABLE' } }] };
-  const r = api('PATCH', `/applications/${PKG}/oneTimeProducts/${PRODUCT}?allowMissing=true&updateMask=listings,purchaseOptions&${RV}`, body);
+  const r = api('PATCH', `/applications/${PKG}/onetimeproducts/${PRODUCT}?allowMissing=true&updateMask=listings,purchaseOptions&${RV}`, body);
   log(`  založeno: ${(r.purchaseOptions || []).map((o) => `${o.purchaseOptionId}:${o.state}`).join(' ')}`);
   const a = api('POST', `/applications/${PKG}/oneTimeProducts/${PRODUCT}/purchaseOptions:batchUpdateStates`,
     { requests: [{ activatePurchaseOptionRequest: { packageName: PKG, productId: PRODUCT, purchaseOptionId: OPTION } }] });
