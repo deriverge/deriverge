@@ -1,0 +1,1732 @@
+{
+ "pulled": "2026-11-23T13:59:53.825Z",
+ "source": "App Store Connect API (GET)",
+ "app": {
+  "name": "Tapkasa: Pokladna na stánek",
+  "bundleId": "com.deriverge.tapkasa",
+  "sku": "tapkasa-ios",
+  "primaryLocale": "cs"
+ },
+ "versions": [
+  {
+   "id": "cc0918df-5956-4304-a594-7d9b260c2a1b",
+   "versionString": "1.0.6",
+   "state": "READY_FOR_SALE",
+   "created": "2026-10-26T15:29:53-07:00"
+  },
+  {
+   "id": "7cffb80d-c0e8-4b95-960f-0cc4cc2bde5a",
+   "versionString": "1.0.5",
+   "state": "READY_FOR_SALE",
+   "created": "2026-09-23T11:46:22-07:00"
+  },
+  {
+   "id": "b6ac8bde-0505-4098-bc00-cfde90481e1c",
+   "versionString": "1.0.4",
+   "state": "READY_FOR_SALE",
+   "created": "2026-09-19T07:52:53-07:00"
+  },
+  {
+   "id": "c6487826-e0d8-4a8a-8ad6-d10766308bc9",
+   "versionString": "1.0.3",
+   "state": "READY_FOR_SALE",
+   "created": "2026-09-18T13:03:55-07:00"
+  },
+  {
+   "id": "a84aad7e-8952-4c42-95d5-9d5a2422302d",
+   "versionString": "1.0.2",
+   "state": "READY_FOR_SALE",
+   "created": "2026-09-17T03:37:50-07:00"
+  },
+  {
+   "id": "823e0f4c-d627-4de0-8a23-760cf4665e7c",
+   "versionString": "1.0.1",
+   "state": "READY_FOR_SALE",
+   "created": "2026-09-11T02:27:24-07:00"
+  },
+  {
+   "id": "e5c08a72-46fc-44df-826d-e01f176a53a7",
+   "versionString": "1.0",
+   "state": "READY_FOR_SALE",
+   "created": "2026-08-31T07:35:34-07:00"
+  }
+ ],
+ "appInfos": [
+  {
+   "id": "7125ada4-cba7-4c96-9272-19f4695aff0c",
+   "state": "READY_FOR_DISTRIBUTION",
+   "categories": {
+    "primary": "BUSINESS",
+    "secondary": "FOOD_AND_DRINK"
+   },
+   "localizations": {
+    "cs": {
+     "id": "aa7b53c0-db0b-478b-800f-624a51117aff",
+     "name": "Tapkasa: Pokladna na stánek",
+     "subtitle": "Kasa na trh, festival i bar",
+     "privacyPolicyUrl": "https://www.deriverge.com/tapkasa/privacy.html"
+    },
+    "de-DE": {
+     "id": "2196b52b-098d-46c5-abf1-9467126427f1",
+     "name": "Tapkasa – Kasse für Stände",
+     "subtitle": "Für Markt, Fest & Vereinsfeier",
+     "privacyPolicyUrl": "https://www.deriverge.com/tapkasa/privacy.html"
+    },
+    "en-US": {
+     "id": "7e3d69ad-0743-410d-918b-09fe75b6bdfc",
+     "name": "Tapkasa: Market Stall POS",
+     "subtitle": "Offline till for pop-up events",
+     "privacyPolicyUrl": "https://www.deriverge.com/tapkasa/privacy.html"
+    },
+    "es-ES": {
+     "id": "788af352-dc1a-4e90-90f5-fa3bc8ccd5d7",
+     "name": "Tapkasa – TPV de bolsillo",
+     "subtitle": "La caja para mercadillos",
+     "privacyPolicyUrl": "https://www.deriverge.com/tapkasa/privacy.html"
+    },
+    "fr-FR": {
+     "id": "fe20785f-8af2-4e12-a520-20295e899028",
+     "name": "Tapkasa – Caisse mobile",
+     "subtitle": "La caisse des marchés",
+     "privacyPolicyUrl": "https://www.deriverge.com/tapkasa/privacy.html"
+    },
+    "it": {
+     "id": "3d48063c-89cf-4b76-a63d-e58f8b36349c",
+     "name": "Tapkasa – Cassa tascabile",
+     "subtitle": "La cassa per i mercatini",
+     "privacyPolicyUrl": "https://www.deriverge.com/tapkasa/privacy.html"
+    },
+    "pl": {
+     "id": "81fd4f41-bde1-4c61-b824-a864c6e3ea97",
+     "name": "Tapkasa – Mobilna kasa",
+     "subtitle": "Kasa na targi i festyny",
+     "privacyPolicyUrl": "https://www.deriverge.com/tapkasa/privacy.html"
+    },
+    "pt-PT": {
+     "id": "15e4c768-a58b-4c69-9f71-29e64a147326",
+     "name": "Tapkasa – Caixa de bolso",
+     "subtitle": "A caixa para feiras",
+     "privacyPolicyUrl": "https://www.deriverge.com/tapkasa/privacy.html"
+    },
+    "sk": {
+     "id": "9c416430-7d97-474b-adcb-52edf7251a3c",
+     "name": "Tapkasa: Pokladňa na stánok",
+     "subtitle": "Na trh, jarmok aj festival",
+     "privacyPolicyUrl": "https://www.deriverge.com/tapkasa/privacy.html"
+    }
+   }
+  }
+ ],
+ "versionDetail": [
+  {
+   "id": "cc0918df-5956-4304-a594-7d9b260c2a1b",
+   "versionString": "1.0.6",
+   "state": "READY_FOR_SALE",
+   "build": {
+    "id": "d3e0b734-fc9b-4eaf-a1d8-d4b904543efd",
+    "version": "79",
+    "state": "VALID"
+   },
+   "localizations": {
+    "cs": {
+     "id": "1f36c447-fd31-4ea7-957e-5918a6ff7515",
+     "description": "Tapkasa je pokladna do kapsy, pro stánek s kávou, školní jarmark, festivalový bar nebo pop-up, který žije jeden víkend. Otevřete aplikaci, naťukáte menu a prodáváte. Bez registrace, bez účtu, bez internetu.\n\nTapkasa prodej ZAZNAMENÁVÁ, nezpracovává platby. Hotovost přijímáte do kasírky, kartu na svém vlastním terminálu, Tapkasa u toho počítá, hlídá frontu a na konci dne řekne, kolik jste utržili.\n\nPRODEJ NA TŘI ŤUKNUTÍ\n• Každá položka je barevná karta, obsluha ji pozná dřív, než přečte název. Na výběr 14 sladěných barev, nebo si na kolečku namícháte vlastní.\n• Ťuknutím přidáte kus na účet, podržením karty na vteřinu ho zase odeberete. Omylem to nejde, karta při držení plní pruh.\n• „+ Jiná částka“ vyřeší cokoli mimo menu.\n• Špatně uložený účet vrátíte jedním ťuknutím zpět.\n\nHOTOVĚ I KARTOU\n• U hotovosti naťukáte, co vám zákazník podal, a Tapkasa spočítá, kolik vrátit.\n• U karty jen potvrdíte částku naúčtovanou na vašem terminálu.\n\nFRONTA OBJEDNÁVEK\n• Zaplacený účet se zařadí do fronty jako objednávka s číslem.\n• Položky se odškrtávají (u více kusů 1/2, 2/2), „Vydáno“ objednávku uzavře, a jde vrátit zpět.\n• Počet čekajících objednávek je pořád vidět v hlavičce.\n\nDVĚ ZAŘÍZENÍ: KASA A VÝDEJ\n• Druhé zařízení přepnete do role Výdej: jen přijímá objednávky a odškrtává je, nejde do něj omylem účtovat.\n• Spárování zabere minutu, jedno zařízení vytvoří kód, druhé ho opíše.\n• Výdej umí nové objednávky číst nahlas, obsluha se nemusí dívat na displej.\n• Bonus: výdejní zařízení má kopii prodejů, záloha zadarmo.\n\nPŘEHLED A UZÁVĚRKA\n• Tržba celkem, rozpad hotově/kartou, prodané kusy po položkách.\n• Souhrn zkopírujete jako text, třeba do zprávy účetní.\n• Souhrn tržeb za zvolené období jako PDF: s vašimi údaji a rozpisem DPH, poslat e-mailem nebo vytisknout.\n• Údaje prodejce vyplníte jednou v nastavení a předvyplní se do každého souhrnu.\n• Plátci DPH zadají u položky sazbu v procentech. Ceny se zadávají včetně daně, souhrn dopočítá základ i daň a rozepíše je po sazbách. Kdo plátce není, DPH vůbec nevidí.\n\nVAŠE DATA JSOU VAŠE\n• Všechno zůstává ve vašem zařízení, uložené hned ve dvou nezávislých kopiích.\n• Žádné účty, žádná analytika, žádné reklamy.\n• Záloha je obyčejný text, zkopírujete ji do poznámek nebo mailu a kdykoli z ní kasu obnovíte.\n• Funguje offline; výpadek signálu prodej nezastaví.\n\nZDARMA A PRO\nZdarma: kompletní pokladna na jednom zařízení, až 10 zaplacených účtů denně, na menší akci se nedoplatíte.\nTapkasa Pro (předplatné): neomezené účtování a spárování druhého zařízení. Předplatné se účtuje přes App Store a lze ho kdykoli zrušit v nastavení účtu.\n\nTapkasa nevede účetnictví. Je to rychlá kasa pro prodej, kde se dnes počítá na papírku, a k tomu souhrn tržeb za období, který si vezme účetní.\n\nCO TAPKASA NENÍ\n• Nezpracovává platby. Hotovost berete do kasírky, kartu na vlastním terminálu.\n• Není fiskální pokladna (EET). Používejte ji tam, kde to předpisy dovolují: spolky, školní a farní akce, dobročinné prodeje, interní evidence.\n• Nevede sklad ani účetnictví.\n\nPodmínky použití: https://www.deriverge.com/tapkasa/terms.html\nZásady ochrany soukromí: https://www.deriverge.com/tapkasa/privacy.html",
+     "keywords": "pos,prodej,tržby,účtenky,objednávky,výdej,offline,kavárna,jarmark,akce,občerstvení,foodtruck,mobilní",
+     "promotionalText": "Vánoční trh, jarmark nebo punč u školy? Naťukejte menu a účtujte, bez registrace a bez internetu. Druhý telefon ukáže frontu objednávek a přečte ji nahlas.",
+     "whatsNew": "Šifrované párování s osmiznakovým kódem (obě zařízení potřebují 1.0.6). Kopii menu a údajů prodejce musí druhé zařízení potvrdit. Rychlejší ukládání i s velkým archivem. Po přepnutí výdeje na kasu se cizí účtenky nepočítají do tržby. Podržení karty ubere jeden kus, nedoplatek chce potvrzení. Souhrn tržeb (PDF) místo daňového dokladu.",
+     "supportUrl": "https://deriverge.com/tapkasa/support.html",
+     "marketingUrl": "https://www.deriverge.com/tapkasa/",
+     "lengths": {
+      "description": 3142,
+      "keywords": 100,
+      "promotionalText": 155,
+      "whatsNew": 335
+     },
+     "screenshots": {
+      "APP_IPAD_PRO_3GEN_129": [
+       {
+        "fileName": "01-sell__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "fd1beb341c9b51fec33f825aa445178f"
+       },
+       {
+        "fileName": "02-till-and-pickup__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "37a5c0292892b710c0b2e9c11250dc3c"
+       },
+       {
+        "fileName": "03-cash-change__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "653b43142f40457acbd8a592e36b300e"
+       },
+       {
+        "fileName": "04-order-queue__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "5104933c03ec650432f465cc1065f7d0"
+       },
+       {
+        "fileName": "05-pickup-ticket__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "fcdbc7cbacc72d1d798be4a286680c30"
+       },
+       {
+        "fileName": "06-takings__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "a746e298158a7fd9edbb775ef406db0c"
+       },
+       {
+        "fileName": "07-pdf-summary__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "5e48adeb10c73f297ec6e4c2990e5c38"
+       },
+       {
+        "fileName": "08-events__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "0f81c89ff221e4ba9c80a3ac396d492c"
+       }
+      ],
+      "APP_IPHONE_67": [
+       {
+        "fileName": "01-sell__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "f2ee26f30ee4e8a8f0c5617074983acc"
+       },
+       {
+        "fileName": "02-till-and-pickup__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "6874b7087be3dc8b41cf18403d0e020d"
+       },
+       {
+        "fileName": "03-cash-change__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "b11af42f4332484375e4a44d873d98e2"
+       },
+       {
+        "fileName": "04-order-queue__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "e29a4b92d6f62e26b7d08a7ff4a1f58e"
+       },
+       {
+        "fileName": "05-pickup-ticket__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "4d2a23c7724b4a9ca10f5877b752e806"
+       },
+       {
+        "fileName": "06-takings__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "8e76d8228ce3bc696336e681642d1104"
+       },
+       {
+        "fileName": "07-pdf-summary__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "c50e035c77c6638cca83eab341bf8838"
+       },
+       {
+        "fileName": "08-events__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "3be0ebc1d702be5d8e9d8c92d38f1e5a"
+       }
+      ]
+     },
+     "previews": [
+      "IPHONE_67"
+     ]
+    },
+    "de-DE": {
+     "id": "afa145c6-27e6-4add-9213-1fb0f20a6972",
+     "description": "Tapkasa ist eine Kasse für die Hosentasche: für den Kaffeestand, das Schulfest, die Festivalbar, den Pop-up, der nur ein Wochenende lebt. App öffnen, Menü eintippen, verkaufen. Ohne Registrierung, ohne Konto, ohne Internet.\n\nTapkasa ERFASST Verkäufe, sie wickelt keine Zahlungen ab. Bargeld nehmen Sie in die Kasse, Karten über Ihr eigenes Terminal; Tapkasa zählt mit, hält die Bestellschlange in Bewegung und sagt Ihnen am Abend, wie viel Sie eingenommen haben.\n\nEIN VERKAUF IN DREI TIPPS\n• Jedes Produkt ist eine Farbkarte, das Personal erkennt sie schneller, als es lesen kann.\n• Antippen legt den Artikel auf den Bon; eine Sekunde halten nimmt ihn wieder herunter.\n• „+ Anderer Betrag\" für alles, was nicht auf der Karte steht.\n\nBAR UND KARTE\n• Bei Bargeld tippen Sie ein, was der Kunde gibt, Tapkasa zeigt das Rückgeld.\n• Bei Karte kassieren Sie über Ihr eigenes Terminal und bestätigen nur.\n\nBESTELLWARTESCHLANGE\n• Jeder bezahlte Bon wird zur nummerierten Bestellung.\n• Beim Zubereiten haken Sie Artikel ab; „Ausgegeben\" schließt die Bestellung.\n• Zwei Geräte, zwei Rollen: Kasse und Ausgabe, in einer Minute gekoppelt. Die Ausgabe kann neue Bestellungen vorlesen.\n\nÜBERSICHT UND ABSCHLUSS\n• Umsatz gesamt, bar/Karte, verkaufte Stücke je Artikel.\n• Umsatzübersicht als PDF für jeden Zeitraum, mit Ihren Verkäuferdaten und auf Wunsch mit Umsatzsteuer-Aufstellung, per E-Mail oder geteilt.\n• „Event abschließen\" legt den Umsatz ins Archiv und leert die Kasse.\n\nIHRE DATEN GEHÖREN IHNEN\n• Alles bleibt auf dem Gerät, in zwei unabhängigen Kopien.\n• Keine Konten, keine Analytik, keine Werbung. Funktioniert komplett offline.\n\nGRATIS UND PRO\nGratis: die komplette Kasse auf einem Gerät, bis zu 10 bezahlte Bons pro Tag.\nTapkasa Pro (Abo): unbegrenzte Bons und Kopplung eines zweiten Geräts. Abrechnung über den App Store, jederzeit kündbar.\n\nDie Oberfläche gibt es auf Deutsch, Tschechisch, Slowakisch, Englisch, Französisch, Spanisch, Italienisch, Polnisch und Portugiesisch. Tapkasa führt keine Buchhaltung; sie ist die schnelle Kasse für Verkäufe, die heute auf einem Zettel landen würden.\n\nWAS TAPKASA NICHT IST\n• Tapkasa wickelt keine Zahlungen ab. Bargeld nehmen Sie selbst, Karten über Ihr eigenes Terminal.\n• Tapkasa ist keine zertifizierte Registrierkasse mit TSE. Nutzen Sie sie dort, wo es die Vorschriften erlauben: Vereinsfeste, Schul- und Wohltätigkeitsfeste, interne Aufzeichnungen.\n• Keine Lagerverwaltung und keine Buchhaltung.\n\nNutzungsbedingungen: https://www.deriverge.com/tapkasa/terms.html\nDatenschutzerklärung: https://www.deriverge.com/tapkasa/privacy.html",
+     "keywords": "kassieren,verkauf,flohmarkt,imbiss,foodtruck,bestellung,verein,festival,offline,quittung,umsatz,bar",
+     "promotionalText": "Weihnachtsmarkt, Basar oder Glühweinstand? Menü eintippen und kassieren, ohne Anmeldung und ohne Internet. Ein zweites Handy zeigt die Bestellungen und liest sie vor.",
+     "whatsNew": "Verschlüsselte Kopplung mit 8-stelligem Code (beide Geräte brauchen 1.0.6). Das Kopieren von Menü und Verkäuferdaten muss das andere Gerät bestätigen. Schnelleres Speichern auch bei großem Archiv. Langes Drücken entfernt ein Stück, ein Fehlbetrag braucht eine Bestätigung. Umsatzübersicht (PDF) statt Steuerbeleg.",
+     "supportUrl": "https://deriverge.com/tapkasa/support.html",
+     "marketingUrl": "https://www.deriverge.com/tapkasa/",
+     "lengths": {
+      "description": 2581,
+      "keywords": 99,
+      "promotionalText": 166,
+      "whatsNew": 313
+     },
+     "screenshots": {
+      "APP_IPAD_PRO_3GEN_129": [
+       {
+        "fileName": "01-sell__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "c96c807f0c8e20fc9b932dbfe0b97717"
+       },
+       {
+        "fileName": "02-till-and-pickup__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "474cfd36bb0381e30c9329725c6e9503"
+       },
+       {
+        "fileName": "03-cash-change__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "c479fe7f3563c1265f95c64362004374"
+       },
+       {
+        "fileName": "04-order-queue__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "d5aaec597697f836e7dffcf5d88d515d"
+       },
+       {
+        "fileName": "05-pickup-ticket__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "d18c800fcf645517e68d95802cd3b40e"
+       },
+       {
+        "fileName": "06-takings__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "99ca80d00d173cbe9e545a4aa814a952"
+       },
+       {
+        "fileName": "07-pdf-summary__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "ac05f60b48c0443d36ce16ef1a316e42"
+       },
+       {
+        "fileName": "08-events__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "5886465d22405d3c3d163f7e1374e9c3"
+       }
+      ],
+      "APP_IPHONE_67": [
+       {
+        "fileName": "01-sell__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "b4b3c99485b5476ff0254c1cb67ff549"
+       },
+       {
+        "fileName": "02-till-and-pickup__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "028aa0ec9ce13b93cc301dd32ca1f0b8"
+       },
+       {
+        "fileName": "03-cash-change__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "3a1d2f803b5f60aeb0886fe78b9768ad"
+       },
+       {
+        "fileName": "04-order-queue__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "23eaab836267c320f6711a292f31fd89"
+       },
+       {
+        "fileName": "05-pickup-ticket__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "66bc253d97bffe1b72222b4357f6be06"
+       },
+       {
+        "fileName": "06-takings__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "bb0ae411fb753bcd01aae96305d1f1ca"
+       },
+       {
+        "fileName": "07-pdf-summary__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "0ab7825a9129e3add1d7af58e41f5b39"
+       },
+       {
+        "fileName": "08-events__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "acd668739414a4efa5d3913c2416d7de"
+       }
+      ]
+     },
+     "previews": []
+    },
+    "en-US": {
+     "id": "9261a934-017f-42d4-87b0-e50f732daa26",
+     "description": "Tapkasa is a point of sale that fits in your pocket, for the coffee stall, the school fair, the festival bar, the pop-up that lives for one weekend. Open the app, type in your menu, start selling. No sign-up, no account, no internet needed.\n\nTapkasa RECORDS sales, it does not process payments. You take cash into your cash box and cards on your own card terminal; Tapkasa does the counting, keeps the order queue moving and tells you at the end of the day how much you took.\n\nA SALE IN THREE TAPS\n• Every product is a colour card, staff recognise it before they can read the name. 14 curated colours, or mix your own on a colour wheel.\n• Tap to add an item to the bill; press and hold for a second to take it off again. A progress bar fills while you hold, so it never happens by accident.\n• \"+ Custom amount\" handles anything that is not on the menu.\n• Saved the wrong bill? One tap undoes it.\n\nCASH AND CARD\n• For cash, type what the customer handed you and Tapkasa shows the change to give back.\n• For card, you charge the amount on your own terminal and simply confirm it.\n\nORDER QUEUE\n• A paid bill does not disappear, it joins the queue as a numbered order.\n• Tick items off as you prepare them (multi-item lines count 1/2, 2/2); \"Served\" closes the order, and it can be reopened.\n• The number of waiting orders is always visible in the header.\n\nTWO DEVICES: TILL AND PICKUP\n• Switch a second device to the Pickup role: it only receives orders and ticks them off, nobody can ring up a sale on it by mistake.\n• Pairing takes a minute: one device creates a code, the other types it in.\n• The pickup device can read new orders aloud, so staff never have to look at the screen.\n• Bonus: the paired device keeps a copy of the sales, a free backup.\n\nOVERVIEW AND CLOSE-OUT\n• Total revenue, cash/card split, and pieces sold per product.\n• Sales summary (PDF) for any period: with your business details, sent by e-mail or printed.\n• Fill in your seller details once in settings and they are pre-filled on every document.\n• VAT registered? Set a rate per item. You enter prices including tax and the summary works out the net amount and the tax, broken down by rate. If you are not registered, VAT never appears.\n• Copy the summary as plain text, straight into a message to your accountant.\n• \"Close event\" moves the takings into the archive and resets the till for the next event.\n\nYOUR DATA IS YOURS\n• Everything stays on your device, saved in two independent copies.\n• No accounts, no analytics, no ads.\n• The backup is plain text, copy it into your notes or an e-mail and restore from it any time.\n• Works fully offline; losing signal never stops a sale.\n\nFREE AND PRO\nFree: the complete till on one device, up to 10 paid bills per day, enough for a small event.\nTapkasa Pro (subscription): unlimited bills and pairing of a second device. Billed through the App Store; cancel any time in your account settings.\n\nThe interface is available in Czech, Slovak, English, German, French, Spanish, Italian, Polish and Portuguese. Tapkasa does not do bookkeeping. It is a fast till for sales that are counted on a scrap of paper today, plus a summary document for any period that your accountant can work from.\n\nWHAT TAPKASA IS NOT\n• It does not process payments. You take cash yourself and cards on your own terminal.\n• It is not a certified fiscal cash register. Use it where the rules allow: clubs, school and charity events, internal records.\n• It does not do stock or accounting.\n\nTerms of Use: https://www.deriverge.com/tapkasa/terms.html\nPrivacy Policy: https://www.deriverge.com/tapkasa/privacy.html",
+     "keywords": "cash register,cashier,festival,vendor,food truck,craft fair,bar,order queue,kitchen,sales,fair,stand",
+     "promotionalText": "Christmas market, craft fair or mulled wine stand? Type in your menu and sell. No sign-up, no internet. A second phone shows the order queue and reads it aloud.",
+     "whatsNew": "Encrypted pairing with an 8-character code (both devices need 1.0.6). Copying the menu and seller details must be confirmed on the other device. Faster saving, even with a large archive. Holding a card removes one item, an underpayment asks for confirmation. Sales summary (PDF) instead of tax document.",
+     "supportUrl": "https://deriverge.com/tapkasa/support.html",
+     "marketingUrl": "https://www.deriverge.com/tapkasa/",
+     "lengths": {
+      "description": 3601,
+      "keywords": 100,
+      "promotionalText": 160,
+      "whatsNew": 303
+     },
+     "screenshots": {
+      "APP_IPAD_PRO_3GEN_129": [
+       {
+        "fileName": "01-sell__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "df23aa5ef42e3bd8b80201ed64ebc579"
+       },
+       {
+        "fileName": "02-till-and-pickup__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "ce6624473e6502cbf226a11013e2edb1"
+       },
+       {
+        "fileName": "03-cash-change__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "bef2e05c50e0b31aed63bfb32c750541"
+       },
+       {
+        "fileName": "04-order-queue__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "9a3ddf0634c478ef0327ff594e1a3b62"
+       },
+       {
+        "fileName": "05-pickup-ticket__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "bd6f22e1a5f7cef283288cbf2f0ec423"
+       },
+       {
+        "fileName": "06-takings__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "75b84357a48618d25f050f99ea35a912"
+       },
+       {
+        "fileName": "07-pdf-summary__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "2f633d783c8bb52db7ce6ba3ee9c694f"
+       },
+       {
+        "fileName": "08-events__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "b77116a29c4b56f734fbe53b58f2bc75"
+       }
+      ],
+      "APP_IPHONE_67": [
+       {
+        "fileName": "01-sell__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "9532a1b2269cff11610beba35022f141"
+       },
+       {
+        "fileName": "02-till-and-pickup__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "2a320cd301d056514e9d05d1038dc6c3"
+       },
+       {
+        "fileName": "03-cash-change__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "71059f2b51eb99909102a5f9c4cfaccd"
+       },
+       {
+        "fileName": "04-order-queue__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "1caa8f13028d12728282059955df80ca"
+       },
+       {
+        "fileName": "05-pickup-ticket__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "2e50e9a73a875b6604ad96c50e443259"
+       },
+       {
+        "fileName": "06-takings__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "30436b1e6cc25e380ab4dd5465ed91c7"
+       },
+       {
+        "fileName": "07-pdf-summary__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "c71b8d5a0e4963dd949aa50fdf2ba503"
+       },
+       {
+        "fileName": "08-events__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "c6605f63e3321b67ee3de7c7b9dccdc1"
+       }
+      ]
+     },
+     "previews": [
+      "IPHONE_67"
+     ]
+    },
+    "es-ES": {
+     "id": "be6ac835-50d2-41a4-bfb0-c35345e594cf",
+     "description": "Tapkasa es una caja registradora de bolsillo: para el puesto de café, la fiesta del colegio, la barra del festival, el pop-up que vive un fin de semana. Abra la app, escriba su menú y venda. Sin registro, sin cuenta, sin internet.\n\nTapkasa REGISTRA ventas, no procesa pagos. El efectivo va a su caja, la tarjeta pasa por su propio datáfono; Tapkasa cuenta, mueve la cola de pedidos y le dice por la noche cuánto ha ingresado.\n\nUNA VENTA EN TRES TOQUES\n• Cada producto es una tarjeta de color, el personal la reconoce antes de leerla.\n• Un toque añade el artículo a la cuenta; mantener un segundo lo quita.\n• «+ Otro importe» para lo que no está en el menú.\n\nEFECTIVO Y TARJETA\n• Con efectivo, teclee lo que entrega el cliente y Tapkasa muestra el cambio.\n• Con tarjeta, cobra en su datáfono y solo confirma.\n\nCOLA DE PEDIDOS\n• Cada cuenta pagada se convierte en pedido numerado.\n• Marque los artículos al prepararlos; «Entregado» cierra el pedido.\n• Dos dispositivos, dos roles: caja y entrega, enlazados en un minuto. El segundo puede leer los pedidos en voz alta.\n\nRESUMEN DE VENTAS\n• Ingresos totales, efectivo/tarjeta, unidades por artículo.\n• Resumen de ventas en PDF de cualquier periodo, con sus datos y, si procede, desglose del IVA; por correo o compartido.\n• «Cerrar evento» archiva los ingresos y deja la caja a cero.\n\nSUS DATOS SON SUYOS\n• Todo se queda en el dispositivo, en dos copias independientes.\n• Sin cuentas, sin analítica, sin publicidad. Funciona totalmente sin conexión.\n\nGRATIS Y PRO\nGratis: la caja completa en un dispositivo, hasta 10 cuentas pagadas al día.\nTapkasa Pro (suscripción): cuentas ilimitadas y enlace de un segundo dispositivo. Se factura por el App Store y se cancela cuando quiera.\n\nInterfaz en español, checo, eslovaco, inglés, alemán, francés, italiano, polaco y portugués. Tapkasa no lleva contabilidad; es la caja rápida para ventas que hoy acabarían en un papelito.\n\nLO QUE TAPKASA NO ES\n• No procesa pagos. El efectivo lo cobra usted y la tarjeta, con su propio datáfono.\n• No es una caja registradora certificada (Verifactu, TicketBAI). Úsela donde la normativa lo permita: asociaciones, fiestas escolares y benéficas, registro interno.\n• No lleva inventario ni contabilidad.\n\nTérminos de uso: https://www.deriverge.com/tapkasa/terms.html\nPolítica de privacidad: https://www.deriverge.com/tapkasa/privacy.html",
+     "keywords": "tpv,caja,venta,puesto,mercado,mercadillo,festival,pedido,cobro,recibo,feria,verbena",
+     "promotionalText": "¿Mercadillo navideño, feria o puesto de chocolate? Escribe tu menú y cobra, sin registro y sin internet. Un segundo móvil muestra los pedidos y los lee en voz alta.",
+     "whatsNew": "Emparejamiento cifrado con código de 8 caracteres (ambos dispositivos necesitan la 1.0.6). Copiar el menú y los datos del vendedor requiere confirmación en el otro dispositivo. Guardado más rápido. Mantener pulsada una tarjeta quita una unidad, un pago incompleto pide confirmación. Resumen de ventas (PDF).",
+     "supportUrl": "https://deriverge.com/tapkasa/support.html",
+     "marketingUrl": "https://www.deriverge.com/tapkasa/",
+     "lengths": {
+      "description": 2358,
+      "keywords": 83,
+      "promotionalText": 164,
+      "whatsNew": 307
+     },
+     "screenshots": {
+      "APP_IPAD_PRO_3GEN_129": [
+       {
+        "fileName": "01-sell__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "671ee410f00ab6ad052f1bd22524a2f6"
+       },
+       {
+        "fileName": "02-till-and-pickup__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "cf57c5acf200ed206eb31a3e744bd75b"
+       },
+       {
+        "fileName": "03-cash-change__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "33f302fd78b628a790b1e901ea1b7a96"
+       },
+       {
+        "fileName": "04-order-queue__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "7827e8c86860c6a7a22529baa110af95"
+       },
+       {
+        "fileName": "05-pickup-ticket__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "ec5303b42e8fc9587791c67b1871ef2d"
+       },
+       {
+        "fileName": "06-takings__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "a8a7b587314c5f6ec28966990f3fefe8"
+       },
+       {
+        "fileName": "07-pdf-summary__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "88bd54a4e016dfbadba613b237774fbc"
+       },
+       {
+        "fileName": "08-events__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "fe5b14072627a041b76f85ae3dbad6fe"
+       }
+      ],
+      "APP_IPHONE_67": [
+       {
+        "fileName": "01-sell__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "b4b2989beaf113dbcdf1fc17cb1ec506"
+       },
+       {
+        "fileName": "02-till-and-pickup__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "16c2d425040dbbe1f3a2bf60f19d3297"
+       },
+       {
+        "fileName": "03-cash-change__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "f9a0625a4c252325d56657914825e3d7"
+       },
+       {
+        "fileName": "04-order-queue__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "fd40da6c1d27bf99e181c0c70f6dff0e"
+       },
+       {
+        "fileName": "05-pickup-ticket__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "39b5c96166487d2039babd52b3bbd647"
+       },
+       {
+        "fileName": "06-takings__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "62bd5c549ca033bb3c0c15254aedbbe2"
+       },
+       {
+        "fileName": "07-pdf-summary__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "c1005e48c47b35048119d1808482b2af"
+       },
+       {
+        "fileName": "08-events__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "2b879eda7e2d9ecfe1c99bb8cee7d59a"
+       }
+      ]
+     },
+     "previews": []
+    },
+    "fr-FR": {
+     "id": "086ecc27-aa46-4735-a588-df0ce87570f8",
+     "description": "Tapkasa est une caisse qui tient dans la poche : pour le stand de café, la kermesse, le bar du festival, le pop-up qui ne vit qu'un week-end. Ouvrez l'app, saisissez votre menu, vendez. Sans inscription, sans compte, sans internet.\n\nTapkasa ENREGISTRE les ventes, elle ne traite pas les paiements. Les espèces vont dans votre caisse, la carte passe par votre propre terminal ; Tapkasa compte, fait avancer la file de commandes et vous dit le soir combien vous avez encaissé.\n\nUNE VENTE EN TROIS GESTES\n• Chaque produit est une carte colorée, l'équipe la reconnaît avant même de lire.\n• Un appui ajoute l'article à l'addition ; maintenir une seconde le retire.\n• « + Autre montant » pour tout ce qui n'est pas au menu.\n\nESPÈCES ET CARTE\n• En espèces, tapez ce que le client donne, Tapkasa affiche la monnaie à rendre.\n• En carte, vous encaissez sur votre terminal et confirmez simplement.\n\nFILE DE COMMANDES\n• Chaque addition payée devient une commande numérotée.\n• Cochez les articles en les préparant ; « Servi » clôt la commande.\n• Deux appareils, deux rôles : caisse et service, appairés en une minute. Le second peut lire les commandes à voix haute.\n\nRÉSUMÉ ET DOCUMENT\n• Recette totale, espèces/carte, quantités par article.\n• Récapitulatif des ventes en PDF pour toute période, avec vos coordonnées et au besoin le détail de la TVA, envoyé par e-mail ou partagé.\n• « Clôturer l'événement » archive la recette et remet la caisse à zéro.\n\nVOS DONNÉES VOUS APPARTIENNENT\n• Tout reste sur l'appareil, en deux copies indépendantes.\n• Pas de comptes, pas d'analytique, pas de pub. Fonctionne entièrement hors ligne.\n\nGRATUIT ET PRO\nGratuit : la caisse complète sur un appareil, jusqu'à 10 additions payées par jour.\nTapkasa Pro (abonnement) : additions illimitées et appairage d'un second appareil. Facturé via l'App Store, résiliable à tout moment.\n\nInterface en français, tchèque, slovaque, anglais, allemand, espagnol, italien, polonais et portugais. Tapkasa ne fait pas de comptabilité ; c'est la caisse rapide des ventes qui finiraient aujourd'hui sur un bout de papier.\n\nCE QUE TAPKASA N'EST PAS\n• Elle ne traite pas les paiements. Vous encaissez les espèces vous-même et la carte sur votre propre terminal.\n• Ce n'est pas une caisse certifiée (NF525). Utilisez-la là où la réglementation le permet : associations, kermesses, ventes caritatives, suivi interne.\n• Pas de gestion de stock ni de comptabilité.\n\nConditions d’utilisation : https://www.deriverge.com/tapkasa/terms.html\nPolitique de confidentialité : https://www.deriverge.com/tapkasa/privacy.html",
+     "keywords": "caisse,tpv,vente,stand,marché,brocante,festival,commande,encaissement,ticket,buvette,kermesse",
+     "promotionalText": "Marché de Noël, kermesse ou vin chaud ? Saisissez le menu et encaissez, sans inscription ni internet. Un second téléphone affiche les commandes et les lit à voix haute.",
+     "whatsNew": "Appairage chiffré avec un code de 8 caractères (les deux appareils doivent être en 1.0.6). La copie du menu et des données du vendeur doit être confirmée sur l'autre appareil. Enregistrement plus rapide. Un appui long retire un article, un paiement incomplet demande confirmation. Récapitulatif des ventes (PDF).",
+     "supportUrl": "https://deriverge.com/tapkasa/support.html",
+     "marketingUrl": "https://www.deriverge.com/tapkasa/",
+     "lengths": {
+      "description": 2563,
+      "keywords": 93,
+      "promotionalText": 168,
+      "whatsNew": 312
+     },
+     "screenshots": {
+      "APP_IPHONE_67": [
+       {
+        "fileName": "01-sell__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "4b365f84585473694a96bd7a00cedbc6"
+       },
+       {
+        "fileName": "02-till-and-pickup__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "6dd10cd06fc68e0d9a803a6aecf9215a"
+       },
+       {
+        "fileName": "03-cash-change__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "9f6cb80d0c99774e60db1415b5fb7ad1"
+       },
+       {
+        "fileName": "04-order-queue__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "29bac222ffe5e8cdbcd71b449633a83c"
+       },
+       {
+        "fileName": "05-pickup-ticket__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "283164ec62e0adecb90a31100c51e96b"
+       },
+       {
+        "fileName": "06-takings__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "4703e8b50579a31d39a2c62030c14488"
+       },
+       {
+        "fileName": "07-pdf-summary__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "e3f176f333fb18f1900191c2c72e2f81"
+       },
+       {
+        "fileName": "08-events__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "437ce5c69eea9cd70516203546abc9b4"
+       }
+      ],
+      "APP_IPAD_PRO_3GEN_129": [
+       {
+        "fileName": "01-sell__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "8269117ed16ed7933e71ef6ca8b7e63d"
+       },
+       {
+        "fileName": "02-till-and-pickup__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "7142725844bd291841ab615c18194d7e"
+       },
+       {
+        "fileName": "03-cash-change__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "52fcc55fa1fc6a1cd20ca47982b95867"
+       },
+       {
+        "fileName": "04-order-queue__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "bc0b816d459bff09a93cef53ee482125"
+       },
+       {
+        "fileName": "05-pickup-ticket__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "65be4c1e9524482e34b8ddfb47ff97e5"
+       },
+       {
+        "fileName": "06-takings__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "e7cd41ad9ae35fb97bf88aad622117bc"
+       },
+       {
+        "fileName": "07-pdf-summary__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "534eb7e442f866c38a9c4994c996a8d6"
+       },
+       {
+        "fileName": "08-events__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "4970f14a8749f939038472c30427eb71"
+       }
+      ]
+     },
+     "previews": []
+    },
+    "it": {
+     "id": "932a55f8-4b5d-43dd-8b2f-84cb1c0b6b86",
+     "description": "Tapkasa è una cassa che sta in tasca: per la bancarella del caffè, la festa della scuola, il bar del festival, il pop-up che vive un weekend. Aprite l'app, scrivete il menù, vendete. Senza registrazione, senza account, senza internet.\n\nTapkasa REGISTRA le vendite, non elabora pagamenti. I contanti vanno nella vostra cassetta, la carta passa dal vostro POS; Tapkasa conta, fa scorrere la coda degli ordini e a fine giornata vi dice quanto avete incassato.\n\nUNA VENDITA IN TRE TOCCHI\n• Ogni prodotto è una scheda colorata, lo staff la riconosce prima di leggerla.\n• Un tocco mette l'articolo sul conto; tenere premuto un secondo lo toglie.\n• «+ Altro importo» per ciò che non è a menù.\n\nCONTANTI E CARTA\n• In contanti digitate quanto dà il cliente e Tapkasa mostra il resto.\n• Con la carta incassate sul vostro POS e confermate soltanto.\n\nCODA DEGLI ORDINI\n• Ogni conto pagato diventa un ordine numerato.\n• Spuntate gli articoli mentre li preparate; «Servito» chiude l'ordine.\n• Due dispositivi, due ruoli: cassa e consegna, collegati in un minuto. Il secondo può leggere gli ordini ad alta voce.\n\nRIEPILOGO VENDITE\n• Incasso totale, contanti/carta, pezzi venduti per articolo.\n• Riepilogo vendite in PDF per qualsiasi periodo, con i vostri dati e volendo il riepilogo IVA; via e-mail o condiviso.\n• «Chiudere l'evento» archivia l'incasso e azzera la cassa.\n\nI VOSTRI DATI SONO VOSTRI\n• Tutto resta sul dispositivo, in due copie indipendenti.\n• Niente account, niente analytics, niente pubblicità. Funziona del tutto offline.\n\nGRATIS E PRO\nGratis: la cassa completa su un dispositivo, fino a 10 conti pagati al giorno.\nTapkasa Pro (abbonamento): conti illimitati e collegamento di un secondo dispositivo. Addebito tramite App Store, disdicibile in ogni momento.\n\nInterfaccia in italiano, ceco, slovacco, inglese, tedesco, francese, spagnolo, polacco e portoghese. Tapkasa non fa contabilità; è la cassa veloce per vendite che oggi finirebbero su un foglietto.\n\nCOSA TAPKASA NON È\n• Non elabora pagamenti. I contanti li incassi tu, le carte con il tuo terminale.\n• Non è un registratore telematico. Usala dove le norme lo consentono: associazioni, feste scolastiche e benefiche, registri interni.\n• Non gestisce magazzino né contabilità.\n\nTermini di utilizzo: https://www.deriverge.com/tapkasa/terms.html\nInformativa sulla privacy: https://www.deriverge.com/tapkasa/privacy.html",
+     "keywords": "cassa,pos,vendita,bancarella,mercato,sagra,festival,ordine,incasso,scontrino,fiera,chiosco",
+     "promotionalText": "Mercatino di Natale, sagra o vin brulé? Inserisci il menu e incassa, senza registrazione e senza internet. Un secondo telefono mostra gli ordini e li legge ad alta voce.",
+     "whatsNew": "Collegamento cifrato con codice di 8 caratteri (entrambi i dispositivi devono avere la 1.0.6). La copia del menu e dei dati del venditore va confermata sull'altro dispositivo. Salvataggio più veloce. Tenere premuta una scheda toglie un pezzo, un pagamento incompleto chiede conferma. Riepilogo vendite (PDF).",
+     "supportUrl": "https://deriverge.com/tapkasa/support.html",
+     "marketingUrl": "https://www.deriverge.com/tapkasa/",
+     "lengths": {
+      "description": 2377,
+      "keywords": 90,
+      "promotionalText": 169,
+      "whatsNew": 308
+     },
+     "screenshots": {
+      "APP_IPHONE_67": [
+       {
+        "fileName": "01-sell__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "8af2b1a9f224be84f247ac5e642cf80e"
+       },
+       {
+        "fileName": "02-till-and-pickup__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "9f09061e9130734e464c8620cd9d929a"
+       },
+       {
+        "fileName": "03-cash-change__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "fcdec4cebb7e1398ec28ac5c33b5145b"
+       },
+       {
+        "fileName": "04-order-queue__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "8e657bff571fddd23ce6af057a9b1d36"
+       },
+       {
+        "fileName": "05-pickup-ticket__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "8c2cb80dd4fb68c9442d77b3a183b150"
+       },
+       {
+        "fileName": "06-takings__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "66bf0cda7bdb046a58a81944f43550a4"
+       },
+       {
+        "fileName": "07-pdf-summary__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "2af923d4d613340ee3640f518e76f89a"
+       },
+       {
+        "fileName": "08-events__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "cdf4cba3d0ad49d7c496a503d40dd020"
+       }
+      ],
+      "APP_IPAD_PRO_3GEN_129": [
+       {
+        "fileName": "01-sell__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "83efa83bd039e4f111280f35b09d95ee"
+       },
+       {
+        "fileName": "02-till-and-pickup__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "7b499758f12644421b85ab335f1cdf49"
+       },
+       {
+        "fileName": "03-cash-change__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "63a140f9b270eb1ab8970aaf4cc678db"
+       },
+       {
+        "fileName": "04-order-queue__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "ee1bc794db8bd2a48de601c8f4081aaf"
+       },
+       {
+        "fileName": "05-pickup-ticket__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "3eeae1773f58ea70ebc85a66c75130b8"
+       },
+       {
+        "fileName": "06-takings__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "23a29b8a667945a5326d8967ae1d8731"
+       },
+       {
+        "fileName": "07-pdf-summary__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "b9c20838e4a5c10e8918d243ad8367b4"
+       },
+       {
+        "fileName": "08-events__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "95da0b7484d68f58c1a7b7922911da0e"
+       }
+      ]
+     },
+     "previews": []
+    },
+    "pl": {
+     "id": "dc5783e5-5c40-4030-92aa-6ed118c480f0",
+     "description": "Tapkasa to kasa, która mieści się w kieszeni: na stragan z kawą, szkolny kiermasz, festiwalowy bar, pop-up żyjący jeden weekend. Otwórz aplikację, wpisz menu, sprzedawaj. Bez rejestracji, bez konta, bez internetu.\n\nTapkasa REJESTRUJE sprzedaż, nie przetwarza płatności. Gotówka trafia do twojej kasetki, karta przechodzi przez twój terminal; Tapkasa liczy, popycha kolejkę zamówień i wieczorem mówi, ile utargowałeś.\n\nSPRZEDAŻ W TRZY STUKNIĘCIA\n• Każdy produkt to kolorowa karta, obsługa poznaje ją szybciej, niż czyta.\n• Stuknięcie dodaje pozycję do rachunku; przytrzymanie sekundę ją zdejmuje.\n• „+ Inna kwota\" dla wszystkiego spoza menu.\n\nGOTÓWKA I KARTA\n• Przy gotówce wpisz, ile daje klient, a Tapkasa pokaże resztę.\n• Przy karcie kasujesz na swoim terminalu i tylko potwierdzasz.\n\nKOLEJKA ZAMÓWIEŃ\n• Każdy opłacony rachunek staje się numerowanym zamówieniem.\n• Odhaczaj pozycje przy przygotowaniu; „Wydane\" zamyka zamówienie.\n• Dwa urządzenia, dwie role: kasa i wydawka, sparowane w minutę. Drugie może czytać zamówienia na głos.\n\nPODSUMOWANIE SPRZEDAŻY\n• Utarg razem, gotówka/karta, sztuki po pozycjach.\n• Podsumowanie sprzedaży w PDF za dowolny okres, z twoimi danymi i w razie potrzeby rozliczeniem VAT; e-mailem albo przez udostępnienie.\n• „Zamknij imprezę\" odkłada utarg do archiwum i zeruje kasę.\n\nTWOJE DANE SĄ TWOJE\n• Wszystko zostaje na urządzeniu, w dwóch niezależnych kopiach.\n• Bez kont, bez analityki, bez reklam. Działa całkowicie offline.\n\nZA DARMO I PRO\nZa darmo: pełna kasa na jednym urządzeniu, do 10 opłaconych rachunków dziennie.\nTapkasa Pro (subskrypcja): rachunki bez limitu i parowanie drugiego urządzenia. Rozliczenie przez App Store, można anulować w każdej chwili.\n\nInterfejs po polsku, czesku, słowacku, angielsku, niemiecku, francusku, hiszpańsku, włosku i portugalsku. Tapkasa nie prowadzi księgowości; to szybka kasa dla sprzedaży, która dziś skończyłaby na karteczce.\n\nCZYM TAPKASA NIE JEST\n• Nie obsługuje płatności. Gotówkę przyjmujesz sam, karty na własnym terminalu.\n• Nie jest kasą fiskalną. Używaj jej tam, gdzie pozwalają przepisy: stowarzyszenia, festyny szkolne i charytatywne, ewidencja wewnętrzna.\n• Nie prowadzi magazynu ani księgowości.\n\nWarunki korzystania: https://www.deriverge.com/tapkasa/terms.html\nPolityka prywatności: https://www.deriverge.com/tapkasa/privacy.html",
+     "keywords": "kasa,pos,sprzedaż,stragan,targ,jarmark,festiwal,zamówienie,paragon,kiermasz,gastronomia,utarg",
+     "promotionalText": "Jarmark świąteczny, kiermasz albo grzaniec? Wpisz menu i sprzedawaj bez rejestracji i bez internetu. Drugi telefon pokaże kolejkę zamówień i odczyta ją na głos.",
+     "whatsNew": "Szyfrowane parowanie z 8-znakowym kodem (oba urządzenia potrzebują 1.0.6). Kopiowanie menu i danych sprzedawcy wymaga potwierdzenia na drugim urządzeniu. Szybszy zapis. Przytrzymanie karty usuwa jedną sztukę, niedopłata wymaga potwierdzenia. Podsumowanie sprzedaży (PDF).",
+     "supportUrl": "https://deriverge.com/tapkasa/support.html",
+     "marketingUrl": "https://www.deriverge.com/tapkasa/",
+     "lengths": {
+      "description": 2322,
+      "keywords": 93,
+      "promotionalText": 160,
+      "whatsNew": 271
+     },
+     "screenshots": {
+      "APP_IPAD_PRO_3GEN_129": [
+       {
+        "fileName": "01-sell__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "075f3db10021e242b069a4a6b460376d"
+       },
+       {
+        "fileName": "02-till-and-pickup__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "916793d0ac4d9b7c0061bfae016a24a6"
+       },
+       {
+        "fileName": "03-cash-change__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "406792c7056f3e6e843f15269cfc8938"
+       },
+       {
+        "fileName": "04-order-queue__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "26d25bf75437b0bde344939a26964fd2"
+       },
+       {
+        "fileName": "05-pickup-ticket__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "bb19a0476aba1cbafd40194dfb6202a6"
+       },
+       {
+        "fileName": "06-takings__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "86a1831d206f71d5a17daccdf0846a2d"
+       },
+       {
+        "fileName": "07-pdf-summary__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "d69282ca8b2069ab80ab1e9268430cc0"
+       },
+       {
+        "fileName": "08-events__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "63ea8950faf112685998d5fb7eb01ac8"
+       }
+      ],
+      "APP_IPHONE_67": [
+       {
+        "fileName": "01-sell__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "0e68cfe3eb712ef3f9fb882028b427d9"
+       },
+       {
+        "fileName": "02-till-and-pickup__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "5577ce9ee0ec766df8cce9e3d7047ffe"
+       },
+       {
+        "fileName": "03-cash-change__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "06cdfb5eb6ee7e29093c26b9a6a0398b"
+       },
+       {
+        "fileName": "04-order-queue__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "863965764de4bd624e7bbfd656ba4d6e"
+       },
+       {
+        "fileName": "05-pickup-ticket__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "ded4698e1fe7f35b4722baa20563e170"
+       },
+       {
+        "fileName": "06-takings__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "aa035f0b957e750e60b98767bcad5925"
+       },
+       {
+        "fileName": "07-pdf-summary__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "8e1ac3a9eed91b935fd6774e4b549ddb"
+       },
+       {
+        "fileName": "08-events__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "5664fbf8c60e664833d383680367b89c"
+       }
+      ]
+     },
+     "previews": []
+    },
+    "pt-PT": {
+     "id": "ed6042e9-af41-4cde-bb81-75dfdeb2077c",
+     "description": "A Tapkasa é uma caixa registadora de bolso: para a banca de café, a festa da escola, o bar do festival, o pop-up que vive um fim de semana. Abra a app, escreva o menu, venda. Sem registo, sem conta, sem internet.\n\nA Tapkasa REGISTA vendas, não processa pagamentos. O dinheiro vai para a sua caixa, o cartão passa pelo seu próprio terminal; a Tapkasa conta, faz andar a fila de pedidos e à noite diz-lhe quanto faturou.\n\nUMA VENDA EM TRÊS TOQUES\n• Cada produto é um cartão colorido, a equipa reconhece-o antes de o ler.\n• Um toque põe o artigo na conta; manter premido um segundo tira-o.\n• «+ Outro montante» para o que não está no menu.\n\nDINHEIRO E CARTÃO\n• Em dinheiro, escreva o que o cliente entrega e a Tapkasa mostra o troco.\n• Em cartão, cobra no seu terminal e apenas confirma.\n\nFILA DE PEDIDOS\n• Cada conta paga torna-se um pedido numerado.\n• Marque os artigos ao prepará-los; «Entregue» fecha o pedido.\n• Dois aparelhos, dois papéis: caixa e entrega, emparelhados num minuto. O segundo pode ler os pedidos em voz alta.\n\nRESUMO DE VENDAS\n• Receita total, dinheiro/cartão, unidades por artigo.\n• Resumo de vendas em PDF de qualquer período, com os seus dados e, se precisar, o resumo do IVA; por e-mail ou partilhado.\n• «Fechar evento» arquiva a receita e põe a caixa a zeros.\n\nOS SEUS DADOS SÃO SEUS\n• Tudo fica no aparelho, em duas cópias independentes.\n• Sem contas, sem análises, sem publicidade. Funciona totalmente offline.\n\nGRÁTIS E PRO\nGrátis: a caixa completa num aparelho, até 10 contas pagas por dia.\nTapkasa Pro (subscrição): contas ilimitadas e emparelhamento de um segundo aparelho. Faturado pela App Store, cancelável a qualquer momento.\n\nInterface em português, checo, eslovaco, inglês, alemão, francês, espanhol, italiano e polaco. A Tapkasa não faz contabilidade; é a caixa rápida para vendas que hoje acabariam num papelinho.\n\nO QUE A TAPKASA NÃO É\n• Não processa pagamentos. Recebe o dinheiro e os cartões no seu próprio terminal.\n• Não é um programa de faturação certificado pela AT. Use-a onde as regras o permitem: associações, festas escolares e de beneficência, registo interno.\n• Não faz gestão de stock nem contabilidade.\n\nTermos de utilização: https://www.deriverge.com/tapkasa/terms.html\nPolítica de privacidade: https://www.deriverge.com/tapkasa/privacy.html",
+     "keywords": "caixa,pos,venda,banca,mercado,feira,festival,pedido,recibo,quermesse,tasquinha,arraial",
+     "promotionalText": "Mercado de Natal, feira ou banca de vinho quente? Escreva o menu e cobre, sem registo e sem internet. Um segundo telemóvel mostra os pedidos e lê-os em voz alta.",
+     "whatsNew": "Emparelhamento cifrado com código de 8 caracteres (ambos os aparelhos precisam da 1.0.6). Copiar o menu e os dados do vendedor exige confirmação no outro aparelho. Gravação mais rápida. Manter premido um cartão retira uma unidade, um pagamento em falta pede confirmação. Resumo de vendas (PDF).",
+     "supportUrl": "https://deriverge.com/tapkasa/support.html",
+     "marketingUrl": "https://www.deriverge.com/tapkasa/",
+     "lengths": {
+      "description": 2295,
+      "keywords": 86,
+      "promotionalText": 161,
+      "whatsNew": 294
+     },
+     "screenshots": {
+      "APP_IPHONE_67": [
+       {
+        "fileName": "01-sell__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "76305f8d45915d677d189ea8f60660c5"
+       },
+       {
+        "fileName": "02-till-and-pickup__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "a9cb070141aa4dfbe8c815412066288b"
+       },
+       {
+        "fileName": "03-cash-change__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "0be23494dad9632da044bfb56f05d46e"
+       },
+       {
+        "fileName": "04-order-queue__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "64ab5db0fd6f16e382dcc0daa9beb2ad"
+       },
+       {
+        "fileName": "05-pickup-ticket__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "fca7759c12ba749edafcee258327ef08"
+       },
+       {
+        "fileName": "06-takings__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "efb45da3106fc8aa2e5a840f4507b313"
+       },
+       {
+        "fileName": "07-pdf-summary__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "8518013369265202fa9279bf84e755d9"
+       },
+       {
+        "fileName": "08-events__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "2c36eccbcae0b02b9f93ff1d157e56ce"
+       }
+      ],
+      "APP_IPAD_PRO_3GEN_129": [
+       {
+        "fileName": "01-sell__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "6583bf8b508d48c2c4318251b1ebe422"
+       },
+       {
+        "fileName": "02-till-and-pickup__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "c10d8afcde9425198ba3fc0ab01ebdab"
+       },
+       {
+        "fileName": "03-cash-change__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "e59153f9086954c7dbfc1bb6a65badbd"
+       },
+       {
+        "fileName": "04-order-queue__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "8c01f4341c3eb5040cea7ad2898b2d0c"
+       },
+       {
+        "fileName": "05-pickup-ticket__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "9c5feae163f9a21c231c4f9400adba5f"
+       },
+       {
+        "fileName": "06-takings__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "0f143ac966c4186cd7101335ae9fc8ad"
+       },
+       {
+        "fileName": "07-pdf-summary__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "4c69ab30a30e195c6149c67cf502eaa6"
+       },
+       {
+        "fileName": "08-events__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "77d540f721baa4d4fd751abc80f0151d"
+       }
+      ]
+     },
+     "previews": []
+    },
+    "sk": {
+     "id": "ba1e2288-b4ad-4650-990c-227a307f74b8",
+     "description": "Tapkasa je pokladňa do vrecka: pre stánok s kávou, školský jarmok, festivalový bar, pop-up, ktorý žije jeden víkend. Otvorte aplikáciu, napíšte menu, predávajte. Bez registrácie, bez účtu, bez internetu.\n\nTapkasa ZAZNAMENÁVA predaje, nespracúva platby. Hotovosť ide do vašej kasičky, karta cez váš vlastný terminál; Tapkasa počíta, posúva frontu objednávok a večer vám povie, koľko ste utŕžili.\n\nPREDAJ NA TRI ŤUKNUTIA\n• Každý produkt je farebná karta, obsluha ju spozná skôr, ako prečíta názov.\n• Ťuknutie pridá položku na účet; podržanie sekundu ju zloží.\n• „+ Iná suma\" pre všetko mimo menu.\n\nHOTOVOSŤ A KARTA\n• Pri hotovosti napíšte, koľko zákazník dáva, Tapkasa ukáže výdavok.\n• Pri karte účtujete na svojom termináli a iba potvrdíte.\n\nFRONTA OBJEDNÁVOK\n• Každý zaplatený účet sa stane číslovanou objednávkou.\n• Pri príprave položky odškrtávate; „Vydané\" objednávku uzavrie.\n• Dve zariadenia, dve roly: kasa a výdaj, spárované za minútu. Druhé vie objednávky čítať nahlas.\n\nPREHĽAD A UZÁVIERKA\n• Tržba spolu, hotovosť/karta, predané kusy po položkách.\n• Súhrn tržieb v PDF za ľubovoľné obdobie, s vašimi údajmi a v prípade potreby rozpisom DPH; e-mailom alebo zdieľaním.\n• „Uzavrieť akciu\" odloží tržbu do archívu a vynuluje kasu.\n\nVAŠE DÁTA SÚ VAŠE\n• Všetko zostáva v zariadení, v dvoch nezávislých kópiách.\n• Žiadne účty, žiadna analytika, žiadne reklamy. Funguje úplne offline.\n\nZADARMO A PRO\nZadarmo: kompletná pokladňa na jednom zariadení, do 10 zaplatených účtov denne.\nTapkasa Pro (predplatné): neobmedzené účty a spárovanie druhého zariadenia. Účtuje sa cez App Store, zrušiteľné kedykoľvek.\n\nRozhranie po slovensky, česky, anglicky, nemecky, francúzsky, španielsky, taliansky, poľsky a portugalsky. Tapkasa nevedie účtovníctvo; je to rýchla kasa pre predaj, ktorý by dnes skončil na papieriku.\n\nČO TAPKASA NIE JE\n• Nespracúva platby. Hotovosť beriete do kasy, kartu na vlastnom termináli.\n• Nie je to registračná pokladnica (eKasa). Používajte ju tam, kde to predpisy dovoľujú: spolky, školské a farské akcie, dobročinné predaje, interná evidencia.\n• Nevedie sklad ani účtovníctvo.\n\nPodmienky použitia: https://www.deriverge.com/tapkasa/terms.html\nZásady ochrany súkromia: https://www.deriverge.com/tapkasa/privacy.html",
+     "keywords": "kasa,predaj,objednávka,bloček,tržba,burza,hody,bufet,občerstvenie,offline,pos,kaviareň,bar,akcia",
+     "promotionalText": "Vianočné trhy, jarmok alebo punč pred školou? Naťukajte menu a účtujte bez registrácie a bez internetu. Druhý telefón ukáže front objednávok a prečíta ho nahlas.",
+     "whatsNew": "Šifrované párovanie s osemznakovým kódom (obe zariadenia potrebujú 1.0.6). Kópiu menu a údajov predajcu musí druhé zariadenie potvrdiť. Rýchlejšie ukladanie aj s veľkým archívom. Podržanie karty uberie jeden kus, nedoplatok chce potvrdenie. Súhrn tržieb (PDF) namiesto daňového dokladu.",
+     "supportUrl": "https://deriverge.com/tapkasa/support.html",
+     "marketingUrl": "https://www.deriverge.com/tapkasa/",
+     "lengths": {
+      "description": 2233,
+      "keywords": 96,
+      "promotionalText": 161,
+      "whatsNew": 286
+     },
+     "screenshots": {
+      "APP_IPAD_PRO_3GEN_129": [
+       {
+        "fileName": "01-sell__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "9b4a8dacde88332ef6e0a13020b9ce2e"
+       },
+       {
+        "fileName": "02-till-and-pickup__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "a9a3d69c5a8f2f9fc93167550ea9dde9"
+       },
+       {
+        "fileName": "03-cash-change__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "6fa9fcb530dfde21da8e2f00b773f6ae"
+       },
+       {
+        "fileName": "04-order-queue__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "7b9c6dfe0a37b385f45f528ef2a0b28e"
+       },
+       {
+        "fileName": "05-pickup-ticket__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "956797fa11b64afc764b627692b413c7"
+       },
+       {
+        "fileName": "06-takings__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "f62bb74e36f5e53241c0947af16cc280"
+       },
+       {
+        "fileName": "07-pdf-summary__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "e919f47149f247240d1a11ed58aba7bd"
+       },
+       {
+        "fileName": "08-events__ipad129-2048x2732.png",
+        "width": 2048,
+        "height": 2732,
+        "state": "COMPLETE",
+        "checksum": "c60d7eec1a37b4b80a9032e53a06c53b"
+       }
+      ],
+      "APP_IPHONE_67": [
+       {
+        "fileName": "01-sell__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "1b027a776722718b4f585d64d4814258"
+       },
+       {
+        "fileName": "02-till-and-pickup__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "5eccdcfe035bb9dfb6eec2ec9737a7ed"
+       },
+       {
+        "fileName": "03-cash-change__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "f5a9218af5dff4d1b707e601039a9bcf"
+       },
+       {
+        "fileName": "04-order-queue__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "3de4135f688e3b61dc41ae40a5d289fc"
+       },
+       {
+        "fileName": "05-pickup-ticket__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "80f1e7c008f510407290ea15c375330d"
+       },
+       {
+        "fileName": "06-takings__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "7c3e3425d38c677b2ffacf37da2f1902"
+       },
+       {
+        "fileName": "07-pdf-summary__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "892c670f21ebc51cfc51136b1c13dce7"
+       },
+       {
+        "fileName": "08-events__iphone67-1290x2796.png",
+        "width": 1290,
+        "height": 2796,
+        "state": "COMPLETE",
+        "checksum": "4ad66d573e8c9d1d65d758c648d13de6"
+       }
+      ]
+     },
+     "previews": []
+    }
+   }
+  }
+ ],
+ "builds": [
+  {
+   "id": "7cf2f9ce-4bc1-400c-b0c8-2ddbc8ebc320",
+   "build": "82",
+   "uploaded": "2026-11-19T23:35:01-08:00",
+   "state": "VALID",
+   "expired": false
+  },
+  {
+   "id": "d3e0b734-fc9b-4eaf-a1d8-d4b904543efd",
+   "build": "79",
+   "uploaded": "2026-10-26T15:31:39-07:00",
+   "state": "VALID",
+   "expired": false
+  },
+  {
+   "id": "f078d73c-c844-48e7-94bc-99cf7699c1e0",
+   "build": "77",
+   "uploaded": "2026-09-23T11:40:59-07:00",
+   "state": "VALID",
+   "expired": false
+  },
+  {
+   "id": "cffcc6aa-535c-4e62-b01c-6223f415661f",
+   "build": "73",
+   "uploaded": "2026-09-19T08:00:06-07:00",
+   "state": "VALID",
+   "expired": false
+  },
+  {
+   "id": "531e58ac-a7b2-459b-9f2a-68c9e0c05c8c",
+   "build": "72",
+   "uploaded": "2026-09-19T07:55:18-07:00",
+   "state": "VALID",
+   "expired": false
+  },
+  {
+   "id": "025062fa-235d-4d99-b69d-d8688e498dd8",
+   "build": "71",
+   "uploaded": "2026-09-18T14:19:33-07:00",
+   "state": "VALID",
+   "expired": false
+  },
+  {
+   "id": "d18434f5-3dc7-4900-9c96-243151046b2a",
+   "build": "70",
+   "uploaded": "2026-09-18T14:13:35-07:00",
+   "state": "VALID",
+   "expired": false
+  },
+  {
+   "id": "522181f4-316c-45bf-b20e-79e22eed5e44",
+   "build": "69",
+   "uploaded": "2026-09-18T14:03:42-07:00",
+   "state": "VALID",
+   "expired": false
+  },
+  {
+   "id": "739af329-5c69-43c2-8fb5-fe6276d45d7c",
+   "build": "68",
+   "uploaded": "2026-09-18T13:45:06-07:00",
+   "state": "VALID",
+   "expired": false
+  },
+  {
+   "id": "f60ed048-087d-412a-83ec-3438eb8eebe4",
+   "build": "67",
+   "uploaded": "2026-09-18T13:39:49-07:00",
+   "state": "VALID",
+   "expired": false
+  },
+  {
+   "id": "a48867d1-010f-4b7c-a8c5-65b75dfed1ca",
+   "build": "66",
+   "uploaded": "2026-09-18T13:08:10-07:00",
+   "state": "VALID",
+   "expired": false
+  },
+  {
+   "id": "23b7f6de-d8aa-4c9f-937e-30ab18b684fd",
+   "build": "65",
+   "uploaded": "2026-09-17T14:33:24-07:00",
+   "state": "VALID",
+   "expired": false
+  },
+  {
+   "id": "7d08c7b8-c8f1-42fd-9486-b06c0b547f31",
+   "build": "61",
+   "uploaded": "2026-09-17T03:49:17-07:00",
+   "state": "VALID",
+   "expired": false
+  },
+  {
+   "id": "9ef4eb18-cd00-42a6-a561-59f3143cd901",
+   "build": "60",
+   "uploaded": "2026-09-11T02:39:04-07:00",
+   "state": "VALID",
+   "expired": false
+  },
+  {
+   "id": "9853ba18-9e1e-4ee3-93aa-8c87ea862300",
+   "build": "59",
+   "uploaded": "2026-09-11T02:31:39-07:00",
+   "state": "VALID",
+   "expired": false
+  },
+  {
+   "id": "0adce93d-f84b-4be3-8fcd-02bfff6b834e",
+   "build": "58",
+   "uploaded": "2026-09-07T12:46:24-07:00",
+   "state": "VALID",
+   "expired": false
+  },
+  {
+   "id": "2e9b1d57-932e-4bb8-8976-2dca369bf68d",
+   "build": "56",
+   "uploaded": "2026-09-07T05:55:05-07:00",
+   "state": "VALID",
+   "expired": false
+  },
+  {
+   "id": "64faf221-0fa9-4491-bffd-a95f1cd1bee7",
+   "build": "54",
+   "uploaded": "2026-09-07T05:34:31-07:00",
+   "state": "VALID",
+   "expired": false
+  },
+  {
+   "id": "8a13d183-42fa-4df1-beaa-4f2baf51f367",
+   "build": "53",
+   "uploaded": "2026-09-07T04:47:04-07:00",
+   "state": "VALID",
+   "expired": false
+  },
+  {
+   "id": "0a8ab398-3337-47b7-aec2-e89fd5e8b2f2",
+   "build": "52",
+   "uploaded": "2026-09-06T05:31:05-07:00",
+   "state": "VALID",
+   "expired": false
+  },
+  {
+   "id": "30cb27a4-7a06-4ccf-a356-a8f314a96070",
+   "build": "51",
+   "uploaded": "2026-09-06T05:30:04-07:00",
+   "state": "VALID",
+   "expired": false
+  },
+  {
+   "id": "b3ba942a-7f4a-4426-8c3b-859694b6fdaf",
+   "build": "48",
+   "uploaded": "2026-09-03T06:10:29-07:00",
+   "state": "VALID",
+   "expired": false
+  },
+  {
+   "id": "b5ffab40-ed4a-4861-9fd7-d650a33de1ec",
+   "build": "47",
+   "uploaded": "2026-09-03T05:50:48-07:00",
+   "state": "VALID",
+   "expired": false
+  },
+  {
+   "id": "5e9327be-8b1a-40ce-8de2-aaf9d6532243",
+   "build": "46",
+   "uploaded": "2026-09-03T01:45:28-07:00",
+   "state": "VALID",
+   "expired": false
+  },
+  {
+   "id": "1980a6e7-94d0-423b-a2fb-9bc5cd7fe34b",
+   "build": "45",
+   "uploaded": "2026-09-03T01:37:02-07:00",
+   "state": "VALID",
+   "expired": false
+  },
+  {
+   "id": "442f5a2f-37c1-4421-91e7-6f996ed7904c",
+   "build": "35",
+   "uploaded": "2026-09-02T01:09:38-07:00",
+   "state": "VALID",
+   "expired": false
+  },
+  {
+   "id": "09afa3e3-8d48-4181-b52f-7f1ba5485179",
+   "build": "36",
+   "uploaded": "2026-09-02T01:08:35-07:00",
+   "state": "VALID",
+   "expired": false
+  },
+  {
+   "id": "5ea0ee2d-3b18-4b3b-bd32-4ccecd9d386d",
+   "build": "32",
+   "uploaded": "2026-09-01T18:16:34-07:00",
+   "state": "VALID",
+   "expired": false
+  },
+  {
+   "id": "f5ab21dd-15c4-4ed6-b2d2-c0a25365bd5c",
+   "build": "31",
+   "uploaded": "2026-09-01T18:06:13-07:00",
+   "state": "VALID",
+   "expired": false
+  },
+  {
+   "id": "4c1d06d9-365e-4ce7-9a2b-fb2288ad3c85",
+   "build": "30",
+   "uploaded": "2026-09-01T17:47:26-07:00",
+   "state": "VALID",
+   "expired": false
+  },
+  {
+   "id": "cceeffbb-e57d-4825-a3e2-ef7dd94cbd1f",
+   "build": "29",
+   "uploaded": "2026-09-01T17:41:19-07:00",
+   "state": "VALID",
+   "expired": false
+  },
+  {
+   "id": "8642ce52-b7e3-4859-9266-b74d92cab143",
+   "build": "28",
+   "uploaded": "2026-09-01T17:11:25-07:00",
+   "state": "VALID",
+   "expired": false
+  },
+  {
+   "id": "fd2016b2-202d-429c-a3d5-4687e2af813c",
+   "build": "27",
+   "uploaded": "2026-09-01T17:06:17-07:00",
+   "state": "VALID",
+   "expired": false
+  },
+  {
+   "id": "6da513f9-694c-4610-8de1-b0b1fb09bd33",
+   "build": "26",
+   "uploaded": "2026-09-01T16:49:49-07:00",
+   "state": "VALID",
+   "expired": false
+  },
+  {
+   "id": "8f280e86-25bf-4bda-a9f7-6540a9416946",
+   "build": "24",
+   "uploaded": "2026-09-01T16:24:43-07:00",
+   "state": "VALID",
+   "expired": false
+  },
+  {
+   "id": "19970c64-515e-4eae-be02-7aea50f4a68b",
+   "build": "23",
+   "uploaded": "2026-09-01T15:28:54-07:00",
+   "state": "VALID",
+   "expired": false
+  },
+  {
+   "id": "1c22bcba-c287-4d53-9d41-1106cd115f0c",
+   "build": "22",
+   "uploaded": "2026-09-01T14:40:27-07:00",
+   "state": "VALID",
+   "expired": false
+  },
+  {
+   "id": "ad7e7910-f798-43c1-ace3-0c5bfd67a05e",
+   "build": "21",
+   "uploaded": "2026-09-01T14:13:56-07:00",
+   "state": "VALID",
+   "expired": false
+  },
+  {
+   "id": "4b26ae8b-ea9b-4c45-b86c-7840d0139f73",
+   "build": "20",
+   "uploaded": "2026-09-01T13:54:29-07:00",
+   "state": "VALID",
+   "expired": false
+  },
+  {
+   "id": "581d03e5-5093-4ba1-bd18-d6c7a01bc74b",
+   "build": "19",
+   "uploaded": "2026-09-01T13:30:16-07:00",
+   "state": "VALID",
+   "expired": false
+  },
+  {
+   "id": "518e0ac9-3418-4a26-8c82-c0cf7309d93d",
+   "build": "18",
+   "uploaded": "2026-09-01T12:49:14-07:00",
+   "state": "VALID",
+   "expired": false
+  },
+  {
+   "id": "da2804c2-d8dc-45d7-a787-1ca17bf52861",
+   "build": "17",
+   "uploaded": "2026-09-01T11:55:48-07:00",
+   "state": "VALID",
+   "expired": false
+  },
+  {
+   "id": "ef3770d9-2803-4dc6-adc1-2d3e67993e81",
+   "build": "16",
+   "uploaded": "2026-09-01T11:34:57-07:00",
+   "state": "VALID",
+   "expired": false
+  },
+  {
+   "id": "acd868c6-a2c9-46f7-aca0-764e0d10f417",
+   "build": "15",
+   "uploaded": "2026-09-01T11:30:07-07:00",
+   "state": "VALID",
+   "expired": false
+  },
+  {
+   "id": "29cea21d-9cd8-4b16-b417-eee998a3a661",
+   "build": "14",
+   "uploaded": "2026-09-01T11:15:41-07:00",
+   "state": "VALID",
+   "expired": false
+  },
+  {
+   "id": "5cc68e2b-ff47-48cc-bacd-c7cc2e19b6cd",
+   "build": "13",
+   "uploaded": "2026-09-01T10:02:35-07:00",
+   "state": "VALID",
+   "expired": false
+  },
+  {
+   "id": "6b6117e4-5a7d-4e59-b7c4-7185f3239e14",
+   "build": "12",
+   "uploaded": "2026-09-01T00:20:40-07:00",
+   "state": "VALID",
+   "expired": false
+  },
+  {
+   "id": "a2fa0142-2e89-463b-8b05-133de5d3d4e2",
+   "build": "11",
+   "uploaded": "2026-09-01T00:10:12-07:00",
+   "state": "VALID",
+   "expired": false
+  },
+  {
+   "id": "6c54c06e-516b-45ad-9e3b-81728d16de20",
+   "build": "9",
+   "uploaded": "2026-08-31T14:42:48-07:00",
+   "state": "VALID",
+   "expired": false
+  },
+  {
+   "id": "b34d466a-95c4-4ed0-b6fb-cc38155b715a",
+   "build": "10",
+   "uploaded": "2026-08-31T14:34:57-07:00",
+   "state": "VALID",
+   "expired": false
+  }
+ ],
+ "preReleaseVersions": [
+  {
+   "id": "f84f07e7-3d9d-4e86-a618-88fe39142f6e",
+   "version": "1.0"
+  },
+  {
+   "id": "29be31bd-9e39-4bd6-beb6-9d04eca48314",
+   "version": "1.0.1"
+  },
+  {
+   "id": "f8ae8e08-7afe-4306-ab23-7f21cf4331f8",
+   "version": "1.0.3"
+  },
+  {
+   "id": "d1f34c18-7561-4051-b9a1-208e7dac9aff",
+   "version": "1.0.8"
+  },
+  {
+   "id": "7b45305f-7f07-4c8e-b555-701c0b00a4d1",
+   "version": "1.0.5"
+  },
+  {
+   "id": "228f2656-5a91-4ad8-bc5a-570e5b85773b",
+   "version": "1.0.2"
+  },
+  {
+   "id": "c79a32a4-d920-4141-afd3-e4c9c7adb750",
+   "version": "1.0.6"
+  },
+  {
+   "id": "8e9936d7-2d32-431d-bfc0-070173bb11bc",
+   "version": "1.0.4"
+  }
+ ],
+ "inAppEvents": [],
+ "customProductPages": []
+}

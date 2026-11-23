@@ -1,0 +1,3665 @@
+{
+ "day": "2026-11-23",
+ "itunes": {
+  "cz|pokladna": {
+   "results": 175,
+   "rank": 88,
+   "top10MedianRatings": 2,
+   "top10MaxRatings": 53,
+   "top5": [
+    "PoS Cash Register (2)",
+    "Profi Účtenka (53)",
+    "elPokladny.cz (0)",
+    "Kash: AI Cash Register & Till (0)",
+    "mKasa (11)"
+   ]
+  },
+  "cz|pokladna na stánek": {
+   "results": 1,
+   "rank": 1,
+   "top10MedianRatings": 1,
+   "top10MaxRatings": 1,
+   "top5": [
+    "Tapkasa: Market Stall POS (1)"
+   ]
+  },
+  "cz|kasa": {
+   "results": 166,
+   "rank": null,
+   "top10MedianRatings": 32,
+   "top10MaxRatings": 6887,
+   "top5": [
+    "Kasa Smart (152)",
+    "mKasa (11)",
+    "Profi Účtenka (53)",
+    "Veho Kasa (5)",
+    "PosKing (0)"
+   ]
+  },
+  "cz|jarmark": {
+   "results": 6,
+   "rank": 3,
+   "top10MedianRatings": 0,
+   "top10MaxRatings": 8,
+   "top5": [
+    "FOLKLORE: Folk Festivals (8)",
+    "Master of Dungeon: AI Text RPG (0)",
+    "Tapkasa: Market Stall POS (1)",
+    "Market – Sales Tracker (0)",
+    "Kasse - Sell Honey (0)"
+   ]
+  },
+  "cz|vánoční trh": {
+   "results": 4,
+   "rank": null,
+   "top10MedianRatings": 1,
+   "top10MaxRatings": 2,
+   "top5": [
+    "Vánoce Brno (2)",
+    "Agency Life: Life Simulator (1)",
+    "Simtegre eSIM: Travel Internet (0)",
+    "Italy eSIM: Travel Data SIM (0)"
+   ]
+  },
+  "cz|festival": {
+   "results": 197,
+   "rank": null,
+   "top10MedianRatings": 6,
+   "top10MaxRatings": 223945,
+   "top5": [
+    "Woov - Your Festival Companion (142)",
+    "Music Festival Tycoon - Idle (10)",
+    "FEST: Your Festivals, One App (0)",
+    "TicketSwap: Buy & Sell Tickets (402)",
+    "Boomtown Festival (2)"
+   ]
+  },
+  "cz|mobilní pokladna": {
+   "results": 9,
+   "rank": 8,
+   "top10MedianRatings": 1,
+   "top10MaxRatings": 14,
+   "top5": [
+    "Tunder · Offline Cash Register (0)",
+    "Cheers (10)",
+    "Ebbo POS Terminál (0)",
+    "TAPYGO (1)",
+    "Payment for Stripe (14)"
+   ]
+  },
+  "cz|stánek": {
+   "results": 65,
+   "rank": 15,
+   "top10MedianRatings": 6,
+   "top10MaxRatings": 170,
+   "top5": [
+    "50z50 - Příprava na přijímačky (1)",
+    "Shirabe Jisho (170)",
+    "CNB Rates (1)",
+    "Na Pivku (5)",
+    "AI Reads Law: Legal Assistant (15)"
+   ]
+  },
+  "cz|pokladna zdarma": {
+   "results": 6,
+   "rank": null,
+   "top10MedianRatings": 0,
+   "top10MaxRatings": 133,
+   "top5": [
+    "EcoPOS (13)",
+    "Tunder · Offline Cash Register (0)",
+    "Shopping & Supermarket Games (133)",
+    "Funny Shop Hippo shopping game (0)",
+    "Tycoon Supermarket Idle Game . (0)"
+   ]
+  },
+  "cz|výdej objednávek": {
+   "results": 0,
+   "rank": null,
+   "top10MedianRatings": null,
+   "top10MaxRatings": 0,
+   "top5": []
+  },
+  "sk|pokladňa": {
+   "results": 132,
+   "rank": 15,
+   "top10MedianRatings": 0,
+   "top10MaxRatings": 32,
+   "top5": [
+    "POS LILKA (0)",
+    "Loyverse POS - Point of Sale (2)",
+    "Animal Store: Pet Cashier Shop (1)",
+    "Flowy Pokladňa (0)",
+    "Shopping & Supermarket Games (21)"
+   ]
+  },
+  "sk|pokladňa na stánok": {
+   "results": 1,
+   "rank": 1,
+   "top10MedianRatings": 0,
+   "top10MaxRatings": 0,
+   "top5": [
+    "Tapkasa: Market Stall POS (0)"
+   ]
+  },
+  "sk|kasa": {
+   "results": 165,
+   "rank": null,
+   "top10MedianRatings": 24,
+   "top10MaxRatings": 106436,
+   "top5": [
+    "Kasa Smart (46)",
+    "TP-Link Tapo (1512)",
+    "EasyKasa (2)",
+    "mKasa (1)",
+    "SmartLife: Smart Living (786)"
+   ]
+  },
+  "sk|jarmok": {
+   "results": 6,
+   "rank": 4,
+   "top10MedianRatings": 0,
+   "top10MaxRatings": 2,
+   "top5": [
+    "Market – Sales Tracker (2)",
+    "FOLKLORE: Folk Festivals (0)",
+    "Kasse - Sell Honey (0)",
+    "Tapkasa: Market Stall POS (0)",
+    "Coverlet (0)"
+   ]
+  },
+  "sk|vianočné trhy": {
+   "results": 1,
+   "rank": null,
+   "top10MedianRatings": 0,
+   "top10MaxRatings": 0,
+   "top5": [
+    "Logo Maker & Design - LogoForm (0)"
+   ]
+  },
+  "sk|festival": {
+   "results": 181,
+   "rank": null,
+   "top10MedianRatings": 3,
+   "top10MaxRatings": 105815,
+   "top5": [
+    "Woov - Your Festival Companion (24)",
+    "Appic - Festivals & More (5)",
+    "Music Festival Tycoon - Idle (3)",
+    "Reading Festival (0)",
+    "Shotgun: Live Music Experience (3)"
+   ]
+  },
+  "sk|mobilná pokladňa": {
+   "results": 0,
+   "rank": null,
+   "top10MedianRatings": null,
+   "top10MaxRatings": 0,
+   "top5": []
+  },
+  "sk|stánok": {
+   "results": 28,
+   "rank": 4,
+   "top10MedianRatings": 1,
+   "top10MaxRatings": 29,
+   "top5": [
+    "Best Hair Color Changer Booth (1)",
+    "Stánok NMH (29)",
+    "STANOK (0)",
+    "Tapkasa: Market Stall POS (0)",
+    "Best Faceapp photo editor app (1)"
+   ]
+  },
+  "de|kasse": {
+   "results": 187,
+   "rank": 139,
+   "top10MedianRatings": 79,
+   "top10MaxRatings": 15170,
+   "top5": [
+    "Offene Ladenkasse - Helfer (425)",
+    "PoS Kasse (18)",
+    "Tunder · Offline · Kasse · POS (139)",
+    "Bonierkassa (0)",
+    "QuickBon Registrierkasse (239)"
+   ]
+  },
+  "de|kassensystem verein": {
+   "results": 13,
+   "rank": null,
+   "top10MedianRatings": 1,
+   "top10MaxRatings": 139,
+   "top5": [
+    "Tunder · Offline · Kasse · POS (139)",
+    "OrderAssist (23)",
+    "Klubkontor (0)",
+    "Goalino: Kasse Simulator (15)",
+    "Vereinskasse_MVH (0)"
+   ]
+  },
+  "de|vereinsfest": {
+   "results": 13,
+   "rank": null,
+   "top10MedianRatings": 1,
+   "top10MaxRatings": 22,
+   "top5": [
+    "Groschen – Rückgeldrechner (22)",
+    "WannWoSaufen (10)",
+    "Oberkellner Franz (0)",
+    "Standverkauf Verein (1)",
+    "bestellst.de (2)"
+   ]
+  },
+  "de|weihnachtsmarkt": {
+   "results": 74,
+   "rank": null,
+   "top10MedianRatings": 3,
+   "top10MaxRatings": 115389,
+   "top5": [
+    "Christmas Markets (1)",
+    "MOSEL-WEIN-NACHTS-MARKT (5)",
+    "Weihnachtsmärkte Berlin 2020 (0)",
+    "Weihnachtsmaat (10)",
+    "Toys & Me (0)"
+   ]
+  },
+  "de|bonkasse": {
+   "results": 0,
+   "rank": null,
+   "top10MedianRatings": null,
+   "top10MaxRatings": 0,
+   "top5": []
+  },
+  "de|vereinskasse": {
+   "results": 24,
+   "rank": null,
+   "top10MedianRatings": 1,
+   "top10MaxRatings": 25,
+   "top5": [
+    "VereinsKasse: Kassenverwaltung (2)",
+    "KassenGuru (9)",
+    "Vereinskasse_MVH (0)",
+    "Strafenmanager (25)",
+    "Kassora – Vereinskasse (0)"
+   ]
+  },
+  "de|festkasse": {
+   "results": 12,
+   "rank": null,
+   "top10MedianRatings": 5,
+   "top10MaxRatings": 23,
+   "top5": [
+    "Kassen-helfer: Fest-Kasse (0)",
+    "Groschen – Rückgeldrechner (22)",
+    "Elebon (0)",
+    "Trinkwert Kasse (1)",
+    "Theken Taschenrechner (8)"
+   ]
+  },
+  "de|kassen app": {
+   "results": 184,
+   "rank": null,
+   "top10MedianRatings": 81,
+   "top10MaxRatings": 1641,
+   "top5": [
+    "Offene Ladenkasse - Helfer (425)",
+    "Groschen – Rückgeldrechner (22)",
+    "PoS Kasse (18)",
+    "Simple Cash (18)",
+    "OrderAssist (23)"
+   ]
+  },
+  "de|flohmarkt kasse": {
+   "results": 21,
+   "rank": 6,
+   "top10MedianRatings": 1,
+   "top10MaxRatings": 847,
+   "top5": [
+    "Groschen – Rückgeldrechner (22)",
+    "Goalino: Kasse Simulator (15)",
+    "Basar & Flohmarkt: Polvendo (1)",
+    "basarlino (847)",
+    "Offline POS – Einfache Kasse (0)"
+   ]
+  },
+  "de|pfand": {
+   "results": 88,
+   "rank": null,
+   "top10MedianRatings": 1,
+   "top10MaxRatings": 295,
+   "top5": [
+    "Pfand (10)",
+    "Pfandgeben (295)",
+    "Pfand & Leergut: Findflasche (2)",
+    "Pfandly (5)",
+    "Pfandabär (1)"
+   ]
+  },
+  "at|kasse": {
+   "results": 184,
+   "rank": 118,
+   "top10MedianRatings": 18,
+   "top10MaxRatings": 1199,
+   "top5": [
+    "PoS Kasse (4)",
+    "Offene Ladenkasse - Helfer (43)",
+    "leafsystems (7)",
+    "Cashier 3D (736)",
+    "ready2order POS - Kassensystem (1199)"
+   ]
+  },
+  "at|vereinskasse": {
+   "results": 22,
+   "rank": null,
+   "top10MedianRatings": 0,
+   "top10MaxRatings": 1,
+   "top5": [
+    "VereinsKasse: Kassenverwaltung (0)",
+    "Vereinskasse: Beiträge & Kassa (0)",
+    "Strafenmanager (1)",
+    "Vereinskasse_MVH (0)",
+    "KassenGuru (1)"
+   ]
+  },
+  "at|vereinsfest": {
+   "results": 11,
+   "rank": null,
+   "top10MedianRatings": 0,
+   "top10MaxRatings": 4,
+   "top5": [
+    "Oberkellner Franz (0)",
+    "Groschen – Rückgeldrechner (4)",
+    "BarRechner – Kasse & Getränke (4)",
+    "Tischzwerg (0)",
+    "bestellst.de (0)"
+   ]
+  },
+  "at|weihnachtsmarkt": {
+   "results": 52,
+   "rank": null,
+   "top10MedianRatings": 0,
+   "top10MaxRatings": 1238,
+   "top5": [
+    "Weihnachtsmärkte Berlin 2020 (0)",
+    "Waren sortieren Match-3-Puzzle (1238)",
+    "Foodstars: Kombiniere & Koche (117)",
+    "Christmas Markets (0)",
+    "MOSEL-WEIN-NACHTS-MARKT (0)"
+   ]
+  },
+  "at|bonkasse": {
+   "results": 0,
+   "rank": null,
+   "top10MedianRatings": null,
+   "top10MaxRatings": 0,
+   "top5": []
+  },
+  "at|festkasse": {
+   "results": 5,
+   "rank": null,
+   "top10MedianRatings": 0,
+   "top10MaxRatings": 4,
+   "top5": [
+    "Groschen – Rückgeldrechner (4)",
+    "Goalino: Kasse Simulator (0)",
+    "OrderJutsu Connect (0)",
+    "BarRechner – Kasse & Getränke (4)",
+    "Tiply – Kasse für Events (0)"
+   ]
+  },
+  "at|kassen app": {
+   "results": 192,
+   "rank": null,
+   "top10MedianRatings": 20,
+   "top10MaxRatings": 1199,
+   "top5": [
+    "Offene Ladenkasse - Helfer (43)",
+    "QuickBon Registrierkasse (385)",
+    "Groschen – Rückgeldrechner (4)",
+    "PoS Kasse (4)",
+    "ready2order POS - Kassensystem (1199)"
+   ]
+  },
+  "at|punschstand": {
+   "results": 0,
+   "rank": null,
+   "top10MedianRatings": null,
+   "top10MaxRatings": 0,
+   "top5": []
+  },
+  "pl|kasa": {
+   "results": 181,
+   "rank": null,
+   "top10MedianRatings": 65,
+   "top10MaxRatings": 662550,
+   "top5": [
+    "Kasa Smart (131)",
+    "PosKing (8)",
+    "My Supermarket Simulator 3D (3269)",
+    "Kasa Stefczyka Online (99)",
+    "mKasa (3)"
+   ]
+  },
+  "pl|kasa na stoisko": {
+   "results": 1,
+   "rank": null,
+   "top10MedianRatings": 0,
+   "top10MaxRatings": 0,
+   "top5": [
+    "Kasse - Sell Honey (0)"
+   ]
+  },
+  "pl|kiermasz": {
+   "results": 4,
+   "rank": 3,
+   "top10MedianRatings": 1,
+   "top10MaxRatings": 10,
+   "top5": [
+    "DRIN Cocktail Recipes App (10)",
+    "Tic Journal - Track & Control (0)",
+    "Tapkasa: Market Stall POS (1)",
+    "BoothLog - Craft Fair Tracker (0)"
+   ]
+  },
+  "pl|jarmark": {
+   "results": 18,
+   "rank": 7,
+   "top10MedianRatings": 0,
+   "top10MaxRatings": 35,
+   "top5": [
+    "Farland: Adventure Story (35)",
+    "Coverlet (0)",
+    "ParkujTutaj: Parking & P+R (3)",
+    "Master of Dungeon: AI Text RPG (21)",
+    "Agency Life: Life Simulator (0)"
+   ]
+  },
+  "pl|kasa mobilna": {
+   "results": 3,
+   "rank": 3,
+   "top10MedianRatings": 1,
+   "top10MaxRatings": 148670,
+   "top5": [
+    "PeoPay (148670)",
+    "Solo mobilna fiskalna (0)",
+    "Tapkasa: Market Stall POS (1)"
+   ]
+  },
+  "pl|stoisko": {
+   "results": 21,
+   "rank": null,
+   "top10MedianRatings": 1,
+   "top10MaxRatings": 4,
+   "top5": [
+    "Hair Color Changer Beauty App (1)",
+    "Tunder · Offline Cash Register (4)",
+    "Hair style color changer App (0)",
+    "Best Faceapp photo editor app (1)",
+    "Christmas Frames Greeting Card (0)"
+   ]
+  },
+  "pl|festyn": {
+   "results": 7,
+   "rank": null,
+   "top10MedianRatings": 0,
+   "top10MaxRatings": 293,
+   "top5": [
+    "City Island 5: Build a City (293)",
+    "PixVilla: Farming MMORPG (0)",
+    "Japanese fireworks (0)",
+    "Pounce: Cat & Mouse Kids Game (0)",
+    "RafflePilot: Raffle Draw (0)"
+   ]
+  },
+  "pl|jarmark świąteczny": {
+   "results": 4,
+   "rank": null,
+   "top10MedianRatings": 0,
+   "top10MaxRatings": 0,
+   "top5": [
+    "Swiss eSIM: Switzerland Data (0)",
+    "Yupo: Learn German Der Die Das (0)",
+    "Salzburg Audio Guide – 1756 (0)",
+    "Vienna Travel Guide – 1435 (0)"
+   ]
+  },
+  "gb|market stall pos": {
+   "results": 164,
+   "rank": 1,
+   "top10MedianRatings": 3,
+   "top10MaxRatings": 741,
+   "top5": [
+    "Tapkasa: Market Stall POS (0)",
+    "Epos Now POS Till (91)",
+    "Loyverse POS - Point of Sale (93)",
+    "Shopify Point of Sale (POS) (741)",
+    "Poster — tablet POS (1)"
+   ]
+  },
+  "gb|craft fair": {
+   "results": 142,
+   "rank": null,
+   "top10MedianRatings": 0,
+   "top10MaxRatings": 8668,
+   "top5": [
+    "FairPulse: Craft Fair Tracker (0)",
+    "Artkiv: Craft Fair Inventory (0)",
+    "Craft Club Community (6)",
+    "VendorsMap: Markets & Fairs (0)",
+    "CraftSale (0)"
+   ]
+  },
+  "gb|bake sale": {
+   "results": 164,
+   "rank": null,
+   "top10MedianRatings": 1724,
+   "top10MaxRatings": 22500,
+   "top5": [
+    "Bakesy: Home Bakery Biz App (89)",
+    "Bake it (22500)",
+    "My Bakery Empire (16988)",
+    "Sweet Bake: Cake ASMR (4)",
+    "Cake Games: Cake Pop It Baking (3351)"
+   ]
+  },
+  "gb|cash register": {
+   "results": 163,
+   "rank": null,
+   "top10MedianRatings": 4,
+   "top10MaxRatings": 164,
+   "top5": [
+    "Simple Cash Register (2)",
+    "PoS Cash Register (4)",
+    "Offline POS: Cash Register (0)",
+    "Cash Register Express (20)",
+    "Kash: AI Cash Register & Till (4)"
+   ]
+  },
+  "gb|till": {
+   "results": 176,
+   "rank": null,
+   "top10MedianRatings": 18,
+   "top10MaxRatings": 2283091,
+   "top5": [
+    "Till App (15)",
+    "Loyverse POS - Point of Sale (93)",
+    "Cash Register Express (20)",
+    "Epos Now POS Till (91)",
+    "Count Cash Fast - TillBuddy (1)"
+   ]
+  },
+  "gb|christmas market": {
+   "results": 179,
+   "rank": null,
+   "top10MedianRatings": 143,
+   "top10MaxRatings": 6431,
+   "top5": [
+    "Christmas Markets (0)",
+    "Christmas Explorer (0)",
+    "Tycoon Supermarket Idle Game . (5)",
+    "Christmas Market Hidden Object (0)",
+    "Christmas Countdown 2026! (341)"
+   ]
+  },
+  "gb|pos": {
+   "results": 195,
+   "rank": null,
+   "top10MedianRatings": 417,
+   "top10MaxRatings": 13723,
+   "top5": [
+    "PayPal POS (ex Zettle) (10813)",
+    "Shopify Point of Sale (POS) (741)",
+    "Tap to Pay + Contactless + POS (944)",
+    "Loyverse POS - Point of Sale (93)",
+    "Square Point of Sale (POS) (13499)"
+   ]
+  },
+  "gb|till app": {
+   "results": 192,
+   "rank": null,
+   "top10MedianRatings": 22260,
+   "top10MaxRatings": 247886,
+   "top5": [
+    "Till App (15)",
+    "Quick Tills (0)",
+    "PayPal POS (ex Zettle) (10813)",
+    "happn: dating app (30724)",
+    "MYPEUGEOT APP (41110)"
+   ]
+  },
+  "gb|market stall": {
+   "results": 130,
+   "rank": 6,
+   "top10MedianRatings": 0,
+   "top10MaxRatings": 21,
+   "top5": [
+    "Market Stall (0)",
+    "LuLu's: Night Market Cooking (20)",
+    "Steamy Stall: Study Timer (0)",
+    "Stalls under Lanterns: Puzzle (0)",
+    "VendorsMap: Markets & Fairs (0)"
+   ]
+  },
+  "gb|school fair": {
+   "results": 52,
+   "rank": null,
+   "top10MedianRatings": 3,
+   "top10MaxRatings": 547,
+   "top5": [
+    "Classlist: connecting parents (62)",
+    "2026 LSAC Law School Forums (0)",
+    "Careers Fair Plus (0)",
+    "Mill Road Winter Fair (3)",
+    "School Lunch Food Maker Salon - Kids Make Cooking Games! (45)"
+   ]
+  },
+  "us|market stall pos": {
+   "results": 189,
+   "rank": 2,
+   "top10MedianRatings": 24,
+   "top10MaxRatings": 7467,
+   "top5": [
+    "Fair Till: Craft & Market POS (2)",
+    "Tapkasa: Market Stall POS (0)",
+    "Loyverse POS - Point of Sale (375)",
+    "Shopify Point of Sale (POS) (7467)",
+    "VendorsMap: Markets & Fairs (144)"
+   ]
+  },
+  "us|craft fair": {
+   "results": 167,
+   "rank": null,
+   "top10MedianRatings": 6,
+   "top10MaxRatings": 656521,
+   "top5": [
+    "VendorsMap: Markets & Fairs (144)",
+    "Craft Club Community (19)",
+    "JOANN - Shopping & Crafts (656521)",
+    "Craft Fair Companion (1)",
+    "Craft Price Calculator (146)"
+   ]
+  },
+  "us|bake sale": {
+   "results": 169,
+   "rank": null,
+   "top10MedianRatings": 3796,
+   "top10MaxRatings": 184275,
+   "top5": [
+    "Bake Local (1)",
+    "Bake Local for Bakers (1)",
+    "Bakesy: Home Bakery Biz App (7411)",
+    "Homebaked (24)",
+    "Cookie Baking Games For Kids (11639)"
+   ]
+  },
+  "us|cash register": {
+   "results": 167,
+   "rank": null,
+   "top10MedianRatings": 101,
+   "top10MaxRatings": 117254,
+   "top5": [
+    "Simple Cash Register (3)",
+    "PoS Cash Register (8)",
+    "Supermarket Work Simulator 3D (20758)",
+    "Supermarket Cashier Simulator (1561)",
+    "Cash Register Express (238)"
+   ]
+  },
+  "us|pos": {
+   "results": 198,
+   "rank": null,
+   "top10MedianRatings": 5441,
+   "top10MaxRatings": 608440,
+   "top5": [
+    "Shopify Point of Sale (POS) (7467)",
+    "Loyverse POS - Point of Sale (375)",
+    "Square Point of Sale (POS) (608440)",
+    "Tap to Pay + Contactless + POS (4499)",
+    "PayPal POS (ex Zettle) (1170)"
+   ]
+  },
+  "us|craft fair pos": {
+   "results": 155,
+   "rank": null,
+   "top10MedianRatings": 1123,
+   "top10MaxRatings": 7403464,
+   "top5": [
+    "Fair Till: Craft & Market POS (2)",
+    "Michaels Stores (270938)",
+    "Artkiv: Craft Fair Inventory (1)",
+    "Hobby Lobby (2102)",
+    "Designs for Crafting (5646)"
+   ]
+  },
+  "us|vendor pos": {
+   "results": 184,
+   "rank": null,
+   "top10MedianRatings": 36,
+   "top10MaxRatings": 8995,
+   "top5": [
+    "VendorPOS (0)",
+    "GlassCase: Card Vendor POS (4)",
+    "Payment for Stripe (8995)",
+    "Vendor Cash Register - off POS (0)",
+    "Eventini PoS (0)"
+   ]
+  },
+  "us|farmers market": {
+   "results": 176,
+   "rank": null,
+   "top10MedianRatings": 281,
+   "top10MaxRatings": 280005,
+   "top5": [
+    "Localize - Farmers Market (22372)",
+    "Sprouts Farmers Market (94461)",
+    "Farmer's Market Online (11)",
+    "Locally Grown: Local Farms (532)",
+    "Thrive Market (280005)"
+   ]
+  },
+  "us|concession stand": {
+   "results": 147,
+   "rank": null,
+   "top10MedianRatings": 7,
+   "top10MaxRatings": 133994,
+   "top5": [
+    "BlazeBite (29)",
+    "Cashister (5)",
+    "The Snack Monkey (8)",
+    "Cash Register Event Simulator (1)",
+    "FanFood App (114)"
+   ]
+  },
+  "us|simple cash register": {
+   "results": 164,
+   "rank": null,
+   "top10MedianRatings": 54,
+   "top10MaxRatings": 117254,
+   "top5": [
+    "Simple Cash Register (3)",
+    "Register Helper - Easy Cash (99)",
+    "Kash: AI Cash Register & POS (5)",
+    "Cash Register Express (238)",
+    "Cashculator - Cash Counter (4219)"
+   ]
+  },
+  "fr|caisse marché": {
+   "results": 45,
+   "rank": 14,
+   "top10MedianRatings": 204,
+   "top10MaxRatings": 21816,
+   "top5": [
+    "Caisse enregistreuse · Tunder (344)",
+    "Mon simulateur de magasin (21816)",
+    "Superstore Story 3D (1001)",
+    "Supermarché - Jeux Enfant 2-5 (1174)",
+    "Farmy : marché local  en ligne (64)"
+   ]
+  },
+  "fr|kermesse": {
+   "results": 29,
+   "rank": 26,
+   "top10MedianRatings": 246,
+   "top10MaxRatings": 26391,
+   "top5": [
+    "La Kermesse Festival 2027 (7)",
+    "La kermesse (0)",
+    "DICE: Événements Live (17851)",
+    "Shotgun - Musique Live (26391)",
+    "TicketSwap: Revente de billets (972)"
+   ]
+  },
+  "fr|buvette": {
+   "results": 24,
+   "rank": 1,
+   "top10MedianRatings": 2,
+   "top10MaxRatings": 53,
+   "top5": [
+    "Tapkasa – Caisse mobile (1)",
+    "Break Eat : Click&Collect (2)",
+    "BarTime - Buvette de club (0)",
+    "BarTill – Caisse buvette & bar (1)",
+    "Stade Toulousain (53)"
+   ]
+  },
+  "fr|caisse enregistreuse": {
+   "results": 109,
+   "rank": null,
+   "top10MedianRatings": 87,
+   "top10MaxRatings": 1963,
+   "top5": [
+    "Caisse enregistreuse (78)",
+    "Cashpad 2 (27)",
+    "Caisse enregistreuse · Tunder (344)",
+    "Caisse enregistreuse fast-food (96)",
+    "Kash: Caisse Enregistreuse IA (0)"
+   ]
+  },
+  "fr|caisse": {
+   "results": 184,
+   "rank": 86,
+   "top10MedianRatings": 758,
+   "top10MaxRatings": 862579,
+   "top5": [
+    "Banxo - Caisse d'Epargne (862579)",
+    "Mon simulateur de magasin (21803)",
+    "Food Simulator Drive thru Game (120)",
+    "Comptage de caisse (25)",
+    "Caisse enregistreuse · Tunder (344)"
+   ]
+  },
+  "fr|marché de noël": {
+   "results": 44,
+   "rank": null,
+   "top10MedianRatings": 20,
+   "top10MaxRatings": 14421,
+   "top5": [
+    "Marché de Noël Amiens 2026 (20)",
+    "Samedis - Sorties locales (2)",
+    "Vide-greniers et brocantes (3011)",
+    "Noël Québec (0)",
+    "Le Village Santa Claus (1)"
+   ]
+  },
+  "fr|caisse association": {
+   "results": 30,
+   "rank": null,
+   "top10MedianRatings": 1,
+   "top10MaxRatings": 6,
+   "top5": [
+    "Desjardins Bank Mobile (1)",
+    "Easy-Floow Caisse (0)",
+    "Paynum Mobilité (6)",
+    "Nova Asso (4)",
+    "BarTill – Caisse buvette & bar (1)"
+   ]
+  },
+  "fr|brocante": {
+   "results": 188,
+   "rank": null,
+   "top10MedianRatings": 548,
+   "top10MaxRatings": 4804812,
+   "top5": [
+    "Vide-greniers.org (131)",
+    "Vide-greniers et brocantes (3011)",
+    "BrocScan : prix de revente (22)",
+    "Farfouille : Brocantes & Puces (28)",
+    "Geev : Dons d’objets (88552)"
+   ]
+  },
+  "it|cassa sagra": {
+   "results": 10,
+   "rank": 9,
+   "top10MedianRatings": 0,
+   "top10MaxRatings": 111,
+   "top5": [
+    "Comanda Assistant Business (111)",
+    "Smart Sagra (0)",
+    "Easy Buy Party (11)",
+    "Ordinando Staff (0)",
+    "Oktoberfest Trento (0)"
+   ]
+  },
+  "it|mercatino": {
+   "results": 175,
+   "rank": null,
+   "top10MedianRatings": 15,
+   "top10MaxRatings": 1376175,
+   "top5": [
+    "Riù mercatino (194)",
+    "EvoMobile (3)",
+    "Mercatino Store (0)",
+    "Catawiki - Aste Online (70974)",
+    "Thrift Map (23)"
+   ]
+  },
+  "it|cassa": {
+   "results": 189,
+   "rank": null,
+   "top10MedianRatings": 20,
+   "top10MaxRatings": 3291,
+   "top5": [
+    "Gioco di cassiere e spesa (20)",
+    "ProCassa (4)",
+    "Cashier 3D (3291)",
+    "Comandi - Cassa in Cloud (55)",
+    "Data Cash (19)"
+   ]
+  },
+  "it|registratore di cassa": {
+   "results": 186,
+   "rank": null,
+   "top10MedianRatings": 10,
+   "top10MaxRatings": 84,
+   "top5": [
+    "ProCassa (4)",
+    "Billy scontrino (27)",
+    "Tunder · registratore di cassa (16)",
+    "Kash: Registratore di Cassa IA (2)",
+    "CassaDigitale (84)"
+   ]
+  },
+  "it|sagra": {
+   "results": 171,
+   "rank": null,
+   "top10MedianRatings": 2874,
+   "top10MaxRatings": 169338,
+   "top5": [
+    "Farm Heroes Saga (9867)",
+    "Stasera Sagra (5)",
+    "Sagra de le Raze (0)",
+    "Candy Crush Saga (169338)",
+    "Pet Rescue Saga (3635)"
+   ]
+  },
+  "it|mercatino di natale": {
+   "results": 28,
+   "rank": null,
+   "top10MedianRatings": 0,
+   "top10MaxRatings": 12,
+   "top5": [
+    "Mercatini Natale (1)",
+    "Christmas Markets (0)",
+    "Oazis: eventi, concerti, feste (1)",
+    "Cadeaux al Castello (0)",
+    "eSIM viaggi e dati · e-sim.net (0)"
+   ]
+  },
+  "it|cassa bar": {
+   "results": 87,
+   "rank": null,
+   "top10MedianRatings": 2,
+   "top10MaxRatings": 5046,
+   "top5": [
+    "Qromo Gestionale (3)",
+    "Comanda Assistant Business (111)",
+    "Waiterio POS Ristorante e Bar (75)",
+    "Liliana Paduano Bar (0)",
+    "Lightspeed Restaurant POS (G) (0)"
+   ]
+  },
+  "it|bancarella": {
+   "results": 13,
+   "rank": 9,
+   "top10MedianRatings": 0,
+   "top10MaxRatings": 16,
+   "top5": [
+    "Tunder · registratore di cassa (16)",
+    "YouAres (10)",
+    "Artkiv: Inventario e Vendite (7)",
+    "Gioco di cucina messicana (0)",
+    "Killer Climber Samurai (8)"
+   ]
+  },
+  "es|caja mercadillo": {
+   "results": 10,
+   "rank": 4,
+   "top10MedianRatings": 0,
+   "top10MaxRatings": 3,
+   "top5": [
+    "Ordenador de vuelta (3)",
+    "BoothLog - Caja registradora (0)",
+    "MiniStall: TPV Caja y Recibos (0)",
+    "Tapkasa – TPV de bolsillo (0)",
+    "Punto de Venta Pro (0)"
+   ]
+  },
+  "es|feria": {
+   "results": 142,
+   "rank": null,
+   "top10MedianRatings": 80,
+   "top10MaxRatings": 2913,
+   "top5": [
+    "Mass Ride Simulator (74)",
+    "Theme Park Simulator (616)",
+    "Idle Theme Park - Tycoon Game (2913)",
+    "GeoCasetas (45)",
+    "Drift - Feria de Jerez (8)"
+   ]
+  },
+  "es|tpv": {
+   "results": 174,
+   "rank": 16,
+   "top10MedianRatings": 26,
+   "top10MaxRatings": 1546,
+   "top5": [
+    "TPVEscola (5)",
+    "Smartphone TPV (Tap to Pay) (12)",
+    "Loyverse TPV - para Comercios (163)",
+    "Square TPV: Punto de Venta (352)",
+    "SumUp Business: pagos y TPV (1546)"
+   ]
+  },
+  "es|caja registradora": {
+   "results": 178,
+   "rank": null,
+   "top10MedianRatings": 5,
+   "top10MaxRatings": 163,
+   "top5": [
+    "Ayudante de Caja - Cajero POS (4)",
+    "Gato Pos (1)",
+    "Loyverse TPV - para Comercios (163)",
+    "Mi Caja registradora (19)",
+    "Mimas POS - Caja Registradora (0)"
+   ]
+  },
+  "es|mercadillo": {
+   "results": 118,
+   "rank": 90,
+   "top10MedianRatings": 2,
+   "top10MaxRatings": 6891,
+   "top5": [
+    "Mercadillo Dos Hermanas (2)",
+    "Broc: Cosy Mercadillo (0)",
+    "Antigüedades: porcelana y loza (0)",
+    "Price Snap - Escaner Precios (1)",
+    "FarmVille 2: Escapada rural (6891)"
+   ]
+  },
+  "es|tpv puesto": {
+   "results": 3,
+   "rank": 1,
+   "top10MedianRatings": 0,
+   "top10MaxRatings": 0,
+   "top5": [
+    "Tapkasa – TPV de bolsillo (0)",
+    "MiniStall: TPV Caja y Recibos (0)",
+    "CoreBusiness (0)"
+   ]
+  },
+  "es|caja": {
+   "results": 176,
+   "rank": null,
+   "top10MedianRatings": 574,
+   "top10MaxRatings": 526622,
+   "top5": [
+    "Grupo Cajamar (2474)",
+    "Ruralvía - Banca digital (70988)",
+    "Laboral Kutxa (592)",
+    "Unicaja | Banca Online (14730)",
+    "CaixaBankNow・Tu Banco móvil (526622)"
+   ]
+  },
+  "es|mercadillo navideño": {
+   "results": 9,
+   "rank": null,
+   "top10MedianRatings": 0,
+   "top10MaxRatings": 2,
+   "top5": [
+    "Madrid Navidad – No oficial (0)",
+    "Zen Chroma: Combina y colorea (2)",
+    "Matcha: Ranking foodie y tapas (0)",
+    "Crear logo & diseño - LogoForm (0)",
+    "Swiss eSIM: Suiza Datos (0)"
+   ]
+  },
+  "pt|caixa registadora": {
+   "results": 57,
+   "rank": null,
+   "top10MedianRatings": 1,
+   "top10MaxRatings": 3,
+   "top5": [
+    "Caixa registradora restaurante (3)",
+    "Kash: Caixa Registadora IA (1)",
+    "Mochi POS - Caixa e Inventário (1)",
+    "Ayudante de Caja - PDV (1)",
+    "Caixa Registradora - POS (1)"
+   ]
+  },
+  "pt|feira": {
+   "results": 132,
+   "rank": 113,
+   "top10MedianRatings": 1691,
+   "top10MaxRatings": 70379,
+   "top5": [
+    "Lista de compras - Listonic (2259)",
+    "comida de feira de carnaval (11)",
+    "Viagem Medieval - Portugal (8)",
+    "Bring! Lista de Compras (4682)",
+    "FarmVille 3 – Farm Animals (1804)"
+   ]
+  },
+  "pt|banca": {
+   "results": 188,
+   "rank": null,
+   "top10MedianRatings": 76,
+   "top10MaxRatings": 152878,
+   "top5": [
+    "ABANCA - Portugal (190)",
+    "ABANCA - Banca Móvil (46)",
+    "ABANCA Empresas (2)",
+    "ABANCA Serfin (17)",
+    "Revolut — Mais que um banco (152878)"
+   ]
+  },
+  "pt|pos": {
+   "results": 190,
+   "rank": null,
+   "top10MedianRatings": 3,
+   "top10MaxRatings": 1186,
+   "top5": [
+    "Pagamentos e finanças myPOS (1186)",
+    "Tap to Pay + Contactless + POS (85)",
+    "Loyverse PDV: Gestão de vendas (6)",
+    "TinyPOS:Criar recibos no tempo (4)",
+    "Silom POS - Point of Sale (1)"
+   ]
+  },
+  "pt|caixa": {
+   "results": 164,
+   "rank": null,
+   "top10MedianRatings": 3561,
+   "top10MaxRatings": 160946,
+   "top5": [
+    "Novo App CAIXA (2)",
+    "CAIXA (1003)",
+    "Caixadirecta (160946)",
+    "FGTS (6118)",
+    "Benefícios Sociais CAIXA (6)"
+   ]
+  },
+  "pt|mercado de natal": {
+   "results": 11,
+   "rank": null,
+   "top10MedianRatings": 0,
+   "top10MaxRatings": 85,
+   "top5": [
+    "natal in Famalicão (85)",
+    "natal in Guimarães (6)",
+    "Unimed (0)",
+    "Gay Map: bares e espaços LGBT (0)",
+    "Swiss eSIM: Suíça Internet (0)"
+   ]
+  },
+  "pt|quermesse": {
+   "results": 3,
+   "rank": 2,
+   "top10MedianRatings": 0,
+   "top10MaxRatings": 17,
+   "top5": [
+    "Rifa Fácil Sorteio Beneficente (17)",
+    "Tapkasa – Caixa de bolso (0)",
+    "Bingowl (0)"
+   ]
+  },
+  "pt|ponto de venda": {
+   "results": 149,
+   "rank": null,
+   "top10MedianRatings": 1,
+   "top10MaxRatings": 3,
+   "top5": [
+    "Simple POS: Ponto de venda (0)",
+    "Tunder · Caixa Registadora (1)",
+    "Ponto de Venda Rotativo (0)",
+    "Waiterio PDV Restaurante e Bar (3)",
+    "3cket Staff (2)"
+   ]
+  },
+  "br|caixa registradora": {
+   "results": 183,
+   "rank": null,
+   "top10MedianRatings": 7,
+   "top10MaxRatings": 7815,
+   "top5": [
+    "Meu Caixa - Controle Simples (7)",
+    "Loyverse - Controle de Vendas (94)",
+    "Caixa Fácil: Vendas e Caixa (3)",
+    "Caixa Registradora - POS (1)",
+    "Caixa registradora restaurante (7)"
+   ]
+  },
+  "br|pdv": {
+   "results": 196,
+   "rank": null,
+   "top10MedianRatings": 410,
+   "top10MaxRatings": 7534,
+   "top5": [
+    "PDV+ (42)",
+    "Netcontroll PDV (15)",
+    "SmartPOS | Gestão de Vendas. (2002)",
+    "Venda Total: Vendas e Fiado (5)",
+    "Nex: PDV e controle de vendas (2231)"
+   ]
+  },
+  "br|feira": {
+   "results": 170,
+   "rank": null,
+   "top10MedianRatings": 78,
+   "top10MaxRatings": 11488,
+   "top5": [
+    "Cadê Feira (3)",
+    "Lista de compras - Listonic (11488)",
+    "Siu Mobile Feira de Santana (129)",
+    "Feira Conectada (26)",
+    "Fala Feira (156) (23)"
+   ]
+  },
+  "br|quermesse": {
+   "results": 14,
+   "rank": 10,
+   "top10MedianRatings": 0,
+   "top10MaxRatings": 2370,
+   "top5": [
+    "Rifa Fácil: Sorteio Digital (2370)",
+    "Bingo Cartelas: Conferir Bingo (0)",
+    "Smash It! Derrube as latas (0)",
+    "Bati! Bingo (0)",
+    "Bingowl (0)"
+   ]
+  },
+  "br|frente de caixa": {
+   "results": 25,
+   "rank": null,
+   "top10MedianRatings": 1,
+   "top10MaxRatings": 3479,
+   "top5": [
+    "SIGE Mobi - PDV para celulares (452)",
+    "Kyte: PDV e Estoque para Loja (3479)",
+    "PDV Loja – Ponto de Venda POS (0)",
+    "Otimizzi PDV (0)",
+    "Tunder · Caixa · PDV · offline (11)"
+   ]
+  },
+  "br|caixa": {
+   "results": 167,
+   "rank": null,
+   "top10MedianRatings": 299361,
+   "top10MaxRatings": 3381921,
+   "top5": [
+    "CAIXA (297570)",
+    "Novo App CAIXA (442)",
+    "CAIXA Tem (2871484)",
+    "Cartões CAIXA (301152)",
+    "FGTS (3381921)"
+   ]
+  },
+  "br|bazar": {
+   "results": 185,
+   "rank": null,
+   "top10MedianRatings": 727,
+   "top10MaxRatings": 11524401,
+   "top5": [
+    "enjoei: compre e venda de tudo (441854)",
+    "BAZAR - Jeu entre potes (0)",
+    "Bazaart Editor de fotos com IA (48556)",
+    "Bazar Horizonte (1378)",
+    "bazar.bg - Безплатни обяви (0)"
+   ]
+  },
+  "br|festa junina": {
+   "results": 181,
+   "rank": null,
+   "top10MedianRatings": 2604,
+   "top10MaxRatings": 80568,
+   "top5": [
+    "Toca Boca World: jogo infantil (80568)",
+    "alto escola festa ofício jogos (213)",
+    "Convite Virtuais Criar, festa (748)",
+    "Festa do Desenho (4803)",
+    "Arraiá da Mira (5)"
+   ]
+  }
+ },
+ "hints": {
+  "cz|pokladna": {
+   "exact": true,
+   "position": 1,
+   "hints": [
+    "pokladna",
+    "eet 2.0 pokladna andapos",
+    "eúčtenka - eet 2.0 pokladna",
+    "kasa plus - mobil pokladna",
+    "kasolo – pokladna s eet 2.0",
+    "peena - týmová pokladna",
+    "t pokladna",
+    "trynx pokladna"
+   ]
+  },
+  "cz|pokladna na stánek": {
+   "exact": false,
+   "position": null,
+   "hints": []
+  },
+  "cz|kasa": {
+   "exact": true,
+   "position": 2,
+   "hints": [
+    "kasa smart",
+    "kasa",
+    "kasalka",
+    "kasalka sport centrum",
+    "kasa defteri ck",
+    "mbs kasa",
+    "go kasa",
+    "kasaba bilgi teknolojileri ticaret a.s.",
+    "kasamba psychic reading chat",
+    "kasamba ltd"
+   ]
+  },
+  "cz|jarmark": {
+   "exact": false,
+   "position": null,
+   "hints": []
+  },
+  "cz|vánoční trh": {
+   "exact": false,
+   "position": null,
+   "hints": []
+  },
+  "cz|festival": {
+   "exact": false,
+   "position": null,
+   "hints": [
+    "festival otevřených sklepů",
+    "kare kare festival",
+    "wishes dance festival",
+    "sziget festival",
+    "emj festival",
+    "united festival",
+    "zlin film festival",
+    "airbeat one festival",
+    "festival slunovrat",
+    "festival republic"
+   ]
+  },
+  "cz|mobilní pokladna": {
+   "exact": false,
+   "position": null,
+   "hints": []
+  },
+  "cz|stánek": {
+   "exact": false,
+   "position": null,
+   "hints": []
+  },
+  "cz|pokladna zdarma": {
+   "exact": false,
+   "position": null,
+   "hints": []
+  },
+  "cz|výdej objednávek": {
+   "exact": false,
+   "position": null,
+   "hints": []
+  },
+  "sk|pokladňa": {
+   "exact": false,
+   "position": null,
+   "hints": [
+    "aurus pokladňa mobile",
+    "flowy pokladňa"
+   ]
+  },
+  "sk|pokladňa na stánok": {
+   "exact": false,
+   "position": null,
+   "hints": []
+  },
+  "sk|kasa": {
+   "exact": false,
+   "position": null,
+   "hints": [
+    "kasa defteri ck",
+    "mbs kasa",
+    "kasa smart",
+    "ka-sat finder for tooway",
+    "kasamba psychic reading chat",
+    "kasaba bilgi teknolojileri ticaret a.s.",
+    "kasamba ltd",
+    "ka-sat pointer",
+    "ka-sat pointer fma",
+    "kasa stefczyka online"
+   ]
+  },
+  "sk|jarmok": {
+   "exact": false,
+   "position": null,
+   "hints": []
+  },
+  "sk|vianočné trhy": {
+   "exact": false,
+   "position": null,
+   "hints": []
+  },
+  "sk|festival": {
+   "exact": false,
+   "position": null,
+   "hints": [
+    "kare kare festivali",
+    "wishes dance festival",
+    "pohoda festival",
+    "sziget festival",
+    "nova rock festival 2026",
+    "festival photo frames & editor",
+    "festival otevřených sklepů",
+    "festivall, all music festivals",
+    "festival rock en seine 2026",
+    "festival clin d&#39;oeil"
+   ]
+  },
+  "sk|mobilná pokladňa": {
+   "exact": false,
+   "position": null,
+   "hints": []
+  },
+  "sk|stánok": {
+   "exact": false,
+   "position": null,
+   "hints": [
+    "stánok nmh"
+   ]
+  },
+  "de|kasse": {
+   "exact": true,
+   "position": 8,
+   "hints": [
+    "kassen app",
+    "kasse spiele",
+    "kassenbon scanner app",
+    "kassenbuch kostenlos",
+    "kassensystem",
+    "kassenbuch",
+    "kassen spiele",
+    "kasse",
+    "kassenfix",
+    "kassel öpnv"
+   ]
+  },
+  "de|kassensystem verein": {
+   "exact": false,
+   "position": null,
+   "hints": []
+  },
+  "de|vereinsfest": {
+   "exact": false,
+   "position": null,
+   "hints": []
+  },
+  "de|weihnachtsmarkt": {
+   "exact": true,
+   "position": 3,
+   "hints": [
+    "weihnachtsmärkte deutschland",
+    "weihnachtsmärkte berlin 2020",
+    "weihnachtsmarkt",
+    "weihnachtsmarkt köln",
+    "amberger weihnachtsmarkt"
+   ]
+  },
+  "de|bonkasse": {
+   "exact": false,
+   "position": null,
+   "hints": []
+  },
+  "de|vereinskasse": {
+   "exact": true,
+   "position": 1,
+   "hints": [
+    "vereinskasse",
+    "vereinskasse: beiträge & kassa",
+    "vereinskasse: kassenverwaltung",
+    "vereinskasse_mvh",
+    "kassora – vereinskasse"
+   ]
+  },
+  "de|festkasse": {
+   "exact": true,
+   "position": 1,
+   "hints": [
+    "festkasse",
+    "kassen-helfer: fest-kasse"
+   ]
+  },
+  "de|kassen app": {
+   "exact": true,
+   "position": 1,
+   "hints": [
+    "kassen app",
+    "stadtguthaben kassen-app",
+    "stockwise: kassen-app & lager"
+   ]
+  },
+  "de|flohmarkt kasse": {
+   "exact": false,
+   "position": null,
+   "hints": []
+  },
+  "de|pfand": {
+   "exact": true,
+   "position": 6,
+   "hints": [
+    "pfandrechner",
+    "pfandgeben",
+    "pfandflaschen",
+    "pfandhaus",
+    "pfandabär",
+    "pfand",
+    "pfando app",
+    "findflasche: dein pfandradar",
+    "pfandhauskönig",
+    "pfand & leergut: findflasche"
+   ]
+  },
+  "at|kasse": {
+   "exact": true,
+   "position": 4,
+   "hints": [
+    "kassemo",
+    "kassemo registrierkasse",
+    "kassensystem",
+    "kasse",
+    "asello kasse",
+    "sumup: kassen- und finanztools",
+    "apro kassensysteme gmbh",
+    "kassenbelege - belege sammeln",
+    "kassenaerztliche bundesvereinigung",
+    "kassenbuch vorlage für numbers"
+   ]
+  },
+  "at|vereinskasse": {
+   "exact": false,
+   "position": null,
+   "hints": [
+    "vereinskasse: club treasurer",
+    "vereinskasse: kassenverwaltung",
+    "vereinskasse_mvh",
+    "kassora – vereinskasse"
+   ]
+  },
+  "at|vereinsfest": {
+   "exact": false,
+   "position": null,
+   "hints": []
+  },
+  "at|weihnachtsmarkt": {
+   "exact": false,
+   "position": null,
+   "hints": [
+    "weihnachtsmärkte berlin 2020"
+   ]
+  },
+  "at|bonkasse": {
+   "exact": false,
+   "position": null,
+   "hints": []
+  },
+  "at|festkasse": {
+   "exact": false,
+   "position": null,
+   "hints": [
+    "kassen-helfer: fest-kasse"
+   ]
+  },
+  "at|kassen app": {
+   "exact": false,
+   "position": null,
+   "hints": [
+    "stadtguthaben kassen-app",
+    "stockwise: kassen-app & lager"
+   ]
+  },
+  "at|punschstand": {
+   "exact": false,
+   "position": null,
+   "hints": []
+  },
+  "pl|kasa": {
+   "exact": true,
+   "position": 5,
+   "hints": [
+    "kasa stefczyka",
+    "kasa stefczyka online",
+    "kasa smart",
+    "kasa fiskalna",
+    "kasa",
+    "kasai",
+    "kasa gra",
+    "kasa defteri ck",
+    "kasa przyszłości",
+    "mbs kasa"
+   ]
+  },
+  "pl|kasa na stoisko": {
+   "exact": false,
+   "position": null,
+   "hints": []
+  },
+  "pl|kiermasz": {
+   "exact": false,
+   "position": null,
+   "hints": []
+  },
+  "pl|jarmark": {
+   "exact": false,
+   "position": null,
+   "hints": []
+  },
+  "pl|kasa mobilna": {
+   "exact": false,
+   "position": null,
+   "hints": []
+  },
+  "pl|stoisko": {
+   "exact": false,
+   "position": null,
+   "hints": [
+    "squeeze! stoisko z lemoniadą"
+   ]
+  },
+  "pl|festyn": {
+   "exact": false,
+   "position": null,
+   "hints": []
+  },
+  "pl|jarmark świąteczny": {
+   "exact": false,
+   "position": null,
+   "hints": []
+  },
+  "gb|market stall pos": {
+   "exact": false,
+   "position": null,
+   "hints": [
+    "fair till: market stall pos"
+   ]
+  },
+  "gb|craft fair": {
+   "exact": false,
+   "position": null,
+   "hints": [
+    "craft fair companion",
+    "artkiv: craft fair inventory",
+    "booth math: craft fair profit",
+    "fairpulse: craft fair tracker"
+   ]
+  },
+  "gb|bake sale": {
+   "exact": false,
+   "position": null,
+   "hints": []
+  },
+  "gb|cash register": {
+   "exact": true,
+   "position": 2,
+   "hints": [
+    "cash register game",
+    "cash register",
+    "pos cash register",
+    "cash register express",
+    "cash-register",
+    "cash register pos",
+    "cash register for business",
+    "cash register toy",
+    "cash register fashion store",
+    "cash register multi"
+   ]
+  },
+  "gb|till": {
+   "exact": true,
+   "position": 3,
+   "hints": [
+    "till games",
+    "till system",
+    "till",
+    "tilly",
+    "tiller verify",
+    "tiller",
+    "days till",
+    "tillwhen: countdown widgets",
+    "tilly — website builder",
+    "tilla"
+   ]
+  },
+  "gb|christmas market": {
+   "exact": false,
+   "position": null,
+   "hints": [
+    "christmas markets",
+    "christmas market hidden object",
+    "christmas market puzzle",
+    "silverton christmas market"
+   ]
+  },
+  "gb|pos": {
+   "exact": false,
+   "position": null,
+   "hints": [
+    "post office",
+    "postcode lottery",
+    "post office travel app",
+    "post tag",
+    "post office credit card",
+    "post office travel money card",
+    "poste italiane",
+    "poster maker",
+    "pose",
+    "post office easyid"
+   ]
+  },
+  "gb|till app": {
+   "exact": true,
+   "position": 1,
+   "hints": [
+    "till app"
+   ]
+  },
+  "gb|market stall": {
+   "exact": false,
+   "position": null,
+   "hints": [
+    "fair till: market stall pos"
+   ]
+  },
+  "gb|school fair": {
+   "exact": false,
+   "position": null,
+   "hints": []
+  },
+  "us|market stall pos": {
+   "exact": false,
+   "position": null,
+   "hints": [
+    "tapkasa: market stall pos"
+   ]
+  },
+  "us|craft fair": {
+   "exact": true,
+   "position": 2,
+   "hints": [
+    "craft fair companion",
+    "craft fair",
+    "artkiv: craft fair inventory",
+    "booth math: craft fair profit",
+    "boothlog - craft fair tracker",
+    "boothtap: craft fair tracker",
+    "fairpulse: craft fair tracker"
+   ]
+  },
+  "us|bake sale": {
+   "exact": false,
+   "position": null,
+   "hints": []
+  },
+  "us|cash register": {
+   "exact": true,
+   "position": 4,
+   "hints": [
+    "cash register practice",
+    "cash register simulator",
+    "cash register games",
+    "cash register",
+    "cash register for business",
+    "cash register calculator",
+    "cash register training",
+    "cash register counter",
+    "cash register free",
+    "cash register express"
+   ]
+  },
+  "us|pos": {
+   "exact": false,
+   "position": null,
+   "hints": [
+    "poshmark",
+    "postmates",
+    "posh",
+    "possible finance: loans & cash",
+    "possible",
+    "poshmark: buy & sell fashion",
+    "postparty",
+    "pose",
+    "postermywall",
+    "poster maker"
+   ]
+  },
+  "us|craft fair pos": {
+   "exact": false,
+   "position": null,
+   "hints": []
+  },
+  "us|vendor pos": {
+   "exact": false,
+   "position": null,
+   "hints": [
+    "glasscase: card vendor pos"
+   ]
+  },
+  "us|farmers market": {
+   "exact": true,
+   "position": 1,
+   "hints": [
+    "farmers market",
+    "farmers market finder",
+    "localize farmers market",
+    "sprouts farmers market",
+    "farmers market online",
+    "city farmers market",
+    "sprouts farmers market rewards",
+    "root: farmers market finder",
+    "farmers market haul",
+    "localize - farmers market"
+   ]
+  },
+  "us|concession stand": {
+   "exact": false,
+   "position": null,
+   "hints": []
+  },
+  "us|simple cash register": {
+   "exact": true,
+   "position": 1,
+   "hints": [
+    "simple cash register"
+   ]
+  },
+  "fr|caisse marché": {
+   "exact": false,
+   "position": null,
+   "hints": []
+  },
+  "fr|kermesse": {
+   "exact": false,
+   "position": null,
+   "hints": [
+    "la kermesse festival 2026",
+    "la kermesse",
+    "la kermesse festival 2027"
+   ]
+  },
+  "fr|buvette": {
+   "exact": false,
+   "position": null,
+   "hints": [
+    "bartill – caisse buvette & bar",
+    "bartime - buvette de club"
+   ]
+  },
+  "fr|caisse enregistreuse": {
+   "exact": true,
+   "position": 2,
+   "hints": [
+    "caisse enregistreuse gratuite",
+    "caisse enregistreuse",
+    "caisse enregistreuse • tactill",
+    "caisse enregistreuse jeux",
+    "caisse enregistreuse jeu",
+    "caisse enregistreuse fast-food",
+    "tunder · caisse enregistreuse",
+    "loyverse caisse enregistreuse",
+    "caisse enregistreuse · tunder",
+    "caisse enregistreuse affaires"
+   ]
+  },
+  "fr|caisse": {
+   "exact": true,
+   "position": 8,
+   "hints": [
+    "caisse d&#39;epargne",
+    "caisse d&#39;epargne mon compte",
+    "caisse d&#39;epargne pro",
+    "caisse de retraite",
+    "caisse epargne",
+    "caisse enregistreuse gratuite",
+    "caisse enregistreuse",
+    "caisse",
+    "caisse sociale de monaco",
+    "ma caisse – caisse & stock"
+   ]
+  },
+  "fr|marché de noël": {
+   "exact": false,
+   "position": null,
+   "hints": [
+    "marché de noël amiens 2026",
+    "marché de noel"
+   ]
+  },
+  "fr|caisse association": {
+   "exact": false,
+   "position": null,
+   "hints": []
+  },
+  "fr|brocante": {
+   "exact": true,
+   "position": 2,
+   "hints": [
+    "vide-greniers et brocantes",
+    "brocante",
+    "brocante et vide grenier",
+    "brocradar - brocantes",
+    "application brocante",
+    "brocante paris",
+    "agenda brocante",
+    "vide grenier brocante",
+    "mes brocantes",
+    "selency : brocante à la maison"
+   ]
+  },
+  "it|cassa sagra": {
+   "exact": false,
+   "position": null,
+   "hints": []
+  },
+  "it|mercatino": {
+   "exact": true,
+   "position": 7,
+   "hints": [
+    "mercatino usato",
+    "mercatino musicale",
+    "riù mercatino",
+    "mercatino di beba store",
+    "il mercatino",
+    "mercatino store",
+    "mercatino",
+    "haggle shop: re del mercatino",
+    "mercatino s.r.l.",
+    "ex novo mercatino"
+   ]
+  },
+  "it|cassa": {
+   "exact": true,
+   "position": 10,
+   "hints": [
+    "cassa edile",
+    "cassa edile napoli",
+    "cassa edile caserta",
+    "cassa edile roma",
+    "cassa edile brescia",
+    "cassa in cloud",
+    "cassa edile online",
+    "cassa digitale",
+    "cassa edile milano",
+    "cassa"
+   ]
+  },
+  "it|registratore di cassa": {
+   "exact": true,
+   "position": 1,
+   "hints": [
+    "registratore di cassa",
+    "registratore di cassa rapida",
+    "registratore di cassa e moda",
+    "registratore di cassa bambini",
+    "cassiere del cinema film e registratore di cassa",
+    "il mio registratore di cassa",
+    "kash: registratore di cassa ia",
+    "loyverse registratore di cassa",
+    "supermercato acquisti e registratore di cassa",
+    "tunder · registratore di cassa"
+   ]
+  },
+  "it|sagra": {
+   "exact": false,
+   "position": null,
+   "hints": [
+    "sagrada familia app",
+    "sagrada familia official",
+    "sagrada familia ufficiale",
+    "audioguida sagrada familia",
+    "la sagrada familia",
+    "sagrario pilates",
+    "sagrada",
+    "basílica sagrada família",
+    "biblia sagrada",
+    "sagrando"
+   ]
+  },
+  "it|mercatino di natale": {
+   "exact": false,
+   "position": null,
+   "hints": [
+    "mercatini di natale"
+   ]
+  },
+  "it|cassa bar": {
+   "exact": false,
+   "position": null,
+   "hints": []
+  },
+  "it|bancarella": {
+   "exact": false,
+   "position": null,
+   "hints": []
+  },
+  "es|caja mercadillo": {
+   "exact": false,
+   "position": null,
+   "hints": []
+  },
+  "es|feria": {
+   "exact": true,
+   "position": 2,
+   "hints": [
+    "feria valencia",
+    "feria",
+    "feria jerez",
+    "feria cordoba",
+    "feria avis",
+    "feria de sevilla app",
+    "feria aotec 2026",
+    "feria avis canarias",
+    "feria muestrario internacional de valencia",
+    "feria de zaragoza"
+   ]
+  },
+  "es|tpv": {
+   "exact": true,
+   "position": 4,
+   "hints": [
+    "tpv escola",
+    "tpvsports",
+    "tpv movil",
+    "tpv",
+    "tpv caixabank",
+    "tpv square",
+    "tpv bar",
+    "tpv restaurantes",
+    "tpv santander",
+    "tpv caixa"
+   ]
+  },
+  "es|caja registradora": {
+   "exact": true,
+   "position": 2,
+   "hints": [
+    "caja registradora juego",
+    "caja registradora",
+    "caja registradora - pos",
+    "caja registradora supermercado",
+    "caja registradora moda almacen",
+    "caja registradora vendr",
+    "boothlog - caja registradora",
+    "cajero cine películas caja registradora juego",
+    "cashcount! - caja registradora",
+    "cashiergo - caja registradora"
+   ]
+  },
+  "es|mercadillo": {
+   "exact": false,
+   "position": null,
+   "hints": [
+    "mercadillo dos hermanas",
+    "broc: cosy mercadillo",
+    "mi mercadillo",
+    "vidasso : mercadillos"
+   ]
+  },
+  "es|tpv puesto": {
+   "exact": false,
+   "position": null,
+   "hints": []
+  },
+  "es|caja": {
+   "exact": false,
+   "position": null,
+   "hints": [
+    "cajamar",
+    "caja rural",
+    "cajasiete",
+    "cajalnet",
+    "caja laboral kutxa",
+    "cajasur",
+    "caja laboral",
+    "cajamar caja rural",
+    "caja rural de navarra",
+    "caja rural del sur"
+   ]
+  },
+  "es|mercadillo navideño": {
+   "exact": false,
+   "position": null,
+   "hints": []
+  },
+  "pt|caixa registadora": {
+   "exact": false,
+   "position": null,
+   "hints": [
+    "caixa registadora supermercado",
+    "kash: caixa registadora ia",
+    "mimas pos - caixa registadora",
+    "pos loja – caixa registadora",
+    "tunder · caixa registadora",
+    "caixa registradora restaurante",
+    "caixa registradora - pos",
+    "caixa registradora moda loja",
+    "banco atm - caixa registradora",
+    "caixas de cinema filmes caixa registradora jogo"
+   ]
+  },
+  "pt|feira": {
+   "exact": false,
+   "position": null,
+   "hints": [
+    "feira organizada",
+    "feira viva cultura e desporto e.m.",
+    "feiras novas 2026",
+    "feira são mateus",
+    "feira dos sabores do tejo",
+    "feira museus",
+    "feira do empreendedor recife",
+    "feira do jeans de toritama",
+    "feira do empreendedor sebraepr",
+    "feirão das frutas"
+   ]
+  },
+  "pt|banca": {
+   "exact": false,
+   "position": null,
+   "hints": [
+    "a banca",
+    "a banca portugal",
+    "bancamiga",
+    "conta bancária",
+    "banca transilvania",
+    "banca currency converter",
+    "banca móvil bcp",
+    "banca comerciala romana",
+    "bancamiga suite",
+    "banca móvil bac"
+   ]
+  },
+  "pt|pos": {
+   "exact": false,
+   "position": null,
+   "hints": [
+    "postparty",
+    "post finance",
+    "postnord",
+    "postnl",
+    "pose",
+    "positions",
+    "post it",
+    "poste italiane",
+    "post",
+    "posicoes"
+   ]
+  },
+  "pt|caixa": {
+   "exact": true,
+   "position": 8,
+   "hints": [
+    "caixa directa",
+    "caixa geral de depósitos",
+    "caixa tem",
+    "caixa agricola",
+    "caixa econômica federal",
+    "caixa direta empresas",
+    "caixa direta",
+    "caixa",
+    "caixa break",
+    "caixa geral"
+   ]
+  },
+  "pt|mercado de natal": {
+   "exact": false,
+   "position": null,
+   "hints": []
+  },
+  "pt|quermesse": {
+   "exact": false,
+   "position": null,
+   "hints": []
+  },
+  "pt|ponto de venda": {
+   "exact": false,
+   "position": null,
+   "hints": [
+    "ponto de venda pro",
+    "bartab: ponto de venda",
+    "posory pos: ponto de venda pdv",
+    "simple pos: ponto de venda"
+   ]
+  },
+  "br|caixa registradora": {
+   "exact": true,
+   "position": 1,
+   "hints": [
+    "caixa registradora",
+    "caixa registradora jogo",
+    "jogos de caixa registradora",
+    "caixa registradora - pos",
+    "caixa registradora restaurante",
+    "caixa registradora moda loja",
+    "caixa registradora infantil",
+    "banco atm - caixa registradora",
+    "caixas de cinema filmes caixa registradora jogo",
+    "kash: caixa registradora ia"
+   ]
+  },
+  "br|pdv": {
+   "exact": true,
+   "position": 6,
+   "hints": [
+    "pdv +",
+    "pdv avantti",
+    "pdv mundo",
+    "pdvaction",
+    "pdv gratuito",
+    "pdv",
+    "pdv legal",
+    "pdv pet",
+    "pdv mais",
+    "pdv 2.0"
+   ]
+  },
+  "br|feira": {
+   "exact": false,
+   "position": null,
+   "hints": [
+    "feirao serasa limpa nome",
+    "feira conectada",
+    "feirao limpa nome",
+    "feirao acordo certo",
+    "feiras maringá",
+    "feirão limpa nome consulta cpf",
+    "feirao moda rio",
+    "feira do empreendedor",
+    "feira ebs 2026",
+    "feira do empreendedor piauí"
+   ]
+  },
+  "br|quermesse": {
+   "exact": false,
+   "position": null,
+   "hints": []
+  },
+  "br|frente de caixa": {
+   "exact": true,
+   "position": 1,
+   "hints": [
+    "frente de caixa",
+    "kassatap pdv: frente de caixa"
+   ]
+  },
+  "br|caixa": {
+   "exact": true,
+   "position": 2,
+   "hints": [
+    "caixa tem",
+    "caixa",
+    "caixa econômica federal",
+    "caixa tem atualizado 2026",
+    "caixa habitacao",
+    "caixa econômica",
+    "caixa cartao credito",
+    "caixa refeição e alimentação",
+    "caixa trabalhador",
+    "caixa trabalhador pis"
+   ]
+  },
+  "br|bazar": {
+   "exact": true,
+   "position": 4,
+   "hints": [
+    "bazart",
+    "bazar horizonte",
+    "bazara33",
+    "bazar",
+    "bazaraki",
+    "bazar setti",
+    "bazar estrelas",
+    "tikinti bazarı",
+    "vamos bazar",
+    "its bazar"
+   ]
+  },
+  "br|festa junina": {
+   "exact": false,
+   "position": null,
+   "hints": []
+  }
+ },
+ "play": {
+  "cz|pokladna": {
+   "results": 30,
+   "rank": null,
+   "top5MedianInstalls": 10000,
+   "top5MedianRatings": 109,
+   "top5": [
+    "Pokladna v mobilu (100+ / 0 hodn.)",
+    "Elementary POS - cash register (100000+ / 581 hodn.)",
+    "PoS Cash Register (100000+ / 589 hodn.)",
+    "Pokladna Smable (1000+ / 19 hodn.)",
+    "EET pokladna KASAmax (10000+ / 109 hodn.)"
+   ]
+  },
+  "cz|pokladna na stánek": {
+   "results": 28,
+   "rank": 1,
+   "top5MedianInstalls": 50000,
+   "top5MedianRatings": 381,
+   "top5": [
+    "Tapkasa: Market Stall POS (5+ / 0 hodn.)",
+    "Elementary POS - cash register (100000+ / 581 hodn.)",
+    "Cash register system - PEXESO (50000+ / 381 hodn.)",
+    "POS - PEXESO Calculator (10000+ / 36 hodn.)",
+    "PoS Cash Register (100000+ / 589 hodn.)"
+   ]
+  },
+  "cz|kasa": {
+   "results": 20,
+   "rank": null,
+   "top5MedianInstalls": 5000,
+   "top5MedianRatings": 0,
+   "top5": [
+    "Kasa Smart (5000000+ / 143616 hodn.)",
+    "Kasa: Speak Spanish with AI (100+ / 0 hodn.)",
+    "Kasa Defteri - Veresiye Takip (500+ / 0 hodn.)",
+    "Elementary POS - cash register (100000+ / 581 hodn.)",
+    "Kasa Takip Sistemi (5000+ / 0 hodn.)"
+   ]
+  },
+  "cz|jarmark": {
+   "results": 50,
+   "rank": null,
+   "top5MedianInstalls": 100,
+   "top5MedianRatings": 0,
+   "top5": [
+    "JAR-MET Maszyny Rolnicze (100+ / 0 hodn.)",
+    "jaageer.com (100+ / 0 hodn.)",
+    "Appreciation Jar (1000+ / 0 hodn.)",
+    "Jar of Marbles: Sleepy Hollow (500000+ / 4285 hodn.)",
+    "Jar of Us - Memory Keeper (10+ / 0 hodn.)"
+   ]
+  },
+  "cz|vánoční trh": {
+   "results": 50,
+   "rank": null,
+   "top5MedianInstalls": 1000,
+   "top5MedianRatings": 0,
+   "top5": [
+    "Vánoční výtah (5000+ / 13 hodn.)",
+    "Trhovište (100+ / 0 hodn.)",
+    "TruNeevesh (100+ / 0 hodn.)",
+    "TrhKnih.cz (1000+ / 26 hodn.)",
+    "H2OTransport (1000+ / 0 hodn.)"
+   ]
+  },
+  "cz|festival": {
+   "results": 14,
+   "rank": null,
+   "top5MedianInstalls": 10000,
+   "top5MedianRatings": 0,
+   "top5": [
+    "Cooking Festival (500000+ / 3326 hodn.)",
+    "Festival Dust: Music Festivals (5000+ / 0 hodn.)",
+    "FEST: Your Festivals, One App (50000+ / 0 hodn.)",
+    "Festival (10+ / 0 hodn.)",
+    "festival Off Avignon (10000+ / 0 hodn.)"
+   ]
+  },
+  "cz|mobilní pokladna": {
+   "results": 50,
+   "rank": null,
+   "top5MedianInstalls": 10000,
+   "top5MedianRatings": 256,
+   "top5": [
+    "Pokladna v mobilu (100+ / 0 hodn.)",
+    "eÚčtenka EET 2.0 pokladna (10000+ / 256 hodn.)",
+    "EET pokladna KASAmax (10000+ / 109 hodn.)",
+    "TabShop POS: Point of Sale (500000+ / 3852 hodn.)",
+    "Elementary POS - cash register (100000+ / 581 hodn.)"
+   ]
+  },
+  "cz|stánek": {
+   "results": 12,
+   "rank": 1,
+   "top5MedianInstalls": 5000000,
+   "top5MedianRatings": 14190,
+   "top5": [
+    "Tapkasa: Market Stall POS (5+ / 0 hodn.)",
+    "Star Stable Online (5000000+ / 56799 hodn.)",
+    "Street Diver (10000000+ / 14190 hodn.)",
+    "Sling Kong (10000000+ / 295896 hodn.)",
+    "Super Stand (100+ / 0 hodn.)"
+   ]
+  },
+  "cz|pokladna zdarma": {
+   "results": 30,
+   "rank": null,
+   "top5MedianInstalls": 100000,
+   "top5MedianRatings": 581,
+   "top5": [
+    "Elementary POS - cash register (100000+ / 581 hodn.)",
+    "EET pokladna KASAmax (10000+ / 109 hodn.)",
+    "W&O POS - Retail Point of Sale (100000+ / 1134 hodn.)",
+    "Pokladna v mobilu (100+ / 0 hodn.)",
+    "PoS Cash Register (100000+ / 589 hodn.)"
+   ]
+  },
+  "cz|výdej objednávek": {
+   "results": 12,
+   "rank": null,
+   "top5MedianInstalls": 100000,
+   "top5MedianRatings": 162,
+   "top5": [
+    "Objednávka obědů (1000+ / 162 hodn.)",
+    "Mark O'Travel: Where I've Been (100000+ / 0 hodn.)",
+    "Orderling (10+ / 0 hodn.)",
+    "been — travel map & tracker (1000000+ / 1267 hodn.)",
+    "Where Is? Find Hidden Objects (1000000+ / 20621 hodn.)"
+   ]
+  },
+  "sk|pokladňa": {
+   "results": 30,
+   "rank": null,
+   "top5MedianInstalls": 100000,
+   "top5MedianRatings": 589,
+   "top5": [
+    "Elementary POS - cash register (100000+ / 581 hodn.)",
+    "PoS Cash Register (100000+ / 589 hodn.)",
+    "Pokladna v mobilu (100+ / 0 hodn.)",
+    "Tunder · POS · Point of sale (100000+ / 926 hodn.)",
+    "TabShop POS: Point of Sale (500000+ / 3852 hodn.)"
+   ]
+  },
+  "sk|pokladňa na stánok": {
+   "results": 50,
+   "rank": null,
+   "top5MedianInstalls": 500000,
+   "top5MedianRatings": 3641,
+   "top5": [
+    "Elementary POS - cash register (100000+ / 581 hodn.)",
+    "Coin Simulator - Coin Flip App (500000+ / 3641 hodn.)",
+    "Cash Register : Shopping Game (1000000+ / 2446 hodn.)",
+    "Cash Register (1000000+ / 5441 hodn.)",
+    "Spin Number (500000+ / 4478 hodn.)"
+   ]
+  },
+  "sk|kasa": {
+   "results": 20,
+   "rank": null,
+   "top5MedianInstalls": 100000,
+   "top5MedianRatings": 876,
+   "top5": [
+    "Kasa Smart (5000000+ / 143616 hodn.)",
+    "Kasa: Speak Spanish with AI (100+ / 0 hodn.)",
+    "Elementary POS - cash register (100000+ / 581 hodn.)",
+    "Kasa Stefczyka Online (100000+ / 876 hodn.)",
+    "W&O POS - Retail Point of Sale (100000+ / 1134 hodn.)"
+   ]
+  },
+  "sk|jarmok": {
+   "results": 50,
+   "rank": null,
+   "top5MedianInstalls": 10000,
+   "top5MedianRatings": 41,
+   "top5": [
+    "Jar of Marbles: Sleepy Hollow (500000+ / 4285 hodn.)",
+    "Jar Runner (50000+ / 138 hodn.)",
+    "Jar File Opener (10000+ / 41 hodn.)",
+    "Zdrowy Catering (500+ / 0 hodn.)",
+    "Goal Jar – Track Your Savings (1000+ / 13 hodn.)"
+   ]
+  },
+  "sk|vianočné trhy": {
+   "results": 50,
+   "rank": null,
+   "top5MedianInstalls": 5000,
+   "top5MedianRatings": 74,
+   "top5": [
+    "Via Transilvanica (50000+ / 234 hodn.)",
+    "vTheorie Traktor (1000+ / 74 hodn.)",
+    "Říčany v mobilu (5000+ / 43 hodn.)",
+    "Trenčínak.sk (100+ / 0 hodn.)",
+    "Vioska (10000+ / 406 hodn.)"
+   ]
+  },
+  "sk|festival": {
+   "results": 50,
+   "rank": null,
+   "top5MedianInstalls": 50000,
+   "top5MedianRatings": 2669,
+   "top5": [
+    "Cooking Festival (500000+ / 3326 hodn.)",
+    "Festival Dust: Music Festivals (5000+ / 0 hodn.)",
+    "FEST: Your Festivals, One App (50000+ / 0 hodn.)",
+    "Chef Festival: Cooking Game (500000+ / 3312 hodn.)",
+    "Delicious: Festival of Dreams (50000+ / 2669 hodn.)"
+   ]
+  },
+  "sk|mobilná pokladňa": {
+   "results": 8,
+   "rank": null,
+   "top5MedianInstalls": 50000,
+   "top5MedianRatings": 327,
+   "top5": [
+    "VRP 2 (50000+ / 327 hodn.)",
+    "Pokladna v mobilu (100+ / 0 hodn.)",
+    "Elementary POS - cash register (100000+ / 581 hodn.)",
+    "PoS Cash Register (100000+ / 589 hodn.)",
+    "Mimas POS - Cash Register (1000+ / 0 hodn.)"
+   ]
+  },
+  "sk|stánok": {
+   "results": 30,
+   "rank": null,
+   "top5MedianInstalls": 10000000,
+   "top5MedianRatings": 368004,
+   "top5": [
+    "Standoff 2 (100000000+ / 12124521 hodn.)",
+    "Champion Strike - PvP Arena (1000000+ / 26669 hodn.)",
+    "Sniper Champions: 3D shooting (10000000+ / 443581 hodn.)",
+    "The Archers 2: Archer Game (50000000+ / 368004 hodn.)",
+    "Easy Skeet Shooting (100000+ / 1528 hodn.)"
+   ]
+  },
+  "de|kasse": {
+   "results": 29,
+   "rank": null,
+   "top5MedianInstalls": 5000,
+   "top5MedianRatings": 0,
+   "top5": [
+    "PoS Cash Register (100000+ / 589 hodn.)",
+    "Kasse (1000+ / 0 hodn.)",
+    "Phoenix - Kasse ohne Fixkosten (10000+ / 129 hodn.)",
+    "Cashier App: POS & Inventory (5000+ / 0 hodn.)",
+    "Cash Register Event Simulator (100+ / 0 hodn.)"
+   ]
+  },
+  "de|kassensystem verein": {
+   "results": 27,
+   "rank": null,
+   "top5MedianInstalls": 100,
+   "top5MedianRatings": 0,
+   "top5": [
+    "Club Treasurer – Cash Book (100+ / 0 hodn.)",
+    "Kassenbuch: Club & Home Cash (100+ / 0 hodn.)",
+    "Kassensystem Tablet POS Kasse (100+ / 0 hodn.)",
+    "VereinsKasse (10+ / 0 hodn.)",
+    "Phoenix - Kasse ohne Fixkosten (10000+ / 129 hodn.)"
+   ]
+  },
+  "de|vereinsfest": {
+   "results": 29,
+   "rank": null,
+   "top5MedianInstalls": 10000,
+   "top5MedianRatings": 61,
+   "top5": [
+    "Vereinsticket (10000+ / 61 hodn.)",
+    "Vereinsorganisator - Termine e (10000+ / 188 hodn.)",
+    "Vereinsplaner: App für Vereine (100000+ / 439 hodn.)",
+    "VereinsApp (1000+ / 15 hodn.)",
+    "Mein Verein (1000+ / 0 hodn.)"
+   ]
+  },
+  "de|weihnachtsmarkt": {
+   "results": 11,
+   "rank": null,
+   "top5MedianInstalls": 1000,
+   "top5MedianRatings": 17,
+   "top5": [
+    "Amberger Weihnachtsmarkt (1000+ / 18 hodn.)",
+    "MOSEL-WEIN-NACHTS-MARKT (10000+ / 17 hodn.)",
+    "Vierjahreszeiten Hintertux (500+ / 0 hodn.)",
+    "we@schwarz (1000+ / 11 hodn.)",
+    "MeineSRH (10000+ / 32 hodn.)"
+   ]
+  },
+  "de|bonkasse": {
+   "results": 29,
+   "rank": null,
+   "top5MedianInstalls": 10000,
+   "top5MedianRatings": 129,
+   "top5": [
+    "Kasse - UnserBasar (1000+ / 0 hodn.)",
+    "Phoenix - Kasse ohne Fixkosten (10000+ / 129 hodn.)",
+    "ready2order POS (50000+ / 522 hodn.)",
+    "Bonsy Bon Scan&Expense tracker (100000+ / 941 hodn.)",
+    "Kasse (1000+ / 0 hodn.)"
+   ]
+  },
+  "de|vereinskasse": {
+   "results": 50,
+   "rank": null,
+   "top5MedianInstalls": 10,
+   "top5MedianRatings": 0,
+   "top5": [
+    "Club Treasurer – Cash Book (100+ / 0 hodn.)",
+    "VereinsKasse (10+ / 0 hodn.)",
+    "Vereinskasse: Club Treasurer (0+ / 0 hodn.)",
+    "Club Tab – Clubhouse Tabs (50+ / 0 hodn.)",
+    "Vereinskasse_MVH (10+ / 0 hodn.)"
+   ]
+  },
+  "de|festkasse": {
+   "results": 30,
+   "rank": null,
+   "top5MedianInstalls": 100,
+   "top5MedianRatings": 7,
+   "top5": [
+    "FestKasse (100+ / 0 hodn.)",
+    "Groschen: Festkasse & Rückgeld (100+ / 7 hodn.)",
+    "Phoenix - Kasse ohne Fixkosten (10000+ / 129 hodn.)",
+    "Kassen-helfer: Fest-Kasse (10+ / 0 hodn.)",
+    "ready2order POS (50000+ / 522 hodn.)"
+   ]
+  },
+  "de|kassen app": {
+   "results": 28,
+   "rank": null,
+   "top5MedianInstalls": 100000,
+   "top5MedianRatings": 480,
+   "top5": [
+    "PoS Cash Register (100000+ / 589 hodn.)",
+    "Kassenka – Mobile POS (5000+ / 63 hodn.)",
+    "Elementary POS - cash register (100000+ / 581 hodn.)",
+    "Cashier App: POS & Inventory (5000+ / 0 hodn.)",
+    "speedy kasse (100000+ / 480 hodn.)"
+   ]
+  },
+  "de|flohmarkt kasse": {
+   "results": 18,
+   "rank": null,
+   "top5MedianInstalls": 5000,
+   "top5MedianRatings": 33,
+   "top5": [
+    "Flea Market Cash Register (10+ / 0 hodn.)",
+    "My Flohmarkt (500+ / 0 hodn.)",
+    "Flea Markets (5000+ / 33 hodn.)",
+    "Quoka Kleinanzeigen Flohmarkt (1000000+ / 49086 hodn.)",
+    "marktcom - Die Flohmarkt App (100000+ / 432 hodn.)"
+   ]
+  },
+  "de|pfand": {
+   "results": 29,
+   "rank": null,
+   "top5MedianInstalls": 1000,
+   "top5MedianRatings": 0,
+   "top5": [
+    "Bottle Deposit: Findflasche (1000+ / 17 hodn.)",
+    "Pfandabär (1000+ / 0 hodn.)",
+    "Konsument — EWP Österreich (1000+ / 0 hodn.)",
+    "PFANDGEBEN (10000+ / 450 hodn.)",
+    "Cash – Event Cash Register (100+ / 0 hodn.)"
+   ]
+  },
+  "at|kasse": {
+   "results": 30,
+   "rank": null,
+   "top5MedianInstalls": 5000,
+   "top5MedianRatings": 0,
+   "top5": [
+    "PoS Cash Register (100000+ / 589 hodn.)",
+    "Cash Register Event Simulator (100+ / 0 hodn.)",
+    "Cashier App: POS & Inventory (5000+ / 0 hodn.)",
+    "Cash – Event Cash Register (100+ / 0 hodn.)",
+    "POS Cashier App Offline (5000+ / 0 hodn.)"
+   ]
+  },
+  "at|vereinskasse": {
+   "results": 28,
+   "rank": null,
+   "top5MedianInstalls": 10,
+   "top5MedianRatings": 0,
+   "top5": [
+    "Club Treasurer – Cash Book (100+ / 0 hodn.)",
+    "VereinsKasse (10+ / 0 hodn.)",
+    "Vereinskasse_MVH (10+ / 0 hodn.)",
+    "Vereinskasse: Club Treasurer (0+ / 0 hodn.)",
+    "Kasse - UnserBasar (1000+ / 0 hodn.)"
+   ]
+  },
+  "at|vereinsfest": {
+   "results": 28,
+   "rank": null,
+   "top5MedianInstalls": 10000,
+   "top5MedianRatings": 15,
+   "top5": [
+    "Vereinsplaner: App für Vereine (100000+ / 439 hodn.)",
+    "Vereinsticket (10000+ / 61 hodn.)",
+    "VereinsApp (1000+ / 15 hodn.)",
+    "easyVerein - Vereinsverwaltung (50000+ / 0 hodn.)",
+    "Club Treasurer – Cash Book (100+ / 0 hodn.)"
+   ]
+  },
+  "at|weihnachtsmarkt": {
+   "results": 11,
+   "rank": null,
+   "top5MedianInstalls": 500,
+   "top5MedianRatings": 0,
+   "top5": [
+    "MOSEL-WEIN-NACHTS-MARKT (10000+ / 17 hodn.)",
+    "Weihnachten am Nordpol (500+ / 0 hodn.)",
+    "Weihnachten im Kreis Saarlouis (1000+ / 0 hodn.)",
+    "Weihnachtsmusicals (10+ / 0 hodn.)",
+    "Wensenlijst - verlanglijstjes (100+ / 0 hodn.)"
+   ]
+  },
+  "at|bonkasse": {
+   "results": 30,
+   "rank": null,
+   "top5MedianInstalls": 50000,
+   "top5MedianRatings": 522,
+   "top5": [
+    "ready2order POS (50000+ / 522 hodn.)",
+    "Bonsy Bon Scan&Expense tracker (100000+ / 941 hodn.)",
+    "Kasse - UnserBasar (1000+ / 0 hodn.)",
+    "kassemo Registrierkasse (10000+ / 112 hodn.)",
+    "PoS Cash Register (100000+ / 589 hodn.)"
+   ]
+  },
+  "at|festkasse": {
+   "results": 30,
+   "rank": null,
+   "top5MedianInstalls": 100,
+   "top5MedianRatings": 7,
+   "top5": [
+    "FestKasse (100+ / 0 hodn.)",
+    "Groschen: Festkasse & Rückgeld (100+ / 7 hodn.)",
+    "Kassen-helfer: Fest-Kasse (10+ / 0 hodn.)",
+    "kassemo Registrierkasse (10000+ / 112 hodn.)",
+    "Supermarket Cashier Simulator (10000000+ / 32367 hodn.)"
+   ]
+  },
+  "at|kassen app": {
+   "results": 29,
+   "rank": null,
+   "top5MedianInstalls": 50000,
+   "top5MedianRatings": 522,
+   "top5": [
+    "PoS Cash Register (100000+ / 589 hodn.)",
+    "Cashier App: POS & Inventory (5000+ / 0 hodn.)",
+    "Elementary POS - cash register (100000+ / 581 hodn.)",
+    "ready2order POS (50000+ / 522 hodn.)",
+    "Simple POS: Cash Register (500+ / 0 hodn.)"
+   ]
+  },
+  "at|punschstand": {
+   "results": 30,
+   "rank": null,
+   "top5MedianInstalls": 10000,
+   "top5MedianRatings": 0,
+   "top5": [
+    "Punch Tree: Receive Wood (10000+ / 0 hodn.)",
+    "Simple Handstands (500+ / 0 hodn.)",
+    "Handstand Coach Kyle Weiger (10000+ / 0 hodn.)",
+    "TheStands (50+ / 0 hodn.)",
+    "Reigns (1000000+ / 147661 hodn.)"
+   ]
+  },
+  "pl|kasa": {
+   "results": 9,
+   "rank": null,
+   "top5MedianInstalls": 100000,
+   "top5MedianRatings": 589,
+   "top5": [
+    "Kasa Smart (5000000+ / 143616 hodn.)",
+    "Elementary POS - cash register (100000+ / 581 hodn.)",
+    "Kasa: Speak Spanish with AI (100+ / 0 hodn.)",
+    "PoS Cash Register (100000+ / 589 hodn.)",
+    "Kasa Stefczyka Online (100000+ / 876 hodn.)"
+   ]
+  },
+  "pl|kasa na stoisko": {
+   "results": 30,
+   "rank": null,
+   "top5MedianInstalls": 100000,
+   "top5MedianRatings": 876,
+   "top5": [
+    "Elementary POS - cash register (100000+ / 581 hodn.)",
+    "PoS Cash Register (100000+ / 589 hodn.)",
+    "Kasa Stefczyka Online (100000+ / 876 hodn.)",
+    "Cash Register : Shopping Game (1000000+ / 2446 hodn.)",
+    "Cash Register (1000000+ / 5441 hodn.)"
+   ]
+  },
+  "pl|kiermasz": {
+   "results": 11,
+   "rank": null,
+   "top5MedianInstalls": 10000,
+   "top5MedianRatings": 750,
+   "top5": [
+    "La Kermesse Festival 2027 (10000+ / 0 hodn.)",
+    "Smithing Master (1000000+ / 30032 hodn.)",
+    "Ki11er Clutter: Clutter 11 (10000+ / 750 hodn.)",
+    "KiekR (1000+ / 0 hodn.)",
+    "The JerryMaya Detective Agency (100000+ / 851 hodn.)"
+   ]
+  },
+  "pl|jarmark": {
+   "results": 50,
+   "rank": null,
+   "top5MedianInstalls": 100,
+   "top5MedianRatings": 0,
+   "top5": [
+    "JAR-MET Maszyny Rolnicze (100+ / 0 hodn.)",
+    "jaageer.com (100+ / 0 hodn.)",
+    "Jar of Marbles: Sleepy Hollow (500000+ / 4285 hodn.)",
+    "Jarmar Immigration (50+ / 0 hodn.)",
+    "Jarrito — Jars & Preserves (100+ / 0 hodn.)"
+   ]
+  },
+  "pl|kasa mobilna": {
+   "results": 8,
+   "rank": null,
+   "top5MedianInstalls": 100000,
+   "top5MedianRatings": 589,
+   "top5": [
+    "Kasa Stefczyka Online (100000+ / 876 hodn.)",
+    "Kasa Smart (5000000+ / 143616 hodn.)",
+    "PoS Cash Register (100000+ / 589 hodn.)",
+    "Elementary POS - cash register (100000+ / 581 hodn.)",
+    "Simple POS: Cash Register (500+ / 0 hodn.)"
+   ]
+  },
+  "pl|stoisko": {
+   "results": 13,
+   "rank": null,
+   "top5MedianInstalls": 10000,
+   "top5MedianRatings": 176,
+   "top5": [
+    "Stonies (1000000+ / 42363 hodn.)",
+    "Stoa - Senda Estoica (50+ / 0 hodn.)",
+    "Sto-Colorix (5000+ / 0 hodn.)",
+    "Kids Chronicles (50000+ / 176 hodn.)",
+    "Vioska (10000+ / 406 hodn.)"
+   ]
+  },
+  "pl|festyn": {
+   "results": 50,
+   "rank": null,
+   "top5MedianInstalls": 1000,
+   "top5MedianRatings": 0,
+   "top5": [
+    "Festy (1000+ / 0 hodn.)",
+    "Festy - Who's going out? (10+ / 0 hodn.)",
+    "FestiBesti (500+ / 0 hodn.)",
+    "FEST: Your Festivals, One App (50000+ / 0 hodn.)",
+    "Festing: Events & Communities (1000+ / 0 hodn.)"
+   ]
+  },
+  "pl|jarmark świąteczny": {
+   "results": 50,
+   "rank": null,
+   "top5MedianInstalls": 1000,
+   "top5MedianRatings": 0,
+   "top5": [
+    "Jarrito — Jars & Preserves (100+ / 0 hodn.)",
+    "Appreciation Jar (1000+ / 0 hodn.)",
+    "JAR-MET Maszyny Rolnicze (100+ / 0 hodn.)",
+    "Maserati Traguardo Hybrid (5000+ / 0 hodn.)",
+    "MAPEI Grouts (10000+ / 121 hodn.)"
+   ]
+  },
+  "gb|market stall pos": {
+   "results": 12,
+   "rank": null,
+   "top5MedianInstalls": 5000,
+   "top5MedianRatings": 0,
+   "top5": [
+    "Stall POS Checkout (5000+ / 0 hodn.)",
+    "Event POS: Stall POS (1+ / 0 hodn.)",
+    "Shopify Point of Sale (POS) (1000000+ / 3697 hodn.)",
+    "QuickStall: Offline POS System (100+ / 0 hodn.)",
+    "SalesPlay POS - Point of Sale (100000+ / 730 hodn.)"
+   ]
+  },
+  "gb|craft fair": {
+   "results": 30,
+   "rank": null,
+   "top5MedianInstalls": 1000,
+   "top5MedianRatings": 0,
+   "top5": [
+    "Artkiv: Craft Fair Inventory (50+ / 0 hodn.)",
+    "Craftfair: Craft Pricing (1+ / 0 hodn.)",
+    "Fair Art Fair (1000+ / 17 hodn.)",
+    "Fun Fair (100000+ / 0 hodn.)",
+    "Baby Panda's Kids Crafts DIY (5000000+ / 3578 hodn.)"
+   ]
+  },
+  "gb|bake sale": {
+   "results": 30,
+   "rank": null,
+   "top5MedianInstalls": 100000,
+   "top5MedianRatings": 825,
+   "top5": [
+    "Bakesy: Home Bakery Biz App (100000+ / 1121 hodn.)",
+    "My Cake Shop: Bake & Serve (100000+ / 825 hodn.)",
+    "Cake Shop Pastries & Waffles (1000000+ / 12337 hodn.)",
+    "Bakedown: Baking Recipe Book (1000+ / 0 hodn.)",
+    "BakeCost Cake Pricing & Profit (50+ / 0 hodn.)"
+   ]
+  },
+  "gb|cash register": {
+   "results": 29,
+   "rank": null,
+   "top5MedianInstalls": 100000,
+   "top5MedianRatings": 581,
+   "top5": [
+    "PoS Cash Register (100000+ / 589 hodn.)",
+    "Elementary POS - cash register (100000+ / 581 hodn.)",
+    "Cash Register (500000+ / 20485 hodn.)",
+    "Simple POS: Cash Register (500+ / 0 hodn.)",
+    "POS Billing : Cash Register (1000+ / 0 hodn.)"
+   ]
+  },
+  "gb|till": {
+   "results": 28,
+   "rank": null,
+   "top5MedianInstalls": 100,
+   "top5MedianRatings": 0,
+   "top5": [
+    "Till App (5000+ / 32 hodn.)",
+    "Simple Till (100+ / 0 hodn.)",
+    "Epos Now POS Till (50000+ / 239 hodn.)",
+    "Till Simple: Countdown Widget (100+ / 0 hodn.)",
+    "Till Ten (5+ / 0 hodn.)"
+   ]
+  },
+  "gb|christmas market": {
+   "results": 30,
+   "rank": null,
+   "top5MedianInstalls": 10000,
+   "top5MedianRatings": 0,
+   "top5": [
+    "Merry Market - Christmas Merge (100+ / 0 hodn.)",
+    "Christmas Market Hidden Object (100000+ / 0 hodn.)",
+    "Cozy Christmas Color (100000+ / 1258 hodn.)",
+    "Christmas Store Simulator 3D (10000+ / 187 hodn.)",
+    "Christmas List: Gift Tracker (500+ / 0 hodn.)"
+   ]
+  },
+  "gb|pos": {
+   "results": 30,
+   "rank": null,
+   "top5MedianInstalls": 1000000,
+   "top5MedianRatings": 24070,
+   "top5": [
+    "PayPal POS (ex Zettle) (1000000+ / 43451 hodn.)",
+    "Shopify Point of Sale (POS) (1000000+ / 3697 hodn.)",
+    "Square Point of Sale: Payment (10000000+ / 261264 hodn.)",
+    "myPOS Payments and Finance (500000+ / 24070 hodn.)",
+    "Loyverse POS - Point of Sale (1000000+ / 18190 hodn.)"
+   ]
+  },
+  "gb|till app": {
+   "results": 28,
+   "rank": null,
+   "top5MedianInstalls": 5000,
+   "top5MedianRatings": 32,
+   "top5": [
+    "Till App (5000+ / 32 hodn.)",
+    "Simple Till (100+ / 0 hodn.)",
+    "Epos Now POS Till (50000+ / 239 hodn.)",
+    "M-PESA for Business (1000000+ / 79357 hodn.)",
+    "Till Simple: Countdown Widget (100+ / 0 hodn.)"
+   ]
+  },
+  "gb|market stall": {
+   "results": 30,
+   "rank": null,
+   "top5MedianInstalls": 5000,
+   "top5MedianRatings": 0,
+   "top5": [
+    "Stall POS Checkout (5000+ / 0 hodn.)",
+    "My Supermarket! (1000000+ / 26246 hodn.)",
+    "My Supermarket Simulator 3D® (100000000+ / 633825 hodn.)",
+    "Night Market: Food Stall Rush (1000+ / 0 hodn.)",
+    "The Market Supermarket (100+ / 0 hodn.)"
+   ]
+  },
+  "gb|school fair": {
+   "results": 10,
+   "rank": null,
+   "top5MedianInstalls": 100,
+   "top5MedianRatings": 0,
+   "top5": [
+    "StriveScan - for College Reps (10000+ / 0 hodn.)",
+    "Fair Play R-II School District (100+ / 0 hodn.)",
+    "Fun Fair (100000+ / 0 hodn.)",
+    "Christian College Fairs App (50+ / 0 hodn.)",
+    "Fairlands A Foundation School (50+ / 0 hodn.)"
+   ]
+  },
+  "us|market stall pos": {
+   "results": 13,
+   "rank": null,
+   "top5MedianInstalls": 5000,
+   "top5MedianRatings": 0,
+   "top5": [
+    "Stall POS Checkout (5000+ / 0 hodn.)",
+    "Event POS: Stall POS (1+ / 0 hodn.)",
+    "Shopify Point of Sale (POS) (1000000+ / 3697 hodn.)",
+    "Square Point of Sale: Payment (10000000+ / 261264 hodn.)",
+    "QuickStall: Offline POS System (100+ / 0 hodn.)"
+   ]
+  },
+  "us|craft fair": {
+   "results": 29,
+   "rank": null,
+   "top5MedianInstalls": 1000,
+   "top5MedianRatings": 17,
+   "top5": [
+    "Artkiv: Craft Fair Inventory (50+ / 0 hodn.)",
+    "Craftfair: Craft Pricing (1+ / 0 hodn.)",
+    "Fair Art Fair (1000+ / 17 hodn.)",
+    "Bubbles Fairy Craft (1000000+ / 6260 hodn.)",
+    "Baby Panda's Kids Crafts DIY (5000000+ / 3578 hodn.)"
+   ]
+  },
+  "us|bake sale": {
+   "results": 30,
+   "rank": null,
+   "top5MedianInstalls": 100000,
+   "top5MedianRatings": 825,
+   "top5": [
+    "Bakesy: Home Bakery Biz App (100000+ / 1121 hodn.)",
+    "The Bake Shop (500+ / 27 hodn.)",
+    "My Cake Shop: Bake & Serve (100000+ / 825 hodn.)",
+    "Bake Cakes (10+ / 0 hodn.)",
+    "Cake Shop Pastries & Waffles (1000000+ / 12337 hodn.)"
+   ]
+  },
+  "us|cash register": {
+   "results": 29,
+   "rank": null,
+   "top5MedianInstalls": 100000,
+   "top5MedianRatings": 581,
+   "top5": [
+    "PoS Cash Register (100000+ / 589 hodn.)",
+    "Elementary POS - cash register (100000+ / 581 hodn.)",
+    "Cash Register (500000+ / 20485 hodn.)",
+    "Simple POS: Cash Register (500+ / 0 hodn.)",
+    "POS Billing : Cash Register (1000+ / 0 hodn.)"
+   ]
+  },
+  "us|pos": {
+   "results": 30,
+   "rank": null,
+   "top5MedianInstalls": 1000000,
+   "top5MedianRatings": 43451,
+   "top5": [
+    "Shopify Point of Sale (POS) (1000000+ / 3697 hodn.)",
+    "PayPal POS (ex Zettle) (1000000+ / 43451 hodn.)",
+    "Square Point of Sale: Payment (10000000+ / 261264 hodn.)",
+    "SumUp Business (10000000+ / 147522 hodn.)",
+    "Loyverse POS - Point of Sale (1000000+ / 18190 hodn.)"
+   ]
+  },
+  "us|craft fair pos": {
+   "results": 30,
+   "rank": null,
+   "top5MedianInstalls": 1000,
+   "top5MedianRatings": 0,
+   "top5": [
+    "Craft Cart Pos (50+ / 0 hodn.)",
+    "Handy Craft (5000000+ / 18758 hodn.)",
+    "Fichero Printer - Crafts & Co (500000+ / 0 hodn.)",
+    "Fair Art Fair (1000+ / 17 hodn.)",
+    "Feji Arts & Crafts (100+ / 0 hodn.)"
+   ]
+  },
+  "us|vendor pos": {
+   "results": 11,
+   "rank": null,
+   "top5MedianInstalls": 1000000,
+   "top5MedianRatings": 3697,
+   "top5": [
+    "Shopify Point of Sale (POS) (1000000+ / 3697 hodn.)",
+    "Square Point of Sale: Payment (10000000+ / 261264 hodn.)",
+    "Small Vendor POS (10+ / 0 hodn.)",
+    "Loyverse POS - Point of Sale (1000000+ / 18190 hodn.)",
+    "POS App, Retail Billing POS (100000+ / 1166 hodn.)"
+   ]
+  },
+  "us|farmers market": {
+   "results": 28,
+   "rank": null,
+   "top5MedianInstalls": 5000,
+   "top5MedianRatings": 8,
+   "top5": [
+    "Farmers Market (100+ / 8 hodn.)",
+    "Farmers Market (5000+ / 0 hodn.)",
+    "Farmer’s Country Market (5000+ / 42 hodn.)",
+    "Locally Grown: Local Farms (50000+ / 7201 hodn.)",
+    "Farmer's Market Online (1000+ / 0 hodn.)"
+   ]
+  },
+  "us|concession stand": {
+   "results": 30,
+   "rank": null,
+   "top5MedianInstalls": 10000,
+   "top5MedianRatings": 423,
+   "top5": [
+    "Snack Shack App (500+ / 0 hodn.)",
+    "The Concession (100+ / 0 hodn.)",
+    "The Stand Restaurants App (10000+ / 587 hodn.)",
+    "Cal AI: Food & Calorie Tracker (10000+ / 1240 hodn.)",
+    "Hotpot Rush: Food Frenzy (10000+ / 423 hodn.)"
+   ]
+  },
+  "us|simple cash register": {
+   "results": 30,
+   "rank": null,
+   "top5MedianInstalls": 100000,
+   "top5MedianRatings": 581,
+   "top5": [
+    "PoS Cash Register (100000+ / 589 hodn.)",
+    "Elementary POS - cash register (100000+ / 581 hodn.)",
+    "Simple POS: Cash Register (500+ / 0 hodn.)",
+    "Cash Register (500000+ / 20485 hodn.)",
+    "POS Billing : Cash Register (1000+ / 0 hodn.)"
+   ]
+  },
+  "fr|caisse marché": {
+   "results": 17,
+   "rank": null,
+   "top5MedianInstalls": 10000,
+   "top5MedianRatings": 82,
+   "top5": [
+    "Shopcaisse - Cash register (10000+ / 147 hodn.)",
+    "Ma Caisse – Caisse & Stock (100+ / 0 hodn.)",
+    "M-System Caisse Enregistreuse (10000+ / 82 hodn.)",
+    "Caisse Manager Waiter POS (1000+ / 0 hodn.)",
+    "Saveur Marché: French Markets (10000+ / 124 hodn.)"
+   ]
+  },
+  "fr|kermesse": {
+   "results": 30,
+   "rank": null,
+   "top5MedianInstalls": 10000,
+   "top5MedianRatings": 0,
+   "top5": [
+    "La Kermesse Festival 2027 (10000+ / 0 hodn.)",
+    "La kermesse (1000+ / 0 hodn.)",
+    "Kermes Wake (10000+ / 0 hodn.)",
+    "SSENSE: Luxury Shopping (100000+ / 1645 hodn.)",
+    "Dice Dreams™️ (50000000+ / 1964221 hodn.)"
+   ]
+  },
+  "fr|buvette": {
+   "results": 30,
+   "rank": null,
+   "top5MedianInstalls": 500,
+   "top5MedianRatings": 18,
+   "top5": [
+    "Buvette Verton (5+ / 0 hodn.)",
+    "The Bearded King (10+ / 9 hodn.)",
+    "Buvons ! - jeu en soirée (1000+ / 35 hodn.)",
+    "Barbu + (500+ / 18 hodn.)",
+    "Merge Bistro™ Cook & Decor (1000000+ / 20580 hodn.)"
+   ]
+  },
+  "fr|caisse enregistreuse": {
+   "results": 28,
+   "rank": null,
+   "top5MedianInstalls": 100000,
+   "top5MedianRatings": 581,
+   "top5": [
+    "PoS Cash Register (100000+ / 589 hodn.)",
+    "Kash.click (100000+ / 502 hodn.)",
+    "Tunder · POS · Point of sale (100000+ / 926 hodn.)",
+    "Shopcaisse - Cash register (10000+ / 147 hodn.)",
+    "Elementary POS - cash register (100000+ / 581 hodn.)"
+   ]
+  },
+  "fr|caisse": {
+   "results": 29,
+   "rank": null,
+   "top5MedianInstalls": 100000,
+   "top5MedianRatings": 589,
+   "top5": [
+    "Banxo (10000000+ / 650562 hodn.)",
+    "Shopcaisse - Cash register (10000+ / 147 hodn.)",
+    "SumUp Business (10000000+ / 147522 hodn.)",
+    "Caisse Manager Waiter POS (1000+ / 0 hodn.)",
+    "PoS Cash Register (100000+ / 589 hodn.)"
+   ]
+  },
+  "fr|marché de noël": {
+   "results": 20,
+   "rank": null,
+   "top5MedianInstalls": 1000000,
+   "top5MedianRatings": 33045,
+   "top5": [
+    "Agenda des marchés de Noël (10000+ / 81 hodn.)",
+    "Marché de Noël Amiens 2026 (5000+ / 29 hodn.)",
+    "Christmas Countdown (1000000+ / 33045 hodn.)",
+    "Christmas Sweeper 3 - Match 3 (1000000+ / 47428 hodn.)",
+    "Call & Video from Santa: PNP (10000000+ / 558185 hodn.)"
+   ]
+  },
+  "fr|caisse association": {
+   "results": 28,
+   "rank": null,
+   "top5MedianInstalls": 10000,
+   "top5MedianRatings": 82,
+   "top5": [
+    "Shopcaisse - Cash register (10000+ / 147 hodn.)",
+    "Caisse Manager Waiter POS (1000+ / 0 hodn.)",
+    "Ma Caisse – Caisse & Stock (100+ / 0 hodn.)",
+    "M-System Caisse Enregistreuse (10000+ / 82 hodn.)",
+    "PoS Cash Register (100000+ / 589 hodn.)"
+   ]
+  },
+  "fr|brocante": {
+   "results": 30,
+   "rank": null,
+   "top5MedianInstalls": 50000,
+   "top5MedianRatings": 309,
+   "top5": [
+    "vide-greniers.org (500000+ / 7145 hodn.)",
+    "Vide-greniers et brocantes (50000+ / 309 hodn.)",
+    "Mes Brocantes (10000+ / 28 hodn.)",
+    "Selency, online 2nd hand (100000+ / 1769 hodn.)",
+    "Agenda des Brocantes (500+ / 0 hodn.)"
+   ]
+  },
+  "it|cassa sagra": {
+   "results": 7,
+   "rank": null,
+   "top5MedianInstalls": 500,
+   "top5MedianRatings": 0,
+   "top5": [
+    "Sagriamo (10000+ / 174 hodn.)",
+    "Cassa Semplice (100+ / 0 hodn.)",
+    "Sagra Touch Tabellone (0+ / 0 hodn.)",
+    "Sagra Touch Palmari (500+ / 0 hodn.)",
+    "Stasera Sagra (10000+ / 132 hodn.)"
+   ]
+  },
+  "it|mercatino": {
+   "results": 9,
+   "rank": null,
+   "top5MedianInstalls": 1000,
+   "top5MedianRatings": 9,
+   "top5": [
+    "Riù mercatino (100000+ / 1499 hodn.)",
+    "Mercatino Store (1000+ / 5 hodn.)",
+    "Mercatino di Beba (1000+ / 6 hodn.)",
+    "EX Novo Mercatino (1000+ / 9 hodn.)",
+    "Vinted: Shop & sell pre-loved (100000000+ / 2472064 hodn.)"
+   ]
+  },
+  "it|cassa": {
+   "results": 26,
+   "rank": null,
+   "top5MedianInstalls": 10000,
+   "top5MedianRatings": 98,
+   "top5": [
+    "CassaDigitale (10000+ / 125 hodn.)",
+    "PoS Cash Register (100000+ / 589 hodn.)",
+    "Cassa (1000+ / 0 hodn.)",
+    "Cassa in Cloud (10000+ / 98 hodn.)",
+    "CASSA.io (500+ / 0 hodn.)"
+   ]
+  },
+  "it|registratore di cassa": {
+   "results": 28,
+   "rank": null,
+   "top5MedianInstalls": 100000,
+   "top5MedianRatings": 581,
+   "top5": [
+    "CassaDigitale (10000+ / 125 hodn.)",
+    "PoS Cash Register (100000+ / 589 hodn.)",
+    "Elementary POS - cash register (100000+ / 581 hodn.)",
+    "Cash register with BT printer (500+ / 21 hodn.)",
+    "Cash Register : Shopping Game (1000000+ / 2446 hodn.)"
+   ]
+  },
+  "it|sagra": {
+   "results": 10,
+   "rank": null,
+   "top5MedianInstalls": 10000,
+   "top5MedianRatings": 132,
+   "top5": [
+    "Sagriamo (10000+ / 174 hodn.)",
+    "Farm Heroes Saga (100000000+ / 9777690 hodn.)",
+    "Stasera Sagra (10000+ / 132 hodn.)",
+    "Sagra Touch Palmari (500+ / 0 hodn.)",
+    "Sagra Touch Amico (100+ / 0 hodn.)"
+   ]
+  },
+  "it|mercatino di natale": {
+   "results": 9,
+   "rank": null,
+   "top5MedianInstalls": 1000,
+   "top5MedianRatings": 5,
+   "top5": [
+    "Riù mercatino (100000+ / 1499 hodn.)",
+    "Mercatino Store (1000+ / 5 hodn.)",
+    "Agenda des marchés de Noël (10000+ / 81 hodn.)",
+    "Mercatini di Natale Italia (1+ / 0 hodn.)",
+    "Mercatini di Natale Europa (1+ / 0 hodn.)"
+   ]
+  },
+  "it|cassa bar": {
+   "results": 29,
+   "rank": null,
+   "top5MedianInstalls": 1000,
+   "top5MedianRatings": 12,
+   "top5": [
+    "Tunder · POS · Point of sale (100000+ / 926 hodn.)",
+    "Restaurant POS & Order Taking (100+ / 0 hodn.)",
+    "Comanda Assistant Business (1000+ / 12 hodn.)",
+    "LAMXO - Cafe & Restaurant POS (5+ / 0 hodn.)",
+    "CassaDigitale (10000+ / 125 hodn.)"
+   ]
+  },
+  "it|bancarella": {
+   "results": 13,
+   "rank": null,
+   "top5MedianInstalls": 10000,
+   "top5MedianRatings": 238,
+   "top5": [
+    "La Bancarella (100+ / 0 hodn.)",
+    "Banca Reale App (10000+ / 338 hodn.)",
+    "Fineco (1000000+ / 169715 hodn.)",
+    "Trading + (5000+ / 61 hodn.)",
+    "Banca Progetto (10000+ / 238 hodn.)"
+   ]
+  },
+  "es|caja mercadillo": {
+   "results": 30,
+   "rank": null,
+   "top5MedianInstalls": 10000000,
+   "top5MedianRatings": 51476,
+   "top5": [
+    "Grocery Market Cashier Store (10000000+ / 9243 hodn.)",
+    "LightInTheBox Online Shopping (10000000+ / 302523 hodn.)",
+    "Cash Register : Shopping Game (1000000+ / 2446 hodn.)",
+    "My Store：Supermarket simulate (1000000+ / 51476 hodn.)",
+    "My Supermarket Simulator 3D® (100000000+ / 633825 hodn.)"
+   ]
+  },
+  "es|feria": {
+   "results": 30,
+   "rank": null,
+   "top5MedianInstalls": 100,
+   "top5MedianRatings": 0,
+   "top5": [
+    "Funfair Ride Simulator 4 (10000+ / 1475 hodn.)",
+    "Feria (50+ / 0 hodn.)",
+    "Feria Albacete (1000+ / 60 hodn.)",
+    "Ferias Go (100+ / 0 hodn.)",
+    "Mi Feria (100+ / 0 hodn.)"
+   ]
+  },
+  "es|tpv": {
+   "results": 30,
+   "rank": null,
+   "top5MedianInstalls": 1000000,
+   "top5MedianRatings": 18190,
+   "top5": [
+    "TPVescola (100000+ / 323 hodn.)",
+    "Smartphone TPV (10000+ / 90 hodn.)",
+    "Square Point of Sale: Payment (10000000+ / 261264 hodn.)",
+    "SumUp Business (10000000+ / 147522 hodn.)",
+    "Loyverse POS - Point of Sale (1000000+ / 18190 hodn.)"
+   ]
+  },
+  "es|caja registradora": {
+   "results": 30,
+   "rank": null,
+   "top5MedianInstalls": 100000,
+   "top5MedianRatings": 589,
+   "top5": [
+    "PoS Cash Register (100000+ / 589 hodn.)",
+    "Elementary POS - cash register (100000+ / 581 hodn.)",
+    "Cash Register : Shopping Game (1000000+ / 2446 hodn.)",
+    "Tunder · POS · Point of sale (100000+ / 926 hodn.)",
+    "POS Billing : Cash Register (1000+ / 0 hodn.)"
+   ]
+  },
+  "es|mercadillo": {
+   "results": 30,
+   "rank": null,
+   "top5MedianInstalls": 100000,
+   "top5MedianRatings": 432,
+   "top5": [
+    "marktcom - Die Flohmarkt App (100000+ / 432 hodn.)",
+    "Treasure Flea Market: Cozy Sim (10000+ / 0 hodn.)",
+    "Mercado Pago: cuenta digital (100000000+ / 15378768 hodn.)",
+    "Mercadona (5000000+ / 12197 hodn.)",
+    "Mercado App (1000+ / 0 hodn.)"
+   ]
+  },
+  "es|tpv puesto": {
+   "results": 8,
+   "rank": null,
+   "top5MedianInstalls": 1000,
+   "top5MedianRatings": 0,
+   "top5": [
+    "TPV móvil Comercia (10000+ / 69 hodn.)",
+    "TPV Móvil (1000+ / 0 hodn.)",
+    "TPV (100+ / 0 hodn.)",
+    "BK TPV Movil (1000+ / 0 hodn.)",
+    "TPV móvil Comercia QR Code (1000+ / 10 hodn.)"
+   ]
+  },
+  "es|caja": {
+   "results": 30,
+   "rank": null,
+   "top5MedianInstalls": 100000,
+   "top5MedianRatings": 1491,
+   "top5": [
+    "Caja Móvil (10000+ / 0 hodn.)",
+    "Mystery Box 3: Escape The Room (100000+ / 693 hodn.)",
+    "sand:box (50000000+ / 512791 hodn.)",
+    "Grupo Cajamar (1000000+ / 15361 hodn.)",
+    "Caja Ingenieros Banca MÓVIL (100000+ / 1491 hodn.)"
+   ]
+  },
+  "es|mercadillo navideño": {
+   "results": 8,
+   "rank": null,
+   "top5MedianInstalls": 5000,
+   "top5MedianRatings": 0,
+   "top5": [
+    "Merry Market - Christmas Merge (100+ / 0 hodn.)",
+    "Christmas Store Simulator 3D (10000+ / 187 hodn.)",
+    "Christmas Supermarket Shopping (5000+ / 0 hodn.)",
+    "Merry Christmas! (100+ / 0 hodn.)",
+    "Good Sorting - Christmas Shop (10000+ / 0 hodn.)"
+   ]
+  },
+  "pt|caixa registadora": {
+   "results": 50,
+   "rank": null,
+   "top5MedianInstalls": 100000,
+   "top5MedianRatings": 581,
+   "top5": [
+    "PoS Cash Register (100000+ / 589 hodn.)",
+    "Elementary POS - cash register (100000+ / 581 hodn.)",
+    "Simple POS: Cash Register (500+ / 0 hodn.)",
+    "Cash Register : Shopping Game (1000000+ / 2446 hodn.)",
+    "Vintage Cash Register (50+ / 0 hodn.)"
+   ]
+  },
+  "pt|feira": {
+   "results": 50,
+   "rank": null,
+   "top5MedianInstalls": 1000000,
+   "top5MedianRatings": 36440,
+   "top5": [
+    "Feiras Novas 2026 (5000+ / 100 hodn.)",
+    "Evil Nun: Horror at School (50000000+ / 624932 hodn.)",
+    "Superstore Story 3D (1000000+ / 36440 hodn.)",
+    "Supermarket Mania - Match 3 (100000+ / 6629 hodn.)",
+    "Fever: Events & Tickets (10000000+ / 145748 hodn.)"
+   ]
+  },
+  "pt|banca": {
+   "results": 50,
+   "rank": null,
+   "top5MedianInstalls": 500000,
+   "top5MedianRatings": 445,
+   "top5": [
+    "ABANCA - Portugal (100000+ / 445 hodn.)",
+    "ABANCA - Mobile Banking (1000000+ / 10166 hodn.)",
+    "ING Italia – Banca Online (500000+ / 0 hodn.)",
+    "Banca Generali Private (100000+ / 0 hodn.)",
+    "Nu: Everyday mobile banking (100000000+ / 6043378 hodn.)"
+   ]
+  },
+  "pt|pos": {
+   "results": 50,
+   "rank": null,
+   "top5MedianInstalls": 100000,
+   "top5MedianRatings": 1386,
+   "top5": [
+    "myPOS Payments and Finance (500000+ / 24070 hodn.)",
+    "PosServer (10000+ / 0 hodn.)",
+    "RestauPOS - POS System (100000+ / 1386 hodn.)",
+    "Loyverse POS - Point of Sale (1000000+ / 18190 hodn.)",
+    "Tunder · POS · Point of sale (100000+ / 926 hodn.)"
+   ]
+  },
+  "pt|caixa": {
+   "results": 20,
+   "rank": null,
+   "top5MedianInstalls": 10000000,
+   "top5MedianRatings": 218964,
+   "top5": [
+    "CAIXA (100000000+ / 5908557 hodn.)",
+    "Caixadirecta (1000000+ / 210285 hodn.)",
+    "Novo App CAIXA (1000000+ / 0 hodn.)",
+    "Cartões CAIXA (10000000+ / 218964 hodn.)",
+    "Habitação Caixa (10000000+ / 685907 hodn.)"
+   ]
+  },
+  "pt|mercado de natal": {
+   "results": 50,
+   "rank": null,
+   "top5MedianInstalls": 1000,
+   "top5MedianRatings": 0,
+   "top5": [
+    "Merry Market - Christmas Merge (100+ / 0 hodn.)",
+    "Supermercado Santa Mônica (1000+ / 0 hodn.)",
+    "BROK Natal Tail Christmas (1000+ / 0 hodn.)",
+    "Noel Supermercados (10000+ / 0 hodn.)",
+    "Nu: Everyday mobile banking (100000000+ / 6043378 hodn.)"
+   ]
+  },
+  "pt|quermesse": {
+   "results": 50,
+   "rank": null,
+   "top5MedianInstalls": 100000,
+   "top5MedianRatings": 0,
+   "top5": [
+    "Quincy - Quinceanera Planner (100000+ / 0 hodn.)",
+    "Que Es? Juego de Fiesta (1000+ / 0 hodn.)",
+    "Quermesse PDV: Fichas Impressa (50+ / 0 hodn.)",
+    "Most Likely To: Question Game (100000+ / 0 hodn.)",
+    "Would You Rather: Party Game (100000+ / 628 hodn.)"
+   ]
+  },
+  "pt|ponto de venda": {
+   "results": 50,
+   "rank": null,
+   "top5MedianInstalls": 5000000,
+   "top5MedianRatings": 1386,
+   "top5": [
+    "Tunder · POS · Point of sale (100000+ / 926 hodn.)",
+    "RestauPOS - POS System (100000+ / 1386 hodn.)",
+    "GrabMerchant (10000000+ / 0 hodn.)",
+    "PicPay Empresas: Conta PJ (5000000+ / 53544 hodn.)",
+    "Square Point of Sale: Payment (10000000+ / 261264 hodn.)"
+   ]
+  },
+  "br|caixa registradora": {
+   "results": 50,
+   "rank": null,
+   "top5MedianInstalls": 100000,
+   "top5MedianRatings": 581,
+   "top5": [
+    "PoS Cash Register (100000+ / 589 hodn.)",
+    "Elementary POS - cash register (100000+ / 581 hodn.)",
+    "Cash Register : Shopping Game (1000000+ / 2446 hodn.)",
+    "POS Billing : Cash Register (1000+ / 0 hodn.)",
+    "Mimas POS - Cash Register (1000+ / 0 hodn.)"
+   ]
+  },
+  "br|pdv": {
+   "results": 50,
+   "rank": null,
+   "top5MedianInstalls": 100000,
+   "top5MedianRatings": 4196,
+   "top5": [
+    "PDV+ (10000+ / 155 hodn.)",
+    "Kyte: POS System and Inventory (1000000+ / 24004 hodn.)",
+    "Nex: app for stores (100000+ / 4196 hodn.)",
+    "Sales Control, Cashier, Orders (1000000+ / 43126 hodn.)",
+    "Sales Manager – Complete POS (1000+ / 29 hodn.)"
+   ]
+  },
+  "br|feira": {
+   "results": 50,
+   "rank": null,
+   "top5MedianInstalls": 1000,
+   "top5MedianRatings": 0,
+   "top5": [
+    "Vale Feira (10000+ / 26 hodn.)",
+    "Feira Certa (1000+ / 0 hodn.)",
+    "Feira Conectada (100000+ / 602 hodn.)",
+    "Minha Feira - Lista de Compras (100+ / 0 hodn.)",
+    "Feira do Empreendedor MA (1000+ / 0 hodn.)"
+   ]
+  },
+  "br|quermesse": {
+   "results": 50,
+   "rank": null,
+   "top5MedianInstalls": 100,
+   "top5MedianRatings": 0,
+   "top5": [
+    "Quermesse PDV: Fichas Impressa (50+ / 0 hodn.)",
+    "La kermesse (1000+ / 0 hodn.)",
+    "Quire (100000+ / 1860 hodn.)",
+    "Querist (10+ / 0 hodn.)",
+    "Paróquia N. S. dos Remédios (100+ / 0 hodn.)"
+   ]
+  },
+  "br|frente de caixa": {
+   "results": 50,
+   "rank": null,
+   "top5MedianInstalls": 1000,
+   "top5MedianRatings": 9,
+   "top5": [
+    "POS Cash Register & Inventory (1000+ / 0 hodn.)",
+    "Fluxo de Caixa - Simples a PRO (100+ / 9 hodn.)",
+    "Sales Manager – Complete POS (1000+ / 29 hodn.)",
+    "Fluxo de Caixa - Simples (100000+ / 2324 hodn.)",
+    "Fluxo de Caixa - Super Simples (100+ / 0 hodn.)"
+   ]
+  },
+  "br|caixa": {
+   "results": 12,
+   "rank": null,
+   "top5MedianInstalls": 100000000,
+   "top5MedianRatings": 3329890,
+   "top5": [
+    "CAIXA (100000000+ / 5908557 hodn.)",
+    "Novo App CAIXA (1000000+ / 0 hodn.)",
+    "CAIXA Tem (100000000+ / 5972452 hodn.)",
+    "FGTS (100000000+ / 3329890 hodn.)",
+    "Habitação Caixa (10000000+ / 685907 hodn.)"
+   ]
+  },
+  "br|bazar": {
+   "results": 50,
+   "rank": null,
+   "top5MedianInstalls": 100,
+   "top5MedianRatings": 0,
+   "top5": [
+    "Bazar (100+ / 0 hodn.)",
+    "Bazar (100+ / 0 hodn.)",
+    "Bazar (5000+ / 0 hodn.)",
+    "Bazar — Marketplace (50+ / 0 hodn.)",
+    "Bazar Horizonte (50000+ / 3129 hodn.)"
+   ]
+  },
+  "br|festa junina": {
+   "results": 50,
+   "rank": null,
+   "top5MedianInstalls": 1000,
+   "top5MedianRatings": 37,
+   "top5": [
+    "Festa Junina - Puzzle (0+ / 0 hodn.)",
+    "São João Online (1000+ / 37 hodn.)",
+    "1001 Festas (50000+ / 363 hodn.)",
+    "Que Es? Juego de Fiesta (1000+ / 0 hodn.)",
+    "Sleepover Party Ideas (10000+ / 149 hodn.)"
+   ]
+  }
+ }
+}

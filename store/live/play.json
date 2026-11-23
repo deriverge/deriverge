@@ -1,0 +1,789 @@
+{
+ "pulled": "2026-11-23T13:58:10.493Z",
+ "source": "veřejná stránka play.google.com (bez přihlášení); jazyk bez vlastního listingu ukazuje výchozí nebo nejbližší jazyk",
+ "package": "com.deriverge.tapkasa",
+ "listings": {
+  "cs-CZ": {
+   "title": "Tapkasa: Pokladna na stánek",
+   "shortDescription": "Pokladna na vánoční trh, jarmark i festival. Fronta objednávek, i bez internetu.",
+   "fullDescription": "Tapkasa je pokladna do kapsy, pro stánek s kávou, školní jarmark, festivalový bar nebo pop-up, který žije jeden víkend. Otevřete aplikaci, naťukáte menu a prodáváte. Bez registrace, bez účtu, bez internetu.\n\nTapkasa prodej ZAZNAMENÁVÁ, nezpracovává platby. Hotovost přijímáte do kasírky, kartu na svém vlastním terminálu, Tapkasa u toho počítá, hlídá frontu a na konci dne řekne, kolik jste utržili.\n\nPRODEJ NA TŘI ŤUKNUTÍ\n• Každá položka je barevná karta, obsluha ji pozná dřív, než přečte název. Na výběr 14 sladěných barev, nebo si na kolečku namícháte vlastní.\n• Ťuknutím přidáte kus na účet, podržením karty na vteřinu ho zase odeberete. Omylem to nejde, karta při držení plní pruh.\n• „+ Jiná částka“ vyřeší cokoli mimo menu.\n• Špatně uložený účet vrátíte jedním ťuknutím zpět.\n\nHOTOVĚ I KARTOU\n• U hotovosti naťukáte, co vám zákazník podal, a Tapkasa spočítá, kolik vrátit.\n• U karty jen potvrdíte částku naúčtovanou na vašem terminálu.\n\nFRONTA OBJEDNÁVEK\n• Zaplacený účet se zařadí do fronty jako objednávka s číslem.\n• Položky se odškrtávají (u více kusů 1/2, 2/2), „Vydáno“ objednávku uzavře, a jde vrátit zpět.\n• Počet čekajících objednávek je pořád vidět v hlavičce.\n\nDVĚ ZAŘÍZENÍ: KASA A VÝDEJ\n• Druhé zařízení přepnete do role Výdej: jen přijímá objednávky a odškrtává je, nejde do něj omylem účtovat.\n• Spárování zabere minutu, jedno zařízení vytvoří kód, druhé ho opíše.\n• Výdej umí nové objednávky číst nahlas, obsluha se nemusí dívat na displej.\n• Bonus: výdejní zařízení má kopii prodejů, záloha zadarmo.\n\nPŘEHLED A UZÁVĚRKA\n• Tržba celkem, rozpad hotově/kartou, prodané kusy po položkách.\n• Souhrn zkopírujete jako text, třeba do zprávy účetní.\n• Souhrn tržeb za zvolené období jako PDF: s vašimi údaji a rozpisem DPH, poslat e-mailem nebo vytisknout.\n• Údaje prodejce vyplníte jednou v nastavení a předvyplní se do každého souhrnu.\n• Plátci DPH zadají u položky sazbu v procentech. Ceny se zadávají včetně daně, souhrn dopočítá základ i daň a rozepíše je po sazbách. Kdo plátce není, DPH vůbec nevidí.\n\nVAŠE DATA JSOU VAŠE\n• Všechno zůstává ve vašem zařízení, uložené hned ve dvou nezávislých kopiích.\n• Žádné účty, žádná analytika, žádné reklamy.\n• Záloha je obyčejný text, zkopírujete ji do poznámek nebo mailu a kdykoli z ní kasu obnovíte.\n• Funguje offline; výpadek signálu prodej nezastaví.\n\nZDARMA A PRO\nZdarma: kompletní pokladna na jednom zařízení, až 10 zaplacených účtů denně, na menší akci se nedoplatíte.\nTapkasa Pro (předplatné): neomezené účtování a spárování druhého zařízení. Předplatné se účtuje přes Google Play a lze ho kdykoli zrušit v nastavení účtu.\n\nTapkasa nevede účetnictví. Je to rychlá kasa pro prodej, kde se dnes počítá na papírku, a k tomu souhrn tržeb za období, který si vezme účetní.\n\nCO TAPKASA NENÍ\n• Nezpracovává platby. Hotovost berete do kasírky, kartu na vlastním terminálu.\n• Není fiskální pokladna (EET). Používejte ji tam, kde to předpisy dovolují: spolky, školní a farní akce, dobročinné prodeje, interní evidence.\n• Nevede sklad ani účetnictví.\n\nPodmínky použití: https://www.deriverge.com/tapkasa/terms.html\nZásady ochrany soukromí: https://www.deriverge.com/tapkasa/privacy.html",
+   "released": "9. 9. 2026",
+   "iapPriceRange": "159,99 Kč–1 199,99 Kč při fakturaci přes Google Play",
+   "installs": "5+",
+   "ratings": 0,
+   "score": null,
+   "genre": "Byznys",
+   "icon": "https://play-lh.googleusercontent.com/q5_zrlIchmp1_GkjlikRNfySXYitnCgLkyHxMM7KVSZqIY1--Z5lxnEL6pDuftfyM43e7bFyt8PmDHwUBj0FqA",
+   "featureGraphic": "https://play-lh.googleusercontent.com/t7KTAJkHu87CMbBnV3Tt3f5t-K4RaKV0hj7Urzrwm2-jmD6eLPyt1XrhZOCVi_IBA4KME-8-94snaHM7dbi4rAw",
+   "video": null,
+   "screenshots": [
+    {
+     "url": "https://play-lh.googleusercontent.com/aIslsgZEMDRkhiDx0MdFuHMvWqsY781l6T9TtJ_hLVChbSya5JbypcWHPwNsz4A27h6Z52IWH1PcghliVKl3",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/6cDCZC1gJrHSnZMlCJask_PMCWRFGeK8ZL8iH-D47O-u2kp6BKd8dwAJzemVD2UQANuwJRUG_JYiLtyUdkka",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/bMa_xUKuwG7vpMUt_Vtn0bsBzydZ5I7peizykS5k9uYmfVEq43PEVu5paDYe6ITGuJKwI-4TSKJ00oA2r0Q3WQ",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/i37RQwD_5zbrnBxba-sss_xGFW4R7wqip-yfKP2nhPr5Wha3_Rn0CCqXPo0N9YaVfy8a0Q-l_mq59Mz2vNpp8A",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/trhGB4yH2DA4igJMuqS6VDUutGeAn-nYilqoZ_v6FQcgqH84q_689EhAX-CA4Rs-ekL9P1D_KoXMyFcjnA0VOA",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/9a1Xln-imGywGtMiSdN-KUeNx6iI6jMC9yTpF-s9pXO2cSTbMync3wjOgcBbWipKw4Yx1gcElOcW-u_K3_mn",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/VUFhDoAF3ALu_d8kgdqcpF0L77yZvs0w0BLIY7nkJsDnmNnGtahV0FBz94JeRwZil4H3qlJiBbE9OlFe6oxJog",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/lYv-DmpJTuoREpARwWj0G_cxwYl6FYThp-OfBr44R1TbAuTGOCxkDXsm9h2N2KfNuHXcnyfquK6ihY32gnmpJA",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/6d9m0hlKW5P0UmNeqSZyyzESj4OCRMB8UQCyMLGFi-_UmXqua8iVg874_WEsW8rGb4mi1Pnp74wvZ4LTBJkV",
+     "width": 1440,
+     "height": 2560
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/CRLU0Cb4xWfUCFpfyPbMZVuv_0uEQ-CD8N95UMKtwAWqoBmlMeaxz4zyoE5vbG2Lx1h_psJpHcDFWIa_Y3Bf0g",
+     "width": 1440,
+     "height": 2560
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/OK2NG6AfBKlgOFlOY69bYQ6HZi7vLHVZIhZMmEidSh9dasdIZccT4llzxhu4KMzfSD1rtv9g4dc9ey_CaO1r4v4",
+     "width": 1440,
+     "height": 2560
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/cNJOMJJAPNbk6x-r-Zyclb2UOJotMOlDu-CxnO2uHFjhqyvlL6Dix4vxfNAYGqwl785G_iIdPbKWzGPUK-lU2g",
+     "width": 1440,
+     "height": 2560
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/KCoDMl3VbdNYBEDDWBnflTJuDumrRfUoU7qWPaMeB9g5DQJbJDhOC-rtQ-sjQkHZ0IjZwTXtCe8N4ArOKlnP",
+     "width": 1440,
+     "height": 2560
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/CRLU0Cb4xWfUCFpfyPbMZVuv_0uEQ-CD8N95UMKtwAWqoBmlMeaxz4zyoE5vbG2Lx1h_psJpHcDFWIa_Y3Bf0g",
+     "width": 1440,
+     "height": 2560
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/cNJOMJJAPNbk6x-r-Zyclb2UOJotMOlDu-CxnO2uHFjhqyvlL6Dix4vxfNAYGqwl785G_iIdPbKWzGPUK-lU2g",
+     "width": 1440,
+     "height": 2560
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/KCoDMl3VbdNYBEDDWBnflTJuDumrRfUoU7qWPaMeB9g5DQJbJDhOC-rtQ-sjQkHZ0IjZwTXtCe8N4ArOKlnP",
+     "width": 1440,
+     "height": 2560
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/6d9m0hlKW5P0UmNeqSZyyzESj4OCRMB8UQCyMLGFi-_UmXqua8iVg874_WEsW8rGb4mi1Pnp74wvZ4LTBJkV",
+     "width": 1440,
+     "height": 2560
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/OK2NG6AfBKlgOFlOY69bYQ6HZi7vLHVZIhZMmEidSh9dasdIZccT4llzxhu4KMzfSD1rtv9g4dc9ey_CaO1r4v4",
+     "width": 1440,
+     "height": 2560
+    }
+   ],
+   "lengths": {
+    "title": 27,
+    "shortDescription": 80,
+    "fullDescription": 3144
+   }
+  },
+  "sk": {
+   "title": "Tapkasa: Pokladňa na stánok",
+   "shortDescription": "Pokladňa na vianočné trhy, jarmok, festival. Front objednávok aj bez internetu.",
+   "fullDescription": "Tapkasa je pokladňa do vrecka: pre stánok s kávou, školský jarmok, festivalový bar, pop-up, ktorý žije jeden víkend. Otvorte aplikáciu, napíšte menu, predávajte. Bez registrácie, bez účtu, bez internetu.\n\nTapkasa ZAZNAMENÁVA predaje, nespracúva platby. Hotovosť ide do vašej kasičky, karta cez váš vlastný terminál; Tapkasa počíta, posúva frontu objednávok a večer vám povie, koľko ste utŕžili.\n\nPREDAJ NA TRI ŤUKNUTIA\n• Každý produkt je farebná karta, obsluha ju spozná skôr, ako prečíta názov.\n• Ťuknutie pridá položku na účet; podržanie sekundu ju zloží.\n• „+ Iná suma\" pre všetko mimo menu.\n\nHOTOVOSŤ A KARTA\n• Pri hotovosti napíšte, koľko zákazník dáva, Tapkasa ukáže výdavok.\n• Pri karte účtujete na svojom termináli a iba potvrdíte.\n\nFRONTA OBJEDNÁVOK\n• Každý zaplatený účet sa stane číslovanou objednávkou.\n• Pri príprave položky odškrtávate; „Vydané\" objednávku uzavrie.\n• Dve zariadenia, dve roly: kasa a výdaj, spárované za minútu. Druhé vie objednávky čítať nahlas.\n\nPREHĽAD A UZÁVIERKA\n• Tržba spolu, hotovosť/karta, predané kusy po položkách.\n• Súhrn tržieb v PDF za ľubovoľné obdobie, s vašimi údajmi a v prípade potreby rozpisom DPH; e-mailom alebo zdieľaním.\n• „Uzavrieť akciu\" odloží tržbu do archívu a vynuluje kasu.\n\nVAŠE DÁTA SÚ VAŠE\n• Všetko zostáva v zariadení, v dvoch nezávislých kópiách.\n• Žiadne účty, žiadna analytika, žiadne reklamy. Funguje úplne offline.\n\nZADARMO A PRO\nZadarmo: kompletná pokladňa na jednom zariadení, do 10 zaplatených účtov denne.\nTapkasa Pro (predplatné): neobmedzené účty a spárovanie druhého zariadenia. Účtuje sa cez Google Play, zrušiteľné kedykoľvek.\n\nRozhranie po slovensky, česky, anglicky, nemecky, francúzsky, španielsky, taliansky, poľsky a portugalsky. Tapkasa nevedie účtovníctvo; je to rýchla kasa pre predaj, ktorý by dnes skončil na papieriku.\n\nČO TAPKASA NIE JE\n• Nespracúva platby. Hotovosť beriete do kasy, kartu na vlastnom termináli.\n• Nie je to registračná pokladnica (eKasa). Používajte ju tam, kde to predpisy dovoľujú: spolky, školské a farské akcie, dobročinné predaje, interná evidencia.\n• Nevedie sklad ani účtovníctvo.\n\nPodmienky použitia: https://www.deriverge.com/tapkasa/terms.html\nZásady ochrany súkromia: https://www.deriverge.com/tapkasa/privacy.html",
+   "released": "9. 9. 2026",
+   "iapPriceRange": "6,49 € – 49,99 € pri fakturácii v službe Play",
+   "installs": "5+",
+   "ratings": 0,
+   "score": null,
+   "genre": "Biznis",
+   "icon": "https://play-lh.googleusercontent.com/q5_zrlIchmp1_GkjlikRNfySXYitnCgLkyHxMM7KVSZqIY1--Z5lxnEL6pDuftfyM43e7bFyt8PmDHwUBj0FqA",
+   "featureGraphic": "https://play-lh.googleusercontent.com/DFKDkfWKt4Q_-z2B3-3mk-Smfk7kTDuVyyKh4tssq3Wui3Ym-LK04mjqy-mgJ58FNa6bR9qAQeCpGTD2f38fhA",
+   "video": null,
+   "screenshots": [
+    {
+     "url": "https://play-lh.googleusercontent.com/xFvSLrvEoG429urI8IAP_KJBxgeof0m72vbI6bckUju1P7jBuBPipfpzmhaJhgufYY2fgB2bk-SwU9hljz5D9g",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/vFRFg06crp_u28hZhodivdKb5OY7w4AkbN0NBdvbE6ekoa5QCyjqJlF9_2hEhAsCjyZMM68anHd_YIZhEt3uzQ",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/FzsXR49sSzIAvtTnPVOgkIRa1QyUCQyjvkPXgDJccxs9yea5-9AHgaidiyPiz8A2FBFvseZHY4olm2Nub86p",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/nLbW965koGpdVrDBvk0SWnmgo4ouwnPWcTnyREEKZZbLf1yI4xfEjtC5QlpRPcH9HNyJSmQbEu9eKZr9onmcbA",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/PsczhzLmQhkkJEauHwRHbJnnrnk-39G1RNUJvbIFwzTHINxomrylF_GAi7WGan72EwHr4dYVhr_lHb-c8nQoaw",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/5fHMtKww0Yn8YYnEamrfpqhuOU__s0cQJopagG0oLoW9hUBGMUNPLAUQ8fzTVTI51H3oFWcUJDgXTsg0R6VO21A",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/X8fkc3PUioUmFEnEp9xNjuo7YrMUMEiwcfN4vtqFgXLJsjiNWL8rY_DKIW2kd_5s59WwLEHXJtm_aaU9rQvwng",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/9Nvpy44eYkmAiIugpZ6TNnIoD9xwTqxcJCIb5Jy-w3VJpcb5gWAQtJm2p8QYeXhifoEC34iV7nyhOGh3BCSnaw",
+     "width": 1080,
+     "height": 1920
+    }
+   ],
+   "lengths": {
+    "title": 27,
+    "shortDescription": 79,
+    "fullDescription": 2235
+   }
+  },
+  "en-US": {
+   "title": "Tapkasa: Market Stall POS",
+   "shortDescription": "Till for Christmas markets, fairs and festivals. Order queue, works offline.",
+   "fullDescription": "Tapkasa is a point of sale that fits in your pocket, for the coffee stall, the school fair, the festival bar, the pop-up that lives for one weekend. Open the app, type in your menu, start selling. No sign-up, no account, no internet needed.\n\nTapkasa RECORDS sales, it does not process payments. You take cash into your cash box and cards on your own card terminal; Tapkasa does the counting, keeps the order queue moving and tells you at the end of the day how much you took.\n\nA SALE IN THREE TAPS\n• Every product is a colour card, staff recognise it before they can read the name. 14 curated colours, or mix your own on a colour wheel.\n• Tap to add an item to the bill; press and hold for a second to take it off again. A progress bar fills while you hold, so it never happens by accident.\n• \"+ Custom amount\" handles anything that is not on the menu.\n• Saved the wrong bill? One tap undoes it.\n\nCASH AND CARD\n• For cash, type what the customer handed you and Tapkasa shows the change to give back.\n• For card, you charge the amount on your own terminal and simply confirm it.\n\nORDER QUEUE\n• A paid bill does not disappear, it joins the queue as a numbered order.\n• Tick items off as you prepare them (multi-item lines count 1/2, 2/2); \"Served\" closes the order, and it can be reopened.\n• The number of waiting orders is always visible in the header.\n\nTWO DEVICES: TILL AND PICKUP\n• Switch a second device to the Pickup role: it only receives orders and ticks them off, nobody can ring up a sale on it by mistake.\n• Pairing takes a minute: one device creates a code, the other types it in.\n• The pickup device can read new orders aloud, so staff never have to look at the screen.\n• Bonus: the paired device keeps a copy of the sales, a free backup.\n\nOVERVIEW AND CLOSE-OUT\n• Total revenue, cash/card split, and pieces sold per product.\n• Sales summary (PDF) for any period: with your business details, sent by e-mail or printed.\n• Fill in your seller details once in settings and they are pre-filled on every document.\n• VAT registered? Set a rate per item. You enter prices including tax and the summary works out the net amount and the tax, broken down by rate. If you are not registered, VAT never appears.\n• Copy the summary as plain text, straight into a message to your accountant.\n• \"Close event\" moves the takings into the archive and resets the till for the next event.\n\nYOUR DATA IS YOURS\n• Everything stays on your device, saved in two independent copies.\n• No accounts, no analytics, no ads.\n• The backup is plain text, copy it into your notes or an e-mail and restore from it any time.\n• Works fully offline; losing signal never stops a sale.\n\nFREE AND PRO\nFree: the complete till on one device, up to 10 paid bills per day, enough for a small event.\nTapkasa Pro (subscription): unlimited bills and pairing of a second device. Billed through Google Play; cancel any time in your account settings.\n\nThe interface is available in Czech, Slovak, English, German, French, Spanish, Italian, Polish and Portuguese. Tapkasa does not do bookkeeping. It is a fast till for sales that are counted on a scrap of paper today, plus a summary document for any period that your accountant can work from.\n\nWHAT TAPKASA IS NOT\n• It does not process payments. You take cash yourself and cards on your own terminal.\n• It is not a certified fiscal cash register. Use it where the rules allow: clubs, school and charity events, internal records.\n• It does not do stock or accounting.\n\nTerms of Use: https://www.deriverge.com/tapkasa/terms.html\nPrivacy Policy: https://www.deriverge.com/tapkasa/privacy.html",
+   "released": "Sep 9, 2026",
+   "iapPriceRange": "$5.99 - $47.99 per item",
+   "installs": "5+",
+   "ratings": 0,
+   "score": null,
+   "genre": "Business",
+   "icon": "https://play-lh.googleusercontent.com/q5_zrlIchmp1_GkjlikRNfySXYitnCgLkyHxMM7KVSZqIY1--Z5lxnEL6pDuftfyM43e7bFyt8PmDHwUBj0FqA",
+   "featureGraphic": "https://play-lh.googleusercontent.com/LP7UJRi8U7eaaA0gEO4l4RPUNV7EaBNSC3oKHUHepUkkMEocS6dQoNRfruURVENoZdvHfflLphMzTcEQVXFN6g",
+   "video": null,
+   "screenshots": [
+    {
+     "url": "https://play-lh.googleusercontent.com/3o2T3NZOCh3PHNTqIipPw7DmdoQ8R6fPDqMeZrTPGXyg0dSKdH6q8bOPwbQz3M5vNrKCQOWnmB4D5RFiUo6w2h0",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/OIW6ielDe4XPvFbRIPIueu0b9PmCHQEWj1Rb2cNTT6W9PWrvtW_BXcFtw9G3ov41i6bsWOyuGSUd_0nDIejY",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/PtHD0KkYGWKCo3BI2Y50Un_hjpjsz07065qi1I2uF2eqyGHU3HF0ebyYCHEYozRHSZMR-q__GkCHGXhoBQ4HMA",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/f5Dp6OnKR9ya3FcsPtTNZrN0JoPy_HNETpzsExzf9C0_zduggsCESzXZ6lGkWIWStOQtZ1FVfnu9-J2UhfTsDw",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/zY_g5qN0NGvDevAKmTTJS5O4V3mQaipPApHmqBhm3YVSqdmr_DAMC2NehExZRprnK9QhJVy-RZmjg9VPs8cI8R8",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/OMY1r1XrBISHojnh6zndfYi3QSLLSyIYckFzYLpa2N4DBx14NGxgSQwgUF8DtFGqMHu41q0pc-nukjJmEN5uQu4",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/gsqgWyX_7z6-3jOLSAye_7mJRa2MXh0CWSue_QDiFpuYGDVtM55hUn2aLGuKuCek3PVMN5arYqxgt0AXusj5",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/O_89Ygndi9lsV6sGDX7hbRD7HzyjxOPQjjEPTkqc34S2nyM1_s81fSybVGu-ejwS5lzVv1MyhpeHOJPZcwRD8A",
+     "width": 1080,
+     "height": 1920
+    }
+   ],
+   "lengths": {
+    "title": 25,
+    "shortDescription": 76,
+    "fullDescription": 3599
+   }
+  },
+  "en-GB": {
+   "title": "Tapkasa: Market Stall POS",
+   "shortDescription": "Till for Christmas markets, fairs and festivals. Order queue, works offline.",
+   "fullDescription": "Tapkasa is a point of sale that fits in your pocket, for the coffee stall, the school fair, the festival bar, the pop-up that lives for one weekend. Open the app, type in your menu, start selling. No sign-up, no account, no internet needed.\n\nTapkasa RECORDS sales, it does not process payments. You take cash into your cash box and cards on your own card terminal; Tapkasa does the counting, keeps the order queue moving and tells you at the end of the day how much you took.\n\nA SALE IN THREE TAPS\n• Every product is a colour card, staff recognise it before they can read the name. 14 curated colours, or mix your own on a colour wheel.\n• Tap to add an item to the bill; press and hold for a second to take it off again. A progress bar fills while you hold, so it never happens by accident.\n• \"+ Custom amount\" handles anything that is not on the menu.\n• Saved the wrong bill? One tap undoes it.\n\nCASH AND CARD\n• For cash, type what the customer handed you and Tapkasa shows the change to give back.\n• For card, you charge the amount on your own terminal and simply confirm it.\n\nORDER QUEUE\n• A paid bill does not disappear, it joins the queue as a numbered order.\n• Tick items off as you prepare them (multi-item lines count 1/2, 2/2); \"Served\" closes the order, and it can be reopened.\n• The number of waiting orders is always visible in the header.\n\nTWO DEVICES: TILL AND PICKUP\n• Switch a second device to the Pickup role: it only receives orders and ticks them off, nobody can ring up a sale on it by mistake.\n• Pairing takes a minute: one device creates a code, the other types it in.\n• The pickup device can read new orders aloud, so staff never have to look at the screen.\n• Bonus: the paired device keeps a copy of the sales, a free backup.\n\nOVERVIEW AND CLOSE-OUT\n• Total revenue, cash/card split, and pieces sold per product.\n• Sales summary (PDF) for any period: with your business details, sent by e-mail or printed.\n• Fill in your seller details once in settings and they are pre-filled on every document.\n• VAT registered? Set a rate per item. You enter prices including tax and the summary works out the net amount and the tax, broken down by rate. If you are not registered, VAT never appears.\n• Copy the summary as plain text, straight into a message to your accountant.\n• \"Close event\" moves the takings into the archive and resets the till for the next event.\n\nYOUR DATA IS YOURS\n• Everything stays on your device, saved in two independent copies.\n• No accounts, no analytics, no ads.\n• The backup is plain text, copy it into your notes or an e-mail and restore from it any time.\n• Works fully offline; losing signal never stops a sale.\n\nFREE AND PRO\nFree: the complete till on one device, up to 10 paid bills per day, enough for a small event.\nTapkasa Pro (subscription): unlimited bills and pairing of a second device. Billed through Google Play; cancel any time in your account settings.\n\nThe interface is available in Czech, Slovak, English, German, French, Spanish, Italian, Polish and Portuguese. Tapkasa does not do bookkeeping. It is a fast till for sales that are counted on a scrap of paper today, plus a summary document for any period that your accountant can work from.\n\nWHAT TAPKASA IS NOT\n• It does not process payments. You take cash yourself and cards on your own terminal.\n• It is not a certified fiscal cash register. Use it where the rules allow: clubs, school and charity events, internal records.\n• It does not do stock or accounting.\n\nTerms of Use: https://www.deriverge.com/tapkasa/terms.html\nPrivacy Policy: https://www.deriverge.com/tapkasa/privacy.html",
+   "released": "9 Sept 2026",
+   "iapPriceRange": "£5.49 – £42.49 if billed through Play",
+   "installs": "5+",
+   "ratings": 0,
+   "score": null,
+   "genre": "Business",
+   "icon": "https://play-lh.googleusercontent.com/q5_zrlIchmp1_GkjlikRNfySXYitnCgLkyHxMM7KVSZqIY1--Z5lxnEL6pDuftfyM43e7bFyt8PmDHwUBj0FqA",
+   "featureGraphic": "https://play-lh.googleusercontent.com/LP7UJRi8U7eaaA0gEO4l4RPUNV7EaBNSC3oKHUHepUkkMEocS6dQoNRfruURVENoZdvHfflLphMzTcEQVXFN6g",
+   "video": null,
+   "screenshots": [
+    {
+     "url": "https://play-lh.googleusercontent.com/3o2T3NZOCh3PHNTqIipPw7DmdoQ8R6fPDqMeZrTPGXyg0dSKdH6q8bOPwbQz3M5vNrKCQOWnmB4D5RFiUo6w2h0",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/OIW6ielDe4XPvFbRIPIueu0b9PmCHQEWj1Rb2cNTT6W9PWrvtW_BXcFtw9G3ov41i6bsWOyuGSUd_0nDIejY",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/PtHD0KkYGWKCo3BI2Y50Un_hjpjsz07065qi1I2uF2eqyGHU3HF0ebyYCHEYozRHSZMR-q__GkCHGXhoBQ4HMA",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/f5Dp6OnKR9ya3FcsPtTNZrN0JoPy_HNETpzsExzf9C0_zduggsCESzXZ6lGkWIWStOQtZ1FVfnu9-J2UhfTsDw",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/zY_g5qN0NGvDevAKmTTJS5O4V3mQaipPApHmqBhm3YVSqdmr_DAMC2NehExZRprnK9QhJVy-RZmjg9VPs8cI8R8",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/OMY1r1XrBISHojnh6zndfYi3QSLLSyIYckFzYLpa2N4DBx14NGxgSQwgUF8DtFGqMHu41q0pc-nukjJmEN5uQu4",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/gsqgWyX_7z6-3jOLSAye_7mJRa2MXh0CWSue_QDiFpuYGDVtM55hUn2aLGuKuCek3PVMN5arYqxgt0AXusj5",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/O_89Ygndi9lsV6sGDX7hbRD7HzyjxOPQjjEPTkqc34S2nyM1_s81fSybVGu-ejwS5lzVv1MyhpeHOJPZcwRD8A",
+     "width": 1080,
+     "height": 1920
+    }
+   ],
+   "lengths": {
+    "title": 25,
+    "shortDescription": 76,
+    "fullDescription": 3599
+   }
+  },
+  "de-DE": {
+   "title": "Tapkasa: Kasse für Marktstände",
+   "shortDescription": "Kasse für Weihnachtsmarkt, Basar und Verein. Bestellungen in der Warteschlange.",
+   "fullDescription": "Tapkasa ist eine Kasse für die Hosentasche: für den Kaffeestand, das Schulfest, die Festivalbar, den Pop-up, der nur ein Wochenende lebt. App öffnen, Menü eintippen, verkaufen. Ohne Registrierung, ohne Konto, ohne Internet.\n\nTapkasa ERFASST Verkäufe, sie wickelt keine Zahlungen ab. Bargeld nehmen Sie in die Kasse, Karten über Ihr eigenes Terminal; Tapkasa zählt mit, hält die Bestellschlange in Bewegung und sagt Ihnen am Abend, wie viel Sie eingenommen haben.\n\nEIN VERKAUF IN DREI TIPPS\n• Jedes Produkt ist eine Farbkarte, das Personal erkennt sie schneller, als es lesen kann.\n• Antippen legt den Artikel auf den Bon; eine Sekunde halten nimmt ihn wieder herunter.\n• „+ Anderer Betrag\" für alles, was nicht auf der Karte steht.\n\nBAR UND KARTE\n• Bei Bargeld tippen Sie ein, was der Kunde gibt, Tapkasa zeigt das Rückgeld.\n• Bei Karte kassieren Sie über Ihr eigenes Terminal und bestätigen nur.\n\nBESTELLWARTESCHLANGE\n• Jeder bezahlte Bon wird zur nummerierten Bestellung.\n• Beim Zubereiten haken Sie Artikel ab; „Ausgegeben\" schließt die Bestellung.\n• Zwei Geräte, zwei Rollen: Kasse und Ausgabe, in einer Minute gekoppelt. Die Ausgabe kann neue Bestellungen vorlesen.\n\nÜBERSICHT UND ABSCHLUSS\n• Umsatz gesamt, bar/Karte, verkaufte Stücke je Artikel.\n• Umsatzübersicht als PDF für jeden Zeitraum, mit Ihren Verkäuferdaten und auf Wunsch mit Umsatzsteuer-Aufstellung, per E-Mail oder geteilt.\n• „Event abschließen\" legt den Umsatz ins Archiv und leert die Kasse.\n\nIHRE DATEN GEHÖREN IHNEN\n• Alles bleibt auf dem Gerät, in zwei unabhängigen Kopien.\n• Keine Konten, keine Analytik, keine Werbung. Funktioniert komplett offline.\n\nGRATIS UND PRO\nGratis: die komplette Kasse auf einem Gerät, bis zu 10 bezahlte Bons pro Tag.\nTapkasa Pro (Abo): unbegrenzte Bons und Kopplung eines zweiten Geräts. Abrechnung über Google Play, jederzeit kündbar.\n\nDie Oberfläche gibt es auf Deutsch, Tschechisch, Slowakisch, Englisch, Französisch, Spanisch, Italienisch, Polnisch und Portugiesisch. Tapkasa führt keine Buchhaltung; sie ist die schnelle Kasse für Verkäufe, die heute auf einem Zettel landen würden.\n\nWAS TAPKASA NICHT IST\n• Tapkasa wickelt keine Zahlungen ab. Bargeld nehmen Sie selbst, Karten über Ihr eigenes Terminal.\n• Tapkasa ist keine zertifizierte Registrierkasse mit TSE. Nutzen Sie sie dort, wo es die Vorschriften erlauben: Vereinsfeste, Schul- und Wohltätigkeitsfeste, interne Aufzeichnungen.\n• Keine Lagerverwaltung und keine Buchhaltung.\n\nNutzungsbedingungen: https://www.deriverge.com/tapkasa/terms.html\nDatenschutzerklärung: https://www.deriverge.com/tapkasa/privacy.html",
+   "released": "09.09.2026",
+   "iapPriceRange": "6,49 €–48,99 € bei Abrechnung über Google Play",
+   "installs": "5+",
+   "ratings": 0,
+   "score": null,
+   "genre": "Business",
+   "icon": "https://play-lh.googleusercontent.com/q5_zrlIchmp1_GkjlikRNfySXYitnCgLkyHxMM7KVSZqIY1--Z5lxnEL6pDuftfyM43e7bFyt8PmDHwUBj0FqA",
+   "featureGraphic": "https://play-lh.googleusercontent.com/xyo7DTFei3grKHQsvchJg-dx_AbleQo6rLfoBgigpFh3lwhsg55wvsn834xpI4QkO8h49X7QfBtimXLz1Gfivg",
+   "video": null,
+   "screenshots": [
+    {
+     "url": "https://play-lh.googleusercontent.com/U5NhiD_LbPsf4n0NQ2NwRZH5lcaH3m5gOPrzJUeDgAshbbQEhomXE-ZseUhM0rh8cDKKlOCyC_4bFdHIK_2vyAo",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/wiOQByEUAsKG_JXRAqfo3RLTaeUNa0fZlLz_Xy4T7T5je4UfHOrzMWOlE9rlSi5EYQbOwXtlFjIoiq4ULOdDFQ",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/bEN3vMiAbmXddsQU8tNJHpqaSLemWIV4s2P_ZX3QW30Klmdpbi_fhj2AFio3aWA8IyNig1Rjt0vizPy6EjUr-w",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/80UDpX1MeX8FMO0lwE6w_DvuRj2SjImRqrK-T_dYtJw8GtmjNlxjnnytdRB2hvOMlRbaxVPEJg7lZQi8bNPW9A",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/cQpsabho6S3rKQPd9zBRUkP0qxJHM0CpZZrs1Os6Lr0xrfo0xo13_MwLUBvjv_-XFrRlbnZd6xWU0upIYz01",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/8cG4PzrmPfomYv-fYHZo2LFf6gIM21qdQpxk5Y51Ewd6_SyoVme7LmXAyjY8IrFsXizY-ypCweZ4a06m3HeEAQ",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/oxYny3YeTxmukht3B1HJUXOW67j2Ge3IqyaiEcUzPDtHRcxr7cy3haBe-u74x2MCvKqqwyXgYKd0XM2-jkaW",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/AvdqJF6NWPDSYi2BtRhlgIzDfGs36Jdw5yODYgsKoQv12tmpv0qzCAOEJsCMparlX7d5LYPbYEtPUBLgY0EuLbQ",
+     "width": 1080,
+     "height": 1920
+    }
+   ],
+   "lengths": {
+    "title": 30,
+    "shortDescription": 79,
+    "fullDescription": 2579
+   }
+  },
+  "pl-PL": {
+   "title": "Tapkasa: kasa na stragan",
+   "shortDescription": "Kasa na jarmark świąteczny, kiermasz, festiwal. Kolejka zamówień, bez internetu.",
+   "fullDescription": "Tapkasa to kasa, która mieści się w kieszeni: na stragan z kawą, szkolny kiermasz, festiwalowy bar, pop-up żyjący jeden weekend. Otwórz aplikację, wpisz menu, sprzedawaj. Bez rejestracji, bez konta, bez internetu.\n\nTapkasa REJESTRUJE sprzedaż, nie przetwarza płatności. Gotówka trafia do twojej kasetki, karta przechodzi przez twój terminal; Tapkasa liczy, popycha kolejkę zamówień i wieczorem mówi, ile utargowałeś.\n\nSPRZEDAŻ W TRZY STUKNIĘCIA\n• Każdy produkt to kolorowa karta, obsługa poznaje ją szybciej, niż czyta.\n• Stuknięcie dodaje pozycję do rachunku; przytrzymanie sekundę ją zdejmuje.\n• „+ Inna kwota\" dla wszystkiego spoza menu.\n\nGOTÓWKA I KARTA\n• Przy gotówce wpisz, ile daje klient, a Tapkasa pokaże resztę.\n• Przy karcie kasujesz na swoim terminalu i tylko potwierdzasz.\n\nKOLEJKA ZAMÓWIEŃ\n• Każdy opłacony rachunek staje się numerowanym zamówieniem.\n• Odhaczaj pozycje przy przygotowaniu; „Wydane\" zamyka zamówienie.\n• Dwa urządzenia, dwie role: kasa i wydawka, sparowane w minutę. Drugie może czytać zamówienia na głos.\n\nPODSUMOWANIE SPRZEDAŻY\n• Utarg razem, gotówka/karta, sztuki po pozycjach.\n• Podsumowanie sprzedaży w PDF za dowolny okres, z twoimi danymi i w razie potrzeby rozliczeniem VAT; e-mailem albo przez udostępnienie.\n• „Zamknij imprezę\" odkłada utarg do archiwum i zeruje kasę.\n\nTWOJE DANE SĄ TWOJE\n• Wszystko zostaje na urządzeniu, w dwóch niezależnych kopiach.\n• Bez kont, bez analityki, bez reklam. Działa całkowicie offline.\n\nZA DARMO I PRO\nZa darmo: pełna kasa na jednym urządzeniu, do 10 opłaconych rachunków dziennie.\nTapkasa Pro (subskrypcja): rachunki bez limitu i parowanie drugiego urządzenia. Rozliczenie przez Google Play, można anulować w każdej chwili.\n\nInterfejs po polsku, czesku, słowacku, angielsku, niemiecku, francusku, hiszpańsku, włosku i portugalsku. Tapkasa nie prowadzi księgowości; to szybka kasa dla sprzedaży, która dziś skończyłaby na karteczce.\n\nCZYM TAPKASA NIE JEST\n• Nie obsługuje płatności. Gotówkę przyjmujesz sam, karty na własnym terminalu.\n• Nie jest kasą fiskalną. Używaj jej tam, gdzie pozwalają przepisy: stowarzyszenia, festyny szkolne i charytatywne, ewidencja wewnętrzna.\n• Nie prowadzi magazynu ani księgowości.\n\nWarunki korzystania: https://www.deriverge.com/tapkasa/terms.html\nPolityka prywatności: https://www.deriverge.com/tapkasa/privacy.html",
+   "released": "9 wrz 2026",
+   "iapPriceRange": "27,99 zł – 219,99 zł, jeśli rozliczasz się przez Play",
+   "installs": "5+",
+   "ratings": 0,
+   "score": null,
+   "genre": "Dla firm",
+   "icon": "https://play-lh.googleusercontent.com/q5_zrlIchmp1_GkjlikRNfySXYitnCgLkyHxMM7KVSZqIY1--Z5lxnEL6pDuftfyM43e7bFyt8PmDHwUBj0FqA",
+   "featureGraphic": "https://play-lh.googleusercontent.com/2OCd8QrQGtAQnqz6YJtNCrTW7hVR8PVBw3IPHS7_4PUm-y_jZdK90i40qIby0jzqrQcDu01abuJIqmOe_Uew6Q",
+   "video": null,
+   "screenshots": [
+    {
+     "url": "https://play-lh.googleusercontent.com/DdaQp4Jgem9CLsXPGQPdx0FhoXFgR9sI6mPZta34c9g7hC74Aj8w5PkNjNHxMQ4TGqRqFzvtLtfT3LdY_6q0Uw",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/aumK-2qGgb2BF1SXxBdKLA2Z_hbHoBDX5tUpka7mE8Q4ASUPbCYzTQrAXkuVpFWy5mwChQ9408F6pmeCx57Idw",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/SJIr5yiGFUjD1wQvZALCJ4dhWaV4ssYUTQpTxJ7r72dRNrqBeLipp6I0a4FTub4isaE945tuPEsCuXPYhpRH",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/8kO63qgnAA4tiqb6rgbvyG4_oeIm5ISYIJMUJrSJKVlmmLIQI16y8l7DXObXHx6-XDMltv3n_TQtEXZUdMh5DA",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/-M2Xv2qrS5K6rAeakT_jDBuNVaVvBIOGkUYSferggIMF0asNd0BNpNRZgPbI6woLtRWT6JV6ym_aTHNzIQgv",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/G9-AJEE4NEunMI0paG6dvqsN8PrngjdcF6MU8DOlgnFOFPyW2O_7jb3ZwBLMfOqcANOpAqkv9qZa64hkAuZPiLQ",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/894qUrpdz0BbtDErntMol5odU8wY6zwq3XUG-Et-yaLKfTD3Vbme_hq28JE1M_bgNj_gXDgNVwSMBHKdUbw",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/ufwiY6eda28DgmEYpw75XCVDVIZ_ZSuwR2ASPq45_Oewg4yUlPQOqFP83wZkprVsHQoffgD1Hn1fCfS4s43_2Q",
+     "width": 1080,
+     "height": 1920
+    }
+   ],
+   "lengths": {
+    "title": 24,
+    "shortDescription": 80,
+    "fullDescription": 2324
+   }
+  },
+  "fr-FR": {
+   "title": "Tapkasa : caisse pour stands",
+   "shortDescription": "Caisse pour marché de Noël, kermesse et festival. File de commandes, hors ligne.",
+   "fullDescription": "Tapkasa est une caisse qui tient dans la poche : pour le stand de café, la kermesse, le bar du festival, le pop-up qui ne vit qu'un week-end. Ouvrez l'app, saisissez votre menu, vendez. Sans inscription, sans compte, sans internet.\n\nTapkasa ENREGISTRE les ventes, elle ne traite pas les paiements. Les espèces vont dans votre caisse, la carte passe par votre propre terminal ; Tapkasa compte, fait avancer la file de commandes et vous dit le soir combien vous avez encaissé.\n\nUNE VENTE EN TROIS GESTES\n• Chaque produit est une carte colorée, l'équipe la reconnaît avant même de lire.\n• Un appui ajoute l'article à l'addition ; maintenir une seconde le retire.\n• « + Autre montant » pour tout ce qui n'est pas au menu.\n\nESPÈCES ET CARTE\n• En espèces, tapez ce que le client donne, Tapkasa affiche la monnaie à rendre.\n• En carte, vous encaissez sur votre terminal et confirmez simplement.\n\nFILE DE COMMANDES\n• Chaque addition payée devient une commande numérotée.\n• Cochez les articles en les préparant ; « Servi » clôt la commande.\n• Deux appareils, deux rôles : caisse et service, appairés en une minute. Le second peut lire les commandes à voix haute.\n\nRÉSUMÉ ET DOCUMENT\n• Recette totale, espèces/carte, quantités par article.\n• Récapitulatif des ventes en PDF pour toute période, avec vos coordonnées et au besoin le détail de la TVA, envoyé par e-mail ou partagé.\n• « Clôturer l'événement » archive la recette et remet la caisse à zéro.\n\nVOS DONNÉES VOUS APPARTIENNENT\n• Tout reste sur l'appareil, en deux copies indépendantes.\n• Pas de comptes, pas d'analytique, pas de pub. Fonctionne entièrement hors ligne.\n\nGRATUIT ET PRO\nGratuit : la caisse complète sur un appareil, jusqu'à 10 additions payées par jour.\nTapkasa Pro (abonnement) : additions illimitées et appairage d'un second appareil. Facturé via Google Play, résiliable à tout moment.\n\nInterface en français, tchèque, slovaque, anglais, allemand, espagnol, italien, polonais et portugais. Tapkasa ne fait pas de comptabilité ; c'est la caisse rapide des ventes qui finiraient aujourd'hui sur un bout de papier.\n\nCE QUE TAPKASA N'EST PAS\n• Elle ne traite pas les paiements. Vous encaissez les espèces vous-même et la carte sur votre propre terminal.\n• Ce n'est pas une caisse certifiée (NF525). Utilisez-la là où la réglementation le permet : associations, kermesses, ventes caritatives, suivi interne.\n• Pas de gestion de stock ni de comptabilité.\n\nConditions d’utilisation : https://www.deriverge.com/tapkasa/terms.html\nPolitique de confidentialité : https://www.deriverge.com/tapkasa/privacy.html",
+   "released": "9 sept. 2026",
+   "iapPriceRange": "6,49 € - 49,99 € si facturé via Play",
+   "installs": "5+",
+   "ratings": 0,
+   "score": null,
+   "genre": "Professionnel",
+   "icon": "https://play-lh.googleusercontent.com/q5_zrlIchmp1_GkjlikRNfySXYitnCgLkyHxMM7KVSZqIY1--Z5lxnEL6pDuftfyM43e7bFyt8PmDHwUBj0FqA",
+   "featureGraphic": "https://play-lh.googleusercontent.com/oAVqPauEbnhglHl44XgRMKfSV6PYICZOx9iFKGOhU6uIop2S4InMKuZI8HefO1XSV0MysvoseSsu_wBP6rTWRQ",
+   "video": null,
+   "screenshots": [
+    {
+     "url": "https://play-lh.googleusercontent.com/qeCluLYZozQZ1mmPcqKZc1ueNh7X5tq8DkyM2C3xkGbQyt1RM7fEnjfepvnncosJ-fFTPsVeTGYlMm6o-WzH",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/UwFS1OFSlyUxpOH6vlNbQzNTxBeZhBrW27CE897ZGJvq5L5OwLQMNZFcFjcsVHNzd1OdBPyQ_kk3Fk8xxGOqSw",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/u3TRPk_xk7OvXZdoQLqz5MPuo7kX1eOFaZ6Sefwp4g5AQ2LrcN6-aIH79N0gZVV9F9OvwemeyjPf-vYP0n5amg",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/vC0PFrzOX4HplM8L9MR_K9Uzx9rP_v-WvMh-TJIAZdu0gVaGI0uLlXn9CAtdcnPwEijFBN3BFXHD7OxIzaf7iQ",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/2cIz9ODt0C_TIH2ilHUcDOUpdTh2ZgS4kW18O5K2zCw7O5abF5r12dY7s4mNfJif1e2XAzRg264Zi7JkOlCMTkg",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/hftxVkEcmyPDF_wgGfy4kpXUAEW21kZBRe5hvgf0DjYm7O263nMXwobdxBfM2NTSX682D9P_Y0PYI29JaPtLQF0",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/Kyz5VSNAKXwLfu27qU7zMlJ8qjeq2M4B_OBEPXXrjgKNx8YoooO2r7JtcHJVOBTRtqDbbWKHt1fez1xeByIHWQ",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/S5EiwD-yrwTeuJWpu9c8F5rwBzk6peTRgc7rBYg7aWpSysIbnaw4PcizRwFTh0yAY5gpQamXSwQO4uW2l4oAlQ",
+     "width": 1080,
+     "height": 1920
+    }
+   ],
+   "lengths": {
+    "title": 28,
+    "shortDescription": 80,
+    "fullDescription": 2563
+   }
+  },
+  "it-IT": {
+   "title": "Tapkasa: cassa per bancarelle",
+   "shortDescription": "Cassa per mercatini di Natale, sagre e festival. Coda degli ordini, offline.",
+   "fullDescription": "Tapkasa è una cassa che sta in tasca: per la bancarella del caffè, la festa della scuola, il bar del festival, il pop-up che vive un weekend. Aprite l'app, scrivete il menù, vendete. Senza registrazione, senza account, senza internet.\n\nTapkasa REGISTRA le vendite, non elabora pagamenti. I contanti vanno nella vostra cassetta, la carta passa dal vostro POS; Tapkasa conta, fa scorrere la coda degli ordini e a fine giornata vi dice quanto avete incassato.\n\nUNA VENDITA IN TRE TOCCHI\n• Ogni prodotto è una scheda colorata, lo staff la riconosce prima di leggerla.\n• Un tocco mette l'articolo sul conto; tenere premuto un secondo lo toglie.\n• «+ Altro importo» per ciò che non è a menù.\n\nCONTANTI E CARTA\n• In contanti digitate quanto dà il cliente e Tapkasa mostra il resto.\n• Con la carta incassate sul vostro POS e confermate soltanto.\n\nCODA DEGLI ORDINI\n• Ogni conto pagato diventa un ordine numerato.\n• Spuntate gli articoli mentre li preparate; «Servito» chiude l'ordine.\n• Due dispositivi, due ruoli: cassa e consegna, collegati in un minuto. Il secondo può leggere gli ordini ad alta voce.\n\nRIEPILOGO VENDITE\n• Incasso totale, contanti/carta, pezzi venduti per articolo.\n• Riepilogo vendite in PDF per qualsiasi periodo, con i vostri dati e volendo il riepilogo IVA; via e-mail o condiviso.\n• «Chiudere l'evento» archivia l'incasso e azzera la cassa.\n\nI VOSTRI DATI SONO VOSTRI\n• Tutto resta sul dispositivo, in due copie indipendenti.\n• Niente account, niente analytics, niente pubblicità. Funziona del tutto offline.\n\nGRATIS E PRO\nGratis: la cassa completa su un dispositivo, fino a 10 conti pagati al giorno.\nTapkasa Pro (abbonamento): conti illimitati e collegamento di un secondo dispositivo. Addebito tramite Google Play, disdicibile in ogni momento.\n\nInterfaccia in italiano, ceco, slovacco, inglese, tedesco, francese, spagnolo, polacco e portoghese. Tapkasa non fa contabilità; è la cassa veloce per vendite che oggi finirebbero su un foglietto.\n\nCOSA TAPKASA NON È\n• Non elabora pagamenti. I contanti li incassi tu, le carte con il tuo terminale.\n• Non è un registratore telematico. Usala dove le norme lo consentono: associazioni, feste scolastiche e benefiche, registri interni.\n• Non gestisce magazzino né contabilità.\n\nTermini di utilizzo: https://www.deriverge.com/tapkasa/terms.html\nInformativa sulla privacy: https://www.deriverge.com/tapkasa/privacy.html",
+   "released": "9 set 2026",
+   "iapPriceRange": "6,49 € - 49,99 € se la fatturazione avviene tramite Play",
+   "installs": "5+",
+   "ratings": 0,
+   "score": null,
+   "genre": "Affari",
+   "icon": "https://play-lh.googleusercontent.com/q5_zrlIchmp1_GkjlikRNfySXYitnCgLkyHxMM7KVSZqIY1--Z5lxnEL6pDuftfyM43e7bFyt8PmDHwUBj0FqA",
+   "featureGraphic": "https://play-lh.googleusercontent.com/JX6J4Wr2DW1eoQmcLd0mhQYsFiK5aHuJSkQ_3XAXiAuiIi6etJj0H0UuD1Drnq_Uo8JU8Ce7V2iEbs3tuKjV",
+   "video": null,
+   "screenshots": [
+    {
+     "url": "https://play-lh.googleusercontent.com/NE4hSbd4giZrzENb6BGJz_PZG5Sy-eW3-kYIYufgXc3hbNagG8TMSxVLQihIUzSnqQoRXJW-Vou-GPYC8co",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/WmrtZ8lLVS2ia48_QgwGLZe7LO0R31HrnacqJElN9WCqjS5fJOR5y52QXfKsvOjTUAKvAFfEUCnKlOvo4Kjwy0E",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/PrPIQHdvVPCq4kiUDYxyOZa5XCjowrPr1SXzBBazKv8mDbg7sBf-iywif_gk5p2noEbz0uLgriOiYFv7Ft4Q",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/vyHg9qQZkjkmuBzMDJPRffDtIjKw_VM4h0QfNvzHooiwHeOXzRdpI49P8k-siyPWtEFCm5GHI8xbu8DxYSaGag",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/hF4IHZdTpISwK-3i-brX1CG43pLYaEsymBJjnbf0DRcndN4AEA1Exra72B2ssdrfCkvihCEpoTjf_eb2VLd4hjY",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/ewhbnRv8R1pFcbCVoSAHEcXklRMPwHacQ59mvLvF5WZ9P_sLBBhxnqLtwBJtp7oTvsICiLvXZTGzd6UZmDESGKs",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/fcmLr_D6PtONSpzGvv3a2rqDVPaHu9dOJALGqLdcM9aCsw3GAFNtseFelwVTyee9GAgPHh2Ow_12lKDzTAdblOI",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/ry3FzBs3mZj1nieNfe-o8rV7w3oaa9A45wGrF8Ho8XfeI93vS20nlYIrc2rlSDHekjqTgOcY9lTxGNt80KHtpPA",
+     "width": 1080,
+     "height": 1920
+    }
+   ],
+   "lengths": {
+    "title": 29,
+    "shortDescription": 76,
+    "fullDescription": 2379
+   }
+  },
+  "es-ES": {
+   "title": "Tapkasa: TPV para puestos",
+   "shortDescription": "Caja para mercadillos navideños, ferias y festivales. Cola de pedidos, sin red.",
+   "fullDescription": "Tapkasa es una caja registradora de bolsillo: para el puesto de café, la fiesta del colegio, la barra del festival, el pop-up que vive un fin de semana. Abra la app, escriba su menú y venda. Sin registro, sin cuenta, sin internet.\n\nTapkasa REGISTRA ventas, no procesa pagos. El efectivo va a su caja, la tarjeta pasa por su propio datáfono; Tapkasa cuenta, mueve la cola de pedidos y le dice por la noche cuánto ha ingresado.\n\nUNA VENTA EN TRES TOQUES\n• Cada producto es una tarjeta de color, el personal la reconoce antes de leerla.\n• Un toque añade el artículo a la cuenta; mantener un segundo lo quita.\n• «+ Otro importe» para lo que no está en el menú.\n\nEFECTIVO Y TARJETA\n• Con efectivo, teclee lo que entrega el cliente y Tapkasa muestra el cambio.\n• Con tarjeta, cobra en su datáfono y solo confirma.\n\nCOLA DE PEDIDOS\n• Cada cuenta pagada se convierte en pedido numerado.\n• Marque los artículos al prepararlos; «Entregado» cierra el pedido.\n• Dos dispositivos, dos roles: caja y entrega, enlazados en un minuto. El segundo puede leer los pedidos en voz alta.\n\nRESUMEN DE VENTAS\n• Ingresos totales, efectivo/tarjeta, unidades por artículo.\n• Resumen de ventas en PDF de cualquier periodo, con sus datos y, si procede, desglose del IVA; por correo o compartido.\n• «Cerrar evento» archiva los ingresos y deja la caja a cero.\n\nSUS DATOS SON SUYOS\n• Todo se queda en el dispositivo, en dos copias independientes.\n• Sin cuentas, sin analítica, sin publicidad. Funciona totalmente sin conexión.\n\nGRATIS Y PRO\nGratis: la caja completa en un dispositivo, hasta 10 cuentas pagadas al día.\nTapkasa Pro (suscripción): cuentas ilimitadas y enlace de un segundo dispositivo. Se factura por Google Play y se cancela cuando quiera.\n\nInterfaz en español, checo, eslovaco, inglés, alemán, francés, italiano, polaco y portugués. Tapkasa no lleva contabilidad; es la caja rápida para ventas que hoy acabarían en un papelito.\n\nLO QUE TAPKASA NO ES\n• No procesa pagos. El efectivo lo cobra usted y la tarjeta, con su propio datáfono.\n• No es una caja registradora certificada (Verifactu, TicketBAI). Úsela donde la normativa lo permita: asociaciones, fiestas escolares y benéficas, registro interno.\n• No lleva inventario ni contabilidad.\n\nTérminos de uso: https://www.deriverge.com/tapkasa/terms.html\nPolítica de privacidad: https://www.deriverge.com/tapkasa/privacy.html",
+   "released": "9 sept 2026",
+   "iapPriceRange": "6,49 € - 49,99 € si se factura a través de Google Play",
+   "installs": "5+",
+   "ratings": 0,
+   "score": null,
+   "genre": "Empresa",
+   "icon": "https://play-lh.googleusercontent.com/q5_zrlIchmp1_GkjlikRNfySXYitnCgLkyHxMM7KVSZqIY1--Z5lxnEL6pDuftfyM43e7bFyt8PmDHwUBj0FqA",
+   "featureGraphic": "https://play-lh.googleusercontent.com/884W-YGZ_wUlIOBDLvGA94zYUv8lD1-vjBH-0FySYjnE1YI2SFLkbcCtma0qJKk0begoI8bjxrK9s45cHGkT8Q",
+   "video": null,
+   "screenshots": [
+    {
+     "url": "https://play-lh.googleusercontent.com/Wv3nWA0qhuD284C440oqnHV0k5FT9Hjg2vlj9BDczp3uR94CU5TihNgmu19hTnnD52V3ewlNIX_AmfklyGerFH4",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/P_wtZOe-5Kbauh1mcpHTZNWWvLPb64UtQqhidZF5vjjUHLCR6FIL51bdZZqiL2QeDbx_cW63d-MwVGZ7pj2Q",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/_jR-6c4FULboovg5m_9UMOlEIz3ZJI8gXXEnHqEd-qyqAMddF1WeCfLzjr_R_UuXlYqKYOHhKH3rTNTsb6_N",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/5iG8yc5xGiUPpz4USCwBZVzyHE3GXqmZs9wDMhqVl2V75_m9hkgpEQCRXH3dy9ooAPeLiePkLEMOMtA7lkwfGg",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/5iTXIY8Qf1k7iJFtCIVC0FMYVFfAbRkl3H2B7jJ6ytgp8ZzSUS2Dor0F4kMBzjPeAJmYvb1FpIFFa3a7lfXWiIs",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/RlfaJgJXJm6qpXdfdwRwmV8fIOLIKpU_5Q9PGno_oWNX9B9l_NgEVqez7FX5VYGaXdS5aUkXXNfw20u0GaWd1Q",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/wbyYI3ALQ0BNOGb2z2g7blzZsUSnEYJpsfFJaDpaaYko_ur2ebBrFGA2IyLv6oVdphHw2eOgebJwYQgKRx8c",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/yNnjPHyvQFJBMlmBOalTeoM2mmzmi6CzZcbeqy_2qwzAyEEjdIowu9TRiu2lJVWkmr-C3O_k7ibPdbJJKKDt-A",
+     "width": 1080,
+     "height": 1920
+    }
+   ],
+   "lengths": {
+    "title": 25,
+    "shortDescription": 79,
+    "fullDescription": 2357
+   }
+  },
+  "es-419": {
+   "title": "Tapkasa: TPV para puestos",
+   "shortDescription": "Caja para mercadillos navideños, ferias y festivales. Cola de pedidos, sin red.",
+   "fullDescription": "Tapkasa es una caja registradora de bolsillo: para el puesto de café, la fiesta del colegio, la barra del festival, el pop-up que vive un fin de semana. Abra la app, escriba su menú y venda. Sin registro, sin cuenta, sin internet.\n\nTapkasa REGISTRA ventas, no procesa pagos. El efectivo va a su caja, la tarjeta pasa por su propio datáfono; Tapkasa cuenta, mueve la cola de pedidos y le dice por la noche cuánto ha ingresado.\n\nUNA VENTA EN TRES TOQUES\n• Cada producto es una tarjeta de color, el personal la reconoce antes de leerla.\n• Un toque añade el artículo a la cuenta; mantener un segundo lo quita.\n• «+ Otro importe» para lo que no está en el menú.\n\nEFECTIVO Y TARJETA\n• Con efectivo, teclee lo que entrega el cliente y Tapkasa muestra el cambio.\n• Con tarjeta, cobra en su datáfono y solo confirma.\n\nCOLA DE PEDIDOS\n• Cada cuenta pagada se convierte en pedido numerado.\n• Marque los artículos al prepararlos; «Entregado» cierra el pedido.\n• Dos dispositivos, dos roles: caja y entrega, enlazados en un minuto. El segundo puede leer los pedidos en voz alta.\n\nRESUMEN DE VENTAS\n• Ingresos totales, efectivo/tarjeta, unidades por artículo.\n• Resumen de ventas en PDF de cualquier periodo, con sus datos y, si procede, desglose del IVA; por correo o compartido.\n• «Cerrar evento» archiva los ingresos y deja la caja a cero.\n\nSUS DATOS SON SUYOS\n• Todo se queda en el dispositivo, en dos copias independientes.\n• Sin cuentas, sin analítica, sin publicidad. Funciona totalmente sin conexión.\n\nGRATIS Y PRO\nGratis: la caja completa en un dispositivo, hasta 10 cuentas pagadas al día.\nTapkasa Pro (suscripción): cuentas ilimitadas y enlace de un segundo dispositivo. Se factura por Google Play y se cancela cuando quiera.\n\nInterfaz en español, checo, eslovaco, inglés, alemán, francés, italiano, polaco y portugués. Tapkasa no lleva contabilidad; es la caja rápida para ventas que hoy acabarían en un papelito.\n\nLO QUE TAPKASA NO ES\n• No procesa pagos. El efectivo lo cobra usted y la tarjeta, con su propio datáfono.\n• No es una caja registradora certificada (Verifactu, TicketBAI). Úsela donde la normativa lo permita: asociaciones, fiestas escolares y benéficas, registro interno.\n• No lleva inventario ni contabilidad.\n\nTérminos de uso: https://www.deriverge.com/tapkasa/terms.html\nPolítica de privacidad: https://www.deriverge.com/tapkasa/privacy.html",
+   "released": "9 sep 2026",
+   "iapPriceRange": "$119.00-$939.00 por elemento",
+   "installs": "5+",
+   "ratings": 0,
+   "score": null,
+   "genre": "Negocios",
+   "icon": "https://play-lh.googleusercontent.com/q5_zrlIchmp1_GkjlikRNfySXYitnCgLkyHxMM7KVSZqIY1--Z5lxnEL6pDuftfyM43e7bFyt8PmDHwUBj0FqA",
+   "featureGraphic": "https://play-lh.googleusercontent.com/884W-YGZ_wUlIOBDLvGA94zYUv8lD1-vjBH-0FySYjnE1YI2SFLkbcCtma0qJKk0begoI8bjxrK9s45cHGkT8Q",
+   "video": null,
+   "screenshots": [
+    {
+     "url": "https://play-lh.googleusercontent.com/Wv3nWA0qhuD284C440oqnHV0k5FT9Hjg2vlj9BDczp3uR94CU5TihNgmu19hTnnD52V3ewlNIX_AmfklyGerFH4",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/P_wtZOe-5Kbauh1mcpHTZNWWvLPb64UtQqhidZF5vjjUHLCR6FIL51bdZZqiL2QeDbx_cW63d-MwVGZ7pj2Q",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/_jR-6c4FULboovg5m_9UMOlEIz3ZJI8gXXEnHqEd-qyqAMddF1WeCfLzjr_R_UuXlYqKYOHhKH3rTNTsb6_N",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/5iG8yc5xGiUPpz4USCwBZVzyHE3GXqmZs9wDMhqVl2V75_m9hkgpEQCRXH3dy9ooAPeLiePkLEMOMtA7lkwfGg",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/5iTXIY8Qf1k7iJFtCIVC0FMYVFfAbRkl3H2B7jJ6ytgp8ZzSUS2Dor0F4kMBzjPeAJmYvb1FpIFFa3a7lfXWiIs",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/RlfaJgJXJm6qpXdfdwRwmV8fIOLIKpU_5Q9PGno_oWNX9B9l_NgEVqez7FX5VYGaXdS5aUkXXNfw20u0GaWd1Q",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/wbyYI3ALQ0BNOGb2z2g7blzZsUSnEYJpsfFJaDpaaYko_ur2ebBrFGA2IyLv6oVdphHw2eOgebJwYQgKRx8c",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/yNnjPHyvQFJBMlmBOalTeoM2mmzmi6CzZcbeqy_2qwzAyEEjdIowu9TRiu2lJVWkmr-C3O_k7ibPdbJJKKDt-A",
+     "width": 1080,
+     "height": 1920
+    }
+   ],
+   "lengths": {
+    "title": 25,
+    "shortDescription": 79,
+    "fullDescription": 2357
+   }
+  },
+  "pt-PT": {
+   "title": "Tapkasa: caixa para bancas",
+   "shortDescription": "Caixa para mercados de Natal, feiras e festivais. Fila de pedidos, sem internet.",
+   "fullDescription": "A Tapkasa é uma caixa registadora de bolso: para a banca de café, a festa da escola, o bar do festival, o pop-up que vive um fim de semana. Abra a app, escreva o menu, venda. Sem registo, sem conta, sem internet.\n\nA Tapkasa REGISTA vendas, não processa pagamentos. O dinheiro vai para a sua caixa, o cartão passa pelo seu próprio terminal; a Tapkasa conta, faz andar a fila de pedidos e à noite diz-lhe quanto faturou.\n\nUMA VENDA EM TRÊS TOQUES\n• Cada produto é um cartão colorido, a equipa reconhece-o antes de o ler.\n• Um toque põe o artigo na conta; manter premido um segundo tira-o.\n• «+ Outro montante» para o que não está no menu.\n\nDINHEIRO E CARTÃO\n• Em dinheiro, escreva o que o cliente entrega e a Tapkasa mostra o troco.\n• Em cartão, cobra no seu terminal e apenas confirma.\n\nFILA DE PEDIDOS\n• Cada conta paga torna-se um pedido numerado.\n• Marque os artigos ao prepará-los; «Entregue» fecha o pedido.\n• Dois aparelhos, dois papéis: caixa e entrega, emparelhados num minuto. O segundo pode ler os pedidos em voz alta.\n\nRESUMO DE VENDAS\n• Receita total, dinheiro/cartão, unidades por artigo.\n• Resumo de vendas em PDF de qualquer período, com os seus dados e, se precisar, o resumo do IVA; por e-mail ou partilhado.\n• «Fechar evento» arquiva a receita e põe a caixa a zeros.\n\nOS SEUS DADOS SÃO SEUS\n• Tudo fica no aparelho, em duas cópias independentes.\n• Sem contas, sem análises, sem publicidade. Funciona totalmente offline.\n\nGRÁTIS E PRO\nGrátis: a caixa completa num aparelho, até 10 contas pagas por dia.\nTapkasa Pro (subscrição): contas ilimitadas e emparelhamento de um segundo aparelho. Faturado pela Google Play, cancelável a qualquer momento.\n\nInterface em português, checo, eslovaco, inglês, alemão, francês, espanhol, italiano e polaco. A Tapkasa não faz contabilidade; é a caixa rápida para vendas que hoje acabariam num papelinho.\n\nO QUE A TAPKASA NÃO É\n• Não processa pagamentos. Recebe o dinheiro e os cartões no seu próprio terminal.\n• Não é um programa de faturação certificado pela AT. Use-a onde as regras o permitem: associações, festas escolares e de beneficência, registo interno.\n• Não faz gestão de stock nem contabilidade.\n\nTermos de utilização: https://www.deriverge.com/tapkasa/terms.html\nPolítica de privacidade: https://www.deriverge.com/tapkasa/privacy.html",
+   "released": "09/09/2026",
+   "iapPriceRange": "6,49 € – 49,99 € se faturado através do Google Play",
+   "installs": "5+",
+   "ratings": 0,
+   "score": null,
+   "genre": "Empresas",
+   "icon": "https://play-lh.googleusercontent.com/q5_zrlIchmp1_GkjlikRNfySXYitnCgLkyHxMM7KVSZqIY1--Z5lxnEL6pDuftfyM43e7bFyt8PmDHwUBj0FqA",
+   "featureGraphic": "https://play-lh.googleusercontent.com/45eAPvjYYdft39CQC6TkH-FKcJb2pp4VAG9mUUsv1bBHZqfLksaaO_crGw3O-9_7ynubFnSkk7HVkm09yoFZOA",
+   "video": null,
+   "screenshots": [
+    {
+     "url": "https://play-lh.googleusercontent.com/Hxmfk5SwmeqDXkELqesJRvljsBb12Mf5iiZQQnQmnDVtNuJ9QjvYohYGVT6XRHlsDVq6Cwz9sBB1Tnbv0jNeNxM",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/1g3nrKFRoVDnsdwiqzJEW8axV6FgF7dJS1N4_HNBK_wd6nsLm19kMCtq0xJhEw9B4Gini_aRTKy88n7EQfaanw",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/ZxKocai13mQrGRARaZhNFhvwwF0XEU6nau6JUsBX7qe2DjyW-2E6uHPSu2zjH928DVAZuNdDC1oRmcvLMUdPYQ",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/zOvttke00Z8ZJdmRwSCiHDXIZUGoPrxSVpdXhZcoBAXv4Otn0THRJMa_2Sw9Twe60t2G1RqisGAofwVlhjKaCA0",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/Rxp_3BOkgwxXk_KvoTvpdDFfV22LdfdfKzyhJcdsMv2regWg6T3xET4s4cdvTz70Hprz783jI50Zaio19Ucu",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/aVbEDMCc0dhCnSZKycdHCYgYq_Ly95XlzMFCp3lXsw8ONxZg0G4XSTs9c-nz1AfytklgQgcTV0L-83hMA_i352U",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/bLG0kXloZyUIGfunyqek2J6LjzHGirBY46YR-tXCXne-Xr-XBvIpDS0qlOURBla7Mpv7kEwDiE4lDqM23aiwLA",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/IY2BnxT9SeSETo4aLbxv0rTe2IOET12mIwwq0-cF30gUrxfhQCl1UJIOb905ZuuqyzW8D9hPn5Q-v2VjlSpmNzc",
+     "width": 1080,
+     "height": 1920
+    }
+   ],
+   "lengths": {
+    "title": 26,
+    "shortDescription": 80,
+    "fullDescription": 2297
+   }
+  },
+  "pt-BR": {
+   "title": "Tapkasa: caixa para bancas",
+   "shortDescription": "Caixa para mercados de Natal, feiras e festivais. Fila de pedidos, sem internet.",
+   "fullDescription": "A Tapkasa é uma caixa registadora de bolso: para a banca de café, a festa da escola, o bar do festival, o pop-up que vive um fim de semana. Abra a app, escreva o menu, venda. Sem registo, sem conta, sem internet.\n\nA Tapkasa REGISTA vendas, não processa pagamentos. O dinheiro vai para a sua caixa, o cartão passa pelo seu próprio terminal; a Tapkasa conta, faz andar a fila de pedidos e à noite diz-lhe quanto faturou.\n\nUMA VENDA EM TRÊS TOQUES\n• Cada produto é um cartão colorido, a equipa reconhece-o antes de o ler.\n• Um toque põe o artigo na conta; manter premido um segundo tira-o.\n• «+ Outro montante» para o que não está no menu.\n\nDINHEIRO E CARTÃO\n• Em dinheiro, escreva o que o cliente entrega e a Tapkasa mostra o troco.\n• Em cartão, cobra no seu terminal e apenas confirma.\n\nFILA DE PEDIDOS\n• Cada conta paga torna-se um pedido numerado.\n• Marque os artigos ao prepará-los; «Entregue» fecha o pedido.\n• Dois aparelhos, dois papéis: caixa e entrega, emparelhados num minuto. O segundo pode ler os pedidos em voz alta.\n\nRESUMO DE VENDAS\n• Receita total, dinheiro/cartão, unidades por artigo.\n• Resumo de vendas em PDF de qualquer período, com os seus dados e, se precisar, o resumo do IVA; por e-mail ou partilhado.\n• «Fechar evento» arquiva a receita e põe a caixa a zeros.\n\nOS SEUS DADOS SÃO SEUS\n• Tudo fica no aparelho, em duas cópias independentes.\n• Sem contas, sem análises, sem publicidade. Funciona totalmente offline.\n\nGRÁTIS E PRO\nGrátis: a caixa completa num aparelho, até 10 contas pagas por dia.\nTapkasa Pro (subscrição): contas ilimitadas e emparelhamento de um segundo aparelho. Faturado pela Google Play, cancelável a qualquer momento.\n\nInterface em português, checo, eslovaco, inglês, alemão, francês, espanhol, italiano e polaco. A Tapkasa não faz contabilidade; é a caixa rápida para vendas que hoje acabariam num papelinho.\n\nO QUE A TAPKASA NÃO É\n• Não processa pagamentos. Recebe o dinheiro e os cartões no seu próprio terminal.\n• Não é um programa de faturação certificado pela AT. Use-a onde as regras o permitem: associações, festas escolares e de beneficência, registo interno.\n• Não faz gestão de stock nem contabilidade.\n\nTermos de utilização: https://www.deriverge.com/tapkasa/terms.html\nPolítica de privacidade: https://www.deriverge.com/tapkasa/privacy.html",
+   "released": "9 de set. de 2026",
+   "iapPriceRange": "R$ 31,99 – R$ 244,99 por item",
+   "installs": "5+",
+   "ratings": 0,
+   "score": null,
+   "genre": "Negócios",
+   "icon": "https://play-lh.googleusercontent.com/q5_zrlIchmp1_GkjlikRNfySXYitnCgLkyHxMM7KVSZqIY1--Z5lxnEL6pDuftfyM43e7bFyt8PmDHwUBj0FqA",
+   "featureGraphic": "https://play-lh.googleusercontent.com/45eAPvjYYdft39CQC6TkH-FKcJb2pp4VAG9mUUsv1bBHZqfLksaaO_crGw3O-9_7ynubFnSkk7HVkm09yoFZOA",
+   "video": null,
+   "screenshots": [
+    {
+     "url": "https://play-lh.googleusercontent.com/Hxmfk5SwmeqDXkELqesJRvljsBb12Mf5iiZQQnQmnDVtNuJ9QjvYohYGVT6XRHlsDVq6Cwz9sBB1Tnbv0jNeNxM",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/1g3nrKFRoVDnsdwiqzJEW8axV6FgF7dJS1N4_HNBK_wd6nsLm19kMCtq0xJhEw9B4Gini_aRTKy88n7EQfaanw",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/ZxKocai13mQrGRARaZhNFhvwwF0XEU6nau6JUsBX7qe2DjyW-2E6uHPSu2zjH928DVAZuNdDC1oRmcvLMUdPYQ",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/zOvttke00Z8ZJdmRwSCiHDXIZUGoPrxSVpdXhZcoBAXv4Otn0THRJMa_2Sw9Twe60t2G1RqisGAofwVlhjKaCA0",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/Rxp_3BOkgwxXk_KvoTvpdDFfV22LdfdfKzyhJcdsMv2regWg6T3xET4s4cdvTz70Hprz783jI50Zaio19Ucu",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/aVbEDMCc0dhCnSZKycdHCYgYq_Ly95XlzMFCp3lXsw8ONxZg0G4XSTs9c-nz1AfytklgQgcTV0L-83hMA_i352U",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/bLG0kXloZyUIGfunyqek2J6LjzHGirBY46YR-tXCXne-Xr-XBvIpDS0qlOURBla7Mpv7kEwDiE4lDqM23aiwLA",
+     "width": 1080,
+     "height": 1920
+    },
+    {
+     "url": "https://play-lh.googleusercontent.com/IY2BnxT9SeSETo4aLbxv0rTe2IOET12mIwwq0-cF30gUrxfhQCl1UJIOb905ZuuqyzW8D9hPn5Q-v2VjlSpmNzc",
+     "width": 1080,
+     "height": 1920
+    }
+   ],
+   "lengths": {
+    "title": 26,
+    "shortDescription": 80,
+    "fullDescription": 2297
+   }
+  }
+ }
+}
