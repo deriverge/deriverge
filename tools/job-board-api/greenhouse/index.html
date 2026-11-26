@@ -29,7 +29,7 @@
  "headline": "Greenhouse Job Board API: Endpoints, Fields, Examples",
  "url": "https://deriverge.com/tools/job-board-api/greenhouse/",
  "description": "How to read any company's Greenhouse jobs with the public Job Board API: endpoint, parameters, fields, pay ranges and working curl and Python examples.",
- "dateModified": "2026-11-20",
+ "dateModified": "2026-11-25",
  "proficiencyLevel": "Beginner",
  "author": {
   "@type": "Organization",
@@ -69,7 +69,7 @@
    "name": "Can I get all Greenhouse jobs, from every company, at once?",
    "acceptedAnswer": {
     "@type": "Answer",
-    "text": "No. The API answers for one company per request, and Greenhouse publishes no list of its customers. Our index reads 5,311 Greenhouse boards with open jobs every day (187,542 jobs on 20 November 2026); you can search all of them through our Apify actor or get them as a daily job data feed."
+    "text": "No. The API answers for one company per request, and Greenhouse publishes no list of its customers. Our index reads 5,272 Greenhouse boards with open jobs every day (188,443 jobs on 25 November 2026); you can search all of them through our Apify actor or get them as a daily job data feed."
    }
   },
   {
@@ -130,7 +130,7 @@
     <header class="hero hero--tool">
       <p class="cmt">developer guide · checked 19 November 2026</p>
       <h1 class="h1-tool">Greenhouse Job Board API</h1>
-      <p class="lede">Greenhouse publishes every job board through a read-only JSON API at boards-api.greenhouse.io. Our index calls it for <strong>5,311</strong> companies a day and holds <strong>187,542</strong> open Greenhouse jobs (20 November 2026).</p>
+      <p class="lede">Greenhouse publishes every job board through a read-only JSON API at boards-api.greenhouse.io. Our index calls it for <strong>5,272</strong> companies a day and holds <strong>188,443</strong> open Greenhouse jobs (25 November 2026).</p>
     </header>
     <section class="block" aria-labelledby="h-endpoint">
       <p class="cmt">the endpoint</p>
@@ -198,7 +198,7 @@ for job in r.json()[&quot;jobs&quot;]:
       <h2 id="h-find" class="h2">Finding a company&#x27;s board token</h2>
       <div class="prose">
         <p>The board token is the last part of the board address: <code>job-boards.greenhouse.io/stripe</code> or <code>boards.greenhouse.io/stripe</code> means the token <code>stripe</code>. When a company embeds the board on its own site, the page loads <code>boards.greenhouse.io/embed/job_board/js?for=&lt;token&gt;</code> and job links end with <code>?gh_jid=&lt;id&gt;</code>.</p>
-        <p>Our <a href="/tools/companies-using-greenhouse/">list of 5,597 companies using Greenhouse</a> shows the careers address of each one, and the address contains the identifier. The list is free to search and download as CSV.</p>
+        <p>Our <a href="/tools/companies-using-greenhouse/">list of 5,591 companies using Greenhouse</a> shows the careers address of each one, and the address contains the identifier. The list is free to search and download as CSV.</p>
       </div>
     </section>
     <section class="block" aria-labelledby="h-tips">
@@ -210,7 +210,7 @@ for job in r.json()[&quot;jobs&quot;]:
       <p class="cmt">skip the plumbing</p>
       <h2>Greenhouse Jobs Scraper on Apify</h2>
       <p>The API answers one company at a time. <strong>Greenhouse Jobs Scraper</strong> reads any Greenhouse board for you, or searches every Greenhouse job we know of.</p>
-      <ul><li>Every open job of any Greenhouse board, or a search across all 187,542 Greenhouse jobs in our daily index without knowing a single board</li><li>One schema for all 21 systems: title, company, locations, remote, department, pay where published, full description, apply link</li><li>Filters for country, seniority, remote, salary and skills; new-only runs for daily schedules</li><li>API, webhooks and CSV, Excel or JSON export</li></ul>
+      <ul><li>Every open job of any Greenhouse board, or a search across all 188,443 Greenhouse jobs in our daily index without knowing a single board</li><li>One schema for all 21 systems: title, company, locations, remote, department, pay where published, full description, apply link</li><li>Filters for country, seniority, remote, salary and skills; new-only runs for daily schedules</li><li>API, webhooks and CSV, Excel or JSON export</li></ul>
       <p class="price">From <b>$1.50</b> per 1,000 jobs, pay only for results. Apify's free plan includes $5 of monthly credit.</p>
       <div class="cta-row"><a class="btn" data-actor="greenhouse-jobs-scraper" data-campaign="job-board-api-greenhouse" href="https://apify.com/deriverge/greenhouse-jobs-scraper?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=job-board-api-greenhouse&amp;fpr=b6jtb8" target="_blank" rel="noopener sponsored">Open Greenhouse Jobs Scraper on Apify &rarr;</a></div>
       <p class="more">Also: <a class="" data-actor="career-site-jobs-search" data-campaign="job-board-api-greenhouse" href="https://apify.com/deriverge/career-site-jobs-search?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=job-board-api-greenhouse&amp;fpr=b6jtb8" target="_blank" rel="noopener sponsored">ATS Jobs API: Job Postings API for Workday, Greenhouse, Lever</a> (from $1.50 per 1,000 jobs)</p>
@@ -221,7 +221,7 @@ for job in r.json()[&quot;jobs&quot;]:
 <div class="faq">
 <details><summary>Does the Greenhouse job board API need an API key?</summary><div class="a"><p>No. GET requests to the Job Board API need no key. Greenhouse uses keys only for posting applications through the API and for its Harvest API, which is for the employer's own data.</p></div></details>
 <details><summary>Is there a rate limit?</summary><div class="a"><p>The documentation gives no number; it says requests may be rate limited for security and traffic reasons. One request per board returns everything, so a daily read of a board is a single call. Keep your request rate modest.</p></div></details>
-<details><summary>Can I get all Greenhouse jobs, from every company, at once?</summary><div class="a"><p>No. The API answers for one company per request, and Greenhouse publishes no list of its customers. Our index reads 5,311 Greenhouse boards with open jobs every day (187,542 jobs on 20 November 2026); you can search all of them through our Apify actor or get them as a daily <a href="/tools/job-data-feed/">job data feed</a>.</p></div></details>
+<details><summary>Can I get all Greenhouse jobs, from every company, at once?</summary><div class="a"><p>No. The API answers for one company per request, and Greenhouse publishes no list of its customers. Our index reads 5,272 Greenhouse boards with open jobs every day (188,443 jobs on 25 November 2026); you can search all of them through our Apify actor or get them as a daily <a href="/tools/job-data-feed/">job data feed</a>.</p></div></details>
 <details><summary>Is it allowed to use the Greenhouse job board API?</summary><div class="a"><p>The API exists so that companies can show their jobs on their own sites and so that job boards can list them. It returns only what the employer has published. Read Greenhouse's documentation and terms for your use, keep request rates modest and link back to the original job for applications.</p></div></details>
 </div>
     </section>

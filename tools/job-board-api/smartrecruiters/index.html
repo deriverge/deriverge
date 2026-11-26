@@ -29,7 +29,7 @@
  "headline": "SmartRecruiters Posting API: Endpoints, Fields, Examples",
  "url": "https://deriverge.com/tools/job-board-api/smartrecruiters/",
  "description": "How to read any company's SmartRecruiters jobs with the public Posting API: endpoints, pagination, filters, fields and working curl and Python examples.",
- "dateModified": "2026-11-20",
+ "dateModified": "2026-11-25",
  "proficiencyLevel": "Beginner",
  "author": {
   "@type": "Organization",
@@ -69,7 +69,7 @@
    "name": "Can I get all SmartRecruiters jobs, from every company, at once?",
    "acceptedAnswer": {
     "@type": "Answer",
-    "text": "No. The API answers for one company per request, and SmartRecruiters publishes no list of its customers. Our index reads 3,096 SmartRecruiters boards with open jobs every day (283,987 jobs on 20 November 2026); you can search all of them through our Apify actor or get them as a daily job data feed."
+    "text": "No. The API answers for one company per request, and SmartRecruiters publishes no list of its customers. Our index reads 3,085 SmartRecruiters boards with open jobs every day (283,393 jobs on 25 November 2026); you can search all of them through our Apify actor or get them as a daily job data feed."
    }
   },
   {
@@ -130,7 +130,7 @@
     <header class="hero hero--tool">
       <p class="cmt">developer guide · checked 19 November 2026</p>
       <h1 class="h1-tool">SmartRecruiters Posting API</h1>
-      <p class="lede">SmartRecruiters publishes every company's job postings through a public Posting API at api.smartrecruiters.com, in pages of up to 100. Our index calls it for <strong>3,096</strong> companies a day and holds <strong>283,987</strong> open SmartRecruiters jobs (20 November 2026).</p>
+      <p class="lede">SmartRecruiters publishes every company's job postings through a public Posting API at api.smartrecruiters.com, in pages of up to 100. Our index calls it for <strong>3,085</strong> companies a day and holds <strong>283,393</strong> open SmartRecruiters jobs (25 November 2026).</p>
     </header>
     <section class="block" aria-labelledby="h-endpoint">
       <p class="cmt">the endpoint</p>
@@ -218,7 +218,7 @@ for p in postings[:3]:
       <p class="cmt">skip the plumbing</p>
       <h2>ATS Jobs API: Job Postings API for Workday, Greenhouse, Lever on Apify</h2>
       <p>The API answers one company at a time. <strong>ATS Jobs API: Job Postings API for Workday, Greenhouse, Lever</strong> reads any SmartRecruiters board for you, or searches every SmartRecruiters job we know of.</p>
-      <ul><li>Every open job of any SmartRecruiters board, or a search across all 283,987 SmartRecruiters jobs in our daily index without knowing a single board</li><li>One schema for all 21 systems: title, company, locations, remote, department, pay where published, full description, apply link</li><li>Filters for country, seniority, remote, salary and skills; new-only runs for daily schedules</li><li>API, webhooks and CSV, Excel or JSON export</li></ul>
+      <ul><li>Every open job of any SmartRecruiters board, or a search across all 283,393 SmartRecruiters jobs in our daily index without knowing a single board</li><li>One schema for all 21 systems: title, company, locations, remote, department, pay where published, full description, apply link</li><li>Filters for country, seniority, remote, salary and skills; new-only runs for daily schedules</li><li>API, webhooks and CSV, Excel or JSON export</li></ul>
       <p class="price">From <b>$1.50</b> per 1,000 jobs, pay only for results. Apify's free plan includes $5 of monthly credit.</p>
       <div class="cta-row"><a class="btn" data-actor="career-site-jobs-search" data-campaign="job-board-api-smartrecruiters" href="https://apify.com/deriverge/career-site-jobs-search?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=job-board-api-smartrecruiters&amp;fpr=b6jtb8" target="_blank" rel="noopener sponsored">Open ATS Jobs API: Job Postings API for Workday, Greenhouse, Lever on Apify &rarr;</a></div>
       
@@ -229,7 +229,7 @@ for p in postings[:3]:
 <div class="faq">
 <details><summary>Does the SmartRecruiters job board API need an API key?</summary><div class="a"><p>No. Public postings are readable without a key. Keys are for the Customer APIs, which manage the company's own jobs and candidates.</p></div></details>
 <details><summary>Is there a rate limit?</summary><div class="a"><p>SmartRecruiters documents general API limits of 10 requests per second and 8 at a time per credential, and states nothing separate for anonymous reads of the Posting API. Because descriptions need one call per posting, big companies take thousands of requests: spread them out and cache what you have read.</p></div></details>
-<details><summary>Can I get all SmartRecruiters jobs, from every company, at once?</summary><div class="a"><p>No. The API answers for one company per request, and SmartRecruiters publishes no list of its customers. Our index reads 3,096 SmartRecruiters boards with open jobs every day (283,987 jobs on 20 November 2026); you can search all of them through our Apify actor or get them as a daily <a href="/tools/job-data-feed/">job data feed</a>.</p></div></details>
+<details><summary>Can I get all SmartRecruiters jobs, from every company, at once?</summary><div class="a"><p>No. The API answers for one company per request, and SmartRecruiters publishes no list of its customers. Our index reads 3,085 SmartRecruiters boards with open jobs every day (283,393 jobs on 25 November 2026); you can search all of them through our Apify actor or get them as a daily <a href="/tools/job-data-feed/">job data feed</a>.</p></div></details>
 <details><summary>Is it allowed to use the SmartRecruiters job board API?</summary><div class="a"><p>The API exists so that companies can show their jobs on their own sites and so that job boards can list them. It returns only what the employer has published. Read SmartRecruiters's documentation and terms for your use, keep request rates modest and link back to the original job for applications.</p></div></details>
 </div>
     </section>

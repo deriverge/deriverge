@@ -29,7 +29,7 @@
  "headline": "Personio XML Job Feed: Address, Fields, Examples",
  "url": "https://deriverge.com/tools/job-board-api/personio/",
  "description": "How to read any company's Personio jobs from the public XML job feed: address, languages, fields, descriptions and working curl and Python examples.",
- "dateModified": "2026-11-20",
+ "dateModified": "2026-11-25",
  "proficiencyLevel": "Beginner",
  "author": {
   "@type": "Organization",
@@ -69,7 +69,7 @@
    "name": "Can I get all Personio jobs, from every company, at once?",
    "acceptedAnswer": {
     "@type": "Answer",
-    "text": "No. The API answers for one company per request, and Personio publishes no list of its customers. Our index reads 2,141 Personio boards with open jobs every day (21,325 jobs on 20 November 2026); you can search all of them through our Apify actor or get them as a daily job data feed."
+    "text": "No. The API answers for one company per request, and Personio publishes no list of its customers. Our index reads 2,136 Personio boards with open jobs every day (21,297 jobs on 25 November 2026); you can search all of them through our Apify actor or get them as a daily job data feed."
    }
   },
   {
@@ -130,7 +130,7 @@
     <header class="hero hero--tool">
       <p class="cmt">developer guide · checked 19 November 2026</p>
       <h1 class="h1-tool">Personio XML Job Feed</h1>
-      <p class="lede">Personio publishes each company's open positions as a public XML feed at &lt;company&gt;.jobs.personio.de/xml, made for job boards and career pages. Our index calls it for <strong>2,141</strong> companies a day and holds <strong>21,325</strong> open Personio jobs (20 November 2026).</p>
+      <p class="lede">Personio publishes each company's open positions as a public XML feed at &lt;company&gt;.jobs.personio.de/xml, made for job boards and career pages. Our index calls it for <strong>2,136</strong> companies a day and holds <strong>21,297</strong> open Personio jobs (25 November 2026).</p>
     </header>
     <section class="block" aria-labelledby="h-endpoint">
       <p class="cmt">the endpoint</p>
@@ -199,7 +199,7 @@ for pos in ET.fromstring(r.content).iter(&quot;position&quot;):
       <h2 id="h-find" class="h2">Finding a company&#x27;s company subdomain</h2>
       <div class="prose">
         <p>The company subdomain is the first part of the job page address: <code>1komma5grad.jobs.personio.de</code> means <code>1komma5grad</code>. Job links look like <code>&lt;company&gt;.jobs.personio.de/job/&lt;id&gt;</code>.</p>
-        <p>Our <a href="/tools/companies-using-personio/">list of 2,251 companies using Personio</a> shows the careers address of each one, and the address contains the identifier. The list is free to search and download as CSV.</p>
+        <p>Our <a href="/tools/companies-using-personio/">list of 2,252 companies using Personio</a> shows the careers address of each one, and the address contains the identifier. The list is free to search and download as CSV.</p>
       </div>
     </section>
     <section class="block" aria-labelledby="h-tips">
@@ -211,7 +211,7 @@ for pos in ET.fromstring(r.content).iter(&quot;position&quot;):
       <p class="cmt">skip the plumbing</p>
       <h2>ATS Jobs API: Job Postings API for Workday, Greenhouse, Lever on Apify</h2>
       <p>The API answers one company at a time. <strong>ATS Jobs API: Job Postings API for Workday, Greenhouse, Lever</strong> reads any Personio board for you, or searches every Personio job we know of.</p>
-      <ul><li>Every open job of any Personio board, or a search across all 21,325 Personio jobs in our daily index without knowing a single board</li><li>One schema for all 21 systems: title, company, locations, remote, department, pay where published, full description, apply link</li><li>Filters for country, seniority, remote, salary and skills; new-only runs for daily schedules</li><li>API, webhooks and CSV, Excel or JSON export</li></ul>
+      <ul><li>Every open job of any Personio board, or a search across all 21,297 Personio jobs in our daily index without knowing a single board</li><li>One schema for all 21 systems: title, company, locations, remote, department, pay where published, full description, apply link</li><li>Filters for country, seniority, remote, salary and skills; new-only runs for daily schedules</li><li>API, webhooks and CSV, Excel or JSON export</li></ul>
       <p class="price">From <b>$1.50</b> per 1,000 jobs, pay only for results. Apify's free plan includes $5 of monthly credit.</p>
       <div class="cta-row"><a class="btn" data-actor="career-site-jobs-search" data-campaign="job-board-api-personio" href="https://apify.com/deriverge/career-site-jobs-search?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=job-board-api-personio&amp;fpr=b6jtb8" target="_blank" rel="noopener sponsored">Open ATS Jobs API: Job Postings API for Workday, Greenhouse, Lever on Apify &rarr;</a></div>
       
@@ -222,7 +222,7 @@ for pos in ET.fromstring(r.content).iter(&quot;position&quot;):
 <div class="faq">
 <details><summary>Does the Personio job board API need an API key?</summary><div class="a"><p>No. The XML feed is public for every company that publishes jobs on a Personio career page. Personio's REST API, for the company's own HR data, needs credentials.</p></div></details>
 <details><summary>Is there a rate limit?</summary><div class="a"><p>Personio documents no number. Its FAQ suggests job boards sync the feed at least once an hour; in practice it answers very fast readers with HTTP 429 and its robots.txt sets the rules for automated access. Back off when asked to.</p></div></details>
-<details><summary>Can I get all Personio jobs, from every company, at once?</summary><div class="a"><p>No. The API answers for one company per request, and Personio publishes no list of its customers. Our index reads 2,141 Personio boards with open jobs every day (21,325 jobs on 20 November 2026); you can search all of them through our Apify actor or get them as a daily <a href="/tools/job-data-feed/">job data feed</a>.</p></div></details>
+<details><summary>Can I get all Personio jobs, from every company, at once?</summary><div class="a"><p>No. The API answers for one company per request, and Personio publishes no list of its customers. Our index reads 2,136 Personio boards with open jobs every day (21,297 jobs on 25 November 2026); you can search all of them through our Apify actor or get them as a daily <a href="/tools/job-data-feed/">job data feed</a>.</p></div></details>
 <details><summary>Is it allowed to use the Personio job board API?</summary><div class="a"><p>The API exists so that companies can show their jobs on their own sites and so that job boards can list them. It returns only what the employer has published. Read Personio's documentation and terms for your use, keep request rates modest and link back to the original job for applications.</p></div></details>
 </div>
     </section>

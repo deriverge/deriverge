@@ -29,7 +29,7 @@
  "headline": "Recruitee Careers Site API: Endpoint, Fields, Examples",
  "url": "https://deriverge.com/tools/job-board-api/recruitee/",
  "description": "How to read any company's Recruitee jobs with the public Careers Site API: the offers endpoint, fields, pay and working curl and Python examples.",
- "dateModified": "2026-11-20",
+ "dateModified": "2026-11-25",
  "proficiencyLevel": "Beginner",
  "author": {
   "@type": "Organization",
@@ -69,7 +69,7 @@
    "name": "Can I get all Recruitee jobs, from every company, at once?",
    "acceptedAnswer": {
     "@type": "Answer",
-    "text": "No. The API answers for one company per request, and Recruitee publishes no list of its customers. Our index reads 1,100 Recruitee boards with open jobs every day (19,848 jobs on 20 November 2026); you can search all of them through our Apify actor or get them as a daily job data feed."
+    "text": "No. The API answers for one company per request, and Recruitee publishes no list of its customers. Our index reads 1,095 Recruitee boards with open jobs every day (20,429 jobs on 25 November 2026); you can search all of them through our Apify actor or get them as a daily job data feed."
    }
   },
   {
@@ -130,7 +130,7 @@
     <header class="hero hero--tool">
       <p class="cmt">developer guide · checked 19 November 2026</p>
       <h1 class="h1-tool">Recruitee Careers Site API</h1>
-      <p class="lede">Recruitee publishes each company's job offers through the Careers Site API at &lt;company&gt;.recruitee.com/api/offers/. Until 10 February 2027 it answers without a key; after that date every call needs a token that the company creates. Our index calls it for <strong>1,100</strong> companies a day and holds <strong>19,848</strong> open Recruitee jobs (20 November 2026).</p>
+      <p class="lede">Recruitee publishes each company's job offers through the Careers Site API at &lt;company&gt;.recruitee.com/api/offers/. Until 10 February 2027 it answers without a key; after that date every call needs a token that the company creates. Our index calls it for <strong>1,095</strong> companies a day and holds <strong>20,429</strong> open Recruitee jobs (25 November 2026).</p>
     </header>
     <section class="block" aria-labelledby="h-endpoint">
       <p class="cmt">the endpoint</p>
@@ -203,7 +203,7 @@ for o in r.json()[&quot;offers&quot;]:
       <h2 id="h-find" class="h2">Finding a company&#x27;s company subdomain</h2>
       <div class="prose">
         <p>The company subdomain is the first part of <code>&lt;company&gt;.recruitee.com</code>. Many companies show the career site under their own domain; the job links then look like <code>&lt;domain&gt;/o/&lt;job-slug&gt;</code>, and the <code>recruitee.com</code> address still answers.</p>
-        <p>Our <a href="/tools/companies-using-recruitee/">list of 1,171 companies using Recruitee</a> shows the careers address of each one, and the address contains the identifier. The list is free to search and download as CSV.</p>
+        <p>Our <a href="/tools/companies-using-recruitee/">list of 1,173 companies using Recruitee</a> shows the careers address of each one, and the address contains the identifier. The list is free to search and download as CSV.</p>
       </div>
     </section>
     <section class="block" aria-labelledby="h-tips">
@@ -215,7 +215,7 @@ for o in r.json()[&quot;offers&quot;]:
       <p class="cmt">skip the plumbing</p>
       <h2>ATS Jobs API: Job Postings API for Workday, Greenhouse, Lever on Apify</h2>
       <p>The API answers one company at a time. <strong>ATS Jobs API: Job Postings API for Workday, Greenhouse, Lever</strong> reads any Recruitee board for you, or searches every Recruitee job we know of.</p>
-      <ul><li>Every open job of any Recruitee board, or a search across all 19,848 Recruitee jobs in our daily index without knowing a single board</li><li>One schema for all 21 systems: title, company, locations, remote, department, pay where published, full description, apply link</li><li>Filters for country, seniority, remote, salary and skills; new-only runs for daily schedules</li><li>API, webhooks and CSV, Excel or JSON export</li></ul>
+      <ul><li>Every open job of any Recruitee board, or a search across all 20,429 Recruitee jobs in our daily index without knowing a single board</li><li>One schema for all 21 systems: title, company, locations, remote, department, pay where published, full description, apply link</li><li>Filters for country, seniority, remote, salary and skills; new-only runs for daily schedules</li><li>API, webhooks and CSV, Excel or JSON export</li></ul>
       <p class="price">From <b>$1.50</b> per 1,000 jobs, pay only for results. Apify's free plan includes $5 of monthly credit.</p>
       <div class="cta-row"><a class="btn" data-actor="career-site-jobs-search" data-campaign="job-board-api-recruitee" href="https://apify.com/deriverge/career-site-jobs-search?utm_source=deriverge.com&amp;utm_medium=tool&amp;utm_campaign=job-board-api-recruitee&amp;fpr=b6jtb8" target="_blank" rel="noopener sponsored">Open ATS Jobs API: Job Postings API for Workday, Greenhouse, Lever on Apify &rarr;</a></div>
       
@@ -226,7 +226,7 @@ for o in r.json()[&quot;offers&quot;]:
 <div class="faq">
 <details><summary>Does the Recruitee job board API need an API key?</summary><div class="a"><p>Not until 10 February 2027. From that date Recruitee requires an <code>X-Careers-Sites-Token</code> header, created by the company in its Recruitee settings, and answers HTTP 401 without it.</p></div></details>
 <details><summary>Is there a rate limit?</summary><div class="a"><p>Recruitee documents no limit for the Careers Site API. One request returns all offers, so a daily read is one call per company. Keep your request rate modest.</p></div></details>
-<details><summary>Can I get all Recruitee jobs, from every company, at once?</summary><div class="a"><p>No. The API answers for one company per request, and Recruitee publishes no list of its customers. Our index reads 1,100 Recruitee boards with open jobs every day (19,848 jobs on 20 November 2026); you can search all of them through our Apify actor or get them as a daily <a href="/tools/job-data-feed/">job data feed</a>.</p></div></details>
+<details><summary>Can I get all Recruitee jobs, from every company, at once?</summary><div class="a"><p>No. The API answers for one company per request, and Recruitee publishes no list of its customers. Our index reads 1,095 Recruitee boards with open jobs every day (20,429 jobs on 25 November 2026); you can search all of them through our Apify actor or get them as a daily <a href="/tools/job-data-feed/">job data feed</a>.</p></div></details>
 <details><summary>Is it allowed to use the Recruitee job board API?</summary><div class="a"><p>The API exists so that companies can show their jobs on their own sites and so that job boards can list them. It returns only what the employer has published. Read Recruitee's documentation and terms for your use, keep request rates modest and link back to the original job for applications.</p></div></details>
 </div>
     </section>
